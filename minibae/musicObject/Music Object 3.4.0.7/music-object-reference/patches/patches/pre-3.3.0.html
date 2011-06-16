@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Patch - Pre 3.3.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Patch - Pre 3.3.0
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Patch</A>
+			<LI><A HREF="#getting-it">Getting This Patch</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Patch
+</TD></TR></TABLE>
+<BR>
+
+<P>If you've been authoring using a version of Music Object before 3.3.0 and would now like to upgrade to the latest version, there may be some features of the older version of Music Object that you were using that are no longer supported in the recent version. Several changes to the API were made between version 3.2.x and version 3.3.0. You should consult the <A HREF="../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object Version History</A> to find out more about the changes in version 3.3.0 and how they may affect your code.</P>
+
+<P>If you find that your code will, indeed, be affected by the changes in the API, then you have two options...</P>
+<OL>
+	<LI><A HREF="../../version-history/index.html?from-3.2.x-to-3.3.x.html" TARGET="_parent">make the necessary changes</A> to your code and switch over to version 3.3.0, or...
+	<LI>switch over to version 3.3.0 without changing your code and use this extension to mask the differences so that your code still works.
+</OL>
+
+<P>Of course, if none of the changes between versions 3.2.x and 3.3.0 affect your code, then you can make the switch to 3.3.0 without worries.</P>
+
+<P>Among the things that this patch does,...</P>
+<UL>
+	<LI>It defines all of the Music Object 3.2.x extensibility API's global functions, so that versions of Music Object extensions that were written for Music Object 3.2.x can also work with Music Object 3.3.0. If this patch is not used, then it is necessary to use the very latest versions of all Music Object extensions (which have all been updated to work correctly with Music Object 3.3.0).
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Patch
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-p-pre330.js</B>" JavaScript file that implements this patch, simply <A HREF="../../../javascript/music-object-p-pre330.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-p-pre330.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-p-pre330.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this patch, the following JavaScript files must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using patches, consult the section <A HREF="../intro.html">About Music Object Patches</A>.</P>
+
+</BODY></HTML>

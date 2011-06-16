@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+	<TITLE>Playing music across page changes</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Playing music across page changes
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<P>If you wish to have MIDI files playing across page changes, you will need to use frames. With the frames approach, the MIDI file will be placed in an <B>"invisible" frame</B> (ie. a frame which has its dimension set to 0). The MIDI file will then continue playing as the user navigates around your site using the larger "content" frame, with the music frame being unaffected. It is possible to use JavaScript or links inside HTML documents to change the music that's played in the music frame.</P>
+
+<BLOCKQUOTE>
+Full documentation on using frames is available from Netscape at:<BR>
+<A HREF="http://home.netscape.com/assist/net_sites/frames.html" TARGET="_top">http://home.netscape.com/assist/net_sites/frames.html</A>
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>Some points of caution when using frames</DIV>
+
+<UL>
+	<LI><B>Links outside of your Web site</B> - As a matter of Web etiquette, when using frames on your Web site, all links to other Web sites outside of your own should contain the additional <B>TARGET="_top"</B> specifier. Otherwise you will find your frames "parasitizing" (clinging on) to other people's Web sites. In the case of using frames to play music that persists, if you do not have the <B>TARGET="_top"</B> specifier present in <B>&lt;A HREF=....&gt;</B> links to outside Web sites, your Web site's music will then become part of someone else's Web site. Imagine if this happened to you and you were trying to play music in your Web site but it was being overridden by somebody else's frame that was carried over to your Web site. This wouldn't be cool. Now, imagine if everyone was being careless in this way. Gradually a person surfing the Web would accumulate dozens of these "parasitic" frames and it would be total chaos. Not to mention the fact that with the Beatnik Player, multiple music files can play simultaneously. Imagine the cacophony!
+</UL>
+
+<!--***********************************************************************-->
+
+</BODY></HTML>

@@ -1,0 +1,181 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Using Player Callbacks</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+PART A - step 2: Wiring the Connections
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that we have created our HTML layout, let's wire together the player and the HTML elements. We will make the wiring go both ways so that the player can control the FORM elements and the FORM elements can control the player. Try the sample below. You will see that changing the state of the player by clicking on the transport buttons results in the FORM also changing its state to reflect the current state of the player. Conversely, changing the state of the FORM by clicking on any of the radio buttons causes the player to also change its state accordingly.</P>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+
+// --></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+function selectRadio (radioNo) {
+	document.callbackForm.playState [radioNo].checked = true;
+}
+
+music.onStop ('selectRadio (0)');
+music.onPlay ('selectRadio (1)');
+music.onPause ('selectRadio (2)');
+
+// --></SCRIPT>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=CENTER>
+		<TD BGCOLOR=000000 ALIGN=CENTER>
+			<SCRIPT LANGUAGE=JavaScript>
+				music.magicEmbed (
+					'SRC="../../../music/lounge.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=60 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE ' +
+					'HSPACE=20'
+				);
+			</SCRIPT>
+		</TD>
+		<TD VALIGN=CENTER>
+			<TABLE HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=8>
+				<FORM NAME="callbackForm">
+				<TR>
+					<TD BGCOLOR=FF0000>
+						<INPUT
+							TYPE=radio
+							NAME=playState
+							ONCLICK="music.stop ()"
+							CHECKED
+						>
+						<FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=FFFFFF><B>STOP</B></FONT>
+					</TD>
+				</TR>
+				<TR>
+					<TD BGCOLOR=00FF00>
+						<INPUT
+							TYPE=radio
+							NAME=playState
+							ONCLICK="music.play ()"
+						>
+						<FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000><B>PLAY</B></FONT>
+					</TD>
+				</TR>
+				<TR>
+					<TD BGCOLOR=FFFF00>
+						<INPUT
+							TYPE=radio
+							NAME=playState
+							ONCLICK="music.pause ()"
+						>
+						<FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000><B>PAUSE</B></FONT>
+					</TD>
+				</TR>
+				</FORM>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Let's look at the source. The text that is now highlighted indicates the code that has been added since the previous step. This is the necessary code to tie the FORM and the Beatnik Player together.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music = new Music ();
+
+<SPAN CLASS=sample-code-highlighted>function selectRadio (radioNo) {
+   document.callbackForm.playState [radioNo].checked = true;
+}
+
+music. onStop ('selectRadio (0)');
+music.onPlay ('selectRadio (1)');
+music.onPause ('selectRadio (2)');
+</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR VALIGN=CENTER&gt;
+      &lt;TD BGCOLOR=000000 ALIGN=CENTER&gt;
+         &lt;SCRIPT LANGUAGE=JavaScript&gt;
+            music.magicEmbed (
+               'SRC="lounge.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=60 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE ' +
+               'HSPACE=20'
+            );
+         &lt;/SCRIPT&gt;
+      &lt;/TD&gt;
+      &lt;TD VALIGN=CENTER&gt;
+         &lt;TABLE HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=8&gt;
+            &lt;FORM NAME="callbackForm"&gt;
+            &lt;TR&gt;
+               &lt;TD BGCOLOR=FF0000&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=playState
+                     <SPAN CLASS=sample-code-highlighted>ONCLICK="music.stop ()"</SPAN>
+                     CHECKED
+                  &gt;
+                  &lt;FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=FFFFFF&gt;&lt;B&gt;STOP&lt;/B&gt;&lt;/FONT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR&gt;
+               &lt;TD BGCOLOR=00FF00&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=playState
+                     <SPAN CLASS=sample-code-highlighted>ONCLICK="music.play ()"</SPAN>
+                  &gt;
+                  &lt;FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000&gt;&lt;B&gt;PLAY&lt;/B&gt;&lt;/FONT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR&gt;
+               &lt;TD BGCOLOR=FFFF00&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=playState
+                     <SPAN CLASS=sample-code-highlighted>ONCLICK="music.pause ()"</SPAN>
+                  &gt;
+                  &lt;FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000&gt;&lt;B&gt;PAUSE&lt;/B&gt;&lt;/FONT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;/FORM&gt;
+         &lt;/TABLE&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+&lt;P&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<!--
+<P>The wiring of the player instance and the HTML form elements is bi-directional. That is, An interesting thing occurs because of this.</P>
+-->
+
+</BODY></HTML>

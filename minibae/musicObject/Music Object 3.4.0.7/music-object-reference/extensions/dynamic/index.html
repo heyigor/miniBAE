@@ -1,0 +1,1079 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Dynamic</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Dynamic
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>Sound and music on a Web site is a double-edged sword. Flashy in a similar way to animated GIFs, Shockwave movies, Java banners, etc., music can really grab a surfer's attention. At the same time, however, music that is upfront and attention-grabbing can also fast become annoying if it is always the same each time the surfer visits your site.</P>
+
+<P>Randomization is a key weapon in the war against tedious and unchanging Web sites. Adding some freshness through dynamically selected music can go a long way towards making Web sites hold up to repeat visits and still leave the Web surfer feeling engaged and interested.</P>
+
+<P>Pages that never sound repetitive will invite repeat visitors who will return with the confidence that their ears will be treated to different sounding pages each time. The methods offered by this Music Object extension will help you author pages with this level of musical "freshness" that doesn't easily get stale and tiresome to the end-user.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-dynamic.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-dynamic.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-dynamic.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-dynamic.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#playRandomNote">playRandomNote</A></TD>
+	<TD CLASS=contents-table-item-desc>Plays a randomized musical note within specified limits of pitch, velocity, duration, volume, and pan.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.extractGroup">Music.extractGroup</A></TD>
+	<TD CLASS=contents-table-item-desc>Generates an array, representing a subgroup of a specified source array.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.groovoidGroup">Music.groovoidGroup</A></TD>
+	<TD CLASS=contents-table-item-desc>Generates an array of Groovoid names, determined by a specified group prefix parameter.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.kwiklistToArray">Music.kwiklistToArray</A></TD>
+	<TD CLASS=contents-table-item-desc>Generates an array containing all the elements represented by the specified Kwiklist shorthand.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.random">Music.random</A></TD>
+	<TD CLASS=contents-table-item-desc>Generates a random integer within a specified range.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.randomFromGroup">Music.randomFromGroup</A></TD>
+	<TD CLASS=contents-table-item-desc>Randomly selects an item out of the specified group, as determined by a specified group prefix parameter.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.randomFromList">Music.randomFromList</A></TD>
+	<TD CLASS=contents-table-item-desc>Randomly selects an item out of a specified list of items.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.randomGroovoid">Music.randomGroovoid</A></TD>
+	<TD CLASS=contents-table-item-desc>Randomly selects a Groovoid within a specified Groovoid group.</TD>
+</TR>
+
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-properties">Instance Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#"></A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#objects">Objects</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Shuffler">Music.Shuffler</A></TD>
+	<TD CLASS=contents-table-item-desc>An object that generates integer numbers that are seemingly more random, using a "shuffling" algorithm.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.groovoids">Music.groovoids</A></TD>
+	<TD CLASS=contents-table-item-desc>An array representing all the Groovoids contained in the Beatnik Player soundbank.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="playRandomNote"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;playRandomNote</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>playRandomNote</B> method lets you play a randomized musical note within specified limits of pitch, velocity, duration, volume, and pan.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>playRandomNote (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#ProgramNumber0to255">ProgramNumber0to255</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Min<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Max<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Min<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Max<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Min<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Max<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MinVolume<A HREF="../../parameters.html#ControllerValue0to127">ControllerValue0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MaxVolume<A HREF="../../parameters.html#ControllerValue0to127">ControllerValue0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; PanLeft<A HREF="../../parameters.html#ControllerValue0to127">ControllerValue0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; PanRight<A HREF="../../parameters.html#ControllerValue0to127">ControllerValue0to127</A><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>MaxNote</B> parameter, then the note pitch of the note that is played will not be randomized, but instead the <B>MinNote</B> value will always be used. This is a convenient way of making the note pitch fixed. Another way would be to make the <B>MinNote</B> and <B>MaxNote</B> parameters always have the same value, but this would require two modifications to be made every time one wished to change the "fixed" note pitch. Note, that it is not valid to specify a <SPAN CLASS=value>null</SPAN> value for the <B>MinNote</B> parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>MaxVelocity</B> parameter, then the velocity of the note that is played will not be randomized, but instead the <B>MinVelocity</B> value will always be used. This is a convenient way of making the velocity fixed. Note, that it is not valid to specify a <SPAN CLASS=value>null</SPAN> value for the <B>MinVelocity</B> parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>MaxNoteDuration</B> parameter, then the duration of the note that is played will not be randomized, but instead the <B>MinNoteDuration</B> value will always be used. Note, that it is not valid to specify a <SPAN CLASS=value>null</SPAN> value for the <B>MinNoteDuration</B> parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>MaxVolume</B> parameter, then the volume of the MIDI channel that the note is played on will not be randomized, but instead the <B>MinVolume</B> value will always be used.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>MinVolume</B> parameter, then the volume of the MIDI channel that the note is played will not be changed from its existing setting.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>PanRight</B> parameter, then the pan setting of the MIDI channel that the note is played on will not be randomized, but instead the <B>PanLeft</B> value will always be used.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>PanLeft</B> parameter, then the pan setting of the MIDI channel that the note is played will not be changed from its existing setting.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>playRandomNote (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B> <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>,</B> <A HREF="../../parameters.html#ProgramNumber0to255">ProgramNumber0to255</A> <B>,</B> Min<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B> Max<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B> Min<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B> Max<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B> Min<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B> Max<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B> MinVolume<A HREF="../../parameters.html#ControllerValue0to127">ControllerValue0to127</A> <B>,</B> MaxVolume<A HREF="../../parameters.html#ControllerValue0to127">ControllerValue0to127</A> <B>)</B>
+		<P>When no <B>PanLeft</B> or <B>PanRight</B> parameters are specified, then the current pan setting of the specified MIDI channel will not be affected.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>playRandomNote (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B> <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>,</B> <A HREF="../../parameters.html#ProgramNumber0to255">ProgramNumber0to255</A> <B>,</B> Min<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B> Max<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B> Min<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B> Max<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B> Min<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B> Max<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>)</B>
+		<P>When no <B>MinVolume</B>, <B>MaxVolume</B>, <B>PanLeft</B>, or <B>PanRight</B> parameters are specified, then the current volume and pan settings of the specified MIDI channel will not be affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI><A HREF="../../../demos/index.html?demos/play-random-note.html">See the demo</A> for this method.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.extractGroup"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.extractGroup</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.extractGroup</B> static method generates an array, representing a subgroup of a specified source array.
+
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.extractGroup (</B> SourceARRAY <B>,</B> GroupPrefixSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>StringARRAY</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.extractGroup</B> static method generates an array, representing a subgroup of the source array specified by the <B>SourceARRAY</B> parameter. The source array should only contain string elements, and the <B>GroupPrefixSTR</B> parameter will be used to determine which elements of the source array make it into the resulting subgroup. Consider the following example...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=6>
+<TR ALIGN=CENTER>
+	<TD><B>SourceARRAY</B></TD>
+	<TD></TD>
+	<TD><B>GroupPrefixSTR</B></TD>
+	<TD></TD>
+	<TD><B>ResultARRAY</B></TD>
+</TR>
+<TR VALIGN=CENTER>
+	<TD BGCOLOR=EEEEEE>
+		able-to-funk.wav<BR>
+		functional-music.mid<BR>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>-monster.rmf<BR>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>-u-mutha-funka.wav<BR>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>adelic.rmf<BR>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>y-chicken.mid<BR>
+		get-down-and-funk.wav<BR>
+		living-funkster.mid<BR>
+		turn-up-the-funk.rmf<BR>
+	</TD>
+	<TD><IMG SRC="../../../style/images/arrow-right.gif" WIDTH=22 HEIGHT=19 BORDER=0 HSPACE=5 VSPACE=0></TD>
+	<TD ALIGN=CENTER><SPAN CLASS=sample-code-highlighted>funk</SPAN></TD>
+	<TD><IMG SRC="../../../style/images/arrow-right.gif" WIDTH=22 HEIGHT=19 BORDER=0 HSPACE=5 VSPACE=0></TD>
+	<TD VALIGN=TOP BGCOLOR=EEEEEE>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>-monster.rmf<BR>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>-u-mutha-funka.wav<BR>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>adelic.rmf<BR>
+		<SPAN CLASS=sample-code-highlighted>funk</SPAN>y-chicken.mid<BR>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>In the source array, there are several elements containing the text "funk", but only some of those are prefixed with "funk". In this case, using the text "funk" for the <B>GroupPrefixSTR</B> parameter will return an array containing only those elements that are prefixed with "funk", as shown to the right of the diagram above.</P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>GroupPrefixSTR</B> parameter, then this method returns a new array exactly matching the array represented by the <B>SourceARRAY</B> parameter. It's important to stress that, in this case, the method does not return a reference to the original array represented by the <B>SourceARRAY</B> parameter. Because the returned result is a newly created array, the elements of this new array can be manipulated without affecting the original array referenced by the <B>SourceARRAY</B> parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.extractGroup (</B> SourceARRAY <B>)</B>
+		<P>When no <B>GroupPrefixSTR</B> parameter is specified, this method returns a new array exactly matching the array represented by the <B>SourceARRAY</B> parameter. This is the same behavior as when a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>GroupPrefixSTR</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.groovoidGroup"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.groovoidGroup</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>The <B>Music.groovoidGroup</B> static method generates an array of Groovoid names, determined by a specified group prefix parameter.</P>
+
+<BR CLEAR=RIGHT>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.groovoidGroup (</B> GroupPrefixSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>GroovoidNamesStringARRAY</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.groovoidGroup</B> static method generates an array, representing a subgroup of all the Groovoids available in the Beatnik Player's soundbank. The <B>GroupPrefixSTR</B> parameter will be used to determine which Groovoids make it into the resulting subgroup. Consider the following example...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=6>
+<TR ALIGN=CENTER>
+	<TD><B>List of Groovoids</B></TD>
+	<TD></TD>
+	<TD><B>GroupPrefixSTR</B></TD>
+	<TD></TD>
+	<TD><B>ResultARRAY</B></TD>
+</TR>
+<TR VALIGN=CENTER>
+	<TD BGCOLOR=EEEEEE>
+		...<BR>
+		Hits-BlastOff<BR>
+		<SPAN CLASS=sample-code-highlighted>Hits-Kicker</SPAN>1<BR>
+		<SPAN CLASS=sample-code-highlighted>Hits-Kicker</SPAN>2<BR>
+		<SPAN CLASS=sample-code-highlighted>Hits-Kicker</SPAN>5<BR>
+		Hits-LudwigVan<BR>
+		Hits-Magic<BR>
+		Hits-MysteryChime<BR>
+		Hits-SportsOrganCharge<BR>
+		Hits-ZoomAndHit<BR>
+		...<BR>
+	</TD>
+	<TD><IMG SRC="../../../style/images/arrow-right.gif" WIDTH=22 HEIGHT=19 BORDER=0 HSPACE=5 VSPACE=0></TD>
+	<TD ALIGN=CENTER><SPAN CLASS=sample-code-highlighted>Hits-Kicker</SPAN></TD>
+	<TD><IMG SRC="../../../style/images/arrow-right.gif" WIDTH=22 HEIGHT=19 BORDER=0 HSPACE=5 VSPACE=0></TD>
+	<TD VALIGN=TOP BGCOLOR=EEEEEE>
+		<SPAN CLASS=sample-code-highlighted>Hits-Kicker</SPAN>1<BR>
+		<SPAN CLASS=sample-code-highlighted>Hits-Kicker</SPAN>2<BR>
+		<SPAN CLASS=sample-code-highlighted>Hits-Kicker</SPAN>5<BR>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>In this example, all the Groovoids prefixed with "Hits-Kicker" are returned in the result array. Note that we haven't shown the full list of Groovoids above - just enough of a slice out of the list to serve as an illustration of how this method works (after all, the list of Groovoids is quite long).</P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>GroupPrefixSTR</B> parameter, then this method returns a new array containing all of the Groovoids available in the soundbank. It's important to stress that, in this case, the method does not return a reference to <A HREF="#Music.groovoids"><B>Music.groovoids</B></A> array. Because the returned result is a newly created array, the elements of this new array can be manipulated without affecting the <B>Music.groovoids</B> array.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.groovoidGroup ( )</B>
+		<P>When no <B>GroupPrefixSTR</B> parameter is specified, this method returns a new array containing all of the Groovoids available in the soundbank. This is the same behavior as when a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>GroupPrefixSTR</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.kwiklistToArray"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.kwiklistToArray</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.kwiklistToArray</B> static method generates an array containing all the elements represented by the specified Kwiklist shorthand.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.kwiklistToArray (</B> KwiklistSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>StringARRAY</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.kwiklistToArray</B> static method generates an array containing all the elements represented by the specified <B>KwiklistSTR</B> parameter. The Kwiklist shorthand syntax lets you express large lists of options in a much condensed form. For example, the following Groovoid names...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Hits-Kicker1
+Hits-Kicker2
+Hits-Kicker5
+Hits-LudwigVan
+Hits-Magic
+Hits-MysteryChime
+Hits-SportsOrganCharge
+Hits-ZoomAndHit
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could be expressed as the following, using Kwiklist shorthand...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Hits-[Kicker[1|2|5]|LudwigVan|Magic|MysteryChime|SportsOrganCharge|ZoomAndHit]
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In another example, the following list of filenames...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+music/ambient/bliss.rmf
+music/ambient/waterscape-full.rmf
+music/ambient/waterscape-short.rmf
+music/ambient/waterscape-groove.rmf
+music/ambient/storm.rmf
+music/techno/high.rmf
+music/techno/pilon.rmf
+music/techno/moonbuster.rmf
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could be expressed as the following, using Kwiklist shorthand...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+music/[ambient/[bliss|waterscape-[full|short|groove]|storm]|techno/[high|pilon|moonbuster]].rmf
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Using the Kwiklist syntax, redundancy is eliminated. If there is a common prefix to multiple items, then that common prefix need only be expressed once. Similarly, if there is a common suffix to multiple items, then that suffix need only be expressed once. In the Kwiklist syntax, square brackets are used to enclose a list of options, and options are separated by the pipe ("|") symbol.</P>
+
+<DIV CLASS=subsection>Step by Step</DIV>
+
+<P>Let's take the simplest example, the first example of a list of Groovoids, and go through the steps of creating a Kwiklist expression...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>Kicker1
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>Kicker2
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>Kicker5
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>LudwigVan
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>Magic
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>MysteryChime
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>SportsOrganCharge
+<SPAN CLASS=sample-code-highlighted>Hits-</SPAN>ZoomAndHit
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You will notice from the list of Groovids that all the names are prefixed with "Hits-". So, we can take the common prefix out of all the items and begin our Kwiklist expression with this prefix, followed by square brackets to indicate that this prefix is to be added to the beginning of each of the options inside the square brackets. Inside the square brackets we will put the name of each Groovoid, minus the common prefix, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Hits-[<SPAN CLASS=sample-code-highlighted>Kicker1|Kicker2|Kicker5</SPAN>|LudwigVan|Magic|MysteryChime|SportsOrganCharge|ZoomAndHit]
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now, while this is somewhat optmized, there is a further optimization that can be made. You will notice that there are three items inside the square brackets that are prefixed with "Kicker" (highlighted in red). Because the Kwiklist syntax allows us to nest square brackets, we can express the three items "Kicker1", "Kicker2", and "Kicker5" more economically as just "Kicker[1|2|5]". And we can nest this expression inside the larger expression to form...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Hits-[<SPAN CLASS=sample-code-highlighted>Kicker[1|2|5]</SPAN>|LudwigVan|Magic|MysteryChime|SportsOrganCharge|ZoomAndHit]
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.random"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.random</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.random</B> static method generates a random integer within a specified range.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.random (</B> RangeLowerLimitINT <B>,</B> RangeUpperLimitINT <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>RandomNumberINT</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.random</B> static method generates a random integer within the range specified by the <B>RangeLowerLimitINT</B> and <B>RangeUpperLimitINT</B> parameters, inclusive of the <B>RangeLowerLimitINT</B> and <B>RangeUpperLimitINT</B> parameter values. This method is useful for randomizing values for parameters used in methods of the Music Object API. For example, <B><NOBR>Music.random (64,127)</NOBR></B> could be used to create a random pan value between center and full right, and <B><NOBR>Music.random (0,63)</NOBR></B> could be used to create a random pan value between full left and center. In another example, <B><NOBR>Music.random (Music.getNoteNumber ('C3'),Music.getNoteNumber ('C5'))</NOBR></B> could be used to randomly select a musical note number between C in the 3rd octave and C in the 5th octave.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.random (</B> RangeUpperLimitINT <B>)</B>
+		<P>When no <B>RangeLowerLimitINT</B> parameter is specified, a random integer between 1 and the RangeUpperLimitINT value will be selected. This is the same as if a value of 1 were specified for the <B>RangeLowerLimitINT</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.randomFromGroup"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.randomFromGroup</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.randomFromGroup</B> static method randomly selects an item out of the specified group, as determined by a specified group prefix parameter.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.randomFromGroup (</B> SourceARRAY <B>,</B> GroupPrefixSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>RandomElementSTR</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.randomFromGroup</B> method randomly selects an item out of a subgroup of the array specified by the <B>SourceARRAY</B> parameter. The source array should only contain string elements, unless a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>GroupPrefixSTR</B> parameter, or the variation of this method that does not take a <B>GroupPrefixSTR</B> parameter is being used (see the variations section further below). The subgroup that the random item is selected out of is determined by the <B>GroupPrefixSTR</B> parameter. For example, let's say we had an array defined as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myFunkyFiles = new Array (
+   'able-to-funk.wav',
+   'functional-music.mid',
+   '<SPAN CLASS=sample-code-highlighted>funk</SPAN>-monster.rmf',
+   '<SPAN CLASS=sample-code-highlighted>funk</SPAN>-u-mutha-funka.wav',
+   '<SPAN CLASS=sample-code-highlighted>funk</SPAN>adelic.rmf',
+   '<SPAN CLASS=sample-code-highlighted>funk</SPAN>y-chicken.mid',
+   'get-down-and-funk.wav',
+   'living-funkster.mid',
+   'turn-up-the-funk.rmf'
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...then the statement <B><NOBR>Music.randomFromGroup (myFunkyFiles,'funk')</NOBR></B> would randomly select an item out of the subgroup of items in the array <B>myFunkyFiles</B> that are prefixed with "<SPAN CLASS=sample-code-highlighted>funk</SPAN>". These items are highlighted in the array definition above.</P>
+
+<P>This method can be quite useful in cases where one needs to randomly select music from a large catalog of files on a Web site. Consider, for example, the following array definition of a list of music files...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicFiles = new Array (
+   'music/ambient/bliss.rmf',
+   'music/ambient/waterscape-full.rmf',
+   'music/ambient/waterscape-short.rmf',
+   'music/ambient/waterscape-groove.rmf',
+   'music/ambient/storm.rmf',
+   'music/rhythm/drummin-machine.rmf',
+   'music/rhythm/unda-my-feet.rmf',
+   'music/rhythm/conga-bonga.rmf',
+   'music/rhythm/caught-in-a-snare.rmf',
+   'music/rhythm/fatal-crash.rmf',
+   'music/techno/high.rmf',
+   'music/techno/pilon.rmf',
+   'music/techno/moonbuster.rmf',
+   'music/techno/power-spike.rmf'
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You'll notice that the music files are arranged in a logical folder structure, according to their genre. Using the <B>Music.randomFromGroup</B> method, it now becomes quite easy to randomly select entries from this array based upon genre. For instance, the statement <B><NOBR>Music.randomFromGroup (myMusicFiles,'music/ambient/')</NOBR></B> would randomly select an ambient music file, and the statement <B><NOBR>Music.randomFromGroup (myMusicFiles,'music/techno/')</NOBR></B> would randomly select a techno music file.</P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>GroupPrefixSTR</B> parameter, then this method randomly selects an item from the entire array specified by the <B>SourceARRAY</B> parameter, rather than a subgroup of it. In this case, it is not required that the source array only contain string elements. The source array may contain elements that are all of a type other than string, or it may contain elements of mixed type (ie. string, boolean, number, object, etc.).
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.randomFromGroup (</B> SourceARRAY <B>)</B>
+		<P>When no <B>GroupPrefixSTR</B> parameter is specified, then this method randomly selects an item from the entire array specified by the <B>SourceARRAY</B> parameter, rather than a subgroup of it. This is the same behavior as when a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>GroupPrefixSTR</B> parameter. When this form of the method is used, it is not required that the source array only contain string elements. The source array may contain elements that are all of a type other than string, or it may contain elements of mixed type (ie. string, boolean, number, object, etc.).</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI>
+		<P></P>
+</UL>
+
+-->
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.randomFromList"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.randomFromList</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.randomFromList</B> static method randomly selects an item out of a specified list of items.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.randomFromList (</B> ListItem1 <B>,</B> ListItem2 <B>,</B> ListItem3 <B>,</B> ... <B>,</B> ListItemN <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>RandomItemANYTYPE</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.randomFromList</B> method randomly selects an item from a list of items passed as parameters to the method. There is no limit to the number of items that can be specified when calling this method. Although the items in the list can be of mixed type, one will typically use the same type for all items in the parameter list. And in most cases, this will be the String type. For example, to play a randomly selected RMF file from a list of RMF files, one could use the statement <B>myMusicObject.play (Music.randomFromList ('ambient.rmf', 'classical.rmf', 'house.rmf', 'jungle.rmf', 'lounge.rmf', 'modern-rock.rmf', 'sfx-medley.rmf', 'techno.rmf', 'trance.rmf'))</B>. Now, because all the files in this list are RMF files, the statement can be optimized as <B>myMusicObject.play (Music.randomFromList ('ambient', 'classical', 'house', 'jungle', 'lounge', 'modern-rock', 'sfx-medley', 'techno', 'trance') + '.rmf')</B>, since all the items in the list share the same suffix ".rmf".</P>
+
+<P>In addition to using the <B>Music.randomFromList</B> method as a way of randomly selecting files to play, one can also randomize the selection of Groovoids, as in the statement <B>myMusicObject.play (Music.randomFromList ('Hits-BlastOff', 'Hits-LudwigVan', 'Hits-ZoomAndHit', 'Fanfare-CorpSting1', 'Fanfare-Majesty', 'Misc-CashRegister', 'UI-TeletypeBurst2'))</B>. In another example using Groovoids, if one wished to randomly select from a specific subset of one of the groups of Groovoids, one could use a statement such as <B>myMusicObject.play (Music.randomFromList ('Background-Clock', 'Background-Dubby', 'Background-Funky', 'Background-Latin', 'Background-StillWaiting'))</B>, which could further be simplified to <B>myMusicObject.play ('Background-' + Music.randomFromList ('Clock', 'Dubby', 'Funky', 'Latin', 'StillWaiting'))</B>, since all of the Groovoids in this list share the same prefix.</P>
+
+<P>It's not necessary to only use the <B>Music.randomFromList</B> method to select music files or Groovoids. If one wished to provide a dynamic interface to remixing a musical composition, one may wish to randomly mute / unmute a track that is randomly selected out of a list of tracks, as in the statement <B>myMusicObject.setTracksMute (Music.randomFromList (5,9,15,16,19,23,27),'Toggle')</B>. The tracks not included in this list could form the foundation of the musical groove, whereas the tracks in the list are embellishements which can be used in any combination, and with this statement can be randomly turned on and off to result in endless different combinations. Note that the <B>setTracksMute</B> method we are using in the statement is part of <A HREF="../groups/index.html">Music Object Extension - Groups</A>.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.randomFromList (</B> ListItemARRAY <B>)</B>
+		<P>When a single Array parameter is specified in place of a list of items, then a randomly selected item will be selected from the array specified. An example of this usage would be the statement <B><NOBR>Music.randomFromList (Music.groovoids)</NOBR></B>, or the statement <B><NOBR>Music.randomFromList (myMusicFilesArray)</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.randomGroovoid"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.randomGroovoid</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.randomGroovoid</B> static method randomly selects a Groovoid within a specified Groovoid group.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.randomGroovoid (</B> GroovoidGroupSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.randomGroovoid</B> method returns a String value, representing a Groovoid that has been randomly selected from the group of Groovoids specified by the <B>GroovoidGroupSTR</B> parameter. For instance, if one wished to play a randomly selected Groovoid from the "Background" group of Groovoids, one could use the statement <B><NOBR>myMusicObject.play (Music.randomGroovoid ('Background'))</NOBR></B>. Similarly, to play a randomly selected Groovoid from the "Fanfare" group of Groovoids, one could use the statement <B><NOBR>myMusicObject.play (Music.randomGroovoid ('Fanfare'))</NOBR></B>. One can even randomly select from variations of similar Groovoids within a Groovoid group. For example, the "UI" Groovoid group contains 17 variations of "click" Groovoids, named "UI-Click1", "UI-Click2", ... , "UI-Click17". One can easily randomly select a "click" Groovoid to play using the statement <B><NOBR>myMusicObject.play (Music.randomGroovoid ('UI-Click'))</NOBR></B>.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.randomGroovoid ( )</B>
+		<P>When no <B>GroovoidGroupSTR</B> parameter is specified, then a Groovoid will be randomly selected from the entire list of Groovoids built into the Beatnik Player's soundbank.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="objects"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Objects
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.Shuffler"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Shuffler</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Object Constructor&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Shuffler</B> object lets you generate integer numbers that are seemingly more random, using a "shuffling" algorithm.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.Shuffler (</B> RandomRangeINT <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.Shuffler</B> object lets you generate random integer numbers that are seemingly more random than those generated using the <A HREF="#Music.random"><B>Music.random</B></A> static method. It does this by using an algorithm which is similar in principle to the process of shuffling a pack of cards.</P>
+
+<P>Each card in a pack of cards is unique. If the pack is shuffled and then cards are drawn from the pack, one by one, until all the cards are exhausted, then no two cards that are drawn in a row will ever be the same. The only time there is some possibility of two cards in a row being the same is when the pack is reshuffled and the first card is drawn. It could happen that the first card drawn after shuffling is the same as the last card drawn from the previous shuffling of the pack. However, the odds of this happening are quite small. Compare this approach to generating random numbers to the <B>Music.random</B> method, where there is a good likelihood that the same number could be generated twice (and sometimes three or more times) in a row - even more so when the randomization range is smaller.</P>
+
+<DIV CLASS=subsection>Constructor</DIV>
+<UL>
+	<LI><B>Music.Shuffler (</B> RandomRangeINT <B>)</B> - To create an instance of this object, use the <B>Music.Shuffler</B> constructor in a JavaScript "new" statement, as in <B><NOBR>myShuffler = new Music.Shuffler (7)</NOBR></B>. The one parameter that is passed to the constructor represents the randomization range of the random numbers that are to be generated by this object.
+</UL>
+
+<DIV CLASS=subsection>Instance Methods</DIV>
+<UL>
+	<LI><B>next ( )</B> - For the specific instance of this object, generates and returns a random integer between (and inclusive of) 1 and the randomization range specified in the constructor's <B>RandomRangeINT</B> parameter.
+		<P></P>
+	<LI><B>reset ( )</B> - For the specific instance of this object, resets the memory so that numbers that have already been generated in the current "shuffling" can once again become eligible for generation. Using the playing cards analogy, this method has the effect of putting all drawn cards back into the pack and reshuffling the pack.
+		<P></P>
+</UL>
+
+<P>Following is a simple example of how the <B>Music.Shuffler</B> object could be used...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Example Using Music.Playlist&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+myPlaylist = new Music.Playlist ();
+music = new Music ();
+music.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.groovoids"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.groovoids</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Dynamic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;array&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>The <B>Music.groovoids</B> static property is an array of strings representing the names of all the Groovoids contained in the Beatnik Player soundbank.</P>
+
+<P>This property is useful for randomly selecting or stepping through all the Groovoids that are available in the Beatnik soundbank. By dynamically selecting Groovoids to play using this property, one can help to ensure that sonified Web pages remain fresh for the end-user. The elements of this array reflect all the Groovoids in the Beatnik soundbank, as listed in the Appendix <A HREF="../../../appendixes/groovoids.html">Beatnik Soundbank - Groovoids</A>.</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+</BODY></HTML>

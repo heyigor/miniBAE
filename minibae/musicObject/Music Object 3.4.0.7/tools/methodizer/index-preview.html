@@ -1,0 +1,46 @@
+<SEARCH PARENT="index.html" SEED=OFF SEARCHABLE=OFF INDEXABLE=OFF>
+<HTML>
+<HEAD>
+	<TITLE>Music Object Methodizer: Preview</TITLE>
+	<STYLE TYPE="text/css"><!--
+		BODY {
+			background: #ddd url(../../style/images/texture.jpg);
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 13px;
+			color: #000;
+		}
+		P, BLOCKQUOTE, TD, OL {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 13px;
+		}
+		A {
+			color: #008;
+			text-decoration: none;
+		}
+		A:hover {
+			text-decoration: underline;
+		}
+	--></STYLE>
+</HEAD>
+<BODY MARGINWIDTH=0 MARGINHEIGHT=0>
+
+<FORM NAME="prefsForm">
+<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=CENTER ALIGN=CENTER>
+		<TD>&nbsp;&nbsp;</TD>
+		<TD><A HREF="javascript://" ONCLICK="top.wizardFrame.helpOnMethod (); return false"><B>Help on Method</B></A></TD>
+		<TD><IMG SRC="../../style/images/text-separator.gif" WIDTH=2 HEIGHT=20 VSPACE=0 HSPACE=4 ALIGN=ABSBOTTOM></TD>
+		<TD><A HREF="javascript://" ONCLICK="top.wizardFrame.resetAll ()"><B>PANIC (reset all)</B></A></TD>
+		<TD><IMG SRC="../../style/images/text-separator.gif" WIDTH=2 HEIGHT=20 VSPACE=0 HSPACE=4 ALIGN=ABSBOTTOM></TD>
+		<TD><A HREF="javascript://" ONCLICK="top.wizardFrame.toggleAutoPreview (); return false"><B>Auto Preview</B></A></TD>
+		<TD><INPUT NAME="autoPreview" TYPE=checkbox ONCLICK="top.wizardFrame.updatePrefs (); return true"></TD>
+		<TD><IMG SRC="../../style/images/text-separator.gif" WIDTH=2 HEIGHT=20 VSPACE=0 HSPACE=4 ALIGN=ABSBOTTOM></TD>
+		<TD><A HREF="javascript://" ONCLICK="top.wizardFrame.previewMethod (); return false"><B>Preview Method</B></A></TD>
+		<TD><IMG SRC="../../style/images/text-separator.gif" WIDTH=2 HEIGHT=20 VSPACE=0 HSPACE=4 ALIGN=ABSBOTTOM></TD>
+		<TD><B>Return Value</B></TD>
+		<TD><INPUT TYPE=text NAME="returnValue" VALUE="" SIZE=46 STYLE="width: 428px;"></TD>
+	</TR>
+</TABLE>
+</FORM>
+
+</BODY></HTML>

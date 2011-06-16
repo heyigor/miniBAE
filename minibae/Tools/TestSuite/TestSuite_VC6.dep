@@ -1,0 +1,229 @@
+# Microsoft Developer Studio Generated Dependency File, included by TestSuite_VC6.mak
+
+..\..\BAE_Source\Common\GenCache.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Common\GenPatch.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Common\MsgCommon.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAE_API_Msg.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Common\GenSample.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Common\GenSong.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSeqTools.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Common\X_API.c : \
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Platform\BAE_API_WinOS.c : \
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAE_API_WinOS_GetDXVer.h"\
+	
+
+..\..\BAE_Source\Platform\BAE_API_WinOS_GetDXVer.CPP : \
+	
+
+..\..\BAE_Source\Platform\BAE_API_WinOS_MsgSnd.c : \
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAE_API_Msg.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Platform\BAE_API_WinOS_Thread.c : \
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	
+
+..\..\BAE_Source\Common\DriverTools.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Common\g711.c : \
+	"..\..\BAE_Source\Common\g72x.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Common\g721.c : \
+	"..\..\BAE_Source\Common\g72x.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	
+
+..\..\BAE_Source\Common\g723_24.c : \
+	"..\..\BAE_Source\Common\g72x.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\g723_40.c : \
+	"..\..\BAE_Source\Common\g72x.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\g72x.c : \
+	"..\..\BAE_Source\Common\g72x.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\GenSoundFiles.c : \
+	"..\..\BAE_Source\Common\g72x.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\MiniBAE.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\MsgSend.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Common\MsgCommon.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Platform\BAE_API_Msg.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\NewNewLZSS.c : \
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\SampleTools.c : \
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\X_Decompress.c : \
+	"..\..\BAE_Source\Common\g72x.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+..\..\BAE_Source\Common\X_IMA.c : \
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Formats.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+
+	
+
+.\BAEMixerTest.c : \
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	".\BAEMixerTest.h"\
+	".\TestSuite.h"\
+	".\TestTools.h"\
+	
+
+.\BAESongTest.c : \
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	".\BAESongTest.h"\
+	".\TestSuite.h"\
+	".\TestTools.h"\
+
+	
+
+.\BAESoundTest.c : \
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	".\BAESoundTest.h"\
+	".\TestSuite.h"\
+	".\TestTools.h"\
+	
+
+.\TestSuite.c : \
+	"..\..\BAE_Source\Common\GenPriv.h"\
+	"..\..\BAE_Source\Common\GenSnd.h"\
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	"..\..\BAE_Source\Common\MsgCommon.h"\
+	"..\..\BAE_Source\Common\X_API.h"\
+	"..\..\BAE_Source\Common\X_Assert.h"\
+	"..\..\BAE_Source\Platform\BAE_API.h"\
+	"..\..\BAE_Source\Platform\BAE_API_Msg.h"\
+	"..\..\BAE_Source\Platform\BAEBuildOptions_WinOS.h"\
+	".\BAEMixerTest.h"\
+	".\BAESongTest.h"\
+	".\BAESoundTest.h"\
+	".\TestSuite.h"\
+	".\TestTools.h"\
+
+	
+
+.\TestTools.c : \
+	"..\..\BAE_Source\Common\MiniBAE.h"\
+	".\TestSuite.h"\
+	".\TestTools.h"\
+	

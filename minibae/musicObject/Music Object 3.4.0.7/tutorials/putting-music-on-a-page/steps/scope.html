@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Scope Out the Music)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 3: Scope Out the Music
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Called "SCOPE" because it most closely resembles the display of old-style oscilloscopes used by electronics engineers to observe signals, this display mode of the Beatnik Player is arguably the most attractive. While it may not offer the user any information about the author of the composition (as is the case with the SONG display), the dance that it dances is a mesmerizing feast for the eyes. It is an easy way to add a bit of eye candy to an otherwise static page. Better, even, than an animated GIF in that its motion is tied to the music that is currently playing. Livelier music, livelier scope. Mellower music, mellower scope. It kind of captures the mood of the music.</P>
+
+<CENTER>
+<EMBED
+	SRC="../../../music/trance.rmf"
+	TYPE="audio/rmf"
+	WIDTH=144
+	HEIGHT=60
+	DISPLAY=SYSTEM
+	MODE=SCOPE
+	AUTOSTART=FALSE
+	LOOP=FALSE
+	ALIGN=RIGHT
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+>
+</CENTER>
+
+<P>
+Right-click (click-and-hold for Mac users) anywhere on the Beatnik control panel to the right. From the pop-up menu that appears, select the "Play" menu option to start the music playing and then watch as the audio output is expressed as an animated waveform.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The SCOPE can be specified using the EMBED tag's DISPLAY and MODE attributes. The syntax is as follows:</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="trance.rmf"
+   TYPE="audio/rmf"
+   WIDTH=144
+   HEIGHT=60
+<SPAN CLASS=sample-code-highlighted>   DISPLAY=SYSTEM
+   MODE=SCOPE</SPAN>
+   AUTOSTART=FALSE
+   LOOP=FALSE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Because you have to put the player into SYSTEM display in order to get the SCOPE mode option, you can no longer have the transport controls in the top portion of the control panel as you would have when SONG display is selected. This is a drawback of the SYSTEM display, but there is a nifty workaround shown in the next example.</P>
+
+</BODY></HTML>

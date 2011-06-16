@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Dealing with MIME Types)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 12: Dealing with MIME Types
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>It is quite possible that your ISP's server is already set up to handle most of the <A HREF="../../../appendixes/supported-file-types.html" TARGET="_parent">file types supported</A> by the Beatnik Player. However, a common problem that people experience is that the file will play fine locally but, as soon as they try to upload and browse the site on their server, the files don't play. The usual reason for this is that the server is not sending the correct <B>MIME type</B> for the files.</P>
+
+<P><B>It is possible</B>, using Netscape Navigator 3.0x and higher, to completely avoid the rather unfortunate server MIME type issue. Using the <A HREF="../../../general-reference/embedding-properties.html#type" TARGET="_parent"><B>TYPE</B></A> attribute, one can explicitly state what an EMBED file's MIME type is to be in the HTML. This means that it is not necessary to configure a server for that MIME type. For a full list of the appropriate MIME type names to use in this attribute, consult the <A HREF="../../../appendixes/supported-file-types.html" TARGET="_parent">Supported file types</A>.</P>
+
+<P><IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;It is important to note, however, that for compatibility with Navigator 2.0, and to ensure the best possible experience for 2.0 users, you should still make sure that your ISP's server is configured to send the correct MIME types. Beatnik Inc. advocates that you both explicitly state the MIME type as well as ensure that the server is configured correctly. You should contact your ISP and request them to support the necessary MIME types, as listed in the <A HREF="../../../appendixes/supported-file-types.html" TARGET="_parent">Supported file types</A>. Below, we have included a ready-to-send e-mail with all the information your ISP needs. Simply copy-and-paste the text into an e-mail, replace your own name at the bottom, and send.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Dear System Administrator,
+
+For the purpose of adding music to my Web site I would like to start
+authoring for some of the available Netscape plug-ins that support
+music and audio file types.
+
+I would like to confirm that the server that is serving my Web site can
+support the following music and audio file MIME types. If there are
+any MIME types from the following list which are currently not
+supported, please consider configuring the server for those MIME types
+as well.
+
+MIME types that I need:
+=======================
+:------------:--------------------------:-------------------------------:
+| extensions |          MIME types      | File type                     |
+|------------|--------------------------|-------------------------------|
+|.mid, .midi |        audio/midi        | MIDI files                    |
+|   .rmf     |        audio/rmf         | RMF (Rich Music Format) files |
+|   .wav     |        audio/wav         | Windows WAV files             |
+|  .aiff     |        audio/aiff        | Audio Interchange File Format |
+|    .au     |       audio/basic        | Basic audio files             |
+|    .js     | application/x-javascript | JavaScript                    |
+:------------:----------------------------------------------------------:
+
+Your assistance in this matter is greatly appreciated. Please inform.
+
+Regards,
+<SPAN CLASS=sample-code-highlighted>[your name here]</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

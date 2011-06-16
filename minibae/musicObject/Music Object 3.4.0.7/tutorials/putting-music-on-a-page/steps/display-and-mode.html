@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (The DISPLAY and MODE attributes)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 2: The DISPLAY and MODE attributes
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<EMBED
+	SRC="../../../music/modern-rock.rmf"
+	TYPE="audio/rmf"
+	WIDTH=144
+	HEIGHT=60
+	DISPLAY=SONG
+	AUTOSTART=FALSE
+	LOOP=TRUE
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+	ALIGN=RIGHT
+	HSPACE=10
+>
+
+<P>Click the play button on the Beatnik Player to the right and start the music file playing. Now right-click (click-and-hold for Mac users) anywhere on the control panel. In the pop-up menu that appears you should see the option "Song Display", which will already be checked. Click on the option "System Display" and see what happens. You should now see how the song information display and transport controls completely vanished and were replaced by a global mute button at the top right and an oscilloscope-type display in the lower portion. Now, click just once on the oscilloscope display. You should see how it changes to a meters-style display mode.</P>
+
+<P>So, it's evident that the Beatnik Player has numerous appearances that it can take on. While the user always has the ability to alter the control panel's appearance using the pop-up menu, is there a way that the author can force an embedded Beatnik player to show up with one of these cool alternate displays? This is where the DISPLAY and MODE attributes come in. First let's explain the concept behind the control panel's display options.</P>
+
+<DIV CLASS=subsection>System Versus Song</DIV>
+
+<P>There are essentially two types of information that the player's control panel can display: song information, or system information. The author can force the player's control panel into one of these two types of display by using the DISPLAY attribute in the EMBED tag and specifying a value of either SONG or SYSTEM. The attribute's syntax could be:</P>
+
+<UL>
+	<LI><B>DISPLAY=SONG</B><BR>
+		The control panel will show information that is specific to the song that the player instance is currently playing. This would be a set of transport controls for the top portion of the display, and song information in the larger bottom portion of the display.
+		<P></P>
+	<LI><B>DISPLAY=SYSTEM</B><BR>
+		The control panel will show information that is common to all Beatnik player instances embedded on the same HTML page, as well as any Beatnik players that may be embedded in other browser windows. This would be a global mute button in the top portion of the display, and an audio output in the larger bottom portion. This is called "System Display" because it shows the global state of Beatnik's underlying audio engine which is common to all player instances. For instance, if you have multiple players embedded on the same page and they are all set to the oscilloscope-type display, the scope on each control panel will be exactly the same, regardless of what that player may be playing (or not playing, for that matter).
+</UL>
+
+<DIV CLASS=subsection>What About Those Meters Then?</DIV>
+
+<P>There is one thing that is still unaccounted for. Remember how at the beginning of this step you changed the control panel using the pop-up menu? And then proceeded to change it further by clicking on the lower portion? This brought up a meters-style display mode. If you were to bring up the pop-up menu again while in this display mode, you would see how the menu still shows 'System Display' as checked. This is because the meters are just a variation on the system display. When the meters are showing, you are still seeing the global audio output for all Beatnik players embedded on the same page, or in completely different frames or browser windows. But the audio output is being presented in a different fashion.</P>
+
+<P>This is where the MODE attribute comes in. The MODE attribute allows an author to further customize the style of display that is used when the panel is in the SONG or SYSTEM display. When the panel is in SONG display, there is only one option that can be used for the MODE attribute: COPYRIGHT. This mode shows information for the player's currently loaded music or audio file in the lower portion of the control panel. On the other hand, when the panel is in SYSTEM display, you can specify a value of either SCOPE or METERS for the MODE attribute:</P>
+
+<UL>
+	<LI><B>MODE=SCOPE</B><BR>
+		With this setting, the lower portion of the control panel will show an oscilloscope like display. The waveform will "dance" according to the combined audio output of all instances of the Beatnik Player.
+		<P></P>
+	<LI><B>MODE=METERS</B><BR>
+		With this setting, the lower portion of the control panel will show the synthesizer voices that are playing by using an LED meters look you would normally associate with a recording studio's mixing console. The underlying audio engine's voices are shared by all instances of the Beatnik Player, and so any player instances on a page that are showing the METERS display mode will be "dancing" to the music in exactly the same way.
+</UL>
+
+</BODY></HTML>

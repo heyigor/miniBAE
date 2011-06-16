@@ -1,0 +1,26 @@
+/*
+ *	MacHeaders.pch
+ *
+ *	Script to generate the 'MacHeaders<xxx>' precompiled header for Metrowerks C/C++.
+ *  Copyright © 1993 metrowerks inc.  All rights reserved.
+ */
+
+/*
+ *	Support for automatically naming the precompiled header file ...
+ */
+#if __POWERPC__
+#pragma precompile_target "HeadersPPC"
+#elif __CFM68K__
+#pragma precompile_target "HeadersCFM68K"
+#else
+#pragma precompile_target "Headers68K"
+#endif
+
+/*
+ *	Now just include the "MacHeaders.c" source file ...
+ */
+
+#pragma once on
+
+#include "MacHeaders.c"
+

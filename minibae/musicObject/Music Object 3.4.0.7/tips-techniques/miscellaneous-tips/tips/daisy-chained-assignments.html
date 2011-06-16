@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Tips: JAVASCRIPT TIP: Daisy-chained Assignments</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Daisy-chained Assignments
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Not all JavaScript programmers may be aware of the fact that it is possible to do "daisy-chained" assignment statements in JavaScript, such as the following...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myVariable1 = myVariable2 = myVariable3 = myVariable4 = 0;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>This statement assigns all the variables with the value 0. As another example, the following statements...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myVariable1 = myOtherVariable1 * myOtherVariable2 - myOtherVariable3;
+myVariable2 = myVariable1;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could be reduced to...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myVariable1 = myVariable2 = myOtherVariable1 * myOtherVariable2 - myOtherVariable3;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Of course, beware of using this syntax with object constructors such as "<B>new Array ()</B>". For example, the statements...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myArray1 = new Array ();
+myArray2 = new Array ();
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is NOT the same as...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myArray1 = myArray2 = new Array ();
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the first case, both <B>myArray1</B> and <B>myArray2</B> will reference distinct new Array objects, but in the second case, both variables will reference the same shared Array object - only one new Array object is created! This is because objects in JavaScript are assigned to variables by reference. So, if you have an array called <B>myArray1</B>, then the statement...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myArrayRef1 = myArray1;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...does NOT actually create a duplicate of the object <B>myArray1</B> and place it in <B>myArrayRef1</B>, but actually just lets <B>myArrayRef1</B> point to the same "stash" in memory as <B>myArray1</B>. If you use <B>myArrayRef1</B> to update the array by adding elements, the changes will be seen when you refer to the array by <B>myArray1</B> as well.</P>
+
+<P>So, if your intention is to link two (or more) variables to the same object, then the condensed syntax is appropriate. For example,...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myArray1 = new Array ();
+myArrayRef1 = myArray1;
+myArrayRef2 = myArray1;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is indeed the same as the statement...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myArrayRef1 = myArrayRef2 = myArray1 = new Array ();
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now, all the variables will reference the same array object, so...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+alert (myArray1 [0]);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...and...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+alert (myArrayRef1 [0]);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...will show the same value. Use this wisdom cautiously!</P>
+
+</BODY></HTML>

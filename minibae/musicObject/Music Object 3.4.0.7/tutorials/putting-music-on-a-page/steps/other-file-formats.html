@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Embedding Other File Formats)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 11: Embedding Other File Formats (MIDI, WAV, AIFF, AU)
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Although RMF is the premier file format that Beatnik Inc. is promoting for music, the Beatnik Player supports a variety of other music and audio file formats (see the appendix <A HREF="../../../appendixes/supported-file-types.html" TARGET="_parent">Supported File Types</A>). And it is just as easy to play these file types through the Beatnik Player as it is with RMF files.</P>
+
+<P>In the example below, we are embedding a WAV file that contains some speech...</P>
+
+<CENTER>
+<EMBED
+	SRC="../../../sample-code/hyperactive/music/tell-me-about.wav"
+	TYPE="audio/rmf"
+	WIDTH=144
+	HEIGHT=60
+	DISPLAY=SONG
+	AUTOSTART=FALSE
+	LOOP=FALSE
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+>
+</CENTER>
+
+<P>Take a look at the HTML source code below. The text that is highlighted indicates the filename of the WAV file that was embedded with this Beatnik Player instance. More importantly, notice how the <B>TYPE="audio/rmf"</B> attribute is specifying the MIME type for RMF files. This ensures that the Beatnik Player will play this WAV file, since Beatnik is the only plug-in for Netscape Navigator that handles this MIME type. And even though the MIME type <B>"audio/rmf"</B>suggests that this file may be an RMF file, the Beatnik Player is smart enough to use the file extension ("<B>.wav</B>" in this case) for the final determination of the file type.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="<SPAN CLASS=sample-code-highlighted>tell-me-about.wav</SPAN>"
+   TYPE="audio/rmf"
+   WIDTH=144
+   HEIGHT=60
+   DISPLAY=SONG
+   AUTOSTART=FALSE
+   LOOP=FALSE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

@@ -1,0 +1,350 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The playRandomNote Method</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+DEMO: The playRandomNote Method
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-dynamic.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+
+// --></SCRIPT>
+
+<P>The <A HREF="../../music-object-reference/extensions/dynamic/index.html#playRandomNote"><B>playRandomNote</B></A> method, which is contained inside <A HREF="../../music-object-reference/extensions/dynamic/index.html">Music Object Extension - Dynamic</A>, offers a <B>multitude parameters</B> that can be used to change the resulting randomly selected musical note. You can randomize properties such as <B>pitch</B>, <B>velocity</B>, <B>pan</B>, <B>duration</B>, and <B>volume</B>.</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6 BGCOLOR=EEEEEE ALIGN=LEFT HSPACE=8><TR><TD>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (1,1,10,100,110,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;One
+	</A>
+	<BR>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (2,1,10,90,100,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;Two
+	</A>
+	<BR>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (3,1,10,80,90,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;Three
+	</A>
+	<BR>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (4,1,10,70,80,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;Four
+	</A>
+	<BR>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (5,1,10,60,70,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;Five
+	</A>
+	<BR>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (6,1,10,50,60,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;Six
+	</A>
+	<BR>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (7,1,10,40,50,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;Seven
+	</A>
+	<BR>
+	<A
+		HREF="javascript://"
+		ONMOUSEOVER="music.playRandomNote (8,1,10,30,40,100,70,1000,1000,100,100,0,127)"
+	>
+		Just&nbsp;a&nbsp;Link&nbsp;-&nbsp;Eight
+	</A>
+	<BR>
+</TD></TR></TABLE>
+<BR>
+
+<P>The table of links to the left demonstrates how you can use the <B>playRandomNote</B> method to achieve <B>very cool effects</B>. The ONMOUSEOVER event for each link triggers a randomly pitched musical note that plays through Beatnik's "<B>Echo Bell</B>" instrument. However, there is an <B>added little subtlety</B>: moving from top to bottom, the range within which a random pitch is selected descends, so that the top-most link always plays a random pitch within a very <B>high range</B>, and the bottom link always plays a random pitch within a very <B>low range</B>.</P>
+
+<P>
+Pretend for a moment that the table of links is actually a <B>navigation bar</B> that is in a frame on the left hand side of a frames-based Web site. This "nav bar" would then be sonified in such an <B>entertaining</B> way that users would have fun just interacting with the nav bar itself. Just think if the entire Web site was interactive in a tasty and dynamic way. Try interacting with the links in the table. You can actually almost <B>play them like a musical instrument</B> if you "swirl" the mouse around, moving gradually from <B>top to bottom</B>, and at <B>varying speed</B>. Take the links for a test drive...
+<BR CLEAR=LEFT>
+</P>
+
+<P>Now, let's take a look at the source code for this navigation bar...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;TITLE&gt;Whacky Navigation Bar&lt;/TITLE&gt;&lt;/HTML&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music = new Music ();
+music.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6 BGCOLOR=EEEEEE ALIGN=LEFT HSPACE=8&gt;&lt;TR&gt;&lt;TD&gt;
+   &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (1,1,10,100,110,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;One
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (2,1,10,90,100,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;Two
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (3,1,10,80,90,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;Three
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (4,1,10,70,80,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;Four
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (5,1,10,60,70,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;Five
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (6,1,10,50,60,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;Six
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (7,1,10,40,50,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;Seven
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;A
+      HREF="javascript://"
+      <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="music.playRandomNote (8,1,10,30,40,100,70,1000,1000,100,100,0,127)"</SPAN>
+   &gt;
+      Just&amp;nbsp;a&amp;nbsp;Link&amp;nbsp;-&amp;nbsp;Eight
+   &lt;/A&gt;
+   &lt;BR&gt;
+   &lt;/FONT&gt;
+&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the source code lising above, the text that is highlighted represents the code that is necessary for achieving the randomized chime effect. Note how we have sourced in the JavaScript file "<B>music-object-x-dynamic.js</B>". Without this file sourced into the page, the <B>playRandomNote</B> method would not be defined and the code would produce JavaScript errors. Notice also how we have sourced in this extension file after first sourcing in the core "music-object.js" file. If you are unfamiliar with Music Object extensions, consult the section <A HREF="../../music-object-reference/extensions/intro.html">About Music Object Extensions</A>.</P>
+
+<P>In this example, we are assuming that the files "music-object.js", "music-object-x-dynamic.js", and "stub.rmf" are all located in the same folder as the HTML document that is to be sonified. If this is not the case in your own particular situation, then you should specify correct paths to the locations of these files relative to the location of the HTML page to be sonified.</P>
+
+<DIV CLASS=subsection>All Together Now</DIV>
+
+<P>By layering <B>multiple notes</B> together at <B>randomly selected pitches</B>, one can achieve some pretty <B>cool</B> and <B>funky</B> results. The possibilities are virtually <B>limitless</B>. For example, try out the various button click sounds below. Be sure to click each button <B>several times</B> to see how the sound texture is <B>always changing</B>, but still conforms to a certain <B>unique identity</B> that differentiates it from all the other button sounds. Even though there is a fair amount of randomization taking place, each button still <B>retains its own quality</B>. Click buttons now...</P>
+
+<CENTER>
+<FORM>
+	<INPUT
+		TYPE="button"
+		VALUE="Button 1"
+		ONCLICK="
+			music.playRandomNote (1,1,82,84,105,30,20,1000,1000,100,100,0,127);
+			music.playRandomNote (2,1,79,84,105,30,20,1000,1000,100,100,0,127);
+			music.playRandomNote (3,0,128+71,85,102,40,40,200,200,100,100,0,127);
+		"
+	>
+	&nbsp;&nbsp;
+	<INPUT
+		TYPE="button"
+		VALUE="Button 2"
+		ONCLICK="
+			music.playRandomNote (1,1,128+82,67,97,30,20,100,100,100,100,0,127);
+			music.playRandomNote (2,1,128+82,67,97,30,20,100,100,100,100,0,127);
+			music.playRandomNote (3,1,38,26,43,50,50,500,500,100,100,0,127);
+		"
+	>
+	&nbsp;&nbsp;
+	<INPUT
+		TYPE="button"
+		VALUE="Button 3"
+		ONCLICK="
+			music.playRandomNote (1,0,128+56,84,84,50,30,3000,3000,100,100,0,127);
+			music.playRandomNote (2,1,119,25,50,100,100,3000,3000,100,100,0,127);
+			music.playRandomNote (3,1,93,50,76,50,50,300,300,100,100,0,127);
+		"
+	>
+	&nbsp;&nbsp;
+	<INPUT
+		TYPE="button"
+		VALUE="Button 4"
+		ONCLICK="
+			music.playRandomNote (1,0,128+56,2,20,50,30,3000,3000,100,100,0,127);
+			music.playRandomNote (2,0,128+56,2,20,50,30,3000,3000,100,100,0,127);
+			music.playRandomNote (3,0,128+56,2,20,50,30,3000,3000,100,100,0,127);
+		"
+	>
+	&nbsp;&nbsp;
+	<INPUT
+		TYPE="button"
+		VALUE="Button 5"
+		ONCLICK="
+			music.playRandomNote (1,1,33,41,54,100,100,2000,2000,100,100,64,64);
+			music.playRandomNote (2,1,33,81,102,10,10,4000,4000,100,100,0,127);
+			music.playRandomNote (3,1,33,81,102,10,10,4000,4000,100,100,0,127);
+			music.playRandomNote (4,1,33,81,102,10,10,4000,4000,100,100,0,127);
+			music.playRandomNote (5,1,33,81,102,10,10,4000,4000,100,100,0,127);
+		"
+	>
+	&nbsp;&nbsp;
+	<INPUT
+		TYPE="button"
+		VALUE="Button 6"
+		ONCLICK="
+			music.playRandomNote (1,1,50,54,80,100,100,500,500,60,60,64,64);
+			music.playRandomNote (2,1,50,54,80,100,100,500,500,60,60,64,64);
+			music.playRandomNote (3,1,50,54,80,100,100,500,500,60,60,64,64);
+			music.playRandomNote (4,1,50,54,80,100,100,500,500,60,60,64,64);
+		"
+	>
+</FORM>
+</CENTER>
+
+<P>Now, let's take a look at the source code for this navigation bar...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;TITLE&gt;Eerie Buttons&lt;/TITLE&gt;&lt;/HTML&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music = new Music ();
+music.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;FORM&gt;
+   &lt;INPUT
+      TYPE="button"
+      VALUE="Button 1"
+<SPAN CLASS=sample-code-highlighted>      ONCLICK="
+         music.playRandomNote (1,1,82,84,105,30,20,1000,1000,100,100,0,127);
+         music.playRandomNote (2,1,79,84,105,30,20,1000,1000,100,100,0,127);
+         music.playRandomNote (3,0,128+71,85,102,40,40,200,200,100,100,0,127);
+      "</SPAN>
+   &gt;
+   &amp;nbsp;&amp;nbsp;
+   &lt;INPUT
+      TYPE="button"
+      VALUE="Button 2"
+<SPAN CLASS=sample-code-highlighted>      ONCLICK="
+         music.playRandomNote (1,1,128+82,67,97,30,20,100,100,100,100,0,127);
+         music.playRandomNote (2,1,128+82,67,97,30,20,100,100,100,100,0,127);
+         music.playRandomNote (3,1,38,26,43,50,50,500,500,100,100,0,127);
+      "</SPAN>
+   &gt;
+   &amp;nbsp;&amp;nbsp;
+   &lt;INPUT
+      TYPE="button"
+      VALUE="Button 3"
+<SPAN CLASS=sample-code-highlighted>      ONCLICK="
+         music.playRandomNote (1,0,128+56,84,84,50,30,3000,3000,100,100,0,127);
+         music.playRandomNote (2,1,119,25,50,100,100,3000,3000,100,100,0,127);
+         music.playRandomNote (3,1,93,50,76,50,50,300,300,100,100,0,127);
+      "</SPAN>
+   &gt;
+   &amp;nbsp;&amp;nbsp;
+   &lt;INPUT
+      TYPE="button"
+      VALUE="Button 4"
+<SPAN CLASS=sample-code-highlighted>      ONCLICK="
+         music.playRandomNote (1,0,128+56,2,20,50,30,3000,3000,100,100,0,127);
+         music.playRandomNote (2,0,128+56,2,20,50,30,3000,3000,100,100,0,127);
+         music.playRandomNote (3,0,128+56,2,20,50,30,3000,3000,100,100,0,127);
+      "</SPAN>
+   &gt;
+   &amp;nbsp;&amp;nbsp;
+   &lt;INPUT
+      TYPE="button"
+      VALUE="Button 5"
+<SPAN CLASS=sample-code-highlighted>      ONCLICK="
+         music.playRandomNote (1,1,33,41,54,100,100,2000,2000,100,100,64,64);
+         music.playRandomNote (2,1,33,81,102,10,10,4000,4000,100,100,0,127);
+         music.playRandomNote (3,1,33,81,102,10,10,4000,4000,100,100,0,127);
+         music.playRandomNote (4,1,33,81,102,10,10,4000,4000,100,100,0,127);
+         music.playRandomNote (5,1,33,81,102,10,10,4000,4000,100,100,0,127);
+      "</SPAN>
+   &gt;
+   &amp;nbsp;&amp;nbsp;
+   &lt;INPUT
+      TYPE="button"
+      VALUE="Button 6"
+<SPAN CLASS=sample-code-highlighted>      ONCLICK="
+         music.playRandomNote (1,1,50,54,80,100,100,500,500,60,60,64,64);
+         music.playRandomNote (2,1,50,54,80,100,100,500,500,60,60,64,64);
+         music.playRandomNote (3,1,50,54,80,100,100,500,500,60,60,64,64);
+         music.playRandomNote (4,1,50,54,80,100,100,500,500,60,60,64,64);
+      "</SPAN>
+   &gt;
+&lt;/FORM&gt;
+&lt;/CENTER&gt;
+&lt;P&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the source code listing above, the text that is highlighted indicates the code that is necessary for achieving the various different "eerie" button sounds.</P>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY></HTML>

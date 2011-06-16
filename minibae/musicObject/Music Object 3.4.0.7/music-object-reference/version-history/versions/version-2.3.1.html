@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 2.3.1</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 2.3.1<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1998-05-04</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#intro">What's New In This Version</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+***********************************************************************-->
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<BLOCKQUOTE>
+<IMG SRC="../../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Since the Beatnik Player 1.3.0 has been released, you can expect that some end-users may be visiting your site with this version. There are issues with the 1.3.0 player and 4.0x versions of Netscape Navigator. You can only avoid these issues by using version 2.3.1 (or higher) of the Music Object API. If you do not upgrade your content to use at least this version, your content may not work reliably for users with Navigator 4.0x and the 1.3.0 Beatnik Player.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - fadeVolume</DIV>
+
+<BLOCKQUOTE>
+The <B>fadeVolume</B> method gives authors greater control over volume fades than ever before. In addition to being able to specify a start volume and end volume, the <B>fadeVolume</B> method also allows you to specify a time over which the fade is to occur. One can also register callbacks that are to occur when fade events occur. The <B>FadeEndCallback</B> parameter lets you specify a JavaScript function or statement block that is to be executed when the fade reaches its end. And the <B>FadeStepCallback</B> parameter lets you specify a function or statement block to be executed each time the fade advances. When a fade advances for the last time (when the fade reaches its end), both the fade advance callback and fade end callbacks are executed. Problem is, with earlier versions of Music Object, the final fade advance callback was executed <B>after</B> the fade end callback. This behavior is counter-intuitive and has been corrected. In versions 1.3.1 (and higher) the fade end callback will always get called last.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - engageAudio</DIV>
+
+<BLOCKQUOTE>
+In pre-release versions of the Beatnik Player 1.3.0, it was possible to turn the player's underlying audio engine off and on using the <B>disengageAudio</B> and <B>reengageAudio</B> methods. However, right before the time of release, it was decided to roll these two methods into a single <B>engageAudio</B> method that takes a boolean as a parameter. The boolean value indicates whether the engine is to be engaged (<SPAN CLASS=value>true</SPAN>) or disengaged (<SPAN CLASS=value>false</SPAN>). Problem is, the Music Object API was not updated to reflect this last minute change in the player. MusicObject version 2.3.1 fixes this problem.
+</BLOCKQUOTE>
+
+<!--***********************************************************************-->
+
+</BODY></HTML>

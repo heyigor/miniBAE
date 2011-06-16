@@ -1,0 +1,483 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The Chords Extension</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+	<STYLE TYPE="text/css"><!--
+		#strumTable A:hover {
+			background: transparent;
+		}
+	--></STYLE>
+</HEAD>
+<BODY ONLOAD="initialize ()">
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+DEMO: The Chords Extension
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-chords.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+
+chordChannelNo = 0;
+chordBankNo = 0;
+chordProgramNo = 11;
+chordName = 'Eb7#9';
+chordOctave = 3;
+chordRoot = 'Eb';
+chordVelocity = 127;
+chordDuration = 1300;
+chordNotes = new Array ();
+strummerSlotRef = new Array ();
+strummerDisplayMode = 'compacted';
+
+function nextChannel () {
+	chordChannelNo = (chordChannelNo + ((chordChannelNo == 9) ? 1 : 0)) % 16 + 1;
+	return chordChannelNo;
+}
+
+function updateChord (bankNo,programNo,_name,octave,root,velocity,duration) {
+	chordBankNo = bankNo;
+	chordProgramNo = programNo;
+	chordName = _name;
+	chordOctave = octave;
+	chordRoot = root;
+	chordVelocity = velocity;
+	chordDuration = duration;
+	chordNotes = Music.getChordNotes (chordName,chordOctave,chordRoot);
+}
+
+function playCurrentChord () {
+	music.playChord (
+		nextChannel (),
+		chordBankNo,
+		chordProgramNo,
+		chordName,
+		chordOctave,
+		chordRoot,
+		chordVelocity,
+		chordDuration
+	);
+}
+
+function strumSlotOver (slotNo) {
+	if (chordNotes [strummerSlotRef [slotNo]] != null) {
+		music.playNote (nextChannel (),chordBankNo,chordProgramNo,chordNotes [strummerSlotRef [slotNo]],chordVelocity,chordDuration);
+		document.strumForm ['slot' + slotNo + 'Trigger'].src = strumOverImage.src;
+	}
+}
+
+function strumSlotOut (slotNo) {
+	if (chordNotes [strummerSlotRef [slotNo]] != null) {
+		document.strumForm ['slot' + slotNo + 'Trigger'].src = strumOutImage.src;
+	}
+}
+
+function chordNoteName (noteNo) {
+	return (noteNo == 1) ? 'root' : (noteNo + ((noteNo == 2) ? 'nd' : ((noteNo == 3) ? 'rd' : 'th')));
+}
+
+function updateStrummer () {
+	document.strumForm.name.value = chordName;
+	document.strumForm.octave.value = chordOctave;
+	document.strumForm.root.value = chordRoot;
+	for (noteNo = 1; noteNo <= 13; noteNo++) {
+		document.strumForm ['slot' + noteNo + 'Name'].value = '';
+		document.strumForm ['slot' + noteNo + 'Value'].value = '';
+		document.strumForm ['slot' + noteNo + 'Trigger'].src = strumBlankImage.src;
+	}
+	if (strummerDisplayMode == 'compacted') {
+		for (slotNo = 1; slotNo <= 13; slotNo++) strummerSlotRef [slotNo] = 0;
+		var realNotes = 0;
+		for (noteNo = 1; noteNo <= 13; noteNo++) {
+			if (chordNotes [noteNo] != null) {
+				realNotes++;
+				strummerSlotRef [realNotes] = noteNo;
+				document.strumForm ['slot' + realNotes + 'Name'].value = chordNoteName (noteNo);
+				document.strumForm ['slot' + realNotes + 'Value'].value = Music.getNoteName (chordNotes [noteNo]);
+				document.strumForm ['slot' + realNotes + 'Trigger'].src = strumOutImage.src;
+			}
+		}
+	} else if (strummerDisplayMode == 'spread') {
+		for (noteNo = 1; noteNo <= 13; noteNo++) {
+			strummerSlotRef [noteNo] = noteNo;
+			document.strumForm ['slot' + noteNo + 'Name'].value = chordNoteName (noteNo);
+			if (chordNotes [noteNo] != null) {
+				document.strumForm ['slot' + noteNo + 'Value'].value = Music.getNoteName (chordNotes [noteNo]);
+				document.strumForm ['slot' + noteNo + 'Trigger'].src = strumOutImage.src;
+			}
+		}
+	}
+}
+
+function setStrummerDisplayMode (displayMode) {
+	if (displayMode != strummerDisplayMode) {
+		strummerDisplayMode = displayMode;
+		updateStrummer ();
+	}
+}
+
+function updateMethodCallView () {
+	document.chordForm.playChordMethodCall.value = 'myMusicObject.playChord (1,' + chordBankNo + ',' + chordProgramNo + ',\'' + chordName + '\',' + chordOctave + ',\'' + chordRoot + '\',' + chordVelocity + ',' + chordDuration + ');';
+}
+
+function updateChordEditor () {
+	var formHandle = document.chordForm;
+	formHandle.bankNo.value = chordBankNo;
+	formHandle.programNo.value = chordProgramNo;
+	formHandle.name.value = chordName;
+	formHandle.octave.value = chordOctave;
+	formHandle.root.value = chordRoot;
+	formHandle.velocity.value = chordVelocity;
+	formHandle.duration.value = chordDuration;
+	updateMethodCallView ();
+}
+
+function setChordAndPlay (bankNo,programNo,_name,octave,root,velocity,duration) {
+	updateChord (bankNo,programNo,_name,octave,root,velocity,duration);
+	updateStrummer ();
+	updateChordEditor ();
+	playCurrentChord ();
+}
+
+function playChordFromEditor () {
+	var formHandle = document.chordForm;
+	updateChord (
+		formHandle.bankNo.value - 0,
+		formHandle.programNo.value - 0,
+		formHandle.name.value,
+		formHandle.octave.value - 0,
+		formHandle.root.value,
+		formHandle.velocity.value - 0,
+		formHandle.duration.value - 0
+	);
+	updateMethodCallView ();
+	updateStrummer ();
+	playCurrentChord ();
+}
+
+function updateChordFromStrummer () {
+	var formHandle = document.strumForm;
+	updateChord (
+		chordBankNo,
+		chordProgramNo,
+		chordForm.name.value,
+		chordForm.octave.value - 0,
+		chordForm.root.value,
+		chordVelocity,
+		chordDuration
+	);
+	updateChordEditor ();
+	updateStrummer ();
+	playCurrentChord ();
+}
+
+strumBlankImage = new Image (40,100);
+strumBlankImage.src = '../../images/blank.gif';
+strumOutImage = new Image (40,100);
+strumOutImage.src = '../../style/images/color-green.gif';
+strumOverImage = new Image (40,100);
+strumOverImage.src = '../../style/images/color-red.gif';
+
+function initialize () {
+	updateChord (0,11,'Eb7#9',3,'Eb',127,1300);
+	updateChordEditor ();
+	updateStrummer ();
+}
+
+// --></SCRIPT>
+
+<P>The methods provided in the <A HREF="../../music-object-reference/extensions/chords/index.html" TARGET="_parent">Chords extension</A> allow music-savvy Web developers to apply their knowledge of music in a manner that is familiar to them, proving invaluable as an aid in the development of Web-based music instruction applications and intelligent musical "jam along" applications.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="taste-some-chords"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Taste Some Chords
+</TD></TR></TABLE>
+<BR>
+
+<P>In the table below, each row contains a button that will play a musical chord when clicked.  To the right of each button is the source code of the <A HREF="../../music-object-reference/extensions/chords/index.html#playChord" TARGET="_parent"><B>playChord</B></A> method call for each button. Each chord in the table is being played on a different instrument from the Beatnik soundbank. Combining different instruments and chords demonstrates very clearly the vast array of sound textures that can be achieved using just the built-in Beatnik soundbank.</P>
+
+<P>Go ahead and taste some chords...</P>
+
+<CENTER>
+<FORM>
+	<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=0>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Eb7#9" ONCLICK="setChordAndPlay (0,11,'Eb7#9',3,'Eb',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,11,'Eb7#9',3,'Eb',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="A7#11" ONCLICK="setChordAndPlay (1,10,'A7#11',3,'A',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,10,'A7#11',3,'A',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="A13" ONCLICK="setChordAndPlay (1,5,'A13',3,'A',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,5,'A13',3,'A',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="B13" ONCLICK="setChordAndPlay (1,92,'B13',3,'B',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,92,'B13',3,'B',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="F13" ONCLICK="setChordAndPlay (1,78,'F13',3,'F',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,78,'F13',3,'F',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Emaj9" ONCLICK="setChordAndPlay (0,89,'Emaj9',3,'E',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,89,'Emaj9',3,'E',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Dbsus9" ONCLICK="setChordAndPlay (0,108,'Dbsus9',4,'Db',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,108,'Dbsus9',4,'Db',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Dbsus7" ONCLICK="setChordAndPlay (0,51,'Dbsus7',3,'Db',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,51,'Dbsus7',3,'Db',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Eb7" ONCLICK="setChordAndPlay (0,52,'Eb7',3,'Eb',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,52,'Eb7',3,'Eb',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Abmin11" ONCLICK="setChordAndPlay (0,97,'Abmin11',3,'Ab',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,97,'Abmin11',3,'Ab',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Emaj7#11" ONCLICK="setChordAndPlay (1,8,'Emaj7#11',4,'E',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,8,'Emaj7#11',4,'E',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="B9" ONCLICK="setChordAndPlay (0,112,'B9',3,'B',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,112,'B9',3,'B',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="C9#116" ONCLICK="setChordAndPlay (0,44,'C9#116',3,'C',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,44,'C9#116',3,'C',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Fm7b5" ONCLICK="setChordAndPlay (0,10,'Fm7b5',3,'F',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,10,'Fm7b5',3,'F',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Bb7#5#9" ONCLICK="setChordAndPlay (1,9,'Bb7#5#9',3,'Bb',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,9,'Bb7#5#9',3,'Bb',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Emaj9" ONCLICK="setChordAndPlay (1,31,'Emaj9',4,'E',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,31,'Emaj9',4,'E',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Ab7" ONCLICK="setChordAndPlay (1,39,'Ab7',4,'Ab',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,39,'Ab7',4,'Ab',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Bb7" ONCLICK="setChordAndPlay (1,44,'Bb7',3,'Bb',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,44,'Bb7',3,'Bb',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Db7" ONCLICK="setChordAndPlay (1,121,'Db7',3,'Db',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,2,121,'Db7',3,'Db',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Eb7#9" ONCLICK="setChordAndPlay (1,93,'Eb7#9',3,'Eb',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,93,'Eb7#9',3,'Eb',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="B7" ONCLICK="setChordAndPlay (0,83,'B7',3,'B',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,0,83,'B7',3,'B',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Emaj7" ONCLICK="setChordAndPlay (1,50,'Emaj7',3,'E',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,50,'Emaj7',3,'E',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="A7#11" ONCLICK="setChordAndPlay (1,53,'A7#11',3,'A',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,53,'A7#11',3,'A',127,1300)&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE="button" VALUE="Ebm" ONCLICK="setChordAndPlay (1,54,'Ebm',3,'Eb',127,1300)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playChord (1,1,54,'Ebm',3,'Eb',127,1300)&nbsp;</TD>
+		</TR>
+	</TABLE>
+</FORM>
+</CENTER>
+
+<!--***********************************************************************-->
+
+<A NAME="try-your-hand"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Try Your Hand
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that you have seen what a couple of musical chords look like when expressed in the syntax required by the <A HREF="../../music-object-reference/extensions/chords/index.html#playChord" TARGET="_parent"><B>playChord</B></A> method, why not try your hand at entering some chords of your own.</P>
+
+<P>The interface below is designed to resemble a call to the <B>playChord</B> method and lets you edit all of the method's parameters. An entry box is provided for each of the method's parameters, with the exception of the <B>MidiChannel1to16</B> parameter which has a fixed value of <SPAN CLASS=value>1</SPAN> in this interface. To the left of each parameter entry box is the name of the parameter and, wherever reference information is available for a parameter, the parameter name is linked to the reference information.</P>
+
+<P>So, go ahead and tweak the parameters in the interface below. When you have a set of values that you like and you'd like to preview the chord that would result from those settings, just hit the "Preview" button...</P>
+
+<FORM NAME="chordForm">
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD BGCOLOR=224488>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6>
+<TR><TD ALIGN=CENTER BGCOLOR=224488><FONT COLOR=FFFFFF SIZE=3><B>playChord Method Editor</B></FONT></TD></TR>
+<TR><TD BGCOLOR=FFFFFF ALIGN=RIGHT>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD ALIGN=RIGHT><FONT SIZE=2>myMusicObject.playChord&nbsp;(&nbsp;<A HREF="../../music-object-reference/parameters.html#MidiChannel1to16">MidiChannel1to16</A>&nbsp;</FONT></TD>
+		<TD><FONT SIZE=2><TABLE WIDTH=95 BORDER=1 CELLSPACING=0 CELLPADDING=1 ALIGN=LEFT BGCOLOR=DDDDDD><TR VALIGN=CENTER><TD>&nbsp;1</FONT></TD></TR></TABLE></FONT>&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT><A HREF="../../music-object-reference/parameters.html#BankNumber0to2">BankNumber0to2</A>&nbsp;</FONT></TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="bankNo" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT><A HREF="../../music-object-reference/parameters.html#ProgramNumber0to255">ProgramNumber0to255</A>&nbsp;</FONT></TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="programNo" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>ChordNameSTR&nbsp;</FONT></TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="name" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>OctaveNumber0to12&nbsp;</FONT></TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="octave" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>ChordRoot<A HREF="../../music-object-reference/parameters.html#NoteNameSTR">NoteNameSTR</A>&nbsp;</FONT></TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="root" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT><A HREF="../../music-object-reference/parameters.html#Velocity0to127">Velocity0to127</A>&nbsp;</FONT></TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="velocity" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT><A HREF="../../music-object-reference/parameters.html#NoteDurationMsINT">NoteDurationMsINT</A>&nbsp;</FONT></TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="duration" VALUE="">&nbsp;)</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT></TD>
+		<TD><BR><INPUT TYPE=button VALUE="Preview" ONCLICK="playChordFromEditor ()"></TD>
+	</TR>
+</TABLE>
+</TD></TR>
+<TR><TD ALIGN=CENTER BGCOLOR=224488><INPUT TYPE=text NAME="playChordMethodCall" VALUE="" SIZE=45></TD></TR>
+</TABLE>
+</TD></TR></TABLE>
+<BR>
+</FORM>
+
+<P>You can also "seed" the interface with values by returning to the previous <A HREF="#taste-some-chords">Taste Some Chords</A> section and clicking on any of the buttons to play a chord. When you scroll back down again to this section, then the parameters in the playChord Method Editor's interface will be seeded with the values needed to play the chord you just played. You can then edit the parameters from there to derive new chords from those listed in the previous section.</P>
+
+<P>Don't be thrown off by the fact that each parameter is on its own new line. This layout was chosen so that it wouldn't be necessary to scroll horizontally all the time to edit different parameters. It is also perfectly acceptable in the JavaScript language to break up a method or function call over several lines, provided that you don't end a line on an unterminated string literal (ie. start a string parameter with an opening quote but don't close the string on the same line). For example, the following method call is perfectly valid in JavaScript...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.playChord (
+   1,
+   1,
+   8,
+   'Emaj7#11',
+   4,
+   'E',
+   127,
+   1300
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="strum-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Strum It!
+</TD></TR></TABLE>
+<BR>
+
+<P>Thanks to the Chord extension's <A HREF="../../music-object-reference/extensions/chords/index.html#Music.getChordNotes" TARGET="_parent"><B>Music.getChordNotes</B></A> static method, the interface below lets you strum the individual notes that make up the last chord you played using the previous <A HREF="#taste-some-chords">Taste Some Chords</A> and <A HREF="#try-your-hand">Try Your Hand</A> sections.</P>
+
+<P>Run your mouse across the green blocks below to strum the chord...</P>
+
+<FORM NAME="strumForm">
+<TABLE ALIGN=CENTER ID="strumTable" BORDER=0 CELLSPACING=0 CELLPADDING=2>
+	<TR BGCOLOR=008888>
+		<TD>&nbsp;</TD>
+		<TD COLSPAN=13><FONT COLOR=FFFFFF SIZE=3><B>Chord Name</B></FONT>&nbsp;<INPUT TYPE=text NAME="name" SIZE=10 VALUE="" ONCHANGE="updateChordFromStrummer ()">&nbsp;&nbsp;&nbsp;<FONT COLOR=FFFFFF SIZE=3><B>Octave</B></FONT>&nbsp;<INPUT TYPE=text NAME="octave" SIZE=2 VALUE="" ONCHANGE="updateChordFromStrummer ()">&nbsp;&nbsp;&nbsp;<FONT COLOR=FFFFFF SIZE=3><B>Root</B></FONT>&nbsp;<INPUT TYPE=text NAME="root" SIZE=2 VALUE="" ONCHANGE="updateChordFromStrummer ()"><!--&nbsp;&nbsp;&nbsp;<INPUT TYPE=button VALUE="REFRESH" ONCLICK="updateChordFromStrummer ()">--></TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT BGCOLOR=224488><FONT COLOR=FFFFFF SIZE=3><B>&nbsp;Display&nbsp;Mode&nbsp;</B></FONT></TD>
+		<TD COLSPAN=13><FONT SIZE=3><INPUT TYPE=radio NAME="displayMode" CHECKED ONCLICK="setStrummerDisplayMode ('compacted')">&nbsp;Compacted&nbsp;&nbsp;<INPUT TYPE=radio NAME="displayMode" ONCLICK="setStrummerDisplayMode ('spread')">&nbsp;Spread Out</FONT></TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT BGCOLOR=224488><FONT COLOR=FFFFFF SIZE=3><B>&nbsp;Chord&nbsp;Note&nbsp;</B></FONT></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot1Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot2Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot3Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot4Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot5Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot6Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot7Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot8Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot9Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot10Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot11Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot12Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot13Name" VALUE="" ONFOCUS="this.blur ()"></TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT BGCOLOR=224488><FONT COLOR=FFFFFF SIZE=3><B>&nbsp;Note&nbsp;Pitch&nbsp;</B></FONT></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot1Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot2Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot3Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot4Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot5Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot6Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot7Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot8Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot9Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot10Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot11Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot12Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+		<TD><INPUT TYPE=text SIZE=4 NAME="slot13Value" VALUE="" ONFOCUS="this.blur ()"></TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD ALIGN=RIGHT BGCOLOR=224488><FONT COLOR=FFFFFF SIZE=3><B>&nbsp;Triggers&nbsp;</B></FONT></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (1)" ONMOUSEOUT="strumSlotOut (1)"><IMG SRC="../../images/blank.gif" NAME="slot1Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (2)" ONMOUSEOUT="strumSlotOut (2)"><IMG SRC="../../images/blank.gif" NAME="slot2Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (3)" ONMOUSEOUT="strumSlotOut (3)"><IMG SRC="../../images/blank.gif" NAME="slot3Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (4)" ONMOUSEOUT="strumSlotOut (4)"><IMG SRC="../../images/blank.gif" NAME="slot4Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (5)" ONMOUSEOUT="strumSlotOut (5)"><IMG SRC="../../images/blank.gif" NAME="slot5Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (6)" ONMOUSEOUT="strumSlotOut (6)"><IMG SRC="../../images/blank.gif" NAME="slot6Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (7)" ONMOUSEOUT="strumSlotOut (7)"><IMG SRC="../../images/blank.gif" NAME="slot7Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (8)" ONMOUSEOUT="strumSlotOut (8)"><IMG SRC="../../images/blank.gif" NAME="slot8Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (9)" ONMOUSEOUT="strumSlotOut (9)"><IMG SRC="../../images/blank.gif" NAME="slot9Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (10)" ONMOUSEOUT="strumSlotOut (10)"><IMG SRC="../../images/blank.gif" NAME="slot10Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (11)" ONMOUSEOUT="strumSlotOut (11)"><IMG SRC="../../images/blank.gif" NAME="slot11Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (12)" ONMOUSEOUT="strumSlotOut (12)"><IMG SRC="../../images/blank.gif" NAME="slot12Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+		<TD><A HREF="javascript://" ONMOUSEOVER="strumSlotOver (13)" ONMOUSEOUT="strumSlotOut (13)"><IMG SRC="../../images/blank.gif" NAME="slot13Trigger" WIDTH=40 HEIGHT=100 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
+	</TR>
+</TABLE>
+</FORM>
+
+<P>Above each green block is a textbox containing the name of the note that corresponds to that block. If you go back up to one of the previous sections and play a different chord, then when you scroll back down to this section you will notice that the notes will have changed.</P>
+
+<BLOCKQUOTE>
+	<IMG SRC="../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>NOTE : </B>Because the <B>Music.getChordNotes</B> method returns an array containing the MIDI note numbers of the notes in the chord, using the <B>Music.getNoteName</B> method on the individual notes that make up the chord will not always generate the note names one might expect. This is because the <B>Music.getNoteName</B> always uses a sharp accidental ("#") in place of a flat accidental ("b") for notes that require an accidental. So, you may see sharp note names making up some chords in places where you'd otherwise expect to see flat notes, based on your musical understanding of the chords.
+</BLOCKQUOTE>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

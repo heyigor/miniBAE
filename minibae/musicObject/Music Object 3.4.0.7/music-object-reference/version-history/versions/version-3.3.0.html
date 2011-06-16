@@ -1,0 +1,584 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 3.3.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<HEAD><TITLE>Music Object Version 3.3.0</TITLE></HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 3.3.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 2000-12-28</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are upgrading from Music Object version 2.x and would like to know about the significant changes that have occurred between versions 2.x and 3.0.x, please consult the version history for <A HREF="version-3.0.0.html">Music Object Version 3.0.0</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="this-version"></A>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Summary of What's New</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#api">Music Object API Changes</A>
+				<UL>
+					<LI><A HREF="#api/general-improvements">General Improvements</A>
+						<UL>
+							<LI><A HREF="#api/general-improvements/netscape-6-support">Support for Netscape 6</A>
+							<LI><A HREF="#api/general-improvements/audio-device-contention-manager">Audio Device Contention Manager</A>
+							<LI><A HREF="#api/general-improvements/smaller-javascript-files">Smaller Size JavaScript Files</A>
+							<LI><A HREF="#api/general-improvements/truly-hidden-instances">Truly Hidden Instances</A>
+							<LI><A HREF="#api/general-improvements/expanded-netscape-support">Expanded Support for Customized Netscape Variations</A>
+							<LI><A HREF="#api/general-improvements/no-with-statements">No More "with" Statements</A>
+							<LI><A HREF="#api/general-improvements/stubEmbed">stubEmbed Method Extended</A>
+						</UL>
+					<LI><A HREF="#api/new-features">New Features</A>
+						<UL>
+							<LI><A HREF="#api/new-features/custom-volume-scalars">Custom Volume Scalars</A>
+							<LI><A HREF="#api/new-features/onOutputVolumeChange">New onOutputVolumeChange Callback</A>
+						</UL>
+					<LI><A HREF="#api/new-embedding-properties">New Embedding Properties</A>
+						<UL>
+							<LI><A HREF="#api/new-embedding-properties/filevolumescaling">FILEVOLUMESCALING</A>
+						</UL>
+					<LI><A HREF="#api/new-instance-methods">New Instance Methods</A>
+						<UL>
+							<LI><A HREF="#api/new-instance-methods/addCallbackHandler">addCallbackHandler</A>
+							<LI><A HREF="#api/new-instance-methods/getOutputVolume">getOutputVolume</A>
+							<LI><A HREF="#api/new-instance-methods/onAudibleStateChange">onAudibleStateChange</A>
+							<LI><A HREF="#api/new-instance-methods/onOutputVolumeChange">onOutputVolumeChange</A>
+
+						</UL>
+					<LI><A HREF="#api/new-instance-properties">New Instance Properties</A>
+						<UL>
+							<LI><A HREF="#api/new-instance-properties/audible">audible</A>
+							<LI><A HREF="#api/new-instance-properties/averageNoteRelease">averageNoteRelease</A>
+							<LI><A HREF="#api/new-instance-properties/usage">usage</A>
+						</UL>
+					<LI><A HREF="#api/new-static-properties">New Static Properties</A>
+						<UL>
+							<LI><A HREF="#api/new-static-properties/Music.clientKnown">Music.clientKnown</A>
+							<LI><A HREF="#api/new-static-properties/Music.clientName">Music.clientName</A>
+							<LI><A HREF="#api/new-static-properties/Music.clientUpgradable">Music.clientUpgradable</A>
+							<LI><A HREF="#api/new-static-properties/Music.clientVersion">Music.clientVersion</A>
+							<LI><A HREF="#api/new-static-properties/Music.embedDefaults">Music.embedDefaults</A>
+							<LI><A HREF="#api/new-static-properties/Music.version">Music.version</A>
+						</UL>
+					<LI><A HREF="#api/new-static-methods">New Static Methods</A>
+						<UL>
+							<LI><A HREF="#api/new-static-methods/Music.addCallbackHandler">Music.addCallbackHandler</A>
+							<LI><A HREF="#api/new-static-methods/Music.getAudioDevicePriority">Music.getAudioDevicePriority</A>
+							<LI><A HREF="#api/new-static-methods/Music.isAudioEngaged">Music.isAudioEngaged</A>
+							<LI><A HREF="#api/new-static-methods/Music.isAudioDeviceShared">Music.isAudioDeviceShared</A>
+							<LI><A HREF="#api/new-static-methods/Music.isAudioSupported">Music.isAudioSupported</A>
+							<LI><A HREF="#api/new-static-methods/Music.onAudioEngagedChange">Music.onAudioEngagedChange</A>
+							<LI><A HREF="#api/new-static-methods/Music.onEngageAudio">Music.onEngageAudio</A>
+							<LI><A HREF="#api/new-static-methods/Music.requireMinPlayerVersion">Music.requireMinPlayerVersion</A>
+							<LI><A HREF="#api/new-static-methods/Music.setAudioDevicePriority">Music.setAudioDevicePriority</A>
+						</UL>
+					<LI><A HREF="#api/api-changes">API Changes</A>
+						<UL>
+							<LI><A HREF="#api/api-changes/no-navigator-3.x-support">No More Support for Netscape Navigator 3.x</A>
+							<LI><A HREF="#api/api-changes/Music.requiredMinVersion">Music.requiredMinVersion Static Property Now Read-only</A>
+							<LI><A HREF="#api/api-changes/Music.platform">Music.platform Static Property Deprecated</A>
+						</UL>
+					<LI><A HREF="#api/new-extensions">New Music Object Extensions</A>
+						<UL>
+							<LI><A HREF="#api/new-extensions/auto-disengage">Music Object Extension - Auto Disengage</A>
+							<LI><A HREF="#api/new-extensions/channels">Music Object Extension - Channels</A>
+							<LI><A HREF="#api/new-extensions/clip">Music Object Extension - Clip</A>
+							<LI><A HREF="#api/new-extensions/ducking">Music Object Extension - Ducking</A>
+							<LI><A HREF="#api/new-extensions/group-volume">Music Object Extension - Group Volume</A>
+							<LI><A HREF="#api/new-extensions/note-effects">Music Object Extension - Note Effects</A>
+							<LI><A HREF="#api/new-extensions/snapshots">Music Object Extension - Snapshots</A>
+							<LI><A HREF="#api/new-extensions/song-info">Music Object Extension - Song Info</A>
+							<LI><A HREF="#api/new-extensions/tracing">Music Object Extension - Tracing</A>
+						</UL>
+				</UL>
+				<HR NOSHADE SIZE=1>
+			<LI><A HREF="#doc">Documentation Changes</A>
+				<UL>
+					<LI><A HREF="#doc/improved-tutorials">Improved Tutorials</A>
+						<UL>
+							<LI><A HREF="#doc/improved-tutorials/putting-music-on-a-page">Putting Music On a Page</A>
+							<LI><A HREF="#doc/improved-tutorials/randomizing-music-on-a-page">Randomizing Music On a Web Page</A>
+						</UL>
+					<LI><A HREF="#doc/new-demos">New Demos</A>
+						<UL>
+							<LI><A HREF="#doc/new-demos/playNoteSlide">The playNoteSlide Method</A>
+						</UL>
+					<LI><A HREF="#doc/new-info">New Information</A>
+						<UL>
+							<LI><A HREF="#doc/new-info/extensibility-api">Music Object Extensibility API</A>
+							<LI><A HREF="#doc/new-info/obsoleted-features">Obsoleted Features</A>
+						</UL>
+					<LI><A HREF="#doc/general-improvements">General Improvements</A>
+						<UL>
+							<LI><A HREF="#doc/general-improvements/intro-to-music-object">New Sub-sections for "Introduction to Music Object"</A>
+							<LI><A HREF="#doc/general-improvements/embedding-properties">"Embedding Properties" Section Enhanced</A>
+							<LI><A HREF="#doc/general-improvements/mute-and-solo">"Mute and Solo" Section Improved</A>
+							<LI><A HREF="#doc/general-improvements/common-parameters">Reference Data Sheets for Common Parameters</A>
+							<LI><A HREF="#doc/general-improvements/no-with-statements">No More "with" Statements</A>
+							<LI><A HREF="#doc/general-improvements/glossary">New Items Added to Glossary</A>
+						</UL>
+				</UL>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<A NAME="api"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object API Changes
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="api/general-improvements"></A>
+
+<A NAME="api/general-improvements/netscape-6-support"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Support for Netscape 6</DIV>
+
+<BLOCKQUOTE>
+<P>Beatnik is possibly the first company to have produced a fully functional and fully scriptable plug-in for the Netscape 6 browser that is also fully compatible with the player available for the Netscape Navigator 4.x and Microsoft Internet Explorer browsers. Thanks to the tireless efforts of the Beatnik engineering and QA teams, versions 2.1 and higher of the Beatnik Player provide the full Beatnik experience to user of Netscape 6.</P>
+
+<P>Much work has gone into adapting the Beatnik Player to utilize the XPCOM plug-in architecture used in Netscape 6, and many contributions have been made to the Mozilla open source initiative. Furthermore, changes have been made to Music Object 3.3.0 specifically to make it work better with Netscape 6, including adding a mechanism to assist the new <A HREF="#api/general-improvements/audio-device-contention-manager">Audio Device Contention Manager</A>.</P>
+
+<P>Perhaps one of the greatest new things about Netscape 6 that significantly benefits Beatnik content is the fact that the Java language is no longer used as the connection layer between JavaScript and the plug-in. As a result, Beatnik content in Netscape will never again force the user to endure the annoying delay of Java starting up, Beatnik content will no longer be at the mercy of whether or not the user has Java enabled in their browser, and Beatnik content may be a little bit zippier and even more stable than ever.</P>
+
+<P>Not everything is rosy with Netscape 6, however, and there are some issues to be aware of. Specifically, the initial release of Netscape 6 contains a rather insidious bug affecting the sonification of HTML elements (such as links and forms) using the <A HREF="../../extensions/wizards/index.html" TARGET="_parent">Wizards extension</A> or other custom automatic sonification code. This bug also impacts the <A HREF="../../extensions/auto-disengage/index.html" TARGET="_parent">Auto Disengage extension</A>. For more information on this issue, consult the section <A HREF="../../../tips-techniques/authoring-issues/index.html?issues/netscape-6-bug.html" TARGET="_parent">Netscape 6 and Automatic Sonification</A>.</P>
+</BLOCKQUOTE>
+
+<A NAME="api/general-improvements/audio-device-contention-manager"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Audio Device Contention Manager</DIV>
+
+<BLOCKQUOTE>
+<P>On some Windows systems, limitations in the installed sound hardware, the software drivers for the sound hardware, or the operating system's audio architecture may result in a situation where the Beatnik Player cannot play audio at the same time as other media players that wish to play audio. Typically, with these systems only one application can use the system's audio services at a time, often leading to situations where two (or more) applications are contending for this single audio device that cannot be shared by multiple applications simultaneously.</P>
+
+<P>With the Beatnik Player version 2.1, a system was put in place to manage this problem and help to avoid situations where the use of the Beatnik Player in sonifying a Web site could interfere with some users' ability to experience audio or audiovisual content through other media players (such as Microsoft's Windows Media Player, Real Networks' RealPlayer, nullsoft's Winamp, Liquid Audio's Liquid Player, and others) - situations which could otherwise lead to technical support queries for the manager or developer of the Web site and which could potentially damage the reputation of the site.</P>
+
+<P>Several new static methods and static properties have been introduced for Music Object 3.3 to allow the behavior of this system to be customized to suit the needs of specific sonified content. For a better understanding of this system, consult the section <A HREF="../../adcm.html" TARGET="_parent">Audio Device Contention Manager</A>.</P>
+</BLOCKQUOTE>
+
+<A NAME="api/general-improvements/smaller-javascript-files"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Smaller Size JavaScript Files</DIV>
+
+<BLOCKQUOTE>
+Thanks to a code-scrunching process that was developed by Beatnik, all of the Music Object API's JavaScript files are now on average 30% smaller. This includes the core Music Object API and all of its extensions, patches, and language modules. This translates to quicker download time for sonified pages. Also, because the scrunching process has resulted in many variable and function names becoming shorter, there should be a slight performance improvement for sonified pages, since long identifier names can result in the JavaScript interpreter using more memory resources as well as using more CPU processing time.
+</BLOCKQUOTE>
+
+<A NAME="api/general-improvements/truly-hidden-instances"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Truly Hidden Instances</DIV>
+
+<BLOCKQUOTE>
+Finally, hidden player instances that are created using the <A HREF="../../instance-methods.html#stubEmbed" TARGET="_parent"><B>stubEmbed</B></A> method (and also by the <A HREF="../../instance-methods.html#magicEmbed" TARGET="_parent"><B>magicEmbed</B></A> method when "WIDTH=0 HEIGHT=0 HIDDEN" is specified) are truly hidden on the page and do not occupy any layout space. That means no more annoying 2x2 pixel dots in Microsoft Internet Explorer, and no more critical graphical layouts being misaligned because of hidden player instances.
+</BLOCKQUOTE>
+
+<A NAME="api/general-improvements/expanded-netscape-support"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Expanded Support for Customized Netscape Variations</DIV>
+
+<BLOCKQUOTE>
+Music Object 3.3 provides broader support for customized versions of the Netscape Communicator browser, including versions that are shipped with some brands of laptop computers and versions that are customized by certain Internet Service Providers (ISPs), such as @Home, Earthlink, and others. Some problems in previous Music Object versions, that prevented some customized versions of Netscape Navigator from being recognized as supported, have been fixed.
+</BLOCKQUOTE>
+
+<A NAME="api/general-improvements/no-with-statements"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: No More "with" Statements</DIV>
+
+<BLOCKQUOTE>
+According to the latest revision of the ECMA-262 standard (JavaScript, JScript, etc.), the "with" statement has been deprecated. While it may be supported for some browser versions in the future in order to maintain backwards compatibility with existing content, there is some question as to how consistent the implementation of the statement will be across all browsers that support ECMA-262, given that the statement will no longer be part of the official language specification.
+</BLOCKQUOTE>
+<BLOCKQUOTE>
+Even though testing indicated that a pre-release version of Netscape 6 was generally still supporting the "with" statement, some specific problems were encountered when using the "with" statement with the <B>window.location</B> object. Because of these problems, it was decided to play it safe rather to risk later on discovering further incompatibilities between the way that different browsers handle the "with" statement. Because the "with" statement has been deprecated from the JavaScript language, there is no level of quality of ongoing support that can be expected for the "with" statement. If bugs were to be found, for instance, fixing such issues may not receive a high priority since the statement is deprecated.
+</BLOCKQUOTE>
+<BLOCKQUOTE>
+So, an effort has been made with the release of Music Object 3.3 to remove all "with" statements from all JavaScript code, including the core Music Object API and all of its extensions, language modules, and patches.
+</BLOCKQUOTE>
+
+<A NAME="api/general-improvements/stubEmbed"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: stubEmbed Method Extended</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../instance-methods.html#stubEmbed" TARGET="_parent"><B>stubEmbed</B></A> method has been extended to now accept an optional additional parameter to allow the embedding properties to be further customized, in a similar manner as the preloadEmbed method. This makes the <B>stubEmbed</B> method a lot more flexible.
+</BLOCKQUOTE>
+
+<A NAME="api/new-features"></A>
+
+<A NAME="api/new-features/custom-volume-scalars"></A>
+<DIV CLASS=subsection>NEW FEATURE: Custom Volume Scalars</DIV>
+
+<BLOCKQUOTE>
+The new custom volume scalar mechanism allows you to create multiple levels of volume control for each Music Object instance. Any number of custom scalars can be created, allowing each instance to have multiple volume controls, all of which cooperate together to produce an overall output volume for an instance. This opens up a whole new array of possibilities for Music Object instance groupings. For more information, consult the section <A HREF="../../concepts.html#volume-scalars" TARGET="_parent">Important Concepts: Custom Volume Scalars</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-features/onOutputVolumeChange"></A>
+<DIV CLASS=subsection>NEW FEATURE: New onOutputVolumeChange Callback</DIV>
+
+<BLOCKQUOTE>
+The new <B>onOutputVolumeChange</B> callback allows you to register a handler that will get executed each time there is a change in a Music Object instance's output volume. At the time that the handler for this callback is executed, the actual output volume can be accessed using the new <A HREF="../../instance-methods.html#getOutputVolume" TARGET="_parent">getOutputVolume</A> instance method. For more information, consult the sections <A HREF="../../concepts.html#callbacks/onOutputVolumeChange" TARGET="_parent">Important Concepts: Callbacks</A> and <A HREF="../../concepts.html#volume-scalars" TARGET="_parent">Important Concepts: Custom Volume Scalars</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-embedding-properties"></A>
+
+<A NAME="api/new-embedding-properties/filevolumescaling"></A>
+<DIV CLASS=subsection>NEW EMBEDDING PROPERTIES: FILEVOLUMESCALING</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../../general-reference/embedding-properties.html#filevolumescaling" TARGET="_parent"><B>FILEVOLUMESCALING</B></A> embedding property lets you specify whether a file's internal volume setting should be scaled against the player volume, or simply be ignored. For a better understanding of file volume scaling, consult the section <A HREF="../../concepts.html#file-volume-scaling" TARGET="_parent">Important Concepts: File Volume Scaling</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-instance-methods"></A>
+
+<A NAME="api/new-instance-methods/addCallbackHandler"></A>
+<DIV CLASS=subsection>NEW INSTANCE METHOD: addCallbackHandler</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-methods.html#addCallbackHandler" TARGET="_parent"><B>addCallbackHandler</B></A> method provides a generic way to register handlers for any of the Music Object API's callback types. Because the callback type is specified by a string parameter, this method makes it easy to conditionalize to which callback a handler should be added, simply by using a string expression to specify the callback type. This method also makes it possible to register multiple handlers for a single callback type - a feature which, up until now, has only been available when using the <A HREF="../../extensions/callbacks/index.html" TARGET="_parent">Callbacks extension</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-instance-methods/getOutputVolume"></A>
+<DIV CLASS=subsection>NEW INSTANCE METHOD: getOutputVolume</DIV>
+
+<BLOCKQUOTE>
+Because the new custom volume scalar mechanism allows an arbitrary number of volume scalars to be created for each Music Object instance, the new <A HREF="../../instance-methods.html#getOutputVolume" TARGET="_parent"><B>getOutputVolume</B></A> instance method has been provided to allow you to find the actual output volume that results from the settings of an instance's various volume scalars. For reasons of backward compatibility, the <A HREF="../../instance-methods.html#getVolume" TARGET="_parent"><B>getVolume</B></A> method still behaves in the same manner, and returns the volume set by the <A HREF="../../instance-methods.html#setVolume" TARGET="_parent"><B>setVolume</B></A> method and the <A HREF="../../../general-reference/embedding-properties.html#volume" TARGET="_parent"><B>VOLUME</B></A> embedding property.
+</BLOCKQUOTE>
+
+<A NAME="api/new-instance-methods/onAudibleStateChange"></A>
+<DIV CLASS=subsection>NEW INSTANCE METHOD: onAudibleStateChange</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-methods.html#onAudibleStateChange" TARGET="_parent"><B>onAudibleStateChange</B></A> instance method lets you to register a handler that will get executed each time there is a change in a Music Object instance's audible state, between being audible and being inaudible. At the time that the handler for this callback is executed, the actual audible state can be accessed using the new <A HREF="../../instance-properties.html#audible" TARGET="_parent"><B>aubible</B></A> instance property, so the handler can conditionalize its implementation appropriately. For more information, consult the section <A HREF="../../concepts.html#callbacks/onAudibleStateChange" TARGET="_parent">Important Concepts: Callbacks</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-instance-methods/onOutputVolumeChange"></A>
+<DIV CLASS=subsection>NEW INSTANCE METHOD: onOutputVolumeChange</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../instance-methods.html#onOutputVolumeChange" TARGET="_parent"><B>onOutputVolumeChange</B></A> instance method lets you register JavaScript code that is to be executed each time there is a change in the Music Object instance's output volume. At the time that the handler for this callback is executed, the current output volume can be obtained using the new <A HREF="#api/new-instance-methods/getOutputVolume"><B>getOutputVolume</B></A> instance method. For more information, consult the section <A HREF="../../concepts.html#callbacks/onOutputVolumeChange" TARGET="_parent">Important Concepts: Callbacks</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-instance-properties"></A>
+
+<A NAME="api/new-instance-properties/audible"></A>
+<DIV CLASS=subsection>NEW INSTANCE PROPERTY: audible</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-properties.html#audible" TARGET="_parent"><B>audible</B></A> instance property is a boolean variable, indicating whether or not a Music Object instance is audible. This property can be used in conjunction with the new <A HREF="../../concepts.html#callbacks/onAudibleStateChange" TARGET="_parent"><B>onAudibleStateChange</B></A> callback, allowing the implementation of this callback's handler to be conditionalized based upon the audible state of the instance.
+</BLOCKQUOTE>
+
+<A NAME="api/new-instance-properties/averageNoteRelease"></A>
+<DIV CLASS=subsection>NEW INSTANCE PROPERTY: averageNoteRelease</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-properties.html#averageNoteRelease" TARGET="_parent"><B>averageNoteRelease</B></A> instance property is an integer variable, representing the average release time (measured in milliseconds) for notes being played through a Music Object instance. This property is typically used to customize the behavior of the <A HREF="../../extensions/auto-disengage/index.html" TARGET="_parent">Auto Disengage extension</A> and the <A HREF="../../extensions/ducking/index.html" TARGET="_parent">Ducking extension</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-instance-properties/usage"></A>
+<DIV CLASS=subsection>NEW INSTANCE PROPERTY: usage</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-properties.html#usage" TARGET="_parent"><B>usage</B></A> instance property is a string variable, representing the intended usage for the Music Object instance ('<SPAN CLASS=value>notes</SPAN>' or '<SPAN CLASS=value>music</SPAN>'). Setting this property allows you to control how an instance should behave when the <A HREF="../../extensions/ducking/index.html" TARGET="_parent">Ducking extension</A> is being used and when the instance is acting as a ducking master. The value set for this property also affects the behavior of the <A HREF="../../instance-properties.html#audible" TARGET="_parent"><B>audible</B></A> instance property and the <A HREF="../../concepts.html#callbacks/onAudibleStateChange" TARGET="_parent"><B>onAudibleStateChange</B></A> callback.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-properties"></A>
+
+<A NAME="api/new-static-properties/Music.clientKnown"></A>
+<DIV CLASS=subsection>NEW STATIC PROPERTY: Music.clientKnown</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-properties.html#Music.clientKnown" TARGET="_parent"><B>Music.clientKnown</B></A> read only static property is a boolean variable, indicating whether or not the user's client (browser) is known by Music Object.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-properties/Music.clientName"></A>
+<DIV CLASS=subsection>NEW STATIC PROPERTY: Music.clientName</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-properties.html#Music.clientName" TARGET="_parent"><B>Music.clientName</B></A> read only static property is a string variable, indicating the name of the user's client application (or browser).
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-properties/Music.clientUpgradable"></A>
+<DIV CLASS=subsection>NEW STATIC PROPERTY: Music.clientUpgradable</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-properties.html#Music.clientUpgradable" TARGET="_parent"><B>Music.clientUpgradable</B></A> read only static property is a boolean variable, indicating whether or not the player can be installed in the user's client application (or browser).
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-properties/Music.clientVersion"></A>
+<DIV CLASS=subsection>NEW STATIC PROPERTY: Music.clientVersion</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-properties.html#Music.clientVersion" TARGET="_parent"><B>Music.clientVersion</B></A> read only static property is a string variable, indicating the version of the user's client application (or browser).
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-properties/Music.embedDefaults"></A>
+<DIV CLASS=subsection>NEW STATIC PROPERTY: Music.embedDefaults</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-properties.html#Music.embedDefaults" TARGET="_parent"><B>Music.embedDefaults</B></A> static property is an array, representing the default values for all of the Beatnik Player's supported embedding properties. This property provides a convenient way to set up default values for certain embedding properties so as to avoid having to specify the exact same values many times over in multiple calls to the <A HREF="../../instance-methods.html#magicEmbed" TARGET="_parent"><B>magicEmbed</B></A> instance method (or other embedding methods).</P>
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-properties/Music.version"></A>
+<DIV CLASS=subsection>NEW STATIC PROPERTY: Music.version</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-properties.html#Music.version" TARGET="_parent"><B>Music.version</B></A> read only static property is a string variable, indicating the version of the Music Object API that is being used.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods"></A>
+
+<A NAME="api/new-static-methods/Music.addCallbackHandler"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.addCallbackHandler</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.addCallbackHandler" TARGET="_parent"><B>Music.addCallbackHandler</B></A> static method lets you add a callback handler to the stack of callback handlers for a specified static callback.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.getAudioDevicePriority"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.getAudioDevicePriority</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.getAudioDevicePriority" TARGET="_parent"><B>Music.getAudioDevicePriority</B></A> static method returns an integer value, indicating the current audio device priority setting for the sonified document. This method forms part of the new <A HREF="#api/general-improvements/audio-device-contention-manager">Audio Device Contention Manager</A> that is built into player versions 2.1 and higher, and can be used as part of a system for managing and monitoring the engaged state behavior of the player's underlying audio engine.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.isAudioEngaged"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.isAudioEngaged</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.isAudioEngaged" TARGET="_parent"><B>Music.isAudioEngaged</B></A> static method returns a boolean indicating whether or not the player's underlying audio engine is engaged. One common way to use this method is in a handler for the <A HREF="../../concepts.html#callbacks/onAudioEngagedChange" TARGET="_parent"><B>onAudioEngagedChange</B></A> static callback, or as part of a system for managing and monitoring the engaged state behavior of the player's underlying audio engine.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.isAudioDeviceShared"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.isAudioDeviceShared</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.isAudioDeviceShared" TARGET="_parent"><B>Music.isAudioDeviceShared</B></A> static method returns a boolean value, indicating whether or not the Beatnik Player can share the system's audio device with other media players. This method forms part of the new <A HREF="#api/general-improvements/audio-device-contention-manager">Audio Device Contention Manager</A> that is built into player versions 2.1 and higher, and can be used as part of a system for managing and monitoring the engaged state behavior of the player's underlying audio engine.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.isAudioSupported"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.isAudioSupported</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.isAudioSupported" TARGET="_parent"><B>Music.isAudioSupported</B></A> static method returns a boolean value, indicating whether or not the user's system provides audio services that are compatible with the player. Certain types of sonified content may rely so heavily upon the audio features of the Beatnik Player that it may not be worth letting users experience the content if their system has no audio support. This method provides a helpful way of preempting technical support e-mails and phone calls that might otherwise result if users were allowed to enter sonified content and then not hear any audio because their systems did not have support for audio.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.onAudioEngagedChange"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.onAudioEngagedChange</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.onAudioEngagedChange" TARGET="_parent"><B>Music.onAudioEngagedChange</B></A> static method lets you register JavaScript code that is to be executed each time there is a change in the engaged state of the player's underlying audio engine. This method can be used as part of a system for managing and monitoring the engaged state behavior of the player's underlying audio engine.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.onEngageAudio"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.onEngageAudio</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.onEngageAudio" TARGET="_parent"><B>Music.onEngageAudio</B></A> static method lets you register JavaScript code that is to be executed after each call to the <A HREF="../../static-methods.html#Music.engageAudio" TARGET="_parent"><B>Music.engageAudio</B></A> static method. Registering a handler for the <A HREF="../../concepts.html#callbacks/onEngageAudio" TARGET="_parent"><B>onEngageAudio</B></A> callback can be a convenient way to monitor the activity of the <A HREF="../../extensions/auto-disengage/index.html" TARGET="_parent">Auto Disengage extension</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.requireMinPlayerVersion"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.requireMinPlayerVersion</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.requireMinPlayerVersion" TARGET="_parent"><B>Music.requireMinPlayerVersion</B></A> static method allows separate code modules to independently request a minimum player version, such that the highest minimum player version that is requested by all code modules will be the version used to determine if the player installed on the user's system is adequate for the content as a whole.
+</BLOCKQUOTE>
+
+<A NAME="api/new-static-methods/Music.setAudioDevicePriority"></A>
+<DIV CLASS=subsection>NEW STATIC METHOD: Music.setAudioDevicePriority</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-methods.html#Music.setAudioDevicePriority" TARGET="_parent"><B>Music.setAudioDevicePriority</B></A> static method lets you set the audio device priority for a sonified document. This method forms part of the new <A HREF="#api/general-improvements/audio-device-contention-manager">Audio Device Contention Manager</A> that is built into player versions 2.1 and higher, and can be used as part of a system for managing and monitoring the engaged state behavior of the player's underlying audio engine.
+</BLOCKQUOTE>
+
+<A NAME="api/api-changes"></A>
+
+<A NAME="api/api-changes/no-navigator-3.x-support"></A>
+<DIV CLASS=subsection>API CHANGE: No More Support for Netscape Navigator 3.x</DIV>
+
+<BLOCKQUOTE>
+For the release of Music Object 3.3 and the Beatnik Player 2.1, Beatnik had to take a fresh (and sobering) look at its browser support matrix in order to prioritize the allocation of QA resources. Sadly, the amount of QA resources that would be required in order to maintain some level of support for Navigator 3.x would not be well spent, with very small anticipated gains. Instead, effort has been focused on Navigator 4.x browsers, Microsoft Internet Explorer, and the freshly released Netscape 6.</P>
+
+<P>It is not only because of QA resource constraints, however, that support for Navigator 3.x has been dropped. For some time now, the newer browser versions have been introducing compelling new JavaScript language features, and maintaining support for Navigator 3.x has exerted somewhat of a stranglehold on the adoption of these new features that could otherwise help to make the Music Object API a more powerful platform for interactive audio and music. With the shackles of Navigator 3.x finally cast aside, Beatnik is now free to explore new options for this already strong authoring platform.</P>
+
+<P>So, take a moment to say a fond farewell to a browser that was once a pioneer of its time. Navigator 3.x support is no more, and ultimately all those who develop content using the Music Object API will benefit from this progressive decision.</P>
+</BLOCKQUOTE>
+
+<A NAME="api/api-changes/Music.requiredMinVersion"></A>
+<DIV CLASS=subsection>API CHANGE: Music.requiredMinVersion Static Property Now Read-only</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../static-properties.html#Music.requiredMinVersion" TARGET="_parent"><B>Music.requiredMinVersion</B></A> static property has now become a read-only property and should no longer be set explicitly. For code that is dependent on the features of a particular player version, the new <A HREF="../../static-methods.html#Music.requireMinPlayerVersion" TARGET="_parent"><B>Music.requireMinPlayerVersion</B></A> static method should be used instead.
+</BLOCKQUOTE>
+
+<A NAME="api/api-changes/Music.platform"></A>
+<DIV CLASS=subsection>API CHANGE: Music.platform Static Property Deprecated</DIV>
+
+<BLOCKQUOTE>
+For the release of Music Object 3.3, it was decided that all static properties that indicated information about the user's client application (or browser) should be grouped together by naming convention, by prefixing each of these properties with "client" (eg. <B>Music.clientName</B>, <B>Music.clientSupported</B>, <B>Music.clientVersion</B>). Consequently, the <B>Music.platform</B> static property has been replaced by the functionally equivalent <A HREF="../../static-properties.html#Music.clientPlatform" TARGET="_parent"><B>Music.clientPlatform</B></A> static property.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions"></A>
+
+<A NAME="api/new-extensions/auto-disengage"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Auto Disengage</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/auto-disengage/index.html" TARGET="_parent">Auto Disengage extension</A> provides features to help alleviate the conflicts that may occur in some system configurations when the Beatnik Player and other audio players are being used together in the same Web site. Along with the ability to have the Beatnik Player automatically release the system's WAV device when the player is not in use by the sonified site, the extension also provides a way to automatically force the player to release the WAV device when the user clicks on a link to any type of audio file that is not supported by the Beatnik Player (such as a streaming Real Audio file).
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/channels"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Channels</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/channels/index.html" TARGET="_parent">Channels extension</A> provides convenient access to all the channel properties that can be controlled through the Music Object API. Most of these properties can be accessed using the core Music Object API's <A HREF="../../instance-methods.html#setController" TARGET="_parent"><B>setController</B></A> and <A HREF="../../instance-methods.html#getController" TARGET="_parent"><B>getController</B></A> methods, so this extension is provided primarily to ease programming and to make sonification code more easily understood. As an example, using the Channels extension's <A HREF="../../extensions/channels/index.html#setChannelReverbLevel" TARGET="_parent"><B>setChannelReverbLevel</B></A> method has the same effect as using the <B>setController</B> method and specifying the value 91 for the <A HREF="../../parameters.html#ControllerNumber0to127" TARGET="_parent"><B>ControllerNumber0to127</B></A> parameter.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/clip"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Clip</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/clip/index.html" TARGET="_parent">Clip extension</A> provides a set of services for conveniently creating a music preview system on a Web page.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/ducking"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Ducking</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/ducking/index.html" TARGET="_parent">Ducking extension</A> provides methods for linking instances to one another and setting up automated ducking relationships - much like the ducking effect used so often in radio broadcasting.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/group-volume"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Group Volume</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/group-volume/index.html" TARGET="_parent">Group Volume extension</A> provides methods for adjusting the overall volume of an entire group of Music Object instances. This, for example, makes it really easy for the overall group volume levels of all Music Object instances that are being used for one functional aspect of a page's sonification (such as user interface sound effects or background music) to be adjusted in one simple step, without interfering with the different instances' individual volume levels that are being used to balance the instances together in the group. In particular, this extension offers the <A HREF="../../extensions/group-volume/index.html#Music.setPageVolume" TARGET="_parent"><B>Music.setPageVolume</B></A> and <A HREF="../../extensions/group-volume/index.html#Music.getPageVolume" TARGET="_parent"><B>Music.getPageVolume</B></A> static methods that make it possible to modify the overall volume of a page's sonification in one operation.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/note-effects"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Note Effects</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/note-effects/index.html" TARGET="_parent">Note Effects extension</A> provides methods for easily creating outrageous sound effects using just musical notes. For example, the <A HREF="../../extensions/note-effects/index.html#playNoteSlide" TARGET="_parent"><B>playNoteSlide</B></A> method provides a convenient way to generate musical note "slides", often referred to by musicians as glissandos. Using this method, you can instantly and easily achieve a wide variety of complex sound textures and outrageous effects.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/snapshots"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Snapshots</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/snapshots/index.html" TARGET="_parent">Snapshots extension</A> provides methods for easily capturing and restoring mix snapshots for RMF and MIDI files that are playing - something that can prove quite useful when creating certain kinds of remixing applications.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/song-info"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Song Info</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/song-info/index.html" TARGET="_parent">Song Info extension</A> provides you with further options for displaying an RMF file's copyright information.
+</BLOCKQUOTE>
+
+<A NAME="api/new-extensions/tracing"></A>
+<DIV CLASS=subsection>NEW EXTENSION: Music Object Extension - Tracing</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../extensions/tracing/index.html" TARGET="_parent">Tracing extension</A> provides an easy way to watch calls to methods of the Music Object API and is a very useful tool to have when debugging sonification code. The extension offers a set of methods that can be used to control exactly which methods of the Music Object API are to be "watched". When a method is being watched, each call to the method will be displayed in the tracing window (either the Java console or a pop-up browser window), complete with the parameter values that are being passed.
+</BLOCKQUOTE>
+
+<A NAME="doc"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Documentation Changes
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="doc/improved-tutorials"></A>
+
+<A NAME="doc/improved-tutorials/putting-music-on-a-page"></A>
+<DIV CLASS=subsection>IMPROVED TUTORIAL: Putting Music On a Page</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../../tutorials/putting-music-on-a-page/index.html" TARGET="_parent">Putting Music On a Page</A> tutorial now offers the new <A HREF="../../../tutorials/putting-music-on-a-page/index.html?steps/embedding-groovoids.html" TARGET="_parent">Embedding Groovoids</A> step, which describes the simplest way to use Groovoids to play background music on a Web page.
+</BLOCKQUOTE>
+
+<A NAME="doc/improved-tutorials/randomizing-music-on-a-page"></A>
+<DIV CLASS=subsection>IMPROVED TUTORIAL: Randomizing Music On a Web Page</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../../tutorials/randomizing-music/index.html" TARGET="_parent">Randomizing Music On a Web Page</A> tutorial has been enhanced to now include the new <A HREF="../../../tutorials/randomizing-music/index.html?steps/file-of-the-day.html" TARGET="_parent">Cool File of the Day</A> step, which explains how to dynamically rotate through a playlist of music files on a daily basis, so that a Web page plays a different file each day.
+</BLOCKQUOTE>
+
+<A NAME="doc/new-demos"></A>
+
+<A NAME="doc/new-demos/playNoteSlide"></A>
+<DIV CLASS=subsection>NEW DEMO: The playNoteSlide Method</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../extensions/note-effects/index.html#playNoteSlide" TARGET="_parent"><B>playNoteSlide</B></A> instance method, offered as part of the new <A HREF="../../extensions/note-effects/index.html" TARGET="_parent">Note Effects extension</A>, provides a convenient and easy way to achieve a wide variety of complex sound textures and outrageous effects. The demo for this method provides a lot of basic note slide examples to get you started, as well as showing off some sophisticated techniques that can be used to achieve more complex stereo slide effects. The demo also includes a nifty method editor, so that you can tweak the parameters of the <B>playNoteSlide</B> method to your heart's content.
+</BLOCKQUOTE>
+
+<A NAME="doc/new-info"></A>
+
+<A NAME="doc/new-info/extensibility-api"></A>
+<DIV CLASS=subsection>NEW INFORMATION: Music Object Extensibility API</DIV>
+
+<BLOCKQUOTE>
+Starting from version 3.1, the Music Object API has offered additional functionality in the form of optional <A HREF="../../extensions/intro.html" TARGET="_parent">Music Object extensions</A>. Up until now, however, the API (Application Programming Interface) for writing these extensions has been private. For the first time, with version 3.3, this API is official, public, and documented. The new <A HREF="../../extensibility-api.html" TARGET="_parent">Music Object Extensibility API</A> section explains the architecture upon which Music Object extensions, language modules, and patches are based and includes a reference to all the methods and properties of the extensibility API.
+</BLOCKQUOTE>
+
+<A NAME="doc/new-info/obsoleted-features"></A>
+<DIV CLASS=subsection>NEW INFORMATION: Obsoleted Features</DIV>
+
+<BLOCKQUOTE>
+Many versions of the Music Object API have come and gone, and some significant changes in the API have occurred, leaving a good number of features either deprecated or completely unsupported in version 3.3. In previous versions of the documentation, features that had become unsupported were no longer listed in either the index or the reference sections. However, because this can cause difficulties for developers who are updating old sonification code to use the most current version of the Music Object API, the dedicated new <A HREF="../../obsoleted-features.html" TARGET="_parent">Obsoleted Features</A> section has been added. This section lists all methods, properties, global functions, and global variables that have become unsupported, with explanations on how such features behaved and how newer features of the Music Object API can be used to achieve similar results.
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements"></A>
+
+<A NAME="doc/general-improvements/intro-to-music-object"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: New Sub-sections for "Introduction to Music Object"</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../intro.html" TARGET="_parent">Introduction to Music Object</A> section of the documentation has been enhanced to include the new subsections, "Methods and Properties" and "File Types and Functionality". The <A HREF="../../intro.html#methods-and-properties" TARGET="_parent">Methods and Properties</A> subsection explains the relationships between static and instance methods, and between static and instance properties. The <A HREF="../../intro.html#file-types-and-functionality" TARGET="_parent">File Types and Functionality</A> subsection explains how the various methods and properties of the Music Object API relate to the various different music and audio file types that are supported.
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements/embedding-properties"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: "Embedding Properties" Section Enhanced</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../../general-reference/embedding-properties.html" TARGET="_parent">Embedding Properties</A> section has been enhanced with better layout, more up-to-date information, and improved explanations. In addition, the reference information for each embedding property now has a reference data sheet, bringing this section in line with other sections of the documentation. For each embedding property, the reference data sheet indicates if the property can be used as an <B>EMBED</B> tag attribute, an <B>OBJECT</B> tag attribute, an <B>OBJECT</B> tag <B>PARAM</B>, and a <B>magicEmbed</B> property.
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements/mute-and-solo"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: "Mute and Solo" Section Improved</DIV>
+
+<BLOCKQUOTE>
+Channels or tracks can be active or inactive depending on their mute state, their solo state, and the solo states of all other channels or tracks. The section <A HREF="../../concepts.html#mute-solo" TARGET="_parent">Mute and Solo, and How They Interact with Each Other</A> has been improved to now offer guidelines for determining if channels or tracks are active. Sample code is also provided.
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements/common-parameters"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Reference Data Sheets for Common Parameters</DIV>
+
+<BLOCKQUOTE>
+The reference information for each parameter in the <A HREF="../../parameters.html" TARGET="_parent">Common Parameters</A> section now has a reference data sheet, bringing this section in line with other sections of the documentation. For all integer parameters, an entry in the reference data sheet indicates whether or not the parameter's value is constrained. And for all string parameters that have finite lists of possible values, these values are listed in the data sheet.
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements/no-with-statements"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: No More "with" Statements</DIV>
+
+<BLOCKQUOTE>
+Because the "with" statement has been deprecated from the JavaScript language (according to the latest revision of the ECMA-262 standard), an effort has been made with the release of Music Object 3.3 to remove all "with" statements from the documentation - including all tutorials, demos, sample code examples, tips and techniques sections, and all sample code segments in the various reference sections.
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements/glossary"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: New Items Added to Glossary</DIV>
+
+<BLOCKQUOTE>
+For convenience and ease of understanding of the documentation, some new items (such as "API", "PPQ", and others) have been added to the <A HREF="../../../appendixes/glossary/index.html" TARGET="_parent">glossary</A>.
+</BLOCKQUOTE>
+
+</BODY></HTML>

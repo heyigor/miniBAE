@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Issues: Setting window.status and Playing Groovoids or Music Files</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Setting window.status and Playing Groovoids or Music Files
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>In Netscape Navigator, playing Groovoids or music files through the Beatnik Player at the same time as trying to set the <B>window.status</B> property can result in the window.status property not being set as expected.</P>
+
+<!--
+<DIV CLASS=subsection>Background</DIV>
+
+<P></P>
+-->
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>When taking HTML code, such as links that have JavaScript to change the value of the window's status bar when the user mouses over them, and then adding code to sonify these links by playing Groovoids or music files through the Beatnik Player, the status messages no longer appear in the window's status bar as expected. Instead, one may see a generic message "<B>Document: Done</B>". In some cases, one may actually see the intended status message flash in the status bar briefly, only to be quickly replaced by the message "Document: Done".</P>
+
+<DIV CLASS=subsection>Cause</DIV>
+
+<P>The problem is caused by the way that callbacks are implemented in the Beatnik Player for Netscape Navigator. Within the Netscape Plug-in API, calls from a plug-in into the JavaScript environment can only be achieved by the plug-in executing links to URL's having a "<B>javascript:</B>" syntax. Unfortunately, Netscape Navigator always updates the window's status bar with "<B>Document: Done</B>" each time a link is successfully executed, regardless of whether the link is a real link to another document, or just some JavaScript code contained in a "javascript:" URL. The immediate drawback of this is that each time the Beatnik Player executes a callback, the window's status is updated with "Document: Done", replacing any custom message that may currently be displayed in the status bar.</P>
+
+<P>The reason that callbacks are even implicated in this problem is that the Beatnik Player always executes the <B>onPause</B>, <B>onPlay</B>, and <B>onStop</B> callbacks, regardless of whether or not an author has registered their own custom handler code for the callbacks. This behavior is necessary due to compatibility issues between Netscape Navigator and Microsoft Internet Explorer, as well as workarounds implemented at the Music Object level. As a result, a link that changes the window.status property at the same time as triggering a Groovoid to play will result in the status bar being replaced with "Document: Done" as soon as the Groovoid begins playing and the Beatnik Player's <B>onPlay</B> callback is executed.</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>This problem only occurs with Netscape Navigator when music files or Groovoids are played through a Beatnik Player instance that is in the same document that is modifying the window.status property. The problem does not occur in Microsoft Internet Explorer, or in Netscape Navigator when musical notes are used in place of music files and Groovoids, or in Netscape Navigator when music files or Groovoids are used for the sonification but the instance that is playing the music files or Groovoids is in a different frame or window to the frame or window that is changing the value of the window.status property.</P>
+
+<P>Given this understanding of the problem, it is possible to create a workaround using strictly musical notes for the sonification of any links that are also to display window status messages. Alternatively, and if the site design permits it, a "hidden" frame may be used to contain all the sonification logic as well as all the Beatnik Player instances needed for the site sonification. If this frame is targeted from another frame that has links to be sonified, then music files or Groovoids can be used for the sonification of the links without this interfering with window status messages that may be set by the links' ONMOUSEOVER or ONCLICK event handlers.</P>
+
+</BODY></HTML>

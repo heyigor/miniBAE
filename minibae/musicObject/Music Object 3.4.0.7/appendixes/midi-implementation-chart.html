@@ -1,0 +1,337 @@
+<HTML>
+<HEAD>
+	<TITLE>Beatnik Player MIDI Implementation Chart</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Beatnik Player MIDI Implementation Chart
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+	<TR VALIGN=TOP>
+		<TD ALIGN=LEFT>
+			<B>Model:</B> Beatnik Platform<BR>
+			Software Wavetable Synthesizer
+		</TD>
+		<TD></TD>
+		<TD ALIGN=RIGHT>
+			<B>Date:</B> April 2, 2000<BR>
+			<B>Version:</B> 1.5.2<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=3>
+			<TABLE CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+			<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=2>
+			<TR>
+				<TD CLASS=data-table-column-header COLSPAN=2>Function...</TD>
+				<TD CLASS=data-table-column-header>Transmitted</TD>
+				<TD CLASS=data-table-column-header>Recognized</TD>
+				<TD CLASS=data-table-column-header>Remarks</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item ROWSPAN=2><NOBR>Basic Channel</NOBR></TD>
+				<TD CLASS=data-table-item>Default</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>1-16</TD>
+				<TD CLASS=data-table-item ROWSPAN=2>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Changed</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>1-16</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=3><NOBR>Mode</NOBR></TD>
+				<TD CLASS=data-table-item>Default</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>Mode 3</TD>
+				<TD CLASS=data-table-item ROWSPAN=3>Can't change</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Messages</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Altered</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>****************</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=2><NOBR>Note Number</NOBR></TD>
+				<TD CLASS=data-table-item>&nbsp;</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>0-127</TD>
+				<TD CLASS=data-table-item ROWSPAN=2>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>True Voice</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>****************</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>0-127</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=2><NOBR>Velocity</NOBR></TD>
+				<TD CLASS=data-table-item>Note on</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+				<TD CLASS=data-table-item ROWSPAN=2>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Note off</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=2><NOBR>Aftertouch</NOBR></TD>
+				<TD CLASS=data-table-item>Key</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ROWSPAN=2>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Channels</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER COLSPAN=2><NOBR>Pitch Bend</NOBR></TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Resolution 12 bit</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=15><NOBR>Change Control</NOBR></TD>
+				<TD CLASS=data-table-item>0</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Bank Select (MSB Only)</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>1</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Modulation</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>6</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Data Entry</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>7</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Volume</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>10</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Panpot</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>11</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Expression</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>64</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Hold1 (Sustain)</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>85,86,87</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Beatnik Loop & Mute (files only)</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>90</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Master Reverb Type</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>91</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Reverb Depth<BR>(>15 = on for reverb types 1-7)</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>93</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Chorus Send</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>98, 99</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>NRPN (LSB, MSB)</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>100,101</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>RPN (LSB, MSB) - Reserved</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>121</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1,*2</TD>
+				<TD CLASS=data-table-item>Reset All Controllers</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>123</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+				<TD CLASS=data-table-item>All Notes Off</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=2><NOBR>Program Change</NOBR></TD>
+				<TD CLASS=data-table-item>&nbsp;</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>*1</TD>
+				<TD CLASS=data-table-item ROWSPAN=2>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>True Number</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>****************</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>0-127</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER COLSPAN=2><NOBR>System Exclusive</NOBR></TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=3><NOBR>System Common</NOBR></TD>
+				<TD CLASS=data-table-item>Song Position</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ROWSPAN=3>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Song Select</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Tune Request</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=2><NOBR>System Realtime</NOBR></TD>
+				<TD CLASS=data-table-item>Clock</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ROWSPAN=2>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Commands</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-separator COLSPAN=5><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item VALIGN=CENTER ROWSPAN=4><NOBR>Aux. Messages</NOBR></TD>
+				<TD CLASS=data-table-item>Local On/Off</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ROWSPAN=4>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>All Notes Off</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>0 (123)</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>Active Sensing</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>System Reset</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+				<TD CLASS=data-table-item ALIGN=CENTER>x</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-column-header COLSPAN=5>Notes</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>*1</TD>
+				<TD CLASS=data-table-item COLSPAN=4>0 x can be selectable</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item>*2</TD>
+				<TD CLASS=data-table-item COLSPAN=4>See the "For Musicians" section of the Beatnik Editor documentation for details on Beatnik's response to controllers.</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item COLSPAN=2>Transmitted / Recognized Key</TD>
+				<TD CLASS=data-table-item COLSPAN=3>O : Yes<BR>x : No</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item COLSPAN=2>Mode Definitions</TD>
+				<TD CLASS=data-table-item COLSPAN=3>
+					Mode 1: OMNI ON, POLY<BR>
+					Mode 2: OMNI ON, MONO<BR>
+					Mode 3: OMNI OFF, POLY<BR>
+					Mode 4: OMNI OFF, MONO<BR>
+				</TD>
+			</TR>
+			</TABLE>
+			</TD></TR></TABLE>
+			</TD></TR></TABLE>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+</CENTER>
+
+</BODY>
+</HTML>

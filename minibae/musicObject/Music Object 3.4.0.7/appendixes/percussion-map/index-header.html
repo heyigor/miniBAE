@@ -1,0 +1,393 @@
+<HTML><HEAD><TITLE>Beatnik Player Authoring Reference: Percussion Map (header)</TITLE></HEAD>
+<BODY BGCOLOR=003366 MARGINWIDTH=0 MARGINHEIGHT=0>
+
+<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR ALIGN=CENTER VALIGN=CENTER>
+		<TD><FONT FACE="ARIAL,HELVETICA,VERDANA" SIZE=4 COLOR=FFFFFF>Interactive Percussion Map</FONT></TD>
+	</TR>
+</TABLE>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                   ©1997,1998 Beatnik, Inc.                        *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+stub = new Music ();
+stub.setMonophonic (1,true);
+
+var
+	currentNote = 60,
+	currentBank = 0
+;
+
+function showInfo (bank,note) {
+	if (typeof bank == 'undefined') bank = currentBank;
+	if (typeof note == 'undefined') note = currentNote;
+	window.status = 'NOTE# ' + note + '     NOTE NAME: ' + Music.getNoteName (note) + '     BANK: ' + banks [bank].name + '     INSTRUMENT: ' + ((banks [bank].instruments [note] != '') ? banks [bank].instruments [note] : '-------');
+}
+
+function noteInfo (octaveNo,noteOffset) {
+	currentNote = octaveNo * 12 + noteOffset;
+	showInfo ();
+}
+
+function stopPreview () {
+	stub.noteOff (1);
+}
+
+function previewInstrument (bankNo,noteNo) {
+	currentBank = bankNo;
+	currentNote = noteNo;
+	stub.noteOn (1,currentBank,currentNote+128,currentNote,127);
+}
+
+function instrumentOver (bankNo,noteNo) {
+	stopPreview ();
+	showInfo (bankNo,noteNo);
+}
+
+function instrumentOut () {
+	stopPreview ();
+	window.status = '';
+}
+
+function keyOver (octaveNo,noteOffset) {
+	stopPreview ();
+	noteInfo (octaveNo,noteOffset);
+}
+
+function setNote (octaveNo,noteOffset) {
+	stopPreview ();
+	currentNote = octaveNo * 12 + noteOffset;
+	stub.noteOn (1,currentBank,currentNote+128,currentNote,127);
+	showInfo ();
+}
+
+function bank (name,instruments) {
+	this.name = name;
+	this.instruments = instruments;
+}
+
+banks = new Array (
+	new bank (
+		'GM Bank',
+		new Array (
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'Hi-Q',
+			'Slap',
+			'Scratch Push',
+			'Scratch Pull',
+			'Sticks',
+			'Square Click',
+			'Metronome Click',
+			'Metronome Bell',
+			'Low Kick',
+			'Kick',
+			'Rimclik',
+			'Electric Snare',
+			'Handclap',
+			'Acoustic Snare',
+			'Tom Low',
+			'Closed Hi-Hat',
+			'Tom Hi',
+			'Pedal Hi-Hat',
+			'Tom Hi',
+			'Open Hi-Hat',
+			'Low Mid Tom',
+			'High Mid Tom',
+			'Crash Cymbal 1',
+			'High Tom',
+			'Ride Cymbal 1',
+			'Chinese Cymbal',
+			'Ride Bell',
+			'Tambourine',
+			'Splash Cymbal',
+			'Cowbell',
+			'Crash Cymbal 2',
+			'Vibraslap',
+			'Ride Cymbal 2',
+			'High Bongo',
+			'Low Bongo',
+			'Mute High Conga',
+			'Open High Conga',
+			'Low Conga',
+			'High Timbale',
+			'Low Timbale',
+			'High Agogo',
+			'Low Agogo',
+			'Cabasa',
+			'Maracas',
+			'Short Whistle',
+			'Long Whistle',
+			'Short Guiro',
+			'Long Guiro',
+			'Claves',
+			'High Wood Block',
+			'Low Wood Block',
+			'Mute Cuica',
+			'Open Cuica',
+			'Close Triangle',
+			'Open Triangle',
+			'Shaker',
+			'Jingle Bell',
+			'Bell Tree',
+			'Castanets',
+			'Mute Surdo',
+			'Open Surdo',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'Brush Snare High',
+			'Brush Snare Low',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			''
+		)
+	),
+	new bank (
+		'Special Bank',
+		new Array (
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'Tablaesque - Low',
+			'Tablaesque - Hi',
+			'Nine Inch Kick',
+			'HippiShake',
+			'ScienceTom',
+			'Click',
+			'Rvs Cymb Pan Long',
+			'Rvs Cymb Pan Med',
+			'Rvs Cymb Pan Short',
+			'Woodstick',
+			'ElectroBrite',
+			'SloLaser',
+			'UFO-by',
+			'Air Snare',
+			'Weird Snare',
+			'Flange Snare',
+			'Ping Drum',
+			'Itchy-Scratch',
+			'Itchy-Scratch 2',
+			'Hi Metallic Snare',
+			'Noise Echo',
+			'Buzzy Hit',
+			'Rez Hat',
+			'Bucket Hit',
+			'Ice Cube',
+			'Explosive Kick',
+			'Mutant Cowbell',
+			'Temple Bell',
+			'Hi Temple Gong',
+			'Thuddy Kick',
+			'Lo Bell',
+			'Sine Chirp',
+			'Hollow Metal Hit',
+			'Woodblock',
+			'Reverse Cymbal',
+			'Tablaesque Slap',
+			'Sonar Blip',
+			'Sine Hit',
+			'Sine Block',
+			'Krell Tone',
+			'Sine Kick',
+			'Hi Tone',
+			'Hi Click',
+			'Gate Tone',
+			'Chem Tone',
+			'Dub Kick',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			''
+		)
+	)
+);
+
+function generateList () {
+	docHandle = parent.indexList.document;
+	docHandle.open ('text/html');
+	docHandle.writeln (
+		'<HTML><HEAD><TITLE>Beatnik Player Authoring Reference: Percussion Map (list)</TITLE></HEAD>' +
+		'<BODY BGCOLOR=FFFFFF TEXT=000000 LINK=000000 VLINK=000000><CENTER>' +
+		'<TABLE WIDTH=100% BGCOLOR=EEEEEE BORDER=0 CELLSPACING=1 CELLPADDING=1>' +
+		'<TR BGCOLOR=CCCCDD ALIGN=CENTER>' +
+		'<TD><B>Note#</B></TD>' +
+		'<TD><B>Note Name</B></TD>'
+	);
+	for (bankNo = 1; bankNo <= banks.length; bankNo++)
+		docHandle.writeln ('<TD><B>' + banks [bankNo - 1].name + ' (' + (bankNo - 1) + ')</B></TD>')
+	;
+	docHandle.writeln ('</TR>');
+	for (noteNo = 27; noteNo <= 95; noteNo++) {
+		docHandle.writeln (
+			'<TR>' +
+			'<TD ALIGN=CENTER BGCOLOR=CCCCCC>' + noteNo + '</TD>' +
+			'<TD ALIGN=CENTER BGCOLOR=CCCCCC>' + Music.getNoteName (noteNo) + '</TD>'
+		);
+		for (bankNo = 1; bankNo <= banks.length; bankNo++) {
+			var bank = banks [bankNo - 1];
+			docHandle.write ('<TD BGCOLOR=BBCCCC>');
+			if (bank.instruments [noteNo] != null && bank.instruments [noteNo] != '') {
+				docHandle.write ('<A HREF="javascript://" ONCLICK="parent.indexHeader.previewInstrument (' + (bankNo - 1) + ',' + noteNo + '); return false" ONMOUSEOVER="parent.indexHeader.instrumentOver (' + (bankNo - 1) + ',' + noteNo + '); return true" ONMOUSEOUT="parent.indexHeader.instrumentOut (); return true">' + instruments [noteNo] + '</A>');
+			} else {
+				docHandle.writeln ('<FONT COLOR=666666>empty</FONT>');
+			}
+			docHandle.writeln ('</TD>');
+		}
+		docHandle.writeln ('</TR>');
+	}
+	docHandle.writeln (
+		'</TABLE>' +
+		'</CENTER></BODY></HTML>'
+	);
+	docHandle.close ();
+}
+
+// generateList ();
+
+stub.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY></HTML>

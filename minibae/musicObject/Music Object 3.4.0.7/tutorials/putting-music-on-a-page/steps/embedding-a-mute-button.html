@@ -1,0 +1,282 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Embedding a Mute Button)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 6: Embedding a Mute Button
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>It is not always necessary for a Beatnik Player to actually be playing music. When the control panel is set in SYSTEM display, then the mute button that appears in the top right corner will affect the Beatnik Player's global audio output. This includes all other player instances, regardless of whether or not they are even in the same document or window as the instance with the mute button.</P>
+
+<P>In this example, we have used this principle to our advantage by embedding one player instance that serves purely as a common global mute button and does nothing more. Try playing some of the files embedded below by using the transport controls. Then, click on the mute button. You will notice that the music you started playing now becomes silent, and the mute button changes state to indicate that the Beatnik Player's global audio output has been muted. Now, if you click on the mute button a second time the global mute will once again be turned off, the mute button graphic will return to its original unmuted state, and the music will continue playing. Each time you click on the mute button the global mute state will toggle.</P>
+
+<TABLE ALIGN=CENTER BORDER=4 CELLSPACING=0 CELLPADDING=0>
+<TR><TD><EMBED
+	SRC="../../../music/stub.rmf"
+	TYPE="audio/rmf"
+	WIDTH=41
+	HEIGHT=15
+	DISPLAY=SYSTEM
+	AUTOSTART=FALSE
+	LOOP=FALSE
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+></TD></TR>
+</TABLE>
+<BR>
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=6>
+	<TR BGCOLOR=EEEEEE>
+		<TD>
+			"<B>Ambient</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/ambient.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=DDDDDD>
+		<TD>
+			"<B>Classical</B>" arranged by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/classical.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=CCCCCC>
+		<TD>
+			"<B>Jungle</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/jungle.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=BBBBBB>
+		<TD>
+			"<B>Lounge</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/lounge.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=AAAAAA>
+		<TD>
+			"<B>Modern Rock</B>" by Paul Sebastien
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/modern-rock.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>Truly Global</DIV>
+
+<P>To drive home the point that the mute button affects the global audio output of the Beatnik Player, try playing several of the files simultaneously before clicking on the mute button. Sure, you'll have to endure a moment's cacophony, but it will be perfectly clear when you click the mute button that it is affecting the combined audio output of all Beatnik Player instances.</P>
+
+<P>Now, for each of the player control panels, pop up the player's contextual menu and select the <NOBR>"System Display"</NOBR> option. The contextual menu can be popped open on Windows systems by right-clicking on the control panel, and on MacOS systems by clicking and holding on the control panel. Once all of the control panels are set to the system display, each control panel should have a mute button. When you click on a mute button on any one of the control panels, you will notice how the mute buttons for all other control panels are updated to the new global mute state.</P>
+
+<DIV CLASS=subsection>A Look at the Source Code</DIV>
+
+<P>Now, let's take a look at the source code for this example. The text that is highlighted indicates the code that is responsible for displaying the mute button. The rest of the code is resposible for embedding the other player instances that appear inside the table layout in the form of slim transport controls.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;CENTER&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;TABLE BORDER=4 CELLSPACING=0 CELLPADDING=0&gt;
+&lt;TR&gt;&lt;TD&gt;&lt;EMBED
+   SRC="stub.rmf"
+   TYPE="audio/rmf"
+   WIDTH=40
+   HEIGHT=15
+   DISPLAY=SYSTEM
+   AUTOSTART=FALSE
+   LOOP=FALSE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;BR&gt;</SPAN>
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6&gt;
+   &lt;TR BGCOLOR=EEEEEE&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Ambient&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="ambient.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=DDDDDD&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Classical&lt;/B&gt;" arranged by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="classical.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=CCCCCC&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Jungle&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="jungle.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=BBBBBB&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Lounge&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="lounge.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=AAAAAA&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Modern Rock&lt;/B&gt;" by Paul Sebastien
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="modern-rock.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to make the control panel only as big as the mute button, we first set the HEIGHT to <SPAN CLASS=value>15</SPAN> so that the control panel only displays the slim top portion. We then take advantage of a subtle little behavior of the control panel. That is, when the WIDTH is set to less than 144, the mute button of the control panel is always drawn against the right-hand side. So, while a WIDTH of <SPAN CLASS=value>40</SPAN> does not give the control panel enough room to display both the Beatnik symbol and the mute button that usually appear in the top portion of the SYSTEM display, it still gives the control panel enough room to display at least the mute button.</P>
+
+<P>In order to illustrate this principle better, take a look at the control panels below where the WIDTH is progressively decreased, starting from 144 and ending at 41. At a WIDTH of <SPAN CLASS=value>41</SPAN>, you can still see a tiny smidgen of the Beatnik "B" peeping through with player versions earlier than 2.1. But, with Beatnik Player versions 2.1 and higher, the mute button is clean.</P>
+
+<P><EMBED SRC="../../../music/stub.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=15 DISPLAY=SYSTEM AUTOSTART=FALSE LOOP=FALSE PLUGINSPAGE="http://www.beatnik.com/to/?player"></P>
+
+<P><EMBED SRC="../../../music/stub.rmf" TYPE="audio/rmf" WIDTH=124 HEIGHT=15 DISPLAY=SYSTEM AUTOSTART=FALSE LOOP=FALSE PLUGINSPAGE="http://www.beatnik.com/to/?player"></P>
+
+<P><EMBED SRC="../../../music/stub.rmf" TYPE="audio/rmf" WIDTH=104 HEIGHT=15 DISPLAY=SYSTEM AUTOSTART=FALSE LOOP=FALSE PLUGINSPAGE="http://www.beatnik.com/to/?player"></P>
+
+<P><EMBED SRC="../../../music/stub.rmf" TYPE="audio/rmf" WIDTH=84 HEIGHT=15 DISPLAY=SYSTEM AUTOSTART=FALSE LOOP=FALSE PLUGINSPAGE="http://www.beatnik.com/to/?player"></P>
+
+<P><EMBED SRC="../../../music/stub.rmf" TYPE="audio/rmf" WIDTH=64 HEIGHT=15 DISPLAY=SYSTEM AUTOSTART=FALSE LOOP=FALSE PLUGINSPAGE="http://www.beatnik.com/to/?player"></P>
+
+<P><EMBED SRC="../../../music/stub.rmf" TYPE="audio/rmf" WIDTH=41 HEIGHT=15 DISPLAY=SYSTEM AUTOSTART=FALSE LOOP=FALSE PLUGINSPAGE="http://www.beatnik.com/to/?player"></P>
+
+<DIV CLASS=subsection>Differences Between Player Versions</DIV>
+
+<P>With Beatnik Player versions earlier than 2.1, the mute button is shown as a speaker icon that becomes grayed out when the Beatnik Player's global audio output is muted. With versions 2.1 and higher, the mute button is shown as a pair of green and red on-off lights, where the red light is lit when the audio is muted and the green light is lit when the audio is not muted. With both styles of mute buttons, clicking anywhere on the mute button has the effects of toggling the global audio output's mute state.</P>
+
+<P>The following table shows the different styles of mute button used in different versions of the Beatnik Player...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Beatnik Player Version</TD>
+		<TD CLASS=data-table-column-header>Mute Button Appearance</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.0 to 2.0</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../../../images/player-control-panel/1.0-2.0/panel-mute-only.gif" WIDTH=41 HEIGHT=15 ALT="System Display - mute button only" BORDER=0></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>2.1 and higher</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../../../images/player-control-panel/2.1/panel-mute-only.gif" WIDTH=41 HEIGHT=15 ALT="System Display - mute button only" BORDER=0></TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

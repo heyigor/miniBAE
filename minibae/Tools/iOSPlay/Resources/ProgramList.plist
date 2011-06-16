@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GM</key>
+	<array>
+		<string>Piano</string>
+		<string>Bright Piano</string>
+		<string>Electric Grand</string>
+		<string>Honky Tonk Piano</string>
+		<string>Electric Piano 1</string>
+		<string>Electric Piano 2</string>
+		<string>Harpsichord</string>
+		<string>Clavinet</string>
+		<string>Celesta</string>
+		<string>Glockenspiel</string>
+		<string>Music Box</string>
+		<string>Vibraphone</string>
+		<string>Marimba</string>
+		<string>Xylophone</string>
+		<string>Tubular Bell</string>
+		<string>Dulcimer</string>
+		<string>Hammond Organ</string>
+		<string>Perc Organ</string>
+		<string>Rock Organ</string>
+		<string>Church Organ</string>
+		<string>Reed Organ</string>
+		<string>Accordion</string>
+		<string>Harmonica</string>
+		<string>Tango Accordion</string>
+		<string>Nylon Str Guitar</string>
+		<string>Steel String Guitar</string>
+		<string>Jazz Electric Gtr</string>
+		<string>Clean Guitar</string>
+		<string>Muted Guitar</string>
+		<string>Overdrive Guitar</string>
+		<string>Distortion Guitar</string>
+		<string>Guitar Harmonics</string>
+		<string>Acoustic Bass</string>
+		<string>Fingered Bass</string>
+		<string>Picked Bass</string>
+		<string>Fretless Bass</string>
+		<string>Slap Bass 1</string>
+		<string>Slap Bass 2</string>
+		<string>Syn Bass 1</string>
+		<string>Syn Bass 2</string>
+		<string>Violin</string>
+		<string>Viola</string>
+		<string>Cello</string>
+		<string>Contrabass</string>
+		<string>Tremolo Strings</string>
+		<string>Pizzicato Strings</string>
+		<string>Orchestral Harp</string>
+		<string>Timpani</string>
+		<string>Ensemble Strings</string>
+		<string>Slow Strings</string>
+		<string>Synth Strings 1</string>
+		<string>Synth Strings 2</string>
+		<string>Choir Aahs</string>
+		<string>Voice Oohs</string>
+		<string>Syn Choir</string>
+		<string>Orchestra Hit</string>
+		<string>Trumpet</string>
+		<string>Trombone</string>
+		<string>Tuba</string>
+		<string>Muted Trumpet</string>
+		<string>French Horn</string>
+		<string>Brass Ensemble</string>
+		<string>Syn Brass 1</string>
+		<string>Syn Brass 2</string>
+		<string>Soprano Sax</string>
+		<string>Alto Sax</string>
+		<string>Tenor Sax</string>
+		<string>Baritone Sax</string>
+		<string>Oboe</string>
+		<string>English Horn</string>
+		<string>Bassoon</string>
+		<string>Clarinet</string>
+		<string>Piccolo</string>
+		<string>Flute</string>
+		<string>Recorder</string>
+		<string>Pan Flute</string>
+		<string>Bottle Blow</string>
+		<string>Shakuhachi</string>
+		<string>Whistle</string>
+		<string>Ocarina</string>
+		<string>Syn Square Wave</string>
+		<string>Syn Saw Wave</string>
+		<string>Syn Calliope</string>
+		<string>Syn Chiff</string>
+		<string>Syn Charang</string>
+		<string>Syn Voice</string>
+		<string>Syn Fifths Saw</string>
+		<string>Syn Brass and Lead</string>
+		<string>Fantasia</string>
+		<string>Warm Pad</string>
+		<string>Polysynth</string>
+		<string>Space Vox</string>
+		<string>Bowed Glass</string>
+		<string>Metal Pad</string>
+		<string>Halo Pad</string>
+		<string>Sweep Pad</string>
+		<string>Ice Rain</string>
+		<string>Soundtrack</string>
+		<string>Crystal</string>
+		<string>Atmosphere</string>
+		<string>Brightness</string>
+		<string>Goblins</string>
+		<string>Echo Drops</string>
+		<string>Sci Fi</string>
+		<string>Sitar</string>
+		<string>Banjo</string>
+		<string>Shamisen</string>
+		<string>Koto</string>
+		<string>Kalimba</string>
+		<string>Bag Pipe</string>
+		<string>Fiddle</string>
+		<string>Shanai</string>
+		<string>Tinkle Bell</string>
+		<string>Agogo</string>
+		<string>Steel Drums</string>
+		<string>Woodblock</string>
+		<string>Taiko Drum</string>
+		<string>Melodic Tom</string>
+		<string>Syn Drum</string>
+		<string>Reverse Cymbal</string>
+		<string>Guitar Fret Noise</string>
+		<string>Breath Noise</string>
+		<string>Seashore</string>
+		<string>Bird</string>
+		<string>Telephone</string>
+		<string>Helicopter</string>
+		<string>Applause</string>
+		<string>Gunshot</string>
+	</array>
+	<key>Special</key>
+	<array>
+		<string>Soft Piano</string>
+		<string>Reflection Piano</string>
+		<string>Flange Piano</string>
+		<string>Octopus Piano</string>
+		<string>Flange Electric Piano</string>
+		<string>Tremolo Electric Piano</string>
+		<string>Chorus Harpsichord</string>
+		<string>Ondioline</string>
+		<string>Curious Chime</string>
+		<string>Swirly Bell</string>
+		<string>Echo Bell</string>
+		<string>Vibraphone 2</string>
+		<string>Soft Marimba</string>
+		<string>Percolator</string>
+		<string>Reverse Bell</string>
+		<string>Percussive Piano</string>
+		<string>Rot. Speaker Organ 1</string>
+		<string>Bright Perc Organ</string>
+		<string>Growl Organ</string>
+		<string>Chorus Church Organ</string>
+		<string>Sawteeth</string>
+		<string>Expressive Accordion</string>
+		<string>Corny Harmonica</string>
+		<string>Squeeze Box</string>
+		<string>Acoustic Bass Gtr</string>
+		<string>Mute Guitar 2</string>
+		<string>Chorus Jazz Guitar</string>
+		<string>Tremolo Guitar</string>
+		<string>Echo Mute Bass</string>
+		<string>Grungey Guitar</string>
+		<string>Flange Guitar</string>
+		<string>Flange Guitar Stab</string>
+		<string>Dark Syn Bass</string>
+		<string>Jungle Bass</string>
+		<string>Jungle Bass 2</string>
+		<string>Chorus Bass</string>
+		<string>Synth Slap Bass</string>
+		<string>Lowrider</string>
+		<string>OB Bass</string>
+		<string>OB Bass 2</string>
+		<string>Synth Violin</string>
+		<string>Robot Threat</string>
+		<string>Formula 1</string>
+		<string>Deep Bass Stab</string>
+		<string>Trill Strings</string>
+		<string>Cello Stroke</string>
+		<string>VibHarp</string>
+		<string>Tuned Drum</string>
+		<string>sfz Strings</string>
+		<string>Moving Strings</string>
+		<string>Heads of Space</string>
+		<string>Slow Synth Strings</string>
+		<string>Slow Choir Aahs</string>
+		<string>Pulsing Voices</string>
+		<string>Cloudscapes</string>
+		<string>Hype Orch Hit</string>
+		<string>Accent Trumpet</string>
+		<string>Accent Trombone</string>
+		<string>Mellow Trombone</string>
+		<string>Muted Trumpet 2</string>
+		<string>French Horn Swell</string>
+		<string>Brass Ensemble 2</string>
+		<string>Syn Brass 3</string>
+		<string>Syn Brass 4</string>
+		<string>Lyrical Sax</string>
+		<string>Accent Sax</string>
+		<string>Slow Sax</string>
+		<string>Staccato Sax</string>
+		<string>Lyrical Oboe</string>
+		<string>Soft Lead Synth</string>
+		<string>Staccato Bassoon</string>
+		<string>Smooth Clarinet</string>
+		<string>Accent Piccolo</string>
+		<string>Lyrical Flute</string>
+		<string>Mello Breath</string>
+		<string>Peruvian</string>
+		<string>Breath Echoes</string>
+		<string>Apparition</string>
+		<string>Humorous Whistle</string>
+		<string>Strobes</string>
+		<string>Teletronic</string>
+		<string>5th Pulse</string>
+		<string>Moon Jelly</string>
+		<string>Ricochet Pad</string>
+		<string>Rock Radiation</string>
+		<string>Solo Vox 2</string>
+		<string>5th Saw Drone</string>
+		<string>Lead Synth 2</string>
+		<string>Fantasy Bells</string>
+		<string>Slow Warm Pad</string>
+		<string>Polysynth 2</string>
+		<string>50&apos;s Sci-Fi</string>
+		<string>Watery Glass</string>
+		<string>UFOs</string>
+		<string>Soprano</string>
+		<string>Refractions</string>
+		<string>Comet Tails</string>
+		<string>Soundtrack 2</string>
+		<string>Friendly Data</string>
+		<string>Analog Sequence</string>
+		<string>Luminous Voice</string>
+		<string>Goblins 2</string>
+		<string>Tick Blok</string>
+		<string>Droplet</string>
+		<string>Droplet 2</string>
+		<string>Video Game 1</string>
+		<string>Video Game 2</string>
+		<string>Digi-Dodo</string>
+		<string>Fairy Godmother</string>
+		<string>Alarm</string>
+		<string>Hoverbug</string>
+		<string>Crickets</string>
+		<string>Beatnik</string>
+		<string>Teletype</string>
+		<string>Carriage Return</string>
+		<string>Typewriter Key</string>
+		<string>Cash Register</string>
+		<string>Thru Phone Chirp</string>
+		<string>Whipped</string>
+		<string>Pop Click</string>
+		<string>Metal Chirp</string>
+		<string>Poing</string>
+		<string>Metal Spray</string>
+		<string>FlyBy 1</string>
+		<string>FlyBy 2</string>
+		<string>Cosmic Ray</string>
+		<string>SampHold</string>
+		<string>SampHold 2</string>
+	</array>
+	<key>GM Percussion</key>
+	<array>
+		<string>Hi-Q</string>
+		<string>Slap</string>
+		<string>Scratch Push</string>
+		<string>Scratch Pull</string>
+		<string>Sticks</string>
+		<string>Square Click</string>
+		<string>Metronome Click</string>
+		<string>Metronome Bell</string>
+		<string>Low Kick</string>
+		<string>Kick</string>
+		<string>Rimclik</string>
+		<string>Electric Snare</string>
+		<string>Handclap</string>
+		<string>Acoustic Snare</string>
+		<string>Tom Low</string>
+		<string>Closed Hi-Hat</string>
+		<string>Tom Hi</string>
+		<string>Pedal Hi-Hat</string>
+		<string>Tom Hi</string>
+		<string>Open Hi-Hat</string>
+		<string>Low Mid Tom</string>
+		<string>High Mid Tom</string>
+		<string>Crash Cymbal 1</string>
+		<string>High Tom</string>
+		<string>Ride Cymbal 1</string>
+		<string>Chinese Cymbal</string>
+		<string>Ride Bell</string>
+		<string>Tambourine</string>
+		<string>Splash Cymbal</string>
+		<string>Cowbell</string>
+		<string>Crash Cymbal 2</string>
+		<string>Vibraslap</string>
+		<string>Ride Cymbal 2</string>
+		<string>High Bongo</string>
+		<string>Low Bongo</string>
+		<string>Mute High Conga</string>
+		<string>Open High Conga</string>
+		<string>Low Conga</string>
+		<string>High Timbale</string>
+		<string>Low Timbale</string>
+		<string>High Agogo</string>
+		<string>Low Agogo</string>
+		<string>Cabasa</string>
+		<string>Maracas</string>
+		<string>Short Whistle</string>
+		<string>Long Whistle</string>
+		<string>Short Guiro</string>
+		<string>Long Guiro</string>
+		<string>Claves</string>
+		<string>High Wood Block</string>
+		<string>Low Wood Block</string>
+		<string>Mute Cuica</string>
+		<string>Open Cuica</string>
+		<string>Close Triangle</string>
+		<string>Open Triangle</string>
+		<string>Shaker</string>
+		<string>Jingle Bell</string>
+		<string>Bell Tree</string>
+		<string>Castanets</string>
+		<string>Mute Surdo</string>
+		<string>Open Surdo</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>Brush Snare High</string>
+		<string>Brush Snare Low</string>
+	</array>
+	<key>Special Percussion</key>
+	<array>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>Tablaesque - Low</string>
+		<string>Tablaesque - Hi</string>
+		<string>Nine Inch Kick</string>
+		<string>HippiShake</string>
+		<string>ScienceTom</string>
+		<string>Click</string>
+		<string>Rvs Cymb Pan Long</string>
+		<string>Rvs Cymb Pan Med</string>
+		<string>Rvs Cymb Pan Short</string>
+		<string>Woodstick</string>
+		<string>ElectroBrite</string>
+		<string>SloLaser</string>
+		<string>UFO-by</string>
+		<string>Air Snare</string>
+		<string>Weird Snare</string>
+		<string>Flange Snare</string>
+		<string>Ping Drum</string>
+		<string>Itchy-Scratch</string>
+		<string>Itchy-Scratch 2</string>
+		<string>Hi Metallic Snare</string>
+		<string>Noise Echo</string>
+		<string>Buzzy Hit</string>
+		<string>Rez Hat</string>
+		<string>Bucket Hit</string>
+		<string>Ice Cube</string>
+		<string>Explosive Kick</string>
+		<string>Mutant Cowbell</string>
+		<string>Temple Bell</string>
+		<string>Hi Temple Gong</string>
+		<string>Thuddy Kick</string>
+		<string>Lo Bell</string>
+		<string>Sine Chirp</string>
+		<string>Hollow Metal Hit</string>
+		<string>Woodblock</string>
+		<string>Reverse Cymbal</string>
+		<string>Tablaesque Slap</string>
+		<string>Sonar Blip</string>
+		<string>Sine Hit</string>
+		<string>Sine Block</string>
+		<string>Krell Tone</string>
+		<string>Sine Kick</string>
+		<string>Hi Tone</string>
+		<string>Hi Click</string>
+		<string>Gate Tone</string>
+		<string>Chem Tone</string>
+		<string>Dub Kick</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+		<string>empty</string>
+	</array>
+</dict>
+</plist>

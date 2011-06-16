@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (Cool File of the Day)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 8: Cool File of the Day
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>As a completely different angle on the dynamic selecion of music content, suppose we wanted a Web page to be appear as though it were being updated regularly, but not in a completely random fashion. With a little help from JavaScript's built in <B>Date</B> object we can make it appear as though a Web site's music is being updated on a daily basis. When a Web page uses this kind of music updating scheme, all visitors to the page will hear the same music play on any given date of the year.</P>
+
+<P>The page for this step of the tutorial is using just such a scheme, and the music file that is now playing through the player instance below will play for all people who view this page on this date of the year. Try <A HREF="file-of-the-day.html">reloading this page</A> several times. Every time you reload the page you should still hear the same file play, unless you're up really late burning the midnight oil and the date rolls over as you reloaded the page.</P>
+
+<P ALIGN=CENTER>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+musicFiles = new Array (
+	'ambient.rmf',
+	'classical.rmf',
+	'house.rmf',
+	'jungle.rmf',
+	'lounge.rmf',
+	'modern-rock.rmf',
+	'sfx-medley.rmf',
+	'techno.rmf',
+	'trance.rmf'
+);
+
+var
+	today = new Date (),
+	msPerDay= 24 * 60 * 60 * 1000,
+	currentSelection = (Math.round (today.getTime () / msPerDay) % musicFiles.length),
+	fileOfTheDay = musicFiles [currentSelection]
+;
+
+Music.magicEmbed ('SRC="../../../music/' + fileOfTheDay + '" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=TRUE');
+
+// --></SCRIPT>
+
+</P>
+
+<P>Now let's take a look at the source code for this example...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+musicFiles = new Array (
+<SPAN CLASS=sample-code-highlighted>   'ambient.rmf',
+   'classical.rmf',
+   'house.rmf',
+   'jungle.rmf',
+   'lounge.rmf',
+   'modern-rock.rmf',
+   'sfx-medley.rmf',
+   'techno.rmf',
+   'trance.rmf'</SPAN>
+);
+
+var
+   today = new Date (),
+   msPerDay= 24 * 60 * 60 * 1000,
+   currentSelection = (Math.round (today.getTime () / msPerDay) % musicFiles.length),
+   fileOfTheDay = musicFiles [currentSelection]
+;
+
+Music.magicEmbed ('SRC="' + fileOfTheDay + '" <SPAN CLASS=sample-code-highlighted>WIDTH=144 HEIGHT=60 DISPLAY=SONG</SPAN> AUTOSTART=TRUE');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Customizations</DIV>
+
+<P>In the sample code listing above, the highlighted code indicates the code that should be customized to suit the needs of your specific application. The contents of the <B>musicFiles</B> array can be customized to accommodate all the files you'd like to step through on a daily basis. This array may contain as many file URLs as you like and the code will automatically cycle through this list, each day selecting the next file from the list. Each element of the array is a string, representing the URL of a file. You should only include URLs for files that can be supported by the player (see the appendix <A HREF="../../../appendixes/supported-file-types.html" TARGET="_parent">Beatnik Player Supported File Types</A>).</P>
+
+<DIV CLASS=subsection>Further Customizations</DIV>
+
+<P>In this example we're displaying the control panel, but if you wanted the control panel to be hidden you could simply replace the <SPAN CLASS=sample-code-highlighted><NOBR>WIDTH=144 HEIGHT=60 DISPLAY=SONG</NOBR></SPAN> with <SPAN CLASS=sample-code-highlighted><NOBR>WIDTH=0 HEIGHT=0 HIDDEN</NOBR></SPAN>. Also, if you wanted to cycle through a very large list of files and all of the files were buried inside a folder that was consideraby deeper than the page that was to embed the cool file of the day, then you could place the common path to the files in the call to the <B>magicEmbed</B> method.</P>
+
+<P>So, rather than having the following somewhat inefficient code...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+musicFiles = new Array (
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>jack-of-all-trades.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>little-munchkins-of-aberdeen.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>attack-of-the-manic-triads.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>under-the-missile-toe.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>calm-yeah-right.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>expert-flavors-of-trance.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>a-cinch.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>experiments-on-espresso.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>mid-day-crisis.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>executive-management-boogaloo.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>downside-of-an-upswing.rmf',
+   '<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>meet-the-light-of-day.rmf',
+);
+
+var
+   today = new Date (),
+   msPerDay= 24 * 60 * 60 * 1000,
+   currentSelection = (Math.round (today.getTime () / msPerDay) % musicFiles.length),
+   fileOfTheDay = musicFiles [currentSelection]
+;
+
+Music.magicEmbed ('SRC="' + fileOfTheDay + '" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...you could instead place the common file URL path <B>media/music/rmf/</B> in the call to the <B>magicEmbed</B> method, as follows...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+musicFiles = new Array (
+   'jack-of-all-trades.rmf',
+   'little-munchkins-of-aberdeen.rmf',
+   'attack-of-the-manic-triads.rmf',
+   'under-the-missile-toe.rmf',
+   'calm-yeah-right.rmf',
+   'expert-flavors-of-trance.rmf',
+   'a-cinch.rmf',
+   'experiments-on-espresso.rmf',
+   'mid-day-crisis.rmf',
+   'executive-management-boogaloo.rmf',
+   'downside-of-an-upswing.rmf',
+   'meet-the-light-of-day.rmf',
+);
+
+var
+   today = new Date (),
+   msPerDay= 24 * 60 * 60 * 1000,
+   currentSelection = (Math.round (today.getTime () / msPerDay) % musicFiles.length),
+   fileOfTheDay = musicFiles [currentSelection]
+;
+
+Music.magicEmbed ('SRC="<SPAN CLASS=sample-code-highlighted>media/music/rmf/</SPAN>' + fileOfTheDay + '" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

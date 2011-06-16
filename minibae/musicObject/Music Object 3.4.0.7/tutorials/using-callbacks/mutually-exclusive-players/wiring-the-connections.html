@@ -1,0 +1,292 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Using Player Callbacks (PART B - step 2: Wiring the Connections)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+PART B - step 2: Wiring the Connections
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>We will now add some clever code to ensure that only one player can be playing at any given moment, thus demonstrating how multiple Beatnik Player instances can effectively be made 'aware' of one another by wiring their event callbacks to a central script. In the enhanced sample below, try the Beatnik control panels again.</P>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music1 = new Music ();
+music2 = new Music ();
+music3 = new Music ();
+music4 = new Music ();
+music5 = new Music ();
+
+lastPlayed = null;
+
+function handleOnPlayB (musicObjectID) {
+	if (lastPlayed != null) {
+		if (lastPlayed != musicObjectID) {
+			lastPlayed.stop (true);
+		}
+	}
+	lastPlayed = musicObjectID;
+}
+
+music1.onPlay ('handleOnPlayB (music1)');
+music2.onPlay ('handleOnPlayB (music2)');
+music3.onPlay ('handleOnPlayB (music3)');
+music4.onPlay ('handleOnPlayB (music4)');
+music5.onPlay ('handleOnPlayB (music5)');
+
+// --></SCRIPT>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=6>
+	<TR BGCOLOR=EEEEEE>
+		<TD>
+			"<B>Ambient</B>" by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music1.magicEmbed (
+					'SRC="../../../music/ambient.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=DDDDDD>
+		<TD>
+			"<B>Classical</B>" arranged by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music2.magicEmbed (
+					'SRC="../../../music/classical.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=CCCCCC>
+		<TD>
+			"<B>Jungle</B>" by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music3.magicEmbed (
+					'SRC="../../../music/jungle.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=BBBBBB>
+		<TD>
+			"<B>Lounge</B>" by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music4.magicEmbed (
+					'SRC="../../../music/lounge.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=AAAAAA>
+		<TD>
+			"<B>Modern Rock</B>" by Paul Sebastien
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music5.magicEmbed (
+					'SRC="../../../music/modern-rock.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE>'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>It may appear as though some voodoo spell has been cast to change the fundamental behavior of the player itself. Now when you play one song and then start another song playing without stopping the previous song, the song that was playing stops automatically. We even threw in a graceful fadeout so the previous song doesn't stop abruptly, but instead fades out into the new song.</P>
+
+<P>Take a look at the mystery ingredient that has created this behavior. The code that has been added since the previous step is highlighted in red.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music1 = new Music ();
+music2 = new Music ();
+music3 = new Music ();
+music4 = new Music ();
+music5 = new Music ();
+
+<SPAN CLASS=sample-code-highlighted>lastPlayed = null;
+
+function handleOnPlay (musicObjectID) {
+   if (lastPlayed != null) {
+      if (lastPlayed != musicObjectID) {
+         lastPlayed.stop (true);
+      }
+   }
+   lastPlayed = musicObjectID;
+}
+
+music1.onPlay ('handleOnPlay (music1)');
+music2.onPlay ('handleOnPlay (music2)');
+music3.onPlay ('handleOnPlay (music3)');
+music4.onPlay ('handleOnPlay (music4)');
+music5.onPlay ('handleOnPlay (music5)');</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6&gt;
+   &lt;TR BGCOLOR=EEEEEE&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Ambient&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music1.magicEmbed (
+               'SRC="ambient.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=DDDDDD&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Classical&lt;/B&gt;" arranged by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music2.magicEmbed (
+               'SRC="classical.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=CCCCCC&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Jungle&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music3.magicEmbed (
+               'SRC="jungle.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=BBBBBB&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Lounge&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music4.magicEmbed (
+               'SRC="lounge.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=AAAAAA&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Modern Rock&lt;/B&gt;" by Paul Sebastien
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music5.magicEmbed (
+               'SRC="modern-rock.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+&lt;P>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the <A HREF="../cross-connecting/intro.html">Cross-connecting a Player and HTML Form Elements</A> example earlier in this tutorial you have seen how functions can be registered as callback handlers for events such as onPause, onPlay, and OnStop.</P>
+
+<P>Well, in addition to being able to take a function as a parameter, the <B>onPause</B>, <B>onPlay</B>, and <B>onStop</B> methods can also take a string as a parameter. This string represents a JavaScript statement (or block of statements) to be executed when the event occurs. In our example, we can now use the same function to handle the callbacks for each of the players, but passing a different parameter to allow the function to discriminate - a code efficiency which simplifies our task tremendously.</P>
+
+<P>See the block of JavaScript code where the <B>onPlay</B> callbacks are registered for the Music Object instances. Each one will end up calling the <B>handleOnPlay</B> function, but with the calling Music Object instance sent as a parameter. For example, <B>music4.onPlay ('handleOnPlay (music4)')</B> will result in the <B>handleOnPlay</B> function being executed every time the Music Object instance called music4 enters into play mode. However, since the statement to be executed is <B>handleOnPlay (music4)</B>, when <B>handleOnPlay</B> gets called it will receive <B>music4</B> as a parameter telling it that the onPlay event was triggered by that instance.</P>
+
+<P>This now leads to the intelligence behind our newly acquired player 'exclusivity' behavior. We can use this central function, <B>handleOnPlay</B>, to maintain a state where only one player can be playing at a time. The way the function does this is to remember the last Music Object instance that was playing and, when a new player enters into play mode, the last playing instance is instructed to stop.</P>
+
+<P>The last playing Music Object is stored in the variable <B>lastPlayed</B>, which is initially set to the value null. The <B>handleOnPlay</B> function performs these two important steps...</P>
+<OL>
+	<LI>It uses the <B>lastPlayed</B> variable to turn off the currently playing instance.
+		<P></P>
+	<LI>It sets the <B>lastPlayed</B> variable to the instance that has just started playing so that, when in the future <B>handleOnPlay</B> is triggered by another player instance, it will again be able to stop the previously playing song.
+</OL>
+
+<P>There are two additional and more subtle steps that are performed by the function to avoid any quirky behavior.</P>
+<OL>
+	<LI>It checks to see that the <B>lastPlayed</B> variable is not set to null. This would be the case when the page first initializes. If <B>lastPlayed</B> is set to null it means effectively that there is no instance currently playing music and it makes no sense to try to stop an instance playing when there is no instance playing. In fact, trying to call the <B>stop</B> method of an instance variable that is null will result in JavaScript errors - not a desired effect. A simple JavaScript <B>if</B> statement avoids this.
+		<P></P>
+	<LI>It checks to see that the instance that has just triggered the onPlay event isn't the same instance that last started playing. How could an onPlay event be triggered by the same instance more than once in a row? Simple: we're not capturing or paying any attention to onPause events, and each time a player switches out of pause mode and back into play mode the onPlay event is triggered.
+		<P></P>
+		So, as an example, the user starts the instance <B>music3</B> playing and an onPlay event is triggered. They then click on the pause button and put the instance <B>music3</B> into a paused state. Finally, they once again click on the pause button and music3 toggles out of pause mode and enters back into play mode. Once again, an onPlay event is triggered from the instance <B>music3</B>.
+		<P></P>
+		Now, if the instance that just triggered the onPlay event is the same instance that last started playing, no action will be taken. This is done with a simple <B>if</B> condition. Why is this little step so important and why would it be a problem if action were actually taken? Well, whenever an onPlay callback is handled by our <B>handleOnPlay</B> function, it uses the <B>lastPlayed</B> variable to stop the player instance that was playing previously. However, using the scenario that we just described above, when the user unpauses an instance a new onPlay callback will occur, but this time the <B>lastPlayed</B> variable will be exactly the same as the player instance that was unpaused. In this case, if the function actually stops the <B>lastPlayed</B> instance, the player will not leave pause mode and continue playing as the user would expect, but will simply stop dead - not very intuitive behavior. The <B>if</B> condition fixes this.
+</OL>
+
+</BODY></HTML>

@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Dr. Frankenscope)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 4: Dr. Frankenscope
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>The DISPLAY attribute divides the Beatnik Player's control panel display options into two main groups. The very cool SCOPE mode is only accessible when the control panel is in SYSTEM display. On the other hand, the very useful transport controls are only available in the SONG display. This, unfortunately, means that it is not possible to have a control panel that shows the transport controls portion on top and the scope portion on the bottom at the same time. Admittedly somewhat of a drag, but there is a clever way around this. Simply sew together two different player instances, thus breathing life into a mutant new type of control panel layout. To the end user, this appears to be just one control panel. Little do they know. Let's take a look at the monster we have created....</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR><TD><EMBED
+		SRC="../../../music/trance.rmf"
+		TYPE="audio/rmf"
+		WIDTH=144
+		HEIGHT=15
+		DISPLAY=SONG
+		AUTOSTART=FALSE
+		LOOP=FALSE
+		PLUGINSPAGE="http://www.beatnik.com/to/?player"
+	></TD></TR>
+	<TR><TD><EMBED
+		SRC="../../../music/stub.rmf"
+		TYPE="audio/rmf"
+		WIDTH=144
+		HEIGHT=45
+		DISPLAY=SYSTEM
+		MODE=SCOPE
+		AUTOSTART=FALSE
+		LOOP=FALSE
+		PLUGINSPAGE="http://www.beatnik.com/to/?player"
+	></TD></TR>
+</TABLE>
+<BR>
+
+<P>Click on the transport control's play button to start the music playing. You will notice how the SCOPE portion of the control panel reflects the audio output associated with the song that is playing. Pause the song and the SCOPE flatlines. Unpause the song and the SCOPE kicks back into action. So far, everything behaves as we might expect. So, a magical new control panel layout is born? Well, actually, the cunning deception is exposed when you right-click (click-and-hold for Mac users) on the SCOPE portion of the control panel to pop up the player's menu. Instead of it showing the song title "Trance" as you might expect, you see the song title "silent RMF file", which is the name of the stub file we used to create the dummy second player instance. There are actually two unique player instances here, grafted onto each other like some demented experiment in genetic engineering.</P>
+
+<P>Let's take a look at the source HTML that achieves this effect:</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;&lt;TD&gt;&lt;EMBED
+      SRC="trance.rmf"
+      TYPE="audio/rmf"
+      WIDTH=144
+      HEIGHT=15
+      DISPLAY=SONG
+      AUTOSTART=FALSE
+      LOOP=FALSE
+      PLUGINSPAGE="http://www.beatnik.com/to/?player"
+   &gt;&lt;/TD&gt;&lt;/TR&gt;
+   &lt;TR&gt;&lt;TD&gt;&lt;EMBED
+      SRC="stub.rmf"
+      TYPE="audio/rmf"
+      WIDTH=144
+      HEIGHT=45
+      DISPLAY=SYSTEM
+      MODE=SCOPE
+      AUTOSTART=FALSE
+      LOOP=FALSE
+      PLUGINSPAGE="http://www.beatnik.com/to/?player"
+   &gt;&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Looking at the source HTML, you will see how we have used a table layout to butt two separate player instances against each other. Because the top portion of our new-fangled control panel is to have the transport controls, we must use the top EMBED tag to load the music file we wish to play so that clicking on the transport buttons will play, pause, and stop the file. We have placed this top control into SONG display and are using a HEIGHT of 15 so that only the top portion is shown.</P>
+
+<P>Below the transport controls we embed another player instance in the SCOPE display and use a HEIGHT of 45 so that only the bottom portion (the scope) is shown. We do not wish the file that is loaded by the bottom EMBED tag to be able to play any music, so we have used a silent RMF file named "stub.rmf". This file is an empty dummy file, containing no musical note information. Because the SCOPE display reflects the global audio output of Beatnik's underlying audio engine, even though the stub file plays no music, the SCOPE display of its control panel will still animate to the music that is being played by the player instance above it which has the transport controls.</P>
+
+<BLOCKQUOTE>
+	<IMG SRC="../../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>There is one very big caveat to this sneaky workaround. Because the SCOPE has been tacked on to the transport controls by embedding a completely different player instance, the user cannot use the pop-up menu that opens up from right-clicking on the SCOPE to control the playback of the song that is being controlled by the transport controls. This may be somewhat puzzling to a user. So, if you want to use this little trick on a Web page, you may want to throw in a cautionary note to demystify this behavior.
+</BLOCKQUOTE>
+
+</BODY></HTML>

@@ -1,0 +1,71 @@
+//---------------------------------------------------------
+// test01.txt
+//---------------------------------------------------------
+// 
+// A Mini-BAE TestSuite script
+//
+// Usage:  testsuite.exe < test01.txt (at the MS-DOS prompt)
+//
+//---------------------------------------------------------
+//
+// Tests in this script:
+//
+// 1. Play MIDI File
+//
+//---------------------------------------------------------
+// Jan. 19, 2000 by Chris Grigg (chrisg@beatnik.com)
+// Based on Mark Deggeler's go.txt
+// (c) 2000 by Beatnik, Inc.  All rights reserved.
+//---------------------------------------------------------
+
+
+
+// create mixer
+1
+1
+1 // open mixer 8hz,16bit
+
+// load default patch file
+1
+1
+4
+
+
+//---------------------------------------------------------
+// 1. Play MIDI File
+//---------------------------------------------------------
+
+// create new BAESong object -----------
+3
+2
+1
+0             // slot 0
+
+// load MIDI file ----------------------
+3
+2
+34
+0             // slot 0
+testMidi1.mid // name of file
+y             // ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+0            // slot 0
+0            // priority 0
+
+
+
+
+
+// PAUSE
+4
+230         // Wait 230 seconds to let file play
+
+
+
+// quit
+0	// VERY IMPORTANT TO QUIT AT END!!!!!
+

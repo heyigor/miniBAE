@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+	<TITLE>Version History: Music Object Extension - Callbacks (version 1.2.0)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Callbacks (version 1.2.0)<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 2000-12-28</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>UPDATE - Music Object 3.3.0 Compatibility&nbsp;<IMG SRC="../../../../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=ABSMIDDLE></DIV>
+
+<BLOCKQUOTE>
+	Changes have been made in this version of this extension to allow it to work correctly with version 3.3.0 of the core Music Object API. To avoid compatibility problems, this version of this extension should not be used with Music Object versions earlier than 3.3.0.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Smaller File Size</DIV>
+
+<BLOCKQUOTE>
+	This version of this extension has been modified as necessary in order to reduce the size of its JavaScript file using Beatnik's proprietary code "scrunching" process (see the section <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html^api/general-improvements/smaller-javascript-files" TARGET="_parent">Smaller Size JavaScript Files</A> in the version history entry for Music Object 3.3.0).
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - Meta Event Support</DIV>
+
+<BLOCKQUOTE>
+	A bug was found where, unless a meta event callback handler was already registered using the <B>onMetaEvent</B> method, the Callback extension's <B>addOnMetaEvent</B> and <B>addMetaEventHandler</B> methods would have no effect. There is a performance optimization within Music Object that results in the player's meta event reporting mechanism being disabled when no meta event handler is registered. This optimization did not take into account the fact that meta event handlers can also be registered exclusively through the <B>addOnMetaEvent</B> and <B>addMetaEventHandler</B> methods of the Callbacks extension, bypassing the core Music Object <B>onMetaEvent</B> method. This bug has been fixed.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - No Meta Event Parameters When Using addMetaEventHandler</DIV>
+
+<BLOCKQUOTE>
+	A bug was found where, even when a meta event callback handler was already registered using the <B>onMetaEvent</B> method (see previous bug) and meta event handlers added using the Callback extension's <B>addMetaEventHandler</B> method were being called, no meta event type and value parameters were being passed to the handlers registered using this method. This bug has been fixed.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD - addOnAudibleStateChange</DIV>
+
+<BLOCKQUOTE>
+	The new <A HREF="../../index.html#addOnAudibleStateChange" TARGET="_parent"><B>addOnAudibleStateChange</B></A> instance method lets you add an event handler to a Music Object instance's list of handlers for the <A HREF="../../../../concepts.html#callbacks/onAudibleStateChange" TARGET="_parent"><B>onAudibleStateChange</B></A> instance callback type that was introduced in <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object version 3.3.0</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD - addOnOutputVolumeChange</DIV>
+
+<BLOCKQUOTE>
+	The new <A HREF="../../index.html#addOnOutputVolumeChange" TARGET="_parent"><B>addOnOutputVolumeChange</B></A> instance method lets you add an event handler to a Music Object instance's list of handlers for the <A HREF="../../../../concepts.html#callbacks/onOutputVolumeChange" TARGET="_parent"><B>onOutputVolumeChange</B></A> instance callback type that was introduced in <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object version 3.3.0</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD - clearOnAudibleStateChange</DIV>
+
+<BLOCKQUOTE>
+	The new <A HREF="../../index.html#clearOnAudibleStateChange" TARGET="_parent"><B>clearOnAudibleStateChange</B></A> instance method lets you clear a Music Object instance's list of handlers for the <A HREF="../../../../concepts.html#callbacks/onAudibleStateChange" TARGET="_parent"><B>onAudibleStateChange</B></A> instance callback type that was introduced in <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object version 3.3.0</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD - clearOnOutputVolumeChange</DIV>
+
+<BLOCKQUOTE>
+	The new <A HREF="../../index.html#clearOnOutputVolumeChange" TARGET="_parent"><B>clearOnOutputVolumeChange</B></A> instance method lets you clear a Music Object instance's list of handlers for the <A HREF="../../../../concepts.html#callbacks/onOutputVolumeChange" TARGET="_parent"><B>onOutputVolumeChange</B></A> instance callback type that was introduced in <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object version 3.3.0</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD - removeOnAudibleStateChange</DIV>
+
+<BLOCKQUOTE>
+	The new <A HREF="../../index.html#removeOnAudibleStateChange" TARGET="_parent"><B>removeOnAudibleStateChange</B></A> instance method lets you remove a specific callback handler (or handlers) from a Music Object instance's list of handlers for the <A HREF="../../../../concepts.html#callbacks/onAudibleStateChange" TARGET="_parent"><B>onAudibleStateChange</B></A> instance callback type that was introduced in <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object version 3.3.0</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD - removeOnOutputVolumeChange</DIV>
+
+<BLOCKQUOTE>
+	The new <A HREF="../../index.html#removeOnOutputVolumeChange" TARGET="_parent"><B>removeOnOutputVolumeChange</B></A> instance method lets you remove a specific callback handler (or handlers) from a Music Object instance's list of handlers for the <A HREF="../../../../concepts.html#callbacks/onOutputVolumeChange" TARGET="_parent"><B>onOutputVolumeChange</B></A> instance callback type that was introduced in <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object version 3.3.0</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW STATIC METHOD - Music.removeCallbackHandlers</DIV>
+
+<BLOCKQUOTE>
+	The new <A HREF="../../index.html#Music.removeCallbackHandlers" TARGET="_parent"><B>Music.removeCallbackHandlers</B></A> static method lets you remove a specific callback handler (or handlers) from a specific static callback type (or types). In particular, this method is useful for removing handlers registered for the <A HREF="../../../../concepts.html#callbacks/onAudioEngagedChange" TARGET="_parent"><B>onAudioEngagedChange</B></A> static callback type that was introduced in <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html" TARGET="_parent">Music Object version 3.3.0</A>, for which no dedicated static method has been provided for removing handlers.
+</BLOCKQUOTE>
+
+</BODY></HTML>

@@ -1,0 +1,2008 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Callbacks</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Callbacks
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>Unlike the <B>onLoad</B>, <B>onMetaEvent</B>, <B>onPause</B>, <B>onPlay</B>, <B>onReady</B>, and <B>onStop</B> methods that provide the core Music Object API's <A HREF="../../instance-methods.html#callbacks">callback support</A>, these additional methods allow one to stack multiple event handlers for the same player event.</P>
+
+<P>For example, while the <B>onPlay</B> method only allows one to override the currently registered handler for the play event, the <B>addOnPlay</B> method lets one add new handlers on top of currently registered handlers. Then, when a play event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnPlay</B> method will be executed in the order in which they were added to the stack. In fact, callback handlers that are added for any callback type are executed when the callback event occurs, and in the order in which they were added to the stack of callback handlers. Consider the following code example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.addOnPlay (initialiseUI);
+myMusicObject.addOnPlay ('fileStarted = true');
+myMusicObject.addOnPlay ('preloadNextSong ("creepy-swamp.rmf")');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now, when a play event occurs for myMusicObject, the <B>initialiseUI</B> function will first be called, then the statement <NOBR><SPAN CLASS=sample-code>fileStarted = true</SPAN></NOBR> will be evaluated, and then the statement <NOBR><SPAN CLASS=sample-code>preloadNextSong ("creepy-swamp.rmf")</SPAN></NOBR> will be evaluated. Of course, in this very straightforward situation one could simply have rolled all the actions into a single <B>myOnPlayHandler</B> function and registered this using the <B>onPlay</B> method, but the goal of the methods in this extension is to allow multiple code modules to add to the callback handler stack for any given callback type, without needing to worry about handlers that have already been registered by other code modules.</P>
+
+<P>One of the things that this allows is for multiple code segments to cooperatively listen for events that occur within a shared Music Object instance, without these code modules having to have an intimate understanding of each other's internal implementation. Using the methods for managing callbacks that are provided in this extension, different code modules can use the callbacks for a Music Object instance without overriding each other's registered callback handlers, as would otherwise occur with the core Music Object callback methods.</P>
+
+<DIV CLASS=subsection>Tip on Removing Callbacks</DIV>
+
+<P>If a function, rather than a statement block, has been registered as a callback handler, then that callback handler can only be removed by specifying the original function that was registered as the callback handler, and not a statement block representing a call to the function. For instance, the following code will not work correctly...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+function myOnPlayHandler () {
+	// code to handle onPlay event
+}
+
+myMusicObject.addOnPlay (myOnPlayHandler);
+myMusicObject.removeOnPlay ('myOnPlayHandler ()');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>However, the code listed below is correct and the handler registered using the <B>addOnPlay</B> method is successfully removed using the <B>removeOnPlay</B> method.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+function myOnPlayHandler () {
+	// code to handle onPlay event
+}
+
+myMusicObject.addOnPlay (myOnPlayHandler);
+myMusicObject.removeOnPlay (myOnPlayHandler);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-callbacks.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-callbacks.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-callbacks.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-callbacks.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<P>The instance methods provided in this module are listed in the table below and are divided into three groups: <A HREF="#adding-event-handlers">Adding Event Handlers</A>, <A HREF="#clearing-event-handlers">Clearing Event Handlers</A>, and <A HREF="#removing-event-handlers">Removing Event Handlers</A>. Removing event handlers is different to clearing event handlers, in that one can remove very specific handlers that have been registered, whereas clearing will clear all event handlers that have been registered. In a few cases there are exceptions to this rule, and you should refer to the method explanations and notes for further details.</P>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#adding-event-handlers"><B>Adding Event Handlers</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addMetaEventHandler">addMetaEventHandler</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler for a specific meta event type and value pair.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnAudibleStateChange">addOnAudibleStateChange</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of audible state change event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnLoad">addOnLoad</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of load event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnMetaEvent">addOnMetaEvent</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of meta event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnOutputVolumeChange">addOnOutputVolumeChange</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of output volume change event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnPause">addOnPause</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of pause event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnPlay">addOnPlay</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of play event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnReady">addOnReady</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of ready event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addOnStop">addOnStop</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds an event handler to a Music Object instance's list of stop event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#clearing-event-handlers"><B>Clearing Event Handlers</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearCallbacks">clearCallbacks</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all callbacks that have been assigned to a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnAudibleStateChange">clearOnAudibleStateChange</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the audible state change event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnLoad">clearOnLoad</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the load event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnMetaEvent">clearOnMetaEvent</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the meta event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnOutputVolumeChange">clearOnOutputVolumeChange</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the output volume change event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnPause">clearOnPause</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the pause event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnPlay">clearOnPlay</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the play event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnReady">clearOnReady</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the ready event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#clearOnStop">clearOnStop</A></TD>
+	<TD CLASS=contents-table-item-desc>Clears all handlers assigned to the stop event of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#removing-event-handlers"><B>Removing Event Handlers</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeCallbackHandlers">removeCallbackHandlers</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes the specified callback handler (or handlers) from the specified instance callback type (or types).</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.removeCallbackHandlers">Music.removeCallbackHandlers</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes the specified callback handler (or handlers) from the specified static callback type (or types).</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeMetaEventHandlers">removeMetaEventHandlers</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes one or more handlers for specific meta event type and value pairs.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnAudibleStateChange">removeOnAudibleStateChange</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of audible state change event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnLoad">removeOnLoad</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of load event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnMetaEvent">removeOnMetaEvent</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of meta event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnOutputVolumeChange">removeOnOutputVolumeChange</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of output volume change event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnPause">removeOnPause</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of pause event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnPlay">removeOnPlay</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of play event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnReady">removeOnReady</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of ready event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeOnStop">removeOnStop</A></TD>
+	<TD CLASS=contents-table-item-desc>Removes a specified handler from a Music Object instance's list of stop event handlers.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="adding-event-handlers"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Adding Event Handlers
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="addMetaEventHandler"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addMetaEventHandler</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addMetaEventHandler</B> instance method lets one add event handlers for specific meta events that are encountered within an RMF or MIDI file.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addMetaEventHandler (</B> <A HREF="../../parameters.html#MetaEventTypeSTR">MetaEventTypeSTR</A> <B>,</B> MetaEventValueSTR <B>,</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Unique meta events are identified by their meta event type and meta event value, as specified by the <B>MetaEventTypeSTR</B> and <B>MetaEventValueSTR</B> parameters, respectively. So, rather than registering a generalized handler using the <A HREF="../../instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> or <A HREF="#addOnMetaEvent"><B>addOnMetaEvent</B></A> methods and then writing your own code for the handler to detect specific meta events that you care about, you can instead let this extension do some of this hard work for you by registering handlers for the specific events that you care about.</P>
+
+<P>For instance, if you wanted to be notified each time an RMF composition reached the beginning of a fade out at the end of the composition, and assuming that the composition contains a marker meta event at the start of this fade out, then one could use the following code to register the handler for this unique meta event...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function musicFadeOutBegins () {
+   // code to change UI to reflect fade out
+}
+
+myMusicObject.addMetaEventHandler ('Marker','Fade to end',musicFadeOutBegins);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addMetaEventHandler (</B> <A HREF="../../parameters.html#MetaEventTypeSTR">MetaEventTypeSTR</A> <B>,</B> MetaEventValueSTR <B>,</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="#addOnMetaEvent">addOnMetaEvent</A> and <A HREF="../../instance-methods.html#onMetaEvent">onMetaEvent</A> methods.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnAudibleStateChange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnAudibleStateChange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnAudibleStateChange</B> instance method lets you add an event handler to a Music Object instance's list of audible state change event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnAudibleStateChange (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnAudibleStateChange</B> method is similar to the <A HREF="../../instance-methods.html#onAudibleStateChange"><B>onAudibleStateChange</B></A> method in that it lets you register handlers for the audible state change event of a Music Object instance. The key difference is that, while the <B>onAudibleStateChange</B> method only lets you register one handler for the audible state change event and overrides any existing registered handler, the <B>addOnAudibleStateChange</B> method instead lets you add to a stack of event handlers for the audible state change event. When an audible state change event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnAudibleStateChange</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the audible state change event using this method do not override a handler registered using the core Music Object API's <B>onAudibleStateChange</B> method. Any handler registered for the audible state change event using the <B>onAudibleStateChange</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnAudibleStateChange</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addOnAudibleStateChange (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onAudibleStateChange">onAudibleStateChange</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnLoad"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnLoad</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnLoad</B> instance method lets you add an event handler to a Music Object instance's list of load event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnLoad (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnLoad</B> method is similar to the <A HREF="../../instance-methods.html#onLoad"><B>onLoad</B></A> method in that it lets you register handlers for the load event of a Music Object instance. The key difference is that, while the <B>onLoad</B> method only lets you register one handler for the load event and overrides any existing registered handler, the <B>addOnLoad</B> method instead lets you add to a stack of event handlers for the load event. When a load event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnLoad</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the load event using this method do not override a handler registered using the core Music Object API's <B>onLoad</B> method. Any handler registered for the load event using the <B>onLoad</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnLoad</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addOnLoad (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onLoad">onLoad</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnMetaEvent"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnMetaEvent</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnMetaEvent</B> instance method lets you add an event handler to a Music Object instance's list of meta event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnMetaEvent (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnMetaEvent</B> method is similar to the <A HREF="../../instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> method in that it lets you register handlers for the meta event of a Music Object instance. The key difference is that, while the <B>onMetaEvent</B> method only lets you register one handler for the meta event and overrides any existing registered handler, the <B>addOnMetaEvent</B> method instead lets you add to a stack of event handlers for the meta event. When a meta event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnMetaEvent</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the meta event using this method do not override a handler registered using the core Music Object API's <B>onMetaEvent</B> method. Any handler registered for the meta event using the <B>onMetaEvent</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnMetaEvent</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onMetaEvent">onMetaEvent</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnOutputVolumeChange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnOutputVolumeChange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnOutputVolumeChange</B> instance method lets you add an event handler to a Music Object instance's list of output volume change event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnOutputVolumeChange (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnOutputVolumeChange</B> method is similar to the <A HREF="../../instance-methods.html#onOutputVolumeChange"><B>onOutputVolumeChange</B></A> method in that it lets you register handlers for the output volume change event of a Music Object instance. The key difference is that, while the <B>onOutputVolumeChange</B> method only lets you register one handler for the output volume change event and overrides any existing registered handler, the <B>addOnOutputVolumeChange</B> method instead lets you add to a stack of event handlers for the output volume change event. When an output volume change event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnOutputVolumeChange</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the output volume change event using this method do not override a handler registered using the core Music Object API's <B>onOutputVolumeChange</B> method. Any handler registered for the output volume change event using the <B>onOutputVolumeChange</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnOutputVolumeChange</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addOnOutputVolumeChange (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onOutputVolumeChange">onOutputVolumeChange</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnPause"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnPause</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnPause</B> instance method lets you add an event handler to a Music Object instance's list of pause event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnPause (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnPause</B> method is similar to the <A HREF="../../instance-methods.html#onPause"><B>onPause</B></A> method in that it lets you register handlers for the pause event of a Music Object instance. The key difference is that, while the <B>onPause</B> method only lets you register one handler for the pause event and overrides any existing registered handler, the <B>addOnPause</B> method instead lets you add to a stack of event handlers for the pause event. When a pause event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnPause</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the pause event using this method do not override a handler registered using the core Music Object API's <B>onPause</B> method. Any handler registered for the pause event using the <B>onPause</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnPause</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addOnPause (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onPause">onPause</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnPlay"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnPlay</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnPlay</B> instance method lets you add an event handler to a Music Object instance's list of play event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnPlay (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnPlay</B> method is similar to the <A HREF="../../instance-methods.html#onPlay"><B>onPlay</B></A> method in that it lets you register handlers for the play event of a Music Object instance. The key difference is that, while the <B>onPlay</B> method only lets you register one handler for the play event and overrides any existing registered handler, the <B>addOnPlay</B> method instead lets you add to a stack of event handlers for the play event. When a play event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnPlay</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the play event using this method do not override a handler registered using the core Music Object API's <B>onPlay</B> method. Any handler registered for the play event using the <B>onPlay</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnPlay</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addOnPlay (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onPlay">onPlay</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnReady"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnReady</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnReady</B> instance method lets you add an event handler to a Music Object instance's list of ready event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnReady (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnReady</B> method is similar to the <A HREF="../../instance-methods.html#onReady"><B>onReady</B></A> method in that it lets you register handlers for the ready event of a Music Object instance. The key difference is that, while the <B>onReady</B> method only lets you register one handler for the ready event and overrides any existing registered handler, the <B>addOnReady</B> method instead lets you add to a stack of event handlers for the ready event. When a ready event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnReady</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the ready event using this method do not override a handler registered using the core Music Object API's <B>onReady</B> method. Any handler registered for the ready event using the <B>onReady</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnReady</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addOnReady (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onReady">onReady</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="addOnStop"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addOnStop</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addOnStop</B> instance method lets you add an event handler to a Music Object instance's list of stop event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>addOnStop (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>addOnStop</B> method is similar to the <A HREF="../../instance-methods.html#onStop"><B>onStop</B></A> method in that it lets you register handlers for the stop event of a Music Object instance. The key difference is that, while the <B>onStop</B> method only lets you register one handler for the stop event and overrides any existing registered handler, the <B>addOnStop</B> method instead lets you add to a stack of event handlers for the stop event. When a stop event occurs for a Music Object instance, all handlers that have been added to the stack using the <B>addOnStop</B> method will be executed in the order in which they were added to the stack.</P>
+
+<P>For backward compatibility reasons, handlers registered for the stop event using this method do not override a handler registered using the core Music Object API's <B>onStop</B> method. Any handler registered for the stop event using the <B>onStop</B> method is executed before any handlers that have been added to the handler stack using the <B>addOnStop</B> method.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addOnStop (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the core <A HREF="../../instance-methods.html#onStop">onStop</A> method.
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="clearing-event-handlers"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Clearing Event Handlers
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="clearCallbacks"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearCallbacks</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearCallbacks</B> instance method lets you clear all callbacks that have been assigned to a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearCallbacks ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearCallbacks</B> method clears all callbacks that have been registered for the Music Object instance. This includes callbacks registered using the core Music Object API's <B>onLoad</B>, <B>onMetaEvent</B>, <B>onPause</B>, <B>onPlay</B>, <B>onReady</B>, and <B>onStop</B> methods, as well as this extension's <B>addMetaEventHandler</B>, <B>addOnLoad</B>, <B>addOnMetaEvent</B>, <B>addOnPause</B>, <B>addOnPlay</B>, <B>addOnReady</B>, and <B>addOnStop</B> methods. If you do not wish to affect handlers registered using the core Music Object API's callback methods, then you should use the <A HREF="#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> method.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnAudibleStateChange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnAudibleStateChange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnAudibleStateChange</B> instance method lets you clear all handlers assigned to the audible state change event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnAudibleStateChange ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnAudibleStateChange</B> method clears all handlers that have been added for the audible state change event using this extension's <A HREF="#addOnAudibleStateChange"><B>addOnAudibleStateChange</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onAudibleStateChange"><B>onAudibleStateChange</B></A> methods. To remove only those handlers that have been added using the <B>addOnAudibleStateChange</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnAudibleStateChange"><B>removeOnAudibleStateChange</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnAudibleStateChange ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onAudibleStateChange (null)</SPAN></NOBR> to clear a handler that has been registered for the audible state change event using the <B>onAudibleStateChange</B> method has no effect on handlers that have been registered using the <B>addOnAudibleStateChange</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnLoad"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnLoad</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnLoad</B> instance method lets you clear all handlers assigned to the load event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnLoad ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnLoad</B> method clears all handlers that have been added for the load event using this extension's <A HREF="#addOnLoad"><B>addOnLoad</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onLoad"><B>onLoad</B></A> methods. To remove only those handlers that have been added using the <B>addOnLoad</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnPlay"><B>removeOnPlay</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onLoad (null)</SPAN></NOBR> to clear a handler that has been registered for the load event using the <B>onLoad</B> method has no effect on handlers that have been registered using the <B>addOnLoad</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnMetaEvent"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnMetaEvent</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnMetaEvent</B> instance method lets you clear all handlers assigned to the meta event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnMetaEvent ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnMetaEvent</B> method clears all handlers that have been added for the meta event using this extension's <A HREF="#addOnMetaEvent"><B>addOnMetaEvent</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> methods. To remove only those handlers that have been added using the <B>addOnMetaEvent</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnPlay"><B>removeOnPlay</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onMetaEvent (null)</SPAN></NOBR> to clear a handler that has been registered for the meta event using the <B>onMetaEvent</B> method has no effect on handlers that have been registered using the <B>addOnMetaEvent</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnOutputVolumeChange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnOutputVolumeChange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnOutputVolumeChange</B> instance method lets you clear all handlers assigned to the output volume change event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnOutputVolumeChange ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnOutputVolumeChange</B> method clears all handlers that have been added for the output volume change event using this extension's <A HREF="#addOnOutputVolumeChange"><B>addOnOutputVolumeChange</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onOutputVolumeChange"><B>onOutputVolumeChange</B></A> methods. To remove only those handlers that have been added using the <B>addOnOutputVolumeChange</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnOutputVolumeChange"><B>removeOnOutputVolumeChange</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnOutputVolumeChange ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onOutputVolumeChange (null)</SPAN></NOBR> to clear a handler that has been registered for the output volume change event using the <B>onOutputVolumeChange</B> method has no effect on handlers that have been registered using the <B>addOnOutputVolumeChange</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnPause"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnPause</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnPause</B> instance method lets you clear all handlers assigned to the pause event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnPause ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnPause</B> method clears all handlers that have been added for the pause event using this extension's <A HREF="#addOnPause"><B>addOnPause</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onPause"><B>onPause</B></A> methods. To remove only those handlers that have been added using the <B>addOnPause</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnPlay"><B>removeOnPlay</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onPause (null)</SPAN></NOBR> to clear a handler that has been registered for the pause event using the <B>onPause</B> method has no effect on handlers that have been registered using the <B>addOnPause</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnPlay"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnPlay</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnPlay</B> instance method lets you clear all handlers assigned to the play event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnPlay ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnPlay</B> method clears all handlers that have been added for the play event using this extension's <A HREF="#addOnPlay"><B>addOnPlay</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onPlay"><B>onPlay</B></A> methods. To remove only those handlers that have been added using the <B>addOnPlay</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnPlay"><B>removeOnPlay</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onPlay (null)</SPAN></NOBR> to clear a handler that has been registered for the play event using the <B>onPlay</B> method has no effect on handlers that have been registered using the <B>addOnPlay</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnReady"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnReady</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnReady</B> instance method lets you clear all handlers assigned to the ready event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnReady ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnReady</B> method clears all handlers that have been added for the ready event using this extension's <A HREF="#addOnReady"><B>addOnReady</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onReady"><B>onReady</B></A> methods. To remove only those handlers that have been added using the <B>addOnReady</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnPlay"><B>removeOnPlay</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onReady (null)</SPAN></NOBR> to clear a handler that has been registered for the ready event using the <B>onReady</B> method has no effect on handlers that have been registered using the <B>addOnReady</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="clearOnStop"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;clearOnStop</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>clearOnStop</B> instance method lets you clear all handlers assigned to the stop event of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>clearOnStop ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>clearOnStop</B> method clears all handlers that have been added for the stop event using this extension's <A HREF="#addOnStop"><B>addOnStop</B></A> method, as well as the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> and <A HREF="../../instance-methods.html#onStop"><B>onStop</B></A> methods. To remove only those handlers that have been added using the <B>addOnStop</B> or <B>addCallbackHandler</B> methods, use the variation of the <A HREF="#removeOnPlay"><B>removeOnPlay</B></A> method that takes no parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ( )</SPAN></NOBR>. It should be noted that using the statement <NOBR><SPAN CLASS=sample-code>onStop (null)</SPAN></NOBR> to clear a handler that has been registered for the stop event using the <B>onStop</B> method has no effect on handlers that have been registered using the <B>addOnStop</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="removing-event-handlers"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Removing Event Handlers
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="removeCallbackHandlers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeCallbackHandlers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeCallbackHandlers</B> instance method lets you remove the specified callback handler (or handlers) from the specified instance callback type (or types).
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeCallbackHandlers (</B> <A HREF="../../parameters.html#InstanceCallbackTypeSTR">InstanceCallbackTypeSTR</A> <B>,</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeCallbackHandlers</B> method lets you remove a specific callback handler from the stack of handlers that have been registered for the specified instance callback type. This is equivalent to using some of the other methods in this extension, such as <B>removeOnLoad</B>, <B>removeOnMetaEvent</B>, <B>removeOnPause</B>, <B>removeOnPlay</B>, <B>removeOnReady</B>, and <B>removeOnStop</B>. For instance, the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeCallbackHandlers ('onPlay',myOnPlayHandler)</SPAN></NOBR> is equivalent to the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay (myOnPlayHandler)</SPAN></NOBR>.</P>
+
+<P>In order to successfully remove a specific handler using the <B>removeCallbackHandlers</B> method, one must correctly specify the callback type and the callback handler that were used when initially registering the callback handler. For example, in order the remove the handler registered using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addCallbackHandler ('onPlay',myOnPlayHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeCallbackHandlers ('onPlay',myOnPlayHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeCallbackHandlers ('onPlay','myOnPlayHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>It is also possible to remove all handlers that have been added for a specific callback type by simply not specifying the handler to be removed, as in the example statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeCallbackHandlers ('onPlay')</SPAN></NOBR>, which will remove all handlers that were added using the <B>addOnPlay</B> or <B>addCallbackHandler</B> methods. This is equivalent to the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ()</SPAN></NOBR>.</P>
+
+<P>Finally, one can remove all instance callback handlers that have been added using the methods in this extension by simply not specifying the instance callback type or handler, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeCallbackHandlers ()</SPAN></NOBR>.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeCallbackHandlers (</B> <A HREF="../../parameters.html#InstanceCallbackTypeSTR">InstanceCallbackTypeSTR</A> <B>,</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeCallbackHandlers (</B> <A HREF="../../parameters.html#InstanceCallbackTypeSTR">InstanceCallbackTypeSTR</A> <B>)</B>
+		<P>When no handler is specified, all handlers that have been added (using the methods in this extension) for the specified callback type will be removed. For compatibility reasons, this does not affect handlers that have been registered using the core Music Object <A HREF="../../instance-methods.html#callbacks">callback methods</A>.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeCallbackHandlers ( )</B>
+		<P>When no callback type or handler is specified, all handlers that have been added using the methods in this extension will be removed - for all callback types. For compatibility reasons, this does not affect handlers that have been registered using the core Music Object <A HREF="../../instance-methods.html#callbacks">callback methods</A>.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="Music.removeCallbackHandlers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.removeCallbackHandlers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.removeCallbackHandlers</B> static method lets you remove the specified callback handler (or handlers) from the specified static callback type (or types).
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.removeCallbackHandlers (</B> <A HREF="../../parameters.html#StaticCallbackTypeSTR">StaticCallbackTypeSTR</A> <B>,</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.removeCallbackHandlers</B> method lets you remove a specific callback handler from the stack of handlers that have been registered for the specified static callback type. This allows one to remove callback handlers from a static callback type where no dedicated static method has been provided for removing handlers from that callback. For example, while there is no static method provided for removing handlers from the <A HREF="../../concepts.html#callbacks/onAudioEngagedChange">onAudioEngagedChange</A> static callback, one can remove handlers from this callback using the <B>Music.removeCallbackHandlers</B> method and specifying the string value "<SPAN CLASS=value>onAudioEngagedChange</SPAN>" for the <B>StaticCallbackTypeSTR</B> parameter.</P>
+
+<P>In order to successfully remove a specific handler using the <B>Music.removeCallbackHandlers</B> method, one must correctly specify the callback type and the callback handler that were used when initially registering the callback handler. For example, in order the remove the handler registered using the statement <NOBR><SPAN CLASS=sample-code>Music.addCallbackHandler ('onAudioEngagedChange',myOnAudioEngagedChangeHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>Music.removeCallbackHandlers ('onAudioEngagedChange',myOnAudioEngagedChangeHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeCallbackHandlers ('onAudioEngagedChange','myOnAudioEngagedChangeHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>It is also possible to remove all handlers that have been added for a specific callback type by simply not specifying the handler to be removed, as in the example statement <NOBR><SPAN CLASS=sample-code>Music.removeCallbackHandlers ('onAudioEngagedChange')</SPAN></NOBR>, which will remove all handlers that were added to the <B>onAudioEngagedChange</B> static callback type.</P>
+
+<P>Finally, one can remove all static callback handlers that have been added using the methods in this extension by simply not specifying the static callback type or handler, as in the statement <NOBR><SPAN CLASS=sample-code>Music.removeCallbackHandlers ()</SPAN></NOBR>.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeCallbackHandlers (</B> <A HREF="../../parameters.html#StaticCallbackTypeSTR">StaticCallbackTypeSTR</A> <B>,</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeCallbackHandlers (</B> <A HREF="../../parameters.html#StaticCallbackTypeSTR">StaticCallbackTypeSTR</A> <B>)</B>
+		<P>When no handler is specified, all handlers that have been added (using the methods in this extension) for the specified callback type will be removed.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeCallbackHandlers ( )</B>
+		<P>When no callback type or handler is specified, all handlers that have been added using the methods in this extension will be removed - for all callback types.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeMetaEventHandlers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeMetaEventHandlers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeMetaEventHandlers</B> instance method lets you remove one or more handlers for specific meta event type and value pairs.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeMetaEventHandlers (</B> <A HREF="../../parameters.html#MetaEventTypeSTR">MetaEventTypeSTR</A> <B>,</B> MetaEventValueSTR <B>,</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeMetaEventHandlers</B> method lets one remove a handler for a specific meta event that was added using the <A HREF="#addMetaEventHandler"><B>addMetaEventHandler</B></A> method. To remove a handler for a specific meta event, one must correctly specify the meta event type, meta event value, and handler parameters that were used when originally registering the handler. For instance to remove a meta event handler that was added using the statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.addMetaEventHandler ('Marker','Fade to end',musicFadeOutBegins);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...one should use the statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.removeMetaEventHandlers ('Marker','Fade to end',musicFadeOutBegins);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>It is possible to remove all handlers that are assigned to a specific meta event type / value by simply not specifying the handler, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeMetaEventHandlers ('Marker','Fade to end')</SPAN></NOBR>. Furthermore, one can remove all handlers for a specific type of meta event, such as a "Marker" event, by not specifying the meta event value and handler parameters, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeMetaEventHandlers ('Marker')</SPAN></NOBR>. Finally, one can remove all handlers for meta events that were added using the <B>addMetaEventHandlers</B> method by simply not specifying any parameters for this method, as in the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeMetaEventHandlers ()</SPAN></NOBR>.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeMetaEventHandlers (</B> <A HREF="../../parameters.html#MetaEventTypeSTR">MetaEventTypeSTR</A> <B>,</B> MetaEventValueSTR <B>)</B>
+		<P>When no handler function is specified, all handlers that have been registered for the specified meta event type and value pair will be removed.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeMetaEventHandlers (</B> <A HREF="../../parameters.html#MetaEventTypeSTR">MetaEventTypeSTR</A> <B>)</B>
+		<P>When no <B>MetaEventValueSTR</B> parameter is specified, all handlers that have been registered for the specified meta event type will be removed.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeMetaEventHandlers ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addMetaEventHandler"><B>addMetaEventHandler</B></A> method will be removed. This does not affect other handlers that have been registered using the <A HREF="#addOnMetaEvent"><B>addOnMetaEvent</B></A> or <A HREF="../../instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> methods.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnAudibleStateChange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnAudibleStateChange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnAudibleStateChange</B> instance method lets you remove a specified handler from a Music Object instance's list of audible state change event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnAudibleStateChange (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnAudibleStateChange</B> method lets one remove a specific handler that was added for the audible state change event using this extension's <A HREF="#addOnAudibleStateChange"><B>addOnAudibleStateChange</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the audible state change event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnAudibleStateChange (myOnAudibleStateChangeHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnAudibleStateChange (myOnAudibleStateChangeHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnAudibleStateChange ('myOnAudibleStateChangeHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the audible state change event using the core Music Object API's <A HREF="../../instance-methods.html#onAudibleStateChange"><B>onAudibleStateChange</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>OnAudibleStateChange (null)</SPAN></NOBR> to clear a handler that has been registered for the audible state change event using the <B>onAudibleStateChange</B> method has no effect on handlers that have been registered using the <B>addOnAudibleStateChange</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnAudibleStateChange (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnAudibleStateChange ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnAudibleStateChange"><B>addOnAudibleStateChange</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onAudibleStateChange"><B>onAudibleStateChange</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnLoad"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnLoad</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnLoad</B> instance method lets you remove a specified handler from a Music Object instance's list of load event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnLoad (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnLoad</B> method lets one remove a specific handler that was added for the load event using this extension's <A HREF="#addOnLoad"><B>addOnLoad</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the load event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnLoad (myOnLoadHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnLoad (myOnLoadHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnLoad ('myOnLoadHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the load event using the core Music Object API's <A HREF="../../instance-methods.html#onLoad"><B>onLoad</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>onLoad (null)</SPAN></NOBR> to clear a handler that has been registered for the load event using the <B>onLoad</B> method has no effect on handlers that have been registered using the <B>addOnLoad</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnLoad (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnLoad ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnLoad"><B>addOnLoad</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onLoad"><B>onLoad</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnMetaEvent"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnMetaEvent</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnMetaEvent</B> instance method lets you remove a specified handler from a Music Object instance's list of meta event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnMetaEvent (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnMetaEvent</B> method lets one remove a specific handler that was added for the meta event using this extension's <A HREF="#addOnMetaEvent"><B>addOnMetaEvent</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the meta event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnMetaEvent (myOnMetaEventHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnMetaEvent (myOnMetaEventHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnMetaEvent ('myOnMetaEventHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the meta event using the core Music Object API's <A HREF="../../instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>onMetaEvent (null)</SPAN></NOBR> to clear a handler that has been registered for the meta event using the <B>onMetaEvent</B> method has no effect on handlers that have been registered using the <B>addOnMetaEvent</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnMetaEvent (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnMetaEvent ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnMetaEvent"><B>addOnMetaEvent</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnOutputVolumeChange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnOutputVolumeChange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnOutputVolumeChange</B> instance method lets you remove a specified handler from a Music Object instance's list of output volume change event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnOutputVolumeChange (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnOutputVolumeChange</B> method lets one remove a specific handler that was added for the output volume change event using this extension's <A HREF="#addOnOutputVolumeChange"><B>addOnOutputVolumeChange</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the output volume change event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnOutputVolumeChange (myOnOutputVolumeChangeHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnOutputVolumeChange (myOnOutputVolumeChangeHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnOutputVolumeChange ('myOnOutputVolumeChangeHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the output volume change event using the core Music Object API's <A HREF="../../instance-methods.html#onOutputVolumeChange"><B>onOutputVolumeChange</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>onOutputVolumeChange (null)</SPAN></NOBR> to clear a handler that has been registered for the output volume change event using the <B>onOutputVolumeChange</B> method has no effect on handlers that have been registered using the <B>addOnOutputVolumeChange</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnOutputVolumeChange (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnOutputVolumeChange ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnOutputVolumeChange"><B>addOnOutputVolumeChange</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onOutputVolumeChange"><B>onOutputVolumeChange</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnPause"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnPause</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnPause</B> instance method lets you remove a specified handler from a Music Object instance's list of pause event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnPause (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnPause</B> method lets one remove a specific handler that was added for the pause event using this extension's <A HREF="#addOnPause"><B>addOnPause</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the pause event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnPause (myOnPauseHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPause (myOnPauseHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPause ('myOnPauseHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the pause event using the core Music Object API's <A HREF="../../instance-methods.html#onPause"><B>onPause</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>onPause (null)</SPAN></NOBR> to clear a handler that has been registered for the pause event using the <B>onPause</B> method has no effect on handlers that have been registered using the <B>addOnPause</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnPause (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnPause ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnPause"><B>addOnPause</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onPause"><B>onPause</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnPlay"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnPlay</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnPlay</B> instance method lets you remove a specified handler from a Music Object instance's list of play event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnPlay (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnPlay</B> method lets one remove a specific handler that was added for the play event using this extension's <A HREF="#addOnPlay"><B>addOnPlay</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the play event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnPlay (myOnPlayHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay (myOnPlayHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnPlay ('myOnPlayHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the play event using the core Music Object API's <A HREF="../../instance-methods.html#onPlay"><B>onPlay</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>onPlay (null)</SPAN></NOBR> to clear a handler that has been registered for the play event using the <B>onPlay</B> method has no effect on handlers that have been registered using the <B>addOnPlay</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnPlay (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnPlay ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnPlay"><B>addOnPlay</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onPlay"><B>onPlay</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnReady"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnReady</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnReady</B> instance method lets you remove a specified handler from a Music Object instance's list of ready event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnReady (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnReady</B> method lets one remove a specific handler that was added for the ready event using this extension's <A HREF="#addOnReady"><B>addOnReady</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the ready event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnReady (myOnReadyHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnReady (myOnReadyHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnReady ('myOnReadyHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the ready event using the core Music Object API's <A HREF="../../instance-methods.html#onReady"><B>onReady</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>onReady (null)</SPAN></NOBR> to clear a handler that has been registered for the ready event using the <B>onReady</B> method has no effect on handlers that have been registered using the <B>addOnReady</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnReady (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnReady ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnReady"><B>addOnReady</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onReady"><B>onReady</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks
+</UL>
+
+<A NAME="removeOnStop"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeOnStop</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Callbacks</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeOnStop</B> instance method lets you remove a specified handler from a Music Object instance's list of stop event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeOnStop (</B> Handler<A HREF="../../parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>removeOnStop</B> method lets one remove a specific handler that was added for the stop event using this extension's <A HREF="#addOnStop"><B>addOnStop</B></A> method or the core Music Object API's <A HREF="../../instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> method.</P>
+
+<P>In order to successfully remove a handler for the stop event that has been added using the methods in this extension, one must correctly specify the handler that was used when originally registering the handler. For instance, in order to remove a handler that was added using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.addOnStop (myOnStopHandler)</SPAN></NOBR>, one should use the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnStop (myOnStopHandler)</SPAN></NOBR>. In this example, using the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.removeOnStop ('myOnStopHandler ()')</SPAN></NOBR> would be incorrect and would not remove the handler, since the original statement that registered the callback handler registered it using the Function type to specify the handler, and not the String type.</P>
+
+<P>For backward compatibility reasons, this method does not affect a handler that has been registered for the stop event using the core Music Object API's <A HREF="../../instance-methods.html#onStop"><B>onStop</B></A> method. Similarly, using the statement <NOBR><SPAN CLASS=sample-code>onStop (null)</SPAN></NOBR> to clear a handler that has been registered for the stop event using the <B>onStop</B> method has no effect on handlers that have been registered using the <B>addOnStop</B> or <B>addCallbackHandler</B> methods.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeOnStop (</B> Handler<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B>removeOnStop ( )</B>
+		<P>When no handler is specified, all handlers that have been added using the <A HREF="#addOnStop"><B>addOnStop</B></A> method will be removed. For backward compatibility reasons, the handler that has been registered using the <A HREF="../../instance-methods.html#onStop"><B>onStop</B></A> method is not affected.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks.
+</UL>
+
+</BODY></HTML>

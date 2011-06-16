@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Sonifying a Navigation Bar (step 4)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+notePlayer = new Music ();
+notePlayer.setMonophonic (2,true);
+notePlayer.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 4: Adding the Click Sounds
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>We have successfully added mouseover sounds to the navbar. The next thing we would like to do is add sounds for when the user clicks on a link on the navbar. This we can do with the &lt;A&gt; tag's ONCLICK event handler, which is supported in all major browsers. Much like the ONMOUSEOVER event handler, the ONCLICK event handler allows us to execute some JavaScript code when a click event occurs - ie. when the user clicks on a link.</P>
+
+<P>The principle is much the same as for the ONMOUSEOVER event handler, so why not just try it out and then take a look at the HTML source code listed further below...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD>
+			<A
+				HREF="buckingham1.html"
+				ONCLICK="notePlayer.playNote (2,0,213,'C4',127,1000); return false"
+				ONMOUSEOVER="notePlayer.playNote (2,0,97,'C4',127,1000)"
+			>
+			<IMG SRC="../../../images/example-nav-prev.gif" WIDTH=96 HEIGHT=36 ALT="PREV" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham-home.html"
+				ONCLICK="notePlayer.playNote (2,0,213,'C4',127,1000); return false"
+				ONMOUSEOVER="notePlayer.playNote (2,0,97,'D4',127,1000)"
+			>
+			<IMG SRC="../../../images/example-nav-home.gif" WIDTH=302 HEIGHT=36 ALT="HOME" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham3.html"
+				ONCLICK="notePlayer.playNote (2,0,213,'C4',127,1000); return false"
+				ONMOUSEOVER="notePlayer.playNote (2,0,97,'E4',127,1000)"
+			>
+			<IMG SRC="../../../images/example-nav-next.gif" WIDTH=96 HEIGHT=36 ALT="NEXT" BORDER=0 HSPACE=0></A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>For clicking, we will use program number 213 of bank 0, which is actually the 'Castanets' sound in the General MIDI percussion set. While MIDI composers cannot select program numbers above 127 in their MIDI and RMF files, JavaScript authors can use the program number range 128 to 255 to play all the percussion sounds from a given bank's percussion set. In this case we're using the GM bank (bank number 0) and so, program numbers 128 to 255 of this bank correspond to the GM percussion set.</P>
+
+<P>Notice how we've used the same note pitch for the click sound of each of the links on the navbar. Since clicking on a link is a decisive act, the user would probably not expect that clicking would produce a different pitch for specific links - it may seem counterintuitive to the user. However, there's no law that says you can't make clicks produce different musical notes.</P>
+
+<P>Take a look at the source...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+<SPAN CLASS=sample-code-highlighted>notePlayer.setMonophonic (1,true);</SPAN>
+notePlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham1.html"
+            ONMOUSEOVER="notePlayer.playNote (1,0,97,'C4',127,1000)"
+            <SPAN CLASS=sample-code-highlighted>ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000)"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-prev.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="PREV"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham-home.html"
+            ONMOUSEOVER="notePlayer.playNote (1,0,97,'D4',127,1000)"
+            <SPAN CLASS=sample-code-highlighted>ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000)"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-home.gif"
+            WIDTH=302
+            HEIGHT=36
+            ALT="HOME"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham3.html"
+            ONMOUSEOVER="notePlayer.playNote (1,0,97,'E4',127,1000)"
+            <SPAN CLASS=sample-code-highlighted>ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000)"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-next.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="NEXT"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a subtle yet notable enhancement that has been made in this step. Notice how we've added the statement <B>notePlayer.setMonophonic (1,true)</B> right after defining our Music Object instance 'notePlayer'. This statement sets MIDI channel number 1 into monophonic mode, allowing only one note to play on this channel at any given time. MIDI Channel 1 is the channel that we're using to play notes in our example. Setting it to monophonic will help reduce the audio 'bleed' when the user mouses quickly over the links, since previously playing notes will be stopped when any new note is played. Remember, each mouseover note has a duration of 1 second and a user could easily mouse over the links quickly enough to cause three notes to be playing at the same time. Also, another beneficial side-effect of the monophonic mode is that any mouseover sound that is playing will be stopped as soon as the click note is played.</P>
+
+<P>Because we're using the General MIDI 'Soundtrack' instrument, a sound which has a natural fadeout/decay even when stopped, there will still be a pleasant 'softening' of the user's mouseover actions.</P>
+
+</BODY></HTML>

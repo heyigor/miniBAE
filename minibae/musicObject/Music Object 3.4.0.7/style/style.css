@@ -1,0 +1,508 @@
+/*** General ***/
+
+	/*** Common Properties ***/
+
+	BODY {
+		background: #FFF;
+		color: #000;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+	}
+	P, BLOCKQUOTE, TD, OL {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+	}
+	UL {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		list-style-type: disc;
+	}
+
+	/*** Link Properties ***/
+
+	A {
+		color: #036;
+		text-decoration: none;
+	}
+	A:hover {
+		text-decoration: underline;
+	}
+	A.obsolete {
+		color: #F00;
+	}
+
+	/*** Inlined Values ***/
+
+	.value {
+		color: #800;
+		font-weight: bold;
+	}
+	/*** Note Blocks ***/
+
+	.note, .note P {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+	}
+
+	/*** Superscripts ***/
+
+	SUP.r {
+		font-size: 12px;
+	}
+	SUP.tm {
+		font-size: 10px;
+	}
+
+/*** Document Titles ***/
+
+	/*** Big Titles ***/
+
+	TD.big-title {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: left;
+		background: #FFF;
+		color: #000;
+	}
+	TD.big-title HR {
+		height: 3px;
+		border-top: solid #666;
+	}
+	TABLE.big-title-border {
+		background: #FFF;
+	}
+
+	/*** Standard Titles ***/
+
+	TD.title {
+		color: #000;
+		background: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: left;
+	}
+	TD.title HR {
+		height: 1px;
+		border-top: solid #666;
+	}
+
+	/*** General Title Formatting ***/
+
+	.title-annotation {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+		font-weight: normal;
+	}
+
+/*** Section Headings ***/
+
+	/*** Main Section Headings ***/
+
+	TD.section {
+		color: #FFF;
+		background: #036;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 14px;
+		font-weight: bold;
+	}
+
+	/*** Subsection Headings ***/
+
+	.subsection {
+		color: #000;
+		background: transparent;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+	}
+
+/*** Contents Lists ***/
+
+	TD.contents-frame {
+		color: #000;
+		background: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.contents-list A {
+		text-decoration: none;
+	}
+	.contents-list A:hover {
+		color: #036;
+		background: transparent;
+		text-decoration: underline;
+	}
+	.contents-list UL {
+		list-style-type: disc;
+	}
+
+/*** Contents Tables ***/
+
+	/*** Headers ***/
+
+	TD.contents-table-column-header {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+		background: #036;
+		text-align: center;
+	}
+
+	/*** Sections ***/
+
+	TD.contents-table-section, TD.contents-table-section A {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+		background: #669;
+		text-align: center;
+	}
+	TD.contents-table-section A:hover {
+		text-decoration: underline;
+	}
+
+	/*** Item Names ***/
+
+	TD.contents-table-item-name {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 13px;
+		background: #CCC;
+		text-align: left;
+		vertical-align: top;
+	}
+	TD.contents-table-item-name A {
+		text-decoration: none;
+	}
+
+	/*** Item Descriptions ***/
+
+	TD.contents-table-item-desc {
+		color: #000;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 13px;
+		background: #EEE;
+		text-align: left;
+		vertical-align: top;
+	}
+
+	/*** General ***/
+
+	TABLE.contents-table-spacer-color {
+		background: #666;
+	}
+	TABLE.contents-table-border-color {
+		background: #FFF;
+	}
+
+/*** Feature Reference Sections ***/
+
+	/*** Headers ***/
+
+	TD.reference-header {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+		color: #000;
+		background: #BBB;
+	}
+	TD.reference-header-line {
+		background: #DDD;
+	}
+
+	/*** Methodizer Links ***/
+
+	TD.reference-header A {
+		color: #FFF;
+		background: #248;
+		text-decoration: none;
+	}
+	TD.reference-header A:hover {
+		text-decoration: underline;
+	}
+
+	/*** Special Values Lists ***/
+
+	UL.reference-special-values {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+		list-style-type: disc;
+	}
+	UL.reference-special-values P {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+	}
+
+	/*** Variations Lists ***/
+
+	UL.reference-variations {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+		list-style-type: disc;
+	}
+	UL.reference-variations P {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+	}
+
+	/*** Notes Lists ***/
+
+	UL.reference-notes {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+		list-style-type: disc;
+	}
+	UL.reference-notes P {
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+	}
+
+	/*** Summary Tables ***/
+
+		/*** Item Names ***/
+
+		TD.summary-table-item-name {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 11px;
+			font-weight: normal;
+			color: #FFF;
+			background: #036;
+		}
+
+		/*** Item Values ***/
+
+		TD.summary-table-item-value {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 11px;
+			color: #000;
+			background: #FFF;
+		}
+		TD.summary-table-item-value A {
+			text-decoration: none;
+		}
+		TD.summary-table-item-value A:hover {
+			color: #036;
+			background: transparent;
+			text-decoration: underline;
+		}
+
+		/*** General ***/
+
+		TD.summary-table-border-color {
+			background: #888;
+		}
+
+/*** Sample Code ***/
+
+	/*** Sample Code Blocks ***/
+
+	TD.sample-code {
+		color: #000;
+		background: #DDD;
+		font-family: "Courier New", Courier, mono;
+		font-size: 12px;
+		font-weight: normal;
+	}
+	TD.sample-code-header {
+		color: #FFF;
+		background: #266;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+	}
+	TD.sample-code-header-good {
+		color: #FFF;
+		background: #0A0;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+	}
+	TD.sample-code-header-bad {
+		color: #FFF;
+		background: #A00;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+	}
+	TD.copy-paste-callout {
+		color: #FFF;
+		background: #036;
+	}
+	TD.copy-paste-callout A {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+		text-decoration: none;
+	}
+	TD.copy-paste-callout A:hover {
+		text-decoration: underline;
+	}
+
+	/*** Inlined Sample Code ***/
+
+	.sample-code {
+		color: #000;
+		background: #FF8;
+		font-family: "Courier New", Courier, mono;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.sample-code-highlighted {
+		color: #036;
+		background: #FF8;
+		font-family: "Courier New", Courier, mono;
+		font-size: 12px;
+		font-weight: bold;
+	}
+
+/*** Sample Code Example: Explanation Page ***/
+
+	/*** Headings ***/
+
+	.sample-code-heading {
+		color: #000;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 21px;
+		font-weight: bold;
+	}
+
+	/*** Item Names ***/
+
+	TD.sample-code-item-name {
+		color: #555;
+		background: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 19px;
+		text-align: right;
+		vertical-align: top;
+	}
+
+	/*** Item Values ***/
+
+	TD.sample-code-item-value, TD.sample-code-item-value P {
+		color: #000;
+		background: #DDD;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 16px;
+		vertical-align: top;
+	}
+
+	/*** Start Link ***/
+
+	A.sample-code-start {
+		color: #484;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 23px;
+		font-style: italic;
+		text-decoration: none;
+		text-align: right;
+	}
+
+/*** Data Tables ***/
+
+	/*** Headers ***/
+
+	TD.data-table-column-header {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+		background: #036;
+		text-align: center;
+	}
+	TD.data-table-column-subheader {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 13px;
+		background: #669;
+		text-align: center;
+	}
+	TD.data-table-column-header-good {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+		background: #0A0;
+		text-align: center;
+	}
+	TD.data-table-column-header-bad {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+		background: #A00;
+		text-align: center;
+	}
+
+	/*** Sections ***/
+
+	TD.data-table-section {
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 15px;
+		font-weight: bold;
+		background: #669;
+		text-align: center;
+	}
+
+	/*** Items ***/
+
+	TD.data-table-item, TD.data-table-item P, TD.data-table-item UL {
+		background: #000;
+		color: #FFF;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 13px;
+		vertical-align: top;
+	}
+	TD.data-table-item-mini {
+		background: #000;
+		color: #000;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+		vertical-align: top;
+	}
+	TD.data-table-item-dimmed {
+		background: 444;
+		color: #CCC;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 13px;
+		vertical-align: top;
+	}
+	TD.data-table-item-highlighted {
+		background: BBB;
+		color: #000;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 13px;
+		font-weight: bold;
+		vertical-align: top;
+	}
+	TD.data-table-item-name-small {
+		color: #000;
+		font-family: Arial, Helvetica, Verdana;
+		font-size: 12px;
+		font-weight: bold;
+		text-align: right;
+	}
+
+	/*** General ***/
+
+	TABLE.data-table-border-color {
+		background: #FFF;
+	}
+	TABLE.data-table-spacer-color {
+		background: #666;
+	}
+	TD.data-table-separator {
+		background: #999;
+	}
+
+/*** Index & Glossary ***/
+
+	.alphabet-section {
+		color: #FFF;
+		background: #669;
+		font-family: "Courier New", Courier, mono;
+		font-size: 27px;
+		font-weight: bold;
+	}

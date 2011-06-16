@@ -1,0 +1,987 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Wizards</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Wizards
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>This extension adds methods that let you easily sonify all form elements and links on a page in a single step, without having to add JavaScript code to all the elements you wish to sonify.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-wizards.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-wizards.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-wizards.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-wizards.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#"></A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addLinkLabel">Music.addLinkLabel</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you add custom labels to links, so that groups of links can be specified when sonifying links.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.sonifyFormsWithGroovoids">Music.sonifyFormsWithGroovoids</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you easily sonify all of the form elements on an HTML page in one step, using Groovoids.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.sonifyFormsWithHandlers">Music.sonifyFormsWithHandlers</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you easily sonify all of the form elements on an HTML page in one step, using your own custom event handlers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.sonifyLinksWithGroovoids">Music.sonifyLinksWithGroovoids</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you easily sonify all (or a subset) of the links on an HTML page in one step, using Groovoids.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.sonifyLinksWithHandlers">Music.sonifyLinksWithHandlers</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you easily sonify all (or a subset) of the links on an HTML page in one step, using your own custom event handlers.</TD>
+</TR>
+
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-properties">Instance Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#"></A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.noManualHandlers">Music.noManualHandlers</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean indicating if the HTML elements to be automatically sonified have no manually coded event handlers.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.addLinkLabel"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addLinkLabel</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Wizards</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addLinkLabel</B> static method lets you attach labels to links so that groups of links can be specified when using the <A HREF="#Music.sonifyLinksWithGroovoids"><B>Music.sonifyLinksWithGroovoids</B></A> and <A HREF="#Music.sonifyLinksWithHandlers"><B>Music.sonifyLinksWithHandlers</B></A> static methods.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addLinkLabel (</B> LinkLabelSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>A group of links is identified by specifying the labels of the start and end links in a series of links. Optionally, a label prefix can be used to identify only certain links from the group of links specified by the start and end link labels. A label can be added to a link by adding a call to the <B>Music.addLinkLabel</B> method to the link's <B>ONCLICK</B>, <B>ONMOUSEOVER</B>, or <B>ONMOUSEOUT</B> event handlers. Multiple labels can be added to the same link by adding multiple calls to the <B>Music.addLinkLabel</B> method to the link's event handlers.</P>
+
+<P>In the example below, the link labels <NOBR>"<B>start chunky links</B>"</NOBR> and <NOBR>"<B>end chunky links</B>"</NOBR> can be used to identify the group of links containing the links "Link 05", "Link 06", "Link 07", "Link 08", "Link 09", "Link 10", and "Link 11".</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;A HREF="link01.html"&gt;Link 01&lt;/A&gt;
+&lt;A HREF="link02.html"&gt;Link 02&lt;/A&gt;
+&lt;A HREF="link03.html"&gt;Link 03&lt;/A&gt;
+&lt;A HREF="link04.html"&gt;Link 04&lt;/A&gt;
+&lt;A HREF="link05.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('start chunky links')"</SPAN>&gt;Link 05&lt;/A&gt;
+&lt;A HREF="link06.html"&gt;Link 06&lt;/A&gt;
+&lt;A HREF="link07.html"&gt;Link 07&lt;/A&gt;
+&lt;A HREF="link08.html"&gt;Link 08&lt;/A&gt;
+&lt;A HREF="link09.html"&gt;Link 09&lt;/A&gt;
+&lt;A HREF="link10.html"&gt;Link 10&lt;/A&gt;
+&lt;A HREF="link11.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('end chunky links')"</SPAN>&gt;Link 11&lt;/A&gt;
+&lt;A HREF="link12.html"&gt;Link 12&lt;/A&gt;
+&lt;A HREF="link13.html"&gt;Link 13&lt;/A&gt;
+&lt;A HREF="link14.html"&gt;Link 14&lt;/A&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Overlapping groups of links can also be specified using link labels. The link labels in the following example could be used to specify two overlapping link groups. The first group can be specified using the link labels "start mouseovers" and "end mouseovers", and would contain the links "Link 02", "Link 03", "Link 04", "Link 05", "Link 06", "Link 07", and "Link 08". The second group can be specified using the link labels "start clicks" and "end clicks", and would contain the links "Link 05", "Link 06", "Link 07", "Link 08", "Link 09", "Link 10", "Link 11", and "Link 12".</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;A HREF="link01.html"&gt;Link 01&lt;/A&gt;
+&lt;A HREF="link02.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('start mouseovers')"</SPAN>&gt;Link 02&lt;/A&gt;
+&lt;A HREF="link03.html"&gt;Link 03&lt;/A&gt;
+&lt;A HREF="link04.html"&gt;Link 04&lt;/A&gt;
+&lt;A HREF="link05.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('start clicks')"</SPAN>&gt;Link 05&lt;/A&gt;
+&lt;A HREF="link06.html"&gt;Link 06&lt;/A&gt;
+&lt;A HREF="link07.html"&gt;Link 07&lt;/A&gt;
+&lt;A HREF="link08.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('end mouseovers')"</SPAN>&gt;Link 08&lt;/A&gt;
+&lt;A HREF="link09.html"&gt;Link 09&lt;/A&gt;
+&lt;A HREF="link10.html"&gt;Link 10&lt;/A&gt;
+&lt;A HREF="link11.html"&gt;Link 11&lt;/A&gt;
+&lt;A HREF="link12.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('end clicks')"</SPAN>&gt;Link 12&lt;/A&gt;
+&lt;A HREF="link13.html"&gt;Link 13&lt;/A&gt;
+&lt;A HREF="link14.html"&gt;Link 14&lt;/A&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now, if either the <B>Music.sonifyLinksWithGroovoids</B> or <B>Music.sonifyLinksWithHandlers</B> method was used to add a sonification behavior to the <B>ONMOUSEOVER</B> event of all the links in the group specified by the "start mouseovers" and "end mouseovers" labels, and if either the <B>Music.sonifyLinksWithGroovoids</B> or <B>Music.sonifyLinksWithHandlers</B> method was used to add a sonification behavior to the <B>ONCLICK</B> event of all the links in the group specified by the "start click" and "end click" labels, then the links from "Link 05" to "Link 08" would have sonification behaviors for both the ONMOUSEOVER and ONCLICK events, while the links from "Link 02" to "Link 04" would have a sonification behavior for just the ONMOUSEOVER event, and the links from "Link 09" to "Link 12" would have a sonification behavior for just the ONCLICK event. The remaining links - "Link 01", "Link 13", and "Link 14" - would have no sonification behaviors for any events.</P>
+
+<P>In the next example, the link label prefix <NOBR>"<B>chunky link</B>"</NOBR> can be used to identify the group of links containing the links "Link 02", "Link 05", "Link 08", "Link 11", and "Link 13".</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;A HREF="link01.html"&gt;Link 01&lt;/A&gt;
+&lt;A HREF="link02.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('chunky link')"</SPAN>&gt;Link 02&lt;/A&gt;
+&lt;A HREF="link03.html"&gt;Link 03&lt;/A&gt;
+&lt;A HREF="link04.html"&gt;Link 04&lt;/A&gt;
+&lt;A HREF="link05.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('chunky link')"</SPAN>&gt;Link 05&lt;/A&gt;
+&lt;A HREF="link06.html"&gt;Link 06&lt;/A&gt;
+&lt;A HREF="link07.html"&gt;Link 07&lt;/A&gt;
+&lt;A HREF="link08.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('chunky link')"</SPAN>&gt;Link 08&lt;/A&gt;
+&lt;A HREF="link09.html"&gt;Link 09&lt;/A&gt;
+&lt;A HREF="link10.html"&gt;Link 10&lt;/A&gt;
+&lt;A HREF="link11.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('chunky link')"</SPAN>&gt;Link 11&lt;/A&gt;
+&lt;A HREF="link12.html"&gt;Link 12&lt;/A&gt;
+&lt;A HREF="link13.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('chunky link')"</SPAN>&gt;Link 13&lt;/A&gt;
+&lt;A HREF="link14.html"&gt;Link 14&lt;/A&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<!--
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI>
+		<P></P>
+</UL>
+
+-->
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+
+-->
+
+<A NAME="Music.sonifyFormsWithGroovoids"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.sonifyFormsWithGroovoids</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Wizards</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.sonifyFormsWithGroovoids</B> static method lets you easily sonify all of the form elements on an HTML page using Groovoids.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.sonifyFormsWithGroovoids (</B><BR>
+			&nbsp;&nbsp;&nbsp; TargetMusicObjectOBJ <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; CheckboxCheck<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; CheckboxUncheck<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; RadioButtonClick<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ListFocus<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ListChoose<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ListBlur<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MultilistFocus<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MultilistChoose<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MultilistBlur<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; TextboxFocus<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; TextboxBlur<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ButtonClick<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FormReset<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FormSubmit<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; UpdateTypeSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowHandleOBJ<BR>
+			<B>)</B><BR>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The various parameters of this method (described in further detail below) let you choose which Groovoids are to play for the various form element events.</P>
+
+<IMG SRC="../../../style/images/subheading-parameters.gif" WIDTH=122 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="PARAMETERS"><BR>
+<UL>
+	<LI><B>TargetMusicObjectOBJ</B> - specifies which Music Object instance is to be used to play the Groovoids for the various sonified form elements
+		<P></P>
+	<LI><B>CheckboxCheckGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a checkbox is checked by the user
+		<P></P>
+	<LI><B>CheckboxUncheckGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a checkbox is unchecked by the user
+		<P></P>
+	<LI><B>RadioButtonClickGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when the user clicks on a radio button
+		<P></P>
+	<LI><B>ListFocusGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when the user focuses a single selection listbox
+		<P></P>
+	<LI><B>ListChooseGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when the user chooses an option from a single selection listbox
+		<P></P>
+	<LI><B>ListBlurGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a single selection listbox loses its focus
+		<P></P>
+	<LI><B>MultilistFocusGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when the user focuses a multiple selection listbox
+		<P></P>
+	<LI><B>MultilistChooseGroovoidNameSTR</B> - lets you specify the Groovoid that is to play each time the user selects an option in a multiple selection listbox
+		<P></P>
+	<LI><B>MultilistBlurGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a multiple selection listbox loses its focus
+		<P></P>
+	<LI><B>TextboxFocusGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when the user focuses a textbox and begins entering data
+		<P></P>
+	<LI><B>TextboxBlurGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a textbox loses its focus
+		<P></P>
+	<LI><B>ButtonClickGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when any form button - other than a reset button or submit button - is clicked
+		<P></P>
+	<LI><B>FormResetGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a form's reset button is clicked
+		<P></P>
+	<LI><B>FormSubmitGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a form's submit button is clicked
+		<P></P>
+	<LI><B>UpdateTypeSTR</B> - lets you specify the way in which the new sonification scheme should affect any sonification scheme that is already set up for the form elements that will be sonified by this method. There are four possible values for this parameter...
+		<P></P>
+			<UL>
+				<LI>"<SPAN CLASS=value>add to</SPAN>" - means that the effect of this method will be cumulative, so that the sonification scheme specified by this method will be added to any existing sonification scheme.
+					<P></P>
+				<LI>"<SPAN CLASS=value>replace</SPAN>" - means that the sonification scheme specified by this method will completely replace any sonification scheme already set up for the form elements. If there are events in the new sonification scheme that do not have any Groovoid specified, then the previous sonification behavior for these events of the form elements will be erased. It is possible to use this method to completely erase the sonification of form elements, simply by specifying empty strings for all the GroovoidNameSTR-type parameters, and by also specifying the "<SPAN CLASS=value>replace</SPAN>" value for the <B>UpdateTypeSTR</B> parameter.
+					<P></P>
+				<LI>"<SPAN CLASS=value>merge with</SPAN>" - means that the sonification scheme specified by this method will replace the existing sonification scheme set up for form elements, but only for those events for which a Groovoid is specified. As an example, if this method were used with the value <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was a Groovoid specified for only the <B>TextboxFocusGroovoidNameSTR</B> parameter, then this method would overwrite the sonification behavior for the onFocus events of all the textboxes but would not overwrite the sonification behaviors for any of the other form element events. So, unlike the <NOBR>"<SPAN CLASS=value>replace</SPAN>"</NOBR> value, the <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> value will not allow you to use this method to completely erase the sonification scheme for form elements.
+					<P></P>
+				<LI>"<SPAN CLASS=value>fill in</SPAN>" - means that the sonification scheme specified by this method will fill in the "holes" in the existing sonification scheme set up for form elements. For example, if this method were used with the value <NOBR>"<SPAN CLASS=value>fill in</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was a Groovoid specified for the <B>TextboxFocusGroovoidNameSTR</B> parameter, then this method will add the specified Groovoid to the onFocus events for all of the textboxes that don't already have a sonification behavior set up for the onFocus event.
+					<P></P>
+			</UL>
+		<P></P>
+	<LI><B>WindowHandleOBJ</B> - lets you specify the window or frame that contains the form elements you would like to sonify. This allows you to use this method to sonify form elements that are in a different window or frame than the window or frame that contains the music and resources and sonification code. As an example, a window that is sonified and has sourced in the "music-object.js" and "music-object-x-wizards.js" files can spawn a new window and sonify the form elements in that window using the <B>Music.sonifyFormsWithGroovoids</B> method, simply by using the <B>WindowHandleOBJ</B> parameter to specify a reference to the spawned window that is to be sonified.
+		<P></P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>UpdateTypeSTR</B> parameter, then <NOBR>"<SPAN CLASS=value>add to</SPAN>"</NOBR> will be used as the default update type.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.sonifyFormsWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> CheckboxCheckGroovoidNameSTR <B>,</B> CheckboxUncheckGroovoidNameSTR <B>,</B> RadioButtonClickGroovoidNameSTR <B>,</B> ListFocusGroovoidNameSTR <B>,</B> ListChooseGroovoidNameSTR <B>,</B> ListBlurGroovoidNameSTR <B>,</B> MultilistFocusGroovoidNameSTR <B>,</B> MultilistChooseGroovoidNameSTR <B>,</B> MultilistBlurGroovoidNameSTR <B>,</B> TextboxFocusGroovoidNameSTR <B>,</B> TextboxBlurGroovoidNameSTR <B>,</B> ButtonClickGroovoidNameSTR <B>,</B> FormResetGroovoidNameSTR <B>,</B> FormSubmitGroovoidNameSTR <B>,</B> UpdateTypeSTR <B>)</B>
+		<P>When no <B>WindowHandleOBJ</B> parameter is specified, then the form elements inside the window in which this method is called will be sonified. This is the most common way in which form elements will be sonified using this method (ie. just the form elements inside the document in which the sonification code resides).</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyFormsWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> CheckboxCheckGroovoidNameSTR <B>,</B> CheckboxUncheckGroovoidNameSTR <B>,</B> RadioButtonClickGroovoidNameSTR <B>,</B> ListFocusGroovoidNameSTR <B>,</B> ListChooseGroovoidNameSTR <B>,</B> ListBlurGroovoidNameSTR <B>,</B> MultilistFocusGroovoidNameSTR <B>,</B> MultilistChooseGroovoidNameSTR <B>,</B> MultilistBlurGroovoidNameSTR <B>,</B> TextboxFocusGroovoidNameSTR <B>,</B> TextboxBlurGroovoidNameSTR <B>,</B> ButtonClickGroovoidNameSTR <B>,</B> FormResetGroovoidNameSTR <B>,</B> FormSubmitGroovoidNameSTR <B>)</B>
+		<P>When there is also no <B>UpdateTypeSTR</B> parameter specified, then the string value "<SPAN CLASS=value>add to</SPAN>" will be used as the default for this parameter. In the most typical use of this method, it will not be necessary to specify the <B>UpdateTypeSTR</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>for examples using the <B>Music.sonifyFormsWithGroovoids</B> method, see the <A HREF="../../../tutorials/sonifying-a-form/index.html?steps/wizards-groovoids.html">Sonifying a Form</A> tutorial...
+	<LI>it is safest to only use this method after a document has finished loading in
+</UL>
+
+<A NAME="Music.sonifyFormsWithHandlers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.sonifyFormsWithHandlers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Wizards</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.sonifyFormsWithHandlers</B> static method lets you easily sonify all of the form elements on an HTML page using handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.sonifyFormsWithHandlers (</B><BR>
+			&nbsp;&nbsp;&nbsp; CheckboxCheck<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; CheckboxUncheck<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; RadioButtonClick<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ListFocus<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ListChoose<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ListBlur<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MultilistFocus<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MultilistChoose<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MultilistBlur<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; TextboxFocus<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; TextboxBlur<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ButtonClick<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FormReset<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FormSubmit<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; UpdateTypeSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowHandleOBJ<BR>
+			<B>)</B><BR>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The various parameters of this method (described in further detail below) let you specify the JavaScript code that is to be executed for the various form element events.</P>
+
+<IMG SRC="../../../style/images/subheading-parameters.gif" WIDTH=122 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="PARAMETERS"><BR>
+<UL>
+	<LI><B>CheckboxCheckJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when a checkbox is checked by the user
+		<P></P>
+	<LI><B>CheckboxUncheckJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when a checkbox is unchecked by the user
+		<P></P>
+	<LI><B>RadioButtonClickJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when the user clicks on a radio button
+		<P></P>
+	<LI><B>ListFocusJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when the user focuses a single selection listbox
+		<P></P>
+	<LI><B>ListChooseJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when the user chooses an option from a single selection listbox
+		<P></P>
+	<LI><B>ListBlurJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when a single selection listbox loses its focus
+		<P></P>
+	<LI><B>MultilistFocusJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when the user focuses a multiple selection listbox
+		<P></P>
+	<LI><B>MultilistChooseJavaScriptSTR</B> - lets you specify the JavaScript code to be executed each time the user selects an option in a multiple selection listbox
+		<P></P>
+	<LI><B>MultilistBlurJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when a multiple selection listbox loses its focus
+		<P></P>
+	<LI><B>TextboxFocusJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when the user focuses a textbox and begins entering data
+		<P></P>
+	<LI><B>TextboxBlurJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when a textbox loses its focus
+		<P></P>
+	<LI><B>ButtonClickJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when any form button - other than a reset button or submit button - is clicked
+		<P></P>
+	<LI><B>FormResetJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when a form's reset button is clicked
+		<P></P>
+	<LI><B>FormSubmitJavaScriptSTR</B> - lets you specify the JavaScript code to be executed when a form's submit button is clicked
+		<P></P>
+	<LI><B>UpdateTypeSTR</B> - lets you specify the way in which the new sonification scheme should affect any sonification scheme that is already set up for the form elements that will be sonified by this method. There are four possible values for this parameter...
+		<P></P>
+			<UL>
+				<LI>"<SPAN CLASS=value>add to</SPAN>" - means that the effect of this method will be cumulative, so that the sonification scheme specified by this method will be added to any existing sonification scheme.
+					<P></P>
+				<LI>"<SPAN CLASS=value>replace</SPAN>" - means that the sonification scheme specified by this method will completely replace any sonification scheme already set up for the form elements. If there are events in the new sonification scheme that do not have any JavaScript code specified, then the previous sonification behavior for these events of the form elements will be erased. It is possible to use this method to completely erase the sonification of form elements, simply by specifying empty strings for all the JavaScriptSTR-type parameters, and by also specifying the "<SPAN CLASS=value>replace</SPAN>" value for the <B>UpdateTypeSTR</B> parameter.
+					<P></P>
+				<LI>"<SPAN CLASS=value>merge with</SPAN>" - means that the sonification scheme specified by this method will replace the existing sonification scheme set up for form elements, but only for those events for which JavaScript code is specified. As an example, if this method were used with the value <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was JavaScript code specified for only the <B>TextboxFocusJavaScriptSTR</B> parameter, then this method would overwrite the sonification behavior for the onFocus events of all the textboxes but would not overwrite the sonification behaviors for any of the other form element events. So, unlike the <NOBR>"<SPAN CLASS=value>replace</SPAN>"</NOBR> value, the <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> value will not allow you to use this method to completely erase the sonification scheme for form elements.
+					<P></P>
+				<LI>"<SPAN CLASS=value>fill in</SPAN>" - means that the sonification scheme specified by this method will fill in the "holes" in the existing sonification scheme set up for form elements. For example, if this method were used with the value <NOBR>"<SPAN CLASS=value>fill in</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was JavaScript code specified for the <B>TextboxFocusJavaScriptSTR</B> parameter, then this method will add the specified JavaScript code to the onFocus events for all of the textboxes that don't already have a sonification behavior set up for the onFocus event.
+					<P></P>
+			</UL>
+		<P>
+	<LI><B>WindowHandleOBJ</B> - lets you specify the window or frame that contains the form elements you would like to sonify. This allows you to use this method to sonify form elements that are in a different window or frame than the window or frame that contains the music and resources and sonification code. As an example, a window that is sonified and has sourced in the "music-object.js" and "music-object-x-wizards.js" files can spawn a new window and sonify the form elements in that window using the <B>Music.sonifyFormsWithGroovoids</B> method, simply by using the <B>WindowHandleOBJ</B> parameter to specify a reference to the spawned window that is to be sonified.
+		<P></P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>UpdateTypeSTR</B> parameter, then <NOBR>"<SPAN CLASS=value>add to</SPAN>"</NOBR> will be used as the default update type.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.sonifyFormsWithHandlers (</B> CheckboxCheckJavaScriptSTR <B>,</B> CheckboxUncheckJavaScriptSTR <B>,</B> RadioButtonClickJavaScriptSTR <B>,</B> ListFocusJavaScriptSTR <B>,</B> ListChooseJavaScriptSTR <B>,</B> ListBlurJavaScriptSTR <B>,</B> MultilistFocusJavaScriptSTR <B>,</B> MultilistChooseJavaScriptSTR <B>,</B> MultilistBlurJavaScriptSTR <B>,</B> TextboxFocusJavaScriptSTR <B>,</B> TextboxBlurJavaScriptSTR <B>,</B> ButtonClickJavaScriptSTR <B>,</B> FormResetJavaScriptSTR <B>,</B> FormSubmitJavaScriptSTR <B>,</B> UpdateTypeSTR <B>)</B>
+		<P>When no <B>WindowHandleOBJ</B> parameter is specified, then the form elements inside the window in which this method is called will be sonified. This is the most common way in which form elements will be sonified using this method (ie. just the form elements inside the document in which the sonification code resides).</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyFormsWithHandlers (</B> CheckboxCheckJavaScriptSTR <B>,</B> CheckboxUncheckJavaScriptSTR <B>,</B> RadioButtonClickJavaScriptSTR <B>,</B> ListFocusJavaScriptSTR <B>,</B> ListChooseJavaScriptSTR <B>,</B> ListBlurJavaScriptSTR <B>,</B> MultilistFocusJavaScriptSTR <B>,</B> MultilistChooseJavaScriptSTR <B>,</B> MultilistBlurJavaScriptSTR <B>,</B> TextboxFocusJavaScriptSTR <B>,</B> TextboxBlurJavaScriptSTR <B>,</B> ButtonClickJavaScriptSTR <B>,</B> FormResetJavaScriptSTR <B>,</B> FormSubmitJavaScriptSTR <B>)</B>
+		<P>When there is also no <B>UpdateTypeSTR</B> parameter specified, then the string value "<SPAN CLASS=value>add to</SPAN>" will be used as the default for this parameter. In the most typical use of this method, it will not be necessary to specify the <B>UpdateTypeSTR</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>for examples using the <B>Music.sonifyFormsWithGroovoids</B> method, see the <A HREF="../../../tutorials/sonifying-a-form/index.html?steps/wizards-handlers.html">Sonifying a Form</A> tutorial...
+	<LI>it is safest to only use this method after a document has finished loading in
+</UL>
+
+<A NAME="Music.sonifyLinksWithGroovoids"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.sonifyLinksWithGroovoids</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Wizards</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.sonifyLinksWithGroovoids</B> static method lets you easily sonify all (or a subset) of the links on an HTML page using Groovoids.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.sonifyLinksWithGroovoids (</B><BR>
+			&nbsp;&nbsp;&nbsp; TargetMusicObjectOBJ <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkClick<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkOver<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkOut<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkHover<A HREF="../../parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkHoverDelayMsINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; StartLinkLabelSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; EndLinkLabelSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkLabelPrefixSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; UpdateTypeSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowHandleOBJ<BR>
+			<B>)</B><BR>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The various parameters of this method (described in further detail below) let you choose which Groovoids are to play for the various link events, and also which links are to be sonified. Using the <B>StartLinkLabelSTR</B>, <B>EndLinkLabelSTR</B>, and <B>LinkLabelPrefixSTR</B> parameters, it is possible to identify exact groups of links that are to be sonified using this method. The method can be used several times to sonify different groups of links in different ways.</P>
+
+<IMG SRC="../../../style/images/subheading-parameters.gif" WIDTH=122 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="PARAMETERS"><BR>
+<UL>
+	<LI><B>TargetMusicObjectOBJ</B> - specifies which Music Object instance is to be used to play the Groovoids for the various sonified link events
+		<P></P>
+	<LI><B>LinkClickGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a click event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkOverGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when an onMouseOver event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkOutGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when an onMouseOut event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkHoverGroovoidNameSTR</B> - lets you specify the Groovoid that is to play when a "hover" event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkHoverDelayMsINT</B> - lets you specify how long (measured in milliseconds) the user should remain over a link before a hover event is triggered for that link
+		<P></P>
+	<LI><B>StartLinkLabelSTR</B> - lets you specify the first link in the group of links that is to be sonified. For information on labeling links, see the <A HREF="#Music.addLinkLabel"><B>Music.addLinkLabel</B></A> method.
+		<P></P>
+	<LI><B>EndLinkLabelSTR</B> - lets you specify the last link in the group of links that is to be sonified. For information on labeling links, see the <A HREF="#Music.addLinkLabel"><B>Music.addLinkLabel</B></A> method.
+		<P></P>
+	<LI><B>LinkLabelPrefixSTR</B> - lets you specify a label prefix that is used to select only certain links out of the group of links specified by the <B>StartLinkLabelSTR</B> and <B>EndLinkLabelSTR</B> parameters. For information on labeling links, see the <A HREF="#Music.addLinkLabel"><B>Music.addLinkLabel</B></A> method.
+		<P></P>
+	<LI><B>UpdateTypeSTR</B> - lets you specify the way in which the new sonification scheme should affect any sonification scheme that is already set up for the links that will be sonified by this method. There are four possible values for this parameter...
+		<P></P>
+			<UL>
+				<LI>"<SPAN CLASS=value>add to</SPAN>" - means that the effect of this method will be cumulative, so that the sonification scheme specified by this method will be added to any existing sonification scheme.
+					<P></P>
+				<LI>"<SPAN CLASS=value>replace</SPAN>" - means that the sonification scheme specified by this method will completely replace any sonification scheme already set up for the links. If there are events in the new sonification scheme that do not have any Groovoid specified, then the previous sonification behavior for these events of the links will be erased. It is possible to use this method to completely erase the sonification of a set of links, simply by specifying empty strings for all the GroovoidNameSTR-type parameters, and by also specifying the "<SPAN CLASS=value>replace</SPAN>" value for the <B>UpdateTypeSTR</B> parameter.
+					<P></P>
+				<LI>"<SPAN CLASS=value>merge with</SPAN>" - means that the sonification scheme specified by this method will replace the existing sonification scheme set up for the links, but only for those events for which a Groovoid is specified. As an example, if this method were used with the value <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was a Groovoid specified for only the <B>LinkOverGroovoidNameSTR</B> parameter, then this method would overwrite the sonification behavior for the onMouseOver events of all the links but would not overwrite the sonification behaviors for any of the other link events. So, unlike the <NOBR>"<SPAN CLASS=value>replace</SPAN>"</NOBR> value, the <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> value will not allow you to use this method to completely erase the sonification scheme for a set of links.
+					<P></P>
+				<LI>"<SPAN CLASS=value>fill in</SPAN>" - means that the sonification scheme specified by this method will fill in the "holes" in the existing sonification scheme set up for links. For example, if this method were used with the value <NOBR>"<SPAN CLASS=value>fill in</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was a Groovoid specified for the <B>LinkOverGroovoidNameSTR</B> parameter, then this method will add the specified Groovoid to the onMouseOver events for all of the links that don't already have a sonification behavior set up for the onMouseOver event.
+					<P></P>
+			</UL>
+		<P></P>
+	<LI><B>WindowHandleOBJ</B> - lets you specify the window or frame that contains the links you would like to sonify. This allows you to use this method to sonify links that are in a different window or frame than the window or frame that contains the music and resources and sonification code. As an example, a window that is sonified and has sourced in the "music-object.js" and "music-object-x-wizards.js" files can spawn a new window and sonify the links in that window using the <B>Music.sonifyLinksWithGroovoids</B> method, simply by using the <B>WindowHandleOBJ</B> parameter to specify a reference to the spawned window that is to be sonified.
+		<P></P>
+</UL>
+
+<P>Sonification of links using this method is cumulative by default (unless you specify a value for the <B>UpdateTypeSTR</B> parameter), so you can use the method multiple times to add further sonification. In the following example, all the links inside a document are being sonified so that their click events play the Groovoid <B>UI-Choice</B>, whereas only the subset of links from the link labeled "start chunky links" to the link labeled "end chunky links" are sonified so that their onMouseOver and hover events also play Groovoids.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Link Sonification Example&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY <SPAN CLASS=sample-code-highlighted>ONLOAD="sonifyLinks ()"</SPAN>&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object.js&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-wizards.js&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;A HREF="link01.html"&gt;Link 01&lt;/A&gt;
+&lt;A HREF="link02.html"&gt;Link 02&lt;/A&gt;
+&lt;A HREF="link03.html"&gt;Link 03&lt;/A&gt;
+&lt;A HREF="link04.html"&gt;Link 04&lt;/A&gt;
+&lt;A HREF="link05.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('start chunky links')"</SPAN>&gt;Link 05&lt;/A&gt;
+&lt;A HREF="link06.html"&gt;Link 06&lt;/A&gt;
+&lt;A HREF="link07.html"&gt;Link 07&lt;/A&gt;
+&lt;A HREF="link08.html"&gt;Link 08&lt;/A&gt;
+&lt;A HREF="link09.html"&gt;Link 09&lt;/A&gt;
+&lt;A HREF="link10.html"&gt;Link 10&lt;/A&gt;
+&lt;A HREF="link11.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('end chunky links')"</SPAN>&gt;Link 11&lt;/A&gt;
+&lt;A HREF="link12.html"&gt;Link 12&lt;/A&gt;
+&lt;A HREF="link13.html"&gt;Link 13&lt;/A&gt;
+&lt;A HREF="link14.html"&gt;Link 14&lt;/A&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+groovoidPlayer = new Music ();
+
+function sonifyLinks () {
+   Music.sonifyLinksWithGroovoids (
+      groovoidPlayer,
+      'UI-Choice1'
+   );
+   Music.sonifyLinksWithGroovoids (
+      groovoidPlayer,
+      '',
+      'UI-Click17',
+      '',
+      'UI-MouseOver2',
+      500,
+      'start chunky links',
+      'end chunky links'
+   );
+}
+
+groovoidPlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>LinkHoverDelayMsINT</B> parameter, then the value <SPAN CLASS=value>350</SPAN> will be used as the default.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN>, an empty string, or the string value <NOBR>"<SPAN CLASS=value>[first link]</SPAN>"</NOBR> is specified for the <B>StartLinkLabelSTR</B> parameter, then the first link in the document will be used as the start of the link group to be sonified.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN>, an empty string, or the string value <NOBR>"<SPAN CLASS=value>[last link]</SPAN>"</NOBR> is specified for the <B>EndLinkLabelSTR</B> parameter, then the last link in the document will be used as the end of the link group to be sonified.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>LinkLabelPrefixSTR</B> parameter, then all of the links in the group specified by the <B>StartLinkLabelSTR</B> and <B>EndLinkLabelSTR</B> parameters will be sonified.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>UpdateTypeSTR</B> parameter, then <NOBR>"<SPAN CLASS=value>add to</SPAN>"</NOBR> will be used as the default update type.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>,</B> LinkOutGroovoidNameSTR <B>,</B> LinkHoverGroovoidNameSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>,</B> EndLinkLabelSTR <B>,</B> UpdateTypeSTR <B>)</B>
+		<P>When no <B>WindowHandleOBJ</B> parameter is specified, then the links inside the window in which this method is called will be sonified. This is the most common way in which links will be sonified using this method (ie. just the links inside the document in which the sonification code resides).</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>,</B> LinkOutGroovoidNameSTR <B>,</B> LinkHoverGroovoidNameSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>,</B> EndLinkLabelSTR <B>)</B>
+		<P>When there is also no <B>UpdateTypeSTR</B> parameter specified, then the string value "<SPAN CLASS=value>add to</SPAN>" will be used as the default for this parameter. In the most typical use of this method, it will not be necessary to specify the <B>UpdateTypeSTR</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>,</B> LinkOutGroovoidNameSTR <B>,</B> LinkHoverGroovoidNameSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>,</B> EndLinkLabelSTR <B>)</B>
+		<P>When there is also no <B>LinkLabelPrefixSTR</B> parameter specified, then all links in the group of links specified by the <B>StartLinkLabelSTR</B> and <B>EndLinkLabelSTR</B> parameters will be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>,</B> LinkOutGroovoidNameSTR <B>,</B> LinkHoverGroovoidNameSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>)</B>
+		<P>When there is also no <B>EndLinkLabelSTR</B> parameter specified, then all links in the document starting from the link specified by the <B>StartLinkLabelSTR</B> parameter will be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>,</B> LinkOutGroovoidNameSTR <B>,</B> LinkHoverGroovoidNameSTR <B>,</B> LinkHoverDelayMsINT <B>)</B>
+		<P>When there is also no <B>StartLinkLabelSTR</B> parameter specified, then all links in the document will be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>,</B> LinkOutGroovoidNameSTR <B>,</B> LinkHoverGroovoidNameSTR <B>)</B>
+		<P>When there is also no <B>LinkHoverDelayMsINT</B> parameter specified, then a value of <SPAN CLASS=value>350</SPAN> is used as a default for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>,</B> LinkOutGroovoidNameSTR <B>)</B>
+		<P>When there is also no <B>LinkHoverGroovoidNameSTR</B> parameter specified, then link hover events will not be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>,</B> LinkOverGroovoidNameSTR <B>)</B>
+		<P>When there is also no <B>LinkOutGroovoidNameSTR</B> parameter specified, then link onMouseOut events will not be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithGroovoids (</B> TargetMusicObjectOBJ <B>,</B> LinkClickGroovoidNameSTR <B>)</B>
+		<P>When there is also no <B>LinkOverGroovoidNameSTR</B> parameter specified, then link onMouseOver events will not be sonified.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>it is safest to only use this method after a document has finished loading in
+	<LI>see also the <A HREF="#Music.sonifyLinksWithHandlers"><B>Music.sonifyLinksWithHandlers</B></A> method
+</UL>
+
+<A NAME="Music.sonifyLinksWithHandlers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.sonifyLinksWithHandlers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Wizards</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.sonifyLinksWithHandlers</B> static method lets you easily sonify all (or a subset) of the links on an HTML page using handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.sonifyLinksWithHandlers (</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkClick<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkOver<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkOut<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkHover<A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkHoverDelayMsINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; StartLinkLabelSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; EndLinkLabelSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; LinkLabelPrefixSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; UpdateTypeSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowHandleOBJ<BR>
+			<B>)</B><BR>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The various parameters of this method (described in further detail below) let you choose which handlers are to be executed for the various link events, and also which links are to be sonified. Using the <B>StartLinkLabelSTR</B>, <B>EndLinkLabelSTR</B>, and <B>LinkLabelPrefixSTR</B> parameters, it is possible to identify exact groups of links that are to be sonified using this method. The method can be used several times to sonify different groups of links in different ways.</P>
+
+<IMG SRC="../../../style/images/subheading-parameters.gif" WIDTH=122 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="PARAMETERS"><BR>
+<UL>
+	<LI><B>LinkClickJavaScriptSTR</B> - lets you specify the JavaScript code that is to be executed when a click event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkOverJavaScriptSTR</B> - lets you specify the JavaScript code that is to be executed when an onMouseOver event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkOutJavaScriptSTR</B> - lets you specify the JavaScript code that is to be executed when an onMouseOut event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkHoverJavaScriptSTR</B> - lets you specify the JavaScript code that is to be executed when a "hover" event occurs for any of the sonified links
+		<P></P>
+	<LI><B>LinkHoverDelayMsINT</B> - lets you specify how long (measured in milliseconds) the user should remain over a link before a hover event is triggered for that link
+		<P></P>
+	<LI><B>StartLinkLabelSTR</B> - lets you specify the first link in the group of links that is to be sonified. For information on labeling links, see the <A HREF="#Music.addLinkLabel"><B>Music.addLinkLabel</B></A> method.
+		<P></P>
+	<LI><B>EndLinkLabelSTR</B> - lets you specify the last link in the group of links that is to be sonified. For information on labeling links, see the <A HREF="#Music.addLinkLabel"><B>Music.addLinkLabel</B></A> method.
+		<P></P>
+	<LI><B>LinkLabelPrefixSTR</B> - lets you specify a label prefix that is used to select only certain links out of the group of links specified by the <B>StartLinkLabelSTR</B> and <B>EndLinkLabelSTR</B> parameters. For information on labeling links, see the <A HREF="#Music.addLinkLabel"><B>Music.addLinkLabel</B></A> method.
+		<P></P>
+	<LI><B>UpdateTypeSTR</B> - lets you specify the way in which the new sonification scheme should affect any sonification scheme that is already set up for the links that will be sonified by this method. There are four possible values for this parameter...
+		<P></P>
+			<UL>
+				<LI>"<SPAN CLASS=value>add to</SPAN>" - means that the effect of this method will be cumulative, so that the sonification scheme specified by this method will be added to any existing sonification scheme.
+					<P></P>
+				<LI>"<SPAN CLASS=value>replace</SPAN>" - means that the sonification scheme specified by this method will completely replace any sonification scheme already set up for the links. If there are events in the new sonification scheme that do not have any JavaScript code specified, then the previous sonification behavior for these events of the links will be erased. It is possible to use this method to completely erase the sonification of a set of links, simply by specifying empty strings for all the JavaScriptSTR-type parameters, and by also specifying the "<SPAN CLASS=value>replace</SPAN>" value for the <B>UpdateTypeSTR</B> parameter.
+					<P></P>
+				<LI>"<SPAN CLASS=value>merge with</SPAN>" - means that the sonification scheme specified by this method will replace the existing sonification scheme set up for the links, but only for those events for which JavaScript code is specified. As an example, if this method were used with the value <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was JavaScript code specified for only the <B>LinkOverJavaScriptSTR</B> parameter, then this method would overwrite the sonification behavior for the onMouseOver events of all the links but would not overwrite the sonification behaviors for any of the other link events. So, unlike the <NOBR>"<SPAN CLASS=value>replace</SPAN>"</NOBR> value, the <NOBR>"<SPAN CLASS=value>merge with</SPAN>"</NOBR> value will not allow you to use this method to completely erase the sonification scheme for a set of links.
+					<P></P>
+				<LI>"<SPAN CLASS=value>fill in</SPAN>" - means that the sonification scheme specified by this method will fill in the "holes" in the existing sonification scheme set up for links. For example, if this method were used with the value <NOBR>"<SPAN CLASS=value>fill in</SPAN>"</NOBR> specified for the <B>UpdateTypeSTR</B> parameter, and if there was JavaScript code specified for the <B>LinkOverJavaScriptSTR</B> parameter, then this method will add the specified JavaScript code to the onMouseOver events for all of the links that don't already have a sonification behavior set up for the onMouseOver event.
+					<P></P>
+			</UL>
+		<P></P>
+	<LI><B>WindowHandleOBJ</B> - lets you specify the window or frame that contains the links you would like to sonify. This allows you to use this method to sonify links that are in a different window or frame than the window or frame that contains the music and resources and sonification code. As an example, a window that is sonified and has sourced in the "music-object.js" and "music-object-x-wizards.js" files can spawn a new window and sonify the links in that window using the <B>Music.sonifyLinksWithGroovoids</B> method, simply by using the <B>WindowHandleOBJ</B> parameter to specify a reference to the spawned window that is to be sonified.
+		<P></P>
+</UL>
+
+<P>Sonification of links using this method is cumulative by default (unless you specify a value for the <B>UpdateTypeSTR</B> parameter), so you can use the method multiple times to add further sonification. In the following example, all the links inside a document are being sonified so that their click events play the percussion instrument "<B>Ice Cube</B>" (bank 1, program 198), whereas only the subset of links from the link labeled "start chunky links" to the link labeled "end chunky links" are sonified so that their onMouseOver events also play the percussion instrument "<B>Tablaesque - Low</B>" (bank 1, program 174).</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Link Sonification Example&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY <SPAN CLASS=sample-code-highlighted>ONLOAD="sonifyLinks ()"</SPAN>&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object.js&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-wizards.js&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;A HREF="link01.html"&gt;Link 01&lt;/A&gt;
+&lt;A HREF="link02.html"&gt;Link 02&lt;/A&gt;
+&lt;A HREF="link03.html"&gt;Link 03&lt;/A&gt;
+&lt;A HREF="link04.html"&gt;Link 04&lt;/A&gt;
+&lt;A HREF="link05.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('start chunky links')"</SPAN>&gt;Link 05&lt;/A&gt;
+&lt;A HREF="link06.html"&gt;Link 06&lt;/A&gt;
+&lt;A HREF="link07.html"&gt;Link 07&lt;/A&gt;
+&lt;A HREF="link08.html"&gt;Link 08&lt;/A&gt;
+&lt;A HREF="link09.html"&gt;Link 09&lt;/A&gt;
+&lt;A HREF="link10.html"&gt;Link 10&lt;/A&gt;
+&lt;A HREF="link11.html" <SPAN CLASS=sample-code-highlighted>ONCLICK="Music.addLinkLabel ('end chunky links')"</SPAN>&gt;Link 11&lt;/A&gt;
+&lt;A HREF="link12.html"&gt;Link 12&lt;/A&gt;
+&lt;A HREF="link13.html"&gt;Link 13&lt;/A&gt;
+&lt;A HREF="link14.html"&gt;Link 14&lt;/A&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+
+function sonifyLinks () {
+   Music.sonifyLinksWithHandlers (
+      'notePlayer.playNote (1,1,198,73,127,1000)'
+   );
+   Music.sonifyLinksWithGroovoids (
+      '',
+      'notePlayer.playNote (1,1,174,73,127,1000)',
+      '',
+      '',
+      null,
+      'start chunky links',
+      'end chunky links'
+   );
+}
+
+notePlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>LinkHoverDelayMsINT</B> parameter, then the value <SPAN CLASS=value>350</SPAN> will be used as the default.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN>, an empty string, or the string value <NOBR>"<SPAN CLASS=value>[first link]</SPAN>"</NOBR> is specified for the <B>StartLinkLabelSTR</B> parameter, then the first link in the document will be used as the start of the link group to be sonified.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN>, an empty string, or the string value <NOBR>"<SPAN CLASS=value>[last link]</SPAN>"</NOBR> is specified for the <B>EndLinkLabelSTR</B> parameter, then the last link in the document will be used as the end of the link group to be sonified.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>LinkLabelPrefixSTR</B> parameter, then all of the links in the group specified by the <B>StartLinkLabelSTR</B> and <B>EndLinkLabelSTR</B> parameters will be sonified.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>UpdateTypeSTR</B> parameter, then <NOBR>"<SPAN CLASS=value>add to</SPAN>"</NOBR> will be used as the default update type.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>,</B> LinkOutJavaScriptSTR <B>,</B> LinkHoverJavaScriptSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>,</B> EndLinkLabelSTR <B>,</B> UpdateTypeSTR <B>)</B>
+		<P>When no <B>WindowHandleOBJ</B> parameter is specified, then the links inside the window in which this method is called will be sonified. This is the most common way in which links will be sonified using this method (ie. just the links inside the document in which the sonification code resides).</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>,</B> LinkOutJavaScriptSTR <B>,</B> LinkHoverJavaScriptSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>,</B> EndLinkLabelSTR <B>)</B>
+		<P>When there is also no <B>UpdateTypeSTR</B> parameter specified, then the string value "<SPAN CLASS=value>add to</SPAN>" will be used as the default for this parameter. In the most typical use of this method, it will not be necessary to specify the <B>UpdateTypeSTR</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>,</B> LinkOutJavaScriptSTR <B>,</B> LinkHoverJavaScriptSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>,</B> EndLinkLabelSTR <B>)</B>
+		<P>When there is also no <B>LinkLabelPrefixSTR</B> parameter specified, then all links in the group of links specified by the <B>StartLinkLabelSTR</B> and <B>EndLinkLabelSTR</B> parameters will be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>,</B> LinkOutJavaScriptSTR <B>,</B> LinkHoverJavaScriptSTR <B>,</B> LinkHoverDelayMsINT <B>,</B> StartLinkLabelSTR <B>)</B>
+		<P>When there is also no <B>EndLinkLabelSTR</B> parameter specified, then all links in the document starting from the link specified by the <B>StartLinkLabelSTR</B> parameter will be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>,</B> LinkOutJavaScriptSTR <B>,</B> LinkHoverJavaScriptSTR <B>,</B> LinkHoverDelayMsINT <B>)</B>
+		<P>When there is also no <B>StartLinkLabelSTR</B> parameter specified, then all links in the document will be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>,</B> LinkOutJavaScriptSTR <B>,</B> LinkHoverJavaScriptSTR <B>)</B>
+		<P>When there is also no <B>LinkHoverDelayMsINT</B> parameter specified, then a value of <SPAN CLASS=value>350</SPAN> is used as a default for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>,</B> LinkOutJavaScriptSTR <B>)</B>
+		<P>When there is also no <B>LinkHoverJavaScriptSTR</B> parameter specified, then link hover events will not be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>,</B> LinkOverJavaScriptSTR <B>)</B>
+		<P>When there is also no <B>LinkOutJavaScriptSTR</B> parameter specified, then link onMouseOut events will not be sonified.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.sonifyLinksWithHandlers (</B> LinkClickJavaScriptSTR <B>)</B>
+		<P>When there is also no <B>LinkOverJavaScriptSTR</B> parameter specified, then link onMouseOver events will not be sonified.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>it is safest to only use this method after a document has finished loading in
+	<LI>see also the <A HREF="#Music.sonifyLinksWithGroovoids"><B>Music.sonifyLinksWithGroovoids</B></A> method
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.noManualHandlers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.noManualHandlers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Wizards</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>false</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.noManualHandlers</B> static property is a boolean variable, indicating if the HTML elements that are to be automatically sonified have no manually coded event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The default value of this property is <SPAN CLASS=value>false</SPAN>, and the property should only be set to <SPAN CLASS=value>true</SPAN> if it is known for certain that none of the HTML elements that may be automatically sonified by methods of the Wizards extension have pre-existing event handlers in the HTML code.</P>
+
+<DIV CLASS=subsection>A Bug in Netscape 6</DIV>
+
+<P>The <B>Music.noManualHandlers</B> property was introduced at around the time that Netscape 6 was released. With the initial release of Netscape 6, it was discovered that this browser had a significant issue that could cause the automatic sonification of HTML elements (using the Wizards extension) to interfere with other aspects of the proper functioning of HTML pages. For a detailed explanation of this issue, consult the section <A HREF="../../../tips-techniques/authoring-issues/index.html?issues/netscape-6-bug.html">Authoring Issues: Netscape 6 and Automatic Sonification</A>.</P>
+
+<P>The value of this property will be used to determine whether or not event handlers can be automatically attached to HTML elements in order to sonify them, if the user is browsing with Netscape 6. The property's value is considered at the time that any of the <A HREF="#Music.sonifyFormsWithGroovoids"><B>Music.sonifyFormsWithGroovoids</B></A>, <A HREF="#Music.sonifyFormsWithHandlers"><B>Music.sonifyFormsWithHandlers</B></A>, <A HREF="#Music.sonifyLinksWithGroovoids"><B>Music.sonifyLinksWithGroovoids</B></A>, or <A HREF="#Music.sonifyLinksWithHandlers"><B>Music.sonifyLinksWithHandlers</B></A> static methods are called. If the property is set to <SPAN CLASS=value>false</SPAN> at the time that any of these methods is called and the user is browsing with Netscape 6, then these methods will have no effect.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property only affects the behavior of the Wizards extension when the user is browsing with Netscape 6. For all other browsers, this property has no effect.
+</UL>
+
+</BODY></HTML>

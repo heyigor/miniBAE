@@ -1,0 +1,84 @@
+/*****************************************************************************/
+/*
+**	X_Assert.h
+**
+**	This provides for platform specfic functions that need to be rewitten,
+**	but will provide a API that is stable across all platforms
+**
+**	© Copyright 1995-2000 Beatnik, Inc, All Rights Reserved.
+**	Written by Christopher Schardt
+**
+**	Beatnik products contain certain trade secrets and confidential and
+**	proprietary information of Beatnik.  Use, reproduction, disclosure
+**	and distribution by any means are prohibited, except pursuant to
+**	a written license from Beatnik. Use of copyright notice is
+**	precautionary and does not imply publication or disclosure.
+**
+**	Restricted Rights Legend:
+**	Use, duplication, or disclosure by the Government is subject to
+**	restrictions as set forth in subparagraph (c)(1)(ii) of The
+**	Rights in Technical Data and Computer Software clause in DFARS
+**	252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
+**	Computer Software--Restricted Rights at 48 CFR 52.227-19, as
+**	applicable.
+**
+**	Confidential-- Internal use only
+**
+** Overview
+**	platform-dependent BAE_ASSERT() and BAE_VERIFY() macros
+**
+**	History	-
+**	5/7/99		MOE: created
+**	7/13/99		Renamed HAE to BAE
+**	2/4/2000	Changed copyright. We're Y2K compliant!
+**	5/29/2001	sh	Added new debugging system with BAE_PRINTF
+**	6/4/2001	sh	Eliminated use of ... in macro for windows
+*/
+/*****************************************************************************/
+
+#ifndef X_Assert_H
+#define X_Assert_H
+
+
+#include "X_API.h"
+
+// new BAE_PRINTF system
+//	BAE_PRINTF("This is a test of me %d %s\n", 34, "hello");
+//		actaully does work because the BAE_PRINTF macro is defined as printf.
+//		To disable you define BAE_PRINTF(...) as blank and it eats everything
+//		in between the () and does nothing.
+
+
+#ifndef _DEBUG
+	#if (X_PLATFORM == X_WIN95) || (X_PLATFORM == X_WIN_HARDWARE) || (X_PLATFORM == X_MACINTOSH) || (X_PLATFORM == X_IOS)
+		#define BAE_PRINTF
+	#else
+		#define BAE_PRINTF(...)
+	#endif
+	#define BAE_ASSERT(exp)			((void)0)
+	#define BAE_VERIFY(exp)			(exp)
+#else
+	#if (X_PLATFORM == X_WIN95) || (X_PLATFORM == X_WIN_HARDWARE) || (X_PLATFORM == X_MACINTOSH) || (X_PLATFORM == X_IOS)
+		#define BAE_PRINTF			printf		
+		#ifdef ASSERT
+			#define BAE_ASSERT(exp)		ASSERT(exp)
+			#define BAE_VERIFY(exp)		ASSERT(exp)
+		#else
+			#include <assert.h>
+			#define BAE_ASSERT(exp)		assert(exp)
+			#define BAE_VERIFY(exp)		assert(exp)
+		#endif
+	#else
+		#include <assert.h>
+		#define BAE_ASSERT(exp)		assert(exp)
+		#define BAE_VERIFY(exp)		assert(exp)
+	#endif
+
+#endif
+	
+#define HAE_ASSERT						BAE_ASSERT
+#define HAE_VERIFY						BAE_VERIFY
+
+#endif	// X_Assert_H
+
+

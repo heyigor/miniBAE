@@ -1,0 +1,326 @@
+//---------------------------------------------------------
+// test02.txt
+//---------------------------------------------------------
+// 
+// A Mini-BAE TestSuite script
+//
+// Usage:  testsuite.exe < test02.txt (at the MS-DOS prompt)
+//
+//---------------------------------------------------------
+//
+// Tests in this script:
+//
+// 1. Play RMF Files:
+//      a. 22k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+//      b. 44k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+//
+//---------------------------------------------------------
+// Jan. 19, 2000 by Chris Grigg (chrisg@beatnik.com)
+// Based on Mark Deggeler's go.txt
+// (c) 2000 by Beatnik, Inc.  All rights reserved.
+//---------------------------------------------------------
+
+
+
+// create mixer
+1
+1
+1 // open mixer 8hz,16bit
+
+// load default patch file
+1
+1
+4
+
+
+//---------------------------------------------------------
+// 1.a.i. Play RMF File, 8-bit mono 22k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+mono8_22.rmf 	// name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8            // Wait 8 seconds to let file play
+
+
+
+
+//---------------------------------------------------------
+// 1.a.ii. Play RMF File, 16-bit mono 22k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+mono16_22.rmf 	// name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8            // Wait 8 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 1.a.iii. Play RMF File, 8-bit stereo 22k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+stereo8_22.rmf 	// name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8              // Wait 8 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 1.a.iv. Play RMF File, 16-bit stereo 22k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+stereo16_22.rmf // name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8            // Wait 8 seconds to let file play
+
+
+//---------------------------------------------------------
+// 2.a.i. Play RMF File, 8-bit mono 44k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+mono8_44.rmf 	// name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8            // Wait 8 seconds to let file play
+
+
+
+
+//---------------------------------------------------------
+// 2.a.ii. Play RMF File, 16-bit mono 44k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+mono16_44.rmf 	// name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8            // Wait 8 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 2.a.iii. Play RMF File, 8-bit stereo 44k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+stereo8_44.rmf 	// name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8              // Wait 8 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 2.a.iv. Play RMF File, 16-bit stereo 44k
+//---------------------------------------------------------
+
+// create new BAESong object ------------
+3
+2
+1
+1               // slot 1
+
+// load rmf file ------------------------
+3
+2
+36
+1 		// slot 1
+stereo16_44.rmf // name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1              // slot 0
+0              // priority 0
+
+
+
+
+// PAUSE
+4
+8            // Wait 8 seconds to let file play
+
+
+// quit
+0	// VERY IMPORTANT TO QUIT AT END!!!!!
+

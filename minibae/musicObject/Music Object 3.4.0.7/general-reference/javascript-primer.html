@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+	<TITLE>JavaScript Primer</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+JavaScript Primer
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#event-handlers">Useful JavaScript Events For Sonifying Web Pages</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="event-handlers"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Useful JavaScript events for sonifying Web pages
+</TD></TR></TABLE>
+<BR>
+
+<P>JavaScript supports various <B>events</B>. These events enable you to script a response to a user's interaction with an HTML element on a Web page. The code that you write to respond to an event is termed an <B>event handler</B>. Event handlers can be used most effectively in making a user's interaction with a page trigger UI sounds or changes within an underlying musical score.</P>
+
+<P>The events most commonly used in sonifying a Web page are outlined in the table below. Beatnik Inc. is not reponsible for the maintenance and extension of the JavaScript language and so you should view the table as merely a guide, and should always refer to Netscape's <A HREF="http://home.netscape.com/eng/mozilla/3.0/handbook/javascript" TARGET="_top">on-line JavaScript documentation</A> as your primary JavaScript programming reference.</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BGCOLOR=DDDDDD BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Event Handler</TD>
+		<TD CLASS=data-table-column-header>Description</TD>
+		<TD CLASS=data-table-column-header>HTML elements</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONCLICK</TD>
+		<TD CLASS=data-table-item>Occurs when the user clicks a form element or link. ONCLICK is an action event and is very appropriate for use in UI sonification. Other events such as ONLOAD, ONCHANGE, ONBLUR, ONSELECT, etc., are less directly connected to immediate user actions.</TD>
+		<TD CLASS=data-table-item>
+			buttons<BR>
+			submit buttons<BR>
+			reset buttons<BR>
+			radio buttons<BR>
+			checkboxes<BR>
+			links<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONMOUSEOVER</TD>
+		<TD CLASS=data-table-item>Occurs when the user moves the mouse pointer over a link. This is one of the more useful events to use in sonification as it allows one to sonify a user's movement over a Web page. Done in a tasteful manner, ONMOUSEOVER events can be used to script fun and engaging pages which give immediate gratification to the user.</TD>
+		<TD CLASS=data-table-item>
+			links<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONMOUSEOUT</TD>
+		<TD CLASS=data-table-item>Occurs when the user moves the mouse pointer out of an area (client-side image map) or link. Paired with the ONMOUSEOVER event, you will find this event to be one of the most frequently used in scripting sonified Web pages.</TD>
+		<TD CLASS=data-table-item>
+			links<BR>
+			client-side image map areas<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONBLUR</TD>
+		<TD CLASS=data-table-item>Occurs when the user removes input focus from a window, frame, or form element.</TD>
+		<TD CLASS=data-table-item>
+			windows<BR>
+			frames<BR>
+			all form elements<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONFOCUS</TD>
+		<TD CLASS=data-table-item>Occurs when the user gives input focus to a window, frame, or form element.</TD>
+		<TD CLASS=data-table-item>
+			windows<BR>
+			frames<BR>
+			all form elements<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONLOAD</TD>
+		<TD CLASS=data-table-item>Occurs when a page and associated media has finished loading.</TD>
+		<TD CLASS=data-table-item>
+			document body<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONUNLOAD</TD>
+		<TD CLASS=data-table-item>Occurs when the user leaves a page.</TD>
+		<TD CLASS=data-table-item>
+			document body<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONABORT</TD>
+		<TD CLASS=data-table-item>Occurs when the user aborts the loading of an image (for example by clicking a link or clicking the Stop button)</TD>
+		<TD CLASS=data-table-item>
+			images<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONERROR</TD>
+		<TD CLASS=data-table-item>Occurs when the loading of a document or image causes an error.</TD>
+		<TD CLASS=data-table-item>
+			images<BR>
+			windows<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONSUBMIT</TD>
+		<TD CLASS=data-table-item>Occurs when the user submits a form.</TD>
+		<TD CLASS=data-table-item>
+			submit button<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONRESET</TD>
+		<TD CLASS=data-table-item>Occurs when the user resets a form (clicks a Reset button).</TD>
+		<TD CLASS=data-table-item>
+			forms<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONSELECT</TD>
+		<TD CLASS=data-table-item>Occurs when the user selects a form element's input field.</TD>
+		<TD CLASS=data-table-item>
+			text fields<BR>
+			textareas<BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>ONCHANGE</TD>
+		<TD CLASS=data-table-item>Occurs when the user changes the value of an element.</TD>
+		<TD CLASS=data-table-item>
+			text fields<BR>
+			textareas<BR>
+			select lists<BR>
+		</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Refer also to Netscape's documentation on <A HREF="http://home.netscape.com/eng/mozilla/3.0/handbook/javascript/getstart.htm#1004263" TARGET="_top">JavaScript's event support</A></P>
+
+</BODY></HTML>

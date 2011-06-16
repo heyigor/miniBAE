@@ -1,0 +1,1458 @@
+<HTML>
+<HEAD>
+	<TITLE>Important Concepts</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Important Concepts
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#beatnik-soundbank">Beatnik Soundbank</A>
+			<LI><A HREF="#groovoids">Groovoids</A>
+			<LI><A HREF="#property-lifetimes">Property Lifetimes</A>
+			<LI><A HREF="#method-variations">Method Variations</A>
+			<LI><A HREF="#constrained-values">Constrained Values</A>
+			<LI><A HREF="#magical-0">Magical MIDI Channel Number 0 and Track Number 0</A>
+			<LI><A HREF="#callbacks">Callbacks</A>
+			<LI><A HREF="#volume-scalars">Custom Volume Scalars</A>
+			<LI><A HREF="#file-volume-scaling">File Volume Scaling</A>
+			<LI><A HREF="#pitched-percussion">Pitched Percussion</A>
+			<LI><A HREF="#channel-instrument-mode">Channel Instrument Mode (NRPN 640)</A>
+			<LI><A HREF="#mute-solo">Mute and Solo, and How They Interact with Each Other</A>
+			<LI><A HREF="#midi-event-queue">MIDI Event Queue</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="beatnik-soundbank"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Beatnik Soundbank
+</TD></TR></TABLE>
+<BR>
+
+<P>The following diagram shows the various parts that make up the soundbank that is built into the Beatnik Player...</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="../images/soundbank.gif" WIDTH=550 HEIGHT=292 ALT="Diagram of the Beatnik Soundbank" BORDER=0>
+</P>
+
+<DIV CLASS=subsection>General MIDI Bank vs. Special Bank</DIV>
+
+<P>The Beatnik soundbank offers a full complement of General MIDI instruments, in the form of the General MIDI Bank. Beatnik's General MIDI Bank has been modeled to be closely compatible with established GM soundbanks, such as Roland's SoundCanvas GM soundset.</P>
+
+<P>The Special Bank, on the other hand, offers an easy way to expand one's musical palette beyond the limitations of the General MIDI standard. The Special bank contains some very cool textures, some of which stand in as alternatives to their less adventurous counterparts in the General MIDI Bank, and even share the same program numbers. In fact, quite often a program number in the General MIDI Bank will have an instrument that is mirrored at the same program number in the Special Bank, except that the Special Bank's version will have a refreshingly different slant on things. This is convenient and makes it quite easy to change the feel of a composition or user interface sonification, merely by changing a bank number. Of the instruments in the Special Bank, program numbers 112 through 124 are especially useful for sound effects and user interface sonification.</P>
+
+<DIV CLASS=subsection>Chromatic vs. Percussion Instruments</DIV>
+
+<P>Both the General MIDI Bank and the Special Bank each have a set of 128 chromatic instruments as well as a set of percussion instruments. While there are 128 instrument "slots" in the percussion set for both banks, not all these slots are occupied. For a full list of the chromatic instruments in the General MIDI Bank and the Special Bank, consult the appendix <A HREF="../appendixes/instrument-list/index.html">Beatnik Soundbank - Instrument List</A>. For a full list of the percussion instruments in the General MIDI Bank and the Special Bank, consult the appendix <A HREF="../appendixes/percussion-map/index.html">Beatnik Soundbank - Percussion Map</A>.</P>
+
+<DIV CLASS=subsection>Groovoids</DIV>
+
+<P>As added "icing on the cake", the Beatnik soundbank also includes a set of over 70 "pre-cooked" musical cues, called Groovoids, to give you a kick start in adding interactive audio to your Web content. For more information on Groovoids, see the section <A HREF="#groovoids">Groovoids</A> below.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="groovoids"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Groovoids
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>What Are Groovoids?</DIV>
+
+<P>Groovoids are a collection of "pre-cooked" musical cues, background music, and user-interface type musical effects that comes bundled with the player. Groovoids are an easy way to sonify a Web page because they are built right into the player's soundbank and can start playing immediately. They do not need to download off the Web! Groovoids are also <B>free to use</B>. You can always count on the fact that anyone who has the Beatnik Player will have the same set of Groovoids available so you can sonify a Web site using Groovoids with this reassuring fact in mind. Groovoids also offer a cool way to fill up the blank spaces while visitors are downloading custom musical themes for your Web site.</P>
+
+<DIV CLASS=subsection>What Groovoids Are Available?</DIV>
+
+<P>There are 72 Groovoids available, which are divided into five categories: Background, Fanfare, Hits, UI (User Interface), and Misc. Each Groovoid name is prefixed with the name of the category that it belongs to so that Groovoids "clump" together logically in an alphabetical listing.</P>
+
+<UL>
+	<LI><B>Background</B><BR>
+		The Background category contains small musical grooves that are designed to be looped and can serve as placeholders that play while larger music or audio files load in from the Web.
+		<P></P>
+	<LI><B>Fanfare</B><BR>
+		The Fanfare category contains short musical fanfares that are ideal as cues for various events within a Web site's sonification, such as page arrival cues, form submission cues, dialogs popping up, etc. The Groovoids in this category are designed to grab the user's attention and should be used judiciously.
+		<P></P>
+	<LI><B>Hits</B><BR>
+		The Hits category is very similar to the Fanfare category and contains various short musical cues that can be used to announce significant events in the user's interaction with a Web site.
+		<P></P>
+	<LI><B>UI</B> (User Interface)<BR>
+		The UI category is a large group of Groovoids, containing very short sound effects that are ideal for sonifying various user interface elements of a Web site.
+		<P></P>
+	<LI><B>Misc</B><BR>
+		The Misc category is a small group of Groovoids, containing sound effects that don't fit logically into any other category.
+		<P></P>
+</UL>
+
+<P>For a full list of all the available Groovoids, consult the appendix <A HREF="../appendixes/groovoids.html">Beatnik Soundbank - Groovoids</A>.</P>
+
+<DIV CLASS=subsection>How Does One Play Groovoids?</DIV>
+
+<P>Groovoids are referred to by name (see the <A HREF="parameters.html#GroovoidNameSTR"><B>GroovoidNameSTR</B></A> parameter), and can be triggered to play via scripting using the Music Object API's <A HREF="instance-methods.html#play"><B>play</B></A> method, or embedded into a page using the <A HREF="../general-reference/embedding-properties.html#groovoid"><B>GROOVOID</B></A> embedding property.</P>
+
+<!--<P>For a step-by-step guide on playing Groovoids, consult the tutorial <A HREF="../tutorials/playing-groovoids/index.html">Playing Groovoids</A>.</P>-->
+
+<DIV CLASS=subsection>The Benefits of Groovoids</DIV>
+
+<P>To summarize, Groovoids have the following key benefits...</P>
+
+<UL>
+	<LI>designed specifically with sonification in mind
+	<LI>don't add to page download time
+	<LI>response is fast, because they are part of the soundbank
+	<LI>reliable authoring, because every user has them
+	<LI>great placeholders while larger music media downloads
+	<LI>FREE to use, no strings attached
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="property-lifetimes"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Property Lifetimes
+</TD></TR></TABLE>
+<BR>
+
+<P>The various properties that can be queried and modified by the Music Object API can be divided into different categories based upon their "lifetime" - that is, how long they retain their value. Some properties, such as song-specific properties, are more "perishable" than others. The various categories of property lifetimes are discussed below...</P>
+
+<DIV CLASS=subsection>Properties With a Music Object Lifetime</DIV>
+
+<P>The static properties that are defined by the Music Object API first come into being when the "music-object.js" JavaScript file is sourced into a page that is loaded by the browser. This may be before any actual player instances are embedded and may, therefore, also be before the underlying audio engine that is used by the player has been loaded and initialized. The properties that fall into this category include all the <A HREF="static-properties.html">Music Object Static Properties</A>.</P>
+
+<DIV CLASS=subsection>Properties With an Audio Engine Lifetime</DIV>
+
+<P>The underlying audio engine that supports the player is only loaded and initialized when the first player instance is embedded on a page. So, properties that have an audio engine lifetime may only come into being after properties with a Music Object lifetime have already been defined. There is one exception to this rule, though. Because the underlying audio engine remains loaded until all player instances in all windows have been unloaded, a case may arise where properties with an audio engine lifetime already exist - even before a particular window has completed loading in the Music Object API. This is because there may already be another sonified window open that has caused the audio engine to be loaded.</P>
+
+<P>Properties that have an audio engine lifetime, such as reverb setting, will retain their value for as long as the audio engine is loaded. If the engine is unloaded and reloaded during the course of the user's browsing, then the engine lifetime properties will get re-initialized. As an example, assume that the user has just one window open and they visit a sonified page where the reverb gets set to a value other than the engine's default initial value. If they then leave the sonified page, browse to an unsonified page, and then browse further to another sonified page, then when they arrive at the second sonified page the reverb will no longer be set to the value that was set earlier by the first sonified page, but will be re-initialized to the engine's default setting. If, however, the user had another sonified window open all the time while browsing, then the reverb setting will not have been re-initialized.</P>
+
+<P>Properties that have an audio engine lifetime include...</P>
+
+<UL>
+	<LI><B>Reverb Type</B><BR>
+		Reverb type can be set using the <A HREF="static-methods.html#Music.setReverbType"><B>Music.setReverbType</B></A> static method and queried using the <A HREF="static-methods.html#Music.getReverbType"><B>Music.getReverbType</B></A> static method.
+		<P></P>
+	<LI><B>Global Mute State</B><BR>
+		Global mute state can be set using the <A HREF="static-methods.html#Music.setGlobalMute"><B>Music.setGlobalMute</B></A> static method.
+		<P></P>
+	<LI><B>Audio Engaged State</B><BR>
+		Audio engaged state can be set using the <A HREF="static-methods.html#Music.engageAudio"><B>Music.engageAudio</B></A> static method.
+		<P></P>
+</UL>
+
+<DIV CLASS=subsection>Properties With a Music Object Instance Lifetime</DIV>
+
+<P>Properties that have a Music Object instance lifetime, such as the ready event handler, are properties that are specific to individual Music Object instances. These properties come into being when a Music Object instance is created and can be set and queried immediately - even before the Music Object instance's associated player instance is embedded in the page.</P>
+
+<P>So, for example, the following code segment is perfectly valid...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject = new Music ();
+myMusicObject.onReady ('myMusicObject.setVolume (50)');
+myMusicObject.magicEmbed ('SRC="my-music-file.rmf"');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The above code will successfully register the ready event handler for the Music Object instance, even before its associated player instance is embedded. When the player instance becomes ready, the statement <B><NOBR>myMusicObject.setVolume (50)</NOBR></B> that is registered as the handler for the ready event will be executed, setting the player's volume to half of maximum.</P>
+
+<P>On the other hand, the following code segment will not work as may be expected...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject = new Music ();
+myMusicObject.setVolume (50);
+myMusicObject.magicEmbed ('SRC="my-music-file.rmf"');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this case, the player's volume will not be affected by the call to the <A HREF="instance-methods.html#setVolume"><B>setVolume</B></A> method. This is because the player volume level property has a player instance lifetime (discussed in further detail in the section <A HREF="#player-instance-lifetime">Properties With a Player Instance Lifetime</A>). Even though the Music Object instance is already created when the statement <B><NOBR>myMusicObject.setVolume (50)</NOBR></B> is executed, the <B>magicEmbed</B> method has not yet been called to create the Music Object instance's associated player instance.</P>
+
+<P>Now, you might think that all that is needed is to move the statement <B><NOBR>myMusicObject.setVolume (50)</NOBR></B> to right after the call to the <B>magicEmbed</B> method and this will fix things up nicely. Well, think again. There is one more little detail to complicate the issue. While the <B>magicEmbed</B> method does indeed generate the HTML necessary in order to create a player instance, there is definitely no guarantee that the player instance will have been created and initialized by the time the browser's JavaScript interpreter reaches the next line of code. This is because the creation of the player instance happens asynchronously - independently of the JavaScript interpreter.</P>
+
+<P>So, there is truly only one safe way to know exactly when a player instance has been created and is completely initialized and ready to receive control instructions: register a handler for the Music Object instance's ready event, using the <A HREF="instance-methods.html#onReady"><B>onReady</B></A> method.</P>
+
+<P>Properties that have a Music Object instance lifetime include...</P>
+
+<UL>
+	<LI><B>Channel Monophonic State</B><BR>
+		Channel monophonic state can be set using the <A HREF="instance-methods.html#setMonophonic"><B>setMonophonic</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getMonophonic"><B>getMonophonic</B></A> method.
+		<P></P>
+	<LI><B>Load Event Handler</B><BR>
+		The load event handler can be set using the <A HREF="instance-methods.html#onLoad"><B>onLoad</B></A> method.
+		<P></P>
+	<LI><B>Meta Event Handler</B><BR>
+		The meta event handler can be set using the <A HREF="instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> method.
+		<P></P>
+	<LI><B>Pause Event Handler</B><BR>
+		The pause event handler can be set using the <A HREF="instance-methods.html#onPause"><B>onPause</B></A> method.
+		<P></P>
+	<LI><B>Play Event Handler</B><BR>
+		The play event handler can be set using the <A HREF="instance-methods.html#onPlay"><B>onPlay</B></A> method.
+		<P></P>
+	<LI><B>Ready Event Handler</B><BR>
+		The ready event handler can be set using the <A HREF="instance-methods.html#onReady"><B>onReady</B></A> method.
+		<P></P>
+	<LI><B>Stop Event Handler</B><BR>
+		The stop event handler can be set using the <A HREF="instance-methods.html#onStop"><B>onStop</B></A> method.
+		<P></P>
+</UL>
+
+<A NAME="player-instance-lifetime"></A>
+<DIV CLASS=subsection>Properties With a Player Instance Lifetime</DIV>
+
+<P>Properties that have a player instance lifetime, such as looping state, are specific to individual player instances. In contrast to properties with a Music Object instance lifetime, these properties only come into being when a Music Object instance's associated player instance is embedded in a page and initialized - not when the Music Object instance is created. So, for any given Music Object instance, properties that have a player instance lifetime come into being after properties with a Music Object instance lifetime.</P>
+
+<P>Properties that have a player instance lifetime include...</P>
+
+<UL>
+	<LI><B>Autostart State</B><BR>
+		Autostart state can be set initially when embedding player instances using the <A HREF="../general-reference/embedding-properties.html#autostart"><B>AUTOSTART</B></A> embedding property, but can also be set subsequently via scripting using the <A HREF="instance-methods.html#setAutostart"><B>setAutostart</B></A> instance method. Autostart state can be queried via scripting using the <A HREF="instance-methods.html#getAutostart"><B>getAutostart</B></A> method.
+		<P></P>
+	<LI><B>Looping State</B><BR>
+		Looping state can be set initially when embedding player instances using the <A HREF="../general-reference/embedding-properties.html#loop"><B>LOOP</B></A> embedding property, but can also be set subsequently via scripting using the <A HREF="instance-methods.html#setLoop"><B>setLoop</B></A> instance method and the variations of the <A HREF="instance-methods.html#play"><B>play</B></A> instance method that take a parameter for looping. Looping state can be queried via scripting using the <A HREF="instance-methods.html#getLoop"><B>getLoop</B></A> method.
+		<P></P>
+	<LI><B>Panel Display</B><BR>
+		Panel display can be set initially when embedding player instances using the <A HREF="../general-reference/embedding-properties.html#display"><B>DISPLAY</B></A> embedding property, but can also be set subsequently via scripting using the <A HREF="instance-methods.html#setPanelDisplay"><B>setPanelDisplay</B></A> instance method. Panel display can be queried via scripting using the <A HREF="instance-methods.html#getPanelDisplay"><B>getPanelDisplay</B></A> method.
+		<P></P>
+	<LI><B>Panel Mode</B><BR>
+		Panel mode can be set initially when embedding player instances using the <A HREF="../general-reference/embedding-properties.html#mode"><B>MODE</B></A> embedding property, but can also be set subsequently via scripting using the <A HREF="instance-methods.html#setPanelMode"><B>setPanelMode</B></A> instance method. Panel mode can be queried via scripting using the <A HREF="instance-methods.html#getPanelMode"><B>getPanelMode</B></A> method.
+		<P></P>
+	<LI><B>Playback State</B><BR>
+		Playback state can be modified using the <A HREF="instance-methods.html#pause"><B>pause</B></A>, <A HREF="instance-methods.html#play"><B>play</B></A>, and <A HREF="instance-methods.html#stop"><B>stop</B></A> instance methods. Playback state can be determined using the <A HREF="instance-methods.html#isPaused"><B>isPaused</B></A> and <A HREF="instance-methods.html#isPlaying"><B>isPlaying</B></A> instance methods.
+		<P></P>
+	<LI><B>Player Volume Level</B><BR>
+		Player volume level can be set initially when embedding player instances using the <A HREF="../general-reference/embedding-properties.html#volume"><B>VOLUME</B></A> embedding property, but can also be set subsequently via scripting using the <A HREF="instance-methods.html#setVolume"><B>setVolume</B></A> and <A HREF="instance-methods.html#fadeVolume"><B>fadeVolume</B></A> instance methods. Player volume level can be queried via scripting using the <A HREF="instance-methods.html#getVolume"><B>getVolume</B></A> method.
+		<P></P>
+</UL>
+
+<A NAME="song-loaded-lifetime"></A>
+<DIV CLASS=subsection>Properties With a Song Loaded Lifetime</DIV>
+
+<P>Properties that have a song loaded lifetime, such as playing duration, are specific to the file that is currently loaded into a player instance and are reset or modified each time a new file is loaded.</P>
+
+<P>Properties that have a song loaded lifetime include...</P>
+<UL>
+	<LI><B>End Time</B><BR>
+		End time can be set initially when embedding player instances using the <A HREF="../general-reference/embedding-properties.html#endtime"><B>ENDTIME</B></A> embedding property, but can also be set subsequently via scripting using the <A HREF="instance-methods.html#setEndTime"><B>setEndTime</B></A> instance method.
+		<P></P>
+	<LI><B>File Size</B><BR>
+		File size can be queried using the <A HREF="instance-methods.html#getFileSize"><B>getFileSize</B></A> instance method.
+		<P></P>
+	<LI><B>Pitch Transposition</B><BR>
+		Pitch transposition can be set using the <A HREF="instance-methods.html#setTranspose"><B>setTranspose</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getTranspose"><B>getTranspose</B></A> method.
+		<P></P>
+	<LI><B>Playing Duration</B><BR>
+		Playing duration can be queried using the <A HREF="instance-methods.html#getPlayLength"><B>getPlayLength</B></A> instance method.
+		<P></P>
+	<LI><B>Song Information Properties</B><BR>
+		Song information properties can be queried using the <A HREF="instance-methods.html#getInfo"><B>getInfo</B></A> instance method.
+		<P></P>
+	<LI><B>Song Position</B><BR>
+		Song position can be set using the <A HREF="instance-methods.html#setPosition"><B>setPosition</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getPosition"><B>getPosition</B></A> method.
+		<P></P>
+	<LI><B>Start Time</B><BR>
+		Start time can be set initially when embedding player instances using the <A HREF="../general-reference/embedding-properties.html#starttime"><B>STARTTIME</B></A> embedding property, but can also be set subsequently via scripting using the <A HREF="instance-methods.html#setStartTime"><B>setStartTime</B></A> instance method.
+		<P></P>
+</UL>
+
+<DIV CLASS=subsection>Properties With a Song Playback Lifetime</DIV>
+
+<P>Properties that have a song playback lifetime, such as track mute, retain their value only while a song is playing and are typically reset when the player is stopped and started again, or when the player loops the currently playing file. These properties are not reset when playback is paused and then later resumed.</P>
+
+<P>So, for example, the following code segment is perfectly valid...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject = new Music ();
+myMusicObject.onPlay ('myMusicObject.setTrackMute (0,true)');
+myMusicObject.magicEmbed ('SRC="my-music-file.rmf"');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The above code will register the play event handler for the Music Object instance and, each time the player begins to play its file, the statement <B><NOBR>myMusicObject.setTrackMute (0,true)</NOBR></B> will be executed which will mute all tracks of the song. On the other hand, the following code segment will not work as may be expected...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject = new Music ();
+myMusicObject.onReady ('myMusicObject.setTrackMute (0,true)');
+myMusicObject.magicEmbed ('SRC="my-music-file.rmf" AUTOSTART=FALSE');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this case, the tracks of the song will not be muted when it begins playing because the track mute property has a song playback lifetime. Even though the Music Object instance's associated player instance is guaranteed to be ready when the <B><NOBR>myMusicObject.setTrackMute (0,true)</NOBR></B> statement is executed (because it is executed as a result of the ready event callback), the player instance will not be playing because the <A HREF="../general-reference/embedding-properties.html#autostart"><B>AUTOSTART</B></A> embedding property is set to <SPAN CLASS=value>false</SPAN>. And when the player does begin playing, perhaps as a result of the user clicking on the control panel's play button, then the track mute property will be re-initialized.</P>
+
+<P>Properties that have a song playback lifetime include...</P>
+
+<UL>
+	<LI><B>Channel Controller Properties</B><BR>
+		Channel controller properties can be set using the <A HREF="instance-methods.html#setController"><B>setController</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getController"><B>getController</B></A> method.
+		<P></P>
+	<LI><B>Channel Mute</B><BR>
+		Channel mute can be set using the <A HREF="instance-methods.html#setChannelMute"><B>setChannelMute</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getChannelMute"><B>getChannelMute</B></A> method.
+		<P></P>
+	<LI><B>Channel Program</B><BR>
+		Channel program can be set using the <A HREF="instance-methods.html#setProgram"><B>setProgram</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getProgram"><B>getProgram</B></A> method.
+		<P></P>
+	<LI><B>Channel Solo</B><BR>
+		Channel solo can be set using the <A HREF="instance-methods.html#setChannelSolo"><B>setChannelSolo</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getChannelSolo"><B>getChannelSolo</B></A> method.
+		<P></P>
+	<LI><B>Channel Transposable State</B><BR>
+		Channel transposable state can be set using the <A HREF="instance-methods.html#setTransposable"><B>setTransposable</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getTransposable"><B>getTransposable</B></A> method.
+		<P></P>
+	<LI><B>Track Mute</B><BR>
+		Track mute can be set using the <A HREF="instance-methods.html#setTrackMute"><B>setTrackMute</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getTrackMute"><B>getTrackMute</B></A> method.
+		<P></P>
+	<LI><B>Track Solo</B><BR>
+		Track solo can be set using the <A HREF="instance-methods.html#setTrackSolo"><B>setTrackSolo</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getTrackSolo"><B>getTrackSolo</B></A> method.
+		<P></P>
+	<LI><B>Playback Tempo</B><BR>
+		Playback tempo can be set using the <A HREF="instance-methods.html#setTempo"><B>setTempo</B></A> instance method and can be queried using the <A HREF="instance-methods.html#getTempo"><B>getTempo</B></A> method.
+		<P></P>
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="method-variations"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Method Variations
+</TD></TR></TABLE>
+<BR>
+
+<P>For your convenience, many of the methods of the Music Object API offer variations (sometimes referred to as overloaded forms) that take differing parameter sets. Some variations may allow certain parameters to be omitted, while other variations may allow different types to be specified for certain parameters. When using any given method in your sonification code, you should consult that method's reference information to determine what variations are available to you. Each method description in the <A HREF="instance-methods.html">Instance Methods</A> and <A HREF="static-methods.html">Static Methods</A> reference sections will specify the variations that are offered.</P>
+
+<P>There are three styles of method variations that are used in the Music Object API...</P>
+<UL>
+	<LI><B>Alternate Parameter Types</B><BR>
+		<P>For many of the methods in the Music Object API, variations are provided to allow different value types to be used for certain parameters. This increases the flexibility of the methods and opens up more possibilities for how the methods may be used. A classic example is the <A HREF="instance-methods.html#playNote"><B>playNote</B></A> instance method. One variation of this method can accept a <A HREF="parameters.html#NoteNumber0to127"><B>NoteNumber0to127</B></A> parameter, allowing an integer to be used for specifying the MIDI note number of the musical note that should be played. Another variation, on the other hand, can accept a <A HREF="parameters.html#NoteNameSTR"><B>NoteNameSTR</B></A> parameter, allowing a string to be used for specifying the name of the musical note that should be played.</P>
+		<P><IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT"></P>
+		<P>It should never be assumed that a method has a variation accepting a specific alternate parameter type, simply because a similar method has such a variation. For example, while almost all of the callback registering instance methods (such as <A HREF="instance-methods.html#onPause"><B>onPause</B></A>, <A HREF="instance-methods.html#onPlay"><B>onPlay</B></A>, and <A HREF="instance-methods.html#onStop"><B>onStop</B></A>, etc.) can accept a <A HREF="parameters.html#JavaScriptSTR"><B>JavaScriptSTR</B></A> parameter in place of a <A HREF="parameters.html#Function"><B>Function</B></A> parameter, the <A HREF="instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> instance method cannot accept a <B>JavaScriptSTR</B> parameter, but can only accept a <B>Function</B> parameter. You should always check with the reference section for a method that you are using to verify that it has a specific variation, before attempting to use that variation.</P>
+	<LI><B>Optional Parameters at the End</B><BR>
+		<P>Some methods, such as the <A HREF="instance-methods.html#fadeVolume"><B>fadeVolume</B></A> instance method, offer very comprehensive parameter sets. With so many ways of customizing the behavior of such methods, using the methods could be quite daunting if all these parameters always had to be specified. It can be quite useful to have the option of omitting some of the more "esoteric" parameters and having these parameters default to the most logical values.</P>
+		<P>For such methods, then, the parameter sets are designed in such a way that the parameters that are less likely to be needed in typical uses are placed towards the end of the parameter sets. In this way, these optional parameters may be omitted and the methods will resort to using logical default values that suit most typical applications of these methods.</P>
+		<P>In the example of the <B>fadeVolume</B> instance method, the full parameter set variation of this method accepts five parameters. However, this full parameter set is scaled down progressively by omitting more and more of the optional end parameters. Essentially, the parameter set is whittled away, one parameter at a time, thereby generating method variations that accept four parameters, three parameters, two parameters, one parameter, and even no parameters. This parameter set "erosion" is illustrated in the list of method variations below...</P>
+		<P><B>Variations of the fadeVolume Instance Method</B></P>
+		<UL>
+			<LI><B>fadeVolume (</B> StartVolume0to100 <B>,</B> EndVolume0to100 <B>,</B> FadeTimeMsINT <B>,</B> FadeEndCallbackFunction <B>,</B> FadeStepCallbackFunction <B>)</B>
+				<P></P>
+				This variation has the complete parameter set.
+				<HR NOSHADE SIZE=1>
+			<LI><B>fadeVolume (</B> StartVolume0to100 <B>,</B> EndVolume0to100 <B>,</B> FadeTimeMsINT <B>,</B> FadeEndCallbackFunction <B>)</B>
+				<P></P>
+				When no <B>FadeStepCallbackFunction</B> parameter is specified, then the default action is for no callback to be executed each time the volume level is updated throughout the course of a fade.
+				<HR NOSHADE SIZE=1>
+			<LI><B>fadeVolume (</B> StartVolume0to100 <B>,</B> EndVolume0to100 <B>,</B> FadeTimeMsINT <B>)</B>
+				<P></P>
+				When no <B>FadeEndCallbackFunction</B> parameter is specified, then the default action is for no callback to be executed when the fade reaches its conclusion.
+				<HR NOSHADE SIZE=1>
+			<LI><B>fadeVolume (</B> StartVolume0to100 <B>,</B> EndVolume0to100 <B>)</B>
+				<P></P>
+				When no <B>FadeTimeMsINT</B> parameter is specified, then the default value of <SPAN CLASS=value>1000</SPAN> is used for this parameter.
+				<HR NOSHADE SIZE=1>
+			<LI><B>fadeVolume (</B> StartVolume0to100 <B>)</B>
+				<P></P>
+				When no <B>EndVolume0to100</B> parameter is specified, then the default value of <SPAN CLASS=value>0</SPAN> is used for this parameter.
+				<HR NOSHADE SIZE=1>
+			<LI><B>fadeVolume ( )</B>
+				<P></P>
+				When no <B>StartVolume0to100</B> parameter is specified, then the instance's current volume setting will be used as the default value for this parameter.
+				<HR NOSHADE SIZE=1>
+		</UL>
+		<P></P>
+	<LI><B>Alternate Parameter Sets</B><BR>
+		<P>Some of the methods provided in the Music Object API offer variations that have greatly varying parameter sets. An example is the <A HREF="instance-methods.html#playNote"><B>playNote</B></A> instance method, which in addition to the standard form that takes <B>MidiChannel1to16</B>, <B>NoteNumber0to127</B>, <B>Velocity0to127</B>, and <B>NoteDurationMsINT</B> parameters, also offers a form that takes an extended parameter set containing the <B>MidiChannel1to16</B>, <B>BankNumber0to2</B>, <B>ProgramNumber0to255</B>, <B>NoteNumber0to127</B>, <B>Velocity0to127</B>, and <B>NoteDurationMsINT</B> parameters. With the extended form, the additional <B>BankNumber0to2</B> and <B>ProgramNumber0to255</B> parameters are "squeezed" into the parameter set between the <B>MidiChannel1to16</B> and <B>NoteNumber0to127</B> parameters, making this type of variation different to the type of variation that simply offers optional parameters towards the end of the parameter list that can simply be omitted.</P>
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="constrained-values"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Constrained Values
+</TD></TR></TABLE>
+<BR>
+
+<P>For many integer-type parameters that are used in methods of the Music Object API, values are constrained within those parameters' valid ranges. So, for a parameter that is value-constrained, if a value is specified for the parameter that is below its valid range, then the value is constrained to the lower limit. And if a value is specified for the parameter that is above its valid range, then the value is constrained to the upper limit. This value constraining is applied only where it is deemed appropriate and of value to sonification code.</P>
+
+<DIV CLASS=subsection>A Simple Example</DIV>
+
+<P>By relying on the value constraining feature, it becomes very easy to write a simple statement to increase the volume of a Music Object instance. One could do this easily with the statement <NOBR><B>myMusicObject.setVolume (myMusicObject.getVolume () + 10)</B></NOBR>. Because the <B>setVolume</B> method strictly constrains the value of the <A HREF="parameters.html#Volume0to100"><B>Volume0to100</B></A> parameter to the range <SPAN CLASS=value>0</SPAN> to <SPAN CLASS=value>100</SPAN>, there is no danger if the value being sent to the <B>setVolume</B> method exceeds the upper limit of 100, since in this case the value will be constrained to 100.</P>
+
+<P>Not all integer parameters are value-constrained. For instance, value constraining does not apply to the <A HREF="parameters.html#MidiChannel1to16">MidiChannel1to16</A> parameter, where using a value outside of the valid range for the parameter will result in the method being ignored. In the case of MIDI channel number, if you specify a channel number of 17 it does not make logical sense to constrain the value to 16.</P>
+
+<P>To find out if a particular parameter is value-constrained, check the reference information for that parameter in the <A HREF="parameters.html">Common Parameters</A> reference.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="magical-0"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Magical MIDI Channel Number 0 and Track Number 0
+</TD></TR></TABLE>
+<BR>
+
+<P>As a convenience, many of the instance methods that set channel and track state can accept a magical value <SPAN CLASS=value>0</SPAN> for specifying channel or track number. Both channel and track numbers are numbered starting at 1, and so the value <SPAN CLASS=value>0</SPAN> is used to indicate that a state setting method should act on all channels or tracks.</P>
+
+<P>By contrast to state setting methods, state querying methods typically do not accept a magical value <SPAN CLASS=value>0</SPAN> for specifying channel or track number, since there is no good way for these methods to return a value that represents the states for all channels or tracks. Also, never assume that any specific method for setting channel or track state can accept a magical value <SPAN CLASS=value>0</SPAN>. Always consult the reference section for any given method to make certain.</P>
+
+<DIV CLASS=subsection>Benefits</DIV>
+
+<P>This "shortcut" feature can be really useful in developing music remixing applications, for example, where a method like the <A HREF="instance-methods.html#setController"><B>setController</B></A> instance method can be used to initialize a specific MIDI controller on all channels in one single operation, or where a method like the <A HREF="instance-methods.html#setTrackMute"><B>setTrackMute</B></A> instance method can be used to reset track muting for all tracks in a single operation.</P>
+
+<P>Using the magical value <SPAN CLASS=value>0</SPAN> feature provides the following key benefits...</P>
+
+<UL>
+	<LI><B>Smaller Code Size</B>
+		<P>Because only one statement is required in order to set a state for all channels or tracks, code can become substantially more compact. Even if you used a <B>for</B> loop to set a state for all channels or tracks in an automated process, there's not way you can beat a single statement.</P>
+	<LI><B>Speed</B>
+		<P>Because the magical value <SPAN CLASS=value>0</SPAN> is in most cases implemented at the player level and not in JavaScript, this approach to setting a state for all channels or tracks can be significantly more zippy than any massive block of statements, or even a <B>for</B> loop. And in certain kinds of interactive audio applications, this kind of performance improvement can make all the difference.</P>
+	<LI><B>Easier Maintenance</B>
+		<P>Because there is only one statement where state is being set for all channels or tracks, it becomes really easy to make a modification to the specific state that is being set. Only one statement needs to be edited in order to change a value that is being set for all channels or tracks. Pure simplicity!</P>
+</UL>
+
+<DIV CLASS=subsection>Magical MIDI Channel Number 0</DIV>
+
+<P>For most instance methods that set channel state, the magical value <SPAN CLASS=value>0</SPAN> can be specified for channel number to indicate that the method's action should be performed on all 16 MIDI channels. For example, the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.setController (0,10,0)</SPAN></NOBR> would pan all MIDI channels hard left. If it weren't for this magical value <SPAN CLASS=value>0</SPAN>, each channel would have to be panned hard left individually. The following before-and-after sample code listing compares the hard way of doing it with the easy way of doing it...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (1,10,0);
+myMusicObject.setController (2,10,0);
+myMusicObject.setController (3,10,0);
+myMusicObject.setController (4,10,0);
+myMusicObject.setController (5,10,0);
+myMusicObject.setController (6,10,0);
+myMusicObject.setController (7,10,0);
+myMusicObject.setController (8,10,0);
+myMusicObject.setController (9,10,0);
+myMusicObject.setController (10,10,0);
+myMusicObject.setController (11,10,0);
+myMusicObject.setController (12,10,0);
+myMusicObject.setController (13,10,0);
+myMusicObject.setController (14,10,0);
+myMusicObject.setController (15,10,0);
+myMusicObject.setController (16,10,0);
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Magical MIDI Channel 0)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (<SPAN CLASS=sample-code-highlighted>0</SPAN>,10,0);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>Magical MIDI channel number 0 can be used by the <A HREF="instance-methods.html#setChannelMute"><B>setChannelMute</B></A>, <A HREF="instance-methods.html#setChannelSolo"><B>setChannelSolo</B></A>, <A HREF="instance-methods.html#setController"><B>setController</B></A>, <A HREF="instance-methods.html#setMonophonic"><B>setMonophonic</B></A>, and <A HREF="instance-methods.html#setProgram"><B>setProgram</B></A> instance methods of the core Music Object API, as well as many other instance methods of various of the <A HREF="extensions/intro.html">Music Object extensions</A>. For any method that can accept a <A HREF="parameters.html#MidiChannel0to16"><B>MidiChannel0to16</B></A> parameter (ie. where <SPAN CLASS=value>0</SPAN> is a legal value), this will be made clear in the reference section for that method.</P>
+
+<DIV CLASS=subsection>Magical Track Number 0</DIV>
+
+<P>For most instance methods that set track state, the magical value <SPAN CLASS=value>0</SPAN> can be specified for track number to indicate that the method's action should be performed on all tracks of an RMF or MIDI file. For example, the statement <NOBR><SPAN CLASS=sample-code>myMusicObject.setTrackMute (0,true)</SPAN></NOBR> would mute all tracks of an RMF or MIDI file that is playing. If it weren't for this magical value <SPAN CLASS=value>0</SPAN>, each track would have to be muted individually. The following before-and-after sample code listing compares the mundane way of doing it with the "magical" way of doing it...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+for (var trackNo = 1; trackNo <= 64; trackNo++) {
+   myMusicObject.setTrackMute (trackNo,true);
+}
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Magical Track Number 0)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setTrackMute (<SPAN CLASS=sample-code-highlighted>0</SPAN>,true);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>Magical track number 0 can be used by the <A HREF="instance-methods.html#setTrackMute"><B>setTrackMute</B></A> and <A HREF="instance-methods.html#setTrackSolo"><B>setTrackSolo</B></A> instance methods of the core Music Object API, as well as many other instance methods of various of the Music Object extensions. For any method that can accept a <A HREF="parameters.html#TrackNumber0to64"><B>TrackNumber0to64</B></A> parameter (ie. where <SPAN CLASS=value>0</SPAN> is a legal value), this will be made clear in the reference section for that method.</P>
+
+<DIV CLASS=subsection>An Example</DIV>
+
+<P>In this example, we are creating a new <B>panic</B> instance method using the <A HREF="extensibility-api.html#Music.addPublicInstanceMethods"><B>Music.addPublicInstanceMethods</B></A> static method of the <A HREF="extensibility-api.html">Music Object Extensibility API</A>. When called, the <B>panic</B> method will have the effect of unmuting and unsoloing all channels and all tracks, as well as resetting all controllers for all channels. The following before-and-after sample code listing compares the unenlightened way of doing it with the "magical" way of doing it...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+function mo_panic () {
+   for (var trackNo = 1; trackNo <= 64; trackNo++) {
+      this.setTrackMute (trackNo,false);
+      this.setTrackSolo (trackNo,false);
+   }
+   for (var channelNo = 1; channelNo <= 16; channelNo++) {
+      this.setChannelMute (channelNo,false);
+      this.setChannelSolo (channelNo,false);
+   }
+   for (var channelNo = 1; channelNo <= 16; channelNo++) {
+      this.setController (channelNo,121,0);
+   }
+}
+
+Music.addPublicInstanceMethods ('panic');
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Magical 0)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+function mo_panic () {
+   this.setTrackMute (<SPAN CLASS=sample-code-highlighted>0</SPAN>,false);
+   this.setTrackSolo (<SPAN CLASS=sample-code-highlighted>0</SPAN>,false);
+   this.setChannelMute (<SPAN CLASS=sample-code-highlighted>0</SPAN>,false);
+   this.setChannelSolo (<SPAN CLASS=sample-code-highlighted>0</SPAN>,false);
+   this.setController (<SPAN CLASS=sample-code-highlighted>0</SPAN>,121,0);
+}
+
+Music.addPublicInstanceMethods ('panic');
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>By using the magical value <SPAN CLASS=value>0</SPAN>, the implementation for the <B>panic</B> method can be tighter - and every little bit of added speed and code size reduction can count when you're working on a performance-critical music remixing application that already has burgeoning blocks of code and reams of control actions to perform.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="callbacks"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Callbacks
+</TD></TR></TABLE>
+<BR>
+
+<P>Callbacks make it possible to synchronize events in an HTML page with events that occur within music or audio files. Much of the Music Object API focuses on letting scripting within HTML pages affect and control music and audio, but with the callbacks the wiring can be done in the reverse direction - from the music to the HTML.</P>
+
+<A NAME="callbacks/instance-vs-static"></A>
+<DIV CLASS=subsection>Instance vs. Static Callbacks</DIV>
+
+<P>Instance callbacks are specific to individual Music Object instances. An example of an instance callback is the <A HREF="#callbacks/onPlay"><B>onPlay</B></A> callback, which is triggered each time a Music Object instance enters the playing state. Unique handlers for instance callbacks can be registered per Music Object instance. So, it possible to have one handler registered for the <B>onPlay</B> callback of one instance and another handler registered for the <B>onPlay</B> callback of a different instance.</P>
+
+<P>The following sample code example illustrates this point...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function myMusicObject1OnPlayHandler () {
+   alert ('myMusicObject1 starts playing');
+}
+
+function myMusicObject2OnPlayHandler () {
+   alert ('myMusicObject2 starts playing');
+}
+
+myMusicObject1 = new Music ();
+myMusicObject2 = new Music ();
+
+myMusicObject1.onPlay (myMusicObject1OnPlayHandler);
+myMusicObject2.onPlay (myMusicObject2OnPlayHandler);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, the function "myMusicObject1OnPlayHandler" is being registered as the <B>onPlay</B> callback handler for the Music Object instance "myMusicObject1", and the function "myMusicObject2OnPlayHandler" is being registered as the <B>onPlay</B> callback handler for the Music Object instance "myMusicObject2". The function "myMusicObject1OnPlayHandler" will only get executed when the instance "myMusicObject1" enters the playing state, and not when the instance ""myMusicObject2" enters the playing state. Similarly, the function "myMusicObject2OnPlayHandler" will only get executed when the instance "myMusicObject2" enters the playing state, and not when the instance ""myMusicObject1" enters the playing state.</P>
+
+<P>Whereas instance callbacks are specific to individual Music Object instances, static callbacks are global to the Music Object class. An example of a static callback is the <A HREF="#callbacks/onAudioEngagedChange"><B>onAudioEngagedChange</B></A> callback, which is triggered each time there is a change in the audio engaged state of the player's underlying audio engine. While handlers for instance callbacks are registered by calling methods of individual Music Object instances (such as the <A HREF="instance-methods.html#onPlay"><B>onPlay</B></A> and <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance methods), handlers for static callbacks are registered by calling methods of the Music object (such as the <A HREF="static-methods.html#Music.addCallbackHandler"><B>Music.addCallbackHandler</B></A> static method).</P>
+
+<A NAME="callbacks/public-callbacks"></A>
+<DIV CLASS=subsection>Callbacks Supported by the Music Object API</DIV>
+
+<P>The following callbacks are supported as part of the public authoring level of the Music Object API...</P>
+
+<UL>
+	<LI><A NAME="callbacks/onAudibleStateChange"></A><B>onAudibleStateChange</B><BR>
+		<P>The <B>onAudibleStateChange</B> instance callback is triggered each time there is a change in the audible state of a Music Object instance.</P>
+		<P>Whenever there is a change in the audible state of an instance, there is a corresponding change in the value of the instance's <A HREF="instance-properties.html#audible"><B>audible</B></A> property. A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onAudibleStateChange"><B>onAudibleStateChange</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnAudibleStateChange"><B>addOnAudibleStateChange</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnAudibleStateChange"><B>removeOnAudibleStateChange</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnAudibleStateChange</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnAudibleStateChange"><B>clearOnAudibleStateChange</B></A> instance method.</P>
+	<LI><A NAME="callbacks/onAudioEngagedChange"></A><B>onAudioEngagedChange</B><BR>
+		<P>The <B>onAudioEngagedChange</B> static callback is triggered each time there is a change in the audio engaged state of the player's underlying audio engine.</P>
+		<P><P>At the time that this callback is triggered, the current engaged state of the audio engine can be determined using the <A HREF="static-methods.html#Music.isAudioEngaged"><B>Music.isAudioEngaged</B></A> static method. A handler for this callback can be registered using the <A HREF="static-methods.html#Music.addCallbackHandler"><B>Music.addCallbackHandler</B></A> static method and specifying the string value "<SPAN CLASS=value>onAudioEngagedChange</SPAN>" for the <A HREF="parameters.html#StaticCallbackTypeSTR"><B>StaticCallbackTypeSTR</B></A> parameter. Similarly, a handler for this callback can be removed using the <A HREF="extensions/callbacks/index.html#Music.removeCallbackHandlers"><B>Music.removeCallbackHandlers</B></A> static method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension and specifying the string value "<SPAN CLASS=value>onAudioEngagedChange</SPAN>" for the <B>StaticCallbackTypeSTR</B> parameter.</P>
+	<LI><A NAME="callbacks/onEngageAudio"></A><B>onEngageAudio</B><BR>
+		<P>The <B>onEngageAudio</B> static callback is triggered after each call to the <A HREF="static-methods.html#Music.engageAudio"><B>Music.engageAudio</B></A> static method.</P>
+		<P>At the time that this callback is triggered, the value specified in the most recent call to the <B>Music.engageAudio</B> method is reflected in the <B>Music.embedDefaults.AUDIOENGAGED</B> static property. A handler for this callback can be registered using the dedicated <A HREF="static-methods.html#Music.onEngageAudio"><B>Music.onEngageAudio</B></A> static method or the more general <A HREF="static-methods.html#Music.addCallbackHandler"><B>Music.addCallbackHandler</B></A> static method. A handler for this callback can be removed using the general <A HREF="extensions/callbacks/index.html#Music.removeCallbackHandlers"><B>Music.removeCallbackHandlers</B></A> static method of the Callbacks extension.</P>
+	<LI><A NAME="callbacks/onLoad"></A><B>onLoad</B><BR>
+		<P>The <B>onLoad</B> instance callback is triggered each time a Music Object instance completes loading in a file.</P>
+		<P>A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onLoad"><B>onLoad</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnLoad"><B>addOnLoad</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnLoad"><B>removeOnLoad</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnLoad</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnLoad"><B>clearOnLoad</B></A> instance method.</P>
+	<LI><A NAME="callbacks/onMetaEvent"></A><B>onMetaEvent</B><BR>
+		<P>The <B>onMetaEvent</B> instance callback is triggered each time a Music Object instance encounters a meta event while playing an RMF or MIDI file.</P>
+		<P>A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnMetaEvent"><B>addOnMetaEvent</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnMetaEvent"><B>removeOnMetaEvent</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnMetaEvent</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnMetaEvent"><B>clearOnMetaEvent</B></A> instance method. Additionally, specialized meta event filters can be assigned using the <A HREF="extensions/callbacks/index.html#addMetaEventHandler"><B>addMetaEventHandler</B></A> instance method of the Callbacks extension, and removed using the <A HREF="extensions/callbacks/index.html#removeMetaEventHandlers"><B>removeMetaEventHandlers</B></A> instance method of the Callbacks extension.</P>
+	<LI><A NAME="callbacks/onOutputVolumeChange"></A><B>onOutputVolumeChange</B><BR>
+		<P>The <B>onOutputVolumeChange</B> instance callback is triggered each time there is a change in a Music Object instance's output volume.</P>
+		<P>At the time that the handler for this callback is executed, the current output volume can be obtained using the <A HREF="instance-methods.html#getOutputVolume"><B>getOutputVolume</B></A> instance method. A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onOutputVolumeChange"><B>onOutputVolumeChange</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnOutputVolumeChange"><B>addOnOutputVolumeChange</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnOutputVolumeChange"><B>removeOnOutputVolumeChange</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnOutputVolumeChange</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnOutputVolumeChange"><B>clearOnOutputVolumeChange</B></A> instance method.</P>
+	<LI><A NAME="callbacks/onPause"></A><B>onPause</B><BR>
+		<P>The <B>onPause</B> instance callback is triggered each time a Music Object instance enters the paused state.</P>
+		<P>A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onPause"><B>onPause</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnPause"><B>addOnPause</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnPause"><B>removeOnPause</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnPause</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnPause"><B>clearOnPause</B></A> instance method.</P>
+	<LI><A NAME="callbacks/onPlay"></A><B>onPlay</B><BR>
+		<P>The <B>onPlay</B> instance callback is triggered each time a Music Object instance enters the playing state.</P>
+		<P>A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onPlay"><B>onPlay</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnPlay"><B>addOnPlay</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnPlay"><B>removeOnPlay</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnPlay</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnPlay"><B>clearOnPlay</B></A> instance method.</P>
+	<LI><A NAME="callbacks/onReady"></A><B>onReady</B><BR>
+		<P>The <B>onReady</B> instance callback is triggered for only the first time that a Music Object instance completes loading in its file and becomes ready for scripted control.</P>
+		<P>A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onReady"><B>onReady</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnReady"><B>addOnReady</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnReady"><B>removeOnReady</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnReady</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnReady"><B>clearOnReady</B></A> instance method.</P>
+	<LI><A NAME="callbacks/onStop"></A><B>onStop</B><BR>
+		<P>The <B>onStop</B> instance callback is triggered each time a Music Object instance enters the stopped state.</P>
+		<P>A handler for this callback can be registered using the dedicated <A HREF="instance-methods.html#onStop"><B>onStop</B></A> instance method, the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method, or the <A HREF="extensions/callbacks/index.html#addOnStop"><B>addOnStop</B></A> instance method of the <A HREF="extensions/callbacks/index.html">Callbacks</A> extension. A handler for this callback can be removed using the dedicated <A HREF="extensions/callbacks/index.html#removeOnStop"><B>removeOnStop</B></A> instance method of the Callbacks extension, or the more general <A HREF="extensions/callbacks/index.html#removeCallbackHandlers"><B>removeCallbackHandlers</B></A> instance method of the Callbacks extension. All handlers registered for this callback using the Callback extension's <B>addOnStop</B> instance method can also be cleared in a single step using the Callback extension's <A HREF="extensions/callbacks/index.html#clearOnStop"><B>clearOnStop</B></A> instance method.</P>
+</UL>
+
+<A NAME="callbacks/registering"></A>
+<DIV CLASS=subsection>Registering Callback Handlers</DIV>
+
+<P>Handlers for callbacks can be registered using the dedicated <A HREF="instance-methods.html#callbacks">callback instance methods</A> (such as <A HREF="instance-methods.html#onPause"><B>onPause</B></A>, <A HREF="instance-methods.html#onPlay"><B>onPlay</B></A>, <A HREF="instance-methods.html#onStop"><B>onStop</B></A>, etc.), the more general <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method and <A HREF="static-methods.html#Music.addCallbackHandler"><B>Music.addCallbackHandler</B></A> static method, and the various methods of <A HREF="extensions/callbacks/index.html">Music Object Extension - Callbacks</A>.</P>
+
+<P>In the following sample code listing, handlers are being registered for the <A HREF="#callbacks/onPlay"><B>onPlay</B></A> and <A HREF="#callbacks/onStop"><B>onStop</B></A> callbacks, using the dedicated <B>onPlay</B> and <B>onStop</B> instance methods, to cause a graphical icon in the page to reflect the playing state of the Music Object instance "myMusicObject".</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Callbacks Test Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+myMusicObject = new Music ();
+
+function myOnPlayHandler () {
+   document.musicPlayingIcon.src = 'images/music-playing.gif';
+}
+
+function myOnStopHandler () {
+   document.musicPlayingIcon.src = 'images/music-stopped.gif';
+}
+
+myMusicObject.onPlay (myOnPlayHandler);
+myMusicObject.onStop (myOnStopHandler);
+
+myMusicObject.preloadEmbed ('SRC="music/my-file.rmf"');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;IMG SRC="images/music-stopped.gif" WIDTH=22 HEIGHT=22 NAME="musicPlayingIcon"&gt;
+
+&lt;A
+   HREF="javascript://"
+   ONMOUSEOVER="myMusicObject.stop (); myMusicObject.play ()"
+   ONMOUSEOVER="myMusicObject.stop (2000)"
+&gt;
+Mouse Over to Play Music
+&lt;/A&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The function "myOnPlayHandler" has been passed as a parameter, by reference, in a call to the <B>onPlay</B> instance method. In this way, the "myOnPlayHandler" function is registered as the handler for the <B>onPlay</B> callback. Now, whenever the Music Object instance enters into a playing state, this function will be executed. Similarly, the function "myOnStopHandler" has been registered as the handler for the <B>onStop</B> callback. Notice how the callback handlers were registered immediately after creating the Music Object instance. When registering callback handlers, it is not necessary to wait until after the Music Object instance's player has been embedded into the page.</P>
+
+<P>Now, when the "myOnPlayHandler" function is executed as a result of the Music Object instance entering into a playing state, the "src" property of the image object in the document named "musicPlayingIcon" will be changed so that the image object displays a "playing state" graphic. Similarly, when the "myOnStopHandler" function is executed as a result of the Music Object instance entering into a stopped state, the "src" property of the image object in the document named "musicPlayingIcon" will be changed so that a "stopped state" graphic is displayed.</P>
+
+<P>Another way to register callback handlers is to specify a block of JavaScript code that is to be executed each time the callback is triggered. When calling the method for registering callback handlers (such as the <B>onPlay</B> instance method), instead of using the <B>HandlerFunction</B> parameter to specify the function that is to act as the handler for the callback, one uses the <B>HandlerJavaScriptSTR</B> parameter to specify the actual code that should be executed as the handler for the callback.</P>
+
+<P>One significant advantage to this approach is that it is somewhat easier to share a common handler function between multiple different callback types. One can still have the handler function perform a different action, based upon some parameter (or parameters) that the function receives. This approach can be a useful a code economy.</P>
+
+<P>Still working with the same example, the following sample code listing shows how this alternative approach can be employed to good effect...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Callbacks Test Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+myMusicObject = new Music ();
+
+<SPAN CLASS=sample-code-highlighted>function myOnPlayOnStopHandler (playingState) {
+   document.musicPlayingIcon.src = 'images/music-' + playingState + '.gif';
+}
+
+myMusicObject.onPlay ('myOnPlayOnStopHandler ("playing")');
+myMusicObject.onStop ('myOnPlayOnStopHandler ("stopped")');</SPAN>
+
+myMusicObject.preloadEmbed ('SRC="music/my-file.rmf"');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;IMG SRC="images/music-stopped.gif" WIDTH=22 HEIGHT=22 NAME="musicPlayingIcon"&gt;
+
+&lt;A
+   HREF="javascript://"
+   ONMOUSEOVER="myMusicObject.stop (); myMusicObject.play ()"
+   ONMOUSEOVER="myMusicObject.stop (2000)"
+&gt;
+Mouse Over to Play Music
+&lt;/A&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You can see, from the above sample code listing, that the functions "myOnPlayHandler" and "myOnStopHandler" have now been rolled into one function - the "myOnPlayOnStopHandler" function - which is able to carry out both of the actions of the original functions. This function expects to receive a "playingState" string parameter, which it will then use to swap out the graphic that is displayed by the document's "musicPlayingIcon" image object. Now, JavaScript code can be registered as the handler for both the <B>onPlay</B> and the <B>onStop</B> callbacks, with the JavaScript code for each callback calling the shared "myOnPlayOnStopHandler" function, but passing a unique string value that is appropriate to each callback type.</P>
+
+<P>Another way to use this approach is to register callback handler JavaScript code that is self-contained and does not need to be implemented in a dedicated separate function. If the action that needs to be carried out each time the callback is triggered is quite basic and is unlikely to grow more complex as the project evolves, then one can simply roll up all the JavaScript handler code into a string and pass it as the <B>HandlerJavaScriptSTR</B> parameter when calling the method for registering the callback handler.</P>
+
+<P>The following sample code listing shows how our example would look if the implementations for the callback handlers were to be passed in full to the callback handler registering methods...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Callbacks Test Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+myMusicObject = new Music ();
+
+<SPAN CLASS=sample-code-highlighted>myMusicObject.onPlay ('document.musicPlayingIcon.src="images/music-playing.gif"');
+myMusicObject.onStop ('document.musicPlayingIcon.src="images/music-stopped.gif"');</SPAN>
+
+myMusicObject.preloadEmbed ('SRC="music/my-file.rmf"');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;IMG SRC="images/music-stopped.gif" WIDTH=22 HEIGHT=22 NAME="musicPlayingIcon"&gt;
+
+&lt;A
+   HREF="javascript://"
+   ONMOUSEOVER="myMusicObject.stop (); myMusicObject.play ()"
+   ONMOUSEOVER="myMusicObject.stop (2000)"
+&gt;
+Mouse Over to Play Music
+&lt;/A&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Of course, there is an issue of scalability with the above technique. The more complex the implementation for the callback handlers becomes, the messier such code is likely to look. What's more, since code like this needs to be enclosed in quotes, one can quickly get caught up in escaping - and even double-escaping - quotes that appear inside the handler code.</P>
+
+<DIV CLASS=subsection>Function vs. JavaScriptSTR</DIV>
+
+<P>Almost all of the methods that register callback handlers can take both a <A HREF="parameters.html#JavaScriptSTR"><B>JavaScriptSTR</B></A> type parameter or a <A HREF="parameters.html#Function"><B>Function</B></A> type parameter as a callback handler. The <A HREF="instance-methods.html#onMetaEvent"><B>onMetaEvent</B></A> method is an exception to this rule, and can only accept a <B>Function</B> type parameter. Always check first with the method reference for a specific method before assuming that the method can accept a <B>JavaScriptSTR</B> or <B>Function</B> type parameter.</P>
+
+<P>In the following cases, it may be more useful to specify a string statement block (in place of a function) as an event handler...</P>
+
+<UL>
+	<LI>if you would like some code to be executed as a handler for an event, but you would not like to declare a separate function for this code
+	<LI>if you would like to call the same function as a handler for different events, but would like to pass the function different parameters for different event types
+	<LI>if the function that is to be the handler for an event is not defined at the time that the event handler is registered
+</UL>
+
+<BLOCKQUOTE>
+<IMG SRC="../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>The <B>onMetaEvent</B> method only accepts a <B>Function</B> parameter type for the callback handler.
+</BLOCKQUOTE>
+
+<P>One disadvantage to using a string statement block is that any quotes used in the JavaScript code for the event handler may need to be escaped so as to prevent syntax errors. This may sometimes produce hard-to-read code. In general, if the handler for a callback is likely to contain many lines of code, it is best to declare a separate function specifically for the callback handler and then pass this function as a parameter when registering the callback handler. This will produce the cleanest and most manageable code, which will help anybody who needs to read the code and will also make future revisions of your code easier to cope with.</P>
+
+<A NAME="callbacks/more-info"></A>
+<DIV CLASS=subsection>More Information</DIV>
+
+<P>For more useful information on using callbacks, consult the tutorial <A HREF="../tutorials/using-callbacks/index.html">Using Player Callbacks</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="volume-scalars"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Custom Volume Scalars
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>What are Volume Scalars?</DIV>
+
+<P>Starting from Music Object version 3.3, the custom volume scalar mechanism allows you to create multiple levels of volume control for each Music Object instance. Any number of custom scalars can be created, allowing each instance to have multiple volume controls, all of which cooperate together to produce an overall output volume for an instance. Among other things, this allows for additional instance master volume controls to be added, without this control being overridden by volume fades.</P>
+
+<P>The following table illustrates an example list of custom volume scalars for a Music Object instance...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+<TR>
+	<TD CLASS=data-table-column-header COLSPAN=3>Custom Volume Scalars</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-column-subheader>Scalar Name</TD>
+	<TD CLASS=data-table-column-subheader><NOBR>Level%&nbsp;(0-100)</NOBR></TD>
+	<TD CLASS=data-table-column-subheader>Remarks</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item>Instance Master Volume</TD>
+	<TD CLASS=data-table-item ALIGN=CENTER>90</TD>
+	<TD CLASS=data-table-item>used as an additional volume control that is not affected by volume fades initiated by the <B>fadeVolume</B> instance method</TD>
+</TR>
+<TR>
+	<TD BGCOLOR=FFFFFF COLSPAN=3 ALIGN=CENTER><IMG SRC="../style/images/small-arrow-down.gif" WIDTH=6 HEIGHT=6 HSPACE=0 VSPACE=0 BORDER=0></TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item>[R]GROUP:Page Volume</TD>
+	<TD CLASS=data-table-item ALIGN=CENTER>70</TD>
+	<TD CLASS=data-table-item>a reserved scalar created by the <B>Music.setPageVolume</B> static method of the Group Volume extension</TD>
+</TR>
+<TR>
+	<TD BGCOLOR=FFFFFF COLSPAN=3 ALIGN=CENTER><IMG SRC="../style/images/small-arrow-down.gif" WIDTH=6 HEIGHT=6 HSPACE=0 VSPACE=0 BORDER=0></TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item>[R]GROUP:UI Sounds</TD>
+	<TD CLASS=data-table-item ALIGN=CENTER>88</TD>
+	<TD CLASS=data-table-item>a reserved scalar created by the <B>Music.setGroupVolume</B> static method of the Group Volume extension</TD>
+</TR>
+<TR>
+	<TD BGCOLOR=FFFFFF COLSPAN=3 ALIGN=CENTER><IMG SRC="../style/images/small-arrow-down.gif" WIDTH=6 HEIGHT=6 HSPACE=0 VSPACE=0 BORDER=0></TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item>[R]ducking</TD>
+	<TD CLASS=data-table-item ALIGN=CENTER>100</TD>
+	<TD CLASS=data-table-item>a reserved scalar used by the <B>Ducking extension</B>. The value is <SPAN CLASS=value>100</SPAN> because this instance is not currently being ducked by another instance.</TD>
+</TR>
+<TR>
+	<TD BGCOLOR=FFFFFF COLSPAN=3 ALIGN=CENTER><IMG SRC="../style/images/small-arrow-down.gif" WIDTH=6 HEIGHT=6 HSPACE=0 VSPACE=0 BORDER=0></TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-column-header COLSPAN=3>VOLUME</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item>&nbsp;</TD>
+	<TD CLASS=data-table-item ALIGN=CENTER>100</TD>
+	<TD CLASS=data-table-item>the value set by the <B>VOLUME</B> embedding property and the <B>setVolume</B> instance method, and returned by the <B>getVolume</B> instance method</TD>
+</TR>
+<TR>
+	<TD BGCOLOR=FFFFFF COLSPAN=3 ALIGN=CENTER><IMG SRC="../style/images/small-arrow-down.gif" WIDTH=6 HEIGHT=6 HSPACE=0 VSPACE=0 BORDER=0></TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-column-header COLSPAN=3>Output Volume</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item>&nbsp;</TD>
+	<TD CLASS=data-table-item ALIGN=CENTER>55</TD>
+	<TD CLASS=data-table-item>the value returned by the <B>getOutputVolume</B> instance method</TD>
+</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The output volume of 55 is reached as the result of scaling all the instance's volume scalars and the <B>VOLUME</B> embedding property as percentages of each other. The result of calculating 90% of 70% of 88% of 100% of 100% is actually 55.44%, but this value is rounded to 55.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Custom volume scalars are Music Object instance properties and persist for the lifetime of a Music Object instance. They are not reset when a new file is loaded and played through a Music Object instance.
+</UL>
+
+<DIV CLASS=subsection>Uses</DIV>
+
+<P>Among other things, custom volume scalars can be used to control groups of instances using a shared volume control, without this additional group volume overriding the individual instance volumes that can still be used to balance the mix of the instances in the group. For example, one could use the custom volume scalar mechanism to effectively divide the various Music Object instances that are being used in a Web page's sonification into volume logical groupings, such as a background music group, user interface sounds group, and corporate jingles group.</P>
+
+<P>Volume scalars are also used by some Music Object extensions, such as the <A HREF="extensions/ducking/index.html">Ducking extension</A> and the <A HREF="extensions/group-volume/index.html">Group Volume extension</A>.</P>
+
+<DIV CLASS=subsection>How Does One Create Volume Scalars?</DIV>
+
+<P>Custom volume scalars can be created quite easily using the variation of the <A HREF="instance-methods.html#setVolume"><B>setVolume</B></A> instance method that takes a <B>VolumeScalarNameSTR</B> parameter.</P>
+
+<P>For example, the following statement creates a custom volume scalar named "myVolumeScalar", setting its initial value to 100...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('myVolumeScalar',100);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If the volume scalar specified by the <B>VolumeScalarNameSTR</B> parameter already exists, then the <B>setVolume</B> will simply modify the value for that scalar. Consider the following example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('myVolumeScalar',100);
+myMusicObject.setVolume ('myVolumeScalar',73);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If we assume that the volume scalar "myVolumeScalar" does not exist at the time that the above code is executed, then the first call to the <B>setVolume</B> method will have the effect of creating this volume scalar, while the second call to the <B>setVolume</B> method will simply modify the value of this scalar.</P>
+
+<DIV CLASS=subsection>How Does One Remove Volume Scalars?</DIV>
+
+<P>Custom volume scalars can be removed just as easily as they are created, also using the variation of the <A HREF="instance-methods.html#setVolume"><B>setVolume</B></A> instance method that takes a <B>VolumeScalarNameSTR</B> parameter. To remove a volume scalar, simply specify the name of the scalar for the <B>VolumeScalarName</B> parameter and specify the value <SPAN CLASS=value>-1</SPAN> in place of the <B>Volume0to100</B> parameter.</P>
+
+<P>For example, the following statement removes a custom volume scalar named "myVolumeScalar"...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('myVolumeScalar',-1);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Consider also the following code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('myVolumeScalar',100);
+myMusicObject.setVolume ('myVolumeScalar',73);
+myMusicObject.setVolume ('myVolumeScalar',-1);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If we assume that the volume scalar "myVolumeScalar" does not exist at the time that the above code is executed, then the first call to the <B>setVolume</B> method will have the effect of creating this volume scalar, the second call to the <B>setVolume</B> method will simply modify the value of this scalar, and the third call to the <B>setVolume</B> method will remove the volume scalar. So, in this case, our custom volume scalar would have a rather short-lived existence.</P>
+
+<DIV CLASS=subsection>Volume Scalar Names are Case-sensitive and Space-sensitive</DIV>
+
+<P>When using volume scalars, it is important to remember that volume scalar names are both case-sensitive and space-sensitive. In other words, in order to make sure that you are always referring to the same volume scalar, you must make sure that the name you use to specify the volume scalar is exactly the same in all cases where you wish to use the volume scalar.</P>
+
+<P>So, for example, if you created a volume scalar with the statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('myCustomScalar',50);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...then the statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('MyCustomScalar',75);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...would not set the volume of the volume scalar named "myCustomScalar" that you had already created but would, instead, create another unique volume scalar named "MyCustomScalar" (beginning with a capitalized "M").</P>
+
+<P>Similarly, if you created a volume scalar with the statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('myCustomScalar',50);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...and you then tried to delete that scalar using the statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setVolume ('my CustomScalar',-1);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...the scalar named "myCustomScalar" would not be deleted. Instead, the <B>setVolume</B> method would simply fail to delete the non-existent volume scalar "my CustomScalar".</P>
+
+<A NAME="volume-scalars/reserved"></A>
+<DIV CLASS=subsection>Reserved Volume Scalars</DIV>
+
+<P>Volume scalars are also used by some Music Object extensions, such as the <A HREF="extensions/ducking/index.html">Ducking extension</A> and the <A HREF="extensions/group-volume/index.html">Group Volume extension</A>. For example, when the <A HREF="extensions/group-volume/index.html#Music.setPageVolume"><B>Music.setPageVolume</B></A> static method of the <B>Group Volume</B> extension is called for the first time, a new volume scalar named <NOBR>"[R]GROUP:Page Volume"</NOBR> is created for every Music Object instance in the document. Once created, this volume scalar is then modified for every Music Object instance on every successive call to the <B>Music.setPageVolume</B> method. And, when the <B>Ducking</B> extension is being used in content, every Music Object instance that is created will have a volume scalar named "[R]ducking".</P>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT"><BR>
+<UL CLASS=reference-notes>
+	<LI>You should never set reserved volume scalars explicitly using the <B>setVolume</B> instance method, since this may hamper the proper operation of an extension that is using them.
+	<LI>When choosing names for your own custom volume scalars, you should never choose names that begin with the text "[R]", since this prefix is used by the Music Object API for its own reserved volume scalars.
+</UL>
+
+<!--
+<DIV CLASS=subsection>An Example</DIV>
+
+<BLOCKQUOTE><FONT COLOR=FF0000>[STILL TO COMPLETE]</FONT></BLOCKQUOTE>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="file-volume-scaling"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+File Volume Scaling
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Background</DIV>
+
+<P>Because of differences in musical arrangements (such as the total number of voices being used, the amount of reverb or chorus effects being used, the specific instruments being used, etc.) it is quite common for one composition to sound considerably louder or softer than another composition. Composers creating RMF files have always had the option of entering an internal song volume for each RMF file exported from the Beatnik Editor. This internal volume setting was designed as a means for composers to compensate for differences in the sonic power of different compositions, so that all the compositions can have a similar perceived volume level to the listener.</P>
+
+<P>A song that is markedly softer than other songs could have a higher internal volume setting than the other songs so as to increase its sonic power to match the other songs. Similarly, a song that stands out as being significantly "louder" - for whatever reason - than other songs could have a lower internal volume setting than the other songs so as to decrease its sonic power to match the other songs.</P>
+
+<DIV CLASS=subsection>A Player Bug</DIV>
+
+<P>While this internal volume setting is an invaluable aid to RMF content creators, a bug existed in Beatnik Player versions earlier than 2.1 that caused the internal song volume of RMF files to essentially be disregarded in favor of volume levels set using the <A HREF="../general-reference/embedding-properties.html#volume"><B>VOLUME</B></A> embedding property or the <A HREF="instance-methods.html#setVolume"><B>setVolume</B></A> instance method. As a result of this bug, developers creating sonified content may inadvertently have found themselves re-doing the work of the composers by balancing out the sonic power of different RMF files using a player's volume level.</P>
+
+<P>In order to give meaning to an RMF file's internal song volume, while at the same time observing player volume level, the file volume scaling mechanism was introduced in Beatnik Player version 2.1. Essentially, what "file volume scaling" means is that the player's actual output volume when playing an RMF file is determined by scaling the player's volume level against the internal volume contained within the RMF file. So, a player volume level of 50 would mean that an RMF file would play back at 50% of its internal volume.</P>
+
+<DIV CLASS=subsection>API Features</DIV>
+
+<P>File volume scaling is player instance specific and can be enabled or disabled on a per instance basis, using the <A HREF="../general-reference/embedding-properties.html#filevolumescaling"><B>FILEVOLUMESCALING</B></A> embedding property. A default value for this property can also be set for all instances, using the <A HREF="static-properties.html#Music.embedDefaults"><B>Music.embedDefaults.FILEVOLUMESCALING</B></A> static property.</P>
+
+<P>Once a player instance has been embedded with file volume scaling either enabled or disabled, this state cannot be subsequently changed - there are no instance methods for changing this state. All RMF files played through an instance (using the <A HREF="instance-methods.html#play"><B>play</B></A> instance method, or other methods) will be affected by this fixed state for the file volume scaling mechanism. This is a limitation you should keep in mind.</P>
+
+<DIV CLASS=subsection>Defaults for File Volume Scaling</DIV>
+
+<P>In order to introduce the file volume scaling feature in such a way that most authors can get the benefit of this improvement without having to do anything specific to their content, while at the same time providing the best possible backwards compatibility with existing sonified content, the following rules were chosen for determining the default enabled state for this feature...</P>
+
+<UL>
+	<LI><B>Music Object Versions Earlier Than 3.3.0</B>
+		<P>If a player instance is being embedded in a document using a version of the Music Object API earlier than 3.3.0, then file volume scaling will be disabled.</P>
+		<P>This is to ensure that older sonified content, that was authored using a version of Music Object before the <B>FILEVOLUMESCALING</B> embedding property was introduced, is still played in the same way by Beatnik Player versions 2.1 and higher. It is more reasonable to require developers, who are upgrading their content to use Music Object 3.3.0 or higher, to explicitly disable file volume scaling if desired, since developers who are upgrading their content are more likely to accept any changes that need to be made to their content in order to use a more recent version of the Music Object API.</P>
+	<LI><B>Music Object Versions 3.3.0 and Higher</B>
+		<P>If a player instance is being embedded in a document using version 3.3.0 or higher of the Music Object API, then file volume scaling will be enabled, by default, unless it is disabled explicitly using the <B>FILEVOLUMESCALING</B> embedding property or the <B>Music.embedDefaults.FILEVOLUMESCALING</B> static property.</P>
+		<P>Because the introduction of the file volume scaling feature essentially addresses a failure of Beatnik Player versions earlier than 2.1, it was considered undesirable to require that extra code be added to content in order get the benefit of this feature - a feature that was long overdue. Many developers who are introduced to the Music Object API and the Beatnik Editor for the first time will, in fact, expect that when an RMF file they create is played in sonified content, the RMF file's internal volume will be correctly respected.</P>
+	<LI><B>Simple EMBED / OBJECT Tags</B>
+		<P>If a player instance is being embedded in a document using the <B>EMBED</B> and/or <B>OBJECT</B> HTML tags, then file volume scaling will be enabled by default, unless the value <SPAN CLASS=value>FALSE</SPAN> is explicitly set for the <B>FILEVOLUMESCALING</B> embedding property.</P>
+		<P>Because player instances are usually not embedded using straight HTML when sonifying Web content, but typically only when providing the user with a way of previewing multiple music files, it was decided appropriate to make a player instance embedded in this manner have file volume scaling enabled, by default, so that any RMF file loaded into such an instance will play at the volume intended by the author.</P>
+</UL>
+</P>
+
+<A NAME="file-volume-scaling/keeping-it-the-same"></A>
+<DIV CLASS=subsection>Keeping it Sounding the Same</DIV>
+
+<P>If you are upgrading content to use Music Object 3.3.0 or higher, then you should be aware of the fact that file volume scaling is enabled, by default, in these versions. So, if your content has been tweaked so that the volume levels of any RMF files that play are just right and blend with other elements of the sonification in just the right manner, then you may be surprised to find the overall mix sounding different with the combination of Music Object 3.3.0 (or higher) and the Beatnik Player 2.1 (or higher).</P>
+
+<P>In such cases, you could decide to tweak the volume levels of the various instances to compensate for this change in the mix, or you could simply opt to disable file volume scaling for all instances used in your content. This is actually quite easy to do, thanks to the <B>Music.embedDefaults.FILEVOLUMESCALING</B> static property. Rather than explicitly setting the <B>FILEVOLUMESCALING</B> embedding property to <SPAN CLASS=value>FALSE</SPAN> for each and every instance, you can just set the default value that will be used for this property.</P>
+
+<P>So, in other words, the sample code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject1 = new Music ();
+myMusicObject2 = new Music ();
+myMusicObject3 = new Music ();
+myMusicObject4 = new Music ();
+
+myMusicObject1.preloadEmbed ('my-file1.rmf','<SPAN CLASS=sample-code-highlighted>FILEVOLUMESCALING=FALSE</SPAN> VOLUME=65');
+myMusicObject2.preloadEmbed ('my-file2.rmf','<SPAN CLASS=sample-code-highlighted>FILEVOLUMESCALING=FALSE</SPAN> VOLUME=85');
+myMusicObject3.preloadEmbed ('my-file3.rmf','<SPAN CLASS=sample-code-highlighted>FILEVOLUMESCALING=FALSE</SPAN> VOLUME=93');
+myMusicObject4.preloadEmbed ('my-file4.rmf','<SPAN CLASS=sample-code-highlighted>FILEVOLUMESCALING=FALSE</SPAN> VOLUME=78');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...has essentially the same effect as the sample code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject1 = new Music ();
+myMusicObject2 = new Music ();
+myMusicObject3 = new Music ();
+myMusicObject4 = new Music ();
+
+<SPAN CLASS=sample-code-highlighted>Music.embedDefaults.FILEVOLUMESCALING = 'FALSE';</SPAN>
+
+myMusicObject1.preloadEmbed ('my-file1.rmf','VOLUME=65');
+myMusicObject2.preloadEmbed ('my-file2.rmf','VOLUME=85');
+myMusicObject3.preloadEmbed ('my-file3.rmf','VOLUME=93');
+myMusicObject4.preloadEmbed ('my-file4.rmf','VOLUME=78');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>So, basically, one statement is all that it takes in order to make your content behave exactly the same way as it did with earlier versions of the Music Object API and Beatnik Player.</P>
+
+<DIV CLASS=subsection>Using File Volume Scaling</DIV>
+
+<P>If you have authored RMF files and you have been frustrated by the fact that the internal volumes that you have entered into those files are being ignored, then you will have to upgrade your sonified content so that it is using version 3.3.0 or higher of the Music Object API, and you may wish to also ensure that users who are browsing your content have at least version 2.1 of the Beatnik Player installed. Using Music Object version 3.3.0 or higher alone is not sufficient in order to get the file volume scaling feature, since this feature is actually implemented inside the player. Music Object versions 3.3.0 and higher simply provide hooks in the API in order to customize the file volume scaling feature.</P>
+
+<P>For more information on requiring a minimum player version, consult the section <A HREF="compatibility-aids.html#cutting-edge-content">Compatibility Aids: Cutting Edge Content</A>. For guidelines on upgrading your content to use the most recent version of the Music Object API, consult the <A HREF="version-history/index.html">Music Object Version History</A>.</P>
+
+<DIV CLASS=subsection>Consistent Playback</DIV>
+
+<P>Because player versions earlier than 2.1 do not have the file volume scaling feature and are not able to respect RMF file volume, having file volume scaling enabled in Music Object versions 3.3.0 could potentially result in your sonified content having a different mix depending on the version of the player that the user has installed. In order to ensure that your sonified content does not sound different for different users because of player version, you could do one of two things...</P>
+
+<UL>
+	<LI><B>Disable File Volume Scaling</B>
+		<P>One way to ensure that users get a consistent experience, regardless of the player version they have installed, is to simply disable the file volume scaling feature. In this way, player versions earlier than 2.1 that do not support file volume scaling will disregard RMF file volume settings, and player versions 2.1 and higher that do support file volume scaling will also disregard RMF file volume settings, because this feature is disabled. In this state, player volume level can be used to balance the sonic power of different RMF files in all player versions.</P>
+		<P>For guidelines on disabling file volume scaling for entire content, consult the section <A HREF="#file-volume-scaling/keeping-it-the-same">Keeping it Sounding the Same</A>.</P>
+	<LI><B>Require a Minimum Player Version of 2.1</B>
+		<P>Another way of ensuring that users do not get a different sounding experience because they are using a player version that does not support file volume scaling, is to simply exclude users who do not have at least version 2.1 installed, or prompt such users to upgrade to the latest player version. If, for other reasons, your content is making use of newer features that are only supported in Beatnik Player versions 2.1 or higher, then this may not be an unreasonable approach.</P>
+		<P>For more information on requiring a minimum player version, consult the section <A HREF="compatibility-aids.html#cutting-edge-content">Compatibility Aids: Cutting Edge Content</A>.</P>
+</UL>
+
+<DIV CLASS=subsection>Per Instance File Volume Scaling</DIV>
+
+<P>As mentioned already, file volume scaling can be enabled or disabled on a per instance basis. This can be useful if you start building on previous sonified content, where the existing player instances in use by the content are playing files that have always been affected by the lack of file volume scaling in player versions earlier than 2.1. You may have tweaked the volume levels for those player instances and gotten the mix to a state where you are happy with it.</P>
+
+<P>Now, however, you want to start using some new RMF files you have created in that content, and you would like to get the benefit of the internal volume settings in those files - settings which you painstakingly tweaked in order to match the sonic power of all the files. In order to get the benefit of file volume scaling for those new files while still retaining the old mix for the old files, all you need to do is add new player instances for playing the new files. For those instances, file volume scaling should be enabled and for the instances that will continue to play the older files, file volume scaling should be disabled.</P>
+
+<P>How you go about disabling file volume scaling for the old instances and enabling it for the new instances is up to you, and could depend on the balance of old versus new player instances. For example, if there is only one older instance, then it would make the most sense to just disable file volume scaling for this instance by specifying the value <SPAN CLASS=value>FALSE</SPAN> for the <B>FILEVOLUMESCALING</B> property when embedding this instance. File volume scaling will be enabled for all other instances without having to explicitly set a value for the <B>FILEVOLUMESCALING</B> property, because this is the default for Music Object 3.3.0 and higher.</P>
+
+<P>This approach is highlighted in the following sample code listing...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+oldPlayer1 = new Music ();
+
+newPlayer1 = new Music ();
+newPlayer2 = new Music ();
+newPlayer3 = new Music ();
+newPlayer4 = new Music ();
+
+oldPlayer1.preloadEmbed ('old-file1.rmf','VOLUME=65 <SPAN CLASS=sample-code-highlighted>FILEVOLUMESCALING=FALSE</SPAN>');
+
+newPlayer1.preloadEmbed ('new-file1.rmf');
+newPlayer2.preloadEmbed ('new-file2.rmf');
+newPlayer3.preloadEmbed ('new-file3.rmf');
+newPlayer4.preloadEmbed ('new-file4.rmf');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now, if on the other hand there is only one new instance, then it would make the most sense to use the <B>Music.embedDefaults.FILEVOLUMESCALING</B> static property to set the default value for the <B>FILEVOLUMESCALING</B> embedding property to <SPAN CLASS=value>FALSE</SPAN>, and then explicitly enable file volume scaling for just the one new instance by specifying the value <SPAN CLASS=value>TRUE</SPAN> for the <B>FILEVOLUMESCALING</B> property when embedding this instance.</P>
+
+<P>This approach is highlighted in the following sample code listing...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+oldPlayer1 = new Music ();
+oldPlayer2 = new Music ();
+oldPlayer3 = new Music ();
+oldPlayer4 = new Music ();
+
+newPlayer1 = new Music ();
+
+<SPAN CLASS=sample-code-highlighted>Music.embedDefaults.FILEVOLUMESCALING = 'FALSE';</SPAN>
+
+oldPlayer1.preloadEmbed ('old-file1.rmf','VOLUME=65');
+oldPlayer2.preloadEmbed ('old-file2.rmf','VOLUME=85');
+oldPlayer3.preloadEmbed ('old-file3.rmf','VOLUME=93');
+oldPlayer4.preloadEmbed ('old-file4.rmf','VOLUME=78');
+
+newPlayer1.preloadEmbed ('new-file1.rmf','<SPAN CLASS=sample-code-highlighted>FILEVOLUMESCALING=TRUE</SPAN>');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="pitched-percussion"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Pitched Percussion
+</TD></TR></TABLE>
+<BR>
+
+<P>According to the General MIDI specification, percussion instruments can normally only be triggered on MIDI channel 10. However, with the Beatnik Player it is possible to play the percussion instruments as pitched instruments on any channel. This enables one to achieve cool "talking drum" effects and to discover other sound textures by playing percussion sounds at unnatural pitches. For instance, a cool Gong-like effect can be achieved by playing cymbal crashes at low pitches. Similarly, a multitude of gunshot sounds can be achieved by playing snare drums and other punchy drum sounds at slightly lower pitches. And, for user interface sonification, percussion sounds played at high pitches make good click noises.</P>
+
+<P>There are two ways to play pitched percussion sounds using the Music Object API...</P>
+
+<OL>
+	<LI><A NAME="pitched-percussion/above-127"></A><B>Program Numbers Above 127</B>
+		<P>While RMF and MIDI files restrict program numbers that can be specified in program change events to the range 0 through 127, the note playing methods of the Music Object API (eg. <A HREF="instance-methods.html#noteOn"><B>noteOn</B></A>, <A HREF="instance-methods.html#playNote"><B>playNote</B></A>, etc.) allow one to specify program numbers in the range 0 through 255. This rule also applies to any other methods that can take a <A HREF="parameters.html#ProgramNumber0to255"><B>ProgramNumber0to255</B></A> parameter (for example, the <A HREF="instance-methods.html#setProgram"><B>setProgram</B></A> instance method).</P>
+		<P>For both the General MIDI Bank (bank number 0) and the Special Bank (bank number 1), program numbers 0 through 127 are the chromatic instruments and program numbers 128 through 255 are the percussion instruments. Percussion instruments are usually played on MIDI channel 10, which is General MIDI's dedicated percussion map channel. However, with this ability in the Music Object API to specify program numbers above 127, the percussion instruments that would usually be mapped to individual notes in channel 10's percussion map can be selected as normal instruments for other channels, so that they can then be played across the full range of pitches.</P>
+		<P>Percussion instruments are mapped to program numbers 128 through 255 to match the way they are mapped to note numbers 0 through 127 in channel 10's percussion map. As an example, the percussion sound "Square Click" that is mapped to note number 32 in channel 10's percussion map would be mapped to program number 160 (exactly 128 + 32). As a rule, the program number that one would need to use in order to play a percussion instrument as a chromatic instrument can be obtained by adding 128 to the note number that you would use to trigger that percussion sound in channel 10's percussion map.</P>
+		<BLOCKQUOTE>
+		<IMG SRC="../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Be careful not to confuse this mapping of percussion sounds to program numbers with the way that percussion sounds are mapped to program numbers 0 through 127 when using Channel Instrument Mode 1 (described in the subsection <A HREF="#pitched-percussion/channel-instrument-mode">Channel Instrument Mode</A>). When a channel is set to Channel Instrument Mode 1, program numbers above 127 have no meaning. By default, however, all MIDI channels are set to Channel Instrument Mode 0.
+		</BLOCKQUOTE>
+	<LI><A NAME="pitched-percussion/channel-instrument-mode"></A><B>Channel Instrument Mode</B>
+		<P>The General MIDI specification sets aside MIDI channel 10 as a dedicated percussion map channel. So, what if you wish to have two channels dedicated to playing percussion sounds, with one that is set to play the General MIDI Bank's percussion set, and one that is set to play the Special Bank's percussion set? Or what if you wish to have no percussion in a composition and you'd like to reclaim channel 10 for playing chromatic instruments? Or what if you'd like to take one of the percussion sounds from the percussion set of the General MIDI Bank or the Special Bank and then play that percussion sound in a pitched manner, as though it were a chromatic instrument? The Beatnik Player makes this possible with the Channel Instrument Mode feature (NRPN 640). For comprehensive information on using the Channel Instrument Mode feature, consult the section <A HREF="#channel-instrument-mode">Channel Instrument Mode</A>.</P>
+		<P>Now, in order to use Channel Instrument Mode feature to play percussion in a pitched manner, one would select Channel Instrument Mode 1. This can be done either by using the <A HREF="instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API, or by using the more convenient <A HREF="extensions/channels/index.html#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A> instance method of the <A HREF="extensions/channels/index.html">Channels</A> extension.</P>
+		<P>The sample code listings below show the two different approaches, assuming that we wish to set MIDI channel 1 to Channel Instrument Mode 1...</P>
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Using the setController Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (1,99,5); // non-registered parameter MSB
+myMusicObject.setController (1,98,0); // non-registered parameter LSB
+myMusicObject.setController (1,6,1);  // non-registered parameter value
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelInstrumentMode Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelInstrumentMode (1,1);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+		<P>Once a channel is set to Channel Instrument Mode 1, percussion instruments can be selected for pitched playing using program select events in just the same way as one would normally select chromatic instruments. In this mode, percussion instruments are mapped to program numbers 0 through 127 to match the way they are mapped to note numbers 0 through 127 in channel 10's percussion map. As an example, the percussion sound "Square Click" that is mapped to note number 32 in channel 10's percussion map would be mapped to program number 32.</P>
+		<P>As an example, the following code could be used to select the "Square Click" percussion instrument for pitched playing on MIDI channel 1...</P>
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code>
+<PRE>
+/*** selects Channel Instrument Mode 1 ***/
+myMusicObject.setController (1,99,5);
+myMusicObject.setController (1,98,0);
+myMusicObject.setController (1,6,1);
+
+/*** selects the "Square Click" percussion instrument ***/
+myMusicObject.setProgram (1,0,32);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+		<BLOCKQUOTE>
+		<IMG SRC="../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Be careful not to confuse this mapping of percussion sounds to program numbers with the way that percussion sounds are mapped to program numbers 128 through 255 when using the pitched percussion approach described in the subsection <A HREF="#pitched-percussion/above-127">Program Numbers Above 127</A>. When a channel is set to Channel Instrument Mode 1, program numbers above 127 have no meaning.
+		</BLOCKQUOTE>
+</OL>
+
+<!--***********************************************************************-->
+
+<A NAME="channel-instrument-mode"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Channel Instrument Mode (NRPN 640)
+</TD></TR></TABLE>
+<BR>
+
+<P>The General MIDI specification sets aside MIDI channel 10 as a dedicated percussion map channel. So, what if you wish to have two channels dedicated to playing percussion sounds, with one that is set to play the General MIDI Bank's percussion set, and one that is set to play the Special Bank's percussion set? Or what if you wish to have no percussion in a composition and you'd like to reclaim channel 10 for playing chromatic instruments? Or what if you'd like to take one of the percussion sounds from the percussion set of the General MIDI Bank or the Special Bank and then play that percussion sound in a pitched manner, as though it were a chromatic instrument? The Beatnik Player makes this possible with the Channel Instrument Mode feature.</P>
+
+<P>Channel Instrument Mode for a channel is set using non-registered parameter number (NRPN) 640. Setting non-registered parameter numbers can be done either by using the <A HREF="instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API, or by using the more convenient <A HREF="extensions/channels/index.html#setChannelNrpn"><B>setChannelNrpn</B></A> and <A HREF="extensions/channels/index.html#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A> instance methods of the <A HREF="extensions/channels/index.html">Channels</A> extension.</P>
+
+<P>The sample code listings below show three different approaches to setting Channel Instrument Mode for a channel, assuming for this example that we wish to set MIDI channel 1 to Channel Instrument Mode 1...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Using the setController Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (1,99,5); // non-registered parameter MSB
+myMusicObject.setController (1,98,0); // non-registered parameter LSB
+myMusicObject.setController (1,6,<SPAN CLASS=sample-code-highlighted>1</SPAN>);  // non-registered parameter value
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelNrpn Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelNrpn (1,640,<SPAN CLASS=sample-code-highlighted>1</SPAN>);
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelInstrumentMode Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelInstrumentMode (1,<SPAN CLASS=sample-code-highlighted>1</SPAN>);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>In each of the sample code listings above, the highlighted code indicates where the Channel Instrument Mode value is specified.</P>
+
+<P>The Beatnik Player allows four possible settings for a MIDI channel's Channel Instrument Mode, discussed in detail in the sections below...</P>
+
+<A NAME="channel-instrument-mode/mode-0"></A>
+<DIV CLASS=subsection>Channel Instrument Mode 0 (Normal GM Mode)</DIV>
+
+<P>When a channel is set to Channel Instrument Mode 0, the channel will behave according to the behavior specified for that channel number by the General MIDI specification. The GM specification sets aside MIDI channel 10 as a dedicated percussion map channel, while all other channels act as standard chromatic channels. So, if a channel is set to Channel Instrument Mode 0, then the channel will be a percussion map channel if the channel's number is 10, and a standard chromatic channel if the channel's number is anything other than 10 (1 through 9, 11 through 16).</P>
+
+<A NAME="channel-instrument-mode/mode-1"></A>
+<DIV CLASS=subsection>Channel Instrument Mode 1 (Pitched Percussion Mode)</DIV>
+
+<P>When a channel is set to Channel Instrument Mode 1, the channel will act as a pitched percussion channel (see the section <A HREF="#pitched-percussion">Pitched Percussion</A>). It is normally only possible to play the percussion instruments in a bank using a dedicated note (and sometimes a range of notes) in the bank's percussion map. In this mode, however, it is possible to select percussion sounds for pitched playing using standard bank and program change events, in the same way as one would normally select chromatic instruments. This mode can be set for any channel - including channel 10, which is reserved by the General MIDI specification as the dedicated percussion map channel.</P>
+
+<P>In this mode, percussion instruments are mapped to program numbers 0 through 127 to match the way they are mapped to note numbers 0 through 127 in channel 10's percussion map. As an example, the percussion sound "Square Click" that is mapped to note number 32 in channel 10's percussion map would be mapped to program number 32.</P>
+
+<P>As an example, the following code could be used to select the "Square Click" percussion instrument for pitched playing on MIDI channel 1...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelInstrumentMode (1,1);
+myMusicObject.setProgram (1,0,32);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Be careful not to confuse this mapping of percussion sounds to program numbers with the way that percussion sounds are mapped to program numbers 128 through 255 when using the pitched percussion approach described in the subsection <A HREF="#pitched-percussion/above-127">Program Numbers Above 127</A>. When a channel is set to Channel Instrument Mode 1, program numbers above 127 have no meaning.
+	<LI>When a channel is set to Channel Instrument Mode 1, it is not possible to select instruments from a bank's chromatic instrument set.
+</UL>
+
+<A NAME="channel-instrument-mode/mode-2"></A>
+<DIV CLASS=subsection>Channel Instrument Mode 2 (Standard Percussion Mode)</DIV>
+
+<P>When a channel is set to Channel Instrument Mode 2, the channel will act as a percussion map channel and will behave according to the behavior specified for channel 10 (the dedicated percussion map channel) by the General MIDI specification. This, in effect, allows you to create "more channel 10's" on different channels. There are several ways in which this feature could be used...</P>
+<UL>
+	<LI><P>With an interactive music remixing application, one could spread a composition's rhythm arrangement over many channels, so that the user could mix in the different rhythmic elements in differing degrees by controlling the channel volumes (MIDI continuous controller 7) of the different percussion channels.</P>
+	<LI><P>By separating a composition's rhythm out across multiple channels, one could apply different amounts of effects, such as reverb, and different stereo pan settings to different parts of a composition's rhythm.</P>
+	<LI><P>One could make use of percussion sounds from the General MIDI Bank percussion set and the Special Bank percussion set at the same time. One would simply set another channel (other than 10) to Channel Instrument Mode 2, and then select bank number 1 (the Special Bank) for that channel.</P>
+	<LI><P>One could create percussion "echo channels" in the assurance that there won't be any unpredictable retriggering problems if the duration of the main notes overlaps the start of the echo notes.</P>
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>When a channel is set to Channel Instrument Mode 2, it is not possible to select instruments from a bank's chromatic instrument set.
+</UL>
+
+<A NAME="channel-instrument-mode/mode-3"></A>
+<DIV CLASS=subsection>Channel Instrument Mode 3 (Standard Chromatic Mode)</DIV>
+
+<P>When a channel is set to Channel Instrument Mode 3, the channel will act as a chromatic instrument channel. It is normally not possible to play chromatic instruments on MIDI channel 10, since this channel is set aside by the General MIDI specification as a dedicated percussion map channel. However, when a channel is set to this mode, it is possible to play instruments from a bank's chromatic instrument set, regardless of the channel's number. This effectively provides a way to reclaim channel 10 for playing chromatic instruments in cases where you do not need a percussion map channel and where as many chromatic instrument channels as possible are needed.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>When a channel is set to Channel Instrument Mode 3, it is still possible to select instruments from a bank's percussion instrument set using the pitched percussion approach described in the subsection <A HREF="#pitched-percussion/above-127">Program Numbers Above 127</A>.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="mute-solo"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Mute and Solo, and How They Interact with Each Other
+</TD></TR></TABLE>
+<BR>
+
+<P>For the purposes of this discussion, we will use channel mute and channel solo to illustrate how the mute and solo status interact with each other to decide the final playing state of a channel. The same principle applies to track mute and track solo, and it should be noted that track mute and track solo and channel mute and channel solo also act in conjunction with each other. For instance, if after channel mute and channel solo are taken into account a particular MIDI channel is allowed to play, if MIDI information for that channel is contained in a track which is muted, the MIDI information for that channel on that track will not be played. However, MIDI information for that channel <B>will</B> play if contained on a track which is not muted.</P>
+
+<P>What follows is a series of tables illustrating different mute/solo scenarios and the ultimate outcome. If a column is checked it indicates that the channel is muted, soloed, or playing, according to the column that the checkmark is in.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR ALIGN=CENTER>
+	<TD><IMG SRC="../images/mute-solo-scenario1.gif" WIDTH=154 HEIGHT=215 HSPACE=0 VSPACE=0 ALT="Scenario 1"></TD>
+	<TD><IMG SRC="../images/mute-solo-scenario2.gif" WIDTH=154 HEIGHT=215 HSPACE=0 VSPACE=0 ALT="Scenario 2"></TD>
+	<TD><IMG SRC="../images/mute-solo-scenario3.gif" WIDTH=154 HEIGHT=215 HSPACE=0 VSPACE=0 ALT="Scenario 3"></TD>
+	<TD><IMG SRC="../images/mute-solo-scenario4.gif" WIDTH=154 HEIGHT=215 HSPACE=0 VSPACE=0 ALT="Scenario 4"></TD>
+</TR></TABLE>
+<BR>
+
+<P>A clear demonstration of channel mute and channel solo working together in a real life example can be seen in the <A HREF="../sample-code/index.html?mixer/index.html">Re-Mixer Demo</A></P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>With the Beatnik Player, notes that are triggered on a channel or track that is inactive do not get turned on if they are still being sustained at the time that the channel or track becomes active again.
+	<LI>Muting and soloing a channel does not affect or interfere with a channel's volume controller (controller number 7).
+</UL>
+
+<DIV CLASS=subsection>Determining if a Channel is Active</DIV>
+
+<P>Because a channel can be active or inactive depending on its mute state, its solo state, and the solo states of all other channels, one cannot simply use the <A HREF="instance-methods.html#getChannelMute"><B>getChannelMute</B></A> method to determine if a channel is active. Instead, one has to write a little bit of custom code. The following piece of sample code adds the instance method <B>isChannelActive</B> that takes into account mute and solo states to determine if a channel is actually active...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;-- //
+
+function mo_isChannelActive (channelNo) {
+   var isActive = !this.getChannelMute (channelNo);
+   if (isActive && !this.getChannelSolo (channelNo)) {
+      for (var otherChannel = 0; otherChannel < 17 && isActive; otherChannel++) {
+         if (otherChannel != channelNo) {
+            isActive = isActive && !this.getChannelSolo (otherChannel);
+         }
+      }
+   }
+   return isActive;
+}
+
+Music.addPublicInstanceMethods ('isChannelActive');
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The above segment of sample code uses the <A HREF="extensibility-api.html">Music Object Extensibility API</A> to add an instance method to the Music Object API. In this way, all Music Object instances that are created after the new instance method has been added to the API will provide this method. So, if a Music Object instance is created called "myMusicObject", then it would be possible to determine if channel 10 is active with the statement <B><NOBR>myMusicObject.isChannelActive (10)</NOBR></B>.</P>
+
+<P>This new <B>isChannelActive</B> method determines a channel's active state based upon the following principles...</P>
+<UL>
+	<LI>If a channel is muted then it is always inactive, regardless of its solo state or the solo state of all other channels.
+	<LI>If a channel is not muted and it is soloed, then the channel is active, regardless of the solo state of all other channels.
+	<LI>If a channel is not muted and it is not soloed, then the channel will be active only if no other channel are soloed.
+</UL>
+
+<DIV CLASS=subsection>Determining if a Track is Active</DIV>
+
+<P>The principles used to determine whether or not a track is active are much the same as the principles used to determine whether or not a channel is active.</P>
+
+<P>A track can be active or inactive depending on its mute state, its solo state, and the solo states of all other tracks, so one cannot simply use the <A HREF="instance-methods.html#getTrackMute"><B>getTrackMute</B></A> method to determine if a track is active. The following piece of sample code adds the instance method <B>isTrackActive</B> that takes into account mute and solo states to determine if a track is actually active...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;-- //
+
+function mo_isTrackActive (trackNo) {
+   var isActive = !this.getTrackMute (trackNo);
+   if (isActive && !this.getTrackSolo (trackNo)) {
+      for (var otherTrack = 0; otherTrack < 65 && isActive; otherTrack++) {
+         if (otherTrack != trackNo) {
+            isActive = isActive && !this.getTrackSolo (otherTrack);
+         }
+      }
+   }
+   return isActive;
+}
+
+Music.addPublicInstanceMethods ('isTrackActive');
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The above segment of sample code adds the <B>isTrackActive</B> instance method to the Music Object API, so that all Music Object instances that are created after this new instance method has been added to the API will provide this method. So, if a Music Object instance is created called "myMusicObject", then it would be possible to determine if track 5 is active with the statement <B><NOBR>myMusicObject.isTrackActive (5)</NOBR></B>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="midi-event-queue"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+MIDI Event Queue
+</TD></TR></TABLE>
+<BR>
+
+<P>With the Beatnik Player, some methods have the effect of adding events to the MIDI event queue, rather than modifying the state of the underlying audio engine immediately at the time that the method is called. The events that are added get processed by the audio engine after all other events that were already in the queue at the time that the method was called are processed. So, with these methods there is inherently some delay between the time that the method is called and when the expected change takes effect in the audio engine. While this delay may be extremely small (as low as 11 milliseconds), it is long enough that cases may arise where code may not behave as one might expect.</P>
+
+<DIV CLASS=subsection>An Example</DIV>
+
+<P>A case in point would be the <A HREF="instance-methods.html#setController"><B>setController</B></A> method, which lets you modify the value of any one of the Beatnik Player's <A HREF="../appendixes/supported-midi-controllers.html">supported MIDI controllers</A>. With the Beatnik Player, the <B>setController</B> method adds a continuous controller MIDI event to the MIDI event queue, to be processed after all other events already in the queue have been processed. This means that calling the <A HREF="instance-methods.html#getController"><B>getController</B></A> method immediately after calling the <B>setController</B> method may not have the expected effect of returning the value that was just "set" using the <B>setController</B> method.</P>
+
+<P>In this example, let's assume that the channel volume for MIDI channel 1 is set to <SPAN CLASS=value>100</SPAN> at the time that the following two statements are executed...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (1,7,0);
+myMusicObject.setController (1,7,myMusicObject.getController (1,7));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<P>If you didn't take into account the MIDI event queue when looking at this code, you may expect that the channel volume would be set to <SPAN CLASS=value>0</SPAN> after the two statements are executed. However, because of the MIDI event queue, the channel volume is more likely to be set to <SPAN CLASS=value>100</SPAN> once the two statements are executed. This is because it's likely to take longer for the first call to the <B>setController</B> method to take any effect at the audio engine level than it would take for the JavaScript interpreter to execute both statements.</P>
+
+<P>As a result, when the second call to the <B>setController</B> method is executed, the value returned by the <B>getController</B> method will still be <SPAN CLASS=value>100</SPAN> (the value for the channel's volume before any of the statements were executed), because the first call to the <B>setController</B> method will not yet have taken effect at the audio engine level. So, what ends up in the MIDI event queue after these two statements are executed is a channel volume event with a value of <SPAN CLASS=value>0</SPAN> immediately followed by another channel volume event with a value of <SPAN CLASS=value>100</SPAN>, and the end result is that the channel volume for MIDI channel 1 ends up being set to <SPAN CLASS=value>100</SPAN> and <B>not</B> <SPAN CLASS=value>0</SPAN>, as one might expect.</P>
+
+<DIV CLASS=subsection>Another Example</DIV>
+
+<P>In another example, let's assume that the channel volume for MIDI channel 1 is set to <SPAN CLASS=value>100</SPAN> at the time that the following block of statements is executed...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (1,7,myMusicObject.getController (1,7) - 10);
+myMusicObject.setController (1,7,myMusicObject.getController (1,7) - 10);
+myMusicObject.setController (1,7,myMusicObject.getController (1,7) - 10);
+myMusicObject.setController (1,7,myMusicObject.getController (1,7) - 10);
+myMusicObject.setController (1,7,myMusicObject.getController (1,7) - 10);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, there are 5 calls to the <B>setController</B> method, and each time the channel volume is set to 10 less than the current volume for the channel. Now, if you didn't take into account the MIDI event queue and you took a casual glance at this code, you may expect that the channel volume would be set to <SPAN CLASS=value>50</SPAN> once all the statements were executed. However, because of the MIDI event queue, the channel volume is more likely to be set to <SPAN CLASS=value>90</SPAN> once all the statements are executed. This is because it will almost invariably take longer for the engine to process any of the channel volume events that are added to the MIDI event queue by the <B>setController</B> method calls than it would take for the JavaScript interpreter to execute the entire block of statements.</P>
+
+<P>So, in reality, when the second, third, fourth, and fifth statements are executed, the value returned by the <B>getController</B> method will always be <SPAN CLASS=value>100</SPAN>, because none of the calls to the <B>setController</B> method will have taken any effect at the audio engine level. The engine will not yet have been able to process the channel volume MIDI events. So, what ends up in the MIDI event queue as a result of this block of statements is 5 consecutive channel volume events with a value of <SPAN CLASS=value>90</SPAN>, so the end result is that the channel volume for MIDI channel 1 ends up being set to <SPAN CLASS=value>90</SPAN> and <B>not</B> <SPAN CLASS=value>50</SPAN>, as one may be tempted to think.</P>
+
+<DIV CLASS=subsection>Methods Affected</DIV>
+
+<P>Methods affected by the principle of the MIDI event queue include the core Music Object API's <A HREF="instance-methods.html#getController"><B>getController</B></A>, <A HREF="instance-methods.html#setController"><B>setController</B></A>, <A HREF="instance-methods.html#getProgram"><B>getProgram</B></A>, and <A HREF="instance-methods.html#setProgram"><B>setProgram</B></A> methods. Other methods that will be affected are any methods provided as part of Music Object extensions that use in their implementation any of the core Music Object API methods that are affected. An example would be the <A HREF="extensions/channels/index.html">Channels</A> Music Object extension, which provides an array of "convenience" methods (such as the <A HREF="extensions/channels/index.html#setChannelVolume"><B>setChannelVolume</B></A> method) that make it easier to query and modify the values of various MIDI controllers.</P>
+
+</BODY></HTML>

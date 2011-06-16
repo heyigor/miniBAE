@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+	<TITLE>Sonification Strategies</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Sonification Strategies
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--
+
+Type of Sonification	Sound Source	Approx. Impact on File Size
+
+Background music, play ad banner sound during page load
+
+
+· Sound banks
+· WebTV UI sounds
+· Embedded RMF files (Plus-only)
+
+HTML-only
+200 bytes (<1K)
+
+Sounds triggered by more interactive events on a page
+
+Example: Sound when ad banner is selected or a button is "clicked". 
+
+* For a single page authored for WebTV boxes-only, rather than for multiple clients. 
+
+· Embedded MIDI synth
+· Sound banks
+· Groovoids (Plus-only)
+· Embedded RMF files (Plus-only)
+JavaScript required
+Basic interactivity: 10K
+Adv. Interactivity: 24K
+
+
+
+Same as above, but for a single page authored to be delivered to multiple platforms/browsers.
+Same
+JavaScript required
+Basic interactivity: 22K
+Adv. Interactivity: 36K
+
+
+Download RMF files with banner (short music files or voice)
+
+Examples:	 Intel sound
+		"Do You Yahoo? with instrumental lead-in
+		Voice saying "Searching now" for Infoseek button. 
+
+Custom RMF file downloaded
+Adds a little more to file size. Calculation depends on length of sound and quality.
+
+Can be as low as 1K (or less)       for an instrument sample or a       sound effect, bigger for a long instrumental or voice. 
+
+Files often average 15K/seconds.
+
+-->
+
+</BODY>
+</HTML>

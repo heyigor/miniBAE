@@ -1,0 +1,25 @@
+/*** Navigation Menu ***/
+
+BODY {
+	background: #666;
+}
+
+TD.menu-section, TD.menu-section A {
+	color: #CCC;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+A.menu-item {
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 12px;
+	color: #CCC;
+	line-height: 110%;
+	text-decoration: none;
+}
+A.menu-item:hover, TD.menu-section A:hover {
+	color: #FFF;
+	text-decoration: underline;
+}
+

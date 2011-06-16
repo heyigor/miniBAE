@@ -1,0 +1,127 @@
+//---------------------------------------------------------
+// test03.txt
+//---------------------------------------------------------
+// 
+// A Mini-BAE TestSuite script
+//
+// Usage:  testsuite.exe < test03.txt (at the MS-DOS prompt)
+//
+//---------------------------------------------------------
+//
+// Tests in this script:
+//
+// 1. Play Files and Stop:
+//    a. MIDI file
+//    b. RMF file
+//
+//---------------------------------------------------------
+// Jan. 19, 2000 by Chris Grigg (chrisg@beatnik.com)
+// Based on Mark Deggeler's go.txt
+// (c) 2000 by Beatnik, Inc.  All rights reserved.
+//---------------------------------------------------------
+
+
+
+// create mixer
+1
+1
+1 // open mixer 8hz,16bit
+
+// load default patch file
+1
+1
+4
+
+
+//---------------------------------------------------------
+// 1.a. Play MIDI File and Stop
+//---------------------------------------------------------
+
+// create new BAESong object -----------
+3
+2
+1
+0             // slot 0
+
+// load MIDI file ------------------------
+3
+2
+34
+0             // slot 0
+testMidi1.mid // name of file
+y             // ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+0            // slot 0
+0            // priority 0
+
+
+
+// PAUSE --------------------------------
+4
+5           // Wait 5 seconds to let file play
+
+
+// stop! -------------------------------
+3
+2
+39
+0            // slot 0
+n            // don't fade
+
+
+
+
+// PAUSE --------------------------------
+4
+3           // Wait 3 seconds in between tests
+
+
+//---------------------------------------------------------
+// 1.b. Play RMF File and Stop
+//---------------------------------------------------------
+
+// create new BAESong object -----------
+3
+2
+1
+1             // slot 1
+
+// load RMF file ------------------------
+3
+2
+36
+1             // slot 1
+House.rmf     // name of file
+0             // song 0
+y 	      // ignore bad instruments
+
+// start! -------------------------------
+3
+2
+38
+1            // slot 1
+0            // priority 0
+
+
+
+// PAUSE --------------------------------
+4
+5           // Wait 5 seconds to let file play
+
+
+// stop! -------------------------------
+3
+2
+39
+0            // slot 0
+n            // don't fade
+
+
+
+// quit
+0	// VERY IMPORTANT TO QUIT AT END!!!!!
+

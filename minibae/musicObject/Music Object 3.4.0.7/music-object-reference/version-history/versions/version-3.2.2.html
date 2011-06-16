@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 3.2.2</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 3.2.2<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1999-12-13</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are upgrading from Music Object version 2.x and would like to know about the significant changes that have occurred between versions 2.x and 3.0.x, please consult the version history for <A HREF="version-3.0.0.html">Music Object Version 3.0.0</A>.</P>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>BUG FIX - onMetaEvent Method Not Working</DIV>
+
+<BLOCKQUOTE>
+A bug was found with the <A HREF="../../instance-methods.html#onMetaEvent" TARGET="_parent"><B>onMetaEvent</B></A> instance method that prevented authors from being able to register meta event handlers. This bug crept in at Music Object 3.1.0 and has now been fixed in the 3.2.2 maintenance release.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - magicEmbed & Music.magicEmbed</DIV>
+
+<BLOCKQUOTE>
+A minor bug was found with the <A HREF="../../instance-methods.html#magicEmbed" TARGET="_parent"><B>magicEmbed</B></A> instance method and the <A HREF="../../static-methods.html#Music.magicEmbed" TARGET="_parent"><B>Music.magicEmbed</B></A> static method where specifying an empty string for any attribute would cause a player instance to be embedded incorrectly. For example, a statement such as <NOBR><B>myMusicObject.magicEmbed ('SRC="" WIDTH=2 HEIGHT=2 HIDDEN')</B></NOBR> would have caused problems because of the empty string specified for the <B>SRC</B> attribute. This bug has been fixed.
+</BLOCKQUOTE>
+
+</BODY></HTML>

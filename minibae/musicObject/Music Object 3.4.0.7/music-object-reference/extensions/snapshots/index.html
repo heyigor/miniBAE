@@ -1,0 +1,740 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Snapshots</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Snapshots
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Snapshots extension provides methods for easily capturing and restoring mix snapshots for RMF and MIDI files that are playing - something that can prove quite useful when creating certain kinds of remixing applications.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-snapshots.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-snapshots.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-snapshots.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-snapshots.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#captureSnapshot">captureSnapshot</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you capture a snapshot of the current playback state for an RMF or MIDI file.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getSnapshotFilter">getSnapshotFilter</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a string value, representing the current filter settings being used for the specified snapshot.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#isSnapshotDefined">isSnapshotDefined</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not there exists a snapshot by the specified name.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#recallSnapshot">recallSnapshot</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you recall the specified snapshot, so that the Music Object instance is restored to the playback state captured by that snapshot.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeSnapshot">removeSnapshot</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you remove (clear) the snapshot of the specified name.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#resetSnapshotFilter">resetSnapshotFilter</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you reset the filter settings for the specified snapshot, so that either all or none of the filter options are enabled.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setSnapshotFilter">setSnapshotFilter</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the filter settings for the specified snapshot.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.defaultSnapshotFilter">Music.defaultSnapshotFilter</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the SnapshotFilterSTR parameter, if this parameter is not specified when using the captureSnapshot and setSnapshotFilter instance methods.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#common-parameters">Common Parameters</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#SnapshotFilterSTR">SnapshotFilterSTR</A></TD>
+	<TD CLASS=contents-table-item-desc>A string, specifying the enabled state for the various available snapshot filter options.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="captureSnapshot"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;captureSnapshot</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>captureSnapshot</B> instance method lets you capture a snapshot of the current playback state for an RMF or MIDI file.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>captureSnapshot (</B> SnapshotNameSTR <B>,</B> <A HREF="#SnapshotFilterSTR">SnapshotFilterSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SnapshotFilterSTR</B> parameter and the snapshot is being created for the first time, then the value of the <A HREF="#Music.defaultSnapshotFilter"><B>Music.defaultSnapshotFilter</B></A> static property is used for this parameter. If a snapshot already exists with the name specified by the <B>SnapshotNameSTR</B> parameter and the value <SPAN CLASS=value>null</SPAN> is specified for the <B>SnapshotFilterSTR</B> parameter, then the snapshot's current filter settings will not be changed.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>captureSnapshot (</B> SnapshotNameSTR <B>)</B>
+		<P>When no <B>SnapshotFilterSTR</B> parameter is specified and the snapshot is being created for the first time, then the value of the <A HREF="#Music.defaultSnapshotFilter"><B>Music.defaultSnapshotFilter</B></A> static property is used for this parameter. If a snapshot already exists with the name specified by the <B>SnapshotNameSTR</B> parameter and no <B>SnapshotFilterSTR</B> parameter is specified, then the snapshot's current filter settings will not be changed.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="getSnapshotFilter"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getSnapshotFilter</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getSnapshotFilter</B> instance method returns a string value, representing the current filter settings being used for the specified snapshot.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getSnapshotFilter (</B> SnapshotNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="#SnapshotFilterSTR">SnapshotFilterSTR</A></TD>
+	</TR>
+</TABLE>
+
+<P>Filter settings can be easily copied from one snapshot to another using a combination of the <B>getSnapshotFilter</B> and <B>setSnapshotFilter</B> methods, as in the example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setSnapshotFilter (
+   'My Snapshot 2',
+   myMusicObject.getSnapshotFilter ('My Snapshot 1')
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, we are calling the <B>setSnapshotFilter</B> method in order to set the filter for the snapshot named "My Snapshot 2". For the <B>SnapshotFilterSTR</B> parameter of the <B>setSnapshotFilter</B> method we are passing the result of the expression <NOBR><SPAN CLASS=sample-code>myMusicObject.getSnapshotFilter ('My Snapshot 1')</SPAN></NOBR>, which retrieves the filter from the snapshot named "My Snapshot 1". This has the effect of copying the filter for the snapshot "My Snapshot 1" to the snapshot "My Snapshot 2".</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>When no snapshot exists with the name specified by the <B>SnapshotNameSTR</B> parameter, then this method will return an empty string.
+	<LI>The filter settings for a snapshot can be set using the <A HREF="#setSnapshotFilter"><B>setSnapshotFilter</B></A> instance method.
+</UL>
+
+<A NAME="isSnapshotDefined"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;isSnapshotDefined</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>isSnapshotDefined</B> instance method returns a boolean value, indicating whether or not there exists a snapshot by the specified name.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>isSnapshotDefined (</B> SnapshotNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>boolean</TD>
+	</TR>
+</TABLE>
+
+<P></P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="recallSnapshot"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;recallSnapshot</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>recallSnapshot</B> instance method lets you recall the specified snapshot, so that the Music Object instance is restored to the playback state captured by that snapshot.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>recallSnapshot (</B> SnapshotNameSTR <B>,</B> <A HREF="#SnapshotFilterSTR">SnapshotFilterSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SnapshotFilterSTR</B> parameter, then the snapshot's current filter settings are used.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>recallSnapshot (</B> SnapshotNameSTR <B>)</B>
+		<P>When no <B>SnapshotFilterSTR</B> parameter is specified, then the snapshot's current filter settings are used.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="removeSnapshot"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeSnapshot</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeSnapshot</B> instance method lets you remove (clear) the snapshot of the specified name.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeSnapshot (</B> SnapshotNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Once a snapshot has been removed using this method, any attempt to recall it using the <A HREF="#recallSnapshot"><B>recallSnapshot</B></A> instance method will fail and will simply be ignored.</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="resetSnapshotFilter"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;resetSnapshotFilter</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>resetSnapshotFilter</B> instance method lets you reset the filter settings for the specified snapshot, so that either all or none of the filter options are enabled.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>resetSnapshotFilter (</B> SnapshotNameSTR <B>,</B> ResetStateSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>When a string value of "<SPAN CLASS=value>ON</SPAN>", "<SPAN CLASS=value>1</SPAN>", or "<SPAN CLASS=value>TRUE</SPAN>" is specified for the <B>ResetStateSTR</B> parameter, then the filter will be reset so that all filter options are enabled. And when a string value of "<SPAN CLASS=value>OFF</SPAN>", "<SPAN CLASS=value>0</SPAN>", or "<SPAN CLASS=value>FALSE</SPAN>" is specified for the <B>ResetStateSTR</B> parameter, then the filter will be reset so that all filter options are disabled.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>resetSnapshotFilter (</B> SnapshotNameSTR <B>)</B>
+		<P>When no <B>ResetStateSTR</B> parameter is specified, then the default string value "<SPAN CLASS=value>ON</SPAN>" is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="setSnapshotFilter"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setSnapshotFilter</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setSnapshotFilter</B> instance method lets you set the filter settings for the specified snapshot
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setSnapshotFilter (</B> SnapshotNameSTR <B>,</B> <A HREF="#SnapshotFilterSTR">SnapshotFilterSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SnapshotFilterSTR</B> parameter, then the value of the <A HREF="#Music.defaultSnapshotFilter"><B>Music.defaultSnapshotFilter</B></A> static property is used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>setSnapshotFilter (</B> SnapshotNameSTR <B>)</B>
+		<P>When no <B>SnapshotFilterSTR</B> parameter is specified, then the value of the <A HREF="#Music.defaultSnapshotFilter"><B>Music.defaultSnapshotFilter</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>The filter settings for a snapshot can be queried using the <A HREF="#getSnapshotFilter"><B>getSnapshotFilter</B></A> instance method.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.defaultSnapshotFilter"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.defaultSnapshotFilter</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Snapshots</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-- see below --&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.defaultSnapshotFilter</B> static property is a string variable, specifying the default value that should be used for the <B>SnapshotFilterSTR</B> parameter, if this parameter is not specified when using the <A HREF="#captureSnapshot"><B>captureSnapshot</B></A> and <A HREF="#setSnapshotFilter"><B>setSnapshotFilter</B></A> instance methods.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The default value for the <B>Music.defaultSnapshotFilter</B> property is "<SPAN CLASS=value>CHANNELMUTE=ON CHANNELSOLO=ON CHANNELMODULATION=ON CHANNELVOLUME=ON CHANNELPAN=ON CHANNELEXPRESSION=ON CHANNELSUSTAIN=ON CHANNELREVERBTYPE=ON CHANNELREVERBLEVEL=ON CHANNELCHORUSLEVEL=ON POSITION=ON TEMPO=ON TRANSPOSE=ON VOLUME=ON</SPAN>".</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="common-parameters"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Common Parameters
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="SnapshotFilterSTR"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;SnapshotFilterSTR</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Parameter&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>The <B>SnapshotFilterSTR</B> parameter is a string, specifying the enabled state for the various available snapshot filter options.</P>
+<BR CLEAR=RIGHT>
+
+<P>The syntax of the <B>SnapshotFilterSTR</B> parameter is much like that of the <A HREF="../../parameters.html#EmbedLineSTR"><B>EmbedLineSTR</B></A> parameter that is used by the various <A HREF="../../instance-methods.html#embedding">embedding methods</A> of the Music Object API, and consists of a series of name/value pairs seperated by whitespace. Each name/value pair has the syntax...</P>
+
+<P>FilterOptionName=[<SPAN CLASS=value>ON</SPAN>|<SPAN CLASS=value>1</SPAN>|<SPAN CLASS=value>TRUE</SPAN>|<SPAN CLASS=value>OFF</SPAN>|<SPAN CLASS=value>0</SPAN>|<SPAN CLASS=value>FALSE</SPAN>]</P>
+
+<P>The values "<SPAN CLASS=value>ON</SPAN>", "<SPAN CLASS=value>1</SPAN>", and "<SPAN CLASS=value>TRUE</SPAN>" all have the same meaning and indicate that the filter option will be enabled. Similarly, the values "<SPAN CLASS=value>OFF</SPAN>", "<SPAN CLASS=value>0</SPAN>", and "<SPAN CLASS=value>FALSE</SPAN>" all have the same meaning and indicate that the filter option will be disabled.</P>
+
+<P>So, for example, the value "<SPAN CLASS=value>CHANNELPAN=ON TEMPO=OFF POSITION=FALSE TRANSPOSE=1</SPAN>" for the <B>SnapshotFilterSTR</B> parameter specifies that the filter options for channel pan and transposition are enabled, whereas the filter options for tempo and position are disabled.</P>
+
+<P>For the <B>SnapshotFilterSTR</B> parameter, the following filter option names can be specified...</P>
+
+<UL>
+	<LI><B>CHANNELMUTE</B><BR>
+		lets you enable or disable the recall of channel mute settings.
+		<P></P>
+	<LI><B>CHANNELSOLO</B><BR>
+		lets you enable or disable the recall of channel solo settings.
+		<P></P>
+	<LI><B>CHANNELMODULATION</B><BR>
+		lets you enable or disable the recall of channel modulation settings (MIDI controller 1).
+		<P></P>
+	<LI><B>CHANNELVOLUME</B><BR>
+		lets you enable or disable the recall of channel volume settings (MIDI controller 7).
+		<P></P>
+	<LI><B>CHANNELPAN</B><BR>
+		lets you enable or disable the recall of channel pan settings (MIDI controller 10).
+		<P></P>
+	<LI><B>CHANNELEXPRESSION</B><BR>
+		lets you enable or disable the recall of channel expression settings (MIDI controller 11).
+		<P></P>
+	<LI><B>CHANNELSUSTAIN</B><BR>
+		lets you enable or disable the recall of channel sustain pedal settings (MIDI controller 64).
+		<P></P>
+	<LI><B>CHANNELREVERBTYPE</B><BR>
+		lets you enable or disable the recall of channel reverb type settings (MIDI controller 90).
+		<P></P>
+	<LI><B>CHANNELREVERBLEVEL</B><BR>
+		lets you enable or disable the recall of channel reverb level settings (MIDI controller 91).
+		<P></P>
+	<LI><B>CHANNELCHORUSLEVEL</B><BR>
+		lets you enable or disable the recall of channel chorus level settings (MIDI controller 93).
+		<P></P>
+	<LI><B>POSITION</B><BR>
+		lets you enable or disable the recall of song position.
+		<P></P>
+	<LI><B>TEMPO</B><BR>
+		lets you enable or disable the recall of playback tempo.
+		<P></P>
+	<LI><B>TRANSPOSE</B><BR>
+		lets you enable or disable the recall of pitch transposition.
+		<P></P>
+	<LI><B>VOLUME</B><BR>
+		lets you enable or disable the recall of volume level.
+		<P></P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Filter option names and filter option values are not case-sensitive.
+	<LI>Methods using this parameter: <A HREF="#captureSnapshot"><B>captureSnapshot</B></A> , <A HREF="#recallSnapshot"><B>recallSnapshot</B></A> , <A HREF="#setSnapshotFilter"><B>setSnapshotFilter</B></A>.
+	<LI>Methods returning this parameter: <A HREF="#getSnapshotFilter"><B>getSnapshotFilter</B></A>.
+</UL>
+
+</BODY></HTML>

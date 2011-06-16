@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Issues: Embedding Hidden Instances in Table Cells</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Embedding Hidden Instances in Table Cells
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>With the new mechanism for embedding truly hidden player instances introduced in Music Object version 3.3, a problem was found with embedding hidden instances in table cells (or other container elements), that would cause intermittent crashes in some 4.x versions of Netscape Navigator.</P>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>A sonified document that contains one or more hidden player instances embedded inside table cells (or other container elements), may sometimes cause a crash in certain versions of Netscape 4.x when the document is reloaded. Occasionally also, when a crash does not occur, the sonification of the page may fail in other ways.</P>
+
+<DIV CLASS=subsection>Severity</DIV>
+
+<P>It is quite rare, indeed, for hidden instances to be embedded inside table cells. The chances are that this issue may not be relevant to any of your sonified content. Just about the only reason that this problem could affect your content is if you had previously used the technique of embedding hidden instances in table cells as a way of controlling the effect that the small 2x2 pixel semi-hidden instances (created by versions of Music Object earlier than 3.3) would have on a document's layout. If you then upgraded that content to use version 3.3 (or higher) of the Music Object API, your content could be exposed to this issue.</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>Because hidden instances no longer impact the flow of a document's layout, there is really no compelling reason at all to embed them inside table cells (or any other container elements, for that matter). So, in order to avoid this potential browser crash, hidden instances should not be embedded within elements deep inside a document's layout hierarchy, but should only ever be embedded as top level members of the BODY tag.</P>
+
+</BODY></HTML>

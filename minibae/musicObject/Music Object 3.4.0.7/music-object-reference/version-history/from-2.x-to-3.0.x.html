@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+	<TITLE>Migrating Content from Music Object 2.x to 3.0.x</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Migrating Content from Music Object 2.x to 3.0.x
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are not already familiar with the significant changes that have occurred between Music Object version 2.x and 3.0.x, please consult the version history for <A HREF="versions/version-3.0.0.html">Music Object 3.0.0</A>. If you are already familiar with the version 3.0.0 changes and would like to update your content that was authored for 2.x version of Music Object, please follow the instruction below...</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+If your content has been not been authored for a Music Object 2.x version, then you should first consult previous sections about migrating your content, starting from the Music Object version your content is currently using and working your way up to version 2.x. Once all your content has been migrated to version 2.x, then it will be safe to follow the guidelines in this document to upgrade further to version 3.0.x.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+1. Make Backups
+</TD></TR></TABLE>
+<BR>
+
+<P>Create a backup of the local versions of any Web sites you wish to update <B>BEFORE</B> you make any of the following changes. This is a wise safety measure.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+2. Download the Latest Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Download the new "music-object.js" file by <B>right-clicking</B> (click-and-hold for Mac users) on the link below and selecting the 'Save Link As...' or 'Save Target As...' option from the pop-up menu. Save the file to your local hard drive.</P>
+
+<P><A HREF="../../javascript/music-object.js" TARGET="_top">music-object.js</A></P>
+
+<P>If this does not work or you do not see a 'Save Link As...' or 'Save Target As...' option in the pop-up, you can also obtain the new "music-object.js" file if you <A HREF="../../index-body.html#download-it" TARGET="_parent">download</A> the latest version of the Beatnik Music Object Documentation. Once you have downloaded and de-archived the documentation, you can find the "music-object.js" file by following these steps...</P>
+
+<OL>
+	<LI>Open up the documentation's main folder.
+	<LI>Then, from inside the documentation's main folder, open up the folder called "web-authoring".
+	<LI>Inside this folder, you will see a folder called "javascript". This is where the "music-object.js" file is located.
+	<LI>Copy the file from this location.
+		<P><IMG SRC="../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Be sure NOT to move the "music-object.js" file outside of the "javascript" folder, as this would cause the documentation to not function correctly.</P>
+</OL>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+3. Replace Your Existing Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that you have the latest "music-object.js" file, simply replace the existing "music-object.js" file you are using in any and all Web sites that you have authored with interactive Beatnik content.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+4. Modify Your Code
+</TD></TR></TABLE>
+<BR>
+
+<P>Although we've tried to create as much of a buffer as possible by making all the global functions and the constructor name "musicObject" backward compatible, we strongly advocate that you play it safe and just go through the process of updating your code as soon as you start using Music Object 3.0. You may not even be using the global functions or properties in your code, so the update process may be really quick for you. Either way, the best course of action is to religiously follow the steps outlined below on each sonified Web page.</P>
+
+<OL>
+	<LI><B>Open the sonified page(s) in a good text editor</B><BR>
+		If you have a text editor that can open multiple documents at the same time and perform a search-and-replace procedure through all the currently open documents, this would be ideal. You should open up all documents that have been sonified using the Music Object API into this text editor. If, on the other hand, your text editor cannot open multiple documents, then you will have to repeat this process for each sonified document by loading in the documents one at a time and performing the search-and-replace procedures listed below.
+		<P></P>
+	<LI><B>Change "new musicObject" to "new Music"</B><BR>
+		Perform a search-and-replace procedure to change all occurrences of the phrase "new musicObject" with the new phrase "new Music". This will take care of the name change of the object constructor in Music Object 3.0.
+		<P></P>
+	<LI><B>Change "mo_installBeatnik" to "Music.installPlayer"</B><BR>
+		Perform a search-and-replace to change all occurrences of "mo_installBeatnik" with "Music.installPlayer". This will take care of this global function which is named differently as a static method in Music Object 3.0.
+		<P></P>
+	<LI><B>Change "mo_Beatnik" to "Music.player"</B><BR>
+		Perform a search-and-replace to change all occurrences of "mo_Beatnik" with "Music.player". This will take care of both the "mo_BeatnikType" and "mo_BeatnikVersion" global properties which are named differently as static properties in Music Object 3.0.
+		<P></P>
+	<LI><B>Change "mo_browser" to "Music.client"</B><BR>
+		Perform a search-and-replace to change all occurrences of "mo_browser" with "Music.client". This will take care of the "mo_browserSupported" property which is named differently as a static property in Music Object 3.0.
+		<P></P>
+	<LI><B>Change "mo_hasBeatnik" to "Music.hasPlayer"</B><BR>
+		Perform a search-and-replace to change all occurrences of "mo_hasBeatnik" with "Music.hasPlayer". This will take care of this global property which is named differently as a static property in Music Object 3.0.
+		<P></P>
+	<LI><B>Change "mo_" to "Music."</B><BR>
+		Perform a search-and-replace to change all occurrences of "mo_" with "Music.". This will take care of all other global properties and global functions which are now available as static properties and static methods of the "Music" object constructor in Music Object 3.0.
+		<P></P>
+</OL>
+
+<P>After performing the above changes to your code, your content will then be Music Object 3.0 compliant. <B>Under no circumstances</B> should you perform this procedure upon the "music-object.js" file itself - <B>ONLY</B> your sonified documents which source in the "music-object.js" file.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+5. Test Your Content
+</TD></TR></TABLE>
+<BR>
+
+<P>Check your Web site pages locally to ensure that all your content is still working. If possible, use several browser versions in your testing. Do not delete the backup(s) that you made in step 1 until you have uploaded the changes to the online version of your Web site and verified that all your content works online as well. There are some authoring issues that only impact content when it is being served from a Web server. Even if you have tested your content online and are confident everything is peachy, you may still wish to keep the backups hanging around for a week or so, just in case. Sometimes it is not possible to test all possibilities and you may receive reports from Web site visitors saying that things are suddenly amiss with your content. Always play it safe with your Web content.</P>
+
+</BODY></HTML>

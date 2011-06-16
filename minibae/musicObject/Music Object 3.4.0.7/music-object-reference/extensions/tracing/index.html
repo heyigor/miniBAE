@@ -1,0 +1,487 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Tracing</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Tracing
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Tracing extension provides an easy way to watch calls to methods of the Music Object API and is a very useful tool to have when debugging sonification code. The extension offers a set of methods that can be used to control exactly which methods of the Music Object API are to be "watched". When a method is being watched, each call to the method will be displayed in the tracing window (either the Java console or a pop-up browser window), complete with the parameter values that are being passed.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-tracing.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-tracing.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-tracing.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-tracing.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#enableTracing">enableTracing</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you enable or disable tracing for all methods of a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setMethodTracing">setMethodTracing</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you enable or disable tracing for the specified method of a Music Object instance.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.enableTracing">Music.enableTracing</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you enable or disable tracing for all static methods of the Music Object API.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.setMethodTracing">Music.setMethodTracing</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you enable or disable tracing for the specified static method of the Music Object API.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.preferJavaConsole">Music.preferJavaConsole</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable, specifying whether or not tracing output should be sent to the Java console on browsers where this is possible.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.tracingEnabled">Music.tracingEnabled</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable, acting as a master switch to enable or disable all tracing.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="enableTracing"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;enableTracing</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Tracing</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>enableTracing</B> instance method lets you enable or disable tracing for all methods of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>enableTracing (</B> TracingEnabledBOOL <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>TracingEnabledBOOL</B> parameter, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>enableTracing ( )</B>
+		<P>When no <B>TracingEnabledBOOL</B> parameter is specified, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Tracing can be enabled for specific methods of a specific Music Object instance using the <A HREF="#setMethodTracing"><B>setMethodTracing</B></A> instance method.
+</UL>
+
+<A NAME="setMethodTracing"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setMethodTracing</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Tracing</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setMethodTracing</B> instance method lets you enable or disable tracing for the specified method of a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setMethodTracing (</B> InstanceMethodNameSTR <B>,</B> TracingEnabledBOOL <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>TracingEnabledBOOL</B> parameter, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>setMethodTracing (</B> InstanceMethodNameSTR <B>)</B>
+		<P>When no <B>TracingEnabledBOOL</B> parameter is specified, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Tracing can be enabled or disabled for all methods of a Music Object instance in one easy step using the <A HREF="#enableTracing"><B>enableTracing</B></A> instance method.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.enableTracing"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.enableTracing</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Tracing</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.enableTracing</B> static method lets you enable or disable tracing for all static methods of the Music Object API.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.enableTracing (</B> TracingEnabledBOOL <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>TracingEnabledBOOL</B> parameter, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.enableTracing ( )</B>
+		<P>When no <B>TracingEnabledBOOL</B> parameter is specified, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Tracing can be enabled for specific static methods of the Music Object API using the <A HREF="#Music.setMethodTracing"><B>Music.setMethodTracing</B></A> static method.
+</UL>
+
+<A NAME="Music.setMethodTracing"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.setMethodTracing</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Tracing</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.setMethodTracing</B> static method lets you enable or disable tracing for the specified static method of the Music Object API.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.setMethodTracing (</B> StaticMethodNameSTR <B>,</B> TracingEnabledBOOL <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>TracingEnabledBOOL</B> parameter, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.setMethodTracing (</B> InstanceMethodNameSTR <B>)</B>
+		<P>When no <B>TracingEnabledBOOL</B> parameter is specified, then the boolean value <SPAN CLASS=value>true</SPAN> is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Tracing can be enabled or disabled for all static methods of the Music Object API in one easy step using the <A HREF="#Music.enableTracing"><B>Music.enableTracing</B></A> static method.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.preferJavaConsole"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.preferJavaConsole</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Tracing</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>true</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.preferJavaConsole</B> static property is A boolean variable, specifying whether or not tracing output should be sent to the Java console on browsers where this is possible.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.tracingEnabled"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.tracingEnabled</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Tracing</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>true</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.tracingEnabled</B> static property is a boolean variable, acting as a master switch to enable or disable all tracing.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+</BODY></HTML>

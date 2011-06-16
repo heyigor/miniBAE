@@ -1,0 +1,656 @@
+<HTML>
+<HEAD>
+	<TITLE>The Beatnik EMBEDifier: CUSTOMIZE ATTRIBUTE VALUES</TITLE>
+	<STYLE TYPE="text/css"><!--
+		BODY {
+			background: #ddd url(../../style/images/texture.jpg);
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 12px;
+			color: #000;
+		}
+		P, TD {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 12px;
+		}
+		SELECT {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 11px;
+			width: 165px;
+			height: 19px;
+			
+		}
+		A {
+			color: #008;
+			text-decoration: none;
+		}
+		A:hover {
+			text-decoration: underline;
+		}
+	--></STYLE>
+</HEAD>
+<BODY ONLOAD="initialize ()">
+
+<SCRIPT SRC="../../javascript/library-url.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+//*********************************************************************
+//* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *
+//*                -- http://www.tomkidding.com --                    *
+//*                                                                   *
+//*                      ©1997 Beatnik, Inc.                          *
+//*********************************************************************
+
+music = new Music ();
+music.onPlay ('music.stop ()');
+music.stubEmbed ('../../music/stub.rmf','AUTOSTART=FALSE VOLUME=0');
+
+attrNames = new Array ('SRC','TYPE','WIDTH','HEIGHT','NAME','AUTOSTART','LOOP','VOLUME','ALIGN','HSPACE','VSPACE','PLUGINSPAGE','HIDDEN','DISPLAY','MODE','GROOVOID','ONREADY','ONPLAY','ONPAUSE','ONSTOP','ONMETAEVENT');
+
+function Attribute (_name,_value) {
+	this.name = _name;
+	this.value = _value;
+}
+
+attributes = new Array ();
+
+settings = new Array ();
+settings ['SRC'] = '';
+settings ['VOLUME'] = '100';
+settings ['AUTOSTART'] = true;
+settings ['LOOP'] = true;
+settings ['WIDTH'] = 144;
+settings ['HEIGHT'] = 60;
+settings ['DISPLAY'] = 'SYSTEM';
+settings ['MODE'] = 'SCOPE';
+settings ['HIDDEN'] = null;
+
+currentFile = '';
+lastFile = '';
+lastPreviewEmbedLine = '';
+lastDisplayEmbedLine = '';
+currentEmbedType = 'OBJECT & EMBED';
+currentPathType = 'relative';
+
+function Layout (_width,_height,display,mode,hidden) {
+	this ['WIDTH'] = _width;
+	this ['HEIGHT'] = _height;
+	this ['DISPLAY'] = display;
+	this ['MODE'] = mode;
+	this ['HIDDEN'] = hidden;
+}
+
+layouts = new Array (
+	new Layout ('144','60','SONG','INFO'),
+	new Layout ('144','60','SYSTEM','METERS'),
+	new Layout ('144','60','SYSTEM','SCOPE'),
+	new Layout ('144','45','SONG','INFO'),
+	new Layout ('144','45','SYSTEM','METERS'),
+	new Layout ('144','45','SYSTEM','SCOPE'),
+	new Layout ('144','15','SONG','INFO'),
+	new Layout ('144','15','SYSTEM','SCOPE'),
+	new Layout ('41','15','SYSTEM','SCOPE'),
+	new Layout ('2','2','','','TRUE')
+);
+
+function replaceStr (sourceStr,searchStr,replaceWithStr) {
+	var
+		returnVal = sourceStr,
+		endFound = false,
+		charPos
+	;
+	while (!endFound) {
+		charPos = returnVal.indexOf (searchStr);
+		if (charPos == -1) {
+			endFound = true;
+		} else {
+			returnVal = returnVal.substring (0,charPos) + replaceWithStr + returnVal.substring (charPos + searchStr.length,returnVal.length)
+		}
+	}
+	return returnVal;
+}
+
+function selectBoxValue (selectHandle) {
+	var result = selectHandle.options [selectHandle.options.selectedIndex].text;
+	return (result == '') ? null : result;
+}
+
+function generateEmbedLine (embedType) {
+	for (attrNo = 0; attrNo < attrNames.length; attrNo++)
+		attributes [attrNames [attrNo]] = null
+	;
+	attributes ['TYPE'] = 'audio/rmf';
+	attributes ['WIDTH'] = selectBoxValue (document.embedSettingsForm.width);
+	attributes ['HEIGHT'] =  selectBoxValue (document.embedSettingsForm.height);
+	attributes ['PLUGINSPAGE'] = 'http://www.beatnik.com/to/?player';
+	attributes ['HIDDEN'] =  selectBoxValue (document.embedSettingsForm.hidden);
+	attributes ['LOOP'] = settings ['LOOP'] ? 'TRUE' : 'FALSE';
+	attributes ['AUTOSTART'] = settings ['AUTOSTART'] ? 'TRUE' : 'FALSE';
+	attributes ['VOLUME'] = settings ['VOLUME'];
+	attributes ['DISPLAY'] =  selectBoxValue (document.embedSettingsForm.display);
+	attributes ['MODE'] =  selectBoxValue (document.embedSettingsForm.mode);
+
+	for (var attrNo = 0; attrNo < Math.floor ((generateEmbedLine.arguments.length - 1) / 2); attrNo++)
+		attributes [generateEmbedLine.arguments [attrNo * 2 + 1]] = generateEmbedLine.arguments [attrNo * 2 + 2]
+	;
+	if (attributes ['SRC'].indexOf ('.') == -1) {
+		attributes ['GROOVOID'] = attributes ['SRC'];
+		attributes ['SRC'] = null;
+	}
+	embedLine = '';
+	if (embedType == 'magicEmbed') {
+		for (attrNo = 0; attrNo < attrNames.length; attrNo++) {
+			var attrName = attrNames [attrNo];
+			if (attrName != 'TYPE' && attrName != 'PLUGINSPAGE' && attributes [attrName] != null)
+				embedLine += ((embedLine != '') ? ' ' : '') + attrName + '="' + attributes [attrName] + '"'
+			;
+		}
+		embedLine =
+			'&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //\n\n' +
+			'\tmyMusicObject.magicEmbed (\'' + embedLine + '\');\n\n' +
+			'// --&gt;&lt;SCRIPT&gt;\n\n'
+		;
+	} else {
+		var
+			haveObjectTag = embedType.indexOf ('OBJECT') != -1,
+			haveEmbedTag = embedType.indexOf ('EMBED') != -1
+		;
+		if (haveObjectTag) {
+			embedLine += '\n<OBJECT' + ((attributes ['NAME'] != null) ? (' ID="' + attributes ['NAME'] + '"') : '') + ' WIDTH=' + attributes ['WIDTH'] + ' HEIGHT=' + attributes ['HEIGHT'] + ' CLASSID="CLSID:B384F118-18EE-11D1-95C8-00A024330339" CODEBASE="http://download.beatnik.com/beatnik-player/beatnik-player.cab">';
+			for (attrNo = 0; attrNo < attrNames.length; attrNo++) {
+				if (attributes [attrNames [attrNo]] != null)
+					embedLine += '\n\t<PARAM NAME="' + attrNames [attrNo] + '" VALUE="' + attributes [attrNames [attrNo]] + '">'
+				;
+			}
+			if (haveEmbedTag) embedLine += '\n\t';
+		}
+		if (haveEmbedTag) {
+			embedLine += '<EMBED' + ((attributes ['NAME'] != null) ? (' NAME="' + attributes ['NAME'] + '"') : '');
+			for (attrNo = 0; attrNo < attrNames.length; attrNo++) {
+				if (attributes [attrNames [attrNo]] != null) {
+					embedLine += ' ' + attrNames [attrNo];
+					if (attributes [attrNames [attrNo]] != '')
+						embedLine += '="' + attributes [attrNames [attrNo]] + '"'
+					;
+				}
+			}
+			embedLine += '>';
+		}
+		if (haveObjectTag) embedLine += '\n</OBJECT>\n\n';
+	}
+}
+
+function minutesSeconds (timeSeconds) {
+	displayMinutes = Math.floor (timeSeconds / 60);
+	displaySeconds = timeSeconds - (displayMinutes * 60);
+	return displayMinutes + 'min' + displaySeconds + 'sec';
+}
+
+function nullToNullStr (supposedStr) {
+	return (supposedStr == null) ? '' : supposedStr;
+}
+
+function showInfo () {
+	if (currentFile != lastFile) {
+		var infoForm = parent.parent.infoFrame.document.songInfo;
+		if (currentFile == '') {
+			var formFields = new Array ('songTitle','fileSize','playTime','performer','composer','publisher','licensedTo','licenseTerm','useOfLicense','licenseExpiration','indexNo','composerNotes');
+			for (var formFieldNo = 0; formFieldNo < formFields.length; formFieldNo++)
+				infoForm [formFields [formFieldNo]].value = '';
+			;
+			lastFile = currentFile;
+		} else {
+			infoForm.songTitle.value = nullToNullStr (music.getInfo ('title'));
+			infoForm.fileSize.value = Math.round (music.getFileSize () / 1024);
+			infoForm.playTime.value = minutesSeconds (Math.round (music.getPlayLength () / 1000));
+			infoForm.performer.value = nullToNullStr (music.getInfo ('performer'));
+			infoForm.composer.value = nullToNullStr (music.getInfo ('composer'));
+			infoForm.publisher.value = nullToNullStr (music.getInfo ('publisher'));
+			infoForm.licensedTo.value = nullToNullStr (music.getInfo ('licensee'));
+			infoForm.licenseTerm.value = nullToNullStr (music.getInfo ('term'));
+			infoForm.useOfLicense.value = nullToNullStr (music.getInfo ('use'));
+			infoForm.licenseExpiration.value = nullToNullStr (music.getInfo ('expiration'));
+			infoForm.indexNo.value = nullToNullStr (music.getInfo ('index'));
+			infoForm.composerNotes.value = nullToNullStr (music.getInfo ('notes'));
+			lastFile = currentFile;
+		}
+	}
+}
+
+function filenameToURL (fileName) {
+	var fileURL = fileName;
+	if (fileName != '' && fileName.indexOf ('://') == -1) {
+		if (fileURL.charAt (0) == '/') {
+			fileURL = 'file://' + fileURL;
+		} else {
+			var
+				delimPos = fileURL.indexOf (':'),
+				driveName = fileURL.substring (0,delimPos),
+				filePath = fileURL.substring (delimPos + 1)
+			;
+			fileURL = 'file:///' + escape (driveName) + '|' + escape (filePath.toForwardSlashes ());
+		}
+	}
+	return fileURL;
+}
+
+function updateMusicPreview () {
+	var
+		selectHandle = parent.chooseMusicFrame.document.chooseMusicForm.presetName,
+		currentSRC = ''
+	;
+	currentFile = selectHandle.options [selectHandle.options.selectedIndex].text;
+	if (currentFile != '') {
+		currentSRC = currentFile;
+		currentFile = parent.chooseMusicFrame.presetsPath + currentFile;
+	} else {
+		currentFile = filenameToURL (parent.chooseMusicFrame.document.chooseMusicForm.musicURL.value);
+		if (currentPathType == 'relative') {
+			var destinationHTML = filenameToURL (parent.chooseMusicFrame.document.chooseMusicForm.pageURL.value);
+			currentSRC = currentFile.toRelativeURL (destinationHTML);
+		}
+		if (currentSRC == '') currentSRC = currentFile;
+	}
+	if (document.embedSettingsForm.useSettingsForPreview.checked) {
+		generateEmbedLine (
+			'OBJECT & EMBED',
+			'SRC',currentFile,
+			'NAME','previewMusicPlayer'
+		);
+	} else {
+		generateEmbedLine (
+			'OBJECT & EMBED',
+			'SRC',currentFile,
+			'NAME','previewMusicPlayer',
+			'AUTOSTART','TRUE',
+			'DISPLAY','SONG',
+			'WIDTH',144,
+			'HEIGHT',60,
+			'LOOP','FALSE',
+			'VOLUME',100
+		);
+	}
+	if (embedLine != lastPreviewEmbedLine) {
+		music.onLoad (showInfo);
+		music.play (currentFile);
+		docHandle = parent.parent.previewMusicFrame.document;
+		docHandle.open ('text/html');
+		docHandle.writeln (
+			'<HTML><HEAD><TITLE></TITLE></HEAD>' +
+			'<BODY BGCOLOR=EEEEEE BACKGROUND="../../style/images/texture.jpg" TEXT=CCCCCC LINK=CCCCCC VLINK=CCCCCC>' +
+			'<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD VALIGN=CENTER ALIGN=CENTER>' +
+			((currentFile != '') ? embedLine : '') +
+			'</TD></TR></TABLE>' +
+			'</BODY></HTML>'
+		);
+		docHandle.close ();
+		lastPreviewEmbedLine = embedLine;
+	}
+	generateEmbedLine (currentEmbedType,'SRC',currentSRC);
+	embedLine = replaceStr (replaceStr (embedLine,'<','&lt;'),'>','&gt;');
+	if (embedLine != lastDisplayEmbedLine) {
+		var docHandle = parent.copyPasteFrame.document;
+		docHandle.open ('text/html');
+		docHandle.writeln (
+			'<HTML><HEAD><TITLE></TITLE></HEAD>' +
+			'<BODY BGCOLOR=000000 TEXT=FFFFFF LINK=FFFFFF VLINK=FFFFFF>' +
+			((currentFile != '') ? ('<PRE>' + embedLine + '</PRE></FONT>') : '') +
+			'</BODY></HTML>'
+		);
+		docHandle.close ();
+		lastDisplayEmbedLine = embedLine;
+	}
+}
+
+function selectMusicFile () {
+	var	selectHandle = parent.chooseMusicFrame.document.chooseMusicForm.presetName;
+	selectHandle.options.selectedIndex = 0;
+	updateMusicPreview ();
+}
+
+function selectPathType (pathType) {
+	currentPathType = pathType;
+	var radioHandle = parent.chooseMusicFrame.document.chooseMusicForm.pathType;
+	radioHandle [(currentPathType == 'relative') ? 0 : 1].checked = true;
+	updateMusicPreview ();
+}
+
+function chooseSelectBoxItem (selectHandle,itemText) {
+	if (itemText == null) itemText = '';
+	for (var optionNo = 0; optionNo < selectHandle.length; optionNo++) {
+		if (selectHandle.options [optionNo].text == itemText) {
+			selectHandle.options.selectedIndex = optionNo;
+			break;
+		}
+	}
+}
+
+function selectLayout (layoutNo) {
+	var radioHandle = document.embedSettingsForm.layout [layoutNo];
+	radioHandle.checked = true;
+	if (document.embedSettingsForm.useSettingsForPreview.checked) {
+		for (var attributeName in layouts [layoutNo])
+			chooseSelectBoxItem (document.embedSettingsForm [attributeName.toLowerCase ()],layouts [layoutNo] [attributeName])
+		;
+		updateMusicPreview ();
+	}
+}
+
+function panelAttributesChanged (changedProperty) {
+	var
+		highestMatches = 0,
+		matchedLayoutNo = 0;
+	;
+	for (var layoutNo in layouts) {
+		if (selectBoxValue (changedProperty) == layouts [layoutNo] [changedProperty.name.toUpperCase ()]) {
+			var newMatches = 0;
+			for (var attributeName in layouts [layoutNo]) {
+				if (layouts [layoutNo] [attributeName] == selectBoxValue (document.embedSettingsForm [attributeName.toLowerCase ()]))
+					newMatches++
+				;
+			}
+			if (newMatches > highestMatches) {
+				matchedLayoutNo = layoutNo;
+				highestMatches = newMatches;
+			}
+		}
+	}
+	selectLayout (matchedLayoutNo);
+}
+
+function selectVolume (volumeNo) {
+	var
+		volumes = new Array ('25','50','75','100'),
+		radioHandle = document.embedSettingsForm.volume [volumeNo]
+	;
+	radioHandle.checked = true;
+	settings ['VOLUME'] = volumes [volumeNo];
+	if (document.embedSettingsForm.useSettingsForPreview.checked) updateMusicPreview ();
+}
+
+function selectEmbedType (embedTypeNo) {
+	var
+		embedTypes = new Array ('OBJECT & EMBED','magicEmbed','OBJECT','EMBED'),
+		radioHandle = document.embedSettingsForm.embedType [embedTypeNo]
+	;
+	radioHandle.checked = true;
+	currentEmbedType = embedTypes [embedTypeNo];
+	if (document.embedSettingsForm.useSettingsForPreview.checked) updateMusicPreview ();
+}
+
+function toggleUseSettingsForPreview () {
+	updateMusicPreview ();
+}
+
+function toggleAutostart () {
+	settings ['AUTOSTART'] = !settings ['AUTOSTART'];
+	document.embedSettingsForm.autostart.checked = settings ['AUTOSTART'];
+	if (document.embedSettingsForm.useSettingsForPreview.checked) updateMusicPreview ();
+}
+
+function toggleLoop () {
+	settings ['LOOP'] = !settings ['LOOP'];
+	document.embedSettingsForm.loop.checked = settings ['LOOP'];
+	if (document.embedSettingsForm.useSettingsForPreview.checked) updateMusicPreview ();
+}
+
+function initialize () {
+	for (var attributeName in layouts [0]) {
+		selectHandle = document.embedSettingsForm [attributeName.toLowerCase ()];
+		selectHandle.options.length--;
+	}
+}
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+
+<FORM NAME="embedSettingsForm">
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (0)">
+				</TD>
+				<TD WIDTH=144>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR><TD><A HREF="javascript:selectLayout (0)" ONCLICK="selectLayout (0); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top" BORDER=0></A></TD></TR>
+						<TR><TD><A HREF="javascript:selectLayout (0)" ONCLICK="selectLayout (0); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info" BORDER=0></A></TD></TR>
+					</TABLE>
+				</TD>
+			</TR></TABLE>
+		</TD>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (1)">
+				</TD>
+				<TD WIDTH=144>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR><TD><A HREF="javascript:selectLayout (1)" ONCLICK="selectLayout (1); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top" BORDER=0></A></TD></TR>
+						<TR><TD><A HREF="javascript:selectLayout (1)" ONCLICK="selectLayout (1); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters" BORDER=0></A></TD></TR>
+					</TABLE>
+				</TD>
+			</TR></TABLE>
+		</TD>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" CHECKED ONCLICK="selectLayout (2)">
+				</TD>
+				<TD WIDTH=144>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR><TD><A HREF="javascript:selectLayout (2)" ONCLICK="selectLayout (2); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top" BORDER=0></A></TD></TR>
+						<TR><TD><A HREF="javascript:selectLayout (2)" ONCLICK="selectLayout (2); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope" BORDER=0></A></TD></TR>
+					</TABLE>
+				</TD>
+			</TR></TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (3)">
+				</TD>
+				<TD WIDTH=144><A HREF="javascript:selectLayout (3)" ONCLICK="selectLayout (3); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info" BORDER=0></A></TD>
+			</TR></TABLE>
+		</TD>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (4)">
+				</TD>
+				<TD WIDTH=144><A HREF="javascript:selectLayout (4)" ONCLICK="selectLayout (4); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters" BORDER=0></A></TD>
+			</TR></TABLE>
+		</TD>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (5)">
+				</TD>
+				<TD WIDTH=144><A HREF="javascript:selectLayout (5)" ONCLICK="selectLayout (5); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope" BORDER=0></A></TD>
+			</TR></TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (6)">
+				</TD>
+				<TD WIDTH=144><A HREF="javascript:selectLayout (6)" ONCLICK="selectLayout (6); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top" BORDER=0></A></TD>
+			</TR></TABLE>
+		</TD>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (7)">
+				</TD>
+				<TD WIDTH=144><A HREF="javascript:selectLayout (7)" ONCLICK="selectLayout (7); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top" BORDER=0></A></TD>
+			</TR></TABLE>
+		</TD>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (8)">
+				</TD>
+				<TD WIDTH=144><A HREF="javascript:selectLayout (8)" ONCLICK="selectLayout (8); return false"><IMG SRC="../../images/player-control-panel/2.2/panel-mute-only.gif" WIDTH=41 HEIGHT=15 ALT="System Display - mute button only" BORDER=0></A></TD>
+			</TR></TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5><TR>
+				<TD VALIGN=TOP>
+					<INPUT TYPE=radio NAME="layout" ONCLICK="selectLayout (9)">
+				</TD>
+				<TD WIDTH=144><A HREF="javascript:selectLayout (9)" ONCLICK="selectLayout (9); return false">HIDDEN</A></TD>
+			</TR></TABLE>
+		</TD>
+		<TD></TD>
+		<TD></TD>
+</TABLE>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4>
+<TR VALIGN=TOP>
+<TD ALIGN=LEFT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>TAG TYPE</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<INPUT TYPE=radio NAME="embedType" ONCLICK="selectEmbedType (0)" CHECKED><A HREF="javascript:selectEmbedType (0)" ONCLICK="selectEmbedType (0); return false">OBJECT & EMBED</A>
+		&nbsp;
+		<INPUT TYPE=radio NAME="embedType" ONCLICK="selectEmbedType (1)"><A HREF="javascript:selectEmbedType (1)" ONCLICK="selectEmbedType (1); return false">magicEmbed</A>
+		<!--
+		<INPUT TYPE=radio NAME="embedType" ONCLICK="selectEmbedType (2)"><A HREF="javascript:selectEmbedType (2)" ONCLICK="selectEmbedType (2); return false">OBJECT</A>
+		&nbsp;
+		<INPUT TYPE=radio NAME="embedType" ONCLICK="selectEmbedType (3)"><A HREF="javascript:selectEmbedType (3)" ONCLICK="selectEmbedType (3); return false">EMBED</A>
+		&nbsp;
+		-->
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>AUTOSTART</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<INPUT NAME="autostart" TYPE=checkbox CHECKED ONCLICK="toggleAutostart ()">
+		play music immediately upon loading
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>LOOP</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<INPUT NAME="loop" TYPE=checkbox CHECKED ONCLICK="toggleLoop ()">
+		play repeatedly
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>VOLUME</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<INPUT TYPE=radio NAME="volume" ONCLICK="selectVolume (0)"><A HREF="javascript:selectVolume (0)" ONCLICK="selectVolume (0); return false">soft</A>
+		&nbsp;&nbsp;
+		<INPUT TYPE=radio NAME="volume" ONCLICK="selectVolume (1)"><A HREF="javascript:selectVolume (1)" ONCLICK="selectVolume (1); return false">medium</A>
+		&nbsp;&nbsp;
+		<INPUT TYPE=radio NAME="volume" ONCLICK="selectVolume (2)"><A HREF="javascript:selectVolume (2)" ONCLICK="selectVolume (2); return false">loud</A>
+		&nbsp;&nbsp;
+		<INPUT TYPE=radio NAME="volume" CHECKED ONCLICK="selectVolume (3)"><A HREF="javascript:selectVolume (3)" ONCLICK="selectVolume (3); return false">maximum</A>
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>PREVIEW</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<INPUT TYPE=checkbox NAME="useSettingsForPreview" CHECKED ONCLICK="toggleUseSettingsForPreview ()">
+		use these settings for preview
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+</TABLE>
+
+</TD>
+<TD>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>WIDTH</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<SELECT NAME="width" ONCHANGE="panelAttributesChanged (this)">
+			<OPTION> 
+			<OPTION SELECTED>144
+			<OPTION>41
+			<OPTION>2
+			<OPTION>--------------------------------
+		</SELECT>
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>HEIGHT</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<SELECT NAME="height" ONCHANGE="panelAttributesChanged (this)">
+			<OPTION> 
+			<OPTION SELECTED>60
+			<OPTION>45
+			<OPTION>15
+			<OPTION>2
+			<OPTION>--------------------------------
+		</SELECT>
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>DISPLAY</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<SELECT NAME="display" ONCHANGE="panelAttributesChanged (this)">
+			<OPTION> 
+			<OPTION>SONG
+			<OPTION SELECTED>SYSTEM
+			<OPTION>--------------------------------
+		</SELECT>
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>MODE</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<SELECT NAME="mode" ONCHANGE="panelAttributesChanged (this)">
+			<OPTION> 
+			<OPTION>INFO
+			<OPTION>METERS
+			<OPTION SELECTED>SCOPE
+			<OPTION>--------------------------------
+		</SELECT>
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+<TR>
+	<TD BGCOLOR=FFFFFF>&nbsp;<B>HIDDEN</B>&nbsp;</TD>
+	<TD HEIGHT=26>
+		<SELECT NAME="hidden" ONCHANGE="panelAttributesChanged (this)">
+			<OPTION SELECTED> 
+			<OPTION>TRUE
+			<OPTION>FALSE
+			<OPTION>--------------------------------
+		</SELECT>
+	</TD>
+</TR>
+<TR><TD BGCOLOR=FFFFFF COLSPAN=2><IMG SRC="images/blank.gif" WIDTH=1 HEIGHT=1></TD></TR>
+</TABLE>
+
+</TD></TR></TABLE>
+<BR>
+
+</FORM>
+
+</TD></TR></TABLE>
+
+</BODY></HTML>

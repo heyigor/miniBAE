@@ -1,0 +1,199 @@
+<HTML>
+<HEAD>
+	<TITLE>Beatnik Player Control Panel Layouts</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Beatnik Player Control Panel Layouts
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<P>The various control panel layouts shown in the table below are possible using different combinations of the WIDTH, HEIGHT, DISPLAY, MODE, and HIDDEN attributes. You can copy-and-paste the HTML code into your own documents and use them as starting points for embedding your own music files. You should also read through the <A HREF="../general-reference/embedding-properties.html">Beatnik Player's Embedding Properties</A> reference section to see what other attributes you might like to include in the EMBED tag.</P>
+
+<DIV CLASS=subsection>The Beatnik EMBEDifier</DIV>
+
+<P>To make your life as a Beatnik content developer a little easier, Beatnik Inc. has gone to the trouble of designing the free Beatnik EMBEDifier tool - a convenient way of creating your own custom EMBED / OBJECT tag code. Using the EMBEDifier is a breeze. You can use the EMBEDifier as an alternative to handcoding your EMBED / OBJECT tags from the information in this appendix. <A HREF="../tools/embedifier/intro.html">Try the Beatnik EMBEDifier</A></P>
+
+<DIV CLASS=subsection>Differences Between Player Versions</DIV>
+
+<P>Over the course of the Beatnik Player's history, the control panel graphics have been refined on numerous occasions. Unless you go out of your way in your authoring to specifically require the very latest version of the Beatnik Player (see the section <A HREF="../music-object-reference/compatibility-aids.html#cutting-edge-content">Compatibility Aids: Cutting Edge Content</A>), there is no way of truly guaranteeing how the player's control panel will appear to the user. Some users may have version 2.2 (or higher) installed, while others may have version 2.1, 2.0, or an even older version installed.</P>
+
+<P>Fortunately, the graphics for all versions of the Beatnik Player have been designed to be functionally equivalent to the graphics of earlier versions. So, while different users may see Beatnik Player control panels that are slightly different in appearance, they will all still have the same control panel options available to them. In order to give you a clear idea of the aesthetic differences between the control panel graphics of newer and older Beatnik Player versions, the table below shows the control panel graphics for these different versions in separate columns.</P>
+
+<TABLE WIDTH=100% ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Versions 1.0 to 2.0</TD>
+		<TD CLASS=data-table-column-header>Version 2.1</TD>
+		<TD CLASS=data-table-column-header>Versions 2.2 and higher</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Transport Controls Strip</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/1.0-2.0/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.1/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.2/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top"></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=15 DISPLAY=SONG&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Transport Controls & Song Info</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/1.0-2.0/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/1.0-2.0/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info"></TD></TR>
+			</TABLE>
+		</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.1/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.1/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info"></TD></TR>
+			</TABLE>
+		</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.2/panel-song-top.gif" WIDTH=144 HEIGHT=15 ALT="Song Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.2/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info"></TD></TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=60 DISPLAY=SONG&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Song Info Only</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/1.0-2.0/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.1/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.2/panel-song-info.gif" WIDTH=144 HEIGHT=45 ALT="Song Display - info"></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=45 DISPLAY=SONG&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Global Mute Strip</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/1.0-2.0/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.1/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.2/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=15 DISPLAY=SYSTEM &gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Global Mute Strip & Meters Display</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/1.0-2.0/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/1.0-2.0/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters"></TD></TR>
+			</TABLE>
+		</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.1/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.1/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters"></TD></TR>
+			</TABLE>
+		</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.2/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.2/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters"></TD></TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=60 DISPLAY=SYSTEM MODE=METERS&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Global Mute Strip & Scope Display</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/1.0-2.0/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/1.0-2.0/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope"></TD></TR>
+			</TABLE>
+		</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.1/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.1/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope"></TD></TR>
+			</TABLE>
+		</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.2/panel-system-top.gif" WIDTH=144 HEIGHT=15 ALT="System Display - top"></TD></TR>
+				<TR><TD><IMG SRC="../images/player-control-panel/2.2/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope"></TD></TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=60 DISPLAY=SYSTEM MODE=SCOPE&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Meters Display Only</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/1.0-2.0/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.1/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.2/panel-system-meters.gif" WIDTH=144 HEIGHT=45 ALT="System Display - meters"></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=45 DISPLAY=SYSTEM MODE=METERS&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Scope Display Only</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/1.0-2.0/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.1/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope"></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.2/panel-system-scope.gif" WIDTH=144 HEIGHT=45 ALT="System Display - scope"></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=144 HEIGHT=45 DISPLAY=SYSTEM MODE=SCOPE&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Global Mute Mini-strip</B> (just button)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/1.0-2.0/panel-mute-only.gif" WIDTH=41 HEIGHT=15 ALT="System Display - mute button only" BORDER=0></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.1/panel-mute-only.gif" WIDTH=41 HEIGHT=15 ALT="System Display - mute button only" BORDER=0></TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><IMG SRC="../images/player-control-panel/2.2/panel-mute-only.gif" WIDTH=41 HEIGHT=15 ALT="System Display - mute button only" BORDER=0></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=41 HEIGHT=15 DISPLAY=SYSTEM&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-column-subheader COLSPAN=3><B>Hidden</B></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code COLSPAN=3>&lt;EMBED SRC="my-file.rmf" TYPE="audio/rmf" WIDTH=0 HEIGHT=0 HIDDEN&gt;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item COLSPAN=3>
+			<P>You may use the above HTML syntax to make a Beatnik Player instance invisible on your page.</P>
+			<P><IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;Even if you are using the <A HREF="../general-reference/embedding-properties.html#hidden"><B>HIDDEN</B></A> attribute, you should still specify <B>WIDTH</B> and <B>HEIGHT</B> dimensions.</P>
+		</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

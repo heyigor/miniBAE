@@ -1,0 +1,20 @@
+
+Contens list: Layer III sample bit streams
+============================================
+
+Title           Fs              Bitrate (total)         Source
+------------------------------------------------------------------------
+funky.mp3       44.1 kHz        96 kbit/s               J. Herre (FhG)
+spot1.mp3       44.1 kHz        96 kbit/s               OMNI-MEDIASOUND
+spot2.mp3       44.1 kHz        96 kbit/s               OMNI-MEDIASOUND
+spot3.mp3       44.1 kHz        96 kbit/s               OMNI-MEDIASOUND
+classic1.mp3    22.05 kHz       56 kbit/s               OMNI-MEDIASOUND
+classic2.mp3    22.05 kHz       48 kbit/s               OMNI-MEDIASOUND
+
+
+spot1.mp3, spot2.mp3, spot3.mp3, classic1.mp3, classic2.mp3 by kind
+permisson of
+OMNI-MEDIASOUND
+Sandweg 2a
+25774 Krempel
+Germany

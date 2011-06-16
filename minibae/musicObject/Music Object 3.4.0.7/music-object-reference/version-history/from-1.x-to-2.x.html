@@ -1,0 +1,157 @@
+<HTML>
+<HEAD>
+	<TITLE>Migrating Content from Music Object 1.x to 2.x</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Migrating Content from Music Object 1.x to 2.x
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Versions 2.x (and later) of the Music Object API offer significant benefits to authors over the earlier 1.x versions, making available new features in the Beatnik Player and offering the ability to author for the Beatnik ActiveX Control for Microsoft Internet Explorer using the very same authoring that will work for the Beatnik Plug-in in Netscape Navigator. New methods have been added to the API, and code changes in the API have improved the performance in certain areas.</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>For the purposes of this document, the term "Beatnik Player" refers to both the Beatnik Plug-in for Netscape Navigator and the Beatnik ActiveX Control for Internet Explorer.
+	<LI>At the time of this writing, the Beatnik ActiveX Control has not yet been released.
+</UL>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are still using version 1.x, it is high time you switched! If you are unsure which version you are currently using, consult <A HREF="intro.html#which-version">Which Music Object Version Are You Using?</A>. To update to the latest version, follow the simple instructions below:</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+1. Make Backups
+</TD></TR></TABLE>
+<BR>
+
+<P>Create a backup of the local versions of any Web sites you wish to update <B>BEFORE</B> you make any of the following changes. This is a wise safety measure.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+2. Download the Latest Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Download the new "music-object.js" file by <B>right-clicking</B> (click-and-hold for Mac users) on the link below and selecting the 'Save Link As...' or 'Save Target As...' option from the pop-up menu. Save the file to your local hard drive.</P>
+
+<P><A HREF="../../javascript/music-object.js" TARGET="_top">music-object.js</A></P>
+
+<P>If this does not work or you do not see a 'Save Link As...' or 'Save Target As...' option in the pop-up, you can also obtain the new "music-object.js" file if you <A HREF="../../index-body.html#download-it" TARGET="_parent">download</A> the latest version of the Beatnik Music Object Documentation. Once you have downloaded and de-archived the documentation, you can find the "music-object.js" file by following these steps...</P>
+
+<OL>
+	<LI>Open up the documentation's main folder.
+	<LI>Then, from inside the documentation's main folder, open up the folder called "web-authoring".
+	<LI>Inside this folder, you will see a folder called "javascript". This is where the "music-object.js" file is located.
+	<LI>Copy the file from this location.
+		<P><IMG SRC="../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Be sure NOT to move the "music-object.js" file outside of the "javascript" folder, as this would cause the documentation to not function correctly.</P>
+</OL>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+3. Replace Your Existing Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that you have the latest "music-object.js" file, simply replace the existing "music-object.js" file you are using in any and all Web sites that you have authored with interactive Beatnik content.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+4. Modify Your Code
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Creating Music Object Instances</DIV>
+
+<P>With versions 2.x and later, it is no longer necessary to assign the result of the <B>new</B> operator to a variable. For example, in version 1.x it was necessary to create a Music Object instance with the following assignment syntax:</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject = new musicObject ('myMusicObject');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>It is now only necessary to call the Music Object constructor with the name of the object instance you'd like to create. A variable is then automatically created and can be referenced as though you'd created it in an assignment. For example, the code above would now become just:</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+new musicObject ('myMusicObject');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>This has the advantage of simplifying your code a little but also eliminating the need to specify the exact same object instance name twice - once in the assignment, and once as a string passed to the Music Object constructor. This reduces the risks of code not working because of these names not being identical - as a result of an innocent typo, for example.</P>
+
+<DIV CLASS=subsection>Using the magicEmbed Method</DIV>
+
+<P>For interactive authoring, the way that one embeds Beatnik Players into an HTML page is slightly different in Music Object versions 2.x and later. One no longer places explicit EMBED tags into the HTML, but now will use the Music Object's <B>magicEmbed</B> method to place an instance in a page. To ease the transition into this new authoring approach, it was decided that the magicEmbed method would be called with a single string parameter, representing the EMBED tag as it would otherwise appear in the HTML. The magicEmbed method then processes the string and writes out an EMBED tag or OBJECT tag into the HTML document, depending on whether the user is browsing with Navigator or Internet Explorer. So, essentially, you just cut and paste your old EMBED tags and place them between quotes in a magicEmbed method call.</P>
+
+<P>There are some other benefits to the new approach, as well. Take a look at the example below to compare the old approach with the new. In the example we have a Music Object instance named "myMusicObject" and we wish to embed a Beatnik Player in the HTML page to be associated with that instance. The old HTML EMBED tag would look as follows:</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="my-music-file.rmf"
+   TYPE="audio/rmf"
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+   NAME="myMusicObjectPlugin"
+   WIDTH=2
+   HEIGHT=2
+   HIDDEN
+   AUTOSTART=FALSE
+   ONREADY="myMusicObject.setReady ()"
+&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Because the <B>magicEmbed</B> method automatically fills in appropriate values for the <B>TYPE</B>, <B>PLUGINSPAGE</B>, <B>NAME</B>, and <B>ONREADY</B> attributes, it is not necessary to have these in the EMBED tag one places in the magicEmbed method call. One can simply delete these attributes. It is also not necessary to specify the "&lt;EMBED " text that opens the EMBED tag, nor is it necessary to use "&gt;" to close the EMBED tag. So, in the new approach, the code would look as follows:</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+myMusicObject.magicEmbed ('SRC="my-music-file.rmf" WIDTH=2 HEIGHT=2 HIDDEN AUTOSTART=FALSE');
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Key Benefits to the New Syntax</DIV>
+
+<UL>
+	<LI>You no longer have to specify the <B>TYPE</B> and <B>PLUGINSPAGE</B> attributes, making it easier to simply embed a player. This is especially helpful as the URL for the <B>PLUGINSPAGE</B> is quite long and it is wasteful to duplicate it everywhere in sonified pages. Having Music Object's <B>magicEmbed</B> fill in the value automatically also allows Beatnik Inc. to control the plug-in download page URL so that if the Beatnik Web site changes and this URL is affected, it can be addressed by the release of a new Music Object version.
+		<P></P>
+	<LI>You no longer have to specify the <B>NAME</B> and <B>ONREADY</B> attributes. These are used in order to create a relationship between a Music Object instance and a Beatnik Player instance embedded in a page. Previously, you had to understand the tricky naming convention that Music Object used to tie these together, and if the naming did not exactly conform to the scheme sonified pages would not work. With the new scheme, you do not need to worry about these attributes. Music Object does the right thing and the <B>magicEmbed</B> method fills these attributes in with appropriate values.
+		<P></P>
+	<LI>The <B>magicEmbed</B> approach now allows the Music Object to speak to either an embedded Beatnik Plug-in or an embedded Beatnik ActiveX control, depending on which browser is being used. If the user is browsing with Internet Explorer, then an OBJECT tag for the Beatnik ActiveX Control will be written into the HTML document. And if the user is browsing with Netscape Navigator, then an EMBED tag for the Beatnik Plug-in will be written into the HTML document.
+</UL>
+
+<P>See also <B>Music Object Reference, <A HREF="../instance-methods.html#magicEmbed" TARGET="_parent">magicEmbed</A></B>.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+5. Test Your Content
+</TD></TR></TABLE>
+<BR>
+
+<P>Check your Web site pages locally to ensure that all your content is still working. If possible, use several browser versions in your testing. Do not delete the backup(s) that you made in step 1 until you have uploaded the changes to the online version of your Web site and verified that all your content works online as well. There are some authoring issues that only impact content when it is being served from a Web server. Even if you have tested your content online and are confident everything is peachy, you may still wish to keep the backups hanging around for a week or so, just in case. Sometimes it is not possible to test all possibilities and you may receive reports from Web site visitors saying that things are suddenly amiss with your content. Always play it safe with your Web content.</P>
+
+</BODY></HTML>

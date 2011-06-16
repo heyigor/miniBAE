@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 2.3.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 2.3.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1998-05-01</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#intro">What's New In This Version</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+***********************************************************************-->
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<BLOCKQUOTE>
+<IMG SRC="../../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Since the Beatnik Player 1.3.0 has been released, you can expect that some end-users may be visiting your site with this version. There are issues with the 1.3.0 player and 4.0x versions of Netscape Navigator. You can only avoid these issues by using version 2.3.0 (or higher) of the Music Object API. If you do not upgrade your content to use at least this version, your content may not work reliably for users with Navigator 4.0x and the 1.3.0 Beatnik Player.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>ISSUE WORKAROUND - Callbacks in Navigator 4.0x</DIV>
+
+<BLOCKQUOTE>
+The new <B>onPlay</B>, <B>onPause</B>, <B>onStop</B>, and <B>onMetaEvent</B> callbacks that have been introduced in the Beatnik Player 1.3.0 were found to be particularly sensitive to browser issues in Navigator 4.0x versions. In order to reliably make the callbacks work, it was necessary to create a workaround in the Music Object API to prevent the callbacks from being called while a document is still loading. Without this workaround, documents would sometimes freeze or just vanish when close to finished loading. This usually did not result in crashes in the browser, but rendered the pages unusable.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Debugging Options</DIV>
+
+<BLOCKQUOTE>
+It is now easier for authors to debug code with the customizable new Music Object error handler. You can read all about debugging in the Music Object reference section <A HREF="../../debugging-aids.html" TARGET="_parent">Music Object Debugging Aids</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - General Optimizations</DIV>
+
+<BLOCKQUOTE>
+As always, old versions are overhauled and code is optimized for size and performance. Small bugs were found in earlier versions that have now been squashed.
+</BLOCKQUOTE>
+
+<!--***********************************************************************-->
+
+</BODY></HTML>

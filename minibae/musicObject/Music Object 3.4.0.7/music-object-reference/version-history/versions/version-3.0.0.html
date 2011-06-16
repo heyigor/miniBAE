@@ -1,0 +1,249 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 3.0.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 3.0.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1999-02-10</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<P>In the interest of developing the Music Object API into a robust API for Web page sonification, and also a possible candidate for standardization as a module for the <B>ECMA-262</B> scripting language, Beatnik Inc. has made some noteworthy changes to the API. These changes may require that some of your sonified content be updated in order to use the 3.0.x version of Music Object.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+A Change in Name : "musicObject" Becomes "Music"
+</TD></TR></TABLE>
+<BR>
+
+<P>The object name "musicObject" has been changed to just "Music".</P>
+
+<UL>
+	<LI><B>Why?</B><BR>
+		This is to bring the Music Object API in line with current objects built into the JavaScript language. The object name's first letter is capitalized, in the spirit of other built-in objects, such as "Math", "Image", etc. It is also the common convention that object constructor names be capitalized in this way. And, since the capitalization of the first letter indicates that "Music" is an object constructor, it is then redundant to append "Object" to its name.
+		<P></P>
+	<LI><B>Backward Compatibility?</B><BR>
+		Initially, there will be several versions of the file "music-object.js" where using the constructor name "musicObject" will still work and will have the same effect as using the new "Music" constructor. However, this backward compatibility will not be maintained indefinitely. If you have code that you do not wish to change, you should either continue to use the old "music-object.js" that has worked with your content, or you should use the new version and make the necessary updates to your code.
+		<P></P>
+	<LI><B>How to Update Code</B><BR>
+		Updating your code for this change in the constructor name should be a simple matter of performing a search-and-replace in a good text editor. For comprehensive update guidelines, see the section <A HREF="../from-2.x-to-3.0.x.html">Migrating Content from Music Object 2.x to 3.0.x</A>.
+		<P></P>
+</UL>
+
+<P>To recap, the change in the object constructor name is primarily to make the Music Object API look similar to, and fit in well with the other objects that are already built into the JavaScript language.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<P>With Music Object 3.0, it is now possible to call global utility methods by directly dereferencing the Music Object constructor. All global functions of the Music Object API that were prefixed with "mo_" are now referenced as methods of "Music". So, for example, the global Music Object API function "<B>mo_isPlayerCompatible</B>" is now called as "<B>Music.isPlayerCompatible</B>".</P>
+
+<P>While the definition in some programming languages of a "static method" means that it may be called as a method of any instance of the object class, this is not the case with JavaScript. Static methods, as implemented in the Music Object API, can only be called as methods of the "Music" object constructor and not instances of the "Music" object that have been created.</P>
+
+<P>The table below lists the old global Music Object API functions and their new names as static methods of "Music".</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Global&nbsp;Function</TD>
+		<TD CLASS=data-table-column-header>Static&Method&nbsp;Name</TD>
+		<TD CLASS=data-table-column-header>Backward&nbsp;Compatible</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_magicEmbed</TD>
+		<TD CLASS=data-table-item><B>Music.magicEmbed</B></TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_installBeatnik</TD>
+		<TD CLASS=data-table-item-highlighted>Music.installPlayer</TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_isPlayerCompatible</TD>
+		<TD CLASS=data-table-item><B>Music.isPlayerCompatible</B></TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_hasMinVersion</TD>
+		<TD CLASS=data-table-item><B>Music.hasMinVersion</B></TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_promptClose</TD>
+		<TD CLASS=data-table-item><B>Music.promptClose</B></TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_promptUser</TD>
+		<TD CLASS=data-table-item><B>Music.promptUser</B></TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_getNoteName</TD>
+		<TD CLASS=data-table-item><B>Music.getNoteName</B></TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_getNoteNumber</TD>
+		<TD CLASS=data-table-item><B>Music.getNoteNumber</B></TD>
+		<TD CLASS=data-table-item><B>yes</B> (deprecated)</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+<BLOCKQUOTE>
+<IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;The highlighted static method names indicate names that differ significantly from their original forms.
+</BLOCKQUOTE>
+<UL>
+	<LI><B>Why?</B><BR>
+		The goal of converting the Music Object API's global functions into static methods of the "Music" object constructor is to create as self-contained an API as possible, without the need to use more of the global namespace. If all of the API could be wrapped into "Music", this would be ideal.
+		<P></P>
+	<LI><B>Backward Compatibility?</B><BR>
+		While initially the global "mo_" namespace will still be used for backward compatibility reasons, the objective is to get content authors to switch over to using the static methods of "Music" so that at some point in the future the deprecated "mo_" global functions can be removed from the API.
+		<P></P>
+		Initially, there will be several versions of the file "music-object.js" where using the global "mo_" functions will still work and will have the same effect as using the static methods of "Music". However, this backward compatibility will not be maintained indefinitely. As soon as you start using Music Object 3.0, you should make the necessary changes to your scripting so as to make use of the static methods and not the global functions.
+		<P></P>
+	<LI><B>How to Update Code</B><BR>
+		Updating your code for this change should be quite easy. It is highly probable that the only functions being called in your own scripting that are prefixed with "mo_" will be the global functions of the Music Object API that are becoming static methods of "Music". You can then simply perform a search-and-replace in a good text editor to change all occurrences of "<B>mo_</B>" with "<B>Music.</B>". One exception is the "<B>mo_installBeatnik</B>" function which has changed name and should now be called as "<B>Music.installPlayer</B>". For comprehensive update guidelines, see the section <A HREF="../from-2.x-to-3.0.x.html">Migrating Content from Music Object 2.x to 3.0.x</A>.
+		<P></P>
+</UL>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<P>In a similar vein to the new static methods, all properties of the Music Object API that were available as global variables prefixed with "mo_" are now dereferenced as static properties of the "Music" object constructor. So, for example, the global Music Object API property "<B>mo_debugToStatus</B>" is now used in the form "<B>Music.debugToStatus</B>".</P>
+
+<P>While the definition in some programming languages of a "static property" means that it may be referenced as a property of any instance of the object class, this is not the case with JavaScript. Static properties, as implemented in the Music Object API, can only be referenced as properties of the "Music" object constructor and not from instances of the "Music" object that have been created.</P>
+
+<P>The table below lists the old global Music Object API properties and their new names as static properties of "Music".</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Global&nbsp;Property</TD>
+		<TD CLASS=data-table-column-header>Static&nbsp;Property&nbsp;Name</TD>
+		<TD CLASS=data-table-column-header>Backward&nbsp;Compatible</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_debugToAlert</TD>
+		<TD CLASS=data-table-item><B>Music.debugToAlert</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_debugToJavaConsole</TD>
+		<TD CLASS=data-table-item><B>Music.debugToJavaConsole</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_debugToStatus</TD>
+		<TD CLASS=data-table-item><B>Music.debugToStatus</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_ignoreNotReady</TD>
+		<TD CLASS=data-table-item><B>Music.ignoreNotReady</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_ignoreJavaDisabled</TD>
+		<TD CLASS=data-table-item><B>Music.ignoreJavaDisabled</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_requiredMinVersion</TD>
+		<TD CLASS=data-table-item><B>Music.requiredMinVersion</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_showCompatibilityPrompt</TD>
+		<TD CLASS=data-table-item><B>Music.showCompatibilityPrompt</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_silentIfInadequate</TD>
+		<TD CLASS=data-table-item><B>Music.silentIfInadequate</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_BeatnikType</TD>
+		<TD CLASS=data-table-item-highlighted>Music.playerType</TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_BeatnikVersion</TD>
+		<TD CLASS=data-table-item-highlighted>Music.playerVersion</TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_browserSupported</TD>
+		<TD CLASS=data-table-item-highlighted>Music.clientSupported</TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_hasBeatnik</TD>
+		<TD CLASS=data-table-item-highlighted>Music.hasPlayer</TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_platform</TD>
+		<TD CLASS=data-table-item><B>Music.platform</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>mo_enabled</TD>
+		<TD CLASS=data-table-item><B>Music.enabled</B></TD>
+		<TD CLASS=data-table-item>no</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+<BLOCKQUOTE>
+<IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;The highlighted static property names indicate names that differ significantly from their original forms.
+</BLOCKQUOTE>
+<UL>
+	<LI><B>Why?</B><BR>
+		The goal of converting the Music Object API's global properties into static properties of the "Music" object constructor is the same as the goal of converting the global functions into static methods of "Music" - to create as self-contained an API as possible. The goal is to wrap as much of the API into "Music" as possible.
+		<P></P>
+	<LI><B>Backward Compatibility?</B><BR>
+		Unlike the case with the static methods where the old global function forms will still be available to use for some versions to come, the global properties prefixed with "mo_" are no longer available at all in Music Object 3.0. So, if you were using these properties in processes such as compatibility testing, you will have to update your code to use the new static property forms.
+		<P></P>
+	<LI><B>How to Update Code</B><BR>
+		Updating your code for this change should also be quite easy. It is highly probable that the only properties being used in your own scripting that are prefixed with "mo_" will be the global properties of the Music Object API that are becoming static properties of "Music". You can then simply perform a search-and-replace in a good text editor to change all occurrences of "<B>mo_</B>" with "<B>Music.</B>". Of course, there are several exceptions in the case of the static properties of names that have changed quite dramatically from the original global properties. For comprehensive update guidelines, see the section <A HREF="../from-2.x-to-3.0.x.html">Migrating Content from Music Object 2.x to 3.0.x</A>.
+		<P></P>
+</UL>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Becoming Player-neutral
+</TD></TR></TABLE>
+<BR>
+
+<P>In the two preceding sections on the new static methods and static properties, you will have noticed that some of the names for the new static versions of the global functions or properties were highlighted. In most cases, all global functions or properties can now be dereferenced from the "Music" object constructor, simply by replacing "mo_" in the name with "Music.". However, it was decided to use this opportunity to also change the names of some of the static methods and properties to make them less Beatnik-specific and more player-neutral.</P>
+
+<P>This is all part of the effort towards gradually evolving the Music Object API into a module that can be standardized for the already established ECMA-262 scripting language standard (a.k.a. JavaScript, JScript, JellyScript). Hopefully in the future, Web browsers will have native support for scriptable interactive music and audio through the Music Object API module.</P>
+
+</BODY></HTML>

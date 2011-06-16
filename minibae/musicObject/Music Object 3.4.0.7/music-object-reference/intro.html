@@ -1,0 +1,776 @@
+<HTML>
+<HEAD>
+	<TITLE>Introduction to Music Object</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Introduction to Music Object
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#introduction">Introduction</A>
+			<LI><A HREF="#whats-new">What's New In the Latest Version of Music Object?</A>
+			<LI><A HREF="#start">Starting to use Music Object</A>
+			<LI><A HREF="#multiple-instances">Creating Multiple Instances</A>
+			<LI><A HREF="#methods-and-properties">Methods and Properties</A>
+			<LI><A HREF="#file-types-and-functionality">File Types and Functionality</A>
+			<LI><A HREF="#reserved-words">Music Object API Reserved Words</A>
+			<LI><A HREF="#layers">Layers of the Music Object API</A>
+			<LI><A HREF="#suite">Making a Custom Music Object Suite</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="introduction"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Introduction
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>What is Music Object?</DIV>
+
+<P>Music Object is an abstraction layer that lies between a Beatnik Player that is instantiated on a page and the HTML page that wishes to control it. It becomes the author's means of communicating with a Beatnik Player instance. Instead of trying to 'speak' directly to the player instance, a Music Object instance is created and linked to the Beatnik Player instance. All communication is then sent to the Music Object instance and is then passed on in the correct manner to the Beatnik Player instance, which could be either the Beatnik Plug-in for Netscape or the Beatnik ActiveX control for Internet Explorer. The way in which one uses Music Object is described in more detail further on in this reference.<P>
+
+<DIV CLASS=subsection>What can Music Object be Used For?</DIV>
+
+<P>The Music Object API is a broad platform for the creation of interactive audio applications on the Web. The comprehensive list of interactive audio features of the Music Object API allows a wide variety of different sonified content to be created, ranging from very straightforward sonified banner ads, to more sophisticated sonified Web sites, and even more elaborate music applications and multimedia experiences.</P>
+
+<P>Some of the types of applications that can be built using the Music Object API include...</P>
+<UL>
+	<LI>Music Remixers
+	<LI>Jukeboxes
+	<LI>Sonified Ad Banners
+	<LI>Sonified Flash Movies and Games
+	<LI>Sonified Web Sites
+	<LI>Unique Multimedia Web Experiences
+	<LI>Auctioning and Brokering Web Sites with Audio Notification Cues
+	<LI>Musical Greeting Cards
+	<LI>Online Karaoke Machines
+	<LI>Online Musical Instruction Systems
+	<LI>and lots more...
+</UL>
+
+<P>There are some limitations to what the Music Object API can do. For example, because of the inherent latencies built into a browser's scripting layer, it wouldn't really be feasible to build a Web-based professional grade synthesizer or music sequencer using the Music Object API.</P>
+
+<P>To see some great examples of the Music Object API in action, check out the <A HREF="http://www.beatnik.com/to/?showcase" TARGET="_top">Beatnik Showcase</A>.</P>
+
+<DIV CLASS=subsection>What is the mechanism that allows a Web page to control a Beatnik Player instance?</DIV>
+
+<P>Within the Music Object code, the connection to the Beatnik Plug-in is made through Netscape's LiveConnect technology, or to the Beatnik ActiveX control through Microsoft's ActiveX scripting. It is not necessary for authors to fully understand this mechanism as this is made fairly transparent through the use of the Music Object code.</P>
+
+<DIV CLASS=subsection>What form does Music Object take?</DIV>
+
+<P>Music Object is a JavaScript class that is defined in the JavaScript file called "music-object.js". This JavaScript file is sourced into the HTML document that is to contain Beatnik interactive authoring using the statement <B>&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;</B></P>
+
+<DIV CLASS=subsection>How does Music Object make authoring easier?</DIV>
+
+<P>The Music Object abstraction layer performs some very vital functions, without which, authoring for Beatnik would be cumbersome.</P>
+<UL>
+	<LI><B>Creates a protection layer for Navigator issues</B>
+		<P>MusicObject acts as a wrapper and protection layer around the Beatnik Plug-in's LiveConnect methods. Once a Music Object instance has been created, it is possible in one's authoring to call that Music Object instance's methods directly without having to worry about whether the player is fully instantiated and ready yet. It alleviates the peculiar symptoms associated with LiveConnect JavaScript authoring.</P>
+	<LI><B>Hides differences between Navigator and Internet Explorer</B>
+		<P>There are a few fundamental differences between LiveConnect scripting and ActiveX scripting that would make programming interactive sonified Web pages more complex if it was left to the author to work around these differences. By managing these differences in the "music-object.js" file (which is sourced into the author's HTML page), the author not only does not need to understand and deal with these differences, but also does not need to have their JavaScript sonification code cluttered by the code that manages the 'wiring' to the player.</P>
+	<LI><B>Adds useful authoring methods</B>
+		<P>The Music Object API extends the Beatnik Player's existing API and offers a few very useful sonification methods. These very methods may make their way into future versions of the player's LiveConnect authoring API.</P>
+</UL>
+
+<DIV CLASS=subsection>How do I get the Music Object JavaScript File?</DIV>
+
+<P>To get the "music-object.js" JavaScript file, simply <A HREF="../javascript/music-object.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object.js" into an appropriate directory of the local copy of your Web site.</P>
+
+<DIV CLASS=subsection>How do I use Music Object?</DIV>
+
+<P>In order to set up an HTML page with the necessary framework for Beatnik interactive authoring, you should follow the guidelines in the section that follows, <A HREF="#start">Starting to use Music Object</A></P>
+
+<DIV CLASS=subsection>Can I have more than one Music Object instance on a page?</DIV>
+
+<P><B>YES</B>. You can create as many Music Object instances as you like on the same HTML page. Bear in mind that for each Music Object instance you are expected to embed a Beatnik Player into the page. While there is also no strict limit on the number of Beatnik Player instances living on the same HTML page, there is a maximum limit of sixteen instances that can be playing at the same time (for some older versions of the Beatnik Player, the limit may be eight). If you are going to create many Music Object instances with accompanying players, you should be aware that for each Music Object instance there is a modest minimum amount of memory that is needed on the user's system. The same applies to each Beatnik Player that accompanies a Music Object instance. In addition, when a Beatnik Player loads in its music or audio file, that file must then be contained in the user's memory.</P>
+
+<P>So, while there are no forced limitations on the number of Music Object instances and Beatnik Player instances, you should be careful not to author pages that make such heavy demands on the user's memory resources that the pages then become sluggish and unbearable to use.</P>
+
+<P>For more information, see the section <A HREF="#multiple-instances">Creating Multiple Instances</A>.</P>
+
+<DIV CLASS=subsection>How far can one take Music Object?</DIV>
+
+<P>The Beatnik Player offers extensive support for realtime control, offered to authors through the Music Object authoring API. Authors can design startlingly interactive Web pages, demonstrated very effectively in the Beatnik Web site's <A HREF="http://www.beatnik.com/to/?showcase" TARGET="_top">Showcase</A> area, as well as the <A HREF="../sample-code/index.html">Sample Code & Examples</A> contained in this documentation.</P>
+
+<DIV CLASS=subsection>What programming experience do I need to have?</DIV>
+
+<P>To be able to fully unleash the interactive capabilities of Beatnik, you should have a healthy understanding of the JavaScript language. This documentation only assumes knowledge of JavaScript 1.1 and none of the tutorials, sample code, or examples currently make use of the more powerful features of JavaScript 1.2. Browsers that support this version of JavaScript are not yet considered universal enough.</P>
+
+<P>You should setup a bookmark to Netscape's on-line <A HREF="http://home.netscape.com/eng/mozilla/3.0/handbook/javascript" TARGET="_top">JavaScript documentation</A> to use as a reference as you author using JavaScript.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In the Latest Version of Music Object?
+</TD></TR></TABLE>
+<BR>
+
+<P><IMG SRC="../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>All the information in this documentation reflects the very latest version of the Music Object API. If you are not using the latest version in your sonification, then you should immediately <A HREF="version-history/index.html">update your content</A> to use the latest version before using the reference information contained inside this documentation in your authoring.</P>
+
+<P>The Beatnik Music Object Documentation contains a <A HREF="version-history/index.html">Music Object Version History</A>, where you will be able to find out about the new features and possible issues with the most recent version of the Music Object API, as well as helpful guidelines for updating your sonified content from older Music Object versions.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="start"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Starting to use Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>The following sections will take you step-by-step through the process of setting up a very simple example sonified page. If you observe the basic principles outlined in the sections below, you should be able to start creating your own sonified HTML pages or adding sonification to existing pages.</P>
+
+<DIV CLASS=subsection>Getting the "music-object.js" File</DIV>
+
+<P>The core Music Object API is implemented in the "<B>music-object.js</B>" JavaScript file. The first thing you need to do is to make sure that this file is available on your Web site. To get the file, simply <A HREF="../javascript/music-object.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object.js" into the folder that contains the local copy of your Web site.</P>
+
+<DIV CLASS=subsection>Sourcing in the "music-object.js" File</DIV>
+
+<P>Once the "music-object.js" file has been copied into your Web site folder, you then need to source the file into the Web page you wish to sonify. This is down using the HTML <B>SCRIPT</B> tag, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;My Sonified Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+
+<P>The <B>SCRIPT</B> tag that sources in the "music-object.js" file is highlighted in the above sample code segment.</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+Never source in the "music-object.js" file into the HEAD of the document (between the opening &lt;HEAD&gt; and the closing &lt;/HEAD&gt; tags). If you do this, the page will not work correctly in some browsers.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Creating a Music Object Instance</DIV>
+
+<P>Now that the "music-object.js" file has been sourced into the HTML page, you can create a Music Object instance by adding JavaScript code as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;My Sonified Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+
+<P>The code that creates the Music Object instance <B>notePlayer</B> is highlighted in the above sample code segment. Notice that a separate <B>SCRIPT</B> tag has been created to contain this JavaScript code. It is not possible to place this code inside the same <B>SCRIPT</B> tag that sources in the "music-object.js" file. If you were to do this, your code may fail in some browsers.</P>
+
+<P>There is an alternative syntax for creating Music Object instances, where you specify the name of the Music Object instance you wish to create as a string parameter in the call to the <B>Music</B> constructor, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;My Sonified Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+new Music ('notePlayer');
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+
+<P>Although both of the above approaches are valid, the first approach is the preferred one. You will see this approach used in most sample code examples throughout the documentation. Don't be alarmed, however, if you see the second approach in sonification code that you receive from online discussion forums or from other online Web sonification resources.</P>
+
+<DIV CLASS=subsection>Embedding the Music Object Instance's Player</DIV>
+
+<P>The music playback capability of the Music Object API is provided by a player which is implemented in native code - not in JavaScript code. This player comes in the form of a browser add-on component: a plug-in for Netscape browsers and an ActiveX control for Microsoft Internet Explorer. Now, in order for a Music Object instance to be operational and have the ability to play music and audio, a player instance must be created that is linked to the Music Object instance. This is done using one of the various <A HREF="instance-methods.html#embedding">embedding methods</A> that are provided by the Music Object API.</P>
+
+<P>In this example, we will use the <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A> instance method to embed the Music Object instance's player, since this method provides us a convenient way to embed a player instance that is correctly set up for playing musical notes. The code is as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;My Sonified Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+<SPAN CLASS=sample-code-highlighted>notePlayer.stubEmbed ('stub.rmf');</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+
+<P>The code that embeds the Music Object instance's player is highlighted in the above sample code segment. The file "stub.rmf" is a special type of RMF file that is silent when it is played, because it contains no musical note data. This allows the file to be continuously playing, without actually playing anything other than the musical notes that are triggered using the note playing methods of the Music Object API.</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+Never embed player instances into the HEAD of the document (between the opening &lt;HEAD&gt; and the closing &lt;/HEAD&gt; tags). Player instances embedded into the HEAD of the document may not function correctly and may cause the page to break in some browsers.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Testing Your Music Object Instance</DIV>
+
+<P>Now that your code is sourcing in the "music-object.js" file, creating a Music Object instance, and embedding the Music Object instance's player, your instance should be ready for action and you can now add some code to the page to test that the Music Object instance is operational. For illustration, we will add some code to play musical notes when the user mouses over links.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;My Sonified Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+<SPAN CLASS=sample-code-highlighted>&lt;A
+   HREF="some-page1.html"
+   ONMOUSEOVER="notePlayer.playNote (1,0,128+85,60,127,1000)"
+&gt;
+   Some Link 1
+&lt;/A&gt;
+&lt;BR&gt;
+&lt;A
+   HREF="some-page2.html"
+   ONMOUSEOVER="notePlayer.playNote (1,0,128+75,60,127,1000)"
+&gt;
+   Some Link 2
+&lt;/A&gt;
+&lt;BR&gt;
+&lt;A
+   HREF="some-page3.html"
+   ONMOUSEOVER="notePlayer.playNote (1,1,128+46,79,127,1000)"
+&gt;
+   Some Link 3
+&lt;/A&gt;
+&lt;BR&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+
+<P>The code that has been added for creating links with mouseover sounds is highlighted in the above sample code segment. You will notice that the <B>A</B> tag for each link contains an <B>ONMOUSEOVER</B> attribute. This attribute is used to specify JavaScript code that should be executed when the user mouses over a link. In this example, the code specified in the <B>ONMOUSEOVER</B> attribute is a call to the <A HREF="instance-methods.html#playNote"><B>playNote</B></A> method of the <B>notePlayer</B> Music Object instance.</P>
+
+<P>The example is now complete. You can use this very basic example as a template for creating other sonified pages, or just as a reference when adding sonification to existing HTML pages.</P>
+
+<DIV CLASS=subsection>A Tip for Better Organizing JavaScript Files</DIV>
+
+<P>The above example assumed that the "music-object.js" file was copied into the Web site's folder at the same level as the sonified HTML page. You could alternatively put the "music-object.js" file into a dedicated "javascript" folder. This can be a good practice when you start using some of the many Music Object extensions in order to further enhance the sonification of your Web pages. Each Music Object extension is implemented in its own separate JavaScript file, and placing all the JavaScript files in a dedicated folder can help to better organize the media used by your Web site.</P>
+
+<P>If you decide to place all JavaScript files into a dedicated "javascript" folder, then you must make sure to source in the files using the correct path to the files (including specifying the folder that the files are in). So, in the above example, the <B>SCRIPT</B> tag that sourced in the "music-object.js" file would have to be modified to...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>javascript/</SPAN>music-object.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+
+<P></P>
+
+<DIV CLASS=subsection>A Tip for Better Organizing Music Files</DIV>
+
+<P>The above example assumed that the "stub.rmf" file was copied into the Web site's folder at the same level as the sonified HTML page. You could alternatively put the "stub.rmf" file into a dedicated "music" folder. This can be a good practice when you start using lots of different music files in the sonification of your Web pages. Placing all the music files in a dedicated folder can help to better organize the media used by your Web site.</P>
+
+<P>If you decide to place all music files into a dedicated "music" folder, then you must make sure to specify the correct path to the files (including specifying the folder that the files are in) when making calls to the <A HREF="instance-methods.html#embedding">embedding methods</A> of the Music Object API. So, in the above example, the <B>stubEmbed</B> method call that embedded the Music Object instance's player would have to be modified to...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code>
+<PRE>
+notePlayer.stubEmbed ('<SPAN CLASS=sample-code-highlighted>music/</SPAN>stub.rmf');
+</PRE>
+</TD></TR></TABLE>
+
+<P></P>
+
+<DIV CLASS=subsection>Testing Your Sonified Pages Online</DIV>
+
+<P>Before you upload your sonified Web pages to test them online, you should make sure that your Web server has the correct MIME type set up for JavaScript files. JavaScript files should always have the file extension ".js" and this file extension should be mapped to the MIME type "<B>application/x-javascript</B>". If you do not have this MIME type configured on your server, your sonified pages may not work correctly in certain browsers. They may work locally while you are authoring and previewing them, but they may not work when visitors try to view them from your Web site. Refer to <A HREF="../tutorials/putting-music-on-a-page/index.html?steps/mime-types.html">Dealing with MIME Types</A> for further information.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="multiple-instances"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Creating Multiple Instances
+</TD></TR></TABLE>
+<BR>
+
+<P>It is only possible to play one file at a time through a player instance. So, for example, it is not possible to fade one piece of music out while another piece fades in, using just one player instance. In order to achieve this effect, one would need to use two different player instances, with one playing the file that is fading out and the other playing the file that is fading in. To understand this, it is best to think of the Beatnik Player as though it were a typical CD player in a home stereo system. In order to put a new CD in, it is necessary to take the currently playing CD out first. You can't fade between the two CD's using just one CD player.</P>
+
+<P>Now, it is possible to have an almost unlimited number of player instances on any HTML page, with as many as 16 players actually playing music at any given time. So, by adding a little bit of scripting wizardry, it should be no problem to use two player instances to achieve a cross-fade effect between two music files. And, when you start using 2 or more instances you can really start to do some sophisticated sonification.</P>
+
+<P>Because player instances need to be embedded into the HTML page, it is not possible to dynamically add more player instances after the page has already loaded. So, you need to assess upfront how many instances you might need for your page sonification and then create that many instances. It is possible to embed as many player instances as you want, with some instances that are not doing anything initially and are just "waiting in the wings". Creating multiple instances is quite easy, and just extends on the principles that were demonstrated in the previous section <A HREF="#start">Starting to use Music Object</A>.</P>
+
+<P>In the example below, we are creating two instances: one instance will play musical notes to sonify navigation links, and the other instance will play music in the background...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Multiple Instances Template&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<B>notePlayer = new Music ();
+musicPlayer = new Music ();</B>
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;A
+   HREF="some-page1.html"
+   ONMOUSEOVER="notePlayer.playNote (1,0,128+85,60,127,1000)"
+&gt;
+   Some Link 1
+&lt;/A&gt;
+&lt;BR&gt;
+&lt;A
+   HREF="some-page2.html"
+   ONMOUSEOVER="notePlayer.playNote (1,0,128+75,60,127,1000)"
+&gt;
+   Some Link 2
+&lt;/A&gt;
+&lt;BR&gt;
+&lt;A
+   HREF="some-page3.html"
+   ONMOUSEOVER="notePlayer.playNote (1,1,128+46,79,127,1000)"
+&gt;
+   Some Link 3
+&lt;/A&gt;</SPAN>
+&lt;BR&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<B>notePlayer.stubEmbed ('stub.rmf');
+
+musicPlayer.magicEmbed (
+   'SRC="background-music.rmf" ' +
+   'WIDTH=0 ' +
+   'HEIGHT=0 ' +
+   'HIDDEN ' +
+   'AUTOSTART=TRUE ' +
+   'VOLUME=70'
+);</B>
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+</CENTER>
+
+<P>The text that is highlighted in the above source code listing represents the code that deals specifically with creating multiple instances (two in this example). Of course, there's nothing to say that you couldn't use 3, 4, or even more instances for your page sonification, depending on how complex the sonification is to be. The general rule to remember is that for each Music Object instance you create, you should also embed a corresponding player instance using one of the <A HREF="instance-methods.html#embedding">embedding methods</A> provided by the Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="methods-and-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Methods and Properties
+</TD></TR></TABLE>
+<BR>
+
+<P>The Music Object API can be broken down into four main functional categories: instance methods, instance properties, static methods, and static properties. The diagram below roughly illustrates the relationship between these functional categories.</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="../images/methods-and-properties.gif" WIDTH=583 HEIGHT=289 ALT="Instance Methods, Instance Properties, Static Methods, and Static Properties" HSPACE=0 VSPACE=0 BORDER=0>
+</P>
+
+<P>In the above diagram, the top container represents the Music Object class, which contains the static methods and static properties that are global to any HTML page that is authored using the Music Object API. Static methods and static properties are referenced from the <B>Music</B> object, as in the statement <NOBR><B>Music.setGlobalMute (true)</B></NOBR>, and the statement <NOBR><B>Music.silentIfInadequate = true</B></NOBR>.</P>
+
+<P>Below the Music Object container, several containers represent multiple Music Object instances that have been created. Each instance maintains its own state, and this state can be accessed using the instance methods and instance properties. Instance methods and instance properties are referenced from the Music Object instance name. For example, if an instance was created named "myMusicObject", then the statement <NOBR><B>myMusicObject.setVolume (50)</B></NOBR> would be a valid call to an instance method, and the statement <NOBR><B>myMusicObject.locked = true</B></NOBR> would be a valid access to an instance property.</P>
+
+<P>Now, let's take a look at each functional category in further detail...</P>
+<UL>
+	<LI><B>Instance Methods</B><BR>
+		Instance methods act on specific Music Object instances, as opposed to the shared global audio engine. An example of an instance method is the <B>setVolume</B> method, which allows one to set the playback volume for the Music Object instance on which this method is called. Each Music Object instance maintains its own state, so the statement <NOBR><B>myMusicObject1.setVolume (50)</B></NOBR> would have no effect on the volume level of a Music Object instance "myMusicObject2".
+		<P>For a full list of all the instance methods, see the <A HREF="instance-methods.html">Instance Methods</A> reference section.</P>
+	<LI><B>Instance Properties</B><BR>
+		While much of a Music Object instance's state information can be accessed using companion set- and get- instance methods (such as the <B>setVolume</B> / <B>getVolume</B> pair), some state information can be accessed more directly through instance properties. An example would be the <B>locked</B> property, which makes it possible to block methods that may change a Music Object instance's state.
+		<P>Instance properties are specific to Music Object instances, as opposed to the shared global audio engine. Each Music Object instance maintains its own state, so the statement <NOBR><B>myMusicObject1.locked = true</B></NOBR> would have no effect on the locked state of a Music Object instance "myMusicObject2". Not all instance properties offer read / write access. For example, the <B>ready</B> property should never be set in one's code and should only ever be queried.</P>
+		<P>For a full list of all the instance properties, see the <A HREF="instance-properties.html">Instance Properties</A> reference section.</P>
+	<LI><B>Static Methods</B><BR>
+		Unlike instance methods, which affect the state of specific Music Object instances, the static methods let you affect the global state of the shared audio engine, as well as the Music Object state for any HTML page that is authored using the Music Object API.
+		<P>For a full list of all the static methods, see the <A HREF="static-methods.html">Static Methods</A> reference section.</P>
+	<LI><B>Static Properties</B><BR>
+		Unlike instance properties, which provide access to state information for specific Music Object instances, the static properties provide access to global Music Object state information for an HTML page that is authored using the Music Object API. Many of the static properties in the core Music Object API provide access to information about the configuration of the player on the user's system, and also allow one to customize the way that Music Object handles any compatibility issues that may arise from the player not being installed, or a version being installed that fails to meet a sonified page's version requirements. Certain <A HREF="extensions/intro.html">Music Object extensions</A> may also provide additional static properties, such as the <A HREF="extensions/dynamic/index.html#Music.groovoids"><B>Music.groovoids</B></A> static property that is provided in the <A HREF="extensions/dynamic/index.html">Dynamic</A> Music Object Extension.
+		<P>For a full list of all the static properties, see the <A HREF="static-properties.html">Static Properties</A> reference section.</P>
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="file-types-and-functionality"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+File Types and Functionality
+</TD></TR></TABLE>
+<BR>
+
+<P>Beyond the methods that allow control over general Music Object instance state, the core Music Object API offers a healthy share of methods that facilitate playback control and obtaining state information for a Music Object instance's currently loaded file. The Music Object API offers only one set of methods and properties, regardless of the type of file that is currently loaded into an instance. Because the Beatnik Player is capable of playing several audio and music file formats - including RMF, MIDI, WAV, AIFF, and AU - there can be situations where a certain method or property will have no meaning for the file that is currently loaded into the player. For example, if the player had a WAV file loaded, then calling the <B>setProgram</B> method would not be appropriate, since this method only has meaning for RMF and MIDI files.</P>
+
+<P>When a particular method has no meaning for the file type that is loaded into the player, then calling that method will simply not do anything - it will not produce a JavaScript error. If it is a method that returns state about the instance, and the method has no meaning for the file type that is loaded into the player, then the method will return meaningless data. An example of this would be calling the <B>getProgram</B> method for a Music Object instance that had an AIFF file loaded.  It is up to you, as a content author, to design your sonification code to be aware of the types of files that are loaded into Music Object instances and to only call methods that are appropriate to those media types.</P>
+
+<P>There are three categories of file types that the Music Object API addresses...</P>
+<UL>
+	<LI><B>All File Formats</B> (RMF, MIDI, WAV, AIFF, AU)<BR>
+		The Music Object API provides a basic set of methods for controlling playback and obtaining state information that are not specific to any audio file type. These methods behave in the same manner, regardless of the type of file that is loaded into a Music Object instance.
+		<P></P>
+	<LI><B>All MIDI-based Formats</B> (RMF and MIDI)<BR>
+		In addition to the basic set of playback control methods that apply to all file types, the Music Object API also provides a set of methods that are specific to file formats that are based on MIDI data and that are rendered through a MIDI-based synthesizer, such as RMF and MIDI files.
+		<P></P>
+	<LI><B>RMF</B> (Rich Music Format)<BR>
+		In addition to the set of methods that are provided for the playback control of general MIDI-based formats, the Music Object API also provides methods that are specific to Beatnik, Inc.'s proprietary Rich Music Format (RMF).
+		<P></P>
+</UL>
+
+<P>To understand how the playback control API features are broken up into different groups based upon file type, consider the table below. In this table, it is shown that the API provided for the control of RMF file playback is a superset of the API provided for the control of MIDI file playback, and the API provided for the control of MIDI file playback is a superset of the API provided for the control of linear digital audio file playback (WAV, AIFF, AU).</P>
+
+<DIV CLASS=subsection>Playback Control Methods, Broken Down by File Types</DIV>
+
+<P></P>
+
+<CENTER>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=000000><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6 BGCOLOR=EEEEEE>
+	<TR><TD COLSPAN=2 ALIGN=CENTER><B>RMF</B></TD></TR>
+	<TR VALIGN=TOP>
+	<TD>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=000000><TR><TD>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6 BGCOLOR=DDDDDD>
+			<TR><TD COLSPAN=2 ALIGN=CENTER><B>RMF, MIDI</B></TD></TR>
+			<TR VALIGN=TOP>
+			<TD>
+				<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=000000><TR><TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6 BGCOLOR=CCCCCC><TR><TD>
+						<CENTER><B>RMF, MIDI, WAV, AIFF, AU, etc.</B></CENTER>
+						<P>
+						<A HREF="instance-methods.html#endVolumeFade">endVolumeFade</A><BR>
+						<A HREF="instance-methods.html#fadeTo">fadeTo</A><BR>
+						<A HREF="instance-methods.html#fadeVolume">fadeVolume</A><BR>
+						<A HREF="instance-methods.html#getAutostart">getAutostart</A><BR>
+						<A HREF="instance-methods.html#getFileSize">getFileSize</A><BR>
+						<A HREF="instance-methods.html#getLoop">getLoop</A><BR>
+						<A HREF="instance-methods.html#getOutputVolume">getOutputVolume</A><BR>
+						<A HREF="instance-methods.html#getPlayLength">getPlayLength</A><BR>
+						<A HREF="instance-methods.html#getPosition">getPosition</A><BR>
+						<A HREF="instance-methods.html#getVolume">getVolume</A><BR>
+						<A HREF="instance-methods.html#isPaused">isPaused</A><BR>
+						<A HREF="instance-methods.html#isPlaying">isPlaying</A><BR>
+						<A HREF="instance-methods.html#onLoad">onLoad</A><BR>
+						<A HREF="instance-methods.html#onPause">onPause</A><BR>
+						<A HREF="instance-methods.html#onPlay">onPlay</A><BR>
+						<A HREF="instance-methods.html#onReady">onReady</A><BR>
+						<A HREF="instance-methods.html#onStop">onStop</A><BR>
+						<A HREF="instance-methods.html#pause">pause</A><BR>
+						<A HREF="instance-methods.html#play">play</A><BR>
+						<A HREF="instance-methods.html#setAutostart">setAutostart</A><BR>
+						<A HREF="instance-methods.html#setEndTime">setEndTime</A><BR>
+						<A HREF="instance-methods.html#setLoop">setLoop</A><BR>
+						<A HREF="instance-methods.html#setPosition">setPosition</A><BR>
+						<A HREF="instance-methods.html#setStartTime">setStartTime</A><BR>
+						<A HREF="instance-methods.html#setVolume">setVolume</A><BR>
+						<A HREF="instance-methods.html#stop">stop</A><BR>
+					</TD></TR></TABLE>
+				</TD></TR></TABLE>
+			</TD>
+			<TD>
+				<A HREF="instance-methods.html#getChannelMute">getChannelMute</A><BR>
+				<A HREF="instance-methods.html#getChannelSolo">getChannelSolo</A><BR>
+				<A HREF="instance-methods.html#getController">getController</A><BR>
+				<A HREF="instance-methods.html#getMonophonic">getMonophonic</A><BR>
+				<A HREF="instance-methods.html#getProgram">getProgram</A><BR>
+				<A HREF="instance-methods.html#getTempo">getTempo</A><BR>
+				<A HREF="instance-methods.html#getTrackMute">getTrackMute</A><BR>
+				<A HREF="instance-methods.html#getTrackSolo">getTrackSolo</A><BR>
+				<A HREF="instance-methods.html#getTransposable">getTransposable</A><BR>
+				<A HREF="instance-methods.html#getTranspose">getTranspose</A><BR>
+				<A HREF="instance-methods.html#noteOff">noteOff</A><BR>
+				<A HREF="instance-methods.html#noteOn">noteOn</A><BR>
+				<A HREF="instance-methods.html#onMetaEvent">onMetaEvent</A><BR>
+				<A HREF="instance-methods.html#playNote">playNote</A><BR>
+				<A HREF="instance-methods.html#setChannelMute">setChannelMute</A><BR>
+				<A HREF="instance-methods.html#setChannelSolo">setChannelSolo</A><BR>
+				<A HREF="instance-methods.html#setController">setController</A><BR>
+				<A HREF="instance-methods.html#setMonophonic">setMonophonic</A><BR>
+				<A HREF="instance-methods.html#setProgram">setProgram</A><BR>
+				<A HREF="instance-methods.html#setTempo">setTempo</A><BR>
+				<A HREF="instance-methods.html#setTrackMute">setTrackMute</A><BR>
+				<A HREF="instance-methods.html#setTrackSolo">setTrackSolo</A><BR>
+				<A HREF="instance-methods.html#setTranspose">setTranspose</A><BR>
+				<A HREF="instance-methods.html#setTransposable">setTransposable</A><BR>
+			</TD>
+		</TR></TABLE>
+		</TD></TR></TABLE>
+	</TD>
+	<TD>
+		<A HREF="instance-methods.html#getInfo">getInfo</A><BR>
+	</TD>
+</TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+</CENTER>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Whenever a particular method or property only has meaning for certain file types, it will also be noted in the reference for that method or property.
+	<LI>Methods that allow control over general Music Object instance state are not shown in the table above, because they are not specific to any file type. These methods can be called for a Music Object instance, regardless of the type of file that is currently loaded into the instance.
+	<LI>Methods that are implemented in <A HREF="extensions/intro.html">Music Object extensions</A> are not shown in the table above. Some Music Object extension methods may be specific to file types. To find out for which file types these methods have meaning, consult the references for these methods in the appropriate Music Object extension's reference section.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="reserved-words"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object API Reserved Words
+</TD></TR></TABLE>
+<BR>
+
+<P>To avoid conflicts in your code and possible unexplained failings in your programming, you should be mindful of the reserved words that are defined in the Music Object API. You should avoid using these reserved words, since any variables or functions that you name the same as identifier names that are defined in the Music Object API will likely cause havoc.</P>
+
+<DIV CLASS=subsection>Don't Use "mo_" or "Music_" as Prefixes</DIV>
+
+<P>The majority of functions and variable names in the Music Object API are prefixed with "<B>mo_</B>", while a few are prefixed with "<B>Music_</B>". This dramatically reduces the likelihood that Music Object identifier names could encroach on your own identifier names. To be safe, always ensure that your sonification code does not define identifiers that begin with "<B>mo_</B>" or "<B>Music_</B>", unless you are specifically <A HREF="extensions/intro.html#creating-your-own">writing Music Object extensions</A>.</P>
+
+<DIV CLASS=subsection>Don't Use "Music" or "musicObject"</DIV>
+
+<P>In addition, the names "<B>Music</B>" and "musicObject" are reserved for the object constructor that lets you define new Music Object instances. You should, of course, never use these names for your own variables or functions, or you will not be able to use the Music Object API at all.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="layers"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR VALIGN=CENTER><TD CLASS=section>
+&nbsp;Layers of the Music Object API
+</TD>
+<TD CLASS=section ALIGN=RIGHT><IMG SRC="../style/images/advanced.gif" WIDTH=136 HEIGHT=30 HSPACE=0 VSPACE=0 BORDER=0 ALT="ADVANCED"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>The Music Object API is made up of several layers, much like the layers of an onion. At the core are the foundation layers upon which all the layers moving outwards are built. Typically, each new layer that is added builds upon previous layers and adds new capabilities. The diagram below illustrates how all the various Music Object layers relate to each other...</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="../images/music-object-diagram.gif" WIDTH=500 HEIGHT=500 BORDER=0 ALT="Layers of the Music Object API">
+</P>
+
+<P>The full Music Object API is made up of the following layers, which are discussed in more detail further below...</P>
+<UL>
+	<LI><B>Core Components</B>
+	<LI><B>Language Module</B> (optional)
+	<LI><B>Extensions</B> (optional)<BR>
+		&nbsp;&nbsp;&nbsp;&nbsp;NOTE: There may be more extensions than are shown in the diagram above.
+	<LI><B>Patches</B> (optional)<BR>
+		&nbsp;&nbsp;&nbsp;&nbsp;NOTE: There may be more patches than are shown in the diagram above.
+</UL>
+
+<DIV CLASS=subsection>Core Components</DIV>
+
+<P>The core Music Object API, which is implemented in the "music-object.js" JavaScript file, is typically all that is needed in most sonification jobs. None of the further layers are required, but may be used optionally depending on the needs of a sonification job.</P>
+
+<P>The core Music Object API is comprised of three core components, which are available also in the form of separate JavaScript files. Each core component provides a certain subset of the capabilities of the core Music Object API ("music-object.js"), so when using the separate core component JavaScript files, the core components may be combined together in different combinations, depending on the needs of the sonification job at hand. When all three core components are sourced into a page as separate JavaScript files, this has the same effect as sourcing in the standard "music-object.js" file.</P>
+
+<P>So, in other words, the following code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-advanced.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-compatibility.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...has the same effect as just...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Dividing the core Music Object API into logical core components provides authors with a way to potentially reduce the load time of sonified pages. For instance, if a particular sonified Web site was only targeted to an audience that already had the Beatnik Player installed, or if a gateway page for the site ensured that all those who entered already had the Player installed, then using the compatibility core component in sonified pages of the site would be unnecessary. So, one could then use only the basic and advanced core components. For convenience, core components can also be combined together into a <A HREF="#suite">Music Object Suite</A>, as per the specific needs of any given sonification job.</P>
+
+<P>For more information and for guidelines on using the core components, see the section <A HREF="core-components.html">Music Object Core Components</A>.</P>
+
+<DIV CLASS=subsection>Language Module</DIV>
+
+<P>The optional language modules allow you to customize the prompts that pop up as a result of the user not having the Beatnik Player installed, so that they appear in a language appropriate to the Web content you are sonifying. This applies also to the prompts that appear when the sonified content requires a version of the Beatnik Player higher than the Player that is installed on the user's system, and also the prompt that appears for Netscape Navigator users who have Java disabled.</P>
+
+<P>Using a language module is easy. Simply source in the desired language module's JavaScript file after sourcing in the core Music Object API, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-l-spanish.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For more information and for guidelines on using language modules, see the section <A HREF="language-modules.html">Music Object Language Modules</A>.</P>
+
+<DIV CLASS=subsection>Extensions</DIV>
+
+<P>Optional extensions allow you to add further capabilities to the Music Object API, and are available as JavaScript files. Different extensions are geared towards different types of sonification needs. For example, "Music Object Extension - Groups" is ideal for making remix interfaces easier to code, and "Music Object Extension - Dynamic" is ideal for making sonified Web pages remain fresh and entertaining.</P>
+
+<P>Extensions offer several key benefits...</P>
+<UL>
+	<LI>they extend the core Music Object API with higher level features useful for sonification 
+	<LI>they don't increase the size of the core Music Object API
+	<LI>they are modular and can be used in different combinations as needed
+	<LI>they add value to the Music Object sonification API
+	<LI>building extensions is open to third party developers
+</UL>
+
+<P>Using extensions is easy. Simply source in the desired extensions' JavaScript files after sourcing in the core Music Object API.  In the following example, "Music Object Extension - Groups" and "Music Object Extension - Fades" are being used...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-x-groups.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-fades.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For more information and for guidelines on using extensions, see the section <A HREF="extensions/intro.html">Music Object Extensions</A>.</P>
+
+<DIV CLASS=subsection>Patches</DIV>
+
+<P>Unlike extensions, the optional patches do not add new features or capabilities to the Music Object API, but are intended to fix certain problems that may arise from browser compatibility issues or changes that occur between different versions of the Music Object API. For example, <A HREF="patches/index.html?patches/pre-3.3.0.html">Music Object Patch - Pre 3.3.0</A> is designed to help authors transition from Music Object version 3.2.x to version 3.3.0 without having to change any sonification scripting, even though changes were made to the API between version 3.2.x and version 3.3.0.</P>
+
+<P>Patches offer several key benefits...</P>
+<UL>
+	<LI>they fix certain browser-related problems
+	<LI>they act as a buffer to help authors transition to newer versions of the Music Object API
+	<LI>they are modular and can be used in different combinations as needed (workarounds for certain browser issues can be optionally sourced in, depending on the author's judgement of the problem's severity in their specific circumstances)
+	<LI>they don't increase the size of the core Music Object API
+</UL>
+
+<P>Using patches is easy. Simply source in the desired patches' JavaScript files after sourcing in the core Music Object API.  In the following example, "Music Object Patch - Navigator 4.04 Bug" is being used...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-p-nav404.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For more information and for guidelines on using patches, see the section <A HREF="patches/index.html">Music Object Patches</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="suite"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR VALIGN=CENTER><TD CLASS=section>
+&nbsp;Making a Custom Music Object Suite
+</TD>
+<TD CLASS=section ALIGN=RIGHT><IMG SRC="../style/images/advanced.gif" WIDTH=136 HEIGHT=30 HSPACE=0 VSPACE=0 BORDER=0 ALT="ADVANCED"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>If you find that certain Music Object <A HREF="extensions/intro.html">extensions</A> or <A HREF="patches/index.html">patches</A> are of great value to you in your general sonification, or even just to a specific site you're working on, you may elect to create a custom Music Object suite so that you're not sourcing in several JavaScript files on every sonified Web page. There are benefits to creating a custom Music Object suite, and there are also inherent risks...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header-good>Benefits</TD>
+		<TD CLASS=data-table-column-header-bad>Risks</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			<B>Fewer Connections to Server</B>
+			<P>With just one sourced in JavaScript file that combines the core Music Object API with all the extensions and patches you require, the number of connections that will be made to the server each time a sonified page loads will be reduced. This will speed up page loads.</P>
+			<HR SIZE=1 NOSHADE>
+			<B>Simpler Sonified Pages</B>
+			<P>By only needing to source in one JavaScript file, all sonified pages will be simplified. This will also reduce the chances of making mistakes with the URLs of JavaScript files, since there will be fewer needing to be sourced in.</P>
+			<HR SIZE=1 NOSHADE>
+			<B>Easier Media Management</B>
+			<P>With a single Music Object suite, managing all the JavaScript file requirements for a Web site becomes a little easier, with fewer files to copy and upload.</P>
+			<HR SIZE=1 NOSHADE>
+			<B>Customization</B>
+			<P>By building all the modules you require into a single JavaScript file, you also have the opportunity to build in any customizations of the Music Object properties to suit your sonification needs, or even to build in your own custom modules of code that extend the sonification possibilities by building on top of the Music Object API and its extensions.</P>
+		</TD>
+		<TD CLASS=data-table-item>
+			<B>Naming Issues</B>
+			<P>It will be your responsibility to maintain naming schemes for your customized Music Object suites. If you create multiple suites for different purposes, you will have to ensure that you don't mix them up or accidentally overwrite one with another.</P>
+			<HR SIZE=1 NOSHADE>
+			<B>Updating Issues</B>
+			<P>When you use one JavaScript file containing multiple different code modules, there is a good likelihood that there will be updates to different modules at different times. It will be your responsibility to ensure the Music Object suite is up to date by copying and pasting in the updates to specific modules when they occur.</P>
+			<HR SIZE=1 NOSHADE>
+			<B>No Modularity</B>
+			<P>When you use a custom Music Object suite for all the sonified pages of a site, you lose the benefits of modularity that would otherwise let you source in different combinations of the optional modules on a case-by-case basis. This means that some pages may be sourcing in more code than they truly need. This is a judgement call. Based on your own specific authoring requirements, you will have to decide whether your site will benefit most from the modular approach or the suite approach.</P>
+		</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+</CENTER>
+
+<DIV CLASS=subsection>How to Build a Music Object Suite</DIV>
+
+<P>Creating your own custom Music Object suite is quite easy. You should decide which extensions and patch modules you would like to include in the suite and then simply copy-and-paste these modules into a newly created text file, using your text editor of choice. Be sure to paste the contents of the "music-object.js" file at the top of this document, with all the extension and patch modules pasted in below. You should apply the same principles of ordering as you would when sourcing in the extension and patch modules as discrete JavaScript files.</P>
+
+<P>To be 100% certain of the order in which extensions and patches should be pasted in, consult the documentation for the extensions or patches you plan to use to find out what their dependencies are. As a simple rule, if an extension / patch depends on another extension / patch, then that required extension / patch should be pasted into the suite before the extension / patch  that depends on it.</P>
+
+</BODY></HTML>

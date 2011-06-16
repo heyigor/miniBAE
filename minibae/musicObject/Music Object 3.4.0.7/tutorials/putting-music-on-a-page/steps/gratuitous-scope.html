@@ -1,0 +1,237 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (A Gratuitous Scope)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 7: A Gratuitous Scope
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Just as in the <A HREF="embedding-a-mute-button.html">Embedding a Mute Button</A> example, we could also use the Beatnik Player to embed a gratuitous scope for our music preview table. The scope will give the user a colored lights show to entertain their eyes while their ears are immersed in the music.</P>
+
+<P>Now, even though the music files are not playing through the player instance that we will use to embed the scope, our 'gratuitous' scope will display the audio output for any and all music files that are playing through Beatnik since the scope is a global resource that is shared by all instances of the Beatnik Player - Beatnik has one common output.</P>
+
+<P>Try playing one (or more) of the files below and see how the seemingly unrelated scope instance comes alive with animated waveforms. Feel like a bit of fun? Turn on all the music files together and then watch the scope to see what a cacophony truly looks like.</P>
+
+<TABLE ALIGN=CENTER BORDER=4 CELLSPACING=0 CELLPADDING=0>
+<TR><TD><EMBED
+	SRC="../../../music/stub.rmf"
+	TYPE="audio/rmf"
+	WIDTH=144
+	HEIGHT=45
+	DISPLAY=SYSTEM
+	AUTOSTART=FALSE
+	LOOP=FALSE
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+></TD></TR>
+</TABLE>
+<BR>
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=6>
+	<TR BGCOLOR=EEEEEE>
+		<TD>
+			"<B>Ambient</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/ambient.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=DDDDDD>
+		<TD>
+			"<B>Classical</B>" arranged by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/classical.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=CCCCCC>
+		<TD>
+			"<B>Jungle</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/jungle.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=BBBBBB>
+		<TD>
+			"<B>Lounge</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/lounge.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=AAAAAA>
+		<TD>
+			"<B>Modern Rock</B>" by Paul Sebastien
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/modern-rock.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Let's take a look at the source code for this example. The text that is highlighted indicates the code that is responsible for displaying our "gratuitous scope". The rest of the code is resposible for embedding the other player instances that appear inside the table layout in the form of slim transport controls.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;CENTER&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;TABLE BORDER=4 CELLSPACING=0 CELLPADDING=0&gt;
+&lt;TR&gt;&lt;TD&gt;&lt;EMBED
+   SRC="stub.rmf"
+   TYPE="audio/rmf"
+   WIDTH=144
+   HEIGHT=45
+   DISPLAY=SYSTEM
+   MODE=SCOPE
+   AUTOSTART=FALSE
+   LOOP=FALSE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;BR&gt;</SPAN>
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6&gt;
+   &lt;TR BGCOLOR=EEEEEE&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Ambient&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="ambient.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=DDDDDD&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Classical&lt;/B&gt;" arranged by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="classical.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=CCCCCC&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Jungle&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="jungle.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=BBBBBB&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Lounge&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="lounge.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=AAAAAA&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Modern Rock&lt;/B&gt;" by Paul Sebastien
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="modern-rock.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>By specifying a HEIGHT of <SPAN CLASS=value>45</SPAN>, the Beatnik control panel knows to only display its lower portion. And because the player instance is embedded with the DISPLAY attribute set to <SPAN CLASS=value>SYSTEM</SPAN> and the MODE attribute set to <SPAN CLASS=value>SCOPE</SPAN>, the oscilloscope is what appears in this lower portion. Finally, to prevent our gratuitous scope instance from limiting the number of other player instances that can be playing files simultaneously, the instance is embedded with AUTOSTART set to <SPAN CLASS=value>FALSE</SPAN> so that it does not automatically start playing.</P>
+
+</BODY></HTML>

@@ -1,0 +1,972 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Ducking</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Ducking
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>What is Ducking?</DIV>
+
+<P>The term "ducking", as it is used in the radio broadcasting profession, refers to the technique of reducing the volume level of the primary audio content so that an announcer can interject commentary and be heard clearly. Typically, the primary audio content continues while the announcer is speaking in order to create a smoother and less jarring experience. This technique also has the convenience of not requiring that it be possible to pause the primary audio content - particularly useful in live broadcasting situations.</P>
+
+<DIV CLASS=subsection>A Burden Lifted</DIV>
+
+<P>In the broadcasting profession, ducking  is typically implemented in an automatic manner using specialized audio processing hardware, so as to take the burden of managing audio levels off the announcer. In the same way that such audio hardware takes the burden off the announcer, so the Ducking extension takes the burden off developers of sonified content.</P>
+
+<P>The Ducking extension provides methods for linking instances to one another and setting up automated ducking relationships. If you were to hand code these behaviors into each sonification project, a good deal of time would be spent with this rather mundane and mechanical aspect of the sonification, instead of being able to spend more time on the creative aspects. The Ducking extension lifts a major burden from you and lets you get down to the stuff that really counts - exercizing the skills of sound design, musical composition, and interactive audio conceptualization.</P>
+
+<DIV CLASS=subsection>Benefits of Ducking in Sonification</DIV>
+
+<P></P>
+
+<UL>
+	<LI><B>Adding Emphasis</B>
+		<P>One way you could add emphasis to a particular audio element in sonified content would be to wire it up to other Music Object instances that may be playing audio at the time that the element is triggered, so that the other audio that is playing is ducked by a small amount - just enough so that the element you're trying to emphasize stands out, and gentle enough so that the effect is almost imperceptible to the user and is not abrupt or jarring in any way.</P>
+	<LI><B>Intelligibility</B>
+		<P>If you are developing a sonified Web site where spoken phrases may be triggered by certain user interface elements, then background music for the site may hamper the intelligibility of the speech. If sacrificing the site's background music is just not an option, then the Ducking extension can be used to allow the spoken user interface sonification and the background music to coexist.</P>
+		<P>Using this extension, the Music Object instances that are to play the spoken phrases can be wired up as ducking masters for any Music Object instances that are to play background music. Because the Ducking extension lets you customize the amount of volume attenuation that is applied during ducking, the background music could be ducked just enough to make the spoken phrases intelligible, while still allowing the background music to be heard.</P>
+	<LI><B>Branding Integrity</B>
+		<P>Audio adds a powerful element to advertising on Web sites that can help to strengthen brand identity for banner ads and other types of Web advertising. Television viewers and radio listeners, for example, are often able to recognize a specific company or product that is being advertised purely by the audio logo that plays along with a commercial. However, advertisers may be very sensitive to how a company's or product's signature audio logo is mixed in along with other distracting audio elements or themes. In fact, anything that dilutes or detracts from the identity of an audio logo may be considered unacceptable.</P>
+		<P>In such cases, the Music Object instances that are to play audio logos for advertising can be wired up as ducking masters for any Music Object instances that are to play background music or any other elements of the sonification. The amount of volume attenuation that is applied during ducking can be set in such a way that that any distracting audio elements are completely silenced while an advertising logo plays.</P>
+	<LI><B>Avoiding Cacophony</B>
+		<P>In many cases - even when the integrity of audio branding or the intelligibility of spoken word is not of great concern - playing a musical jingle along with a musical background theme may simply create an unpleasant and jarring cacophony. Unless such a jingle is perfectly synchronized with the background music and is in the same musical key, the two playing together is likely to sound aweful - to say the least.</P>
+		<P>In such cases, it may be appropriate to fully duck all background music while a musical jingle plays. Any Music Object instances that are to play musical jingles can be wired up as ducking masters for any Music Object instances that are to play background music, so that background music is completely silenced while a jingle plays.</P>
+</UL>
+
+<DIV CLASS=subsection>Masters & Slaves</DIV>
+
+<P>Ducking is, in essence, a master-slave relationship. If a Music Object instance is configured in a ducking relationship as a slave, then that instance will be ducked while its master is audible. When the ducking master becomes audible, it issues an "order" to the slave. The slave, in turn, does its master's bidding by "obeying" this order to reduce its volume. When the master becomes inaudible once again, it "grants" permission to its slave to restore its original volume level so that it may once again be fully heard. So, a ducking slave is affected during a ducking process while a ducking master is not.</P>
+
+<P>The Ducking extension is very flexible and allows a ducking slave to have multiple ducking masters, and also allows a ducking master to have multiple ducking slaves (see the section <A HREF="#about/complex-relationships">Complex Ducking Relationships</A>).</P>
+
+<DIV CLASS=subsection>Ducking, Volume, and Volume Scalars</DIV>
+
+<P>Because ducking is, by definition, a process that affects volume, a sensible way had to be found to achieve the desired volume attenuation. One possible approach would be to use a Music Object instance's main volume setting, that can be set using the <A HREF="../../../general-reference/embedding-properties.html#volume"><B>VOLUME</B></A> embedding property or the <A HREF="../../instance-methods.html#setVolume"><B>setVolume</B></A> instance method). However, because this main volume setting is often used to balance out the mix of various sonification elements in a page, using this setting could be quite obstructive to developing sonified content, since ducking processes would overwrite this volume setting and possibly even "fight" with other code for control over it.</P>
+
+<P>Instead, the Ducking extension uses the system of custom volume scalars (see the section <A HREF="../../concepts.html#volume-scalars">Important Concepts: Custom Volume Scalars</A>) in order to achieve the desired volume attenuation in a way that respects a Music Object instance's main volume setting. When the Ducking extension is used, a dedicated volume scalar is assigned to each Music Object for the purpose of ducking. A single volume scalar is assigned to a Music Object instance, regardless of how many ducking masters the instance may have. If an instance has multiple ducking masters that are audible, then the multiple concurrent ducking tasks for that instance will cooperate with each other in setting the level of the instance's ducking volume scalar (see the section <A HREF="#about/multiple-concurrent-ducking">Multiple Concurrent Ducking</A>).</P>
+
+<P><IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT"></P>
+
+<P>The Ducking extension assigns a dedicated volume scalar named "[R]ducking" to each Music Object instance. If you are creating your own custom volume scalars, you should never choose names that begin with the text "[R]", since this prefix is used by the Music Object API for its own reserved volume scalars (see the section <A HREF="../../concepts.html#volume-scalars/reserved">Custom Volume Scalars: Reserved Volume Scalars</A>).</P>
+
+<DIV CLASS=subsection>Anatomy of a Simple Ducking Process</DIV>
+
+<P>For a simple ducking relationship where one Music Object instance has only one ducking master, a ducking process is triggered for the instance when the instance's ducking master becomes audible, and this ducking process is then released when the ducking master once again becomes inaudible.</P>
+
+<P>While ducking is in progress, the level of the slave instance's dedicated ducking volume scalar is faded appropriately in order to achieve the desired pattern of volume attenuation for the instance. The following diagram illustrates a simple ducking process by contrasting elapsed time (on the X axis) against the value of the ducking volume scalar (on the Y axis). The timeline is divided up into discrete sections, indicating the different phases that make up a simple ducking process. These phases are described in more detail below the illustration.</P>
+
+<P ALIGN=CENTER><IMG SRC="../../../images/ducking-diagram1.gif" WIDTH=540 HEIGHT=350 HSPACE=0 VSPACE=0 BORDER=0 ALT="Ducking - Diagram 1"></P>
+
+<UL>
+	<LI><B>Before Ducking</B>
+		<P>Before ducking is triggered for the slave instance (ie. while the ducking master is inaudible), its ducking volume scalar remains set to the value <SPAN CLASS=value>100</SPAN>. Set at this value, the ducking volume scalar has no effect on the instance's overall output volume (as returned by the <A HREF="../../instance-methods.html#getOutputVolume"><B>getOutputVolume</B></A> instance method).</P>
+	<LI><B>Attack Phase</B>
+		<P>Ducking for the slave instance is triggered immediately when the instance's ducking master becomes audible. So that the ducking effect does not sound too abrupt, the Ducking extension provides a way to customize the amount of time that it should take for the slave instance's ducking volume scalar to fade from the value <SPAN CLASS=value>100</SPAN> down to the ducking sustain level. This fade time is referred to as the "attack time", and can be specified using the <B>AttackTimeMsINT</B> parameter when creating ducking relationships.</P>
+		<P>It is usually appropriate to set quite a short attack time so that there is not too much audio overlap between master and slave, with the slave still being heard while it is fading out and while its master has already started playing. In the example shown in the diagram, the attack time is set to 250ms (a quarter of a second).</P>
+	<LI><B>Sustain Phase</B>
+		<P>After ducking for the slave instance has been triggered, and after the attack time has elapsed, the ducking process enters into the sustain phase. By this point, the value of the slave instance's ducking volume scalar has completed fading down to the sustain level. During the entire sustain phase, the ducking volume scalar is sustained at the same level. There is no set duration for the sustain phase. Instead, the sustain phase lasts for as long as the ducking master remains audible. In the example shown in the diagram, the sustain phase lasts for 1750 milliseconds (one and three quarters of a second).</P>
+		<P>In order to allow for different levels of volume attenuation in different kinds of ducking applications, the Ducking extension lets you specify the degree of attenuation that is to be applied while an instance is being ducked. This attenuation (referred to as "sustain level") is expressed as a percentage of original volume level, and can be specified using the <B>SustainLevel0to100</B> parameter when creating ducking relationships.</P>
+		<P>So, for instance, a sustain level of 0 would indicate a severe attenuation, where the slave instance will be attenuated to 0% of its original volume level when it is being ducked. On the other hand, a level of 50 would indicate a gentler attenuation, where the slave instance will be attenuated to 50% of its original volume level when it is being ducked. In the example shown in the diagram, the sustain level is set to 20% (one fifth of original volume level).</P>
+	<LI><B>Release Phase</B>
+		<P>Ducking for the slave instance is released immediately when the instance's ducking master once again becomes inaudible. So that the ducking effect does not sound too abrupt, the Ducking extension provides a way to customize the amount of time that it should take for the slave instance's ducking volume scalar to fade from the ducking sustain level back up to the full <SPAN CLASS=value>100</SPAN>. This fade time is referred to as the "release time", and can be specified using the <B>ReleaseTimeMsINT</B> parameter when creating ducking relationships.</P>
+		<P>It is usually appropriate to set a relatively long release time, so that the release phase is gentle on the ear as the slave fades back in. In the example shown in the diagram, the release time is set to 1000ms (one second).</P>
+	<LI><B>Completed</B>
+		<P>Ducking is finally completed for the slave instance after the release phase is over and the value of the slave instance's ducking volume scalar has completed fading back up to the value <SPAN CLASS=value>100</SPAN> that was set before ducking began. Set at this value, the ducking volume scalar once again has no effect on the instance's overall output volume, and the slave instance awaits the next ducking process.</P>
+</UL>
+
+<A NAME="about/complex-relationships"></A>
+<DIV CLASS=subsection>Complex Ducking Relationships</DIV>
+
+<P>The Ducking extension is very flexible and allows a ducking slave to have multiple ducking masters, and also allows a ducking master to have multiple ducking slaves.</P>
+
+<P>For a complex ducking relationship where one Music Object instance has multiple ducking masters, a ducking process is triggered for the instance when one or more of the instance's ducking masters become audible, after all the ducking masters were previously inaudible. A ducking process for the instance is effectively only released when all of the instance's ducking masters become inaudible, after some of the ducking masters were previously audible.</P>
+
+<A NAME="about/multiple-concurrent-ducking"></A>
+<DIV CLASS=subsection>Multiple Concurrent Ducking</DIV>
+
+<P>With the Ducking extension it is possible for one ducking slave to have multiple ducking masters. It is, therefore, possible for a slave to be ducked by more than one master at the same time. In such cases, the Ducking extension must resolve multiple separate requests to control the value of the slave's ducking volume scalar. In order to do this, the Ducking extension uses the following two rules...</P>
+
+<UL>
+	<LI><B>Never Too Low</B>
+		<P>A ducking slave should not have its volume attenuated to a level that is any lower than is necessary in order to satisfy the desires of all active ducking tasks that are controlling it. So, for example, if there are two ducking tasks controlling a slave, and the one task would like attenuation down to 30% of original volume level while the other task would like attenuation down to 20% of original volume level, then attenuation should be 20% while both tasks are active. Attenuation should not be down to 20% of 30% (ie. 6%) simply because there are two ducking tasks controlling the slave, since neither of the ducking tasks require that the slave be attenuated so extremely.</P>
+	<LI><B>Never Too High</B>
+		<P>A ducking slave should not have its volume attenuated to a level that is any higher than the lowest level desired by any of the slave's active ducking tasks. If there is any ducking task active and that ducking task would like the slave to be attenuated to a certain level, no other concurrent ducking task should be able to set the ducking volume scalar to a level that is higher. The lowest is the safest.</P>
+</UL>
+
+<P>What these two rules amount to, essentially, is the melding together of all envelopes for concurrent ducking tasks into one envelope, by always taking the minimum value out of all active ducking tasks at any point in time.</P>
+
+<P>The following diagram illustrates how the Ducking extension handles concurrent ducking tasks, and how the value of the ducking volume scalar is derived from these ducking tasks. In order to keep things fairly simple, this diagram only shows the combination of two ducking tasks, but these very same principles can be applied to any number of concurrent ducking tasks. The two ducking tasks shown are triggered at different times, released at different times, and have different settings for attack time, sustain level, and release time.</P>
+
+<P ALIGN=CENTER><IMG SRC="../../../images/ducking-diagram2.gif" WIDTH=580 HEIGHT=488 HSPACE=0 VSPACE=0 BORDER=0 ALT="Ducking - Diagram 2"></P>
+
+<P>In the diagram, the green lines and annotations indicate ducking task A, while the blue lines and annotations indicate ducking task B. The purple lines that lie beneath both the green and blue lines indicate the level that would be set as a result of the combination of ducking task A and ducking task B. Notice how this line tracks the combined minimum values out of the two concurrent ducking tasks.</P>
+
+<P>Don't be thrown off by the small vertical gap between the purple line and the green and blue lines. This gap is only provided to help distinguish between the different color lines and to make the diagram easier to view, but it should be interpreted that these lines that are shown so close together are directly on the same values for ducking scalar level.</P>
+
+<!--
+<DIV CLASS=subsection>Musical Notes as a Ducking Trigger</DIV>
+
+<P></P>
+-->
+
+<DIV CLASS=subsection>Ducking and the Clip Extension</DIV>
+
+<P>Every effort has been made in the design of the Music Object API, to design the different extensions in such a manner that they can interoperate with each other in useful and practical ways. One case in point is the <A HREF="../clip/index.html">Clip extension</A>, which provides not only a very handy way of getting access to an individual Music Object instance that services the needs of a specific <B>Music.Clip</B> object instance, but also a handy way of accessing the entire list of <B>Music.Clip</B> object instances created in a page - regardless of how those instances were created.</P>
+
+<P>Consequently, if you were creating a preview page using the Clip extension and you also wanted to have background music playing on that page, then you could quite easily use the Ducking extension to wire the Music Object instances for all the clips to the Music Object instance that will be playing the background music. The code to do this might look as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+for (var clipNo = 0; clipNo < Music.Clip.instances.length; clipNo++) {
+   backgroundMO.addDuckingMasters (Music.Clip.instances [clipNo].musicObject);
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the above sample code snippet, it is assumed that the Clip extension and the Ducking extension have been sourced in, that all the <B>Music.Clip</B> object instances have been created, that the background music's Music Object instance has been created, etc.</P>
+
+<!--
+<A NAME="about/setting-defaults"></A>
+<DIV CLASS=subsection>Setting Defaults for the Ducking Properties</DIV>
+
+<P></P>
+
+-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-ducking.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-ducking.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-ducking.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-ducking.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addDuckingMasters">addDuckingMasters</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you add ducking masters for a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#addDuckingSlaves">addDuckingSlaves</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you add ducking slaves for a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getUsage">getUsage</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a string value, indicating the usage mode for the Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeDuckingMasters">removeDuckingMasters</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you remove ducking masters from a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#removeDuckingSlaves">removeDuckingSlaves</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you remove ducking slaves from a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setUsage">setUsage</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the usage mode for the Music Object instance.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addDuckingRelationships">Music.addDuckingRelationships</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you conveniently add many ducking slaves to many ducking masters in a single operation.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.removeDuckingRelationships">Music.removeDuckingRelationships</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you conveniently remove many ducking slaves from many ducking masters in a single operation.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.duckingAttackTime">Music.duckingAttackTime</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the AttackTimeMsINT parameter, if this parameter is not specified when setting up ducking relationships.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.duckingReleaseTime">Music.duckingReleaseTime</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the ReleaseTimeMsINT parameter, if this parameter is not specified when setting up ducking relationships.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.duckingSustainLevel">Music.duckingSustainLevel</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the SustainLevel0to100 parameter, if this parameter is not specified when setting up ducking relationships.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="addDuckingMasters"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addDuckingMasters</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addDuckingMasters</B> instance method lets you add ducking masters for a Music Object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>addDuckingMasters (</B><BR>
+			&nbsp;&nbsp;&nbsp; DuckingMastersARRAYorOBJ <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; AttackTimeMsINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; SustainLevel0to100 <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ReleaseTimeMsINT<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingMastersARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be added as ducking masters for the instance.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>AttackTimeMsINT</B> parameter, then the default value of <SPAN CLASS=value>200</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SustainLevel0to100</B> parameter, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ReleaseTimeMsINT</B> parameter, then the default value of <SPAN CLASS=value>1500</SPAN> will be used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addDuckingMasters (</B> DuckingMastersARRAYorOBJ <B>,</B> AttackTimeMsINT <B>,</B> SustainLevel0to100 <B>)</B>
+		<P>When no <B>ReleaseTimeMsINT</B> parameter is specified, then the default value of <SPAN CLASS=value>1500</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>addDuckingMasters (</B> DuckingMastersARRAYorOBJ <B>,</B> AttackTimeMsINT <B>)</B>
+		<P>When there is also no <B>SustainLevel0to100</B> parameter specified, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>addDuckingMasters (</B> DuckingMastersARRAYorOBJ <B>)</B>
+		<P>When there is also no <B>AttackTimeMsINT</B> parameter specified, then the default value of <SPAN CLASS=value>200</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>addDuckingMasters (  )</B>
+		<P>When there is also no <B>DuckingMastersARRAYorOBJ</B> parameter specified, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be added as ducking masters for the instance.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Ducking masters added to a Music Object instance using this method can be removed using the <A HREF="#removeDuckingMasters"><B>removeDuckingMasters</B></A> instance method.
+	<LI>Ducking slaves can be added to a Music Object instance using the <A HREF="#addDuckingSlaves"><B>addDuckingSlaves</B></A> instance method.
+</UL>
+
+<A NAME="addDuckingSlaves"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;addDuckingSlaves</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>addDuckingSlaves</B> instance method lets you add ducking slaves for a Music Object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>addDuckingSlaves (</B><BR>
+			&nbsp;&nbsp;&nbsp; DuckingSlavesARRAYorOBJ <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; AttackTimeMsINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; SustainLevel0to100 <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ReleaseTimeMsINT<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingSlavesARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be added as ducking slaves for the instance.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>AttackTimeMsINT</B> parameter, then the default value of <SPAN CLASS=value>200</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SustainLevel0to100</B> parameter, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ReleaseTimeMsINT</B> parameter, then the default value of <SPAN CLASS=value>1500</SPAN> will be used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>addDuckingSlaves (</B> DuckingSlavesARRAYorOBJ <B>,</B> AttackTimeMsINT <B>,</B> SustainLevel0to100 <B>)</B>
+		<P>When no <B>ReleaseTimeMsINT</B> parameter is specified, then the default value of <SPAN CLASS=value>1500</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>addDuckingSlaves (</B> DuckingSlavesARRAYorOBJ <B>,</B> AttackTimeMsINT <B>)</B>
+		<P>When there is also no <B>SustainLevel0to100</B> parameter specified, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>addDuckingSlaves (</B> DuckingSlavesARRAYorOBJ <B>)</B>
+		<P>When there is also no <B>AttackTimeMsINT</B> parameter specified, then the default value of <SPAN CLASS=value>200</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>addDuckingSlaves (  )</B>
+		<P>When there is also no <B>DuckingSlavesARRAYorOBJ</B> parameter specified, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be added as ducking slaves for the instance.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Ducking slaves added to a Music Object instance using this method can be removed using the <A HREF="#removeDuckingSlaves"><B>removeDuckingSlaves</B></A> instance method.
+	<LI>Ducking masters can be added to a Music Object instance using the <A HREF="#addDuckingMasters"><B>addDuckingMasters</B></A> instance method.
+</UL>
+
+<A NAME="getUsage"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getUsage</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getUsage</B> instance method returns a string value, indicating the usage mode for the Music Object instance
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getUsage ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>UsageSTR</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method essentially returns the value that is stored in the <A HREF="../../instance-properties.html#usage"><B>usage</B></A> instance property.
+</UL>
+
+<A NAME="removeDuckingMasters"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeDuckingMasters</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeDuckingMasters</B> instance method lets you remove ducking masters from a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeDuckingMasters (</B> DuckingMastersARRAYorOBJ <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingMastersARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be removed as ducking masters from the instance.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeDuckingMasters (</B>  <B>)</B>
+		<P>When no <B>DuckingMastersARRAYorOBJ</B> parameter is specified, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be removed as ducking masters from the instance.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Ducking slaves can be removed from a Music Object instance using the <A HREF="#removeDuckingSlaves"><B>removeDuckingSlaves</B></A> instance method.
+</UL>
+
+<A NAME="removeDuckingSlaves"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;removeDuckingSlaves</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>removeDuckingSlaves</B> instance method lets you remove ducking slaves from a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>removeDuckingSlaves (</B> DuckingSlavesARRAYorOBJ <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingSlavesARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be removed as ducking slaves from the instance.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>removeDuckingSlaves (</B>  <B>)</B>
+		<P>When no <B>DuckingSlavesARRAYorOBJ</B> parameter is specified, then all Music Object instances currently created in the document - excluding the instance on which this method is being called - will be removed as ducking slaves from the instance.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Ducking masters can be removed from a Music Object instance using the <A HREF="#removeDuckingMasters"><B>removeDuckingMasters</B></A> instance method.
+</UL>
+
+<A NAME="setUsage"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setUsage</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setUsage</B> instance method lets you set the usage mode for the Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setUsage (</B> UsageSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method essentially sets the value of the <A HREF="../../instance-properties.html#usage"><B>usage</B></A> instance property.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.addDuckingRelationships"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addDuckingRelationships</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addDuckingRelationships</B> static method lets you conveniently add many ducking slaves to many ducking masters in a single operation.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.addDuckingRelationships (</B><BR>
+			&nbsp;&nbsp;&nbsp; DuckingMastersARRAYorOBJ <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; DuckingSlavesARRAYorOBJ <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; AttackTimeMsINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; SustainLevel0to100 <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ReleaseTimeMsINT<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingMastersARRAYorOBJ</B> parameter, then the Music Object instances specified by the <B>DuckingSlavesARRAYorOBJ</B> parameter will be added as ducking slaves to all Music Object instances currently created in the document - excluding those instances specified by the <B>DuckingSlavesARRAYorOBJ</B> parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingSlavesARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document - excluding those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter - will be added as ducking slaves for those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>AttackTimeMsINT</B> parameter, then the default value of <SPAN CLASS=value>200</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SustainLevel0to100</B> parameter, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ReleaseTimeMsINT</B> parameter, then the default value of <SPAN CLASS=value>1500</SPAN> will be used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.addDuckingRelationships (</B> DuckingMastersARRAYorOBJ <B>,</B> DuckingSlavesARRAYorOBJ <B>,</B> AttackTimeMsINT <B>,</B> SustainLevel0to100 <B>)</B>
+		<P>When no <B>ReleaseTimeMsINT</B> parameter is specified, then the default value of <SPAN CLASS=value>1500</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.addDuckingRelationships (</B> DuckingMastersARRAYorOBJ <B>,</B> DuckingSlavesARRAYorOBJ <B>,</B> AttackTimeMsINT <B>)</B>
+		<P>When there is also no <B>SustainLevel0to100</B> parameter specified, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.addDuckingRelationships (</B> DuckingMastersARRAYorOBJ <B>,</B> DuckingSlavesARRAYorOBJ <B>)</B>
+		<P>When there is also no <B>AttackTimeMsINT</B> parameter specified, then the default value of <SPAN CLASS=value>200</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.addDuckingRelationships (</B> DuckingMastersARRAYorOBJ <B>)</B>
+		<P>When there is also no <B>DuckingSlavesARRAYorOBJ</B> parameter specified, then all Music Object instances currently created in the document - excluding those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter - will be added as ducking slaves for those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Many ducking slaves can be removed from many ducking masters in a single operation using the <A HREF="#Music.removeDuckingRelationships"><B>Music.removeDuckingRelationships</B></A> static method.
+</UL>
+
+<A NAME="Music.removeDuckingRelationships"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.removeDuckingRelationships</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.removeDuckingRelationships</B> static method lets you conveniently remove many ducking slaves from many ducking masters in a single operation.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.removeDuckingRelationships (</B><BR>
+			&nbsp;&nbsp;&nbsp; DuckingMastersARRAYorOBJ <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; DuckingSlavesARRAYorOBJ<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingMastersARRAYorOBJ</B> parameter, then the Music Object instances specified by the <B>DuckingSlavesARRAYorOBJ</B> parameter will be removed as ducking slaves from all Music Object instances currently created in the document - excluding those instances specified by the <B>DuckingSlavesARRAYorOBJ</B> parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>DuckingSlavesARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document - excluding those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter - will be removed as ducking slaves from those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.removeDuckingRelationships (</B> DuckingMastersARRAYorOBJ <B>)</B>
+		<P>When no <B>DuckingSlavesARRAYorOBJ</B> parameter is specified, then all Music Object instances currently created in the document - excluding those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter - will be removed as ducking slaves from those instances specified by the <B>DuckingMastersARRAYorOBJ</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Many ducking slaves can be added for many ducking masters in a single operation using the <A HREF="#Music.addDuckingRelationships"><B>Music.addDuckingRelationships</B></A> static method.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.duckingAttackTime"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.duckingAttackTime</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>200</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.duckingAttackTime</B> static property is an integer variable, specifying the default value that should be used for the <B>AttackTimeMsINT</B> parameter, if this parameter is not specified when setting up ducking relationships.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>For more information, consult the section <A HREF="#about/setting-defaults">Setting Defaults for the Ducking Properties</A>.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#Music.duckingReleaseTime"><B>Music.duckingReleaseTime</B></A> and <A HREF="#Music.duckingSustainLevel"><B>Music.duckingSustainLevel</B></A> static properties.
+</UL>
+
+<A NAME="Music.duckingReleaseTime"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.duckingReleaseTime</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>0</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.duckingReleaseTime</B> static property is an integer variable, specifying the default value that should be used for the <B>ReleaseTimeMsINT</B> parameter, if this parameter is not specified when setting up ducking relationships.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>For more information, consult the section <A HREF="#about/setting-defaults">Setting Defaults for the Ducking Properties</A>.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#Music.duckingAttackTime"><B>Music.duckingAttackTime</B></A> and <A HREF="#Music.duckingSustainLevel"><B>Music.duckingSustainLevel</B></A> static properties.
+</UL>
+
+<A NAME="Music.duckingSustainLevel"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.duckingSustainLevel</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Ducking</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>1500</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.duckingSustainLevel</B> static property is an integer variable, specifying the default value that should be used for the <B>SustainLevel0to100</B> parameter, if this parameter is not specified when setting up ducking relationships.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>For more information, consult the section <A HREF="#about/setting-defaults">Setting Defaults for the Ducking Properties</A>.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#Music.duckingAttackTime"><B>Music.duckingAttackTime</B></A> and <A HREF="#Music.duckingReleaseTime"><B>Music.duckingReleaseTime</B></A> static properties.
+</UL>
+
+</BODY></HTML>

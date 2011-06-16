@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The Ducking Extension</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+DEMO: The Ducking Extension
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-debug.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-ducking.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-disengage.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-note-effects.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music1 = new Music ();
+music2 = new Music ();
+music3 = new Music ();
+music4 = new Music ();
+
+music2.setUsage ('notes');
+
+/***
+music2.magicEmbed ('SRC="../../music/stub.rmf" GROOVOID="Fanfare-Mars" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=FALSE LOOP=FALSE VOLUME=30');
+music3.magicEmbed ('SRC="../../music/stub.rmf" GROOVOID="Fanfare-Arrival" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=FALSE LOOP=FALSE VOLUME=30');
+music4.magicEmbed ('SRC="../../music/stub.rmf" GROOVOID="UI-OpenOrClose3" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=FALSE LOOP=FALSE VOLUME=30');
+***/
+
+//Music.addDuckingRelationships (new Array (music2,music3,music4),music1);
+//Music.addDuckingRelationships (null,null,200,75,1500);
+Music.addDuckingRelationships (music2,music1);
+
+music1.magicEmbed ('SRC="../../music/techno.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=TRUE LOOP=TRUE');
+
+document.writeln ('<P></P>');
+
+music2.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<P>
+<A HREF="javascript://" ONCLICK="music1.play (); return false">Play</A><BR>
+<A HREF="javascript://" ONCLICK="music1.stop (2000); return false">Stop with fade</A><BR>
+<A HREF="javascript://" ONCLICK="music1.pause (2000); return false">Pause with fade</A><BR>
+</P>
+
+<P>
+<A HREF="javascript://" ONCLICK="music2.playNote (1,1,121,60,127,2000); return false">Poing</A><BR>
+<A HREF="javascript://" ONCLICK="music2.playNote (1,1,117,60,127,1000); return false">Thru Phone Chirp</A><BR>
+<A HREF="javascript://" ONCLICK="music2.playNote (1,1,112,60,127,1000); return false">Beatnik</A><BR>
+<A HREF="javascript://" ONCLICK="music2.playNote (1,1,108,60,127,3000); return false">Fairy Godmother</A><BR>
+</P>
+
+<P>
+<A HREF="javascript://" ONCLICK="music2.playNoteSlide (1,1,186,20,120,70,-1,1000,-1,1000,25); return false">Note Slide Effect</A><BR>
+</P>
+
+</BODY></HTML>

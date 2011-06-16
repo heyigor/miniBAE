@@ -1,0 +1,379 @@
+/*****************************************************************************/
+/*
+**	MiniBAE Build notes.txt
+**
+**	Detailed build documentation for building MiniBAE
+*/
+/*****************************************************************************/
+#if 0
+
+################################################################################
+
+Thank you for using the Beatnik Audio Engine! Please address any questions about 
+the codebase or documentation to:
+
+Steve Hales (steve@igorlabs.com)
+
+################################################################################
+
+
+
+
+################################################################################
+I.  HOW IS THE CODE ORGANIZED?
+
+The BAE codebase is broken into four parts.
+
+1) Front-end API.  This is the primary API for accessing features of BAE.  The
+source involved here is primarily MiniBAE.c and MiniBAE.h. It is documented in the 
+file MiniBAE_Client_API.pdf
+
+2) Back-end API.  This is all machine dependant features placed into one place
+(i.e. memory allocation, acquiring audio hardware, file I/O, etc). The source 
+involved here is BAE_API.h, and a file for each individual platform (e.g. 
+BAE_API_MacOS.c for MacOS, BAE_API_WinOS.c for Windows, etc).  The functionality
+required in these platform files is documented MiniBAE_Host_Interface_API.pdf
+
+3) Cross platform support code.  All files beginning with X_ are part of the
+cross-platform support codebase.  The most important one is X_API.h
+
+4) General audio mixer and synth code.  All files that begin with Gen are part
+of the mixer and synth. There's also a few support files that are required.
+This code is completely cross platform.
+
+
+
+
+################################################################################
+II.  WHAT FILES DO I INCLUDE IN MY PROJECT?
+
+
+You'll need to make sure you can search for include files from all of these folders.
+
+MiniBAE/BAE_Source/Common/							- common source and header files.
+MiniBAE/BAE_Source/Platform/						- platform specific files.
+MiniBAE/BAE_MPEG_Source_II/							- if you're building with MPEG.
+
+
+Include these files in your project:
+
+
+General MiniBAE support:
+	BAE_Source/Common/MiniBAE.c
+	BAE_Source/Common/MiniBAE.h
+
+General mixer and synth files:
+	BAE_Source/Common/GenSnd.h
+	BAE_Source/Common/GenPriv.h
+	BAE_Source/Common/GenSetup.c
+	BAE_Source/Common/GenSong.c
+	BAE_Source/Common/GenSynth.c
+	BAE_Source/Common/GenOutputSimple.c
+	BAE_Source/Common/GenPatch.c
+	BAE_Source/Common/GenSample.c
+	BAE_Source/Common/GenSeq.c
+
+Loops:
+	BAE_Source/Common/GenSynthFiltersSimple.c
+	BAE_Source/Common/GenSynthInterp2Simple.c
+
+General purpose file, memory support, file format AU and the other formats:
+	BAE_Source/Common/X_API.c
+	BAE_Source/Common/X_API.h
+	BAE_Source/Common/X_Assert.h
+	BAE_Source/Common/X_Formats.h
+	BAE_Source/Common/X_Decompress.c
+	BAE_Source/Common/NewNewLZSS.c
+	BAE_Source/Common/X_IMA.c
+	BAE_Source/Common/GenSoundFiles.c
+	BAE_Source/Common/DriverTools.c
+	BAE_Source/Common/SampleTools.c
+	BAE_Source/Common/SMOD_Volume_Scaler.c
+	BAE_Source/Common/SMOD.h
+	BAE_Source/Common/g711.c
+	BAE_Source/Common/g721.c
+	BAE_Source/Common/g723_24.c
+	BAE_Source/Common/g723_40.c
+	BAE_Source/Common/g72x.c
+	BAE_Source/Common/g72x.h
+
+MPEG support. This can be optionally built, and requires a patent license from Fraunhofer-IIS.
+See http://www.iis.fhg.de/amm/legal/index.html for ALL the details. Beatnik cannot provide
+a patent for MP3.
+	BAE_MPEG_Source_II/
+	BAE_MPEG_Source_II/XMPEGFilesSun.c
+	BAE_MPEG_Source_II/XMPEG_BAE_API.c
+	BAE_MPEG_Source_II/XMPEG_BAE_API.h
+	BAE_MPEG_Source_II/mpa.h
+	BAE_MPEG_Source_II/mpa_c_copybytes.c
+	BAE_MPEG_Source_II/mpa_conv.c
+	BAE_MPEG_Source_II/mpa_dec.c
+	BAE_MPEG_Source_II/mpa_dec_bits.c
+	BAE_MPEG_Source_II/mpa_dec_crc.c
+	BAE_MPEG_Source_II/mpa_dec_l1.c
+	BAE_MPEG_Source_II/mpa_dec_l12.c
+	BAE_MPEG_Source_II/mpa_dec_l2.c
+	BAE_MPEG_Source_II/mpa_dec_l3.c
+	BAE_MPEG_Source_II/mpa_dec_l3.h
+	BAE_MPEG_Source_II/mpa_dec_l3hf.c
+	BAE_MPEG_Source_II/mpa_dec_l3u.c
+	BAE_MPEG_Source_II/mpa_dec_mc.c
+	BAE_MPEG_Source_II/mpa_dec_poly.c
+	BAE_MPEG_Source_II/mpa_dec_proto.h
+	BAE_MPEG_Source_II/mpa_dec_tab.c
+	BAE_MPEG_Source_II/mpa_dec_tab.h
+	BAE_MPEG_Source_II/mpa_dec_vec.c
+	BAE_MPEG_Source_II/mpa_version.c
+
+
+Back end connection from BAE to hardware and Operating System:
+	BAE_Source/Platform/BAE_API.h
+		This header files describes all the functions needed to be implemented
+		by a particular platform in order for BAE to function. Below are various
+		implementations for each platform.  Only include the files below for
+		your actual platform.
+
+		WinOS platform:
+			BAE_Source/Platform/BAE_API_WinOS.c
+			BAE_Source/Platform/BAE_API_WinOS_Thread.c
+			BAE_Source/Platform/BAE_API_WinOS_GetDXVer.cpp
+			BAE_Source/Platform/BAEBuildOptions_WinOS.h
+	
+		BeOS platform:
+			BAE_Source/Platform/BAE_API_BeOS.cpp
+			BAE_Source/Platform/BAEBuildOptions_BeOS.h
+	
+		MacOS platform:
+			BAE_Source/Platform/BAE_API_MacOS.c
+			BAE_Source/Platform/BAEBuildOptions_MacOS.h
+	
+		iOS platform:
+			BAE_Source/Platform/BAE_API_IOS.c
+			BAE_Source/Platform/BAEBuildOptions_IOS.h
+	
+		SolarisOS platform:
+			BAE_Source/Platform/BAE_API_SolarisOS.c
+			BAE_Source/Platform/BAE_API_SolarisOS_Thread.c
+			BAE_Source/Platform/BAEBuildOptions_SunOS.h
+	
+		WebTV platform:
+			BAE_Source/Platform/BAE_API_WebTV.c
+			BAE_Source/Platform/BAEBuildOptions_WebTV.h
+
+		Liberate platform:
+			BAE_Source/Platform/BAE_API_Liberate.c
+			BAE_Source/Platform/BAEBuildOptions_Liberate.h
+
+
+
+################################################################################
+III.  HOW DOES BAE KNOW WHICH PLATFORM I'M COMPILING FOR?
+
+There is a compiler flag X_PLATFORM which you must define to be one of the 
+following options.  Look in X_API.h for the latest options.
+
+	X_MACINTOSH			// MacOS 68k/PPC
+	X_WIN95				// Windows 95/98/NT
+	X_WIN_HARDWARE		// Windows 95 only direct to Sound Blaster hardware
+	X_BE				// BeOS
+	X_SOLARIS			// SunOS
+	X_NAVIO				// Liberate OS
+	X_WEBTV				// WebTV OS
+	X_WEBTV_CE			// WebTV with CE
+	X_IOS				// iOS platform
+
+
+################################################################################
+IV.  WHAT IF MY PLATFORM ISN'T LISTED?
+
+If you are the first to port BAE to your platform, there are two files you must
+create:
+
+	BAE_Source/Platform/BAE_API_<platform>.c
+	BAE_Source/Platform/BAEBuildOptions_<platform>.h
+
+	where <platform> is the name of your platform.
+
+The file BAE_API_<platform>.c contains all the platform specific functionality
+such as memory allocation, acquiring audio hardware, file I/O, etc.  The 
+functions you need to implement are documented in the back-end API docs,
+BAE_Host_Interface_API.pdf.
+
+The file BAEBuildOptions_<platform>.h is a file which #defines all of the
+compiler flags which control which functionality of BAE is turned on in your
+build.  A complete list of the flags which must be defined in this file are 
+listed in Section V below.
+
+In order to tell BAE about your new platform, you must modify the file X_API.h
+in two places:
+
+	1)  Under the header "X_PLATFORM defines", you must add your platform name
+		to the bottom of the list of valid choices for X_PLATFORM.
+		
+	2)	Under the header "X_PLATFORM includes", you must add the name of the
+		build options file.  For example:
+		
+		#elif X_PLATFORM == X_<platform>
+			#include "BAEBuildOptions_<platform>.h"
+		#endif
+
+
+
+################################################################################
+V.  HOW DO I CHANGE THE BUILD OPTIONS FOR A PLATFORM?
+
+
+The file BAEBuildOptions_<platform>.h defines the machine type, platform type, 
+compile time features.  By changing various flags, you can compile the BAE 
+codebase without features that you don't use on your platform, ie mono output, 
+and make it have a smaller code footprint.
+
+	COMPILER_TYPE
+		DEFAULT_COMPILER
+			This is currently the only option for this flag.
+
+	CPU_TYPE
+		k68000
+		kRISC
+		k80X86
+		kSPARC
+			This flag defines the type of CPU you're building on. 
+			This is useful for optional compile time optimizations.
+
+	X_WORD_ORDER
+		FALSE is big endian, ie. 	0x12345678		PowerPC, Sparc
+		TRUE is little endian, ie.	0x34127856		Intel
+
+	USE_FLOAT
+		Set this to TRUE if your platform supports floating point. You should
+		only set this to TRUE if your floating point is fast, and can be called
+		at interrupt time, or alternate thread slice time without causing faults
+		in data.  Beatnik recommends that you set this to TRUE.
+
+
+	At least one the two following flags must be defined as TRUE:
+	USE_8_BIT_OUTPUT
+		Set to TRUE if you want to support 8-bit PCM audio output.
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+	USE_16_BIT_OUTPUT
+		Set to TRUE if you want to support 16-bit PCM audio output.
+		NOTE: THIS CURRENTLY MUST BE TRUE.
+
+	At least one the two following flags must be defined as TRUE:
+	USE_MONO_OUTPUT
+		Set to TRUE if you want to support mono output.
+		NOTE: THIS CURRENTLY MUST BE TRUE.
+	USE_STEREO_OUTPUT
+		Set to TRUE if you want to support stereo output.
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+
+
+	LOOPS_USED
+		The difference between the options is speed and size. The U3232_LOOPS
+		and FLOAT_LOOPS solve a major limit in BAE, the ability to play samples
+		larger than 1MB.  There's only a minor speed hit as compared to 
+		LIMITED_LOOPS.  With the LIMITED_LOOPS you
+		can get an even smaller code footprint by using just USE_DROP_SAMPLE, but
+		output quality will suffer a great deal.
+
+		U3232_LOOPS
+			NOTE: THIS IS NOT SUPPORTED YET.
+			Implements linear terp with a 4 GB sample limit. 
+			Beatnik recommends this for medium memory, and fast CPU's.
+		FLOAT_LOOPS
+			NOTE: THIS IS NOT SUPPORTED YET.
+			Implements linear terp with a 4 GB sample limit in floating point.
+			Beatnik recommends that this not be used. Its here for reference in
+			case you want to understand how the inner loops work. Its the 
+			simplest case.
+		LIMITED_LOOPS
+			Implements a smaller, lesser quality interpolation, which imposes a
+			1 MB sample limit.  If you use this option, then you must set the 
+			following flags as well:
+
+			USE_DROP_SAMPLE
+				Implements drop sample terp with a 1 MB sample limit. 
+				Beatnik recommends this for low memory, and slow CPU's.
+			USE_TERP1
+				Implements a 2 point average with a 1 MB sample limit. 
+				Beatnik recommends this for low memory, and slow CPU's.
+			USE_TERP2
+				Implements linear terp with a 1 MB sample limit.
+				Beatnik recommends this option for low memory, but fast CPU's.
+
+	REVERB_USED
+		REVERB_DISABLED
+			Removes all reverb code.
+		SMALL_MEMORY_REVERB
+			NOTE: THIS IS NOT SUPPORTED YET.
+			Implements a small sounding reverb that uses 32k of reverb mix 
+			memory.  This is used in cases in which memory is very tight.  Not 
+			very pleasant sounding.  Beatnik recommends that you don't use this
+			if you don't need to, but it's still better than a dry output.
+		VARIABLE_REVERB
+			NOTE: THIS IS NOT SUPPORTED YET.
+			Implements 6 fixed type reverbs.  Uses 128k of reverb mix memory.
+			This is the best choice for complete RMF compatibility.  Beatnik 
+			recommends that you use this setting.
+
+	USE_NEW_EFFECTS
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+		Implements 4 more reverbs and a chorus effect. Uses no extra memory,
+		but does increase your CPU load by a factor of 3. Beatnik recommends
+		that you use this if you CPU speed is fast.
+
+	FILE_NAME_LENGTH
+		Maximum number of characters in a file name.
+
+	USE_DEVICE_ENUM_SUPPORT
+		Implements new API's in the BAE_API.h system that allow for multiple
+		audio devices, and the ability to select between them. Beatnik
+		recommends that you set this to TRUE.
+
+	USE_FULL_RMF_SUPPORT
+		Enables the decoding and encoding of RMF files. If you want to be RMF
+		compliant this needs to be set to TRUE.  Beatnik recommends that you
+		set this to TRUE.
+
+	USE_CREATION_API
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+		Enables various API's that are used for creating RMF files. Used by the
+		exporter API and the Beatnik Editor.  Beatnik recommends that this is
+		set to FALSE unless you are creating an editor and bank editor.
+
+	USE_HIGHLEVEL_FILE_API
+		Implements decoding of audio file types: AIF, WAV, AU, MP3
+
+	USE_STREAM_API
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+		Implements a streaming audio API. BAESoundStream class. If 
+		USE_HIGHLEVEL_FILE_API is FALSE then you can still use the 
+		streaming audio classes, but none of the standard file decoders 
+		will work.
+
+	USE_MPEG_ENCODER
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+		Implements the creation of MPEG files.  Used when creating RMF files, or
+		MP3 files.  Only useful if USE_CREATION_API is set to TRUE.  Beatnik
+		recommends that this is set to FALSE unless you are creating an editor
+		and bank editor.
+
+	USE_MPEG_DECODER
+		Implements the reading of MPEG encoded audio files, and RMF encoded with
+		MP3 files.  Beatnik recommends that you set this to TRUE, so you can use
+		the latest RMF content.
+
+	USE_MOD_API
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+		Implements MOD file type support. 
+		Beatnik recommends that you set this to FALSE.
+
+	USE_CAPTURE_API
+		NOTE: THIS IS NOT SUPPORTED YET.  SET IT TO FALSE.
+		Implements a new API for audio capture. This is not complete, so use
+		at your own risk.
+
+
+################################################################################
+#endif
+

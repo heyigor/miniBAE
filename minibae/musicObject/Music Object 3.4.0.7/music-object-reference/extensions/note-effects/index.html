@@ -1,0 +1,224 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Note Effects</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Note Effects
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Note Effects extension provides methods for easily creating rich sound textures and outrageous sound effects using just musical notes. For example, the <A HREF="#playNoteSlide"><B>playNoteSlide</B></A> method provides a convenient way to generate musical note "slides", often referred to by musicians as glissandos.</P>
+
+<DIV CLASS=subsection>Benefits of Note Effects</DIV>
+
+<P>Effects produced using this extension have the following key benefits...</P>
+<UL>
+	<LI><B>No Media Downloads</B><BR>
+		<P>Because these effects are produced programmatically, there is no extra download of music media required. The only extra download required is the tiny Note Effects extension, and after this is downloaded the code required to produce a note effect is less than 100 bytes of text!</P>
+	<LI><B>Tweak and Tune to Your Heart's Content</B><BR>
+		<P>Effects produced using this extension can be easily tweaked and tuned to perfection - another advantage of being produced programmatically. For example, if the range of pitches in a note slide produced by the <A HREF="#playNoteSlide"><B>playNoteSlide</B></A> method is too extreme for your application, simply modify the value of either the <B>StartNoteNumber0to127</B> or the <B>EndNoteNumber0to127</B> parameter to reduce the pitch range. If a note slide starts off too shrill because the value specified for the <B>StartNoteNumber0to127</B> parameter is quite high but you want the slide to start at that pitch, then simply reduce the value of the <B>StartVelocity0to127</B> parameter so the high pitch of the first notes isn't so harsh on the ears.</P>
+	<LI><B>Easily Randomized</B><BR>
+		<P>Another benefit of note effects produced by this extension is that they can quite easily be made more dynamic than any sound effect that is pre-recorded in a separate music file. Simply add a little randomization to some of the parameters of the methods and you have note effects that don't always sound exactly the same each time they're played.</P>
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-note-effects.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-note-effects.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-note-effects.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-note-effects.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#playNoteSlide">playNoteSlide</A></TD>
+	<TD CLASS=contents-table-item-desc>Plays an ascending or descending series of note pitches over a specified period of time.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<P></P>
+
+<A NAME="playNoteSlide"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;playNoteSlide</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Note Effects</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>playNoteSlide</B> method lets you play an ascending or descending series of note pitches over a specified period of time.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>playNoteSlide (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#ProgramNumber0to255">ProgramNumber0to255</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; SlideTimeMsINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; NoteIntervalMsINT<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-parameters.gif" WIDTH=122 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="PARAMETERS"><BR>
+<UL>
+	<LI><P><B>MidiChannel1to16</B> - specifies the MIDI channel on which the note slide should be played</P>
+	<LI><P><B>BankNumber0to2</B> & <B>ProgramNumber0to255</B> - specifies the bank number and program number of the instrument that should be used to play the notes of the note slide</P>
+	<LI><P><B>StartNoteNumber0to127orNoteNameSTR</B> & <B>EndNoteNumber0to127orNoteNameSTR</B> - specifies the starting note pitch and ending note pitch of the range of note pitches that will make up the note slide</P>
+	<LI><P><B>StartVelocity0to127</B> & <B>EndVelocity0to127</B> - specifies the starting and ending velocities of the range of velocities that will be used for the notes of the note slide</P>
+	<LI><P><B>StartNoteDurationMsINT</B> & <B>EndNoteDurationMsINT</B> - specifies the starting duration and ending duration of the range of note durations that will be used for the notes of note slide</P>
+	<LI><P><B>SlideTimeMsINT</B> - specifies the amount of time over which all the notes of the note slide will be triggered. For example, specifying a value of <SPAN CLASS=value>2000</SPAN> for this parameter will result in a note slide where the last note of the slide is triggered 2 seconds (2000 milliseconds) after the first note of the slide. The <B>SlideTimeMsINT</B> parameter has no relationship to the <B>StartNoteDurationMsINT</B> and <B>EndNoteDurationMsINT</B> parameters. As an example, specifying a value of <SPAN CLASS=value>2000</SPAN> for the <B>SlideTimeMsINT</B> parameter and specifying a value of <SPAN CLASS=value>3000</SPAN> for the <B>EndNoteDurationMsINT</B> parameter could result in a note slide that sounds for 5 seconds (or more) before fully fading out, depending also upon the release time of the particular instrument being used. Furthermore, if the value of the <B>StartNoteDurationMsINT</B> parameter is greater than the sum of the <B>SlideTimeMsINT</B> and <B>EndNoteDurationMsINT</B> parameters, then the note slide could sound for as long as the duration of the first note of the slide before fully fading out.</P>
+	<LI><P><B>NoteIntervalMsINT</B> - specifies the amount of time (measured in milliseconds) between successive notes of a note slide. If the value of this parameter is lower than the value of the <B>StartNoteDurationMsINT</B> or <B>EndNoteDurationMsINT</B> parameters, then notes will overlap at some stage during the note slide. If the value is significantly lower, then there could be a pronounced "piling up" of notes that may result in a dischordant effect. The values of the <B>NoteIntervalMsINT</B> and <B>SlideTimeMsINT</B> parameters will determine the number of notes that make up the slide. For example, specifying a value of <SPAN CLASS=value>2000</SPAN> for the <B>SlideTimeMsINT</B> parameter and specifying a value of <SPAN CLASS=value>1000</SPAN> for the <B>NoteIntervalMsINT</B> parameter would result in a note slide made up of 3 notes: the first note, another note following 1 second after the first note, and then the final note following 2 seconds after the first note. In another example, specifying a value of <SPAN CLASS=value>2000</SPAN> for the <B>SlideTimeMsINT</B> parameter and specifying a value of <SPAN CLASS=value>100</SPAN> for the <B>NoteIntervalMsINT</B> parameter would result in a note slide made up of 21 notes. As a rule, the number of notes contained in a note slide can be calculated using the mathematical expression <B><NOBR>Math.floor (SlideTimeMsINT / NoteIntervalMsINT) + 1</NOBR></B>.</P>
+		<P><IMG SRC="../../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=5 BORDER=0 ALIGN=LEFT><B>IMPORTANT:</B> The <B>SlideTimeMsINT</B> parameter takes priority over the <B>NoteIntervalMsINT</B> parameter such that, if the value of the <B>NoteIntervalMsINT</B> parameter is not exactly divisible into the value of the <B>SlideTimeMsINT</B> parameter, then the value of the <B>NoteIntervalMsINT</B> will be adjusted so that it becomes exactly divisible into the <B>SlideTimeMsINT</B> parameter. This is done in such a way as to achieve the same number of complete notes that would have been achieved using the unadjusted <B>NoteIntervalMsINT</B> parameter value. As an example, if the value <SPAN CLASS=value>2000</B> were specified for the <B>SlideTimeMsINT</B> parameter and the value <SPAN CLASS=value>900</SPAN> were specified for the <B>NoteIntervalMsINT</B> parameter, then the number of complete notes making up the note slide, as calculated by the expression <B><NOBR>Math.floor (SlideTimeMsINT / NoteIntervalMsINT) + 1</NOBR></B>, would be 3. Now, clearly, playing 3 notes with a time interval of 900 milliseconds would result in the last note of the note slide being triggered 1800 milliseconds after the first note, and this is inconsistent with the value of <SPAN CLASS=value>2000</SPAN> that was specified for the <B>SlideTimeMsINT</B> parameter. So, because the <B>SlideTimeMsINT</B> parameter takes priority, the value of the <B>NoteIntervalMsINT</B> parameter is adjusted to become <SPAN CLASS=value>1000</SPAN> so that the note slide does indeed span exactly 2 seconds.</P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or <SPAN CLASS=value>-1</SPAN> is specified for either the <B>BankNumber0to2</B> parameter or the <B>ProgramNumber0to255</B> parameter, then the <B>playNoteSlide</B> method will not change the program that is currently selected for the channel that the note slide will play on (as specified by the <B>MidiChannel1to16</B> parameter).
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or <SPAN CLASS=value>-1</SPAN> is specified for the <B>EndNoteNumber0to127orNoteNameSTR</B> parameter, then the value of the <B>StartNoteNumber0to127orNoteNameSTR</B> parameter will be used for this parameter. This can be useful for producing note slides where all the notes in the slide have the same note pitch, without having to specify the same value for both the <B>StartNoteNumber0to127orNoteNameSTR</B> and <B>EndNoteNumber0to127orNoteNameSTR</B> parameters.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or <SPAN CLASS=value>-1</SPAN> is specified for the <B>EndVelocity</B> parameter, then the value of the <B>StartVelocity</B> parameter will be used for this parameter. This can be useful for producing note slides where all the notes in the slide have the same velocity, without having to specify the same value for both the <B>StartVelocity</B> and <B>EndVelocity</B> parameters.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or <SPAN CLASS=value>-1</SPAN> is specified for the <B>EndNoteDurationMsINT</B> parameter, then the value of the <B>StartNoteDurationMsINT</B> parameter will be used for this parameter. This can be useful for producing note slides where all the notes in the slide have the same duration, without having to specify the same value for both the <B>StartNoteDurationMsINT</B> and <B>EndNoteDurationMsINT</B> parameters.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or <SPAN CLASS=value>-1</SPAN> is specified for the <B>NoteIntervalMsINT</B> parameter, then the default value of <SPAN CLASS=value>100</SPAN> is used for this parameter.</P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>playNoteSlide (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B> <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>,</B> <A HREF="../../parameters.html#ProgramNumber0to255">ProgramNumber0to255</A> <B>,</B> Start<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B> End<A HREF="../../parameters.html#NoteNumber0to127">NoteNumber0to127</A><B>or</B><A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B> Start<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B> End<A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B> Start<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B> End<A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A> <B>,</B> SlideTimeMsINT <B>)</B>
+		<P>When no <B>NoteIntervalMsINT</B> parameter is specified, then the default value of <SPAN CLASS=value>100</SPAN> is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See the <A HREF="../../../demos/index.html?demos/play-note-slide.html">demo</A> for this method.
+</UL>
+
+</BODY></HTML>

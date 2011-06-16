@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 3.1.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 3.1.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1999-05-17</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are upgrading from Music Object version 2.x and would like to know about the significant changes that have occurred between versions 2.x and 3.0.x, please consult the version history for <A HREF="version-3.0.0.html">Music Object Version 3.0.0</A>.</P>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<P>Several noteworthy changes have been made to the Music Object API between versions 3.0.x and 3.1.x, some of which may require that your existing sonified code be modified in some small way. For guidelines on updating your code to be compliant with Music Object 3.1.x, consult the section <A HREF="../from-3.0.x-to-3.1.x.html">Migrating Content from Music Object 3.0.x to 3.1.x</A>.</P>
+
+<DIV CLASS=subsection>NEW FEATURE - Music Object Extensions</DIV>
+
+<BLOCKQUOTE>
+For the first time, the Music Object API is being extended through the use of modular JavaScript files that are geared towards different types of sonification needs (Beatnik Inc. has made a commitment to freezing the size of the core Music Object API's code). Using the Music Object extensions is easy - authors can source in specific modules as needed by the pages being sonified. For example, <A HREF="../../extensions/groups/index.html" TARGET="_parent">Music Object Extension - Groups</A> is ideal for making remix interfaces easier to code. Find out all about <A HREF="../../extensions/intro.html" TARGET="_parent">Music Object Extensions</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "stopAll" Becomes a Static Method</DIV>
+
+<BLOCKQUOTE>
+The <B>stopAll</B> method is no longer a method of individual Music Object instances, but is now only accessible as a static method of the Music Object class. It is now no longer correct to use a statement such as "myMusicObject.stopAll ()", but the statement "Music.stopAll ()" should be used in its place.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "getNoteName" and "getNoteNumber" Become Exclusively Static Methods</DIV>
+
+<BLOCKQUOTE>
+The <B>getNoteName</B> and <B>getNoteNumber</B> methods, which could previously be used as methods of any created Music Object instance, can now only be used as static methods of the Music object. This change has been made to streamline the API and cut down a little on the code size. It was decided that, since these methods have no specific different meaning on a per-instance basis, they should only be available at a global level in the form of static methods.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "playGroovoid" Method No Longer Supported</DIV>
+
+<BLOCKQUOTE>
+For some versions of the Music Object API, the <A HREF="../../obsoleted-features.html#playGroovoid" TARGET="_parent"><B>playGroovoid</B></A> method has been deprecated. This means that the method was no longer officially sanctioned but was still supported for backward compatibility. In order to keep the Music Object code clean and lean, this function has now been officially removed from the API. It is, of course, still possible to play Groovoids using the <A HREF="../../instance-methods.html#play" TARGET="_parent"><B>play</B></A> method.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "fadeFromTo" Method No Longer Supported</DIV>
+
+<BLOCKQUOTE>
+The "fadeFromTo" method has always had exactly the same behavior as the "fadeVolume" method. Because of this redundancy and in the interests of streamlining the Music Object API and reducing its code size, this method has been dropped.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "isReady" Method Replaced by "ready" Instance Property</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../obsoleted-features.html#isReady" TARGET="_parent"><B>isReady</B></A> method is no longer supported. It is now possible to determine if a player is ready for scripting control simply by querying the <B>ready</B> property of the instance. For example, "<B><NOBR>myMusicObject.isReady ()</NOBR></B>" may now simply be replaced with "<B>myMusicObject.ready</B>". This simplifies the Music Object API a little and optimizes the code size, since all the <B>isReady</B> method was doing was returning the value of the <B>ready</B> instance property, anyway.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "getVersion" Method Replaced by "Music.playerVersion" Static Property</DIV>
+
+<BLOCKQUOTE>
+It was decided that it does not make sense for getVersion to be a method of individual Music Object instances, since the value returned is always the same regardless of the instance used to call the method. Consequently, this instance method is no longer supported. There is no static getVersion method to replace the instance level method. Instead, one should use the <B>Music.playerVersion</B> static property, which returns the exact same value as the old getVersion method.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "ignoreNotReady" No Longer Supported</DIV>
+
+<BLOCKQUOTE>
+It was decided that the <A HREF="../../obsoleted-features.html#Music.ignoreNotReady" TARGET="_parent"><B>Music.ignoreNotReady</B></A> static property is not of enough value to occupy code space in the Music Object API. The default behavior has always been to <B>not report</B> attempts to execute scripting control over a Music Object instance that is not yet ready for such control. Since few authors may ever have used this property for code debugging, it was decided that the size reduction in the "music-object.js" file from removing support for the property would be of greater benefit to most authors.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "musicObject" Name No Longer Supported</DIV>
+
+<BLOCKQUOTE>
+When Music Object <A HREF="version-3.0.0.html">version 3.0.0</A> was released, the constructor name "musicObject" was changed to just "Music". However, for reasons of backward compatibility and easing the transition for authors, the constructor name "musicObject" was still supported as well. This has now changed and it is no longer possible to create Music Object instances using the constructor name "musicObject". If you have been using a 2.x version of the Music Object API and have still not transitioned your sonified code over to the newer 3.0.x version, consult the section <A HREF="../from-2.x-to-3.0.x.html">Migrating Content from Music Object 2.x to 3.0.x</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "mo_installBeatnik" No Longer Supported</DIV>
+
+<BLOCKQUOTE>
+When Music Object <A HREF="version-3.0.0.html">version 3.0.0</A> was released, the global function "mo_installBeatnik" was replaced with the static method "Music.installPlayer". However, for backward compatibility reasons, the function name "mo_installBeatnik" was initially also maintained. This is no longer the case with Music Object 3.1.0, and if you are still using the function in your code, you will have to switch over to using the "Music.installPlayer" static method. If you have been using a 2.x version of the Music Object API and have still not transitioned your sonified code over to the newer 3.0.x version, consult the section <A HREF="../from-2.x-to-3.0.x.html">Migrating Content from Music Object 2.x to 3.0.x</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - VOLUME=0</DIV>
+
+<BLOCKQUOTE>
+A bug was introduced with Music Object version 3.0 that wasn't present in versions 2.x. The bug involved instances of the player embedded with the VOLUME attribute set to 0. Such instances would not play at all. This bug has been fixed in version 3.1.0.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>WORKAROUND REINSTATED - Navigator 4.04 Issue</DIV>
+
+<BLOCKQUOTE>
+A workaround that was implemented in Music Object 2.1.6 for a bug in Navigator 4.04 was subsequently dropped in Music Object 2.5.5, due to several releases of Navigator passing since Netscape fixed the bug and also due to the code size that it added to the Music Object API. However, due to concerns from Web content developers regarding compatibility with all versions of Navigator, this workaround has been reinstated in the form of the optional <A HREF="../../obsoleted-features.html#patch/navigator-4.04-bug" TARGET="_parent">Music Object Patch - Navigator 4.04 Bug</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>OPTIMIZATIONS</DIV>
+
+<BLOCKQUOTE>
+Some general code optimizations have been made since version 3.0.8, making certain processes a little more efficient.
+</BLOCKQUOTE>
+
+</BODY></HTML>

@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (Using randomFromList to Play a Random Groovoid)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 4: Using randomFromList to Play a Random Groovoid
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P ALIGN=CENTER>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-x-dynamic.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+groovoidToPlay = Music.randomFromList (
+	'Hits-BlastOff',
+	'Hits-LudwigVan',
+	'Hits-ZoomAndHit',
+	'Fanfare-CorpSting1',
+	'Fanfare-Majesty',
+	'Misc-CashRegister',
+	'UI-TeletypeBurst2'
+);
+
+Music.magicEmbed (
+	'SRC="../../../music/stub.rmf" ' +
+	'GROOVOID="' + groovoidToPlay + '" ' +
+	'AUTOSTART=TRUE ' +
+	'DISPLAY=SONG ' +
+	'MODE=INFO ' +
+	'LOOP=FALSE ' +
+	'VOLUME=100'
+);
+
+// --></SCRIPT>
+
+</P>
+
+<P>Groovoids are an easy way to sonify a Web page because they are built right into the Beatnik Player's soundbank and can start playing immediately. Groovoids are also free to use for any Web page author. This example makes use of JavaScript to randomly select one of the many Groovoids that are built into the soundbank. Each time you <A HREF="randomfromlist-groovoid.html">reload this page</A>, a new randomly selected Groovoid will play.</P>
+
+<P><IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;Because the selection is truly random, you may sometimes get the same Groovoid selected twice in a row.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object-x-dynamic.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+groovoidToPlay = Music.randomFromList (
+   'Hits-BlastOff',
+   'Hits-LudwigVan',
+   'Hits-ZoomAndHit',
+   'Fanfare-CorpSting1',
+   'Fanfare-Majesty',
+   'Misc-CashRegister',
+   'UI-TeletypeBurst2'
+);
+
+Music.magicEmbed (
+   'SRC="<SPAN CLASS=sample-code-highlighted>stub.rmf</SPAN>" ' +
+   'GROOVOID="' + groovoidToPlay + '" ' +
+   'AUTOSTART=TRUE ' +
+   'DISPLAY=SONG ' +
+   'MODE=INFO ' +
+   'LOOP=FALSE ' +
+   'VOLUME=100'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Notice in the source code how we are now specifying Groovoid names instead of filenames in our call to the <B>Music.randomFromList</B> method.</P>
+
+</BODY></HTML>

@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+	<TITLE>Beatnik Player Supported MIDI Controllers</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Beatnik Player Supported MIDI Controllers
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>MIDI controllers supported by the Beatnik Player are listed in the table below...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Controller#</TD>
+		<TD CLASS=data-table-column-header>Reset&nbsp;Value</TD>
+		<TD CLASS=data-table-column-header>Description</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Bank Select (MSB Only)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>1</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Modulation</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>6</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Data Entry</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>7</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>127</TD>
+		<TD CLASS=data-table-item>Volume</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>10</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>64</TD>
+		<TD CLASS=data-table-item>Panpot</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>11</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Expression</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>64</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Hold1 (Sustain)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>85<BR>86<BR>87</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>
+			<P>Beatnik Loop & Mute</P>
+			<DIV CLASS=note>
+			<IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;These controllers are only observed at the time that an RMF or MIDI file begins playing, and only if they are found within the file. These controllers do not have any meaning when used with the Music Object API's <B>setController</B> method.
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>90</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>1</TD>
+		<TD CLASS=data-table-item>
+			<P>Master Reverb Type</P>
+			<DIV CLASS=note>
+			<IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;Reverb types 1 through 7 are old reverbs which do not offer variable send. Reverb types 8 and higher are newer reverbs supported from Beatnik Player 2.0 onwards, which do offer variable send. For more information, see the <A HREF="../music-object-reference/parameters.html#ReverbType1to11">ReverbType1to11</A> parameter.
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>91</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>
+			<P>Reverb Depth</P>
+			<DIV CLASS=note>
+			<IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;With reverb types 1 through 7, a controller 91 value of 0 to 14 will switch the reverb for a MIDI channel off, and a value of 15 to 127 will switch the reverb for a MIDI channel on. With reverb types 8 and higher, the controller 91 value is a continuous variable reverb send level, with 0 representing no reverb send and 127 representing maximum reverb send level for a MIDI channel.
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>93</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>
+			<P>Chorus Send</P>
+			<DIV CLASS=note>
+			<IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;With reverb types 1 through 7, controller 93 has no effect. With reverb types 8 and higher, controller 93 value is a continuous variable chorus send level, with 0 representing no chorus send and 127 representing maximum chorus send for a MIDI channel.
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>98</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Non-registered Parameter Number LSB</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>99</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Non-registered Parameter Number MSB</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>100</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Registered Parameter Number LSB</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>101</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>Registered Parameter Number MSB</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>121</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>-</TD>
+		<TD CLASS=data-table-item>
+			<P>Reset All Controllers</P>
+			<DIV CLASS=note>
+			<IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;As it's implemented in the Beatnik Player, controller 121 resets all MIDI controllers shown in this table with the values indicated in the "Reset Value" column alongside each controller number. Also, when an RMF or MIDI file loops, controllers are reset in the same way as if a controller 121 (reset all controllers) message were sent.
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>123</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>0</TD>
+		<TD CLASS=data-table-item>All Notes Off</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY>
+</HTML>

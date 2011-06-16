@@ -1,0 +1,216 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Tiny Little Strips)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 5: Tiny Little Strips
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>The Beatnik Player has the unique feature of being able to play multiple music and audio files at the same time. While each player instance can only play one file, it is possible to embed multiple Beatnik Player instances on the same HTML page, each with its own <B>SRC</B> file. You can have as many of these player instances on the HTML page as you wish, but up to eight can play together at the same time.</P>
+
+<P>Now, say for instance you were a composer and you wished to create an HTML page where visitors could preview the many RMF compositions you had created. To achieve this, you could embed multiple Beatnik Player instances on the same page. But, in its default control panel layout, the Beatnik Player takes up a fair amount of room - 144 pixels wide by 60 pixels high. This is where the ability to customize the control panel layout comes in handy. The Beatnik Player offers several options for changing aspects of the control panel layout, all of which can be set in the <B>EMBED</B> tag by using the player's supported <A HREF="../../../general-reference/embedding-properties.html" TARGET="_parent">Embedding Properties</A>.</P>
+
+<P>The particular layout mode that is of interest to us can best bedescribed as a 'tiny little strip' - no more than 15 pixels high and perfect for use in a table layout. Take a look at the sample below...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=6>
+	<TR BGCOLOR=EEEEEE>
+		<TD>
+			"<B>Ambient</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/ambient.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=DDDDDD>
+		<TD>
+			"<B>Classical</B>" arranged by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/classical.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=CCCCCC>
+		<TD>
+			"<B>Jungle</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/jungle.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=BBBBBB>
+		<TD>
+			"<B>Lounge</B>" by Brian Salter
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/lounge.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+	<TR BGCOLOR=AAAAAA>
+		<TD>
+			"<B>Modern Rock</B>" by Paul Sebastien
+		</TD>
+		<TD>
+			<EMBED
+				SRC="../../../music/modern-rock.rmf"
+				TYPE="audio/rmf"
+				WIDTH=144
+				HEIGHT=15
+				DISPLAY=SONG
+				AUTOSTART=FALSE
+				LOOP=FALSE
+				PLUGINSPAGE="http://www.beatnik.com/to/?player"
+			>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>In this layout, we have placed multiple Beatnik player instances, each loading its own SRC file. The song title for each is placed alongside the accompanying player in the table layout. The user can now listen to the files by clicking on the play buttons on the different control panels. Note that there is no intelligent connection between the different player instances - they each operate independently and can, as a result, be played at the same time resulting in a bit of musical chaos. The user will have to stop each player once they are finished listening to the song and only then start a different song playing. There is a way that one can 'wire' together multiple player instances on a page so that they become mutually exclusive. See the <A HREF="../../using-callbacks/index.html?mutually-exclusive-players/intro.html" TARGET="_parent">Mutually Exclusive Players</A> example in the <B>Using Player Callbacks</B> tutorial.</P>
+
+<P>Now, let's look at the HTML source...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;CENTER&gt;
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6&gt;
+   &lt;TR BGCOLOR=EEEEEE&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Ambient&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="ambient.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=DDDDDD&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Classical&lt;/B&gt;" arranged by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="classical.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=CCCCCC&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Jungle&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="jungle.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=BBBBBB&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Lounge&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="lounge.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=AAAAAA&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Modern Rock&lt;/B&gt;" by Paul Sebastien
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;EMBED
+            SRC="modern-rock.rmf"
+            TYPE="audio/rmf"
+            WIDTH=144
+            HEIGHT=15
+            DISPLAY=SONG
+            AUTOSTART=FALSE
+            LOOP=FALSE
+            PLUGINSPAGE="http://www.beatnik.com/to/?player"
+         &gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You will notice, in the HTML, some gratuitous little touches like the fading gray table row gradient, but other than that it's fairly straightforward HTML. The basic <B>EMBED</B> tag syntax for each music file is exactly the same other than the fact that the <B>SRC</B> attribute refers to a different filename.</P>
+
+<P>Notice how the HEIGHT of each player instance has been set with the statement <B>HEIGHT=15</B>. Beatnik automatically knows to select the top part of the control panel when this height is specified. Now, since the control panel has been set into SONG display with the statement <B>DISPLAY=SONG</B>, what the user sees in this slim panel layout is the transport control buttons that would normally appear at the top of the full control panel when it is in SONG display (see <A HREF="a-simple-embed.html">A Simple EMBED</A>).</P>
+
+<P>Incidentally, you can also force Beatnik to automatically select the bottom portion of the control panel by setting the height to 45 using the statement <B>HEIGHT=45</B>. The total of 15 and 45 is 60, which corresponds to the height of the full Beatnik Player control panel - 15 is the top and 45 is the bottom. You can see the bottom-only control panel layout in action in <A HREF="gratuitous-scope.html">A Gratuitous Scope</A> later on.</P>
+
+</BODY></HTML>

@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 3.2.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 3.2.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1999-07-20</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are upgrading from Music Object version 2.x and would like to know about the significant changes that have occurred between versions 2.x and 3.0.x, please consult the version history for <A HREF="version-3.0.0.html">Music Object Version 3.0.0</A>.</P>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<P>Several noteworthy changes have been made to the Music Object API between versions 3.1.x and 3.2.x, some of which may require that your existing sonified code be modified in some small way. For guidelines on updating your code to be compliant with Music Object 3.2.x, consult the section <A HREF="../from-3.1.x-to-3.2.x.html">Migrating Content from Music Object 3.1.x to 3.2.x</A>.</P>
+
+<DIV CLASS=subsection>NEW FEATURE - Core Components</DIV>
+
+<BLOCKQUOTE>
+Starting from version 3.2.0, the Music Object API is now available in three core components that allow authors to create faster loading pages in cases where only certain capabilities are needed. To find out more about using core components, consult the section <A HREF="../../core-components.html" TARGET="_parent">Music Object Core Components</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW FEATURE - Language Modules Now Available</DIV>
+
+<BLOCKQUOTE>
+It is now possible to customize the prompts that pop up as a result of the user not having the Beatnik Player installed, so that they appear in a language appropriate to the Web content you are sonifying. For more information on using language modules, see the section <A HREF="../../language-modules.html" TARGET="_parent">Music Object Language Modules</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW FEATURE - myMusicObject = new Music ()</DIV>
+
+<BLOCKQUOTE>
+The more conventional syntax for the creation of new object instances is now also supported by Music Object 3.2.0 (and higher). Whereas, in previous versions it was always necessary to pass the name of the Music Object instance one wished to create as a parameter of the Music Object constructor, it is now no longer necessary to do this. As an example, the statement <NOBR><B>new Music ('myMusicObject')</B></NOBR> could now also be expressed as <NOBR><B>myMusicObject = new Music ()</B></NOBR>. For backward compatibility reasons, the old form will continue to be supported.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW STATIC PROPERTY - Music.installerOptions</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../static-properties.html#Music.installerOptions" TARGET="_parent"><B>Music.installerOptions</B></A> static property lets you customize certain aspects of the behavior of the Beatnik Player installer. A key way that this property can be used is to specify a Web URL that should be returned to after the Beatnik Player install process has successfully been completed.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE PROPERTY - locked</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-properties.html#locked" TARGET="_parent"><B>locked</B></A> instance property lets Music Object instances be locked so that they cannot respond to methods that may change their state. This is useful for temporarily disabling page sonification events, since the locked state will obstruct attempts to play Groovoids, music files, or musical notes through locked instances.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - Debug Capabilities Now an Extension</DIV>
+
+<BLOCKQUOTE>
+The debug capabilities of the Music Object API, as explained in the section <A HREF="../../debugging-aids.html" TARGET="_parent">Debugging Aids</A>, are now no longer a part of the core Music Object API. These capabilities are still available by using the new <A HREF="../../extensions/debug/index.html" TARGET="_parent">Music Object Extension - Debug</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "engageAudio" Becomes a Static Method</DIV>
+
+<BLOCKQUOTE>
+The <B>engageAudio</B> method is no longer a method of individual Music Object instances, but is now only accessible as a static method of the Music Object class. It is now no longer correct to use a statement such as "myMusicObject.engage ()", but the statement "Music.engageAudio ()" should be used in its place. For guidelines on updating your sonified content for this change, consult the section <A HREF="../from-3.1.x-to-3.2.x.html">Migrating Content from Music Object 3.1.x to 3.2.x</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "getReverbType" Becomes a Static Method</DIV>
+
+<BLOCKQUOTE>
+The <B>getReverbType</B> method is no longer a method of individual Music Object instances, but should instead be used as a static method of the Music Object class. As an example, the statement "myMusicObject.getReverbType ()" should now be replaced with "Music.getReverbType ()". For guidelines on updating your sonified content for this change, consult the section <A HREF="../from-3.1.x-to-3.2.x.html">Migrating Content from Music Object 3.1.x to 3.2.x</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "setGlobalMute" Becomes a Static Method</DIV>
+
+<BLOCKQUOTE>
+The <B>setGlobalMute</B> method is no longer a method of individual Music Object instances, but should instead be used as a static method of the Music Object class. As an example, the statement "myMusicObject.setGlobalMute ()" should now be replaced with "Music.setGlobalMute ()". For guidelines on updating your sonified content for this change, consult the section <A HREF="../from-3.1.x-to-3.2.x.html">Migrating Content from Music Object 3.1.x to 3.2.x</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - "setReverbType" Becomes a Static Method</DIV>
+
+<BLOCKQUOTE>
+The <B>setReverbType</B> method is no longer a method of individual Music Object instances, but should instead be used as a static method of the Music Object class. As an example, the statement "myMusicObject.setReverbType ()" should now be replaced with "Music.setReverbType ()". For guidelines on updating your sonified content for this change, consult the section <A HREF="../from-3.1.x-to-3.2.x.html">Migrating Content from Music Object 3.1.x to 3.2.x</A>.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - Extensions</DIV>
+
+<BLOCKQUOTE>
+A problem was found with the implementation of Music Object extensions which caused the extensions to not work on Netscape Navigator 3.x. This has been fixed so that extensions are now compatible even with Navigator 3.x versions.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Behavior of Music.enabled Static Property Extended</DIV>
+
+<BLOCKQUOTE>
+The behavior of the <A HREF="../../static-properties.html#Music.enabled" TARGET="_parent"><B>Music.enabled</B></A> static property has now been enhanced to allow the property to be set to false even after player instances have been embedded and have begun playing. When set to false, this property can now act as a master switch to obstruct attempts to change the state of any instances on a page, thus intercepting attempts to play Groovoids, music files, or musical notes.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Compatibility Prompts Get New Look</DIV>
+
+<BLOCKQUOTE>
+The look for Music Object compatibility dialogs has been updated to more closely resemble system dialog boxes. This applies also to dialogs that are opened using the <B>Music.promptUser</B> static method.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Compatibility Prompts Now Centered</DIV>
+
+<BLOCKQUOTE>
+All Music Object compatibility prompts that pop up are now centered within the screen, making them immediately easier to read. This applies also to prompts that are opened using the <B>Music.promptUser</B> static method.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>OPTIMIZATIONS</DIV>
+
+<BLOCKQUOTE>
+Some general code optimizations have been made since version 3.1.0, making certain processes a little more efficient.
+</BLOCKQUOTE>
+
+</BODY></HTML>

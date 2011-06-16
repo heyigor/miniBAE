@@ -1,0 +1,1323 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Static Properties</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Static Properties
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Property&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#compatibility/read-write"><B>Compatibility (read / write)</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getPlayerImagesPath">Music.getPlayerImagesPath</A></TD>
+	<TD CLASS=contents-table-item-desc>A string, specifying the Web location of player control panel substitute graphics.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.ignoreJavaDisabled">Music.ignoreJavaDisabled</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean, specifying whether or not a prompt should be displayed when Java is disabled.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.installerOptions">Music.installerOptions</A></TD>
+	<TD CLASS=contents-table-item-desc>An array, containing customizable installer options that are to be passed to the Beatnik Player installer.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.showCompatibilityPrompt">Music.showCompatibilityPrompt</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean, specifying whether or not a prompt should be displayed when the installed player fails to meet the author's requirements.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.silentIfInadequate">Music.silentIfInadequate</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean, specifying whether or not a page should be silent when the installed player fails to meet the author's requirements.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#compatibility/read-only"><B>Compatibility (read only)</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.hasPlayer">Music.hasPlayer</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean indicating whether any version of the Beatnik Player is installed.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.clientKnown">Music.clientKnown</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean indicating whether or not the user's client (browser) is known by Music Object.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.clientName">Music.clientName</A></TD>
+	<TD CLASS=contents-table-item-desc>A string representing the name of the user's client (browser).</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.clientPlatform">Music.clientPlatform</A></TD>
+	<TD CLASS=contents-table-item-desc>A string representing the user's platform (operating system).</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.clientSupported">Music.clientSupported</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean indicating if the user's browser / operating system is supported by the Beatnik Player.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.clientUpgradable">Music.clientUpgradable</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean indicating whether or not the Beatnik Player can be installed into the user's client (browser).</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.clientVersion">Music.clientVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>A string indicating the version number of the user's client (browser).</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.playerType">Music.playerType</A></TD>
+	<TD CLASS=contents-table-item-desc>A string representing the type of player that is installed ('Plug-in' or 'ActiveX').</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.playerVersion">Music.playerVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>A string representing just the version number of the installed Beatnik Player.</TD>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.requiredMinVersion">Music.requiredMinVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>A string, specifying the overall minimum Beatnik Player version required by all sonification code modules on a page.</TD>
+</TR>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#general"><B>General</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.embedDefaults">Music.embedDefaults</A></TD>
+	<TD CLASS=contents-table-item-desc>An array, representing the default values for all of the Beatnik Player's supported embedding properties.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.enabled">Music.enabled</A></TD>
+	<TD CLASS=contents-table-item-desc>Acts as a "master switch" to enable or disable sonification of a page.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.instances">Music.instances</A></TD>
+	<TD CLASS=contents-table-item-desc>An array of references to all the Music Object instances on a page.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.version">Music.version</A></TD>
+	<TD CLASS=contents-table-item-desc>A string indicating the version of the Music Object API that is being used.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="compatibility/read-write"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Compatibility (read / write)
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.getPlayerImagesPath"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getPlayerImagesPath</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>undefined</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getPlayerImagesPath</B> property is a String variable, specifying the Web location of graphics that can act as substitutes for the Beatnik Player control panel when the user does not have the player installed in their browser.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>If you do not define this property and the user does not have the Beatnik Player installed, then Music Object will by default substitute the Beatnik Player control panel with a plain square area the same size as the control panel you're trying to embed, and containing a link for users to initiate the installation process.</P>
+
+<P>For more information on using this property, consult the section <A HREF="compatibility-aids.html#panel-substitute">Music Object Compatibility Aids</A>.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.ignoreJavaDisabled"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.ignoreJavaDisabled</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>false</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.ignoreJavaDisabled</B> property is a boolean variable, specifying whether or not a prompt should be displayed when Java is disabled in Netscape Navigator.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When this property is set to <SPAN CLASS=value>true</SPAN>, a prompt will not be displayed when Java is disabled. And when set to <SPAN CLASS=value>false</SPAN>, a prompt will be displayed when Java is disabled.</P>
+
+<P>Netscape Navigator relies on Java as the means for connecting plug-ins and JavaScript in its LiveConnect technology. In turn, the Beatnik Player relies on LiveConnect for the scriptable control that makes it possible to sonify Web pages. Since a Web content developer will be investing time into enhancing their content to make use of the interactive features of the Beatnik Player, it is preferable that the user enable Java before continuing on through a sonified Web site.</P>
+
+<P>However, it is also sometimes of paramount importance to certain Web site developers that users receive absolutely no prompts / alerts / warnings whatsoever, even if the user will experience only a shadow of the Web site that was actually designed. In cases like this, the <B>Music.ignoreJavaDisabled</B> property can be set to <SPAN CLASS=value>true</SPAN> to ensure that no prompt is displayed when users are browsing a Beatnik-enhanced Web page with Java disabled in Navigator.</P>
+
+<P>Java is not used as the means for scripted control over ActiveX controls in Microsoft Internet Explorer, and so this property has no effect on the behavior of Music Object when the user is browsing with MSIE and the Beatnik ActiveX control. Java is also not required - even in Netscape Navigator - when an author is simply using the <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> function to embed non-scriptable player instances.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.installerOptions"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.installerOptions</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;array&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.installerOptions</B> property is an array, containing customizable installer options that are to be passed to the Beatnik Player installer.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>Installer options are set by defining elements of the <B>Music.installerOptions</B> array that are recognized by the Beatnik Player installer. For example, one of the options of the Beatnik Player installer is a Web URL that should be returned to when the install process has successfully been completed. This installer option can be set with a statement such as...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.installerOptions ['returnURL'] = '<SPAN CLASS=sample-code-highlighted>http://www.my-domain.com/my-page.html</SPAN>';
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, the highlighted text indicates the text that should be substituted with your own value that is appropriate to your sonified Web site. It is also acceptable to set installer options by defining properties of the <B>Music.installerOptions</B> array in much the same way as one would define properties of an object, so the following syntax is also allowed...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.installerOptions.returnURL = '<SPAN CLASS=sample-code-highlighted>http://www.my-domain.com/my-page.html</SPAN>';
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The following installer options are recognized by the Beatnik Player installer...</P>
+<UL>
+	<LI><B>Music.installerOptions.returnURL</B><BR>
+		Lets you specify a URL that should be returned to when the Beatnik Player install process has successfully been completed.
+		<P></P>
+	<LI><B>Music.installerOptions.affiliateID</B><BR>
+		If you are a member of the Beatnik affiliates program, this property lets you specify your Beatnik affiliate ID so that you can receive credit from each successful player installation that is initiated from your sonified Web site(s).
+		<P></P>
+</UL>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.requiredMinVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.requiredMinVersion</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;an empty string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.requiredMinVersion</B> read-only static property is a string variable, specifying the overall minimum Beatnik Player version required by all sonification code modules on a page.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>Starting from Music Object version 3.3, the <B>Music.requiredMinVersion</B> static property is a read-only property and should not be set explicitly - the <A HREF="static-methods.html#Music.requireMinPlayerVersion"><B>Music.requireMinPlayerVersion</B></A> static method should be used instead.</P>
+
+<P>For more information on using compatibility methods and properties, see the section <A HREF="compatibility-aids.html">Music Object Compatibility Aids</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property can be set using the <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> and <A HREF="static-methods.html#Music.requireMinPlayerVersion"><B>Music.requireMinPlayerVersion</B></A> static methods.
+</UL>
+
+<A NAME="Music.showCompatibilityPrompt"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.showCompatibilityPrompt</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>true</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.showCompatibilityPrompt</B> property is a boolean variable, specifying whether or not a prompt should be displayed when the installed player fails to meet the author's requirements.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When this property is set to <SPAN CLASS=value>true</SPAN>, a prompt will be displayed when the installed player fails the compatibility test. And when set to <SPAN CLASS=value>false</SPAN>, a prompt will not be displayed when the installed player is inadequate.</P>
+
+<P>This property should be set before any calls are made to the <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> or <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> static methods, or the <A HREF="instance-methods.html#magicEmbed"><B>magicEmbed</B></A>, <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A>, or <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A> methods. The best way to ensure this is to set the property in the code immediately following the SCRIPT tag that sources in the "music-object.js" file.</P>
+
+<P>For example:</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   Music.requireMinPlayerVersion ('1.3.2');
+   <SPAN CLASS=sample-code-highlighted>Music.showCompatibilityPrompt = false;</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For more information on using this property in conjunction with the other compatibility methods and properties, see the section <A HREF="compatibility-aids.html">Music Object Compatibility Aids</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property can also be set using the <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> function.
+</UL>
+
+<A NAME="Music.silentIfInadequate"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.silentIfInadequate</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>false</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.silentIfInadequate</B> property is a boolean variable, specifying whether or not a page should be silent when the installed player fails to meet the author's requirements (as specified by the <A HREF="static-methods.html#Music.requireMinPlayerVersion">Music.requireMinPlayerVersion</A> static method).
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When this property is set to <SPAN CLASS=value>true</SPAN>, the page will be silent if the installed player fails the compatibility test. And when set to <SPAN CLASS=value>false</SPAN> (the default), all Beatnik Player instances will be embedded and activated as per normal, even though the page may specifically require a version of the Beatnik Player that is higher than the version installed on the user's system.</P>
+
+<P>This property should be set before any calls are made to the <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> or <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> static methods, or the <A HREF="instance-methods.html#magicEmbed"><B>magicEmbed</B></A>, <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A>, or <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A> methods. The best way to ensure this is to set the property in the code immediately following the SCRIPT tag that sources in the "music-object.js" file.</P>
+
+<P>For example:</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   Music.requireMinPlayerVersion ('1.3.2');
+   Music.showCompatibilityPrompt = false;
+   <SPAN CLASS=sample-code-highlighted>Music.silentIfInadequate = true;</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For more information on using this property in conjunction with the other compatibility methods and properties, see the section <A HREF="compatibility-aids.html">Music Object Compatibility Aids</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property can also be set using the <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> function.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="compatibility/read-only"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Compatibility (read only)
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.clientKnown"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.clientKnown</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.clientKnown</B> property is a boolean variable, indicating whether or not the user's client (browser) is known by Music Object.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>A value of <SPAN CLASS=value>true</SPAN> indicates that the user's browser / operating system is known, and a value of <SPAN CLASS=value>false</SPAN> indicates that it is not known. This property can be used when manually performing compatibility testing using the <A HREF="static-methods.html#compatibility">Compatibility Methods</A> that are built into the Music Object API. While in most cases a client that is known by Music Object will also be supported, this cannot be assumed. In order to find out for certain if the user's client is supported by Music Object, one should use the <A HREF="#Music.clientSupported"><B>Music.clientSupported</B></A> static property.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>compare to the <A HREF="#Music.clientSupported"><B>Music.clientSupported</B></A> static property
+</UL>
+
+<A NAME="Music.clientName"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.clientName</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.clientName</B> property is a string variable, representing the name of the user's client (browser).
+<BR CLEAR=RIGHT>
+</P>
+
+<P>Possible string values for this property include...</P>
+
+<UL>
+	<LI>"<SPAN CLASS=value>Netscape</SPAN>"
+	<LI>"<SPAN CLASS=value>Microsoft Internet Explorer</SPAN>"
+	<LI>"<SPAN CLASS=value>WebTV Plus Receiver</SPAN>"
+	<LI>"<SPAN CLASS=value>WebTV Satellite Receiver</SPAN>"
+</UL>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.clientPlatform"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.clientPlatform</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.clientPlatform</B> property is a string variable, representing the user's platform (operating system).
+<BR CLEAR=RIGHT>
+</P>
+
+<P>This value does not relate necessarily to the Web browser being used. For instance, the <B>Music.clientPlatform</B> property will have the value <SPAN CLASS=value>Win32</SPAN> if the user's machine is running Windows 95/98/2000/ME/NT, regardless of whether they are using Netscape Navigator or Microsoft Internet Explorer.</P>
+
+<P>The possible values for this property are as follows....</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Value</TD>
+		<TD CLASS=data-table-column-header>Platform(s) Indicated</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>Win32</TD>
+		<TD CLASS=data-table-item>
+			Windows 95<BR>
+			Windows 98<BR>
+			Windows 2000<BR>
+			Windows ME<BR>
+			Windows NT
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>MacPPC</TD>
+		<TD CLASS=data-table-item>MacOS (all versions)</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted ALIGN=CENTER>WebTV</TD>
+		<TD CLASS=data-table-item>
+			WebTV Internet Terminal<BR>
+			WebTV Plus Receiver
+		</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>This property can be used when manually performing compatibility testing using the <A HREF="static-methods.html#compatibility">Compatibility Methods</A> that are built into the Music Object API.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>If the user's platform (operating system) cannot be determined by Music Object, then the <B>Music.clientPlatform</B> property will be set to the string value "<SPAN CLASS=value>Unknown</SPAN>".
+</UL>
+
+<A NAME="Music.clientSupported"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.clientSupported</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.clientSupported</B> property is a boolean variable, indicating whether or not the user's browser / operating system is supported by the Beatnik Player.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>A value of <SPAN CLASS=value>true</SPAN> indicates that the user's browser / operating system is supported, and a value of <SPAN CLASS=value>false</SPAN> indicates that it is not supported. This property can be used when manually performing compatibility testing using the <A HREF="static-methods.html#compatibility">Compatibility Methods</A> that are built into the Music Object API.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>compare to the <A HREF="#Music.clientKnown"><B>Music.clientKnown</B></A> static property
+</UL>
+
+<A NAME="Music.clientUpgradable"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.clientUpgradable</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.clientUpgradable</B> property is a boolean variable, indicating whether or not the Beatnik Player can be installed into the user's client (browser).
+<BR CLEAR=RIGHT>
+</P>
+
+<P>A value of <SPAN CLASS=value>true</SPAN> indicates that the Beatnik Player can be installed, and a value of <SPAN CLASS=value>false</SPAN> indicates that the Beatnik Player cannot be installed. It may be possible for a particular client to be supported by the Music Object API, but for it not to be possible to install the Beatnik Player into that client if Music Object determines that the player is not already installed, or if the version of the player that is installed does not meet the minimum version requirement specified by <A HREF="#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A> static property.</P>
+
+<P>This property can be used when manually performing compatibility testing using the <A HREF="static-methods.html#compatibility">Compatibility Methods</A> that are built into the Music Object API. For example, it would not make sense to attempt to initiate the download an installation of the player if the Beatnik Player cannot actually be installed into the user's client.</P>
+
+<P>So, for example, instead of using the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+if (!Music.hasMinVersion ('2.1')) {
+   Music.installPlayer ();
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...one should instead use the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+if (!Music.hasMinVersion ('2.1') && Music.clientUpgradable) {
+   Music.installPlayer ();
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Because the <A HREF="static-methods.html#Music.hasMinVersion"><B>Music.hasMinVersion</B></A> static method will return the value <SPAN CLASS=value>false</SPAN> when an installed version of the player does not meet the minimum version requirement specified by <B>Music.requiredMinVersion</B> static property, and also when the user's client is not supported at all and there is no player installed, one cannot simply indiscriminately call the <A HREF="static-methods.html#Music.installPlayer"><B>Music.installPlayer</B></A> method when the <B>Music.hasMinVersion</B> method returns <SPAN CLASS=value>false</SPAN>. One should only initiate the download process when the user's client fails the compatibility test and one is also certain that the player can be installed into their client.</P>
+
+<P>If one does initiate the download process when there is either no Beatnik Player available for the user's client, or there is no way to install a component into the user's client (as is the case with some set-top boxes), then the user may be presented with a dialog from the player download site informing them that the player cannot be installed on their system. This, of course, would not be a desirable user experience. The correct approach, as shown in the sample code listing above, is to make the call to the <B>Music.installPlayer</B> method conditional upon the user not having the necessary version of the player and it also being possible to install the player into the user's client.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>If the user's client (browser) is not supported by Music Object, then the <B>Music.clientUpgradable</B> property will be set to <SPAN CLASS=value>false</SPAN>.
+	<LI>compare to the <A HREF="#Music.clientKnown"><B>Music.clientKnown</B></A> and <A HREF="#Music.clientSupported"><B>Music.clientSupported</B></A> static properties
+</UL>
+
+<A NAME="Music.clientVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.clientVersion</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.clientVersion</B> property is a string variable, indicating the version number of the user's client (browser).
+<BR CLEAR=RIGHT>
+</P>
+
+<P>This property can be used when manually performing compatibility testing using the <A HREF="static-methods.html#compatibility">Compatibility Methods</A> that are built into the Music Object API.</P>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>In some cases, the version indicated by this property may be lower than the actual version number of the user's browser. This is because some browsers do not correctly report their version in the <B>navigator.appVersion</B> property. For example, in the case of Microsoft Internet Explorer 5.0, the <B>Music.clientVersion</B> property would be set to the string value "<SPAN CLASS=value>4.0</SPAN>", because this browser reports the value <NOBR>"<SPAN CLASS=value><SPAN CLASS=value>4.0 (compatible; MSIE 5.0; Windows 98; DigExt)</SPAN></SPAN>"</NOBR> for the <B>navigator.appVersion</B> property. Music Object ignores parenthetical information in the <B>navigator.appVersion</B> property, but this browser is actually hiding its true version number in parentheses.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property will always have a value indicating the version number of the user's client, regardless of whether or not the client is supported by Music Object.
+</UL>
+
+<A NAME="Music.hasPlayer"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.hasPlayer</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.hasPlayer</B> property is a boolean variable, indicating whether any version of the Beatnik Player at all is installed in the user's browser.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>A value of <SPAN CLASS=value>true</SPAN> indicates that the user does have a version of the Beatnik Player installed, and a value of <SPAN CLASS=value>false</SPAN> indicates that they do not. This property can be used when manually performing compatibility testing using the <A HREF="static-methods.html#compatibility">Compatibility Methods</A> that are built into the Music Object API.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.playerType"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.playerType</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.playerType</B> property is a string variable, representing the type of player that is installed.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The value of this property depends on the browser that is being used, and can be either "<SPAN CLASS=value>Plug-in</SPAN>" (for Netscape Navigator on all platforms, and Microsoft Internet Explorer on MacOS) or "<SPAN CLASS=value>ActiveX</SPAN>" (for Microsoft Internet Explorer on the Windows operating system).</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.playerVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.playerVersion</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.playerVersion</B> property is a string variable, representing just the version number of the installed Beatnik Player (eg. "<SPAN CLASS=value>1.3.2</SPAN>").
+<BR CLEAR=RIGHT>
+</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>If the Beatnik Player is not installed in the user's client, or the Music Object API is unable to determine the version of the Beatnik Player that is installed, then the <B>Music.playerVersion</B> property will be set to an empty string.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="general"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+General
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.embedDefaults"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.embedDefaults</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;array&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.embedDefaults</B> property is an array, representing the default values for all of the Beatnik Player's supported embedding properties.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>This property provides a convenient way to set up default values for certain embedding properties so as to avoid having to specify the exact same values many times over in multiple calls to the <A HREF="instance-methods.html#magicEmbed"><B>magicEmbed</B></A> instance method, or other embedding methods (such as the <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A> and <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A> instance methods and the <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> static method).</P>
+
+<P>As an example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject1 = new Music ();
+myMusicObject2 = new Music ();
+myMusicObject3 = new Music ();
+myMusicObject4 = new Music ();
+
+myMusicObject1.magicEmbed (
+   'SRC="my-file1.rmf" ' +
+<SPAN CLASS=sample-code-highlighted>   'WIDTH=144 HEIGHT=15 DISPLAY=SONG ' +
+   'LOOP=TRUE VOLUME=55'</SPAN>
+);
+myMusicObject2.magicEmbed (
+   'SRC="my-file2.rmf" ' +
+<SPAN CLASS=sample-code-highlighted>   'WIDTH=144 HEIGHT=15 DISPLAY=SONG ' +
+   'LOOP=TRUE VOLUME=55'</SPAN>
+);
+myMusicObject3.magicEmbed (
+   'SRC="my-file3.rmf" ' +
+<SPAN CLASS=sample-code-highlighted>   'WIDTH=144 HEIGHT=15 DISPLAY=SONG ' +
+   'LOOP=TRUE VOLUME=55'</SPAN>
+);
+myMusicObject4.magicEmbed (
+   'SRC="my-file4.rmf" ' +
+<SPAN CLASS=sample-code-highlighted>   'WIDTH=144 HEIGHT=15 DISPLAY=SONG ' +
+   'LOOP=TRUE VOLUME=55'</SPAN>
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...has the same effect as the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject1 = new Music ();
+myMusicObject2 = new Music ();
+myMusicObject3 = new Music ();
+myMusicObject4 = new Music ();
+
+<SPAN CLASS=sample-code-highlighted>Music.embedDefaults.WIDTH = '144';
+Music.embedDefaults.HEIGHT = '15';
+Music.embedDefaults.DISPLAY = 'SONG';
+Music.embedDefaults.LOOP = 'TRUE';
+Music.embedDefaults.VOLUME = '55';</SPAN>
+
+myMusicObject1.magicEmbed ('SRC="my-file1.rmf"');
+myMusicObject2.magicEmbed ('SRC="my-file2.rmf"');
+myMusicObject3.magicEmbed ('SRC="my-file3.rmf"');
+myMusicObject4.magicEmbed ('SRC="my-file4.rmf"');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the two sample code listings above, the highlighted text indicates the code that is needed in both cases to ensure that all instances are embedded with the same values for each of the <B>WIDTH</B>, <B>HEIGHT</B>, <B>DISPLAY</B>, <B>LOOP</B>, and <B>VOLUME</B> embedding properties.</P>
+
+<DIV CLASS=subsection>Quick Updates</DIV>
+
+<P>Looking at the two code listings, one thing that should be quite apparent is how much simpler it would be to update the second code listing (that is using the <B>Music.embedDefaults</B> static property) so that all of the instances now have the value <SPAN CLASS=value>60</SPAN> set for the <B>VOLUME</B> embedding property. All that would be needed would be to change the statement <NOBR><SPAN CLASS=sample-code>Music.embedDefaults.VOLUME = '55'</SPAN></NOBR> to become <NOBR><SPAN CLASS=sample-code>Music.embedDefaults.VOLUME = '60'</SPAN></NOBR>.</P>
+
+<DIV CLASS=subsection>How Are stubEmbed and preloadEmbed Methods Affected?</DIV>
+
+<P>Any default values set for embedding properties using the <B>Music.embedDefaults</B> static property are overridden by properties that are explicitly set by the <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A> and <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A> embedding methods. For example, in the sample code listing below, only the <B>VOLUME</B> embedding property will be set to the default value that is stored in the <B>Music.embedDefaults.VOLUME</B> property.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject = new Music ();
+
+Music.embedDefaults.WIDTH = '144';
+Music.embedDefaults.HEIGHT = '15';
+Music.embedDefaults.HIDDEN = 'FALSE';
+Music.embedDefaults.LOOP = 'FALSE';
+Music.embedDefaults.AUTOSTART = 'FALSE';
+Music.embedDefaults.VOLUME = '55';
+
+myMusicObject.stubEmbed ('stub.rmf');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>While the <B>stubEmbed</B> method does not explicitly specify a value for the <B>VOLUME</B> embedding property, it does explicitly specify values for the <B>WIDTH</B>, <B>HEIGHT</B>, <B>HIDDEN</B>, <B>AUTOSTART</B> and <B>LOOP</B> embedding properties. So, any default values set for these embedding properties using the <B>Music.embedDefaults</B> static property will have no effect when the <B>stubEmbed</B> method is used. Similarly, the <B>preloadEmbed</B> method also explicitly specifies values for the <B>WIDTH</B>, <B>HEIGHT</B>, <B>HIDDEN</B>, <B>AUTOSTART</B> and <B>LOOP</B> embedding properties.</P>
+
+<DIV CLASS=subsection>Case-sensitivite!</DIV>
+
+<P>When using the <B>Music.embedDefaults</B> static property to set default values for embedding properties, it is essential to always specify the embedding properties in all uppercase. If you attempt to set an embedding property's default value and do not use all uppercase, then your setting will simply be ignored.</P>
+
+<P>In the following sample code listing, only the default value for the <B>LOOP</B> embedding property will be correctly set. All the other settings will have no effect.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+Music.embedDefaults.Width = '144';
+Music.embedDefaults.Height = '15';
+Music.embedDefaults.display = 'SONG';
+Music.embedDefaults.LOOP = 'TRUE';
+Music.embedDefaults.volume = '55';
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to successfully set the default values for these embedding properties, the code should correctly be...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+Music.embedDefaults.WIDTH = '144';
+Music.embedDefaults.HEIGHT = '15';
+Music.embedDefaults.DISPLAY = 'SONG';
+Music.embedDefaults.LOOP = 'TRUE';
+Music.embedDefaults.VOLUME = '55';
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>When setting default values for embedding properties, names of embedding properties must always be specified using all uppercase.
+</UL>
+
+<A NAME="Music.enabled"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.enabled</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>true</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.enabled</B> property is a boolean variable, which acts as a "master switch" to enable or disable sonification of a page.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When this property is set to <SPAN CLASS=value>true</SPAN>, the page will be sonified as expected. However, when this property is set to <SPAN CLASS=value>false</SPAN>, all sonification of the page using Beatnik will be ignored. This includes all compatibility tests performed using the <A HREF="static-methods.html#compatibility">Compatibility Methods</A> that are built into the Music Object API. Calls to methods of a Music Object instance for the sake of page sonification will not produce JavaScript errors when the sonification is disabled in this way.</P>
+
+<P>When this property is set to <SPAN CLASS=value>false</SPAN> before any calls are made to the <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> or <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> static methods, or the <A HREF="instance-methods.html#magicEmbed"><B>magicEmbed</B></A>, <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A>, or <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A> instance methods, then the compatibility tests will be ignored and space that would have been occupied by any Player control panels will instead be filled with transparent tables of the same dimensions to maintain the layout integrity of the page. In this case, no actual Player instances are embedded in the page, and since it is not possible to embed Player instances after the document has finished loading, it will not be possible to reverse the unsonified state by setting the <B>Music.enabled</B> property to <SPAN CLASS=value>true</SPAN> after the document has already loaded in. The only way then for the document to ever have sound is for it to be reloaded and for the <B>Music.enabled</B> property to be set to <SPAN CLASS=value>true</SPAN> at the time that the Player instances are embedded.</P>
+
+<P>On the other hand, if the <B>Music.enabled</B> property is set to <SPAN CLASS=value>true</SPAN> at the time that Player instances are embedded, then sonification will be enabled as normal. In this case, setting the property to <SPAN CLASS=value>false</SPAN> later will effectively block any attempts to alter the state of any Player instances. In this condition, it is still possible to obtain state information about the instances using the "get" type methods, but it is not possible to alter the state of any instances using the "set" type methods or the transport control methods, such as <B>play</B>, <B>pause</B>, and <B>stop</B>. This is a convenient way to switch off the sonification of a page's user interface, since all attempts to instruct an instance to play musical notes, Groovoids, or music files will be blocked when the property is set <SPAN CLASS=value>false</SPAN>.</P>
+
+<P>It's important to note that setting this property to <SPAN CLASS=value>false</SPAN> after a document has loaded in with sonification enabled will not stop music that is currently playing through Player instances, but will merely block further attempts to change the state of all Player instances. So, depending on the way you wish to use this property, you may need to use the <A HREF="instance-methods.html#stop"><B>stop</B></A> method or the <A HREF="static-methods.html#Music.stopAll"><B>Music.stopAll</B></A> static method before setting <B>Music.enabled</B> to <SPAN CLASS=value>false</SPAN>. Of course, if you first set the property to <SPAN CLASS=value>false</SPAN> and then try to use the <B>stop</B> or <B>Music.stopAll</B> methods, you will not succeed in stopping the music that's playing because having the property set to false will block all attempts to change the state of player instances, including attempts to stop them playing.</P>
+
+<P>If you are only using this property as a means of disabling all sonification for a page, then the most effective way to use the property is to set it in the code immediately following the SCRIPT tag that sources in the "music-object.js" file, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   Music.enabled = false;
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are also using <A HREF="extensions/intro.html">Music Object extensions</A> or <A HREF="language-modules.html">language modules</A> in your authoring, then it is perfectly acceptable to set the <B>Music.enabled</B> property after all extensions and language modules have been sourced in, but before any player instances are embedded in the page or any calls to the compatibility methods are made, as in the following example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-l-portuguese.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-debug.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-groups.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   Music.enabled = false;
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.instances"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.instances</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;array&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.instances</B> static property is an array of references to all of the Music Object instances that have been created on a page.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>This array can be used to perform an operation on all Music Object instances on a page by programmatically iterating through the elements of the array. Each element of the <B>Music.instances</B> array is a reference to a Music Object instance that was created, in the order in which they were created on the page. Consider the following example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+notePlayer = new Music ():
+groovoidPlayer = new Music ();
+backgroundMusicPlayer = new Music ();
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, the element <B>Music.instances [0]</B> would be a reference to the instance <B>notePlayer</B>, the element <B>Music.instances [1]</B> would be a reference to the instance <B>groovoidPlayer</B>, and the element <B>Music.instances [2]</B> would be a reference to the instance <B>backgroundMusicPlayer</B>. Now, in this example, because the element <B>Music.instances [1]</B> is a reference to the object instance <B>groovoidPlayer</B>, then statement <NOBR><B>Music.instances [1].play ('UI-Choice1')</B></NOBR> would be equivalent to the statement <NOBR><B>groovoidPlayer.play ('UI-Choice1')</B></NOBR>.</P>
+
+<P>An example application of the <B>Music.instances</B> static property would be a page that creates multiple instances and loads music into each instance using the <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A> method. A "PLAY ALL" button on the page could then call a function that would start all the instances on the page playing, regardless of how many instances were created. This function would look as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function playAll () {
+   for (var instanceNo = 0; instanceNo < Music.instances.length; instanceNo++) {
+      Music.instances [instanceNo].play ();
+   }
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Because this function will start all Music Object instances playing, regardless of how many instances were created on the page, the function is a more flexible approach for implementing the "PLAY ALL" button and allows more instances to be created as need without having to update the code that gets called when the user clicks the "PLAY ALL" button on the page.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This is a read only property.
+</UL>
+
+<A NAME="Music.version"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.version</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.version</B> property is a string variable, representing the version of the Music Object API that is being used (eg. "<SPAN CLASS=value>3.3.0</SPAN>").
+<BR CLEAR=RIGHT>
+</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This is a read only property.
+</UL>
+
+</BODY></HTML>

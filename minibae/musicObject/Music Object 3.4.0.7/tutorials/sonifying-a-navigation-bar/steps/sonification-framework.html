@@ -1,0 +1,153 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Sonifying a Navigation Bar - Adding the Framework For Sonification</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 2: Adding the Framework For Sonification
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that we have designed the HTML layout, there is some basic legwork that must first be done to enable the navbar to be sonified.</P>
+
+<DIV CLASS=subsection>Linking in the Music Object JavaScript File</DIV>
+
+<P>Sonifying a Web page using the interactive scripting capability of Beatnik requires that you 'talk' to Beatnik through the Music Object API. The Music Object API comes in the form of a separate JavaScript file that is sourced (linked) into the current page. It then becomes part of the page, just as if the JavaScript code was copied-and-pasted into the page itself. The benefit of sourcing it in is that you don't need to see all this messy JavaScript code in your pages, and the file can also be shared between all pages that need to be sonified. The alternative would be to copy-and-paste the JavaScript code into every page you wanted to sonify - a lot of tedious work that would also bump up the file size of all your pages. The Music Object Javascript file is sourced into your page with the line...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P><IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;In this example, it is assumed that the JavaScript file called "music-object.js" is located in the same folder as the HTML file being sonified. If this file is to be located in a different resource directory for your Web site, then the correct path to the file must be specified in front of the actual filename. If the path name is incorrectly specified, the page will not function correctly and no sound will be heard.</P>
+
+<DIV CLASS=subsection>Creating a Music Object Instance</DIV>
+
+<P>When you wish to embed a Beatnik Player instance in your HTML page so that you can send sonification 'instructions' to it - for example, telling it to play notes or Groovoids - you need to create a Music Object instance to accompany that Beatnik Player instance. In fact, it is necessary to create a unique Music Object instance for each Beatnik Player instance that you wish to embed. Once the Music Object instance has been created and you have embedded a Beatnik Player instance for that Music Object instance, you can then use all of the callable methods of the Music Object API. The method that we're most interested in right now is the <B>playNote</B> method.</P>
+
+<P>Now, the Music Object instance in this example is created with the statement...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+notePlayer = new Music ();
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You can also see this code in its full context further down, where the complete source code is shown. The reserved keyword 'new' is the constructor keyword in JavaScript that allows you to create a new instance of an object. In this case, we are creating a new instance of the object called 'Music' which is defined in the "music-object.js" file that we've already sourced into the HTML document. All the <B>playNote</B> method calls used in the final sonified navbar will be targeted to the Music Object instance named "notePlayer". You will see the exact syntax for these method calls in further steps of this tutorial.</P>
+
+<DIV CLASS=subsection>Embedding the Beatnik Player Instance</DIV>
+
+<P>Now that the "music-object.js" file has been sourced into the HTML document and the Music Object instance "notePlayer" has been created, it is necessary to embed a Beatnik Player instance for that Music Object instance. We do this using the <B>stubEmbed</B> instance method.</P>
+
+<P>The <B>stubEmbed</B> method embeds a Beatnik Player instance with certain preset properties that are convenient for embedding a hidden player instance that is going to be used specifically for UI sonification techniques that involve the playing of notes. For instance, the player that is embedded by <B>stubEmbed</B> will have a size of 0 pixels by 0 pixels and will be hidden on the page. It will also start playing automatically and will loop continuously, both of which are requirements for playing notes through the Beatnik Player. The only parameter that gets passed to the <B>stubEmbed</B> method is a string representing the URL of the stub file that should be loaded by the player. The stub file, itself, is no more than a very small blank RMF file that loops only after a very long time. It is required to instantiate the Beatnik Player using a source file, and so a stub file is used in this case because we don't want to have any music playing in the background.</P>
+
+<P>The Beatnik Player instance is embedded for the "notePlayer" Music Object instance with the statement...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+notePlayer.stubEmbed ('stub.rmf');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You can also see this code in its full context further down, where the complete source code is shown.</P>
+
+<P><IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;In this example, it is assumed that the RMF stub file called "stub.rmf" is located in the same folder as the HTML file being sonified. If this file is to be located in a different resource directory for your Web site, then the correct path to the file must be specified in front of the actual filename. If the path name is incorrectly specified, the page will not function correctly and no sound will be heard.</P>
+
+<P>So, this is what we have so far...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD>
+			<A
+				HREF="buckingham1.html"
+				ONCLICK="return false"
+			>
+			<IMG SRC="../../../images/example-nav-prev.gif" WIDTH=96 HEIGHT=36 ALT="PREV" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham-home.html"
+				ONCLICK="return false"
+			>
+			<IMG SRC="../../../images/example-nav-home.gif" WIDTH=302 HEIGHT=36 ALT="HOME" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham3.html"
+				ONCLICK="return false"
+			>
+			<IMG SRC="../../../images/example-nav-next.gif" WIDTH=96 HEIGHT=36 ALT="NEXT" BORDER=0 HSPACE=0></A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Let's take a look at the HTML for this sample. The table border has now been set to 0 and so you can see how the table layout has arranged these graphics to seamlessly connect to each other, forming what appears to be just one graphic. The highlighted text indicates the code that has been added since the previous step.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham1.html"
+         &gt;
+         &lt;IMG
+            SRC="navbar-prev.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="PREV"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham-home.html"
+         &gt;
+         &lt;IMG
+            SRC="navbar-home.gif"
+            WIDTH=302
+            HEIGHT=36
+            ALT="HOME"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham3.html"
+         &gt;
+         &lt;IMG
+            SRC="navbar-next.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="NEXT"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Important Notes</DIV>
+
+<P>It is customary to place the code that sources in the "music-object.js" file and sets up the Music Object instance, ahead of all the HTML in the document. This is because HTML in the document may call methods of the Music Object instances that you set up towards the head of your document. If the Music Object instances are not created by the time the HTML calls methods of them, users will be bombarded with JavaScript error alerts and the sonification will fail.</P>
+
+<P>It is also, of course, important that you source in the "music-object.js" file before you try creating new Music Object instances, since it is the "music-object.js" file that defines the Music Object object class. A failure to have "music-object.js" loaded in before trying to create new Music Object instances will result in JavaScript error messages - not a pleasant experience for users of a Web site.</P>
+
+</BODY></HTML>

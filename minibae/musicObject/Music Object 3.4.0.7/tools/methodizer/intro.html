@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Methodizer: Introduction</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Methodizer: Introduction
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/shared-launch-methodizer.js"></SCRIPT>
+
+<P ALIGN=CENTER>If you already know how to use the Methodizer, you can <A HREF="javascript://" ONCLICK="launchMethodizer (); return false">launch it now</A>.</P>
+
+<DIV CLASS=subsection>What is it?</DIV>
+
+<P>The <B>Music Object Methodizer</B> is a free tool offered by Beatnik Inc. to make writing sonification code and learning how to use the Music Object API a whole lot easier. Use the convenient graphic interface to edit the parameters of virtually all of the core Music Object methods. The interactive interface even lets you preview the changes you make to the methods as you edit method parameters. Use the Methodizer to easily preview and construct playNote instructions, and many other useful sonification methods.</P>
+
+<A NAME="launching-from-reference-sections"></A>
+<DIV CLASS=subsection>Launching the Methodizer from Reference Sections</DIV>
+
+<P>The Methodizer can conveniently be launched from the reference sections of many of the core Music Object API's instance and static methods (see the "<A HREF="../../music-object-reference/instance-methods.html">Instance Methods</A>" and "<A HREF="../../music-object-reference/static-methods.html">Static Methods</A>" sections). If a specific method (or method variation) is editable in the Methodizer, then the method name in the method's syntax definition (or an entry in the method's variations list) will be linked so that clicking on the method name will launch the Methodizer to the desired method variation. If the Methodizer is already open, then clicking on one of these linked method names will configure the Methodizer for the desired method variation and will bring the Methodizer window to the foreground.</P>
+
+<BLOCKQUOTE>
+	<IMG SRC="../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;Not all methods are editable in the Methodizer, so not all method names in the reference sections will be linked to launch the Methodizer. By mousing over a method name, it will be clear whether or not the method is editable in the Methodizer.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>How to Use It</DIV>
+
+<P>Have a look at the screenshot of the Methodizer interface below (not shown to size). Further below is a description of all the different frames that make up the user interface. Click on any frame inside the Methodizer screenshot to see an explanation of that frame's function.</P>
+
+<MAP NAME="methodizer-screenshot">
+	<AREA HREF="#choose-method" SHAPE=RECT COORDS=4,40,496,77 ALT="1. CHOOSE METHOD">
+	<AREA HREF="#edit-parameters" SHAPE=RECT COORDS=4,78,496,210 ALT="2. EDIT PARAMETERS">
+	<AREA HREF="#preview" SHAPE=RECT COORDS=4,210,496,237 ALT="3. PREVIEW">
+	<AREA HREF="#copy-and-paste" SHAPE=RECT COORDS=4,238,496,262 ALT="4. COPY-AND-PASTE CODE">
+</MAP>
+
+<P ALIGN=CENTER><IMG SRC="images/screenshot.gif" WIDTH=500 HEIGHT=266 ALT="Music Object Methodizer Screenshot" BORDER=0 USEMAP="#methodizer-screenshot"></P>
+
+<!--***********************************************************************-->
+
+<A NAME="choose-method"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+The "1. CHOOSE METHOD" Frame
+</TD></TR></TABLE>
+<BR>
+
+<P>The two drop-down lists in this frame let you select an exact method variation so that you can edit its parameters and construct a call to the method. The "Method" drop-down list lets you choose the method you would like to edit, and the "Parameters" drop-down list lets you choose one of the parameter configurations supported for the method you selected in the "Method" drop-down list. Some methods provide many parameter configurations, while others may only provide one. In cases where only one parameter configuration is provided, that configuration will be selected by default in the "Parameters" drop-down list and there will no other options available for selecting in the list. Each method has a default parameter configuration that will automatically be selected in the "Parameters" drop-down list when you select a method.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="edit-parameters"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+The "2. EDIT PARAMETERS" Frame
+</TD></TR></TABLE>
+<BR>
+
+<P>This frame lets you edit the values for all the parameters of the method variation you selected in the "1. CHOOSE METHOD" frame. Each time you select a different method or parameter configuration in the "1. CHOOSE METHOD" frame, the "2. EDIT PARAMETERS" frame will be updated to offer input fields for all the parameters of the newly selected method variation. The layout of the input fields in this frame is designed to look somewhat like the syntax of a call to the method you're editing. Alongside each input field is the name of the parameter that the input field corresponds to.</P>
+
+<DIV CLASS=subsection>Parameter Defaults</DIV>
+
+<P>Initially, the input fields for all parameters will be set to logical default values for the method you're editing.</P>
+
+<DIV CLASS=subsection>Parameter Help Links</DIV>
+
+<P>If reference information is available in the documentation for a specific parameter type, then a help button will be provided alongside the parameter's name. When clicked, this help button will focus the main documentation window and take you to the reference information for that parameter type inside the documentation. Don't be alarmed when the Methodizer window goes into the background after clicking one of these help buttons. The Methodizer window has not been closed, so once you've finished reading up on the parameter type you should be able to easily bring the Methodizer window to the foreground again to continue editing your method.</P>
+
+<DIV CLASS=subsection>Input Types</DIV>
+
+<P>Some parameter types offer only a limited list of value options, and in such cases a drop-down list is provided for the parameter's input field. In other cases, a parameter may allow any integer value or string value to be entered, and in these cases a textbox will be provided.</P>
+
+<DIV CLASS=subsection>Non-editable Parameters</DIV>
+
+<P>There are also a few cases where a particular parameter configuration for a method requires that a certain parameter have a fixed value that may not be edited. In such cases, no input field will be provided for the fixed parameter, and instead the fixed value for the parameter will be displayed in a non-editable table alongside the parameter name. You can see examples of this in some of the parameter configurations for the <B>playNote</B> method.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="preview"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+The "3. PREVIEW" Frame
+</TD></TR></TABLE>
+<BR>
+
+<P>This small frame provides a link for previewing the current method settings (see the "<A HREF="#edit-parameters">2. EDIT PARAMETERS</A>" frame)and also offers several ways to customize how the Methodizer works. The various options are described in further detail below...</P>
+
+<DIV CLASS=subsection>Help on Method</DIV>
+
+<P>Clicking on the "Help on Method" link takes you to the reference information for the currently selected method in the documentation. When you click on any help link in the Methodizer, the documentation window will become focused and the Methodizer window will go into the background. The Methodizer window has not been closed, so you should be able to easily bring it to the foreground again to continue editing your method.</P>
+
+<DIV CLASS=subsection>PANIC (reset all)</DIV>
+
+<P>Clicking on the "PANIC (reset all)" link restores the Methodizer's test Music Object instance to the state it was in when the Methodizer was first launched. This can be useful if you've previewed many methods since launching the Methodizer and it is no longer clear what state the test instance is in. Use this option if you don't seem to be able to play musical notes when editing and previewing the <B>playNote</B> method, or if the test instance has extreme settings for transposition, volume, or other properties. The "PANIC (reset all)" option will reset all properties of the test instance and make it once again play the silent stub file that will allow you to preview musical notes using the <B>playNote</B> method.</P>
+
+<DIV CLASS=subsection>Auto Preview</DIV>
+
+<P>When the "Auto Preview" option is checked, the method you are editing will be automatically previewed each time you change the value for one of its parameters. This is useful, for instance, in finding just the right settings for the <B>playNote</B> method. When editing the parameter values for this method with the "Auto Preview" option checked, a musical note will be triggered each time a new value is selected for the channel, bank, instrument, pitch, velocity, or duration parameter. The "Auto Preview" option can be toggled by either clicking on the "Auto Preview" link or the checkbox alongside it.</P>
+
+<DIV CLASS=subsection>Preview Method</DIV>
+
+<P>The "Preview Method" link lets you manually preview the current settings for the method you are editing. This option is useful for when the "Auto Preview" option is turned off. By using the manual "Preview Method" option, you can edit the parameter values for your method until you've set values that you think will be suitable before actually previewing the method. You can also use this option to manually preview different methods in succession to see how the methods affect the state of the test Music Object instance. Seeing how different methods interact with each other to affect the overall state of a Music Object instance can provide the basis for an approach in your programming of a sonified Web page or Web-based multimedia application.</P>
+
+<DIV CLASS=subsection>Return Value</DIV>
+
+<P>Many of the methods you can edit using the Methodizer provide a return value. This is true of all the get-style methods and all the is-style methods that query state information about a Music Object instance. The state information that is returned by these methods will be displayed in the "Return Value" text field each time such a method is previewed, either through the manual "Preview Method" option or the "Auto Preview" option. When a method is previewed and no value is returned by the method, then the "Return Value" field will contain the message "--- NO RETURN VALUE ---".</P>
+
+<!--***********************************************************************-->
+
+<A NAME="copy-and-paste"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+The "4. COPY-AND-PASTE CODE" Frame
+</TD></TR></TABLE>
+<BR>
+
+<P>Once you have settled on just the right settings for your Music Object method, you can copy the automatically generated JavaScript code from this frame and paste it into an appropriate spot inside your sonification code. Be sure to select all of the code. This can be done easily by clicking somewhere in the text box, then pressing Ctrl-A (Command-A for Mac users) to select all of the contents. Then, press Ctrl-C (Command-C for Mac users) to copy all the contents to the clipboard.</P>
+
+<P>When you paste the code into a sonified HTML document or JavaScript file, you will have to make sure that the method is correctly prefixed with a valid Music Object instance name. For instance, if you were using the Methodizer to edit the parameters for the <B>playNote</B> method and the code that the Methodizer generated was <NOBR><B>playNote (1,0,213,60,127)</B></NOBR>, and if the sonified document you were going to paste the code into contained a Music Object instance named "myMusicObject", then you could paste the code into your sonified document and prefix it with "<SPAN CLASS=sample-code-highlighted>myMusicObject.</SPAN>", as in <NOBR><SPAN CLASS=sample-code><SPAN CLASS=sample-code-highlighted>myMusicObject</SPAN>.playNote (1,0,213,60,127)</SPAN></NOBR>.</P>
+
+<HR NOSHADE SIZE=1>
+
+<P ALIGN=CENTER>If you feel you now understand how to use the Methodizer, you can <A HREF="javascript://" ONCLICK="launchMethodizer (); return false">launch it now</A>.</P>
+
+</BODY></HTML>

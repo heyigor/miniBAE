@@ -1,0 +1,1461 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Clip</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Clip
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Clip extension provides a set of services for conveniently creating a music preview system on a Web page.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-clip.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-clip.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-clip.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-clip.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#Music.Clip-object-constructor">Music.Clip Object Constructor</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip">Music.Clip</A></TD>
+	<TD CLASS=contents-table-item-desc>An object constructor that lets you create a new Music.Clip object instance.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#Music.Clip-instance-methods">Music.Clip Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#insertUI">insertUI</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you insert the user interface for a Music.Clip object instance at the position within the document where this method is called.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#play">play</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you play the music file that is loaded into a Music.Clip object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#stop">stop</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you stop the music file that is playing for a Music.Clip object instance.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#Music.Clip-instance-properties">Music.Clip Instance Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#musicObject">musicObject</A></TD>
+	<TD CLASS=contents-table-item-desc>A reference to the Music Object instance that is used by a Music.Clip object instance.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#Music.Clip-static-properties">Music.Clip Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.fadeOutTime">Music.Clip.fadeOutTime</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the FadeOutTimeINT parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.hoverDelay">Music.Clip.hoverDelay</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the HoverDelayINT parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.hoverResetDelay">Music.Clip.hoverResetDelay</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the HoverResetDelayINT parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.imagePath">Music.Clip.imagePath</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the URL path that is used to prefix all image URLs used by all Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.imageHeight">Music.Clip.imageHeight</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the ImageHeightINT parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.imageUrl">Music.Clip.imageUrl</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the ImageUrlSTR parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.imageWhileLoadingUrl">Music.Clip.imageWhileLoadingUrl</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the ImageWhileLoadingUrlSTR parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.imageWhilePlayingUrl">Music.Clip.imageWhilePlayingUrl</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the ImageWhilePlayingUrlSTR parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.imageWidth">Music.Clip.imageWidth</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the default value that should be used for the ImageWidthINT parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.instances">Music.Clip.instances</A></TD>
+	<TD CLASS=contents-table-item-desc>An array of references to all the Music.Clip object instances that have been created in the document.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.musicUrl">Music.Clip.musicUrl</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the MusicUrlSTR parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.restartIfPlaying">Music.Clip.restartIfPlaying</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable, specifying the default value that should be used for the RestartIfPlayingBOOL parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.triggerType">Music.Clip.triggerType</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the TriggerTypeSTR parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.stopOnMouseOut">Music.Clip.stopOnMouseOut</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable, specifying the default value that should be used for the StopOnMouseOutBOOL parameter, if this parameter is not specified when creating Music.Clip object instances.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Clip.stubPath">Music.Clip.stubPath</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the URL of the stub RMF file that is needed to instantiate the player instances used by all the Music.Clip object instances.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.newClips">Music.newClips</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides a convenient way of creating multiple Music.Clip object instances in one single step.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="Music.Clip-object-constructor"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music.Clip Object Constructor
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.Clip"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Object Constructor&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip</B> object constructor (a static method of the <B>Music</B> object) lets you create a new Music.Clip object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.Clip (</B><BR>
+			&nbsp;&nbsp;&nbsp; ObjectNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MusicUrlSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ImageUrlSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ImageWhileLoadingUrlSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ImageWhilePlayingUrlSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ImageWidthINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ImageHeightINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; TriggerTypeSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeOutTimeINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; StopOnMouseOutBOOL <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; RestartIfPlayingBOOL <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; HoverDelayINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; HoverResetDelayINT<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ClipOBJ</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-parameters.gif" WIDTH=122 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="PARAMETERS"><BR>
+<UL>
+	<LI><B>ObjectNameSTR</B>
+		<P>Lets you specify the name of the <B>Music.Clip</B> object instance that should be created as a property of the window object. For instance, specifying the string value "<SPAN CLASS=value>myClip1</SPAN>" would allow you to reference the object instance in your code as <B>window.myClip1</B> or just <B>myClip1</B>, as in the statement <NOBR><SPAN CLASS=sample-code>myClip1.insertUI ()</SPAN></NOBR>.</P>
+		<P>If you specify a name for this parameter that does not conform to the valid syntax for a JavaScript identifer (for example, if it contains spaces, hyphens, or other illegal characters), then you will need to perform a string dereference of the <B>window</B> object in order to access the <B>Music.Clip</B> object instance. As an example, if you specified the string value "<SPAN CLASS=value>My Clip - 1</SPAN>" for this parameter, then the object instance could be accessed as in the statement <NOBR><SPAN CLASS=sample-code>window ['My Clip - 1'].insertUI ()</SPAN></NOBR>.</P>
+	<LI><B>MusicUrlSTR</B>
+		<P>Lets you specify the URL of the music file that should be played for the <B>Music.Clip</B> object instance. If the value of this parameter is prefixed with an asterisk ('*'), then a URL will be created by using the remainder of the value, excluding the asterisk, to replace all occurrences of the characters '[*]' in the value of the <A HREF="#Music.Clip.musicUrl"><B>Music.Clip.musicUrl</B></A> static property. If the value of the paramater is not prefixed with an asterisk, then a URL will be created by using the value of the <B>ObjectNameSTR</B> parameter to replace all occurrences of the characters '[*]' in the value of the <B>MusicUrlSTR</B> parameter.</P>
+	<LI><B>ImageUrlSTR</B>
+		<P>Lets you specify the URL of the image file that should be displayed for the user interface of the <B>Music.Clip</B> object instance. If the value of this parameter is prefixed with an asterisk ('*'), then a URL will be created by using the remainder of the value, excluding the asterisk, to replace all occurrences of the characters '[*]' in the value of the <A HREF="#Music.Clip.imageUrl"><B>Music.Clip.imageUrl</B></A> static property. If the value of the paramater is not prefixed with an asterisk, then a URL will be created by using the value of the <B>ObjectNameSTR</B> parameter to replace all occurrences of the characters '[*]' in the value of the <B>ImageUrlSTR</B> parameter.</P>
+	<LI><B>ImageWhileLoadingUrlSTR</B>
+		<P>Lets you specify the URL of the image file that should be displayed for the user interface of the <B>Music.Clip</B> object instance, only while the music file is still loading in. If the value of this parameter is prefixed with an asterisk ('*'), then a URL will be created by using the remainder of the value, excluding the asterisk, to replace all occurrences of the characters '[*]' in the value of the <A HREF="#Music.Clip.imageWhileLoadingUrl"><B>Music.Clip.imageWhileLoadingUrl</B></A> static property (or the value of the <A HREF="#Music.Clip.imageUrl"><B>Music.Clip.imageUrl</B></A> static property, if the <B>Music.Clip.imageWhileLoadingUrl</B> property is set to <SPAN CLASS=value>null</SPAN>). If the value of the paramater is not prefixed with an asterisk, then a URL will be created by using the value of the <B>ObjectNameSTR</B> parameter to replace all occurrences of the characters '[*]' in the value of the <B>ImageWhileLoadingUrlSTR</B> parameter.</P>
+	<LI><B>ImageWhilePlayingUrlSTR</B>
+		<P>Lets you specify the URL of the image file that should be displayed for the user interface of the <B>Music.Clip</B> object instance, only while the music file is playing. If the value of this parameter is prefixed with an asterisk ('*'), then a URL will be created by using the remainder of the value, excluding the asterisk, to replace all occurrences of the characters '[*]' in the value of the <A HREF="#Music.Clip.imageWhilePlayingUrl"><B>Music.Clip.imageWhilePlayingUrl</B></A> static property (or the value of the <A HREF="#Music.Clip.imageUrl"><B>Music.Clip.imageUrl</B></A> static property, if the <B>Music.Clip.imageWhilePlayingUrl</B> property is set to <SPAN CLASS=value>null</SPAN>). If the value of the paramater is not prefixed with an asterisk, then a URL will be created by using the value of the <B>ObjectNameSTR</B> parameter to replace all occurrences of the characters '[*]' in the value of the <B>ImageWhilePlayingUrlSTR</B> parameter.</P>
+	<LI><B>ImageWidthINT</B>
+		<P>Lets you specify the width (measured in pixels) of the images that will be used for the user interface of the <B>Music.Clip</B> object instance.</P>
+	<LI><B>ImageHeightINT</B>
+		<P>Lets you specify the height (measured in pixels) of the images that will be used for the user interface of the <B>Music.Clip</B> object instance.</P>
+	<LI><B>TriggerTypeSTR</B>
+		<P>Lets you specify the triggering mode for the <B>Music.Clip</B> object instance. There are two possible values for this parameter...</P>
+			<UL>
+				<LI>"<SPAN CLASS=value>click</SPAN>" - means that the music file will be played only when the user clisk on the user interface for the <B>Music.Clip</B> object instance.
+					<P></P>
+				<LI>"<SPAN CLASS=value>over</SPAN>" - means that the music file will be played only when the user mouses over the user interface for the <B>Music.Clip</B> object instance.
+					<P></P>
+			</UL>
+	<LI><B>FadeOutTimeINT</B>
+		<P>Lets you specify the amount of time (measured in milliseconds) that a <B>Music.Clip</B> object instance's music file should take to completely fade out, each time that the instance is stopped. For example, a value of <SPAN CLASS=value>2000</SPAN> would mean that the clip would fade out to a stop over a period of 2 seconds (2000 milliseconds). Specifying a value of <SPAN CLASS=value>0</SPAN> for this parameter would result in an abrupt stop.</P>
+	<LI><B>StopOnMouseOutBOOL</B>
+		<P>Lets you specify whether or not a <B>Music.Clip</B> object instance's music file should automatically be stopped when the user mouses out of the instance's user interface.</P>
+	<LI><B>RestartIfPlayingBOOL</B>
+		<P>Lets you specify whether or not a <B>Music.Clip</B> object instance's music file should automatically be started again from the beginning if the instance is retriggered while the file is still playing.</P>
+	<LI><B>HoverDelayINT</B>
+		<P>Lets you specify the amount of time (measured in milliseconds) that the user needs to keep the mouse over the <B>Music.Clip</B> object instance's user interface in order to trigger the music file to play. This parameter only has meaning when the "<SPAN CLASS=value>over</SPAN>" trigger mode is being used. As an example, a value of <SPAN CLASS=value>1000</SPAN> would mean that the user would have to keep the mouse over the user interface for 1 second (1000 milliseconds) before the music file would start playing. Specifying a value of <SPAN CLASS=value>0</SPAN> for this parameter would cause the music file to begin playing immediately on mousing over the user interface.</P>
+	<LI><B>HoverResetDelayINT</B>
+		<P>Lets you specify the amount of time (measured in milliseconds) that it should take, after the the <B>Music.Clip</B> object instance's music file has completed fading out to a stop, before the <B>Music.Clip</B> object instance no longer registers that the user is hovering over the user interface, and the user has to then mouse over the user interface once again and hover for the amount of time specified by the <B>HoverDelayINT</B> parameter before the music file can be retriggered. This parameter only has meaning when the "<SPAN CLASS=value>over</SPAN>" trigger mode is being used.</P>
+</UL>
+
+<!--
+
+<A NAME="Music.Clip/substitution-system"></A>
+<DIV CLASS=subsection>Substitution System for Certain Parameters</DIV>
+
+<P>A system of value substitution is employed for the <B>MusicUrlSTR</B>, <B>ImageUrlSTR</B>, <B>ImageWhileLoadingUrlSTR</B>, and the <B>ImageWhilePlayingUrlSTR</B> parameters. This system is completely optional to use and is provided as a convenience for preview pages that may contain a large number of clips that have music or graphics files in a shared location. For such pages, the <B>Music.</B></P>
+
+<P>In order to explain how this system works, we will use the <B>MusicUrlSTR</B>...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+new Music.Clip ('saphiku','<SPAN CLASS=sample-code-highlighted>music/african-rhythms/</SPAN>saphiku-mutu<SPAN CLASS=sample-code-highlighted>-clip.rmf</SPAN>');
+new Music.Clip ('bhapthala','<SPAN CLASS=sample-code-highlighted>music/african-rhythms/</SPAN>bhapthala-kwanziku<SPAN CLASS=sample-code-highlighted>-clip.rmf</SPAN>');
+new Music.Clip ('tituli','<SPAN CLASS=sample-code-highlighted>music/african-rhythms/</SPAN>tituli-mobhuti<SPAN CLASS=sample-code-highlighted>-clip.rmf</SPAN>');
+new Music.Clip ('laghlaza','<SPAN CLASS=sample-code-highlighted>music/african-rhythms/</SPAN>laghlaza-sikuleli<SPAN CLASS=sample-code-highlighted>-clip.rmf</SPAN>');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.musicUrl = '<SPAN CLASS=sample-code-highlighted>music/african-rhythms/</SPAN>[*]<SPAN CLASS=sample-code-highlighted>-clip.rmf</SPAN>';
+
+new Music.Clip ('saphiku','*saphiku-mutu');
+new Music.Clip ('bhapthala','*bhapthala-kwanziku');
+new Music.Clip ('tituli','*tituli-mobhuti');
+new Music.Clip ('laghlaza','*laghlaza-sikuleli');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>When a new Music.Clip object is created and the value of the <B>MusicUrlSTR</B> parameter is prefixed with an asterisk ('*'), </P>
+
+-->
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ObjectNameSTR</B> parameter, then a value is automatically generated for this parameter. In this event, there would be no way for you to determine the value that has been chosen for this parameter, so the only way you would be able to reference the newly created Clip instance would be to assign the return value of the object constructor to a variable, as in the statement...<BR>
+		<P><SPAN CLASS=sample-code><NOBR>myClip = new Music.Clip (null,'my-clip-file.rmf')</NOBR></SPAN></P>
+		<P>Then you would be able to call methods of the Clip instance using this variable, as in the statement...<BR></P>
+		<P><SPAN CLASS=sample-code><NOBR>myClip.play ()</NOBR></SPAN></P>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>MusicUrlSTR</B> parameter, then this parameter is set to the value of the <B>ObjectNameSTR</B> parameter prefixed with an asterisk ('*'). So, if the <B>ObjectNameSTR</B> parameter were set to the string value "<SPAN CLASS=value>myClip</SPAN>", then the value "<SPAN CLASS=value>*myClip</SPAN>" would be used for the <B>MusicUrlSTR</B> parameter.<!-- To understand how this affects the behavior for this parameter, consult the section <A HREF="#Music.Clip/substitution-system">Substitution System for Certain Parameters</A>.-->
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ImageUrlSTR</B> parameter, then this parameter is set to the value of the <B>ObjectNameSTR</B> parameter prefixed with an asterisk ('*'). So, if the <B>ObjectNameSTR</B> parameter were set to the string value "<SPAN CLASS=value>myClip</SPAN>", then the value "<SPAN CLASS=value>*myClip</SPAN>" would be used for the <B>ImageUrlSTR</B> parameter.<!-- To understand how this affects the behavior for this parameter, consult the section <A HREF="#Music.Clip/substitution-system">Substitution System for Certain Parameters</A>.-->
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ImageWhileLoadingUrlSTR</B> parameter, then the value of the <B>ImageUrlSTR</B> parameter is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ImageWhilePlayingUrlSTR</B> parameter, then the value of the <B>ImageUrlSTR</B> parameter is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ImageWidthINT</B> parameter, then the value of the <A HREF="#Music.Clip.imageWidth"><B>Music.Clip.imageWidth</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ImageHeightINT</B> parameter, then the value of the <A HREF="#Music.Clip.imageHeight"><B>Music.Clip.imageHeight</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>TriggerTypeSTR</B> parameter, then the value of the <A HREF="#Music.Clip.triggerType"><B>Music.Clip.triggerType</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>FadeOutTimeINT</B> parameter, then the value of the <A HREF="#Music.Clip.fadeOutTime"><B>Music.Clip.fadeOutTime</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>StopOnMouseOutBOOL</B> parameter, then the value of the <A HREF="#Music.Clip.stopOnMouseOut"><B>Music.Clip.stopOnMouseOut</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>RestartIfPlayingBOOL</B> parameter, then the value of the <A HREF="#Music.Clip.restartIfPlaying"><B>Music.Clip.restartIfPlaying</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>HoverDelayINT</B> parameter, then the value of the <A HREF="#Music.Clip.hoverDelay"><B>Music.Clip.hoverDelay</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>HoverResetDelayINT</B> parameter, then the value of the <A HREF="#Music.Clip.hoverResetDelay"><B>Music.Clip.hoverResetDelay</B></A> static property is used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>,</B> ImageWidthINT <B>,</B> ImageHeightINT <B>,</B> TriggerTypeSTR <B>,</B> FadeOutTimeINT <B>,</B> StopOnMouseOutBOOL <B>,</B> RestartIfPlayingBOOL <B>,</B> HoverDelayINT <B>)</B>
+		<P>When no <B>HoverResetDelayINT</B> parameter is specified, then the value of the <A HREF="#Music.Clip.hoverResetDelay"><B>Music.Clip.hoverResetDelay</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>,</B> ImageWidthINT <B>,</B> ImageHeightINT <B>,</B> TriggerTypeSTR <B>,</B> FadeOutTimeINT <B>,</B> StopOnMouseOutBOOL <B>,</B> RestartIfPlayingBOOL <B>)</B>
+		<P>When there is also no <B>HoverDelayINT</B> parameter specified, then the value of the <A HREF="#Music.Clip.hoverDelay"><B>Music.Clip.hoverDelay</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>,</B> ImageWidthINT <B>,</B> ImageHeightINT <B>,</B> TriggerTypeSTR <B>,</B> FadeOutTimeINT <B>,</B> StopOnMouseOutBOOL <B>)</B>
+		<P>When there is also no <B>RestartIfPlayingBOOL</B> parameter specified, then the value of the <A HREF="#Music.Clip.restartIfPlaying"><B>Music.Clip.restartIfPlaying</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>,</B> ImageWidthINT <B>,</B> ImageHeightINT <B>,</B> TriggerTypeSTR <B>,</B> FadeOutTimeINT <B>)</B>
+		<P>When there is also no <B>StopOnMouseOutBOOL</B> parameter specified, then the value of the <A HREF="#Music.Clip.stopOnMouseOut"><B>Music.Clip.stopOnMouseOut</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>,</B> ImageWidthINT <B>,</B> ImageHeightINT <B>,</B> TriggerTypeSTR <B>)</B>
+		<P>When there is also no <B>FadeOutTimeINT</B> parameter specified, then the value of the <A HREF="#Music.Clip.fadeOutTime"><B>Music.Clip.fadeOutTime</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>,</B> ImageWidthINT <B>,</B> ImageHeightINT <B>)</B>
+		<P>When there is also no <B>TriggerTypeSTR</B> parameter specified, then the value of the <A HREF="#Music.Clip.triggerType"><B>Music.Clip.triggerType</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>,</B> ImageWidthINT <B>)</B>
+		<P>When there is also no <B>ImageHeightINT</B> parameter specified, then the value of the <A HREF="#Music.Clip.imageHeight"><B>Music.Clip.imageHeight</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>,</B> ImageWhilePlayingUrlSTR <B>)</B>
+		<P>When there is also no <B>ImageWidthINT</B> parameter specified, then the value of the <A HREF="#Music.Clip.imageWidth"><B>Music.Clip.imageWidth</B></A> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>,</B> ImageWhileLoadingUrlSTR <B>)</B>
+		<P>When there is also no <B>ImageWhilePlayingUrlSTR</B> parameter specified, then the value of the <B>ImageUrlSTR</B> parameter is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>,</B> ImageUrlSTR <B>)</B>
+		<P>When there is also no <B>ImageWhileLoadingUrlSTR</B> parameter specified, then the value of the <B>ImageUrlSTR</B> parameter is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>,</B> MusicUrlSTR <B>)</B>
+		<P>When there is also no <B>ImageUrlSTR</B> parameter specified, then this parameter is set to the value of the <B>ObjectNameSTR</B> parameter prefixed with an asterisk ('*'). So, if the <B>ObjectNameSTR</B> parameter were set to the string value "<SPAN CLASS=value>myClip</SPAN>", then the value "<SPAN CLASS=value>*myClip</SPAN>" would be used for the <B>ImageUrlSTR</B> parameter.<!-- To understand how this affects the behavior for this parameter, consult the section <A HREF="#Music.Clip/substitution-system">Substitution System for Certain Parameters</A>.--></P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Clip (</B> ObjectNameSTR <B>)</B>
+		<P>When there is also no <B>MusicUrlSTR</B> parameter specified, then this parameter is set to the value of the <B>ObjectNameSTR</B> parameter prefixed with an asterisk ('*'). So, if the <B>ObjectNameSTR</B> parameter were set to the string value "<SPAN CLASS=value>myClip</SPAN>", then the value "<SPAN CLASS=value>*myClip</SPAN>" would be used for the <B>MusicUrlSTR</B> parameter.<!-- To understand how this affects the behavior for this parameter, consult the section <A HREF="#Music.Clip/substitution-system">Substitution System for Certain Parameters</A>.--></P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="Music.Clip-instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music.Clip Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="insertUI"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;insertUI</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>insertUI</B> instance method of the <A HREF="#Music.Clip"><B>Music.Clip</B></A> object lets you insert the user interface for a <B>Music.Clip</B> object instance at the position within the document where this method is called.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>insertUI (</B> LinkHrefSTR <B>,</B> LinkTargetSTR <B>,</B> LinkAltSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>LinkHrefSTR</B> parameter, then the icon for the <B>Music.Clip</B> object instance will have no action for when the user clicks on it.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>LinkTargetSTR</B> parameter, then any link that is specified (by the <B>LinkHrefSTR</B> parameter) for the icon of the <B>Music.Clip</B> object instance will target the current window / frame.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>LinkAltSTR</B> parameter, then the icon for the <B>Music.Clip</B> object instance will display no alternate text while its image loads in, and will also display no tooltip when the user mouses over it.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>insertUI (</B> LinkHrefSTR <B>,</B> LinkTargetSTR <B>)</B>
+		<P>When no <B>LinkAltSTR</B> parameter is specified, then the icon for the <B>Music.Clip</B> object instance will display no alternate text while its image loads in, and will also display no tooltip when the user mouses over it.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>insertUI (</B> LinkHrefSTR <B>)</B>
+		<P>When there is also no <B>LinkTargetSTR</B> parameter specified, then any link that is specified (by the <B>LinkHrefSTR</B> parameter) for the icon of the <B>Music.Clip</B> object instance will target the current window / frame.</P>
+	<LI><B>insertUI ( )</B>
+		<P>When there is also no <B>LinkHrefSTR</B> parameter specified, then the icon for the <B>Music.Clip</B> object instance will have no action for when the user clicks on it.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="play"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;play</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>play</B> instance method of the <A HREF="#Music.Clip"><B>Music.Clip</B></A> object lets you play the music file that is loaded into a <B>Music.Clip</B> object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>play (</B> <A HREF="../../parameters.html#LoopingBOOL">LoopingBOOL</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>This method can be useful if you are not using the <A HREF="#insertUI"><B>insertUI</B></A> instance method in order to create the user interface for a <B>Music.Clip</B> object instance, but are instead creating your own custom interface.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>play ( )</B>
+		<P>When no <B>LoopingBOOL</B> parameter is specified, then the <B>Music.Clip</B> object instance will be played using its current loop setting.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>A <B>Music.Clip</B> object instance can be stopped using the instance's <A HREF="#stop"><B>stop</B></A> method.
+</UL>
+
+<A NAME="stop"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;stop</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>stop</B> instance method of the <A HREF="#Music.Clip"><B>Music.Clip</B></A> object lets you stop the music file that is playing for a <B>Music.Clip</B> object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>stop ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>This method can be useful if you are not using the <A HREF="#insertUI"><B>insertUI</B></A> instance method in order to create the user interface for a <B>Music.Clip</B> object instance, but are instead creating your own custom interface.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>A <B>Music.Clip</B> object instance can be triggered to play using the instance's <A HREF="#play"><B>play</B></A> method.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="Music.Clip-instance-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music.Clip Instance Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="musicObject"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;musicObject</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;object&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>musicObject</B> instance property of the <A HREF="#Music.Clip"><B>Music.Clip</B></A> object is a reference to the Music Object instance that is used by a <B>Music.Clip</B> object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>This property can be useful if there are other ways you would like to control the playback of a clip while it is playing, or if you'd like to indicate playback state for clips using your own custom code. As an example, you could create custom code to hook into the <A HREF="../../concepts.html#callbacks/onPlay"><B>onPlay</B></A> and <A HREF="../../concepts.html#callbacks/onStop"><B>onStop</B></A> callbacks for the Music Object instances of all <B>Music.Clip</B> object instances, so as to update the window's status bar to indicate when clips are playing.</P>
+
+<P>The following sample code listing shows how this could be achieved...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+for (var clipNo = 0; clipNo < Music.Clip.instances.length; clipNo++) {
+   var clipMO = Music.Clip.instances [clipNo].musicObject;
+   clipMO.addCallbackHandler ('onPlay','window.status = "audio preview clip playing..."');
+   clipMO.addCallbackHandler ('onStop','window.status = window.defaultStatus');
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If this code is placed in the document after all <B>Music.Clip</B> object instances have been created, then the window's status bar will be updated each time any one of the clips starts or stops playing.</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="Music.Clip-static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music.Clip Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.Clip.fadeOutTime"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.fadeOutTime</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>500</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.fadeOutTime</B> static property is an integer variable, specifying the default value that should be used for the <B>FadeOutTimeINT</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.hoverDelay"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.hoverDelay</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>350</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.hoverDelay</B> static property is an integer variable, specifying the default value that should be used for the <B>HoverDelayINT</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.hoverResetDelay"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.hoverResetDelay</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>1000</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.hoverResetDelay</B> static property is an integer variable, specifying the default value that should be used for the <B>HoverResetDelayINT</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.imagePath"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.imagePath</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;an empty string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.imagePath</B> static property is a string variable, specifying the URL path that is used to prefix all image URLs used by all <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.imageHeight"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.imageHeight</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>13</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.imageHeight</B> static property is an integer variable, specifying the default value that should be used for the <B>ImageHeightINT</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.imageUrl"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.imageUrl</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;"<SPAN CLASS=value>preview-ready.gif</SPAN>"&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.imageUrl</B> static property is a string variable, specifying the default value that should be used for the <B>ImageUrlSTR</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.imageWhileLoadingUrl"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.imageWhileLoadingUrl</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>not-ready.gif</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.imageWhileLoadingUrl</B> static property is a string variable, specifying the default value that should be used for the <B>ImageWhileLoadingUrlSTR</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.imageWhilePlayingUrl"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.imageWhilePlayingUrl</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>preview-playing.gif</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.imageWhilePlayingUrl</B> static property is a string variable, specifying the default value that should be used for the <B>ImageWhilePlayingUrlSTR</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.imageWidth"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.imageWidth</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>18</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.imageWidth</B> static property is an integer variable, specifying the default value that should be used for the <B>ImageWidthINT</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.instances"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.instances</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;array&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.instances</B> static property is an array of references to all the <B>Music.Clip</B> object instances that have been created in the document.
+
+<P>This property can be useful if there is an operation that you would like to perform on all clips in the document. As an example, if you wanted to insert the user interfaces for all clips in an automated manner, you could simply iterate through all the elements of the <B>Music.Clip.instances</B> array, calling the <A HREF="#insertUI"><B>insertUI</B></A> method for each instance.</P>
+
+<P>The following sample code listing shows how this could be achieved...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+for (var clipNo = 0; clipNo < Music.Clip.instances.length; clipNo++) {
+   Music.Clip.instances [clipNo].insertUI ();
+   document.writeln ('&lt;BR&gt;');
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Not only does such an approach save some code size, but nothing would need to be done to change this code in the future if more <B>Music.Clip</B> object instances were created or specific instances were removed.</P>
+
+<P>In another example, if you were creating a preview page using the Clip extension and you also wanted to have background music playing on that page, then you could use the <A HREF="../ducking/index.html">Ducking extension</A> to wire the Music Object instances for all the clips to the Music Object instance that will be playing the background music. The code to do this might look as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+for (var clipNo = 0; clipNo < Music.Clip.instances.length; clipNo++) {
+   backgroundMO.addDuckingMasters (Music.Clip.instances [clipNo].musicObject);
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the above sample code snippet, it is assumed that the Clip extension and the Ducking extension have been sourced in, that all the <B>Music.Clip</B> object instances have been created, that the background music's Music Object instance has been created, etc.</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.musicUrl"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.musicUrl</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;"<SPAN CLASS=value>[*].rmf</SPAN>"&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.musicUrl</B> static property is a string variable, specifying the default value that should be used for the <B>MusicUrlSTR</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.restartIfPlaying"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.restartIfPlaying</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>null</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.restartIfPlaying</B> static property is a boolean variable, specifying the default value that should be used for the <B>RestartIfPlayingBOOL</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.triggerType"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.triggerType</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;"<SPAN CLASS=value>click</SPAN>"&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.triggerType</B> static property is a string variable, specifying the default value that should be used for the <B>TriggerTypeSTR</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.stopOnMouseOut"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.stopOnMouseOut</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>false</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.stopOnMouseOut</B> static property is a boolean variable, specifying the default value that should be used for the <B>StopOnMouseOutBOOL</B> parameter, if this parameter is not specified when creating <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.Clip.stubPath"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Clip.stubPath</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property (of Music.Clip)&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value></SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Clip.stubPath</B> static property is a string variable, specifying the URL of the stub RMF file that is needed to instantiate the player instances used by all the <B>Music.Clip</B> object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.newClips"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.newClips</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Clip</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.newClips</B> static method provides a convenient way of creating multiple <A HREF="#Music.Clip"><B>Music.Clip</B></A> object instances in one single step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.newClips (</B> ObjectName1STR <B>,</B> ObjectName2STR <B>,</B> ... <B>,</B> ObjectNameNSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Calling the <B>Music.newClips</B> method essentially amounts to calling the <B>Music.Clip</B> object constructor multiple times, each time passing the next <B>ObjectNameSTR</B> parameter specified in the <B>Music.newClips</B> method's parameter list.</P>
+
+<P>So, for example, the statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.newClips ('saphiku','bhapthala','tituli','laghlaza');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...would be equivalent to the block of statements...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+new Music.Clip ('saphiku');
+new Music.Clip ('bhapthala');
+new Music.Clip ('tituli');
+new Music.Clip ('laghlaza');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>When creating <B>Music.Clip</B> object instances using the <B>Music.newClips</B> method, it is not possible to specify the additional parameters that can be accepted by the <B>Music.Clip</B> object constructor.
+</UL>
+
+</BODY></HTML>

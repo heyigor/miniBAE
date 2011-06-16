@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 2.8.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 2.8.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1999-01-21</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>ISSUE WORKAROUND - Crash on Closing Internet Explorer</DIV>
+
+<BLOCKQUOTE>
+Using the most recent beta builds of the Beatnik ActiveX control, we had noticed fairly frequent crashes on exiting Internet Explorer. We traced this problem to an issue with Internet Explorer not freeing up all of the allocated Beatnik Player instances, while at the same time freeing up the Beatnik Player code that the instances depend upon. This results in a memory violation. We were able to work around the problem by modifying Music Object to proactively declare the player instances unneeded when the HTML document unloads.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>ISSUE WORKAROUND - Music Persisting in Internet Explorer</DIV>
+
+<BLOCKQUOTE>
+The Internet Explorer issue that has already been documented, regarding music that persists even when the HTML document is unloaded, seems to have been related to the crash issue described above. The modification made to the Music Object code has fixed this issue as well.
+</BLOCKQUOTE>
+
+</BODY></HTML>

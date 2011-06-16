@@ -1,0 +1,1361 @@
+<HTML>
+<HEAD>
+	<TITLE>Beatnik Player's Embedding Properties</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Beatnik Player's Embedding Properties
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>A Beatnik Player is embedded on a page using either an <B>EMBED</B> tag, an <B>OBJECT</B> tag, an <B>EMBED/OBJECT</B> tag combination, or Music Object's <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. There are many properties that can be used to customize the appearance and behavior of a Beatnik Player instance. This reference describes all the properties that can be set when embedding Beatnik Player instances on a page.</P>
+
+<TABLE ALIGN=CENTER WIDTH=80% BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD BGCOLOR=CCCCCC>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD BGCOLOR=EEEEEE>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD BGCOLOR=CCCCCC>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=8><TR><TD BGCOLOR=FFFFFF>
+	<P><B>THE BEATNIK EMBEDIFIER :</B> &nbsp;&nbsp;To make your life as a Beatnik content developer a little easier, Beatnik Inc. has gone to the trouble of designing the free Beatnik EMBEDifier tool - a convenient way of creating your own custom EMBED / OBJECT code. Using the EMBEDifier is a breeze.</P>
+	<P ALIGN=CENTER><A HREF="../tools/embedifier/intro.html">Try the Beatnik EMBEDifier</A></P>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL>
+	<LI>Some properties described in this reference are specific to the Beatnik plug-in (Netscape Navigator), and others are specific to the Beatnik ActiveX Control (Microsoft Internet Explorer). This will be noted in the reference information for each property.
+		<P></P>
+	<LI>Some of the properties are required, while others are optional. For instance, it is required that every EMBED and OBJECT tag on a page have the WIDTH and HEIGHT properties specified. If a particular property is required it will be noted in the reference for that property.
+		<P></P>
+	<LI>For further guidance on using the properties described in this reference to create your own EMBED / OBJECT tags, consult the tutorial <A HREF="../tutorials/putting-music-on-a-page/index.html?steps/embed-meets-object.html">Putting Music on a Page</A>.
+</UL>
+
+<P>The table below lists all the properties that can be used when embedding the Beatnik Player.</P>
+
+<TABLE ALIGN=CENTER CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Property&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#align">ALIGN</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify how a player should be aligned against other HTML elements in a page's layout.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#autostart">AUTOSTART</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify whether or not the player should start playing automatically once it completes loading in its file.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#classid">CLASSID</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you coerce Microsoft Internet Explorer into using the Beatnik Player to embed an audio file.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#codebase">CODEBASE</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the URL location of the downloadable CAB file that will install the Beatnik ActiveX control.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#display">DISPLAY</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the display type for the player instance's control panel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#endtime">ENDTIME</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the position within a file where you would like playback to stop automatically.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#filevolumescaling">FILEVOLUMESCALING</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify whether a file's internal volume setting should be scaled against the player volume, or simply be ignored.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#groovoid">GROOVOID</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the name of a Groovoid that should be played.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#height">HEIGHT</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the height of the player instance's control panel, measured in pixels.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#hidden">HIDDEN</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify that the player instance's control panel should be hidden.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#hspace">HSPACE</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the amount of horizontal padding space that should be placed around the player instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#loop">LOOP</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the desired looping behavior for the player instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mode">MODE</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the DISPLAY mode for the information portion of the player instance's control panel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#pluginspage">PLUGINSPAGE</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the URL location of the Beatnik Player download page.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#src">SRC</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the URL location of a music or audio file that should be loaded into the player instance..</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#starttime">STARTTIME</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the position within a file where you would like playback to start.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#type">TYPE</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you coerce Netscape Navigator and Netscape Communicator into using the Beatnik Player to embed an audio file.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#volume">VOLUME</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the playback volume level for the player instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#vspace">VSPACE</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the amount of vertical padding space that should be placed around the player instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#width">WIDTH</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify the width of the player instance's control panel, measured in pixels.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="align"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;ALIGN</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>ALIGN</B> property lets you specify how a player should be aligned against other HTML elements in a page's layout.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>ALIGN=</B><SPAN CLASS=value>{LEFT | RIGHT | CENTER | TOP | BOTTOM | MIDDLE}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>ALIGN</B> property can be used as an attribute for the EMBED tag, an attribute for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. Because the browser handles alignment of the player instance, the flow of HTML around the player instance will follow the same rules of alignment that are used for any other HTML elements, such as <B>IMG</B> tags, for example.</P>
+
+<A NAME="autostart"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;AUTOSTART</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>TRUE</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>AUTOSTART</B> property lets you specify whether or not the player should start playing automatically once it completes loading in the file specified by the <A HREF="#src"><B>SRC</B></A> property.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>AUTOSTART=</B><SPAN CLASS=value>{TRUE | FALSE}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>AUTOSTART</B> property can be used as an attribute for the EMBED tag, a parameter for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. When this property is set to <SPAN CLASS=value>true</SPAN>, the file will play immediately upon loading, and when this property is set to <SPAN CLASS=value>false</SPAN>, the file will not automatically begin playing. All files that are subsequently played by the player instance using the Music Object <A HREF="../music-object-reference/instance-methods.html#play"><B>play</B></A> method will observe the value set for this property. The autostart state can be obtained and modified using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#getAutostart"><B>getAutostart</B></A> and <A HREF="../music-object-reference/instance-methods.html#setAutostart"><B>setAutostart</B></A> methods, respectively.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>default is TRUE if the AUTOSTART property is specified without a value, and also TRUE if the property is not present at all
+	<LI>attribute of the EMBED tag and parameter of the OBJECT tag
+	<LI>can be used in Music Object's <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method
+</UL>
+
+<A NAME="classid"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;CLASSID</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>CLASSID</B> property lets you coerce Microsoft Internet Explorer into using the Beatnik Player to embed an audio file.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>CLASSID=</B>"<SPAN CLASS=value>CLSID:B384F118-18EE-11D1-95C8-00A024330339</SPAN>"</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>This property is specific to Microsoft Internet Explorer and is used to specify the unique Windows class ID of the Beatnik ActiveX control. This property can be used to force the Beatnik Player to handle a file that is specified in the OBJECT tag's <A HREF="#src"><B>SRC</B></A> parameter, in much the same way as the <A HREF="#type"><B>TYPE</B></A> attribute is used with the EMBED tag. In order to invoke the Beatnik ActiveX control, the value specified for the <B>CLASSID</B> property must be <B>exactly</B> as shown above.</P>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>It is not necessary to specify this property if you are using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method (or other embedding methods) to embed player instances, as these methods set this property automatically.</P>
+
+<A NAME="codebase"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;CODEBASE</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>CODEBASE</B> property lets you specify the URL location of the downloadable CAB file that will install the Beatnik ActiveX control.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>CODEBASE=</B>"<SPAN CLASS=value>http://download.beatnik.com/beatnik-player/beatnik-player.cab</SPAN>"</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>This property is specific to Microsoft Internet Explorer. In order for the automatic installation of the Beatnik Player to work correctly, the value specified for the <B>CODEBASE</B> property must be exactly as shown above.</P>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>It is not necessary to specify this property if you are using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method (or other embedding methods) to embed player instances, as these methods set this property automatically.</P>
+
+<A NAME="display"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;DISPLAY</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>SYSTEM</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>DISPLAY</B> property lets you specify the display type for the player instance's control panel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>DISPLAY=</B><SPAN CLASS=value>{SONG | SYSTEM}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using this property, you can specify whether the player instance's control panel should display information specific to the currently loaded file, or information that is global in nature (such as the output meters or oscilloscope). The <B>DISPLAY</B> property can be used as an attribute for the EMBED tag, a parameter for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. For an understanding of how different values for this property relate to different control panel layouts, consult the appendix <A HREF="../appendixes/control-panel-layouts.html">Control Panel Layouts</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>control panel display type can also be set via scripting using the <A HREF="../music-object-reference/instance-methods.html#setPanelDisplay">setPanelDisplay</A> method, and can be queried using the <A HREF="../music-object-reference/instance-methods.html#getPanelDisplay">getPanelDisplay</A> method
+	<LI>refer further to the appendix <A HREF="../appendixes/control-panel-layouts.html">Control Panel Layouts</A>
+</UL>
+
+<A NAME="endtime"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;ENDTIME</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;end of song&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>ENDTIME</B> property lets you specify the position, within the file specified by the <A HREF="#src"><B>SRC</B></A> property, where you would like playback to stop automatically.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>ENDTIME=</B><A HREF="../music-object-reference/parameters.html#SongPositionMsINT">SongPositionMsINT</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The effect of this property is to override the file's natural end position. The <B>ENDTIME</B> property can be used as an attribute for the EMBED tag, a parameter for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>end time position can also be set via scripting using the <A HREF="../music-object-reference/instance-methods.html#setEndTime">setEndTime</A> method
+	<LI>see also the companion <A HREF="#starttime"><B>STARTTIME</B></A> property
+</UL>
+
+<A NAME="filevolumescaling"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;FILEVOLUMESCALING</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>TRUE</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>FILEVOLUMESCALING</B> property lets you specify whether a file's internal volume setting should be scaled against the player volume, or simply be ignored.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>FILEVOLUMESCALING=</B><SPAN CLASS=value>{TRUE | FALSE | ON | OFF | 1 | 0}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The values <SPAN CLASS=value>TRUE</SPAN>, <SPAN CLASS=value>ON</SPAN>, and <SPAN CLASS=value>1</SPAN> all have the same meaning and indicate that file volume scaling should be enabled. Similarly, the values <SPAN CLASS=value>FALSE</SPAN>, <SPAN CLASS=value>OFF</SPAN>, and <SPAN CLASS=value>0</SPAN> all have the same meaning and indicate that file volume scaling should be disabled. For a better understanding of file volume scaling, consult the section <A HREF="../music-object-reference/concepts.html#file-volume-scaling">Important Concepts: File Volume Scaling</A>.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="groovoid"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;GROOVOID</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>GROOVOID</B> property lets you specify the name of a Groovoid that should be played in place of the file specified by the <A HREF="#src"><B>SRC</B></A> property.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>GROOVOID="</B><A HREF="../music-object-reference/parameters.html#GroovoidNameSTR">GroovoidNameSTR</A>"</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>A Groovoid is a "pre-cooked" musical piece that is built right into the player's soundbank. For more information on Groovoids, consult the section <A HREF="../music-object-reference/concepts.html#groovoids">Important Concepts: Groovoids</A>. When using the <B>GROOVOID</B> property, the <A HREF="#src"><B>SRC</B></A> property should still be used to specify the location of a stub file. This is to maintain backward compatibility with some older player versions that always required a <B>SRC</B> property to be specified - even when a Groovoid was being embedded. Newer versions of the player will ignore the <B>SRC</B> property if a <B>GROOVOID</B> property is specified, anyway.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>a stub file <B>must</B> still be specified in the <B>SRC</B> property
+	<LI>the <B>GROOVOID</B> property should be used in conjunction with the <A HREF="#type"><B>TYPE</B></A> and <A HREF="#src"><B>SRC</B></A> properties
+</UL>
+
+<A NAME="height"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;HEIGHT</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>60</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>HEIGHT</B> property lets you specify the height of the player instance's control panel, measured in pixels.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>HEIGHT=</B><SPAN CLASS=value>{0 | 15 | 45 | 60}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Different combinations of values for the <B>HEIGHT</B> and <A HREF="#width"><B>WIDTH</B></A> properties correspond to different control panel layouts. For an understanding of how different values for this property relate to different control panel layouts, consult the appendix <A HREF="../appendixes/control-panel-layouts.html">Control Panel Layouts</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Should comply with available <A HREF="../appendixes/control-panel-layouts.html">Beatnik Player control panel</A> dimensions
+	<LI>HEIGHT must still be specified even if the HIDDEN property is present
+</UL>
+
+<A NAME="hidden"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;HIDDEN</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>FALSE</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>HIDDEN</B> property lets you specify that the player instance's control panel should be hidden.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>HIDDEN</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Embedding hidden player instances is especially useful for sonifying Web sites where you don't want the sonification to take up any of the sites' precious graphic real estate. When using the <B>HIDDEN</B> attribute, one should also specify the <B>WIDTH=0 HEIGHT=0</B> embedding properties so that the hidden player instance doesn't occupy any significant space within the page layout. For instance, if you specified the embedding properties <B>WIDTH=144 HEIGHT=60 HIDDEN</B>, the embedded player instance would indeed be hidden, but would still create a blank 144 x 60 pixel space in the page layout - not really the desired effect.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI><B><NOBR>WIDTH=0 HEIGHT=0</NOBR></B> should also be specified when using the <B>HIDDEN</B> property
+</UL>
+
+<A NAME="hspace"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;HSPACE</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>HSPACE</B> property lets you specify the amount of horizontal padding space, measured in pixels, that should be placed around the player instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>HSPACE=</B><SPAN CLASS=value>{pixels}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>HSPACE</B> property can be used as an attribute for the EMBED tag, an attribute for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. Because the browser handles positioning of the player instance, the flow of HTML around the player instance will follow the same rules that are used for any other HTML elements, such as <B>IMG</B> tags, for example.</P>
+
+<A NAME="loop"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;LOOP</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>FALSE</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>LOOP</B> property lets you specify the desired looping behavior for the player instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>LOOP=</B><SPAN CLASS=value>{TRUE | ON | FALSE | OFF | integer where 0 is infinite}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>When a value of <SPAN CLASS=value>true</SPAN>, <SPAN CLASS=value>on</SPAN>, or <SPAN CLASS=value>0</SPAN>, is specified for this property, then the player will loop the file it is playing indefinitely. When a value of <SPAN CLASS=value>false</SPAN>, <SPAN CLASS=value>off</SPAN>, or <SPAN CLASS=value>1</SPAN> is specified, then the player will play through the file it is playing only once and will not repeat. When an integer greater than 1 is specified for this property, then the player will play through the file it is playing as many times as is specified by the property.</P>
+
+<P>The <B>LOOP</B> property can be used as an attribute for the EMBED tag, a parameter for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. All files that are subsequently played by the player instance using the Music Object <A HREF="../music-object-reference/instance-methods.html#play"><B>play</B></A> method will observe the value set for this property. The looping state can be obtained and modified using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#getLoop"><B>getLoop</B></A> and <A HREF="../music-object-reference/instance-methods.html#setLoop"><B>setLoop</B></A> methods, respectively.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>default is TRUE if the LOOP attribute is specified without a value, and FALSE if the attribute is not present at all
+</UL>
+
+<A NAME="mode"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;MODE</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>SCOPE</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>MODE</B> property lets you specify the <A HREF="#display"><B>DISPLAY</B></A> mode of the information portion of the player instance's control panel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>MODE=</B><SPAN CLASS=value>{METERS | SCOPE | COPYRIGHT}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>When a value of <SPAN CLASS=value>SONG</SPAN> is specified for the <A HREF="#display"><B>DISPLAY</B></A> property, then there is only one display mode available - the <B>COPYRIGHT</B> mode - which shows the song's author, copyright, and publisher information. When a value of <SPAN CLASS=value>SYSTEM</SPAN> is specified for the <B>DISPLAY</B> property, then there are two display modes available - <B>METERS</B> and <B>SCOPE</B>.</P>
+
+<P>Depending on the values for the <A HREF="#width"><B>WIDTH</B></A> and <A HREF="#height"><B>HEIGHT</B></A> properties, there may or may not be an information portion present in the player instance's control panel layout. If this portion is not present, then setting this property will have no effect. The <B>MODE</B> property can be used as an attribute for the EMBED tag, a parameter for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method.</P>
+
+<P>For an understanding of how different values for this property relate to different control panel layouts, consult the appendix <A HREF="../appendixes/control-panel-layouts.html">Control Panel Layouts</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>control panel display mode can also be set via scripting using the <A HREF="../music-object-reference/instance-methods.html#setPanelMode">setPanelMode</A> method, and can be queried via scripting using the <A HREF="../music-object-reference/instance-methods.html#getPanelMode">getPanelMode</A> method
+	<LI>refer further to the appendix <A HREF="../appendixes/control-panel-layouts.html">Control Panel Layouts</A>
+</UL>
+
+<A NAME="pluginspage"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;PLUGINSPAGE</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>PLUGINSPAGE</B> property lets you specify the URL location of the Beatnik Player download page.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>PLUGINSPAGE=</B>"<SPAN CLASS=value>http://www.beatnik.com/to/?player</SPAN>"</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>By using this property, you can direct Web site visitors who don't already have the Beatnik Player installed straight to the Beatnik Player download page. This is especially important if you are authoring a Web site to specifically make use of the features of the Beatnik Player. This property is specific to Netscape Navigator and Netscape Communicator. In order for the installation of the Beatnik Player to work correctly, the value specified for the <B>PLUGINSPAGE</B> property must be exactly as shown above.</P>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>It is not necessary to specify this property if you are using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method (or other embedding methods) to embed player instances, as these methods set this property automatically.</P>
+
+<A NAME="src"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;SRC</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>SRC</B> property lets you specify the URL location of a music or audio file that should be loaded into the player instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>SRC=</B><A HREF="../music-object-reference/parameters.html#FileUrlSTR">FileUrlSTR</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The file specified by this property can be a resource on the Web or on a local hard drive or other storage device. The file can be any one of the Beatnik Player's <A HREF="../appendixes/supported-file-types.html">supported file types</A>. New files can be loaded into the player instance subsequently via scripting, using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#play"><B>play</B></A> method. This property should also be used when the <A HREF="#groovoid"><B>GROOVOID</B></A> property is specified, so as to maintain backward compatibility with some older player versions.</P>
+
+<A NAME="starttime"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;STARTTIME</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;beginning of song&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>STARTTIME</B> property lets you specify the position, within the file specified by the <A HREF="#src"><B>SRC</B></A> property, where you would like playback to start.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>STARTTIME=</B><A HREF="../music-object-reference/parameters.html#SongPositionMsINT">SongPositionMsINT</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The effect of this property is to override the song's natural beginning position. The <B>STARTTIME</B> property can be used as an attribute for the EMBED tag, a parameter for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>start time position can also be set via scripting using the <A HREF="../music-object-reference/instance-methods.html#setStartTime">setStartTime</A> method
+	<LI>see also the companion <A HREF="#endtime"><B>ENDTIME</B></A> property
+</UL>
+
+<A NAME="type"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;TYPE</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>TYPE</B> property lets you coerce Netscape Navigator and Netscape Communicator into using the Beatnik Player to embed an audio file.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>TYPE=</B>"<SPAN CLASS=value>audio/rmf</SPAN>"</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>This property is specific to Netscape Navigator and Netscape Communicator and can be used to force the Beatnik Plug-in to handle a file that is specified in the EMBED tag's <A HREF="#src"><B>SRC</B></A> attribute, in much the same way as the <A HREF="#classid"><B>CLASSID</B></A> attribute is used with the OBJECT tag. In order to invoke the Beatnik Plug-in, the value specified for the <B>TYPE</B> property must be <B>exactly</B> as shown above. Using this property, one may eliminate the need to setup special MIME types on one's server.</P>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>It is not necessary to specify this property if you are using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method (or other embedding methods) to embed player instances, as these methods set this property automatically.</P>
+
+<A NAME="volume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;VOLUME</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>100</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>VOLUME</B> property lets you specify the playback volume level for the player instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>VOLUME=</B><A HREF="../music-object-reference/parameters.html#Volume0to100">Volume0to100</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Player volume level is measured in percent, where a value of <SPAN CLASS=value>100</SPAN> represents maximum volume and a value of <SPAN CLASS=value>0</SPAN> represents minimum volume (or silence). For more information, see the <A HREF="../music-object-reference/parameters.html#Volume0to100">Volume0to100</A> parameter.</P>
+
+<P>The <B>VOLUME</B> property can be used as an attribute for the EMBED tag, a parameter for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. This property can also be set via scripting using the Music Object API's <A HREF="../music-object-reference/instance-methods.html#setVolume"><B>setVolume</B></A> method, or queried via scripting using the <A HREF="../music-object-reference/instance-methods.html#getVolume"><B>getVolume</B></A> method.</P>
+
+<A NAME="vspace"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;VSPACE</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>VSPACE</B> property lets you specify the amount of vertical padding space, measured in pixels, that should be placed around the player instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>VSPACE=</B><SPAN CLASS=value>{pixels}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>VSPACE</B> property can be used as an attribute for the EMBED tag, an attribute for the OBJECT tag, and also a property for the <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. Because the browser handles positioning of the player instance, the flow of HTML around the player instance will follow the same rules that are used for any other HTML elements, such as <B>IMG</B> tags, for example.</P>
+
+<A NAME="width"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;WIDTH</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Embedding Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;EMBED Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag Attribute&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;OBJECT Tag PARAM&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;magicEmbed Property&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;yes&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>144</SPAN>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>WIDTH</B> property lets you specify the width of the player instance's control panel, measured in pixels.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>WIDTH=</B><SPAN CLASS=value>{0 | 144}</SPAN></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Different combinations of values for the <B>WIDTH</B> and <A HREF="#height"><B>HEIGHT</B></A> properties correspond to different control panel layouts. For an understanding of how different values for this property relate to different control panel layouts, consult the appendix <A HREF="../appendixes/control-panel-layouts.html">Control Panel Layouts</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Should comply with available <A HREF="../appendixes/control-panel-layouts.html">Beatnik Player control panel</A> dimensions
+	<LI>WIDTH must still be specified even if the HIDDEN property is present
+</UL>
+
+</BODY></HTML>

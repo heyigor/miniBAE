@@ -1,0 +1,166 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object API (body)</TITLE>
+	<LINK REL="stylesheet" HREF="style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Introduction
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="intro"></A>
+<P>This documentation contains information necessary to start authoring your own sonified Web sites or augment existing Web sites to use the interactive power of the Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In Version 3.4
+</TD></TR></TABLE>
+<BR>
+
+<P>Among the new features included in version 3.4 of the Music Object API are: support for Microsoft Internet Explorer on the MacOS, improved documentation, and updated company branding.
+
+<P>For the full scoop, check out the <A HREF="music-object-reference/version-history/index.html?versions/version-3.4.0.html">Music Object Version History</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="not-using-3.3"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Not Already Using 3.3 ?
+</TD></TR></TABLE>
+<BR>
+
+<P>If your sonified content is not already using version 3.3 of the Music Object API, then by upgrading to use version 3.4 you will automatically be able to make use of the many powerful new features that were added in version 3.3.</P>
+
+<P>Among the things you will be able to benefit from are: smaller JavaScript files, the Audio Device Contention Manager, support for Netscape 6, expanded support for ISP- and OEM-customized versions of Netscape Navigator 4.x, truly hidden player instances, custom volume scalars, new core API methods and properties, a whole slew of new Music Object extensions, and lots more!</P>
+
+<P>For the full scoop, check out the version history entry for <A HREF="music-object-reference/version-history/index.html?versions/version-3.3.0.html">version 3.3</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="javascript-files"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting the JavaScript Files
+</TD></TR></TABLE>
+<BR>
+
+<P>For your convenience, an appendix has been provided that contains a complete list of all the JavaScript files that are offered as part of the Music Object API, including the core Music Object API, the discrete components of the core Music Object API, the language modules, the patches, and the extensions. To quickly begin development of new sonified content, simply go to this central location and grab whichever JavaScript files you will need for the site.</P>
+
+<P><A HREF="appendixes/javascript-files.html">Get the JavaScript Files...</A></P>
+
+<!--***********************************************************************-->
+
+<A NAME="download-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Download This Documentation
+</TD></TR></TABLE>
+<BR>
+
+<P>The Beatnik Music Object Documentation is featured in a browsable form on the Beatnik Web site, but it is also available as a downloadable archive so you can browse, study, and experiment off-line. To download the latest version, go to the online <A HREF="http://www.beatnik.com/to/?music-object-doc-download" TARGET="_top">documentation download page</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="doc-overview"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What This Documentation Offers
+</TD></TR></TABLE>
+<BR>
+
+<P>The various sections contained inside this documentation are described below. To link to the sections, use the contents navigation frame on the left.</P>
+
+<UL>
+	<LI><B>Tutorials</B><BR>
+		The step-by-step tutorials will guide you through a certain feature (or set of features). Typically, each step will increase in complexity, building towards a thorough understanding of the feature(s) being explained. Along with real examples that can be tested and experienced first-hand, the tutorials also offer copy-and-paste source code listings that can then be adapted for use in your own HTML pages.
+		<P></P>
+	<LI><B>View Source</B><BR>
+		Unlike the tutorials, which are designed with a very definite goal of teaching about certain features, the sample code examples and demos are more loose and stand on their own as illustrations of specific things that can be accomplished with the Music Object API. If you have experience in programming and feel comfortable looking at code, you may hack into the code for the examples and demos to gain a better understanding of how they work and to reapply some of the principles, or even chunks of the code.
+		<P></P>
+	<LI><B>Tools</B><BR>
+		Some tools, such as the Beatnik EMBEDifier, are provided to make common Beatnik authoring tasks a little easier. Using these tools will also help to familiarize you with authoring using the Music Object API, and you may eventually find yourself able to code by hand with complete confidence.
+		<P></P>
+	<LI><B>General Reference</B><BR>
+		The General Reference section covers issues that are related to authoring for Beatnik, but which are not directly addressed in the Music Object Reference.
+		<P></P>
+	<LI><B>Tips & Techniques</B><BR>
+		<P>The Tips & Techniques section contains a wealth of information on special sonification techniques, such as the technique of using the Beatnik Player and Macromedia's Flash Player together in sonified content. This section also contains important information on issues to be aware of that may affect certain sonified content or certain approaches to sonification.</P>
+	<LI><B>Music Object Reference</B><BR>
+		The Music Object Reference pages offer comprehensive documentation of the Music Object API. The full set of powerful methods are explained, with syntax definitions and listings for variations of these methods. Parameters that are common to several methods are also described in greater detail. Once you understand the principles behind Beatnik authoring with the Music Object API, you will find yourself going back to the reference all the time.
+		<P></P>
+	<LI><B>Music Object Extensions</B><BR>
+		Extended functionality is added to the core Music Object API through the use of optional extension modules. Guidelines for using Music Object extensions is available in this section, as well as complete references for all of the currently available extensions.
+		<P></P>
+	<LI><B>Appendixes</B><BR>
+		The many appendixes that are offered with this documentation act as invaluable support information for the reference pages and the tutorials. Information that you would often like to view in table layout form is generally placed in the Appendixes section.
+		<P></P>
+	<LI><B>Index</B><BR>
+		Every decent book has an index, and the Beatnik Music Object Documentation is no exception. But, unlike a conventional printed book, you will find this index conveniently hyperlinked to the exact places inside the documentation where the references occur. The index also offers a quick A-Z navigation bar to get you to the desired letter of the alphabet without delay.
+		<P></P>
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="online-resources"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Beatnik Online Resources
+</TD></TR></TABLE>
+<BR>
+<P>While this documentation is quite comprehensive, it is still likely that there may be additional information or more up-to-date information available on the Beatnik Web site. You can use the following online resources in conjunction with this documentation...</P>
+
+<UL>
+	<LI><A HREF="http://www.beatnik.com/to/?music-object" TARGET="_top">Music Object Central</A> - Go to the Music Object Web site to access all the online support options that are provided for the Music Object API.
+	<LI><A HREF="http://www.beatnik.com/to/?music-object-help" TARGET="_top">Online Help</A> - This is the place to go if you are having difficulty with something which you feel is not explained inside this documentation.
+	<LI><A HREF="http://www.beatnik.com/to/?music-object-doc" TARGET="_top">Online Documentation</A> - Get the very latest online documentation for the Music Object API. If it's been a while since you last downloaded an update of this documentation, you'll want to check to see if a more recent version is available.
+	<LI><A HREF="http://www.beatnik.com/to/?music-object-download" TARGET="_top">Download "music-object.js"</A> - Get the very latest version of the Music Object API online.
+		<HR>
+	<LI><A HREF="http://www.beatnik.com/to/?collections" TARGET="_top">Music for Your Site</A> - Get great sounding, high quality RMF music to put on your own sonified Web sites.
+	<LI><A HREF="http://www.beatnik.com/to/?editor" TARGET="_top">Create Your Own RMF Files</A> - Learn how you can use the Beatnik Editor to create your own RMF files for use in your sonified content.
+	<LI><A HREF="http://www.beatnik.com" TARGET="_top">Beatnik Central</A> - Learn about all things Beatnik by visiting the main Beatnik Web site.
+</UL>
+
+<P>For more online sonification and music resources, see the Appendix <A HREF="appendixes/resources.html">Resources on the Web</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="doc-conventions"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Syntax and Annotation Conventions
+</TD></TR></TABLE>
+<BR>
+
+<P>The Beatnik Music Object Documentation adheres to certain syntax and annotation conventions. When reading through the docs, consider the following points...</P>
+
+<UL>
+	<LI>All values, including legal values or value ranges for embedding properties, static properties, instance properties, and parameters are highlighted in a color that is different to normal text.
+	<LI>Square brackets always denote optional items in an expression, whether it is a JavaScript method or an embedding property.
+	<LI>Wherever sample code listings are provided, they will appear as preformatted text contained inside a highlighted block.
+	<LI>As a convenience to authors, many of the methods of the Music Object API provide several variations, each of which is distinguished by needing a different set of parameters. When variations for a method are provided, they are listed below the explanation for the method. A listing for a method variation is made up of a syntax definition followed by an explanation. For more information on method variations, see the section <A HREF="music-object-reference/concepts.html#method-variations">Important Concepts: Method Variations</A>.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="doc-conventions/copy-and-paste"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Copy-and-Paste Considerations
+</TD></TR></TABLE>
+<BR>
+
+<P>In parts of this documentation, there will appear colored blocks of example code. In cases where this example code is offered as copy-and-paste templates for seeding your own sonified pages, a 'Copy-and-Paste' tag will appear in the top left corner of the block. Example code in blocks like this is deliberately shown as pre-formatted text so that copying and pasting will not add undesired line breaks in the middle of lines of JavaScript code, leading to possible JavaScript syntax errors in your pages. A side effect of this formatting, however, is that you may at times have to scroll horizontally to see the full code. It's more important to us that copying and pasting example code from this documentation provide you with usable pages.</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+Whenever you copy-and-paste sonification code from the documentation, you ABSOLUTELY MUST make sure to also use the very latest versions of the JavaScript files used by that sonification code. If you copy-and-paste sonification code and use it with old versions of the JavaScript files, there is a good chance that things may not work properly. This applies to all JavaScript files, including "music-object.js" and all extensions, patches, language modules, etc.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY>
+</HTML>

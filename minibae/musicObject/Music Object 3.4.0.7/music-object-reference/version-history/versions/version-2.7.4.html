@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 2.7.4</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 2.7.4<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1998-11-25</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>NEW CLIENT SUPPORTED - WebTV Plus</DIV>
+
+<BLOCKQUOTE>
+<P>The significant difference between version 2.7.4 and version 2.6.9 is that this new version achieves compatibility with WebTV Plus set-top boxes. WebTV implemented support for many of Beatnik's music playback capabilities in their WebTV Plus Receiver, including the playback of RMF files. However, certain issues were discovered with the implementation of JavaScript that made it necessary to make significant changes to the Music Object API implementation. These changes are all "under the hood" and don't affect how Beatnik Web content authors use the API - all the methods, functions, properties, etc. are still exactly the same.</P>
+
+<P>One unfortunate result of achieving Music Object support for the WebTV Plus Receiver is that the "music-object.js" file grew in size by roughly 2Kb - still a modest price to pay for content support across more platforms. It is WebTV's intention to eliminate the need for the Music Object workarounds in future versions of the WebTV Plus software. At this stage, it may be possible to remove the workarounds and once again reduce the size of the "music-object.js" file by 2Kb.</P>
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - magicEmbed & mo_magicEmbed</DIV>
+
+<BLOCKQUOTE>
+<P>It is no longer necessary, with the <B>magicEmbed</B> method and the <B>mo_magicEmbed</B> function, to specify the "&lt;EMBED " text that opens the EMBED tag or the "&gt;" that closes the EMBED tag. This makes use of <B>magicEmbed</B> and <B>mo_magicEmbed</B> a little simpler and will save a little time in authoring pages, as well as saving a small amount of file size in pages sonified with Music Object. OK, so it's not a lot, but every little bit counts, right? The other advantage to this simplified syntax is that it eliminates the plug-in specific "EMBED" tag language and helps to make <B>magicEmbed</B> and <B>mo_magicEmbed</B> more neutral to Netscape Navigator and Microsoft Internet Explorer.</P>
+
+<P>Here is an example of how to change your code to make use of this simpler syntax...</P>
+</BLOCKQUOTE>
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE Music Object 2.7.4</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMO.magicEmbed ('&lt;EMBED SRC="trance.rmf" WIDTH=2 HEIGHT=2 HIDDEN AUTOSTART=TRUE&gt;');
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>FROM Music Object 2.7.4</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMO.magicEmbed ('SRC="trance.rmf" WIDTH=2 HEIGHT=2 HIDDEN AUTOSTART=TRUE');
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+<BLOCKQUOTE>
+<IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;Old content that was authored before Music Object 2.7.4 should still continue to work with "&lt;EMBED " and "&gt;" specified.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>OPTIMIZATION - General Improvements</DIV>
+
+<BLOCKQUOTE>
+Some optimizations were made to offset the increase in code size as a result of achieving support for WebTV. None of these code optimizations require any changes to authored content.
+</BLOCKQUOTE>
+
+</BODY></HTML>

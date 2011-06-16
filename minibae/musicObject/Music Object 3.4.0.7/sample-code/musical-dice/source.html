@@ -1,0 +1,145 @@
+<HTML><HEAD><TITLE>EXAMPLE: The Musical Dice (source)</TITLE></HEAD>
+<BODY BGCOLOR=FFFFFF TEXT=000000 LINK=000088 VLINK=880088>
+
+<PRE>
+&lt;!--SEARCH PARENT="../index.html"--&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+   &lt;TITLE&gt;EXAMPLE: The Musical Dice (sample)&lt;/TITLE&gt;
+   &lt;LINK REL="stylesheet" HREF="../../style/style.css"&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;!--*********************************************************************--&gt;
+&lt;!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *--&gt;
+&lt;!--*                -- http://www.tomkidding.com --                    *--&gt;
+&lt;!--*                                                                   *--&gt;
+&lt;!--*                    ©1997-1999 Beatnik, Inc.                       *--&gt;
+&lt;!--*********************************************************************--&gt;
+
+&lt;SCRIPT SRC="../../javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="../../javascript/music-object-prefs.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="../../javascript/music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+diceFrame = new Array ();
+
+function checkMediaLoaded () {
+   allMediaLoaded = true;
+   for (var frameNo = 1; frameNo &lt;= totalFrames && allMediaLoaded; frameNo++)
+      allMediaLoaded = allMediaLoaded && diceFrame [frameNo].complete
+   ;
+   if (!allMediaLoaded) {
+      setTimeout ('checkMediaLoaded ()',1000);
+   } else {
+      currentFrame = (currentGenre - 1) * genreFrames + 1;
+   }
+}
+
+function spinTheDice () {
+   if (allMediaLoaded && !animating) {
+      lastGenre = currentGenre;
+      currentGenre = randomGenre.next ();
+      genreSkips = currentGenre - lastGenre;
+      if (genreSkips &lt; 1) genreSkips += genres.length;
+      if (genreSkips &lt; genres.length / 2) genreSkips += genres.length;
+      framesToAnimate = genreSkips * genreFrames;
+      framesAnimated = 0;
+      animating = true;
+      delay = 10;
+   }
+}
+
+function updateAnimation () {
+   if (animating && allMediaLoaded) {
+      currentFrame++;
+      framesAnimated++;
+      if (currentFrame &gt; totalFrames) currentFrame = 1;
+      document.dice.src = diceFrame [currentFrame].src;
+      delay = delay * 1.1;
+      if (framesAnimated == framesToAnimate) {
+         fileToPlay = baseURL + 'music/' + genres [currentGenre - 1] + '-' + currentSet + '.rmf';
+         music.play (true,fileToPlay);
+         animating = false;
+      }
+   }
+   setTimeout ('updateAnimation ()',delay);
+}
+
+music = new Music ();
+ui = new Music ();
+
+genres = new Array ('techno','ambient','funky','classical','trance');
+totalMusicSets = 3;
+totalGenres = genres.length;
+
+today = new Date ();
+msPerDay = 24 * 60 * 60 * 1000;
+currentSet = (Math.round (today.getTime () / msPerDay) % totalMusicSets) + 1;
+
+randomGenre = new Music.Shuffler (5);
+currentGenre = randomGenre.next ();
+
+allMediaLoaded = false;
+animating = false;
+lastGenre = 0;
+currentGenre = 1;
+currentFrame = 1;
+framesAnimated = 0;
+framesToAnimate = 0;
+delay = 1;
+genreFrames = 6;
+totalFrames = genreFrames * genres.length;
+
+for (var frameNo = 1; frameNo &lt;= totalFrames; frameNo++) {
+   diceFrame [frameNo] = new Image (90,90);
+   diceFrame [frameNo].src = baseURL + 'dice/frame' + frameNo + '.gif';
+}
+
+checkMediaLoaded ();
+
+document.writeln (
+   '&lt;BR&gt;&lt;BR&gt;' +
+   '&lt;CENTER&gt;' +
+   '&lt;TABLE WIDTH=90% CELLSPACING=0 CELLPADDING=4 BORDER=0&gt;' +
+   '&lt;TR&gt;' +
+   '&lt;TD ROWSPAN=2 ALIGN=LEFT WIDTH=15% BGCOLOR=CCCCCC&gt;&nbsp;&lt;/TD&gt;' +
+   '&lt;TD ALIGN=LEFT BGCOLOR=CCCCCC&gt;&lt;FONT SIZE=5 COLOR=880000&gt;Roll the Dice&lt;/FONT&gt;&lt;/TD&gt;' +
+   '&lt;/TR&gt;' +
+   '&lt;TR&gt;' +
+   '&lt;TD BGCOLOR=DDDDDD&gt;' +
+   '&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=12&gt;' +
+   '&lt;TR&gt;' +
+   '&lt;TD&gt;' +
+   '&lt;TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0&gt;&lt;TR&gt;&lt;TD BGCOLOR=000000&gt;&lt;A HREF="javascript://" ONCLICK="spinTheDice (); return false"&gt;&lt;IMG SRC="' + diceFrame [currentFrame].src + '" NAME="dice" WIDTH=90 HEIGHT=90 BORDER=0 VSPACE=0 HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;' +
+   '&lt;/TD&gt;&lt;TD&gt;' +
+   'Take a gamble. Click on the musical dice to select music for your listening pleasure as you browse around the Beatnik Web site. Each face has a unique musical genre, and whichever face the dice lands on will decide the style of music you listen to.' +
+   '&lt;/TD&gt;&lt;TD&gt;'
+);
+ui.magicEmbed ('SRC="../../music/stub.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SYSTEM PANEL=SCOPE AUTOSTART=FALSE LOOP=TRUE VOLUME=100');
+document.writeln (
+   '&lt;/TD&gt;' +
+   '&lt;/TR&gt;' +
+   '&lt;/TABLE&gt;' +
+   '&lt;/TD&gt;' +
+   '&lt;/TR&gt;' +
+   '&lt;/TABLE&gt;' +
+   '&lt;/CENTER&gt;'
+);
+
+updateAnimation ();
+
+music.stubEmbed ('../../music/stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;</PRE>
+
+</BODY>
+</HTML>

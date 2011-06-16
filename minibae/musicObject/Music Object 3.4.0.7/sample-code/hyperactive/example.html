@@ -1,0 +1,354 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: Hyperactivity (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<CENTER>
+
+<!----------------------------------------------------------------------------->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-groups.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+tellMeAbout = new Music ();
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+function preLoadButton (buttonName,width,height) {
+	if (isJavaScript1_1) {
+		buttons [buttonName] = new Image (width,height);
+		buttons [buttonName].src = baseURL + 'images/buttons/' + buttonName + '.gif';
+		buttons [buttonName + '-lit'] = new Image (100,30);
+		buttons [buttonName + '-lit'].src = baseURL + 'images/buttons/' + buttonName + '-lit.gif';
+	}
+}
+
+if (isJavaScript1_1) {
+	buttons = new Array ();
+	preLoadButton ('down-a-fifth',100,30);
+	preLoadButton ('echo-mute',77,30);
+	preLoadButton ('mute',77,30);
+	preLoadButton ('reset',100,30);
+	preLoadButton ('solo',77,30);
+	preLoadButton ('tempo-down',100,30);
+	preLoadButton ('tempo-up',100,30);
+	preLoadButton ('up-an-octave',100,30);
+	preLoadButton ('up-a-third',100,30);
+	preLoadButton ('volume-down',100,30);
+	preLoadButton ('volume-up',100,30);
+}
+
+function lead (name,programNo) {
+	this.name = name;
+	this.programNo = programNo;
+	if (isJavaScript1_1) {
+		this.img = new Image (176,153);
+		this.img.src = baseURL + "images/" + name + ".gif"
+	}
+}
+
+leads = new Array (
+	new lead ('trombone',57),
+	new lead ('accordion',21),
+	new lead ('piano',2),
+	new lead ('flute',75)
+);
+
+currentLead = 1;
+
+musicalParts = new Array ();
+musicalParts ['lead'] = '6,7';
+musicalParts ['bass'] = '1,2';
+musicalParts ['rhythm'] = 4;
+musicalParts ['beat'] = '3,10';
+
+function selectLead (leadNo) {
+	if (music.ready && music.isPlaying ()) {
+		radioHandle = document.uiForm.lead [leadNo - 1];
+		radioHandle.checked = true;
+		setLead (leadNo);
+	}
+}
+
+function setLead (leadNo) {
+	if (music.ready && music.isPlaying ()) {
+		currentLead = leadNo;
+		music.setProgram (8,0,leads [currentLead - 1].programNo);
+		music.setProgram (9,0,leads [currentLead - 1].programNo);
+	}
+}
+
+function soloPart (partID) {
+	if (music.ready) {
+		music.setTracksSolo (musicalParts [partID],'Toggle');
+		var soloState = music.getTracksSolo (musicalParts [partID]);
+		if (isJavaScript1_1)
+			document.uiForm [partID + 'SoloImage'].src = buttons ['solo' + (soloState ? "-lit" : "")].src
+		;
+		document.uiForm [partID + 'SoloCheckbox'].checked = soloState;
+	}
+}
+
+function mutePart (partID) {
+	if (music.ready) {
+		music.setTracksMute (musicalParts [partID],'Toggle');
+		var muteState = music.getTracksMute (musicalParts [partID]);
+		if (isJavaScript1_1)
+			document.uiForm [partID + 'MuteImage'].src = buttons ['mute' + (muteState ? "-lit" : "")].src
+		;
+		document.uiForm [partID + 'MuteCheckbox'].checked = muteState;
+	}
+}
+
+function unclickButton (buttonName) {
+	if (isJavaScript1_1) document.uiForm [buttonName].src = buttons [buttonName].src;
+}
+
+function clickButton (buttonName) {
+	if (isJavaScript1_1) {
+		document.uiForm [buttonName].src = buttons [buttonName + '-lit'].src;
+		setTimeout ('unclickButton ("' + buttonName + '")',150);
+	}
+}
+
+function upOneThird () {
+	if (music.ready && music.getTranspose () != 3) {
+		music.setTranspose (3);
+		clickButton ('up-a-third');
+	}
+}
+
+function downOneFifth () {
+	if (music.ready && music.getTranspose () != -5) {
+		music.setTranspose (-5);
+		clickButton ('down-a-fifth');
+	}
+}
+
+function upAnOctave () {
+	if (music.ready && music.getTranspose () != 12) {
+		music.setTranspose (12);
+		clickButton ('up-an-octave');
+	}
+}
+
+function tempoUp () {
+	if (music.ready) {
+		music.setTempo (music.getTempo () + 5);
+		clickButton ('tempo-up');
+	}
+}
+
+function tempoDown () {
+	if (music.ready) {
+		music.setTempo (music.getTempo () - 5);
+		clickButton ('tempo-down');
+	}
+}
+
+function volumeUp () {
+	if (music.ready && music.getVolume () != 100) {
+		music.setVolume (music.getVolume () + 10);
+		clickButton ('volume-up');
+	}
+}
+
+function volumeDown () {
+	if (music.ready && music.getVolume () != 0) {
+		music.setVolume (music.getVolume () - 10);
+		clickButton ('volume-down');
+	}
+}
+
+function echoOnOff () {
+	if (music.ready) {
+		music.setChannelMute (9,!music.getChannelMute (9));
+		echoMuteState = music.getChannelMute (9);
+		if (isJavaScript1_1)
+			document.uiForm ["echo-mute"].src = buttons ['echo-mute' + (echoMuteState ? "-lit" : "")].src
+		;
+		document.uiForm.echoCheckbox.checked = echoMuteState;
+	}
+}
+
+function resetMusic () {
+	if (music.ready) {
+		music.setVolume (100);
+		music.setTranspose (0);
+		music.setTempo (108);
+		clickButton ('reset');
+	}
+}
+
+// --></SCRIPT>
+
+<FORM NAME="uiForm">
+
+<BR><BR>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6 BGCOLOR=000000><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=000000>
+
+<TR><TD>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%>
+	<TR ALIGN=CENTER>
+		<TD ROWSPAN=2 VALIGN=BOTTOM><A HREF="javascript:tellMeAbout.play ()" ONCLICK="tellMeAbout.play (); return false"><IMG SRC="images/tell-me-about.gif" WIDTH=160 HEIGHT=119 HSPACE=20 BORDER=0></A></TD>
+		<TD><INPUT TYPE=radio NAME=lead CHECKED ONCLICK="setLead (1)"></TD>
+		<TD><INPUT TYPE=radio NAME=lead ONCLICK="setLead (2)"></TD>
+		<TD><INPUT TYPE=radio NAME=lead ONCLICK="setLead (3)"></TD>
+		<TD><INPUT TYPE=radio NAME=lead ONCLICK="setLead (4)"></TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD><A HREF="javascript:selectLead (1)" ONCLICK="selectLead (1); return false"><IMG SRC="images/trombone.gif" WIDTH=88 HEIGHT=77 BORDER=0></A></TD>
+		<TD><A HREF="javascript:selectLead (2)" ONCLICK="selectLead (2); return false"><IMG SRC="images/accordion.gif" WIDTH=88 HEIGHT=77 BORDER=0></A></TD>
+		<TD><A HREF="javascript:selectLead (3)" ONCLICK="selectLead (3); return false"><IMG SRC="images/piano.gif" WIDTH=88 HEIGHT=77 BORDER=0></A></TD>
+		<TD><A HREF="javascript:selectLead (4)" ONCLICK="selectLead (4); return false"><IMG SRC="images/flute.gif" WIDTH=88 HEIGHT=77 BORDER=0></A></TD>
+	</TR>
+</TABLE>
+
+</TD></TR>
+<TR><TD>
+
+<TABLE BGCOLOR=888888 BORDER=0 CELLSPACING=0 CELLPADDING=2>
+<TR>
+	<TD ALIGN=CENTER>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3>
+			<TR>
+				<TD><A HREF="javascript:upOneThird ()" ONCLICK="upOneThird (); return false"><IMG SRC="images/buttons/up-a-third.gif" WIDTH=100 HEIGHT=30 NAME="up-a-third" ALT="Up a Third" BORDER=0></A></TD>
+				<TD><A HREF="javascript:tempoUp ()" ONCLICK="tempoUp (); return false"><IMG SRC="images/buttons/tempo-up.gif" WIDTH=100 HEIGHT=30 NAME="tempo-up" ALT="Tempo Up" BORDER=0></A></TD>
+				<TD><A HREF="javascript:volumeUp ()" ONCLICK="volumeUp (); return false"><IMG SRC="images/buttons/volume-up.gif" WIDTH=100 HEIGHT=30 NAME="volume-up" ALT="Volume Up" BORDER=0></A></TD>
+			</TR>
+			<TR>
+				<TD><A HREF="javascript:downOneFifth ()" ONCLICK="downOneFifth (); return false"><IMG SRC="images/buttons/down-a-fifth.gif" WIDTH=100 HEIGHT=30 NAME="down-a-fifth" ALT="Down a Fifth" BORDER=0></A></TD>
+				<TD><A HREF="javascript:tempoDown ()" ONCLICK="tempoDown (); return false"><IMG SRC="images/buttons/tempo-down.gif" WIDTH=100 HEIGHT=30 NAME="tempo-down" ALT="Tempo Down" BORDER=0></A></TD>
+				<TD><A HREF="javascript:volumeDown ()" ONCLICK="volumeDown (); return false"><IMG SRC="images/buttons/volume-down.gif" WIDTH=100 HEIGHT=30 NAME="volume-down" ALT="Volume Down" BORDER=0></A></TD>
+			</TR>
+			<TR>
+				<TD><A HREF="javascript:upAnOctave ()" ONCLICK="upAnOctave (); return false"><IMG SRC="images/buttons/up-an-octave.gif" NAME="up-an-octave" WIDTH=100 HEIGHT=30 ALT="Up an Octave" BORDER=0></A></TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:echoOnOff ()" ONCLICK="echoOnOff (); return false"><IMG SRC="images/buttons/echo-mute.gif" WIDTH=77 HEIGHT=30 NAME="echo-mute" ALT="Echo Mute" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="echoCheckbox" ONCLICK="echoOnOff ()"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+				<TD><A HREF="javascript:resetMusic ()" ONCLICK="resetMusic (); return false"><IMG SRC="images/buttons/reset.gif" WIDTH=100 HEIGHT=30 NAME="reset" ALT="Reset" BORDER=0></A></TD>
+			</TR>
+		</TABLE>
+	</TD>
+	<TD>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3>
+			<TR ALIGN=CENTER VALIGN=CENTER>
+				<TD><B>Lead</B></TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:soloPart ('lead')" ONCLICK="soloPart ('lead'); return false"><IMG SRC="images/buttons/solo.gif" WIDTH=77 HEIGHT=30 NAME="leadSoloImage" ALT="Solo" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="leadSoloCheckbox" ONCLICK="soloPart ('lead')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:mutePart ('lead')" ONCLICK="mutePart ('lead'); return false"><IMG SRC="images/buttons/mute.gif" WIDTH=77 HEIGHT=30 NAME="leadMuteImage" ALT="Mute" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="leadMuteCheckbox" ONCLICK="mutePart ('lead')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+			</TR>
+			<TR ALIGN=CENTER VALIGN=CENTER>
+				<TD><B>Bass</B></TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:soloPart ('bass')" ONCLICK="soloPart ('bass'); return false"><IMG SRC="images/buttons/solo.gif" WIDTH=77 HEIGHT=30 NAME="bassSoloImage" ALT="Solo" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="bassSoloCheckbox" ONCLICK="soloPart ('bass')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:mutePart ('bass')" ONCLICK="mutePart ('bass'); return false"><IMG SRC="images/buttons/mute.gif" WIDTH=77 HEIGHT=30 NAME="bassMuteImage" ALT="Mute" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="bassMuteCheckbox" ONCLICK="mutePart ('bass')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+			</TR>
+			<TR ALIGN=CENTER VALIGN=CENTER>
+				<TD><B>Rhythm</B></TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:soloPart ('rhythm')" ONCLICK="soloPart ('rhythm'); return false"><IMG SRC="images/buttons/solo.gif" WIDTH=77 HEIGHT=30 NAME="rhythmSoloImage" ALT="Solo" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="rhythmSoloCheckbox" ONCLICK="soloPart ('rhythm')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:mutePart ('rhythm')" ONCLICK="mutePart ('rhythm'); return false"><IMG SRC="images/buttons/mute.gif" WIDTH=77 HEIGHT=30 NAME="rhythmMuteImage" ALT="Mute" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="rhythmMuteCheckbox" ONCLICK="mutePart ('rhythm')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+			</TR>
+			<TR ALIGN=CENTER VALIGN=CENTER>
+				<TD><B>Beat</B></TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:soloPart ('beat')" ONCLICK="soloPart ('beat'); return false"><IMG SRC="images/buttons/solo.gif" WIDTH=77 HEIGHT=30 NAME="beatSoloImage" ALT="Solo" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="beatSoloCheckbox" ONCLICK="soloPart ('beat')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+				<TD>
+					<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+						<TR VALIGN=CENTER>
+							<TD><A HREF="javascript:mutePart ('beat')" ONCLICK="mutePart ('beat'); return false"><IMG SRC="images/buttons/mute.gif" WIDTH=77 HEIGHT=30 NAME="beatMuteImage" ALT="Mute" BORDER=0></A></TD>
+							<TD><INPUT TYPE=checkbox NAME="beatMuteCheckbox" ONCLICK="mutePart ('beat')"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+			</TR>
+		</TABLE>
+	</TD>
+</TR>
+</TABLE>
+
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+</FORM>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music.magicEmbed ('SRC="music/hyperactive.rmf" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE VOLUME=100 LOOP=TRUE');
+
+tellMeAbout.magicEmbed ('SRC="music/tell-me-about.rmf" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=FALSE VOLUME=100 LOOP=FALSE');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

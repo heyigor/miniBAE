@@ -1,0 +1,145 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Tips: GENERAL TIP: Viewing Source Code</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Viewing Source Code
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Viewing the source code for an HTML document is the tried and tested way for a JavaScript hacker to learn the tricks of the trade. This method of learning, however, relies on the browser's ability to accurately display a document's source code. There are certain issues associated with different browser versions and, unfortunately, what you see cannot always be fully trusted.</P>
+
+<P>From the list below, choose the browser you will be using in your Web content development for guidelines on viewing source code in that browser...</P>
+<UL>
+	<LI><A HREF="#navigator-4.x">Navigator 4.x</A>
+	<LI><A HREF="#internet-explorer-4.x-and-higher">Internet Explorer 4.x and higher</A> (Windows only)
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="navigator-4.x"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Navigator 4.x
+</TD></TR></TABLE>
+<BR>
+
+<P>For some reason, Netscape decided not to allow Navigator 4.x users to select their own text editor application for viewing HTML source code. This means no convenient loading directly into your Web development editor of choice. But, far more significant than this even, Navigator's default source viewer in 4.x doesn't even necessarily display the true source code of the document. In cases where a document uses JavaScript <B>write</B> and <B>writeln</B> statements to generate HTML, the built-in source viewer will display the generated HTML and not the JavaScript code that generated it. This can cause some content that is copied from the built-in source code viewer to break when pasted into new HTML documents. This problem renders the browser's built-in menu options for viewing source code practically useless to content developers who wish to learn how complex scripted pages accomplish their wizardry.</P>
+
+<P>There are several ways to get around this problem with Navigator 4.x...</P>
+<OL>
+	<LI><B>Use the "view-source:" protocol</B>
+		<P>The "view-source:" protocol is somewhat of an undocumented feature of Netscape Navigator, which is also implemented in Navigator 3.0x. However, the source viewing system in Navigator 3.0x is so sweet that you would truly have no need to use it in this version. In Navigator 4.x, on the other hand, it's a lifesaver. It's quite simple to use.</P>
+		<P>If you are browsing a simple Web page that contains no framesets, then you can easily view the true source code for the page by simple prepending "view-source:" at the beginning of the URL in the browser's location field and then hitting the "Enter" button. This will open up the page's <B>exact</B> source code inside Navigator's built-in source viewer.</P>
+		<P>For example, if the HTML document you wished to view the source of was located at "http://www.some-domain.com", then you could view the exact source code for that page by adding "view-source:" to the beginning of this URL to create the new URL "view-source:http://www.some-domain.com". When you hit the "Enter" button, the source code for the homepage will appear.</P>
+		<P>You cannot save out from Navigator's source viewer, so the only way to get this source code into your editor of choice is to copy-and-paste the entire document. You can do this fairly easily by first pressing "Ctrl-A" ("Command-A" for Mac users), and then pressing "Ctrl-C" ("Command-C" for Mac users). Then, launch your editor and create a new document. Press "Ctrl-V" ("Command-V" for Mac users) to paste the contents of the clipboard into your new empty document.</P>
+		<P><B>Viewing Source Code Inside a Frameset</B></P>
+		<P>If you are trying to use "view-source:" to view the source code of an HTML page that is inside a frameset, then your life is made a little more complicated. In this case you will first need to find the URL for the frame you wish to view. This procedure is different for Navigator 4.x on Windows and Navigator 4.x on Mac...</P>
+		<BLOCKQUOTE>
+			<P><B>Navigator 4.x on Windows</B></P>
+				<OL>
+					<LI><B>Right-click on the frame you wish to view</B> to bring up the contextual menu.
+					<LI><B>Select the "Create Shortcut" option</B>, which will open up a small dialog box.
+					<LI><B>Click in the "URL" field and copy its contents to the clipboard</B>. Once the cursor is inside this field, you can copy its contents quickly by pressing the "Home" button, then pressing "Shift-Ctrl-End", and then pressing "Ctrl-C" to copy to the clipboard.
+					<LI><B>Start entering a new URL, beginning with "view-source:"</B>, into the browser's location field.
+					<LI><B>Press "Ctrl-V"</B> to paste the contents of the clipboard at the end of "view-source:".
+					<LI><B>Press enter</B> to open up the true source code for the HTML page using Navigator's built-in source viewer. You can copy-and-paste from the built-in source viewer, but you cannot easily save the entire document. Copy the entire contents by first pressing "Ctrl-A", and then pressing "Ctrl-C".
+				</OL>
+			<P><B>Navigator 4.x on Mac</B></P>
+				<OL>
+					<LI><B>Make the frame active</B> by clicking somewhere inside it, or by clicking on the scrollbar. If the frame contains many links and active objects, be careful not to click on these. You can safely click on the document's background, which is essentially "dead" space, and this will also make the frame active.
+					<LI><B>Click on the "View" menu</B>, to open up this menu.
+					<LI><B>Select the "Page Info" option</B>, which will open up a window with two frames.
+					<LI><B>Carefully select and copy the "Location:" link</B>, which you will find in the lower frame of the window.
+					<LI><B>Close the "Page Info" window</B>.
+					<LI><B>Start entering a new URL, beginning with "view-source:"</B>, into the browser's location field.
+					<LI><B>Press "Command-V"</B> to paste the contents of the clipboard at the end of "view-source:".
+					<LI><B>Press enter</B> to open up the true source code for the HTML page using Navigator's built-in source viewer. You can copy-and-paste from the built-in source viewer, but you cannot easily save the entire document. Copy the entire contents by first pressing "Command-A", and then pressing "Command-C".
+				</OL>
+		</BLOCKQUOTE>
+	<LI><B>Save the document to your local system</B>
+		<P>Saving the document you wish to view onto your local system is a fairly fuss-free way of viewing and manipulating source code, but it does run the risk of cluttering up your desktop (or other such area of your hard drive) with a plethora of files that you will inevitably forget whether you still need or not. So, you'll likely keep them hanging around and permit them to overstay their welcome.</P>
+		<P>If the document you are viewing is not in a frameset, then saving it out is very straightforward. Just follow these simple steps...</P>
+		<OL>
+			<LI><B>Select the "Save As..." option</B> from the application File menu.
+			<LI><B>Choose an appropriate filename and destination folder</B> on your hard drive from the "Save As..." dialog that pops open. This is where your file will be saved.
+			<LI><B>Make sure that you save the file as HTML</B> and not "Plain Text", as the "Plain Text" option will not save the HTML source code for the page, but will instead save a text file that looks somewhat similar to how the document displayed in the browser.
+			<LI><B>Click the "Save" button</B> to save the page to the place you selected.
+			<LI><B>Load the saved HTML file into your text editor of choice</B> in order to view and/or edit the source code, and to possibly use all or just parts of it as a template for your own new Web pages.
+		</OL>
+		<P><B>Saving a Document That's in a Frameset</B></P>
+		<P>To save a document that is inside a frameset, the procedure is slightly different between Navigator 4.x on Windows and Navigator 4.x on Mac,...</P>
+		<BLOCKQUOTE>
+			<P><B>Navigator 4.x on Windows</B></P>
+				<OL>
+					<LI><B>Make the frame active</B> by clicking somewhere inside it, or by clicking on the scrollbar. If the frame contains many links and active objects, be careful not to click on these. You can safely click on the document's background, which is essentially "dead" space, and this will also make the frame active.
+					<LI><B>Select the "Save Frame As..." option</B> from the application File menu.
+					<LI><B>Choose an appropriate filename and destination folder</B> on your hard drive from the "Save As..." dialog that pops open. This is where your file will be saved.
+					<LI><B>Make sure that you save the file as HTML</B> and not "Plain Text", as the "Plain Text" option will not save the HTML source code for the page, but will instead save a text file that looks somewhat similar to how the document displayed in the browser.
+					<LI><B>Click the "Save" button</B> to save the page to the place you selected.
+					<LI><B>Load the saved HTML file into your text editor of choice</B> in order to view and/or edit the source code, and to possibly use all or just parts of it as a template for your own new Web pages.
+				</OL>
+			<P><B>Navigator 4.x on Mac</B></P>
+				<OL>
+					<LI><B>Make the frame active</B> by clicking somewhere inside it, or by clicking on the scrollbar. If the frame contains many links and active objects, be careful not to click on these. You can safely click on the document's background, which is essentially "dead" space, and this will also make the frame active.
+					<LI><B>Select the "Save As..." option</B> from the application File menu.
+					<LI><B>Choose an appropriate filename and destination folder</B> on your hard drive from the "Save As..." dialog that pops open. This is where your file will be saved.
+					<LI><B>Make sure that you save the file as "Source"</B> and not "Text", as the "Text" option will not save the HTML source code for the page, but will instead save a text file that looks somewhat similar to how the document displayed in the browser.
+					<LI><B>Click the "Save" button</B> to save the page to the place you selected.
+					<LI><B>Load the saved HTML file into your text editor of choice</B> in order to view and/or edit the source code, and to possibly use all or just parts of it as a template for your own new Web pages.
+				</OL>
+		</BLOCKQUOTE>
+</OL>
+
+<P>Be careful of framesets in Web sites. Quite often Web sites will hide their framesets as best as possible for aesthetic reasons by creating borderless frames. If you are trying to view the source code for a complex Web page and all you get by using the "<B>View | Page Source</B>" option is an inappropriately small document containing &lt;FRAMESET&gt; and &lt;FRAME&gt; tags, then the Web page you are viewing contains a frameset and you should first find out which frame in the frameset contains the code you would like to view.</P>
+
+<P>Remember, if you are using Navigator 4.x and you wish to view source code that is accurate and that you can learn from or reuse in your own content, <B>NEVER USE THE NAVIGATOR 4.x MENU OPTIONS TO VIEW HTML SOURCE</B>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="internet-explorer-4.x-and-higher"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Internet Explorer 4.x and higher (Windows only)
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are using IE on Windows, you face a rather terrible predicament when it comes to viewing source code. Apparently, Microsoft has little interest in the HTML and JavaScript developers out there who learn by example. Internet Explorer takes source viewing one step further into the inferno of frustration than Netscape's Navigator 4.x does. Not only does IE not permit the user to register their own application for viewing source code, but the application that IE uses by default is not able to correctly display text files that are authored on Mac or Unix machines, or text editors for Windows which have the option of outputting Unix-style text files, for that matter.</P>
+
+<P>I find myself setting my Windows text editor to Unix-style linebreaks out of habit, since most servers on the Web are Unix-based and there are also plenty of text editors for both Windows and Mac that can read and write Unix-style text files. On the other hand, there are few text editors for Windows that can deal with Mac-style text files, and few text editors for Mac that can understand DOS-style text files.</P>
+
+<P>In IE's defense, however, even though Notepad is not able to deal very gracefully with Unix or Mac linebreaks, it is attempting in its own endearing way to show the actual true source code for the HTML page, and not the generated product of JavaScript <B>write</B> and <B>writeln</B> statements. And if you save a document from Notepad or Wordpad and republish it to the Web, it will still remain fully functional, if not very pretty to work with. Don't let the lines that run straight into each other, or the ugly solid blocks bother you. Those blocks are the linebreaks that Notepad chokes on.</P>
+
+<P>There's only one way that I can advocate for safely viewing HTML source code in Internet Explorer on Windows...</P>
+
+<DIV CLASS=subsection>Save the document to your local system</DIV>
+
+<P>Saving the document you wish to view onto your local system is a fairly fuss-free way of viewing and manipulating source code, but it does run the risk of cluttering up your desktop (or other such area of your hard drive) with a plethora of files that you will inevitably forget whether you still need or not. So, you'll likely keep them hanging around and permit them to overstay their welcome.</P>
+
+<P>If the document you are viewing is not in a frameset, then saving it out is very straightforward. Just follow these simple steps...</P>
+<OL>
+	<LI><B>Select the "Save As..." option</B> from the application File menu.
+	<LI><B>Choose an appropriate filename and destination folder</B> on your hard drive from the "Save Web Page" dialog that pops open. This is where your file will be saved.
+	<LI><B>Make sure to select "Web Page, HTML only"</B> from the "Save as type" field so that only the HTML page itself is saved, unless you wish to save all the Web page's graphics and other assets as well, in which case you can leave the default "Web Page, complete" option selected.
+	<LI><B>Click the "Save" button</B> to save the page to the place you selected.
+	<LI><B>Load the saved HTML file into your text editor of choice</B> in order to view and/or edit the source code, and to possibly use all or just parts of it as a template for your own new Web pages.
+</OL>
+
+<DIV CLASS=subsection>Saving a Document That's in a Frameset</DIV>
+
+<P>To save a document that is inside a frameset, you will need to use Internet Explorer's "View Source" option as follows...</P>
+<OL>
+	<LI><B>Right-click on the frame you wish to view</B> to bring up the contextual menu.
+	<LI><B>Select the "View Source" option</B>, which will attempt to open up the HTML page in Notepad by default. If the HTML page is larger than 32Kb then a dialog box will appear, informing you that the document is too large to be opened in Notepad and asking you if you'd like to open it up in WordPad instead. If such a dialog appears, click the "Yes" button.
+	<LI><B>Select the "Save As..." option</B> from the application File menu, regardless of whether Notepad or WordPad opened the document.
+	<LI><B>Choose an appropriate filename and destination folder</B> on your hard drive from the "Save As" dialog that pops open. This is where your file will be saved.
+	<LI><B>Make sure to select "Text Document"</B> from the "Save as type" field towards the bottom of the "Save As" dialog box.
+	<LI><B>Click the "Save" button</B> to save the page to the place you selected.
+	<LI><B>Load the saved HTML file into your text editor of choice</B> in order to view and/or edit the source code, and to possibly use all or just parts of it as a template for your own new Web pages.
+</OL>
+
+</BODY></HTML>

@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+	<TITLE>Crash on Systems with Incompatible Sound Hardware</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Systems with Incompatible Sound Hardware
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>A bug was found with versions of the Beatnik Player before 2.1 that may result in a browser crash on systems that have no sound hardware. The problem may also, theoretically, occur on a very small number of systems that have sound hardware, where the sound hardware's software drivers are incompatible with the Beatnik Player (or some aspect of the operating system's underlying audio services that are used by the Beatnik Player).</P>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>On systems where this problem occurs, the browser may crash when the user browses content that uses the Beatnik Player, and the version of the Beatnik Player that is installed is earlier than version 2.1.</P>
+
+<DIV CLASS=subsection>Severity</DIV>
+
+<P>When considering the severity of this problem, the following points should be kept in mind...</P>
+
+<UL>
+	<LI>The problem only occurs with Beatnik Player versions earlier than version 2.1. The problem was fixed in version 2.1.
+	<LI>The problem will only occur when browsing content that uses the Beatnik Player, and not simply because the player is installed into the browser.
+	<LI>Practically all Mac OS systems have built-in sound hardware that is compatible with the Beatnik Player.
+	<LI>All WebTV systems that have Beatnik support also have compatible sound hardware built in.
+	<LI>A very small percentage of new Windows systems lack sound hardware.
+	<LI>The problem primarily affects only some older Windows systems, and a crash that may occur in the browser is unlikely to require a reboot of the system because of protection mechanisms that are built into the Windows operating system.
+	<LI>Because the Beatnik Player is exclusively a music and audio player, it is unlikely that a user will opt to install the player if their system lacks sound hardware.
+</UL>
+
+<P>This said, however, any problem that may result in a browser crash should be considered serious. If there is any likelihood at all that a sonified Web site you have developed will be browsed by users who will have a version of the Beatnik Player earlier than 2.1 installed on systems that do not have appropriate sound hardware, then you may wish to add a workaround for this problem to your sonified Web site.</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>By far the easiest way to work around this problem in Beatnik Player versions earlier than 2.1 is to simply make your sonified content require at least version 2.1. This is done by using the <A HREF="../../../music-object-reference/static-methods.html#Music.requireMinPlayerVersion" TARGET="_parent"><B>Music.requireMinPlayerVersion</B></A> static method and specifying the string value "<SPAN CLASS=value>2.1</SPAN>" for the <B>MinimumVersionSTR</B> parameter. The call to the <B>Music.requireMinPlayerVersion</B> method can be placed immediately after sourcing in the "music-object.js" JavaScript file and before your own sonification code, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<SPAN CLASS=sample-code-highlighted>if (Music.clientPlatform == 'Win32') Music.requireMinPlayerVersion ('2.1');</SPAN>
+
+/*** Your Sonification Code Follows ***/
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Because the problem is fixed in Beatnik Player versions 2.1 and higher, requiring at least version 2.1 will ensure that your sonification code becomes inactivated for users who have an earlier version of the player installed. Notice how the call to the <B>Music.requireMinPlayerVersion</B> method is conditionalized so that it is only executed on Windows systems. This is because the MacOS and WebTV platforms have built-in audio hardware that is supported by Beatnik and, therefore, the problem is almost certain to occur only on some Windows systems. For more information on requiring a minimum player version, consult the section <A HREF="../../../music-object-reference/compatibility-aids.html#cutting-edge-content" TARGET="_parent">Compatibility Aids: Cutting Edge Content</A>.</P>
+
+<DIV CLASS=subsection>The Music.isAudioSupported Static Method</DIV>
+
+<P>Avoiding the crash bug in the Beatnik Player is one aspect of a broader issue. Certain types of sonified content may rely so heavily upon the audio features of the Beatnik Player that it may not be worth letting users experience the content if their system has no audio support. In fact, allowing users to enter music remixing applications, for example, when their system doesn't even have audio support may just be a source of confusion for such users, as well as a source of technical support e-mails or phonecalls for you. In order to deny a user access to such content when their system has no audio support, you can make use of the <A HREF="../../../music-object-reference/static-methods.html#Music.isAudioSupported" TARGET="_parent"><B>Music.isAudioSupported</B></A> static method that was introduced in Music Object version 3.3.0 and which is supported in Beatnik Player versions 2.1 and higher.</P>
+
+</BODY></HTML>

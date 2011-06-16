@@ -1,0 +1,226 @@
+INST resource map
+
+DWRD	snd/csnd/esnd resource ID (Default)
+DWRD	Sample root key (Use 0 for default in snd)
+DBYT	NEW Inital stereo pan placement (-63 to 63, left to right)
+BBIT	Reserved (Set to 0)
+BBIT	Reserved (Set to 0)
+BBIT	Disable snd looping?
+BBIT	Reserved (Set to 0)
+BBIT	NEW Factor sample rate into pitch
+BBIT	NEW Play sample and hold (1) or play sample and release (0)
+BBIT	NEW Extended format. (Set to 1 for extended format)
+BBIT	NEW Disable reverberation?
+BBIT	Reserved (Set to 0)
+BBIT	Play only at sampled frequency?
+BBIT	Reserved (Set to 0)
+BBIT	Apply Sound Modifier?
+BBIT	NEW Sound Modifier bits used for root key/volume level?
+BBIT	Instrument not polyphonic?
+BBIT	Reserved (Set to 0)
+BBIT	Reserved (Set to 0)
+DBYT	SMOD (Sound Modifier) Rsrc ID #
+DWRD	Misc parameter 1
+DWRD	Misc parameter 2
+OCNT	Number of keyboard splits
+LSTC	-----
+	DBYT	Lowest MIDI note playable
+	DBYT	Highest MIDI note playable
+	DWRD	snd resource ID for range
+	DWRD	Misc parameter 1
+	DWRD	Misc parameter 2
+LSTE	-----
+OCNT	Tremolo data
+LSTC	*****
+	HWRD	Tremolo data
+LSTE	*****
+HWRD	Terminate tremolo with $8000!
+DWRD	Reserved (Set to 0)
+PSTR	Copyright
+PSTR	Author
+DLNG	Reserved (Set to 0)
+DLNG	Reserved (Set to 0)
+DLNG	Reserved (Set to 0)
+BCNT	Envelope Unit
+LSTC	
+	KTYP	
+		CASE	Volume ADSR unit=ADSR
+		CASE	Low Pass Instrument Filter=LPGF
+		CASE	Pitch Envelope LFO=PITC
+		CASE	Volume Envelope LFO=VOLU
+		CASE	Pan Envelope LFO=SPAN
+		CASE	Low Pass Frequency Filter LFO=LPFR
+		CASE	Low Pass Resonance Depth LFO=LPRE
+		CASE	Low Pass Amount LFO=LPAM
+		CASE	Curve=CURV
+		CASE	Default MOD Wheel to Pitch LFO Connection=DMOD
+	KEYB	ADSR
+		BCNT	Envelope
+		LSTC	
+			DLNG	Volume ADSR Level (04096) (65536 = max for volume)
+			DLNG	Volume ADSR Time (microseconds)
+			TNAM	Volume ADSR Mode
+				CASE	Line=LINE
+				CASE	Sustain=SUST
+				CASE	Terminate=LAST
+		LSTE	
+	KEYE	
+	KEYB	LPGF
+		DLNG	Low pass filter resonant frequency (51216384)
+		DLNG	Low pass filter depth of resonance (0255)
+		DLNG	Low pass filter: amount of low-pass (0255)
+	KEYE	
+	KEYB	PITC
+		BCNT	Pitch
+		LSTC	
+			DLNG	Pitch ADSR Level (-6553665536) 256=1 semitone for pitch
+			DLNG	Pitch ADSR Time (microseconds)
+			TNAM	Pitch ADSR Mode
+				CASE	Line=LINE
+				CASE	Sustain=SUST
+				CASE	Terminate=LAST
+		LSTE	
+		DLNG	Period of LFO in microseconds
+		TNAM	Wave Shape
+			CASE	Sine wave=SINE
+			CASE	Sawtooth wave=SAWT
+			CASE	Sawtooth type 2 wave=SAW2
+			CASE	Square wave=SQUA
+			CASE	Square type 2 wave=SQU2
+			CASE	Triangle wave=TRIA
+		DLNG	Amount to use as ADSR (-6553665536) (256=1 semitone for pitch)
+		DLNG	Amount to use as LFO (-6553665536) (256=1 semitone for pitch)
+	KEYE	
+	KEYB	VOLU
+		BCNT	Volume
+		LSTC	
+			DLNG	Volume ADSR Level (065536)
+			DLNG	Volume ADSR Time (microseconds)
+			TNAM	Volume ADSR Mode
+				CASE	Line=LINE
+				CASE	Sustain=SUST
+				CASE	Terminate=LAST
+		LSTE	
+		DLNG	Period of LFO in microseconds
+		TNAM	Wave Shape
+			CASE	Sine wave=SINE
+			CASE	Sawtooth wave=SAWT
+			CASE	Sawtooth type 2 wave=SAW2
+			CASE	Square wave=SQUA
+			CASE	Square type 2 wave=SQU2
+			CASE	Triangle wave=TRIA
+		DLNG	Reserved (Set to 0)
+		DLNG	Depth of LFO (04096)
+	KEYE	
+	KEYB	SPAN
+		BCNT	Pan
+		LSTC	
+			DLNG	Pan ADSR Level (-6553665536)
+			DLNG	Pan ADSR Time (microseconds)
+			TNAM	Pan ADSR Mode
+				CASE	Line=LINE
+				CASE	Sustain=SUST
+				CASE	Terminate=LAST
+		LSTE	
+		DLNG	Period of LFO in microseconds
+		TNAM	Wave Shape
+			CASE	Sine wave=SINE
+			CASE	Sawtooth wave=SAWT
+			CASE	Sawtooth type 2 wave=SAW2
+			CASE	Square wave=SQUA
+			CASE	Square type 2 wave=SQU2
+			CASE	Triangle wave=TRIA
+		DLNG	Amount to use as ADSR (-6363)
+		DLNG	Amount to use as LFO (063, 63 for max stereo pan)
+	KEYE	
+	KEYB	LPFR
+		BCNT	Low Pass Resonance Frequency LFO
+		LSTC	
+			DLNG	Resonance ADSR Level (065536)
+			DLNG	Resonance ADSR Time (microseconds)
+			TNAM	Resonance ADSR Mode
+				CASE	Line=LINE
+				CASE	Sustain=SUST
+				CASE	Terminate=LAST
+		LSTE	
+		DLNG	Period of LFO in microseconds
+		TNAM	Wave Shape
+			CASE	Sine wave=SINE
+			CASE	Sawtooth wave=SAWT
+			CASE	Sawtooth type 2 wave=SAW2
+			CASE	Square wave=SQUA
+			CASE	Square type 2 wave=SQU2
+			CASE	Triangle wave=TRIA
+		DLNG	Amount to use as ADSR (51216384)
+		DLNG	Amount to use as LFO (08192)
+	KEYE	
+	KEYB	LPRE
+		BCNT	Resonance Depth
+		LSTC	
+			DLNG	Resonance Depth ADSR Level (-6553665536)
+			DLNG	Resonance Depth ADSR Time (microseconds)
+			TNAM	Resonance Depth ADSR Mode
+				CASE	Line=LINE
+				CASE	Sustain=SUST
+				CASE	Terminate=LAST
+		LSTE	
+		DLNG	Period of LFO in microseconds
+		TNAM	Wave Shape
+			CASE	Sine wave=SINE
+			CASE	Sawtooth wave=SAWT
+			CASE	Sawtooth type 2 wave=SAW2
+			CASE	Square wave=SQUA
+			CASE	Square type 2 wave=SQU2
+			CASE	Triangle wave=TRIA
+		DLNG	Amount to use as ADSR (0256)
+		DLNG	Amount to use as LFO (0128)
+	KEYE	
+	KEYB	LPAM
+		BCNT	LP Amount
+		LSTC	
+			DLNG	Low Pass amount ADSR Level (-6553665536)
+			DLNG	Low Pass amount ADSR Time (microseconds)
+			TNAM	Low Pass amount ADSR Mode
+				CASE	Line=LINE
+				CASE	Sustain=SUST
+				CASE	Terminate=LAST
+		LSTE	
+		DLNG	Period of LFO in microseconds
+		TNAM	Wave Shape
+			CASE	Sine wave=SINE
+			CASE	Sawtooth wave=SAWT
+			CASE	Sawtooth type 2 wave=SAW2
+			CASE	Square wave=SQUA
+			CASE	Square type 2 wave=SQU2
+			CASE	Triangle wave=TRIA
+		DLNG	Amount to use as ADSR (0256)
+		DLNG	Amount to use as LFO (0128)
+	KEYE	
+	KEYB	CURV
+		TNAM	Tie from...
+			CASE	MIDI Pitch=PITC
+			CASE	MIDI Note Velocity=VOLU
+			CASE	MOD Wheel value=MODW
+			CASE	Key split range (0..number of keysplits)=SAMP
+		TNAM	Tie into...
+			CASE	Note Overall Volume=NVOL
+			CASE	    Volume Attack Time=ATIM
+			CASE	    Volume Attack Peak Level=ALEV
+			CASE	    Volume Sustaining Release Time to 50%=SUST
+			CASE	    Volume Sustain Level=SLEV
+			CASE	    Volume Release Time=RELS
+			CASE	Pitch LFO Period (higher period:lower speed)=PITF
+			CASE	    Pitch LFO Amount=PITC
+			CASE	Volume LFO Period=VOLF
+			CASE	    Volume LFO Amount=VOLU
+			CASE	Low Pass Filter Amount=LPAM
+			CASE	Waveform Offset (in samples)=WAVE
+		BCNT	Number of elements in curve, max=8
+		LSTC	Elements of curve
+			DBYT	Level of input (tie from)
+			DWRD	Percentage of tie-to level to use
+		LSTE	Elements of curve
+	KEYE	CURV
+	KEYB	DMOD
+	KEYE	DMOD
+LSTE	

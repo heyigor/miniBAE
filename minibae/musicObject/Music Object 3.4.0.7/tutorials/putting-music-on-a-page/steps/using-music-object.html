@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Browser Compatibility: Using Music Object)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 14: Browser Compatibility: Using Music Object
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the previous step we saw how we could use an EMBED tag nested inside an OBJECT to achieve compatibiltiy with both Netscape Navigator and Microsoft Internet Explorer. While this does work reliably, one problem is that it is quite a bunch of HTML to type each time you wish to play some background music. There are quite a few attributes in the EMBED tag that must be echoed as parameters of the OBJECT tag, opening up the possibility of errors occurring after several generations of updates. Another problem is that using this approach is only really appropriate for background music and it doesn't scale well into the vast world of interactive possibilities offered through the Music Object API.</P>
+
+<P>An easier way to embed background music in a way that can scale well into full-blown interactive sonification is to use the Music Object API's <A HREF="../../../music-object-reference/static-methods.html#Music.magicEmbed" TARGET="_parent"><B>Music.magicEmbed</B></A> static method. This method allows one to embed non-scriptable Player instances in a way that is compatible with both Navigator and Internet Explorer, without having to worry about the specific differences between the EMBED tag and the OBJECT tag.</P>
+
+<P>The following before-and-after example shows how the cross-browser EMBED-OBJECT tag combination from the previous step in this tutorial is translated to use the <B>Music.magicEmbed</B> method.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE (Using EMBED & OBJECT tags)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;OBJECT
+<SPAN CLASS=sample-code-highlighted>   SRC="trance.rmf"
+   WIDTH=144
+   HEIGHT=60</SPAN>
+   CLASSID="CLSID:B384F118-18EE-11D1-95C8-00A024330339"
+   CODEBASE="http://download.beatnik.com/beatnik-player/beatnik-player.cab"
+&gt;
+<SPAN CLASS=sample-code-highlighted>   &lt;PARAM NAME="WIDTH" VALUE="144"&gt;
+   &lt;PARAM NAME="HEIGHT" VALUE="60"&gt;
+   &lt;PARAM NAME="DISPLAY" VALUE="SONG"&gt;
+   &lt;PARAM NAME="AUTOSTART" VALUE="FALSE"&gt;
+   &lt;PARAM NAME="LOOP" VALUE="FALSE"&gt;</SPAN>
+   &lt;EMBED
+<SPAN CLASS=sample-code-highlighted>      SRC="trance.rmf"
+      WIDTH=144
+      HEIGHT=60
+      DISPLAY=SONG
+      AUTOSTART=FALSE
+      LOOP=FALSE</SPAN>
+      TYPE="audio/rmf"
+      PLUGINSPAGE="http://www.beatnik.com/to/?player"
+   &gt;
+&lt;\OBJECT&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using the Music.magicEmbed Method)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.magicEmbed (
+<SPAN CLASS=sample-code-highlighted>   'SRC="trance.rmf" ' +
+   'WIDTH=144 ' +
+   'HEIGHT=60 ' +
+   'DISPLAY=SONG ' +
+   'AUTOSTART=FALSE ' +
+   'LOOP=FALSE'</SPAN>
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>In both the before and after stage in the above comparison, the text that is highlighted indicates the customizable attributes / parameters for the embedded Player instance. From the comparison, you will notice how much simpler the <B>Music.magicEmbed</B> approach is. Most notably, there is no need to duplicate values in both the EMBED and OBJECT tags. The <B>Music.magicEmbed</B> method also automatically takes care of the TYPE and PLUGINSPAGE attributes for the EMBED tag, as well as the CLASSID and CODEBASE attributes for the OBJECT tag, so these don't have to be specified when calling the <B>Music.magicEmbed</B> method.</P>
+
+<BLOCKQUOTE>
+	<IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;It's important to note that you cannot use the <B>Music.magicEmbed</B> method unless you have first sourced in the "music-object.js" JavaScript file, since the method is defined inside this file. This is done with the statement <B>&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;</B>. In our example we're assuming that the "music-object.js" file exists inside the same folder as the HTML document that is using it. If the file was in a different folder, then we'd have to specify the correct relative path to it, just like any other Web site resource (such as a GIF or JPEG image file).
+</BLOCKQUOTE>
+
+</BODY></HTML>

@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Sonifying a Navigation Bar - Combining Groovoids With Note Playing</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('../../../music/stub.rmf');
+
+groovoidPlayer = new Music ();
+groovoidPlayer.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 7: Combining Groovoids With Note Playing
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>With Beatnik's ability to play audio and music through multiple player instances at the same time, we are not forced into using either one approach or the other, but can in fact get the best of both worlds by combining note playing and Groovoid playing in the same HTML page. The version of the navigation bar below uses note playing for when the user mouses over the navigation options, but uses Groovoid playing for when the user clicks on a navigation option.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD>
+			<A
+				HREF="buckingham1.html"
+				ONCLICK="notePlayer.noteOff (2,'C4'); groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.stop (500); notePlayer.noteOn (2,1,98,'C4',127)"
+				ONMOUSEOUT="notePlayer.noteOff (2,'C4')"
+			>
+			<IMG SRC="../../../images/example-nav-prev.gif" WIDTH=96 HEIGHT=36 ALT="PREV" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham-home.html"
+				ONCLICK="notePlayer.noteOff (2,'D4'); groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.stop (500); notePlayer.noteOn (2,1,98,'D4',127)"
+				ONMOUSEOUT="notePlayer.noteOff (2,'D4')"
+			>
+			<IMG SRC="../../../images/example-nav-home.gif" WIDTH=302 HEIGHT=36 ALT="HOME" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham3.html"
+				ONCLICK="notePlayer.noteOff (2,'E4'); groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.stop (500); notePlayer.noteOn (2,1,98,'E4',127)"
+				ONMOUSEOUT="notePlayer.noteOff (2,'E4')"
+			>
+			<IMG SRC="../../../images/example-nav-next.gif" WIDTH=96 HEIGHT=36 ALT="NEXT" BORDER=0 HSPACE=0></A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Up until this step in the tutorial, we have only been using one player instance in the page. It is important to note that there are some issues regarding playing musical notes through the Beatnik Player that require us to use separate player instances for playing Groovoids and playing musical notes.</P>
+
+<P>When you play musical notes through Beatnik, you must be playing those musical notes to a player instance that is currently playing an RMF or MIDI file. Furthermore, the music file that is loaded into the player instance must actually be playing at the time you wish to play musical notes, or the musical notes will not be played. If we want to create a Beatnik Player instance purely for the purpose of playing musical notes and don't want any other music playing through that instance, we have to load a silent (also referred to as "stub") RMF or MIDI file into the instance. Using an RMF or MIDI file that contains no musical note data also ensures that there are no conflicts between program changes that may occur on MIDI channels within the file, and instrument programs that you wish to playing musical notes to.</P>
+
+<P>There are two main reasons why one should not, typically, play musical notes to a player instance that is also going to be used to play Groovoids...</P>
+
+<OL>
+	<LI><B>Instrument Conflicts</B> - Because a Groovoid is a music file just like an RMF or MIDI file, the way it sounds will depend on the programs (musical instruments) that are selected on the channels being used. Issuing an instruction to play a musical note to an instance that is currently playing a Groovoid could cause the instrument settings on a channel to change from what was set inside the Groovoid file, causing the Groovoid to play incorrectly with inappropriate instruments.
+		<P></P>
+	<LI><B>The Player May Stop</B> - Because playing musical notes through a player instance requires that the instance actually be playing a file, instructing the instance to play a Groovoid may cause the player instance to stop once the Groovoid comes to its natural end, unless the Groovoid is set to loop and is intended by design to be a looping file (there's little sense in having a looping button click sound, for example).
+</OL> 
+
+<P>So, in this example we have added a second player instance so that we have one instance dedicated to playing musical notes and another instance dedicated to playing Groovoid files. Let's take a look at the source code for this example...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('stub.rmf');
+
+<SPAN CLASS=sample-code-highlighted>groovoidPlayer = new Music ();
+groovoidPlayer.stubEmbed ('stub.rmf');</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham1.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="
+               groovoidPlayer.stop (500);
+               notePlayer.noteOn (2,1,98,'C4',127)"
+            ONMOUSEOUT="notePlayer.noteOff (2,'C4')"
+            ONCLICK="
+               notePlayer.noteOff (2,'C4');
+               groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-prev.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="PREV"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham-home.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="
+               groovoidPlayer.stop (500);
+               notePlayer.noteOn (2,1,98,'D4',127)"
+            ONMOUSEOUT="notePlayer.noteOff (2,'D4')"
+            ONCLICK="
+               notePlayer.noteOff (2,'D4');
+               groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-home.gif"
+            WIDTH=302
+            HEIGHT=36
+            ALT="HOME"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham3.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="
+               groovoidPlayer.stop (500);
+               notePlayer.noteOn (2,1,98,'E4',127)"
+            ONMOUSEOUT="notePlayer.noteOff (2,'E4')"
+            ONCLICK="
+               notePlayer.noteOff (2,'E4');
+               groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-next.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="NEXT"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Notice how we now have the two Music Object instances, "notePlayer" and "groovoidPlayer". The instance named "notePlayer" is being used for playing musical notes, and the instance named "groovoidPlayer" is being used for playing Groovoids.</P>
+
+<P>We are using the <B>noteOn / noteOff</B> method for playing a musical note only while the user "hovers" over an option, and the musical note stops immediately as they move the mouse outside of the option. In addition, the Groovoid that starts playing when the user clicks on an option is stopped with a 500 millisecond (1/2 second) fade when the user mouses over one of the other options again. This is done using the variation of the Music Object <A HREF="../../../music-object-reference/instance-methods.html#stop" TARGET="_parent"><B>stop</B></A> method that takes a <B>FadeTimeMsINT</B> parameter. Try this out by going back to the sample above and clicking on an option so that the Groovoid starts playing, and then immediately moving the mouse to over one of the other options. Compare this to simply clicking on an option and leaving the mouse in its place.</P>
+
+<P>Now, it may seem frivolous to implement such a behavior here since it is expected that when the user clicks on a navigation option, they will be leaving the page they're on and will not have further opportunity to interact with the navigation bar. However, this behavior may be useful in a frameset context where there is a persistent navigation frame that is to be sonified, and so this demonstration illustrates a technique you may wish to use in certain situations.</P>
+
+<P>Finally, you will see in the ONCLICK event handler that there is both an instruction to play the Groovoid cue for the user's click, as well as an instruction to stop the musical note that is currently playing as a result of the user hovering over the navigation option. The statement used here to turn the note off is exactly the same as the statement used in the ONMOUSEOUT event handler, and prevents a situation from arising where the mouseover's musical note creates a dischord by playing over the Groovoid that will start playing.</P>
+
+</BODY></HTML>

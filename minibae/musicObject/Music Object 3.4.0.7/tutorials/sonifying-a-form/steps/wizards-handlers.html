@@ -1,0 +1,712 @@
+<HTML>
+<HEAD>
+	<TITLE>Sonifying a Form (Using the sonifyFormsWithHandlers Method)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY ONLOAD="sonifyForms ()">
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 9: Using the sonifyFormsWithHandlers Method
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Up until now in this tutorial we've shown how a form can be sonified by explicitly adding event handlers to all of the elements of the form. Now, in a complex form, not only can this add quite a bit of HTML and JavaScript code to your page, but it also creates a fair amount of work for you. What if there were a wondrous and magical way to sonify a form without even touching the form's HTML? Too good to be true, right? Well, get ready to act pleasantly surprised.</P>
+
+<P>At this point we'll depart into some wicked DOM (Document Object Model) Voodoo and make our lives one whole helluva lot easier. "Document Object Model?" you ask. Well, if you've ever coded an image rollover behavior for a page in a Web site, then you've already been exposed to the DOM. Basically, browsers expose all the HTML elements on a page to the JavaScript scripting environment. This is referred to as "reflection", since the HTML elements on a page are "reflected" to JavaScript in the form of objects.</P>
+
+<DIV CLASS=subsection>Wizard to the Rescue</DIV>
+
+<P>Now, because elements of an HTML page can be accessed using JavaScript, it becomes possible to write JavaScript code to automatically scan for specific types of elements on an HTML page and, if desired, actually modify the properties of any elements. This principle can be applied quite effectively to form elements, where it is possible using JavaScript to scan a document for all form elements and add event handlers as needed to sonify the elements.</P>
+
+<P>We're not going to get into the frightening details of how this is done, because Beatnik, Inc. has already gone to the trouble of creating just the code needed to automatically sonify all elements of all forms on any HTML page. This code is neatly packaged into the <A HREF="../../../music-object-reference/extensions/wizards/index.html" TARGET="_parent">Music Object Extension - Wizards</A> module. What we will be looking at is how to use the methods provided in this extension to conveniently sonify forms in various ways. We will be continuing with the same form as we've used in the earlier steps of this tutorial, and we will show how the same results from the earlier steps can be achieved with less work using "Music Object Extension - Wizards".</P>
+
+<P>In this first step using the extension, we will use Groovoids to achieve the same level of sonification as we saw in the earlier step <A HREF="button-sounds.html">Adding the Submit and Reset Button Sounds</A>. And we will achieve these same results with much less sonification code, thanks to the <A HREF="../../../music-object-reference/extensions/wizards/index.html#Music.sonifyFormsWithHandlers" TARGET="_parent"><B>Music.sonifyFormsWithHandlers</B></A> static method found in this extension.</P>
+
+<P>The <B>Music.sonifyFormsWithHandlers</B> method lets you sonify all the elements of all forms on any HTML page using handlers. All you need to do is supply the method with the desired handlers that are to be executed for each type of form element event that can occur. For this method, handlers must be string parameters containing the JavaScript code that is to be executed when a specific event occurs. For instance, in this page's example we have used the handler <B><NOBR>'formSounds.play ("UI-Click7")'</NOBR></B> for when checkboxes get clicked.</P>
+
+<P>Now try out the form below. Interact with it. It should sound remarkably familiar.</P>
+
+<!-- ***************************************************************************** -->
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-x-wizards.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<FORM NAME="productForm" METHOD=GET ACTION="thanks.html">
+<TABLE ALIGN=CENTER WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4>
+	<TR>
+		<TD ALIGN=CENTER BGCOLOR=003366>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<FONT COLOR=FFFFFF SIZE=6>
+			Blue Bass & the Neurotic Fishes<BR>
+			</FONT>
+			<FONT COLOR=FFFFFF SIZE=5>
+			-- Merchandise --
+			</FONT>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=666699>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<CENTER><FONT SIZE=5>1. Select your poison...</FONT></CENTER>
+			<P>
+			<INPUT TYPE=checkbox NAME=tshirt>&nbsp;&nbsp;<B>T-shirt ($15.95)</B>
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Color</TD>
+					<TD>
+						<SELECT NAME=tshirtColor>
+							<OPTION>Oil Slick Black
+							<OPTION>Spiritual White
+							<OPTION SELECTED>Blood Clot Red
+							<OPTION>Summer Sky Blue
+							<OPTION>Underwater Aqua
+							<OPTION>Radioactive Green
+							<OPTION>Militia Khaki
+							<OPTION>Neon Pink
+						</SELECT>
+					</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Size</TD>
+					<TD>
+						<INPUT TYPE=radio NAME=tshirtSize>Small
+						&nbsp;&nbsp;&nbsp;
+						<INPUT TYPE=radio NAME=tshirtSize CHECKED>Medium
+						&nbsp;&nbsp;&nbsp;
+						<INPUT TYPE=radio NAME=tshirtSize>Large
+						&nbsp;&nbsp;&nbsp;
+						<INPUT TYPE=radio NAME=tshirtSize>X-Large
+						&nbsp;&nbsp;&nbsp;
+						<INPUT TYPE=radio NAME=tshirtSize>XX-Large
+					</TD>
+				</TR>
+			</TABLE>
+			<HR SIZE=1 NOSHADE>
+
+			<INPUT TYPE=checkbox NAME=mug>&nbsp;&nbsp;<B>Commemorative Reunion Mug ($19.95)</B>
+			- with printed mugshot of a band member of your choice
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Band Member</TD>
+					<TD>
+						<SELECT NAME=mugPicture>
+							<OPTION SELECTED>Blue Bass (lead vocals & bass guitar)
+							<OPTION>Alec Littlefish (lead guitar & vocals)
+							<OPTION>Joe "The Octopus" Malone (drums & percussion)
+							<OPTION>Humphrey Proudfin (keyboards & vocals)
+							<OPTION>Gill Stronglung (harmony vocals)
+							<OPTION>Neville "The Blowfish" Ohrensborg (sax & horns)
+						</SELECT>
+					</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Mug Size</TD>
+					<TD>
+						<SELECT NAME=mugSize>
+							<OPTION>Diet Size (9 Fl.Oz.)
+							<OPTION SELECTED>Average Stomach (12 Fl.Oz)
+							<OPTION>Big Mama (20 Fl.Oz)
+						</SELECT>
+					</TD>
+				</TR>
+			</TABLE>
+<BR>
+			<HR SIZE=1 NOSHADE>
+			<B>Albums ($15.95 each)</B>
+			<P>
+			<INPUT TYPE=checkbox NAME=album1989>&nbsp;&nbsp;
+				Underwater Blues (released 1989)<BR>
+			<INPUT TYPE=checkbox NAME=album1991>&nbsp;&nbsp;
+				The Suffocating Sky (released 1991)<BR>
+			<INPUT TYPE=checkbox NAME=album1992>&nbsp;&nbsp;
+				Suckerfish Rising (released 1992)<BR>
+			<INPUT TYPE=checkbox NAME=album1994>&nbsp;&nbsp;
+				Psychedelic Abyss (released 1994)<BR>
+			<INPUT TYPE=checkbox NAME=album1997>&nbsp;&nbsp;
+				The Little Fish That Could (released 1997)<BR>
+			<INPUT TYPE=checkbox NAME=album1998>&nbsp;&nbsp;
+				Have You Eaten Fish Today (new release)<BR>
+			<HR SIZE=1 NOSHADE>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=9999CC>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<CENTER><FONT SIZE=5>2. Pay for the poison...</FONT></CENTER>
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Type of Credit Card</TD>
+					<TD>
+						<INPUT TYPE=radio NAME=creditCardType>American Express
+						&nbsp;&nbsp;&nbsp;
+						<INPUT TYPE=radio NAME=creditCardType CHECKED>VISA
+						&nbsp;&nbsp;&nbsp;
+						<INPUT TYPE=radio NAME=creditCardType>Mastercard
+					</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Name on Credit Card</B></TD>
+					<TD><INPUT TYPE=text SIZE=30 NAME=creditCardName></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Credit Card Number</B></TD>
+					<TD><INPUT TYPE=text SIZE=30 NAME=creditCardNumber></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Expiration Date</TD>
+					<TD>
+						<SELECT NAME=creditCardExpirationYear>
+							<OPTION SELECTED>1998
+							<OPTION>1999
+							<OPTION>2000
+							<OPTION>2001
+							<OPTION>2002
+							<OPTION>2003
+							<OPTION>2004
+						</SELECT>
+						&nbsp;&nbsp;&nbsp;
+						<SELECT NAME=creditCardExpirationMonth>
+							<OPTION SELECTED>01 Jan
+							<OPTION>02 Feb
+							<OPTION>03 Mar
+							<OPTION>04 Apr
+							<OPTION>05 May
+							<OPTION>06 Jun
+							<OPTION>07 Jul
+							<OPTION>08 Aug
+							<OPTION>09 Sep
+							<OPTION>10 Oct
+							<OPTION>11 Nov
+							<OPTION>12 Dec
+						</SELECT>
+					</TD>
+				</TR>
+			</TABLE>
+			<HR SIZE=1 NOSHADE>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=CCCCFF>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<CENTER><FONT SIZE=5>3. Deliver the poison...</FONT></CENTER>
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Shipping & Handling Option</TD>
+					<TD>
+						<SELECT NAME=shippingOption>
+							<OPTION>US Mail (7 day delivery)
+							<OPTION SELECTED>UPS (2 day delivery)
+							<OPTION>Fedex (overnight delivery)
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD COLSPAN=2 ALIGN=CENTER>&nbsp;</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Name</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressName SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Address Line 1</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressLine1 SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Address Line 2</TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressLine2 SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*City</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressCity SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*State</B> (or Province, or Region)</TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressState SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Zip Code</B> (or Postal Code)</FONT></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressZip SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Country</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressCountry SIZE=40 VALUE="USA"></TD>
+				</TR>
+			</TABLE>
+			<HR SIZE=1 NOSHADE>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=000000>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR>
+					<TD ALIGN=LEFT>
+						<INPUT TYPE=reset VALUE="Reset and start over">
+					</TD>
+					<TD ALIGN=RIGHT>
+						<INPUT TYPE=submit NAME=submitButton VALUE="BUY the poison NOW!!!">
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+</FORM>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+formSounds = new Music ();
+
+function sonifyForms () {
+	Music.noManualHandlers = true;
+	document.productForm.submitButton.onclick = new Function ('return false');
+	Music.sonifyFormsWithHandlers (
+		'formSounds.play ("UI-Click7")',
+		'formSounds.play ("UI-Click6")',
+		'formSounds.play ("UI-Click2")',
+		'formSounds.play ("UI-MouseOver1")',
+		'formSounds.play ("UI-SimpleClick2")',
+		'formSounds.stop (300)',
+		'formSounds.stop (300)',
+		'formSounds.play ("UI-SimpleClick2")',
+		'formSounds.stop (300)',
+		'formSounds.play ("Background-SimpleTyping")',
+		'formSounds.play ("UI-CarriageReturn")',
+		'formSounds.play ("UI-SimpleClick1")',
+		'formSounds.play ("Fanfare-Mars")',
+		'formSounds.play ("Fanfare-CorpSting1")'
+	);
+}
+
+formSounds.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<!-- ***************************************************************************** -->
+
+<BR>
+
+<P>There are many form element events that can be sonified automatically using the <B>Music.sonifyFormsWithHandlers</B> method, and a parameter is provided for each of these events, as follows...</P>
+
+<UL>
+	<LI><B>CheckboxCheckJavaScriptSTR</B><BR>
+		...for when a checkbox, as defined by the "&lt;INPUT TYPE=checkbox&gt;" tag, becomes checked.
+		<P></P>
+	<LI><B>CheckboxUncheckJavaScriptSTR</B><BR>
+		...for when a checkbox becomes unchecked.
+		<P></P>
+	<LI><B>RadioButtonClickJavaScriptSTR</B><BR>
+		...for when a radio button, as defined by the "&lt;INPUT TYPE=radio&gt;" tag, is clicked.
+		<P></P>
+	<LI><B>ListFocusJavaScriptSTR</B><BR>
+		...for when a drop-down listbox, as defined by the SELECT and OPTION tags, becomes focused.
+		<P></P>
+	<LI><B>ListChooseJavaScriptSTR</B><BR>
+		...for when a new item is selected from a drop-down listbox.
+		<P></P>
+	<LI><B>ListBlurJavaScriptSTR</B><BR>
+		...for when a drop-down listbox loses its focus.
+		<P></P>
+	<LI><B>MultilistFocusJavaScriptSTR</B><BR>
+		...for when a multiple selection listbox, as defined by the SELECT and OPTION tags, becomes focused.
+		<P></P>
+	<LI><B>MultilistChooseJavaScriptSTR</B><BR>
+		...for when an item is selected or unselected in a multiple selection listbox.
+		<P></P>
+	<LI><B>MultilistBlurJavaScriptSTR</B><BR>
+		...for when a multiple selection listbox loses its focus.
+		<P></P>
+	<LI><B>TextboxFocusJavaScriptSTR</B><BR>
+		...for when a textbox, as defined by the "&lt;INPUT TYPE=text&gt;", or a textarea, as defined by the TEXTAREA tag, becomes focused.
+		<P></P>
+	<LI><B>TextboxBlurJavaScriptSTR</B><BR>
+		...for when a textbox or textarea loses its focus.
+		<P></P>
+	<LI><B>ButtonClickJavaScriptSTR</B><BR>
+		...for when a button, as defined by the "&lt;INPUT TYPE=button&gt;" tag, is clicked.
+		<P></P>
+	<LI><B>FormResetJavaScriptSTR</B><BR>
+		...for when a form reset button, as defined by the "&lt;INPUT TYPE=reset&gt;" tag, is clicked.
+		<P></P>
+	<LI><B>FormSubmitJavaScriptSTR</B><BR>
+		...for when a form submit button, as defined by the "&lt;INPUT TYPE=submit&gt;" tag, is clicked.
+		<P></P>
+</UL>
+
+<P>In this example we have used almost all of the above parameters to sonify the form. Now, take a look at the HTML source code for this example to see how the <B>Music.sonifyFormsWithHandlers</B> method of <B>Music Object Extension - Wizards</B> has been used...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Sonified Forms Example&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY <SPAN CLASS=sample-code-highlighted>ONLOAD="sonifyForms ()"</SPAN>&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-wizards.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;FORM NAME="productForm" METHOD=GET ACTION="thanks.html"&gt;
+&lt;CENTER&gt;
+&lt;TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4&gt;
+   &lt;TR&gt;
+      &lt;TD ALIGN=CENTER BGCOLOR=003366&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;FONT COLOR=00CCFF SIZE=6&gt;
+         Blue Bass & the Neurotic Fishes&lt;BR&gt;
+         &lt;/FONT&gt;
+         &lt;FONT COLOR=FFFFFF SIZE=5&gt;
+         -- Merchandise --
+         &lt;/FONT&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=666699&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;CENTER&gt;&lt;FONT SIZE=5&gt;1. Select your poison...&lt;/FONT&gt;&lt;/CENTER&gt;
+         &lt;P&gt;
+         &lt;INPUT TYPE=checkbox NAME=tshirt&gt;&nbsp;&nbsp;&lt;B&gt;T-shirt ($15.95)&lt;/B&gt;
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Color&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT NAME=tshirtColor&gt;
+                     &lt;OPTION&gt;Oil Slick Black
+                     &lt;OPTION&gt;Spiritual White
+                     &lt;OPTION SELECTED&gt;Blood Clot Red
+                     &lt;OPTION&gt;Summer Sky Blue
+                     &lt;OPTION&gt;Underwater Aqua
+                     &lt;OPTION&gt;Radioactive Green
+                     &lt;OPTION&gt;Militia Khaki
+                     &lt;OPTION&gt;Neon Pink
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Size&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;INPUT TYPE=radio NAME=tshirtSize&gt;Small
+                  &nbsp;&nbsp;&nbsp;
+                  &lt;INPUT TYPE=radio NAME=tshirtSize CHECKED&gt;Medium
+                  &nbsp;&nbsp;&nbsp;
+                  &lt;INPUT TYPE=radio NAME=tshirtSize&gt;Large
+                  &nbsp;&nbsp;&nbsp;
+                  &lt;INPUT TYPE=radio NAME=tshirtSize&gt;X-Large
+                  &nbsp;&nbsp;&nbsp;
+                  &lt;INPUT TYPE=radio NAME=tshirtSize&gt;XX-Large
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+
+         &lt;INPUT TYPE=checkbox NAME=mug&gt;&nbsp;&nbsp;&lt;B&gt;Commemorative Reunion Mug ($19.95)&lt;/B&gt;
+         - with printed mugshot of a band member of your choice
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Band Member&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT NAME=mugPicture&gt;
+                     &lt;OPTION SELECTED&gt;Blue Bass (lead vocals & bass guitar)
+                     &lt;OPTION&gt;Alec Littlefish (lead guitar & vocals)
+                     &lt;OPTION&gt;Joe "The Octopus" Malone (drums & percussion)
+                     &lt;OPTION&gt;Humphrey Proudfin (keyboards & vocals)
+                     &lt;OPTION&gt;Gill Stronglung (harmony vocals)
+                     &lt;OPTION&gt;Neville "The Blowfish" Ohrensborg (sax & horns)
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Mug Size&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT NAME=mugSize&gt;
+                     &lt;OPTION&gt;Diet Size (9 Fl.Oz.)
+                     &lt;OPTION SELECTED&gt;Average Stomach (12 Fl.Oz)
+                     &lt;OPTION&gt;Big Mama (20 Fl.Oz)
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;B&gt;Albums ($15.95 each)&lt;/B&gt;
+         &lt;P&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1989&gt;&nbsp;&nbsp;
+            Underwater Blues (released 1989)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1991&gt;&nbsp;&nbsp;
+            The Suffocating Sky (released 1991)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1992&gt;&nbsp;&nbsp;
+            Suckerfish Rising (released 1992)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1994&gt;&nbsp;&nbsp;
+            Psychedelic Abyss (released 1994)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1997&gt;&nbsp;&nbsp;
+            The Little Fish That Could (released 1997)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1998&gt;&nbsp;&nbsp;
+            Have You Eaten Fish Today (new release)&lt;BR&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=9999CC&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;CENTER&gt;&lt;FONT SIZE=5&gt;2. Pay for the poison...&lt;/FONT&gt;&lt;/CENTER&gt;
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Type of Credit Card&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;INPUT TYPE=radio NAME=creditCardType&gt;American Express
+                  &nbsp;&nbsp;&nbsp;
+                  &lt;INPUT TYPE=radio NAME=creditCardType CHECKED&gt;VISA
+                  &nbsp;&nbsp;&nbsp;
+                  &lt;INPUT TYPE=radio NAME=creditCardType&gt;Mastercard
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Name on Credit Card&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=text SIZE=30 NAME=creditCardName&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Credit Card Number&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=text SIZE=30 NAME=creditCardNumber&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Expiration Date&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT NAME=creditCardExpirationYear&gt;
+                     &lt;OPTION SELECTED&gt;1998
+                     &lt;OPTION&gt;1999
+                     &lt;OPTION&gt;2000
+                     &lt;OPTION&gt;2001
+                     &lt;OPTION&gt;2002
+                     &lt;OPTION&gt;2003
+                     &lt;OPTION&gt;2004
+                  &lt;/SELECT&gt;
+                  &nbsp;&nbsp;&nbsp;
+                  &lt;SELECT NAME=creditCardExpirationMonth&gt;
+                     &lt;OPTION SELECTED&gt;01 Jan
+                     &lt;OPTION&gt;02 Feb
+                     &lt;OPTION&gt;03 Mar
+                     &lt;OPTION&gt;04 Apr
+                     &lt;OPTION&gt;05 May
+                     &lt;OPTION&gt;06 Jun
+                     &lt;OPTION&gt;07 Jul
+                     &lt;OPTION&gt;08 Aug
+                     &lt;OPTION&gt;09 Sep
+                     &lt;OPTION&gt;10 Oct
+                     &lt;OPTION&gt;11 Nov
+                     &lt;OPTION&gt;12 Dec
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=CCCCFF&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;CENTER&gt;&lt;FONT SIZE=5&gt;3. Deliver the poison...&lt;/FONT&gt;&lt;/CENTER&gt;
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Shipping & Handling Option&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT NAME=shippingOption&gt;
+                     &lt;OPTION&gt;US Mail (7 day delivery)
+                     &lt;OPTION SELECTED&gt;UPS (2 day delivery)
+                     &lt;OPTION&gt;Fedex (overnight delivery)
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR&gt;
+               &lt;TD COLSPAN=2 ALIGN=CENTER&gt;&nbsp;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Name&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressName SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Address Line 1&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressLine1 SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Address Line 2&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressLine2 SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*City&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressCity SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*State&lt;/B&gt; (or Province, or Region)&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressState SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Zip Code&lt;/B&gt; (or Postal Code)&lt;/FONT&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressZip SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Country&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressCountry SIZE=40 VALUE="USA"&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=000000&gt;
+         &lt;TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
+            &lt;TR&gt;
+               &lt;TD ALIGN=LEFT&gt;
+                  &lt;INPUT TYPE=reset VALUE="Reset and start over"&gt;
+               &lt;/TD&gt;
+               &lt;TD ALIGN=RIGHT&gt;
+                  &lt;INPUT TYPE=submit NAME=submitButton VALUE="BUY the poison NOW!!!"&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;P&gt;
+&lt;/CENTER&gt;
+&lt;/FORM&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+formSounds = new Music ();
+
+function sonifyForms () {
+   Music.noManualHandlers = true;
+   document.productForm.submitButton.onclick = new Function ('return false');
+   Music.sonifyFormsWithHandlers (
+      'formSounds.play ("UI-Click7")',
+      'formSounds.play ("UI-Click6")',
+      'formSounds.play ("UI-Click2")',
+      'formSounds.play ("UI-MouseOver1")',
+      'formSounds.play ("UI-SimpleClick2")',
+      'formSounds.stop (300)',
+      'formSounds.stop (300)',
+      'formSounds.play ("UI-SimpleClick2")',
+      'formSounds.stop (300)',
+      'formSounds.play ("Background-SimpleTyping")',
+      'formSounds.play ("UI-CarriageReturn")',
+      'formSounds.play ("UI-SimpleClick1")',
+      'formSounds.play ("Fanfare-Mars")',
+      'formSounds.play ("Fanfare-CorpSting1")'
+   );
+}
+
+formSounds.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the source code listing above, all the code needed for sonification of the form is highlighted in red. One of the first things you should notice, towards the top of the source code, is how the JavaScript file "music-object-x-wizards.js" that implements <B>Music Object Extension - Wizards</B> has been sourced into the page immediately following the sourcing in of the "music-object.js" file. It is important that Music Object extensions always be sourced after the core "music-object.js" file has first been sourced in, otherwise the extensions will not work.</P>
+
+<P>Towards the bottom of the source code listing you will see the block of code (highlighted in red) that is responsible for actually sonifying the form. Three key things are taking place in this block of code...</P>
+
+<OL>
+	<LI><B>A Music Object instance is created</B> so that it can be used to play Groovoids for the sonification of the form elements. The instance is created in the statement <NOBR>"formSounds = new Music ();"</NOBR>.
+		<P></P>
+	<LI><B>The sonifyForms function is defined</B>, which gets called when the document has finished loading in (see the BODY tag's ONLOAD event handler towards the top of the example). Inside the implementation for this function there is only one statement - a call to the Music.sonifyFormsWithHandlers method, which is responsible for automatically adding the appropriate event handlers to all elements of the form.
+		<BLOCKQUOTE>
+			<IMG SRC="../../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>It's very important that the methods inside the "Music Object Extension - Wizards" module only be called once a document has finished loading in, as calling these methods while a document is still loading may, in some cases, cause unpredictable results.
+		</BLOCKQUOTE>
+		<P>Now, remember the long list of parameters we discussed earlier? This is an example of those parameters in action. Wherever there is a form element event to be sonified you will see a string parameter containing a JavaScript statement that plays a Groovoid through the Music Object instance "formSounds". And wherever a form element event is not to be sonified you will see an empty string.</P>
+		<P>In case you're finding it a little hard to map the parameter values in this method call to the parameters we discussed earlier, consider the following table...</P>
+		<P>
+		<TABLE CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+		<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+		<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+			<TR>
+				<TD CLASS=data-table-column-header>Parameter Name</TD>
+				<TD CLASS=data-table-column-header>Parameter Value</TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>CheckboxCheckJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-Click7")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>CheckboxUncheckJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-Click6")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>RadioButtonClickJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-Click2")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>ListFocusJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-MouseOver1")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>ListChooseJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-SimpleClick2")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>ListBlurJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.stop (300)'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>MultilistFocusJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.stop (300)'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>MultilistChooseJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-SimpleClick2")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>MultilistBlurJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.stop (300)'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>TextboxFocusJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("Background-SimpleTyping")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>TextboxBlurJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-CarriageReturn")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>ButtonClickJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("UI-SimpleClick1")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>FormResetJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("Fanfare-Mars")'</SPAN></TD>
+			</TR>
+			<TR>
+				<TD CLASS=data-table-item><B>FormSubmitJavaScriptSTR</B></TD>
+				<TD CLASS=data-table-item><SPAN CLASS=value>'formSounds.play ("Fanfare-CorpSting1")'</SPAN></TD>
+			</TR>
+		</TABLE>
+		</TD></TR></TABLE>
+		</TD></TR></TABLE>
+		</P>
+	<LI><P><B>A Beatnik Player instance is embedded</B> for the Music Object instance "formSounds" using the <A HREF="../../../music-object-reference/instance-methods.html#stubEmbed" TARGET="_parent"><B>stubEmbed</B></A> method.</P>
+</OL>
+
+<P>Now, if you want to quickly go back and revisit the earlier step <A HREF="button-sounds.html">Adding the Submit and Reset Button Sounds</A>, you may truly come to appreciate the power and convenience of Music Object extensions. Not only is the form sonification using this new approach easier, but it also is far less intrusive in the actual HTML source of your Web pages.</P>
+
+<P>While the <B>Music.sonifyFormsWithHandlers</B> method is convenient, we didn't just stop there. In the next step of this tutorial you'll see how the <B>Music.sonifyFormsWithGroovoids</B> method makes things even easier still...</P>
+
+</BODY></HTML>

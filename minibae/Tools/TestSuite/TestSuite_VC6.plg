@@ -1,0 +1,67 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: TestSuite - Win32 Complete--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP26.tmp" with contents
+[
+/nologo /G5 /MTd /W3 /Gm /GX /Zi /Od /I "..\..\BAE_Source\Platform" /I "..\..\BAE_Source\Common" /I "..\..\..\..\..\Dependencies\Win\DirectX 5 SDK\sdk\inc" /D "BAE_COMPLETE" /D "_DEBUG" /D "WIN32" /D "_CONSOLE" /D "_MBCS" /D X_PLATFORM=X_WIN95 /D LOOPS_USED=LIMITED_LOOPS /D REVERB_USED=REVERB_DISABLED /D USE_DROP_SAMPLE=FALSE /D USE_TERP1=FALSE /D USE_HIGHLEVEL_FILE_API=TRUE /D "BAE_MSG_MSG" /FR"Complete/" /Fp"Complete/TestSuite_VC6.pch" /YX /Fo"Complete/" /Fd"Complete/" /FD /c 
+"D:\Projects\Vesuvio\Core\Igor\MiniBAE\BAE_Source\Common\X_API.c"
+"D:\Projects\Vesuvio\Core\Igor\MiniBAE\BAE_Source\Common\MiniBAE.c"
+"D:\Projects\Vesuvio\Core\Igor\MiniBAE\BAE_Source\Common\SampleTools.c"
+]
+Creating command line "xicl6.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP26.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP27.tmp" with contents
+[
+dxguid.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:no /pdb:"Complete/TestSuite_VC6.pdb" /debug /machine:I386 /out:"Complete/TestSuite_VC6.exe" /pdbtype:sept /libpath:"..\..\..\..\..\Dependencies\Win\DirectX 5 SDK\sdk\lib\\" 
+.\Complete\GenCache.obj
+.\Complete\GenPatch.obj
+.\Complete\GenSample.obj
+.\Complete\GenSong.obj
+.\Complete\X_API.obj
+.\Complete\BAE_API_WinOS.obj
+.\Complete\BAE_API_WinOS_GetDXVer.obj
+.\Complete\BAE_API_WinOS_Thread.obj
+.\Complete\DriverTools.obj
+.\Complete\g711.obj
+.\Complete\g721.obj
+.\Complete\g723_24.obj
+.\Complete\g723_40.obj
+.\Complete\g72x.obj
+.\Complete\GenSoundFiles.obj
+.\Complete\MiniBAE.obj
+.\Complete\NewNewLZSS.obj
+.\Complete\SampleTools.obj
+.\Complete\X_Decompress.obj
+.\Complete\X_IMA.obj
+.\Complete\GenOutputSimple.obj
+.\Complete\GenSeq.obj
+.\Complete\GenSeqTools.obj
+.\Complete\GenSetup.obj
+.\Complete\GenSynth.obj
+.\Complete\GenSynthFiltersSimple.obj
+.\Complete\GenSynthInterp2Simple.obj
+.\Complete\BAEMixerTest.obj
+.\Complete\BAESongTest.obj
+.\Complete\BAESoundTest.obj
+.\Complete\TestSuite.obj
+.\Complete\TestTools.obj
+]
+Creating command line "xilink6.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP27.tmp"
+<h3>Output Window</h3>
+Compiling...
+X_API.c
+MiniBAE.c
+SampleTools.c
+Linking...
+
+
+
+<h3>Results</h3>
+TestSuite_VC6.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

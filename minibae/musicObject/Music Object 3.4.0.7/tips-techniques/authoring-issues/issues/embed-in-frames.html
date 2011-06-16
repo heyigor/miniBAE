@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Issues: Using EMBED in multiple frames</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Using EMBED in multiple frames
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>Sometimes sonified documents that work reliably on their own cease to work reliably when placed together inside a frameset.</P>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>There appears to be a JavaScript plug-in reflection problem when having plug-ins in multiple frames of the same frameset. Sometimes plug-in handles, as defined in the NAME attribute, fail and it is impossible to speak to the plug-in using LiveConnect. When querying Navigator to find the length of the embeds[] array, a value of 2 is sometimes returned for a document which most absolutely only has one instantiated plug-in. In the cases where the reflection fails, the symbolic plug-in handle (as defined in the NAME attribute) returns a value of null. In cases where the reflection succeeds, the result returned is something like "Rmf@400025b8".</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>We've resorted to always only having music content in one frame. This imposes certain unpleasant restrictions on authoring, however, this has proved the only sure way of authoring reliable sonified Web sites that use framesets.</P>
+
+</BODY></HTML>

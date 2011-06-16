@@ -1,0 +1,79 @@
+// My First Test
+// 1/14/2000
+// by Mark Deggeller
+// mark@beatnik.com
+// 
+// to run this script, type:  "testsuite.exe < go.txt"
+
+
+// create mixer
+1
+1
+1 // open mixer 8hz,16bit
+
+// load default patch file
+1
+1
+4
+
+
+////////////////////////////
+// LOAD AND PLAY A MIDI FILE
+////////////////////////////
+
+// create new BAESong object
+3
+2
+1
+0// slot 0
+
+// load rmf file
+3
+2
+34
+0// slot 0
+testMidi1.mid // name of file
+y // ignore bad instruments
+
+// start!
+3
+2
+38
+0 // slot 0
+0 // priority 0
+
+
+/////////////////////////////
+// LOAD AND PLAY AN RMF FILE
+/////////////////////////////
+
+// create new BAESong object
+3
+2
+1
+1 // slot 1
+
+// load rmf file
+3
+2
+36
+1 		// slot 1
+House.rmf 	// name of file
+0 		// song 0
+y 		// ignore bad instruments
+
+// start!
+3
+2
+38
+1 // slot 0
+0 // priority 0
+
+
+// PAUSE
+4
+10 // wait 10 seconds
+
+// quit
+0	// VERY IMPORTANT TO QUIT AT END!!!!!
+

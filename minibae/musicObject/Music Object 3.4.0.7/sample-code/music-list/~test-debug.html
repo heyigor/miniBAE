@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: Music List (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-debug.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+Music.debugToAlert = true;
+Music.debugToJavaConsole = true;
+Music.debugToStatus = true;
+
+music = new Music ();
+blahBlah ();
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5>
+	<TR VALIGN=TOP>
+		<TD ROWSPAN=2>
+			This example demonstrates how you can instruct a Beatnik Player embedded in an HTML page to play music files from a list.
+			<P>A practical application of this technique would be a Web site that allows the user to preview music files before choosing one to download and use in their own Web page. It could also just be a convenient way for a multimedia musician to let visitors listen to showcase compositions - all on just one page. The advantage of instructing the Beatnik Player to play a new file is that the user does not need to leave the preview page, but can keep selecting new files from the list, or read further information on the page as they listen to a file they have chosen. The code is also much easier to author than for a technique that might make use of a frameset.</P>
+			<P>Click on any one of the files in the list to the right. Clicking on one of these links will instruct the player embedded below the list to play the chosen file. Now, take a look at the source for this page and see how simple the code is.</P>
+		</TD>
+		<TD ROWSPAN=2>
+		</TD>
+		<TD>
+			<NOBR>
+			<UL>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/ambient.rmf'); return false">Ambient</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/classical.rmf'); return false">Classical</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/house.rmf'); return false">House</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/jungle.rmf'); return false">Jungle</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/lounge.rmf'); return false">Lounge</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/modern-rock.rmf'); return false">Modern Rock</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/sfx-medley.rmf'); return false">SFX Medley</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/techno.rmf'); return false">Techno</A>
+				<LI><A HREF="javascript://" ONCLICK="music.play ('../../music/trance.rmf'); return false">Trance</A>
+			</UL>
+			</NOBR>
+		</TD>
+	</TR>
+	<TR>
+		<TD><SCRIPT LANGUAGE=JavaScript>music.magicEmbed ('SRC="../../music/stub.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=TRUE VOLUME=100');</SCRIPT></TD>
+	</TR>
+</TABLE>
+<BR>
+
+</BODY>
+</HTML>

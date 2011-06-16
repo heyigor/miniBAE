@@ -1,0 +1,134 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The noteOn, noteOff, and playNote Methods</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-debug.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-wizards.js"></SCRIPT>
+
+<A HREF="javascript://">Some Link 01</A><BR>
+<A HREF="javascript://">Some Link 02</A><BR>
+<A HREF="javascript://" ONCLICK="Music.addLinkLabel ('start of sonified links')">Some Link 03</A> [start]<BR>
+<A HREF="javascript://" ONCLICK="Music.addLinkLabel ('blah1')">Some Link 04</A> (*)<BR>
+<A HREF="javascript://" ONCLICK="Music.addLinkLabel ('blah2')">Some Link 05</A> (*)<BR>
+<A HREF="javascript://">Some Link 06</A><BR>
+<A HREF="javascript://" ONCLICK="Music.addLinkLabel ('blah3')">Some Link 07</A> (*)<BR>
+<A HREF="javascript://">Some Link 08</A><BR>
+<A HREF="javascript://">Some Link 09</A><BR>
+<A HREF="javascript://">Some Link 10</A><BR>
+<A HREF="javascript://" ONCLICK="Music.addLinkLabel ('blah4')">Some Link 11</A> (*)<BR>
+<A HREF="javascript://" ONCLICK="Music.addLinkLabel ('blah5')">Some Link 12</A> (*)<BR>
+<A HREF="javascript://" ONCLICK="Music.addLinkLabel ('end of sonified links')">Some Link 13</A> [end]<BR>
+<A HREF="javascript://">Some Link 14</A><BR>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+groovoidPlayer = new Music ();
+notePlayer = new Music ();
+notePlayer.setMonophonic (0,true);
+
+/*
+Music.sonifyLinksWithGroovoids (
+	groovoidPlayer,
+	'UI-Choice1',
+	'UI-Click2',
+	'',
+	'UI-MouseOver1',
+	500
+);
+*/
+
+/*
+Music.sonifyLinksWithGroovoids (
+	groovoidPlayer,
+	'UI-Choice1',
+	'UI-Click2',
+	'',
+	'UI-MouseOver1',
+	500,
+	'start of sonified links',
+	'end of sonified links',
+	'blah'
+);
+*/
+
+/*
+Music.sonifyLinksWithHandlers (
+	'notePlayer.noteOff (3); notePlayer.playNote (1,1,183,40 - linkNo * 2,127,1000)',
+	'notePlayer.playNote (2,0,191,60 + linkNo * 2,127,1000)',
+	'notePlayer.noteOff (3)',
+	'notePlayer.playNote (3,1,110,55,50,200000)',
+	500
+);
+*/
+
+/*
+Music.sonifyLinksWithHandlers (
+	'notePlayer.noteOff (3); notePlayer.playNote (1,1,183,40 - linkNo * 2,127,1000)',
+	'notePlayer.playNote (2,1,119,60 + linkNo * 2,127,1000)',
+	'notePlayer.noteOff (3)',
+	'notePlayer.playNote (3,1,110,55,50,200000)',
+	500,
+	'start of sonified links',
+	'end of sonified links',
+	'blah'
+);
+*/
+
+Music.sonifyLinksWithHandlers (
+	'notePlayer.noteOff (3); notePlayer.playNote (1,1,183,40 - linkNo * 2,127,1000)',
+	'notePlayer.playNote (2,1,119,60 + linkNo * 2,127,1000)',
+	'notePlayer.noteOff (3)',
+	'notePlayer.playNote (3,1,110,55,50,200000)',
+	500,
+	'end of sonified links',
+	'start of sonified links',
+	'blah'
+);
+
+Music.sonifyLinksWithHandlers (
+	'',
+	'notePlayer.playNote (2,1,211,110,127,1000)',
+	'',
+	'',
+	null,
+	null,
+	null,
+	null,
+	'merge with'
+);
+
+Music.sonifyLinksWithHandlers (
+	'notePlayer.noteOff (4)',
+	'',
+	'notePlayer.noteOff (4)',
+	'notePlayer.playNote (4,1,110,70,50,200000)',
+	1500
+);
+
+Music.sonifyLinksWithHandlers (
+	'notePlayer.noteOff (5)',
+	'',
+	'notePlayer.noteOff (5)',
+	'notePlayer.playNote (5,1,110,78,50,200000)',
+	2500
+);
+
+Music.sonifyLinksWithHandlers (
+	'notePlayer.noteOff (6)',
+	'',
+	'notePlayer.noteOff (6)',
+	'notePlayer.playNote (6,1,110,87,50,200000)',
+	3500
+);
+
+groovoidPlayer.stubEmbed ('../../music/stub.rmf');
+notePlayer.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

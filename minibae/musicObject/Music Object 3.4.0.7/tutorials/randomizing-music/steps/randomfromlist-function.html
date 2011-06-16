@@ -1,0 +1,118 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (The Select-from-a-list approach)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 2: The Select-from-a-list approach
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P ALIGN=CENTER>
+
+<!-- ************************************************************************** -->
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+function randomFromList () {
+	var args = randomFromList.arguments;
+	return (args.length == 0) ? '' : args [Math.round (Math.random () * (args.length - 1))];
+}
+
+fileToPlay = randomFromList (
+	'ambient',
+	'classical',
+	'house',
+	'jungle',
+	'lounge',
+	'modern-rock',
+	'sfx-medley',
+	'techno',
+	'trance'
+);
+
+Music.magicEmbed (
+	'SRC="../../../music/' + fileToPlay + '.rmf" ' +
+	'AUTOSTART=TRUE ' +
+	'DISPLAY=SONG ' +
+	'MODE=INFO ' +
+	'LOOP=FALSE ' +
+	'VOLUME=100'
+);
+
+// --></SCRIPT>
+
+<!-- ************************************************************************** -->
+
+</P>
+
+<P>This example makes use of JavaScript to randomize the music file that is to play when the page is loaded, reloaded, or revisited later. Each time the page loads it will play a file which is randomly selected from a list of available files. There is no "memory" used to store the last file that has played, using Cookies or otherwise, so there is a possibility that the same file might be randomly selected twice in a row.</P>
+
+<P>Try <A HREF="randomfromlist-function.html">loading this page</A> again. You might get a different piece of music. Try this several times.</P>
+
+<P>The select-from-a-list approach makes use of some slightly more advanced JavaScript than the numbered file approach. With this approach you do not need to name the music files in any particular way. All you need to do is create a list of the filenames as they appear in the folder. You then pass this list to the <B>randomFromList</B> function, which then returns a random file from that list. The JavaScript is shown in the source code listing below. Once again, place this JavaScript towards the end of your HTML file, where you'd like the random music file be embedded.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+function randomFromList () {
+   var args = randomFromList.arguments;
+   return (args.length == 0) ? '' : args [Math.round (Math.random () * (args.length - 1))];
+}
+
+fileToPlay = randomFromList (
+<SPAN CLASS=sample-code-highlighted>   'ambient',
+   'classical',
+   'house',
+   'jungle',
+   'lounge',
+   'modern-rock',
+   'sfx-medley',
+   'techno',
+   'trance'</SPAN>
+);
+
+Music.magicEmbed (
+   'SRC="<SPAN CLASS=sample-code-highlighted>music/</SPAN>' + fileToPlay + '<SPAN CLASS=sample-code-highlighted>.rmf</SPAN>" ' +
+   'AUTOSTART=TRUE ' +
+   'DISPLAY=SONG ' +
+   'MODE=INFO ' +
+   'LOOP=FALSE ' +
+   'VOLUME=100'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the above script there are two values which must be substituted, and a comma-separated list which must be supplied by you before using the script. These are all highlighted in red.</P>
+
+<UL>
+	<LI><B>Prefix</B>
+		<P>The part of the filename that is the same at the beginning of all the files you wish to randomize. In our example, we are specifying the folder in which all the music files are located, the folder called "music".</P>
+		<P>However, the prefix doesn't have to be restricted to specifying just the directory path of the files in your list. For instance, if your files were all located in the same folder "music" and were named "mellow-blues.rmf", "mellow-jazz.rmf", "mellow-trance.rmf", etc. then you could specify "<SPAN CLASS=value>music/mellow-</SPAN>" for the prefix.</P>
+	<LI><B>Suffix</B>
+		<P>The part of the filename that is the same at the end of all the files you wish to randomize. In our example, we are specifying the file type of the files we are randomizing, the extension for RMF files ".rmf".</P>
+		<P>You can also use the suffix to specify any amount of the tail end of the filename that is common to all of the files you are randomizing. For instance, if your files were named "blues-mellow.rmf", "jazz-mellow.rmf", "trance-mellow.rmf", etc. then you could specify "<SPAN CLASS=value>-mellow.rmf</SPAN>" for the suffix.</P>
+	<LI><B>List of Files</B>
+		<P>Beyond the prefix and suffix you need to substitute in the <B>magicEmbed</B> statement, there are also the parameters that you need to send to the <B>randomFromList</B> function - the list of music files that you would like to have randomized. The <B>randomFromList</B> function can accept an arbitrarily long list of filenames. Make sure each item in the list is within enclosing quotes, and if any filename contains an apostrophe (single quote) then you should be sure to use double quotes to enclose the filename.</P>
+</UL>
+
+</BODY></HTML>

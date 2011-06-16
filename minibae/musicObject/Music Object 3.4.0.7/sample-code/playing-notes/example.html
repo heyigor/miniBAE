@@ -1,0 +1,258 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: Playing Notes (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+music.setMonophonic (1,true);
+
+// --></SCRIPT>
+
+<CENTER>
+
+<!--********************************************************************
+        Playing notes when the user clicks on hypertext links
+*********************************************************************-->
+
+<SPAN STYLE="font-size: 14pt; font-weight: bold">Playing notes when the user clicks on hypertext links...</SPAN>
+<BR>
+<BR>
+
+<SPAN STYLE="font-size: 16pt">
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'C4',100,1000); return false">
+Do
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'D4',100,1000); return false">
+Re
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'E4',100,1000); return false">
+Mi
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'F4',100,1000); return false">
+Fa
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'G4',100,1000); return false">
+So
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'A4',100,1000); return false">
+La
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'B4',100,1000); return false">
+Ti
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'C5',100,1000); return false">
+Do
+</A>
+</SPAN>
+<BR><IMG SRC="../../style/images/color-gray.gif" WIDTH=100% HEIGHT=1 VSPACE=10><BR>
+
+<!--********************************************************************
+       Playing notes when the user mouses over hypertext links
+*********************************************************************-->
+
+<SPAN STYLE="font-size: 14pt; font-weight: bold">Playing notes when the user mouses over hypertext links...</SPAN>
+<BR>
+<BR>
+
+<SPAN STYLE="font-size: 16pt">
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'C4',100,1000)">
+Do
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'D4',100,1000)">
+Re
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'E4',100,1000)">
+Mi
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'F4',100,1000)">
+Fa
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'G4',100,1000)">
+So
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'A4',100,1000)">
+La
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'B4',100,1000)">
+Ti
+</A>
+ | 
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'C5',100,1000)">
+Do
+</A>
+</SPAN>
+<BR><IMG SRC="../../style/images/color-gray.gif" WIDTH=100% HEIGHT=1 VSPACE=10><BR>
+
+<!--********************************************************************
+          Playing notes when the user clicks on graphics
+*********************************************************************-->
+
+<SPAN STYLE="font-size: 14pt; font-weight: bold">Playing notes when the user clicks on graphics...</SPAN>
+<BR>
+<BR>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'C4',100,1000); return false">
+<IMG SRC="images/do.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Do"></A>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'D4',100,1000); return false">
+<IMG SRC="images/re.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Re"></A>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'E4',100,1000); return false">
+<IMG SRC="images/mi.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Mi"></A>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'F4',100,1000); return false">
+<IMG SRC="images/fa.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Fa"></A>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'G4',100,1000); return false">
+<IMG SRC="images/so.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="So"></A>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'A4',100,1000); return false">
+<IMG SRC="images/la.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="La"></A>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'B4',100,1000); return false">
+<IMG SRC="images/ti.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Ti"></A>
+
+<A HREF="javascript://" ONCLICK="music.playNote (1,0,0,'C5',100,1000); return false">
+<IMG SRC="images/do.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Do"></A>
+<BR><IMG SRC="../../style/images/color-gray.gif" WIDTH=100% HEIGHT=1 VSPACE=10><BR>
+
+<!--********************************************************************
+          Playing notes when the user mouses over graphics
+*********************************************************************-->
+
+<SPAN STYLE="font-size: 14pt; font-weight: bold">Playing notes when the user mouses over graphics...</SPAN>
+<BR>
+<BR>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'C4',100,1000); return false">
+<IMG SRC="images/do.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Do"></A>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'D4',100,1000); return false">
+<IMG SRC="images/re.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Re"></A>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'E4',100,1000); return false">
+<IMG SRC="images/mi.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Mi"></A>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'F4',100,1000); return false">
+<IMG SRC="images/fa.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Fa"></A>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'G4',100,1000); return false">
+<IMG SRC="images/so.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="So"></A>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'A4',100,1000); return false">
+<IMG SRC="images/la.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="La"></A>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'B4',100,1000); return false">
+<IMG SRC="images/ti.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Ti"></A>
+
+<A HREF="javascript://" ONCLICK="return false" ONMOUSEOVER="music.playNote (1,0,0,'C5',100,1000); return false">
+<IMG SRC="images/do.jpg" WIDTH=35 HEIGHT=25 BORDER=0 HSPACE=5 ALT="Do"></A>
+<BR><IMG SRC="../../style/images/color-gray.gif" WIDTH=100% HEIGHT=1 VSPACE=10><BR>
+
+<!--********************************************************************
+          Playing notes when the user clicks on form buttons
+*********************************************************************-->
+
+<SPAN STYLE="font-size: 14pt; font-weight: bold">Playing notes when the user clicks on form buttons...</SPAN>
+<BR>
+<BR>
+
+<FORM>
+<INPUT TYPE=button VALUE=" Do " ONCLICK="music.playNote (1,0,0,'C4',100,1000)">
+ | 
+<INPUT TYPE=button VALUE=" Re " ONCLICK="music.playNote (1,0,0,'D4',100,1000)">
+ | 
+<INPUT TYPE=button VALUE=" Mi " ONCLICK="music.playNote (1,0,0,'E4',100,1000)">
+ | 
+<INPUT TYPE=button VALUE=" Fa " ONCLICK="music.playNote (1,0,0,'F4',100,1000)">
+ | 
+<INPUT TYPE=button VALUE=" So " ONCLICK="music.playNote (1,0,0,'G4',100,1000)">
+ | 
+<INPUT TYPE=button VALUE=" La " ONCLICK="music.playNote (1,0,0,'A4',100,1000)">
+ | 
+<INPUT TYPE=button VALUE=" Ti " ONCLICK="music.playNote (1,0,0,'B4',100,1000)">
+ | 
+<INPUT TYPE=button VALUE=" Do " ONCLICK="music.playNote (1,0,0,'C5',100,1000)">
+</SPAN>
+<IMG SRC="../../style/images/color-gray.gif" WIDTH=100% HEIGHT=1 VSPACE=10><BR>
+
+<!--********************************************************************
+ Playing notes when the user clicks on areas of a client-side image map
+*********************************************************************-->
+
+<MAP NAME="staffClick">
+	<AREA SHAPE=RECT COORDS="53,0,120,74" HREF="javascript:music.playNote (1,0,0,'C4',100,1000)">
+	<AREA SHAPE=RECT COORDS="122,0,184,74" HREF="javascript:music.playNote (1,0,0,'D4',100,1000)">
+	<AREA SHAPE=RECT COORDS="187,0,249,74" HREF="javascript:music.playNote (1,0,0,'E4',100,1000)">
+	<AREA SHAPE=RECT COORDS="251,0,313,74" HREF="javascript:music.playNote (1,0,0,'F4',100,1000)">
+	<AREA SHAPE=RECT COORDS="315,0,377,74" HREF="javascript:music.playNote (1,0,0,'G4',100,1000)">
+	<AREA SHAPE=RECT COORDS="379,0,441,74" HREF="javascript:music.playNote (1,0,0,'A4',100,1000)">
+	<AREA SHAPE=RECT COORDS="443,0,505,74" HREF="javascript:music.playNote (1,0,0,'B4',100,1000)">
+	<AREA SHAPE=RECT COORDS="508,0,569,74" HREF="javascript:music.playNote (1,0,0,'C5',100,1000)">
+</MAP>
+
+<SPAN STYLE="font-size: 14pt; font-weight: bold">Playing notes when the user clicks on areas of a client-side image map...</SPAN>
+<BR>
+<BR>
+
+<IMG SRC="images/staff.jpg" WIDTH=580 HEIGHT=75 BORDER=0 USEMAP="#staffClick">
+<BR><IMG SRC="../../style/images/color-gray.gif" WIDTH=100% HEIGHT=1 VSPACE=10><BR>
+
+<!--********************************************************************
+Playing notes when the user mouses over areas of a client-side image map
+*********************************************************************-->
+
+<MAP NAME="staffOver">
+	<AREA SHAPE=RECT COORDS="53,0,120,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'C4',100,1000)">
+	<AREA SHAPE=RECT COORDS="122,0,184,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'D4',100,1000)">
+	<AREA SHAPE=RECT COORDS="187,0,249,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'E4',100,1000)">
+	<AREA SHAPE=RECT COORDS="251,0,313,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'F4',100,1000)">
+	<AREA SHAPE=RECT COORDS="315,0,377,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'G4',100,1000)">
+	<AREA SHAPE=RECT COORDS="379,0,441,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'A4',100,1000)">
+	<AREA SHAPE=RECT COORDS="443,0,505,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'B4',100,1000)">
+	<AREA SHAPE=RECT COORDS="508,0,569,74" HREF="javascript://" ONMOUSEOVER="music.playNote (1,0,0,'C5',100,1000)">
+</MAP>
+
+<SPAN STYLE="font-size: 14pt; font-weight: bold">Playing notes when the user mouses over areas of a client-side image map</SPAN>
+<BR>
+<BR>
+
+<IMG SRC="images/staff.jpg" WIDTH=580 HEIGHT=75 BORDER=0 USEMAP="#staffOver">
+
+</CENTER>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

@@ -1,0 +1,164 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: The Mixer (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-debug.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-tracing.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/library-widgets.js"></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript"><!-- //
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+function mixer () {}
+
+function sendController (channelNo) {
+	music.setController (channelNo,currentController,mixer [channelNo].value);
+}
+
+function changeController () {
+	var controllerName = document.fileForm.controller.options [document.fileForm.controller.selectedIndex].text;
+	if (controllerName != currentControllerName) {
+		if (controllerName == 'Channel Volume') currentController = 7
+			else if (controllerName == 'Channel Pan') currentController = 10
+			else if (controllerName == 'Modulation') currentController = 1
+			else if (controllerName == 'Reverb Level') currentController = 91;
+		currentControllerName = controllerName;
+		initialiseSliders ();
+	}
+}
+
+function initialiseMuteSoloBoxes () {
+	for (var channelNo = 1; channelNo <= 16; channelNo++) {
+		document.mixerForm ['mute' + channelNo].checked = music.getChannelMute (channelNo);
+		document.mixerForm ['solo' + channelNo].checked = music.getChannelSolo (channelNo);
+	}
+}
+
+function muteChannel (channelNo) {
+	music.setChannelMute (channelNo,document.mixerForm ['mute' + channelNo].checked);
+}
+
+function soloChannel (channelNo) {
+	music.setChannelSolo (channelNo,document.mixerForm ['solo' + channelNo].checked);
+}
+
+function initialiseSliders () {
+	for (var channelNo = 1; channelNo <= 16; channelNo++)
+		mixer [channelNo].setValue (music.getController (channelNo,currentController))
+	;
+}
+
+function updateSliders () {
+	if (liveUpdate) initialiseSliders ();
+	setTimeout ('updateSliders ()',300);
+}
+
+function initialiseMixer () {
+	if (music.ready) {
+		initialiseSliders ();
+		initialiseMuteSoloBoxes ();
+		updateSliders ();
+	} else {
+		setTimeout ('initialiseMixer ()',500);
+	}
+}
+
+function changeFile () {
+	currentFile = document.fileForm.fileList.options [document.fileForm.fileList.selectedIndex].text;
+	music.play (true,baseURL + '../../music/' + currentFile);
+	initialiseMixer ();
+}
+
+function toggleLiveUpdate () {
+	liveUpdate= !liveUpdate;
+}
+
+music = new Music ();
+music.onReady (initialiseMixer);
+
+fileList = new Array ('ambient.rmf','classical.rmf','house.rmf','jungle.rmf','lounge.rmf','modern-rock.rmf','sfx-medley.rmf','techno.rmf','trance.rmf');
+currentFile = fileList [0];
+currentFocus = null;
+currentControllerName = 'Volume';
+currentController = 7;
+liveUpdate = false;
+
+document.writeln (
+	'<BR><BR><CENTER>' +
+	'<TABLE CELLSPACING=0 CELLPADDING=3 BORDER=0>' +
+	'<TR ALIGN=CENTER>' +
+	'<TD></TD>'
+);
+for (var channelNo = 1; channelNo <= 16; channelNo++) {
+	document.writeln ('<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>');
+	mixer [channelNo] = new Slider ('mixerSlider' + channelNo,'sendController (' + channelNo + ')',0,127,127,12,20,15,5,'../../images/slider/');
+	document.writeln (
+		'</TD></TR>' +
+		'<TR><TD><TABLE BORDER=2 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR><TD BGCOLOR=444444 ALIGN=CENTER><A HREF="javascript://" ONCLICK="mixer [' + channelNo + '].focus (); return false"><FONT COLOR=FFFFFF><B>' + channelNo  + '</B></FONT></A></TD></TR></TABLE></TD></TR>' +
+		'</TD></TR></TABLE>'
+	);
+}
+document.writeln (
+	'</TR>' +
+	'<FORM NAME="mixerForm">' +
+	'<TR ALIGN=CENTER>' +
+	'<TD>mute</TD>'
+);
+for (var channelNo = 1; channelNo <= 16; channelNo++)
+	document.writeln ('<TD><INPUT TYPE=checkbox NAME="mute' + channelNo + '" ONCLICK="muteChannel (' + channelNo + ')"></TD>')
+;
+document.writeln (
+	'</TR>' +
+	'<TR ALIGN=CENTER>' +
+	'<TD>solo</TD>'
+);
+for (var channelNo = 1; channelNo <= 16; channelNo++)
+	document.writeln ('<TD><INPUT TYPE=checkbox NAME="solo' + channelNo + '" ONCLICK="soloChannel (' + channelNo + ')"></TD>')
+;
+document.writeln (
+	'</TR>' +
+	'</FORM>' +
+	'</TABLE>' +
+	'<BR>' +
+	'<FORM NAME="fileForm">' +
+	'Select music&nbsp;' +
+	'<SELECT NAME="fileList" ONCHANGE="changeFile ()">'
+);
+for (var fileNo = 1; fileNo <= fileList.length; fileNo++)
+	document.writeln ('<OPTION>' + fileList [fileNo - 1])
+;
+document.writeln (
+	'</SELECT>' +
+	'&nbsp;&nbsp;&nbsp;Channel Controller&nbsp;' +
+	'<SELECT NAME="controller" ONCHANGE="changeController ()">' +
+	'<OPTION>Channel Volume' +
+	'<OPTION>Channel Pan' +
+	'<OPTION>Modulation' +
+	'<OPTION>Reverb Level' +
+	'</SELECT>' +
+	'&nbsp;&nbsp;&nbsp;Live Updating&nbsp;' +
+	'<INPUT TYPE="checkbox" NAME="liveUpdate" ONCLICK="toggleLiveUpdate ()">' +
+	'</FORM>'
+);
+music.magicEmbed ('SRC="../../music/ambient.rmf" AUTOSTART=TRUE LOOP=TRUE VOLUME=100 HIDDEN WIDTH=0 HEIGHT=0');
+document.writeln ('</CENTER>');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

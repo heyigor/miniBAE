@@ -1,0 +1,187 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The setTracksMute and setTracksSolo Methods</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+DEMO: The setTracksMute and setTracksSolo Methods
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-groups.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+
+// --></SCRIPT>
+
+<P>The <A HREF="../../music-object-reference/extensions/groups/index.html#setTracksMute" TARGET="_parent"><B>setTracksMute</B></A> and <A HREF="../../music-object-reference/extensions/groups/index.html#setTracksSolo" TARGET="_parent"><B>setTracksSolo</B></A> methods, which are contained inside <A HREF="../../music-object-reference/extensions/groups/index.html" TARGET="_parent">Music Object Extension - Groups</A>, offer the ability to conveniently mute and solo multiple tracks of an RMF or MIDI file at a time, in one simple operation. This straightforward example will show how combinations of different musical parts of the song Hyperactive can easily be muted and unmuted, or soloed and unsoloed. Click on the various JavaScript statements below to see the effects they have on the music that's playing...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR VALIGN=CENTER ALIGN=CENTER>
+		<TD CLASS=data-table-column-subheader ROWSPAN=7><B>&nbsp;Solo&nbsp;</B></TD>
+		<TD CLASS=data-table-column-header>Lead</TD>
+		<TD CLASS=data-table-column-header>Bass</TD>
+		<TD CLASS=data-table-column-header>Rhythm</TD>
+		<TD CLASS=data-table-column-header>Beat</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7',true); return false">setTracksSolo&nbsp;('6,7',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7',false); return false">setTracksSolo&nbsp;('6,7',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7','Toggle'); return false">setTracksSolo&nbsp;('6,7','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2',true); return false">setTracksSolo&nbsp;('1,2',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2',false); return false">setTracksSolo&nbsp;('1,2',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2','Toggle'); return false">setTracksSolo&nbsp;('1,2','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo (4,true); return false">setTracksSolo&nbsp;(4,true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo (4,false); return false">setTracksSolo&nbsp;(4,false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo (4,'Toggle'); return false">setTracksSolo&nbsp;(4,'Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('3,10',true); return false">setTracksSolo&nbsp;('3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('3,10',false); return false">setTracksSolo&nbsp;('3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('3,10','Toggle'); return false">setTracksSolo&nbsp;('3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini COLSPAN=2>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2',true); return false">setTracksSolo&nbsp;('6,7,1,2',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2',false); return false">setTracksSolo&nbsp;('6,7,1,2',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2','Toggle'); return false">setTracksSolo&nbsp;('6,7,1,2','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini COLSPAN=2>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('4,3,10',true); return false">setTracksSolo&nbsp;('4,3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('4,3,10',false); return false">setTracksSolo&nbsp;('4,3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('4,3,10','Toggle'); return false">setTracksSolo&nbsp;('4,3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+		<TD CLASS=data-table-item-mini COLSPAN=2>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2,4',true); return false">setTracksSolo&nbsp;('1,2,4',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2,4',false); return false">setTracksSolo&nbsp;('1,2,4',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2,4','Toggle'); return false">setTracksSolo&nbsp;('1,2,4','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini COLSPAN=3>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2,4',true); return false">setTracksSolo&nbsp;('6,7,1,2,4',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2,4',false); return false">setTracksSolo&nbsp;('6,7,1,2,4',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2,4','Toggle'); return false">setTracksSolo&nbsp;('6,7,1,2,4','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+		<TD CLASS=data-table-item-mini COLSPAN=3>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2,4,3,10',true); return false">setTracksSolo&nbsp;('1,2,4,3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2,4,3,10',false); return false">setTracksSolo&nbsp;('1,2,4,3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('1,2,4,3,10','Toggle'); return false">setTracksSolo&nbsp;('1,2,4,3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini COLSPAN=4>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2,4,3,10',true); return false">setTracksSolo&nbsp;('6,7,1,2,4,3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2,4,3,10',false); return false">setTracksSolo&nbsp;('6,7,1,2,4,3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksSolo ('6,7,1,2,4,3,10','Toggle'); return false">setTracksSolo&nbsp;('6,7,1,2,4,3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+	<TR VALIGN=CENTER ALIGN=CENTER>
+		<TD CLASS=data-table-column-subheader ROWSPAN=7><B>&nbsp;Mute&nbsp;</B></TD>
+		<TD CLASS=data-table-column-header>Lead</TD>
+		<TD CLASS=data-table-column-header>Bass</TD>
+		<TD CLASS=data-table-column-header>Rhythm</TD>
+		<TD CLASS=data-table-column-header>Beat</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7',true); return false">setTracksMute&nbsp;('6,7',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7',false); return false">setTracksMute&nbsp;('6,7',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7','Toggle'); return false">setTracksMute&nbsp;('6,7','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2',true); return false">setTracksMute&nbsp;('1,2',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2',false); return false">setTracksMute&nbsp;('1,2',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2','Toggle'); return false">setTracksMute&nbsp;('1,2','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute (4,true); return false">setTracksMute&nbsp;(4,true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute (4,false); return false">setTracksMute&nbsp;(4,false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute (4,'Toggle'); return false">setTracksMute&nbsp;(4,'Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('3,10',true); return false">setTracksMute&nbsp;('3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('3,10',false); return false">setTracksMute&nbsp;('3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('3,10','Toggle'); return false">setTracksMute&nbsp;('3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini COLSPAN=2>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2',true); return false">setTracksMute&nbsp;('6,7,1,2',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2',false); return false">setTracksMute&nbsp;('6,7,1,2',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2','Toggle'); return false">setTracksMute&nbsp;('6,7,1,2','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini COLSPAN=2>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('4,3,10',true); return false">setTracksMute&nbsp;('4,3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('4,3,10',false); return false">setTracksMute&nbsp;('4,3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('4,3,10','Toggle'); return false">setTracksMute&nbsp;('4,3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+		<TD CLASS=data-table-item-mini COLSPAN=2>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2,4',true); return false">setTracksMute&nbsp;('1,2,4',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2,4',false); return false">setTracksMute&nbsp;('1,2,4',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2,4','Toggle'); return false">setTracksMute&nbsp;('1,2,4','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini COLSPAN=3>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2,4',true); return false">setTracksMute&nbsp;('6,7,1,2,4',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2,4',false); return false">setTracksMute&nbsp;('6,7,1,2,4',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2,4','Toggle'); return false">setTracksMute&nbsp;('6,7,1,2,4','Toggle')</A><BR>
+		</TD>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini>&nbsp;</TD>
+		<TD CLASS=data-table-item-mini COLSPAN=3>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2,4,3,10',true); return false">setTracksMute&nbsp;('1,2,4,3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2,4,3,10',false); return false">setTracksMute&nbsp;('1,2,4,3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('1,2,4,3,10','Toggle'); return false">setTracksMute&nbsp;('1,2,4,3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-mini COLSPAN=4>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2,4,3,10',true); return false">setTracksMute&nbsp;('6,7,1,2,4,3,10',true)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2,4,3,10',false); return false">setTracksMute&nbsp;('6,7,1,2,4,3,10',false)</A><BR>
+			<A HREF="javascript://" ONCLICK="music.setTracksMute ('6,7,1,2,4,3,10','Toggle'); return false">setTracksMute&nbsp;('6,7,1,2,4,3,10','Toggle')</A><BR>
+		</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music.stubEmbed ('../../music/hyperactive.rmf');
+
+// --></SCRIPT>
+
+</BODY></HTML>

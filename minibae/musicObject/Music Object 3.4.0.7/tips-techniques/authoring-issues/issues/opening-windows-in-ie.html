@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Issues: Opening Sonified Windows in IE</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Opening Sonified Windows in IE
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>A problem was identified with versions of the Beatnik Player earlier than 2.1, for Microsoft Internet Explorer on Windows. This problem could result in a freeze of the browser with specific content under specific conditions.</P>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>Under certain circumstances, closing a window that contains content sonified using a version of the Beatnik Player earlier than 2.1 in Microsoft Internet Explorer can leave the browser in a "frozen" state where it does not respond to any user interaction. The application does not crash, but remains open in an unresponsive state. In such cases, it is usually not possible to force the application to close and it is often necessary to reboot the system in order to once again get Internet Explorer into a usable state.</P>
+
+<DIV CLASS=subsection>Severity</DIV>
+
+<P>Because the problem can leave the user's browser in a state where it is unusuable and may, in some cases, require the user to reboot their system, this problem should be considered very serious.</P>
+
+<P>That said, however, the following points should be considered...</P>
+
+<UL>
+	<LI>The problem has not been known to lock up or cause crashes in any other running applications, and these applications continue to function normally. Also, no data loss or file corruption has been known to occur as a result of this freeze in Internet Explorer.
+	<LI>The problem only occurs if the version of the Beatnik Player installed is earlier than 2.1, since the problem was fixed at version 2.1.
+	<LI>The problem seems to not occur if the opener window contains at least one player instance. A player instance could be embedded as a result of sonification using the Music Object API, just sourcing in the "music-object.js" file, or even just a plain old <B>OBJECT</B> or <B>EMBED</B> tag.
+	<LI>The problem seems to only occur for Beatnik-sonified windows that are spawned using the JavaScript <B>window.open</B> method, and does not seem to occur for sonified windows that are opened by the user through file menu or contextual menu options (or other means).
+</UL>
+
+<DIV CLASS=subsection>Cause</DIV>
+
+<P>The problem was determined to be related to Microsoft's OLE (Object Linking and Embedding) architecture and the specific way in which the Beatnik Player (earlier than 2.1) was using it. Apparently, the player was not correctly uninitializing OLE at the time of destruction of the player code module. The exact manner in which this was causing the "freeze" symtpoms in the browser is not known, and seems to be deeply hidden within the mysteries of OLE's internal architecture.</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>If your sonified content is not being opened up in a new window using the JavaScript <B>window.open</B> method, then you may not have to worry about this problem and no code modifications may be required. However, if at any point you wish to spawn sonified windows from unsonified windows, then you will have to follow the guidelines below...</P>
+
+<P>Because of the very specific conditions required for reproducing this problem, there are two ways that you can reliably work around it...</P>
+
+<UL>
+	<LI><B>Sonify the Opener Window</B>
+		<P>Because the problem does not occur when a sonified window is opened from another sonified window, the easiest way to avoid the problem is to just make sure that the launch page for your sonified window is itself sonified. The sonification of the launch page does not need to be elaborate, and may just involve user interface sound effects, or a simple non-looping arrival cue for the page.</P>
+	<LI><B>Just Source in the "music-object.js" File in the Opener Window</B>
+		<P>In Microsoft Internet Explorer on Windows, the Music Object API always creates a dummy player instance in order to determine the version of the player that is installed - even when no other instances are created for sonification. This satisfies the requirement that the opener window contain at least one player instance, in order to avoid the problem. So, it is not even really necessary to sonify the launch page in order to avoid the browser freeze. All that is needed is to source the "music-object.js" file into the launch page in the opener window.</P>
+</UL>
+
+</BODY></HTML>

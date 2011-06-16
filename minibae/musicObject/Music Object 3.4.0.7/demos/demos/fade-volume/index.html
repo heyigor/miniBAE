@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The fadeVolume Method (body)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+DEMO: The fadeVolume Method
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>The basic form of the <A HREF="../../../music-object-reference/instance-methods.html#fadeVolume" TARGET="_parent"><B>fadeVolume</B></A> method takes five parameters...</P>
+
+<UL>
+	<LI>StartVolume0to100
+	<LI>EndVolume0to100
+	<LI>FadeTimeMsINT
+	<LI>FadeEndCallback
+	<LI>FadeStepCallback
+</UL>
+
+<P>This demonstration use a variation of the <B>fadeVolume</B> method that only takes the first three of the parameters listed above. In addition, it uses the value <SPAN CLASS=value>null</SPAN> for the <B>StartVolumeLevel</B> parameter to indicate that all fades should always start at the player's current volume setting.</P>
+
+<P>Using the grid further below (may still be loading in), you can select any combination of destination volume level and fade time to get a feel for how the fadeVolume method can achieve any number of different fade effects, including...</P>
+
+<UL>
+	<LI>fading in a song over several seconds
+	<LI>fading out a song over several seconds
+	<LI>fading in a song very quickly (eg. half a second)
+	<LI>fading out a song very quickly (eg. half a second)
+	<LI>gently bumping up the volume, using a short fade (eg. 100ms)
+	<LI>gently bumping down the volume, using a short fade (eg. 100ms)
+</UL>
+
+<P>On the grid, destination volume is represented by the vertical axis, and fade time is represented by the horizontal axis. At all times while moving the mouse inside the grid, the "Volume" and "Fade Time (ms)" value display boxes will be updated to reflect the values represented by your current position in the grid.</P>
+
+<P>When you find a desired combination of values, simply click on your exact position on the grid to initiate the fade. You can then move your position inside the grid without it affecting the fade that is in progress. You can initiate another fade even while a fade is still in progress. This has the effect of overriding the current fade and starting a new fade from the player's current volume setting. This demonstrates the real behavior of the <B>fadeVolume</B> method when used in scripting.</P>
+
+<CENTER>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/object-matrix.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music= new Music ();
+
+function initiateFade (fadeTime,toVolume) {
+	window.status = '*** fade begins ***';
+	music.fadeVolume (null,toVolume,fadeTime,'window.status = \'*** fade ends ***\'','window.status = \'*** OUTPUT VOLUME *** \' + music.getOutputVolume ()');
+}
+
+new Matrix (
+	'fadeMatrix',
+	'Fade Time (ms)','Volume',
+	true,true,
+	0,8000,
+	0,100,
+	300,300,
+	20,20,
+	initiateFade
+);
+
+fadeMatrix.generate ();
+
+music.magicEmbed ('SRC="../../../music/hyperactive.rmf" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE LOOP=TRUE VOLUME=100');
+
+// --></SCRIPT>
+
+</CENTER>
+
+</BODY>
+</HTML>

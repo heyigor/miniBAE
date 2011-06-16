@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+	<TITLE>Version History: Music Object Extension - Debug (version 1.1.0)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Debug (version 1.1.0)<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 2000-12-28</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>UPDATE - Music Object 3.3.0 Compatibility&nbsp;<IMG SRC="../../../../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=ABSMIDDLE></DIV>
+
+<BLOCKQUOTE>
+	Changes have been made in this version of this extension to allow it to work correctly with version 3.3.0 of the core Music Object API. To avoid compatibility problems, this version of this extension should not be used with Music Object versions earlier than 3.3.0.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Smaller File Size</DIV>
+
+<BLOCKQUOTE>
+	This version of this extension has been modified as necessary in order to reduce the size of its JavaScript file using Beatnik's proprietary code "scrunching" process (see the section <A HREF="../../../../version-history/index.html?versions/version-3.3.0.html^api/general-improvements/smaller-javascript-files" TARGET="_parent">Smaller Size JavaScript Files</A> in the version history entry for Music Object 3.3.0).
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>WORKAROUND - Bug in Netscape 6</DIV>
+
+<BLOCKQUOTE>
+	<P>With the initial release of Netscape 6, a problem was discovered that affects error handling. The Debug extension registers a handler for errors by setting the <B>window.onerror</B> property. The function that is registered as the error handler is called each time an error occurs, with parameters being passed to indicate the type of error that occurred, the file that it occurred in, and the specific line number where it occurred.</P>
+	<P>The bug with Netscape 6 results in useless information being passed to an error handler function, so this kind of error handling is of no value. What's more, if the Debug extension were to catch errors in Netscape 6, then these errors would not get reported to the browser's JavaScript console - one place where useful information is actually displayed. So, as a result of this bug in Netscape 6, it was decided to add some conditional logic to the Debug extension so that an error handler is not registered for this browser. To debug code in Netscape 6, simply pop open the convenient JavaScript console.</P>
+</BLOCKQUOTE>
+
+</BODY></HTML>
