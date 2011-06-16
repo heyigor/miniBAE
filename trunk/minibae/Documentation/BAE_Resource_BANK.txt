@@ -1,5 +1,0 @@
-BANK resource map
-
-DLNG	version
-CSTR	bank URL
-CSTR	bank name
