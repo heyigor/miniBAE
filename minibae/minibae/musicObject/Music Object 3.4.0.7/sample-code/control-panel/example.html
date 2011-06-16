@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: Custom Control Panel (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/library-widgets.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+function musicPlays () {
+	if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-up.gif';
+	lastState = 'play';
+	if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-down.gif';
+}
+
+function musicPauses () {
+	if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-up.gif';
+	lastState = 'pause';
+	if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-down.gif';
+}
+
+function musicStops () {
+	if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-up.gif';
+	lastState = 'stop';
+}
+
+function changeFile () {
+	music.stop ();
+	music.setAutostart (true);
+	var
+		selectHandle = document.fileForm.fileList,
+		currentFile = selectHandle.options [selectHandle.selectedIndex].text
+	;
+	music.play (true,'../../music/' + currentFile + '.rmf');
+}
+
+function volumeFromSlider () {music.setVolume (volumeSlider.value)}
+
+music = new Music ();
+music.onPlay (musicPlays);
+music.onStop (musicStops);
+music.onPause (musicPauses);
+
+lastState = 'stop';
+
+document.writeln (
+	'<TABLE ALIGN=CENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="888888"><TR><TD>' +
+	'<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 BGCOLOR="223344">' +
+	'<TR>' +
+	'<TD BGCOLOR="223344" COLSPAN=3 ALIGN=CENTER>' +
+	'<FORM NAME="fileForm">' +
+	'<SELECT NAME="fileList" ONCHANGE="changeFile ()" ONFOCUS="volumeSlider.blur ()">' +
+	'<OPTION>ambient' +
+	'<OPTION>classical' +
+	'<OPTION>house' +
+	'<OPTION>jungle' +
+	'<OPTION>lounge' +
+	'<OPTION>modern-rock' +
+	'<OPTION>sfx-medley' +
+	'<OPTION>techno' +
+	'<OPTION>trance' +
+	'</SELECT>' +
+	'</FORM>' +
+	'</TD>' +
+	'<TD ROWSPAN=3>'
+);
+new Slider ('volumeSlider','volumeFromSlider ()',0,100,100,10,12,8,5,'../../images/slider/');
+document.writeln (
+	'</TD>' +
+	'</TR>' +
+	'<TR>' +
+	'<TD ALIGN=CENTER><A HREF="javascript://" ONCLICK="music.stop (); return false"><IMG SRC="buttons/stop-up.gif" ALT="stop" WIDTH=35 HEIGHT=24 BORDER=0 NAME="img_stop"></A></TD>' +
+	'<TD ALIGN=CENTER><A HREF="javascript://" ONCLICK="music.play (); return false"><IMG SRC="buttons/play-up.gif" ALT="play" WIDTH=35 HEIGHT=24 BORDER=0 NAME="img_play"></A></TD>' +
+	'<TD ALIGN=CENTER><A HREF="javascript://" ONCLICK="music.pause (); return false"><IMG SRC="buttons/pause-up.gif" ALT="pause" WIDTH=35 HEIGHT=24 BORDER=0 NAME="img_pause"></A></TD>' +
+	'</TR>' +
+	'</TABLE>' +
+	'</TD></TR></TABLE>'
+);
+
+music.magicEmbed ('SRC="../../music/ambient.rmf" AUTOSTART=FALSE LOOP=TRUE VOLUME=100 HIDDEN WIDTH=0 HEIGHT=0');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

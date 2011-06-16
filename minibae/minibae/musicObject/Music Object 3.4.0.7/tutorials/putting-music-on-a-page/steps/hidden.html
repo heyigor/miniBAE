@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Music You Cannot See)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 8: Music You Cannot See
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>There's an old-fashioned expression that my grandparents sometimes used to use: "Children are meant to be seen and not heard." Well, you could turn that right upside down when it comes to music. It may often happen that you are authoring a Web page where you do not wish any funky music control panel to upset the carefully designed graphic layout of the page. You essentially want the music soundtrack to be an accompaniment to the page's layout, but not intrude in any way. You can achieve this by using the following syntax:</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="trance.rmf"
+   TYPE="audio/rmf"
+<SPAN CLASS=sample-code-highlighted>   HIDDEN
+   WIDTH=0
+   HEIGHT=0
+   AUTOSTART=TRUE</SPAN>
+   LOOP=FALSE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>By adding the HIDDEN attribute into the EMBED tag, the Beatnik Player knows not to display its control panel. You can essentially have music, but not know where it is coming from. However, when you use the HIDDEN attribute you still need to pay attention to the WIDTH and HEIGHT attributes. It is always absolutely essential to specify values for these attributes. When you want to hide the music on a page, you should specify a value of 0 for both the WIDTH and HEIGHT attributes. Don't assume that just because the control panel is hidden that you can leave the width set to 144 and the height set to 60. The browser will still allocate the amount of space in the layout that is specified by the WIDTH and HEIGHT attributes, even if the control panel is hidden.</P>
+
+<P>Finally, because there will now be no control panel visible to the user (and thus no way for them to stop or start the music), you will want to specify a value of TRUE for the AUTOSTART attribute so that the music starts playing immediately once the file has loaded in. Otherwise, the user would never be able to start the music and, indeed, wouldn't even have any clue that there is actually music to be started.</P>
+
+<EMBED
+	SRC="../../../music/trance.rmf"
+	TYPE="audio/rmf"
+	HIDDEN
+	WIDTH=0
+	HEIGHT=0
+	AUTOSTART=TRUE
+	LOOP=FALSE
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+>
+
+</BODY></HTML>

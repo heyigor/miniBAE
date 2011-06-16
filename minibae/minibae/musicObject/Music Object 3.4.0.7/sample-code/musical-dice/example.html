@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: The Musical Dice (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-dynamic.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+diceFrame = new Array ();
+
+function checkMediaLoaded () {
+	allMediaLoaded = true;
+	for (var frameNo = 1; frameNo <= totalFrames && allMediaLoaded; frameNo++)
+		allMediaLoaded = allMediaLoaded && diceFrame [frameNo].complete
+	;
+	if (!allMediaLoaded) {
+		setTimeout ('checkMediaLoaded ()',1000);
+	} else {
+		currentFrame = (currentGenre - 1) * genreFrames + 1;
+	}
+}
+
+function spinTheDice () {
+	if (allMediaLoaded && !animating) {
+		lastGenre = currentGenre;
+		currentGenre = randomGenre.next ();
+		genreSkips = currentGenre - lastGenre;
+		if (genreSkips < 1) genreSkips += genres.length;
+		if (genreSkips < genres.length / 2) genreSkips += genres.length;
+		framesToAnimate = genreSkips * genreFrames;
+		framesAnimated = 0;
+		animating = true;
+		delay = 10;
+	}
+}
+
+function updateAnimation () {
+	if (animating && allMediaLoaded) {
+		currentFrame++;
+		framesAnimated++;
+		if (currentFrame > totalFrames) currentFrame = 1;
+		document.dice.src = diceFrame [currentFrame].src;
+		delay = delay * 1.1;
+		if (framesAnimated == framesToAnimate) {
+			fileToPlay = baseURL + 'music/' + genres [currentGenre - 1] + '-' + currentSet + '.rmf';
+			music.play (true,fileToPlay);
+			animating = false;
+		}
+	}
+	setTimeout ('updateAnimation ()',delay);
+}
+
+music = new Music ();
+ui = new Music ();
+
+genres = new Array ('techno','ambient','funky','classical','trance');
+totalMusicSets = 3;
+totalGenres = genres.length;
+
+today = new Date ();
+msPerDay = 24 * 60 * 60 * 1000;
+currentSet = (Math.round (today.getTime () / msPerDay) % totalMusicSets) + 1;
+
+randomGenre = new Music.Shuffler (5);
+currentGenre = randomGenre.next ();
+
+allMediaLoaded = false;
+animating = false;
+lastGenre = 0;
+currentGenre = 1;
+currentFrame = 1;
+framesAnimated = 0;
+framesToAnimate = 0;
+delay = 1;
+genreFrames = 6;
+totalFrames = genreFrames * genres.length;
+
+for (var frameNo = 1; frameNo <= totalFrames; frameNo++) {
+	diceFrame [frameNo] = new Image (90,90);
+	diceFrame [frameNo].src = baseURL + 'dice/frame' + frameNo + '.gif';
+}
+
+checkMediaLoaded ();
+
+document.writeln (
+	'<BR><BR>' +
+	'<CENTER>' +
+	'<TABLE WIDTH=90% CELLSPACING=0 CELLPADDING=4 BORDER=0>' +
+	'<TR>' +
+	'<TD ROWSPAN=2 ALIGN=LEFT WIDTH=15% BGCOLOR=CCCCCC>&nbsp;</TD>' +
+	'<TD ALIGN=LEFT BGCOLOR=CCCCCC><FONT SIZE=5 COLOR=880000>Roll the Dice</FONT></TD>' +
+	'</TR>' +
+	'<TR>' +
+	'<TD BGCOLOR=DDDDDD>' +
+	'<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=12>' +
+	'<TR>' +
+	'<TD>' +
+	'<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0><TR><TD BGCOLOR=000000><A HREF="javascript://" ONCLICK="spinTheDice (); return false"><IMG SRC="' + diceFrame [currentFrame].src + '" NAME="dice" WIDTH=90 HEIGHT=90 BORDER=0 VSPACE=0 HSPACE=0></A></TD></TR></TABLE>' +
+	'</TD><TD>' +
+	'Take a gamble. Click on the musical dice to select music for your listening pleasure as you browse around the Beatnik Web site. Each face has a unique musical genre, and whichever face the dice lands on will decide the style of music you listen to.' +
+	'</TD><TD>'
+);
+ui.magicEmbed ('SRC="../../music/stub.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SYSTEM PANEL=SCOPE AUTOSTART=FALSE LOOP=TRUE VOLUME=100');
+document.writeln (
+	'</TD>' +
+	'</TR>' +
+	'</TABLE>' +
+	'</TD>' +
+	'</TR>' +
+	'</TABLE>' +
+	'</CENTER>'
+);
+
+updateAnimation ();
+
+music.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

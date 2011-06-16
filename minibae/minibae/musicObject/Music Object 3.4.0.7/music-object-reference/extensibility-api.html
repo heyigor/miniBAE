@@ -1,0 +1,2240 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extensibility API</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extensibility API
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#intro">Introduction</A>
+			<LI><A HREF="#template">An Extension Template</A>
+			<LI><A HREF="#reference">Extensibility API Reference</A>
+			<LI><A HREF="#divisions">How Extensibility API Features are Divided Between the Core Components</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="intro"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Introduction
+</TD></TR></TABLE>
+<BR>
+
+<P>Starting from version 3.1, the Music Object API has offered additional functionality in the form of optional <A HREF="extensions/intro.html">Music Object extensions</A>. With the release of version 3.3, the API (Application Programming Interface) for writing these extensions became official and public. This section explains the architecture upon which Music Object extensions, language modules, and patches are based and includes a reference to all the methods and properties of the extensibility API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="template"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+An Extension Template
+</TD></TR></TABLE>
+<BR>
+
+<P>The following sample code listing provides a template that can be used as a starting point for creating your own custom Music Object extensions...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+/**********
+     TITLE: Music Object Extension - <SPAN CLASS=sample-code-highlighted>MyExtensionName</SPAN>
+   VERSION: <SPAN CLASS=sample-code-highlighted>1.0.0</SPAN>
+    AUTHOR: <SPAN CLASS=sample-code-highlighted>Whoever I Am</SPAN>
+ COPYRIGHT: <SPAN CLASS=sample-code-highlighted>1999 MyCompany, Inc. All Rights Reserved</SPAN>
+  REQUIRES: music-object.js (3.2.0 or higher)
+**********/
+
+function mo_<SPAN CLASS=sample-code-highlighted>myInstanceMethod</SPAN> (<SPAN CLASS=sample-code-highlighted>someParam1,someParam2,someParamN</SPAN>) {
+   <SPAN CLASS=sample-code-highlighted>// some code to implement this instance method</SPAN>
+}
+
+function mo_<SPAN CLASS=sample-code-highlighted>myStaticMethod</SPAN> (<SPAN CLASS=sample-code-highlighted>someParam1,someParam2,someParamN</SPAN>) {
+   <SPAN CLASS=sample-code-highlighted>// some code to implement this static method</SPAN>
+}
+
+/*** Instance Extenders ***/
+
+function mo_<SPAN CLASS=sample-code-highlighted>addMyExtensionInstanceProperties</SPAN> (ID) {
+   ID.<SPAN CLASS=sample-code-highlighted>myExtensionInstanceProperty1 = false</SPAN>;
+   ID.<SPAN CLASS=sample-code-highlighted>myExtensionInstanceProperty2 = 0</SPAN>;
+<SPAN CLASS=sample-code-highlighted>   //...
+   //...
+</SPAN>   ID.<SPAN CLASS=sample-code-highlighted>myExtensionInstancePropertyN = null</SPAN>;
+}
+
+Music.addInstanceExtender (mo_<SPAN CLASS=sample-code-highlighted>addMyExtensionInstanceProperties</SPAN>);
+
+/*** Public Instance Methods ***/
+
+Music.addPublicInstanceMethods ('<SPAN CLASS=sample-code-highlighted>myInstanceMethod</SPAN>');
+
+/*** Public Static Methods ***/
+
+Music.addPublicStaticMethods ('<SPAN CLASS=sample-code-highlighted>myStaticMethod</SPAN>');
+
+/*** Public Static Properties ***/
+
+Music.<SPAN CLASS=sample-code-highlighted>myExtensionStaticProperty1 = false</SPAN>;
+Music.<SPAN CLASS=sample-code-highlighted>myExtensionStaticProperty2 = 0</SPAN>;
+<SPAN CLASS=sample-code-highlighted>//...
+//...
+</SPAN>Music.<SPAN CLASS=sample-code-highlighted>myExtensionStaticPropertyN = null</SPAN>;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Extensibility API Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+
+<TR BGCOLOR=FFFFFF>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getPlayer">getPlayer</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an object reference, being a handle to the player object instance that is supporting the Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setPlayer">setPlayer</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the player object instance that should support the Music Object instance.</TD>
+</TR>
+
+<TR BGCOLOR=FFFFFF>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-properties">Instance Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#objectName">objectName</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, indicating the name of the window object's property that can be used to reference the Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#volumeScalars">volumeScalars</A></TD>
+	<TD CLASS=contents-table-item-desc>An array, containing elements for all of the custom volume scalars that have been created for a Music Object instance.</TD>
+</TR>
+
+<TR BGCOLOR=FFFFFF>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addEventHandler">Music.addEventHandler</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you attach an additional event handler to an event that may already have a handler registered.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addInstanceExtender">Music.addInstanceExtender</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register an extender function that will be called at the time of creation of each Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addKnownClient">Music.addKnownClient</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you add a client profile to the list of supported clients, with the assumption that the extension calling this method may implement code necessary to support the client.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addPrivateInstanceMethods">Music.addPrivateInstanceMethods</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register the names of private instance methods that should extend each Music Object instance that is created.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addPublicCallbacks">Music.addPublicCallbacks</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register the names of public instance and static callbacks.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addPublicInstanceMethods">Music.addPublicInstanceMethods</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register the names of public instance methods that should extend each Music Object instance that is created.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addPublicStaticMethods">Music.addPublicStaticMethods</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register the names of static methods that should extend the Music Object.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.appendToArray">Music.appendToArray</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you append the elements from one array onto another array.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.arrayOfObjects">Music.arrayOfObjects</A></TD>
+	<TD CLASS=contents-table-item-desc>Offers a convenient way to create an array that is populated with a specified object type.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.checkForPlayer">Music.checkForPlayer</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you coerce the Music Object compatibility layer to check for an installed player.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.clearTimeout">Music.clearTimeout</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you clear a timeout that is referenced from a property of a specified name that belongs to a specified object.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.execCallback">Music.execCallback</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you execute the handler(s) for the specified static callback type.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.execHandler">Music.execHandler</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you execute the specified handler code, regardless of whether it is specified as a function reference or as a string containing JavaScript.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.globalThru">Music.globalThru</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not there is a Music Object instance ready through which to pass instructions to query or modify the global state of the audio engine.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.indexOf">Music.indexOf</A></TD>
+	<TD CLASS=contents-table-item-desc>Finds the character position of a substring inside a source string, and returns the string length if the substring is not found.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.isInstance">Music.isInstance</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not the specified object is a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.meetsMinVersion">Music.meetsMinVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not a specified version number meets a specified minimum version number.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.doNothing">Music.doNothing</A></TD>
+	<TD CLASS=contents-table-item-desc>A dummy method that does nothing and which can be passed as a parameter to functions or methods that take a function as a parameter.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.openWindow">Music.openWindow</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you open a centered window of the specified size and properties, for the purposes of displaying prompt dialogs or informational messages.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.parseAttributes">Music.parseAttributes</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you easily parse out HTML attributes from a string and return their values in a specified array.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.retrieveVersion">Music.retrieveVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you extract just the version number out of the specified source string.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.setClientInfo">Music.setClientInfo</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you explicitly set the client information that the Music Object compatibility component will use to determine whether or not the client is supported.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.stringHasAny">Music.stringHasAny</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not the source string contains any of the specified substrings.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.tagAttr">Music.tagAttr</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a string value, being a name/value pair that is created from a property of a specified name that belongs to a specified object.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.wireMethod">Music.wireMethod</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you wire a Music Object method of a specified name to the specified object.</TD>
+</TR>
+
+<TR BGCOLOR=FFFFFF>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.client">Music.client</A></TD>
+	<TD CLASS=contents-table-item-desc>An object reference, being a reference to the last element of the Music.knownClients array that was successfully matched against the user's client application.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.enableJavaPrompt">Music.enableJavaPrompt</A></TD>
+	<TD CLASS=contents-table-item-desc>A static property that can be set in a language module so as to customize the message that appears when the user is prompted to enable Java in their browser.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getPlayerText">Music.getPlayerText</A></TD>
+	<TD CLASS=contents-table-item-desc>A static string property, representing the text that should appear in the player control panel substitute when the user needs to install the Beatnik Player.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.global">Music.global</A></TD>
+	<TD CLASS=contents-table-item-desc>A static property, indicating the Music Object instance that can be used to pass through instructions to query or modify the global state of the audio engine.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.installPrompt">Music.installPrompt</A></TD>
+	<TD CLASS=contents-table-item-desc>A static property that can be set in a language module so as to customize the message that appears when the user is prompted to install the Beatnik Player.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.knownClients">Music.knownClients</A></TD>
+	<TD CLASS=contents-table-item-desc>An array, representing the list of client applications that are known by the compatibility component of the Music Object API.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.minFadeInterval">Music.minFadeInterval</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer variable, specifying the minimum time interval between updates in the list of active fade tasks.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.publicInstanceCallbacks">Music.publicInstanceCallbacks</A></TD>
+	<TD CLASS=contents-table-item-desc>An array, containing the names of all the public instance callback types that have been registered using the Music.addPublicCallbacks static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.publicStaticCallbacks">Music.publicStaticCallbacks</A></TD>
+	<TD CLASS=contents-table-item-desc>An array, containing the names of all the public static callback types that have been registered using the Music.addPublicCallbacks static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.upgradePrompt">Music.upgradePrompt</A></TD>
+	<TD CLASS=contents-table-item-desc>A static property that can be set in a language module so as to customize the message that appears when the user is prompted to upgrade their player version.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.upgradePlayerText">Music.upgradePlayerText</A></TD>
+	<TD CLASS=contents-table-item-desc>A static string property, representing the text that should appear in the player control panel substitute when the user needs to upgrade their player version.</TD>
+</TR>
+
+<TR BGCOLOR=FFFFFF>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#global-variables">Global Variables</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_delayPlayerCheck">mo_delayPlayerCheck</A></TD>
+	<TD CLASS=contents-table-item-desc>A global variable which, if defined with any value, indicates that the automatic player check should not be carried out at the time that the Music Object API loads and initializes.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="getPlayer"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getPlayer</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>The <B>getPlayer</B> instance method returns an object reference, being a handle to the player object instance that is supporting the Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getPlayer ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>OBJECT</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="setPlayer"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setPlayer</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>The <B>setPlayer</B> instance method lets you set the player object instance that should support the Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setPlayer (</B> PlayerReferenceOBJ <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="instance-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="objectName"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;objectName</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Instance Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>objectName</B> instance property is a string variable, indicating the name of the <B>window</B> object's property that can be used to reference the Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="volumeScalars"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;volumeScalars</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Instance Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>volumeScalars</B> instance property is an array, containing elements for all of the custom volume scalars that have been created for a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.addEventHandler"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addEventHandler</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addEventHandler</B> static method lets you attach an additional event handler to an event that may already have a handler registered.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addEventHandler (</B> WindowOBJ <B>,</B> HtmlElementOBJ <B>,</B> EventTypeSTR <B>,</B> EventHandler<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>If an event of the name specified by the <B>EventTypeSTR</B> parameter does not exist for the specified HTML element, then the method will simply be ignored and will not produce any error.
+</UL>
+
+<A NAME="Music.addInstanceExtender"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addInstanceExtender</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addInstanceExtender</B> static method lets you register an extender function that will be called at the time of creation of each Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addInstanceExtender (</B> Extender<A HREF="parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.addKnownClient"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addKnownClient</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addKnownClient</B> static method lets you add a client profile to the list of supported clients, with the assumption that the extension calling this method may implement code necessary to support the client.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addKnownClient (</B> ClientNameSTR <B>,</B> ClientPlatformSTR <B>,</B> ClientMinVersionSTR <B>,</B> ClientIsUpgradableBOOL <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.addKnownClient (</B> ClientNameSTR <B>,</B> ClientPlatformSTR <B>,</B> ClientMinVersionSTR <B>,</B> ClientIsUpgradableBOOL <B>,</B> CustomPropertiesOBJ <B>)</B>
+		<P>When the optional <B>CustomPropertiesOBJ</B> parameter is specified, then all the properties of the object specified by the <B>CustomPropertiesOBJ</B> parameter will be copied to the object that is created by the <B>Music.addKnownClient</B> method. Among other things, this feature can be used to add notes regarding issues or limitations with the support for a specific known client, or to add notes regarding why a specific known client is not supported. Custom properties that are stored with a known client are simply ignored by the core Music Object API, and so it is up to the code that registeres such custom properties to make use of them as appropriate.</P>
+		<P>When specifying a value for the <B>CustomPropertiesOBJ</B> parameter, it is possible to create the object containing the custom properties directly in the call to the <B>Music.addKnownClient</B> method, as in the statement...</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+		<TR><TD CLASS=sample-code>
+<PRE>
+Music.addKnownClient (
+   'Some Browser',
+   'Win32,MacPPC',
+   '2.0 to 4.1',
+   true,
+   {
+      notes:'Certain maintenance release versions of this browser may not be supported.',
+      downloadURL:'http://www.somedomain.com/downloads/player-for-some-browser.cgi'
+   }
+);
+</PRE>
+		</TD></TR>
+		</TABLE>
+		<SPAN CLASS=sample-code><NOBR></NOBR></SPAN>.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.addPrivateInstanceMethods"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addPrivateInstanceMethods</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addPrivateInstanceMethods</B> static method lets you register the names of private instance methods that should extend each Music Object instance that is created.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addPrivateInstanceMethods (</B> MethodName1STR <B>,</B> MethodName2STR <B>,</B> ... <B>,</B> MethodNameNSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.addPublicCallbacks"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addPublicCallbacks</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addPublicCallbacks</B> static method lets you register the names of public instance and static callbacks.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addPublicCallbacks (</B> CallbackName1STR <B>,</B> CallbackName2STR <B>,</B> ... <B>,</B> CallbackNameNSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.addPublicInstanceMethods"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addPublicInstanceMethods</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addPublicInstanceMethods</B> static method lets you register the names of public instance methods that should extend each Music Object instance that is created.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addPublicInstanceMethods (</B> MethodName1STR <B>,</B> MethodName2STR <B>,</B> ... <B>,</B> MethodNameNSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.addPublicStaticMethods"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addPublicStaticMethods</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addPublicStaticMethods</B> static method lets you register the names of static methods that should extend the Music Object.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addPublicStaticMethods (</B> MethodName1STR <B>,</B> MethodName2STR <B>,</B> ... <B>,</B> MethodNameNSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.appendToArray"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.appendToArray</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.appendToArray</B> static method lets you append the elements from one array onto another array.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.appendToArray (</B> DestinationArrayOBJ <B>,</B> SourceArrayOBJ <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.arrayOfObjects"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.arrayOfObjects</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.arrayOfObjects</B> static method offers a convenient way to create an array that is populated with a specified object type.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.arrayOfObjects (</B> TotalInstancesINT , ObjectConstructor<A HREF="parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.checkForPlayer"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.checkForPlayer</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.checkForPlayer</B> static method lets you coerce the Music Object compatibility layer to check for an installed player.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.checkForPlayer ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.clearTimeout"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.clearTimeout</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.clearTimeout</B> static method lets you clear a timeout that is referenced from a property of a specified name that belongs to a specified object.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.clearTimeout (</B> TimeoutOwnerOBJ <B>,</B> TimeoutPropertyNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.doNothing"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.doNothing</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.doNothing</B> static method is a dummy function that does nothing and which can be passed as a parameter to functions or methods that take a function as a parameter.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.doNothing ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.execCallback"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.execCallback</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.execCallback</B> static method lets you execute the handler(s) for the specified static callback type.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.execCallback (</B> StaticCallbackTypeSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.execHandler"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.execHandler</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.execHandler</B> static method lets you execute the specified handler code, regardless of whether it is specified as a function reference or as a string containing JavaScript.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.execHandler (</B> Handler<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.execHandler (</B> Handler<A HREF="parameters.html#Function">Function</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.globalThru"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.globalThru</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.globalThru</B> static method returns a boolean value, indicating whether or not there is a Music Object instance ready through which to pass instructions to query or modify the global state of the audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.globalThru ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.indexOf"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.indexOf</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.indexOf</B> static method finds the character position of a substring inside a source string, and returns the string length if the substring is not found.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.indexOf (</B> SourceSTR <B>,</B> SearchSTR <B>,</B> StartPosINT <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.isInstance"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.isInstance</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.isInstance</B> static method returns a boolean value, indicating whether or not the specified object is a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.isInstance (</B> ObjectToTestOBJ <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.meetsMinVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.meetsMinVersion</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.meetsMinVersion</B> static method returns a boolean value, indicating whether or not a specified version number meets a specified minimum version number.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.meetsMinVersion (</B> VersionToTestSTR <B>,</B> MinRequiredVersionSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.openWindow"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.openWindow</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.openWindow</B> static method lets you open a centered window of the specified size and properties, for the purposes of displaying prompt dialogs or informational messages. 
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.openWindow (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="parameters.html#FileUrlSTR">FileUrlSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowWidthINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowHeightINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ShowStatusBarBOOL <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowPropertiesSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowLeftPositionINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; WindowTopPositionINT<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<IMG SRC="../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ShowStatusBarBOOL</B> parameter, then the window that is opened by this method will by default have no status bar.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>WindowPropertiesSTR</B> parameter, then an empty string will be used for this parameter.
+</UL>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.openWindow (</B> FileUrlSTR <B>,</B> WindowNameSTR <B>,</B> WindowWidthINT <B>,</B> WindowHeightINT <B>,</B> ShowStatusBarBOOL <B>,</B> WindowPropertiesSTR <B>,</B> WindowLeftPositionINT <B>)</B>
+		<P>When no <B>WindowTopPositionINT</B> parameter is specified, then the window will be centered vertically on the screen.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.openWindow (</B> FileUrlSTR <B>,</B> WindowNameSTR <B>,</B> WindowWidthINT <B>,</B> WindowHeightINT <B>,</B> ShowStatusBarBOOL <B>,</B> WindowPropertiesSTR <B>)</B>
+		<P>When there is also no <B>WindowLeftPositionINT</B> parameter specified, then the window will also be centered horizontally on the screen.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.openWindow (</B> FileUrlSTR <B>,</B> WindowNameSTR <B>,</B> WindowWidthINT <B>,</B> WindowHeightINT <B>,</B> ShowStatusBarBOOL <B>)</B>
+		<P>When there is also no <B>WindowPropertiesSTR</B> parameter specified, then the default window properties for this method will be used.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.openWindow (</B> FileUrlSTR <B>,</B> WindowNameSTR <B>,</B> WindowWidthINT <B>,</B> WindowHeightINT <B>)</B>
+		<P>When there is also no <B>ShowStatusBarBOOL</B> parameter specified, then the window that is opened by this method will by default have no status bar.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>The <B>WindowNameSTR</B> parameter may not contain any spaces or non-alphaneumeric characters, excepting the underscore character ("_").
+</UL>
+
+<A NAME="Music.parseAttributes"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.parseAttributes</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.parseAttributes</B> static method lets you easily parse out HTML attributes from a string and return their values in a specified array.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.parseAttributes (</B> HtmlAttributesSTR <B>,</B> AttributesOwnerOBJ <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.retrieveVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.retrieveVersion</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.retrieveVersion</B> static method lets you extract just the version number out of the specified source string.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.retrieveVersion (</B> SourceSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.setClientInfo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.setClientInfo</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.setClientInfo</B> static method lets you explicitly set the client information that the Music Object compatibility component will use to determine whether or not the client is supported.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.setClientInfo (</B> AppNameSTR <B>,</B> AppVersionSTR <B>,</B> PlatformSTR <B>,</B> UserAgentSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>AppNameSTR</B> parameter, then the value of the browser's <B>navigator.appName</B> property will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>AppVersionSTR</B> parameter, then the value of the browser's <B>navigator.appVersion</B> property will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>PlatformSTR</B> parameter, then the value of the browser's <B>navigator.platform</B> property will be used for this parameter, unless the platform can be determined from the value of the <B>UserAgentSTR</B> parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>UserAgentSTR</B> parameter, then the value of the browser's <B>navigator.userAgent</B> property will be used for this parameter.
+</UL>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.setClientInfo (</B> AppNameSTR <B>,</B> AppVersionSTR <B>,</B> PlatformSTR <B>)</B>
+		<P>When no <B>UserAgentSTR</B> parameter is specified, then the value of the browser's <B>navigator.userAgent</B> property will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.setClientInfo (</B> AppNameSTR <B>,</B> AppVersionSTR <B>)</B>
+		<P>When there is also no <B>PlatformSTR</B> parameter specified, then the value of the browser's <B>navigator.platform</B> property will be used for this parameter, unless the platform can be determined from the value of the <B>UserAgentSTR</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.setClientInfo (</B> AppNameSTR <B>)</B>
+		<P>When there is also no <B>AppVersionSTR</B> parameter specified, then the value of the browser's <B>navigator.appVersion</B> property will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.setClientInfo ( )</B>
+		<P>When there is also no <B>AppNameSTR</B> parameter specified, then the value of the browser's <B>navigator.appName</B> property will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.stringHasAny"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.stringHasAny</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.stringHasAny</B> static method returns a boolean value, indicating whether or not the source string contains any of the specified substrings.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.stringHasAny (</B> SourceSTR <B>,</B> Substring1STR <B>,</B> Substring2STR <B>,</B> ... <B>,</B> SubstringNSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.tagAttr"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.tagAttr</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.tagAttr</B> static method returns a string value, being a name/value pair that is created from a property of a specified name that belongs to a specified object.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.tagAttr (</B> PropertyOwnerOBJ <B>,</B> PropertyNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.wireMethod"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.wireMethod</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Method&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.wireMethod</B> static method lets you wire a Music Object method of a specified name to the specified object.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.wireMethod (</B> MethodOwnerOBJ <B>,</B> MethodNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.client"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.client</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.client</B> static property is an object reference, being a reference to the last element of the <A HREF="#Music.knownClients"><B>Music.knownClients</B></A> array that was successfully matched against the user's client application.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.enableJavaPrompt"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.enableJavaPrompt</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.enableJavaPrompt</B> static property is a reference to a function and can be set in a language module so as to customize the message that appears when the user is prompted to enable Java in their browser.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>For more information on using this property in conjunction with other Extensibility API properties in the creation of custom language modules, consult the section <A HREF="language-modules.html#creating-your-own">Creating Your Own Language Modules</A>.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.getPlayerText"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getPlayerText</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getPlayerText</B> static property is a string, representing the text that should appear in the player control panel substitute when the user needs to install the Beatnik Player.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.global"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.global</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.global</B> static property is an object reference, indicating the Music Object instance that can be used to pass through instructions to query or modify the global state of the audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.installPrompt"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.installPrompt</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.installPrompt</B> static property is a reference to a function and can be set in a language module so as to customize the message that appears when the user is prompted to install the Beatnik Player.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>For more information on using this property in conjunction with other Extensibility API properties in the creation of custom language modules, consult the section <A HREF="language-modules.html#creating-your-own">Creating Your Own Language Modules</A>.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.knownClients"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.knownClients</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.knownClients</B> static property is an array, representing the list of client applications that are known by the compatibility component of the Music Object API.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.minFadeInterval"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.minFadeInterval</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.minFadeInterval</B> static property is an integer variable, specifying the minimum time interval between updates in the list of active fade tasks.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.publicInstanceCallbacks"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.publicInstanceCallbacks</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.publicInstanceCallbacks</B> static property is an array, containing the names of all the public instance callback types that have been registered using the <A HREF="#Music.addPublicCallbacks"><B>Music.addPublicCallbacks</B></A> static method.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.publicStaticCallbacks"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.publicStaticCallbacks</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.publicStaticCallbacks</B> static property is an array, containing the names of all the public static callback types that have been registered using the <A HREF="#Music.addPublicCallbacks"><B>Music.addPublicCallbacks</B></A> static method.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.upgradePlayerText"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.upgradePlayerText</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B></B> static property is a string, representing the text that should appear in the player control panel substitute when the user needs to upgrade their player version.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.upgradePrompt"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.upgradePrompt</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.upgradePrompt</B> static property is a reference to a function and can be set in a language module, so as to customize the message that appears when the user is prompted to upgrade their player version.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>For more information on using this property in conjunction with other Extensibility API properties in the creation of custom language modules, consult the section <A HREF="language-modules.html#creating-your-own">Creating Your Own Language Modules</A>.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="global-variables"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Global Variables
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="mo_delayPlayerCheck"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_delayPlayerCheck</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Extensibility API Static Property&nbsp;</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Music Object Core<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</FONT></TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_delayPlayerCheck</B> global variable, if defined with any value, indicates that the automatic player check should not be carried out at the time that the Music Object API loads and initializes.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="divisions"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+How Extensibility API Features are Divided Between the Core Components
+</TD></TR></TABLE>
+<BR>
+
+<P>The following table illustrates how the features (methods and properties) of the Music Object Extensibility API are broken up between the three core components. Each column of the table represents a core component, and each row in the table represents a type of extensibility feature (instance methods, static methods, instance properties, and static properties).</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+For information on how the features of the Music Object public authoring API are divided between the different core components, consult the section <A HREF="core-components.html#divisions">How Features are Divided Between the Core Components</A>.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Basic Component</TD>
+		<TD CLASS=data-table-column-header>Advanced Component</TD>
+		<TD CLASS=data-table-column-header>Compatibility Component</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Instance Methods</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="#getPlayer">getPlayer</A><BR>
+			<A HREF="#setPlayer">setPlayer</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Static Methods</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="#Music.addEventHandler">Music.addEventHandler</A><BR>
+			<A HREF="#Music.addInstanceExtender">Music.addInstanceExtender</A><BR>
+			<A HREF="#Music.addPrivateInstanceMethods">Music.addPrivateInstanceMethods</A><BR>
+			<A HREF="#Music.addPublicCallbacks">Music.addPublicCallbacks</A><BR>
+			<A HREF="#Music.addPublicInstanceMethods">Music.addPublicInstanceMethods</A><BR>
+			<A HREF="#Music.addPublicStaticMethods">Music.addPublicStaticMethods</A><BR>
+			<A HREF="#Music.appendToArray">Music.appendToArray</A><BR>
+			<A HREF="#Music.arrayOfObjects">Music.arrayOfObjects</A><BR>
+			<A HREF="#Music.clearTimeout">Music.clearTimeout</A><BR>
+			<A HREF="#Music.doNothing">Music.doNothing</A><BR>
+			<A HREF="#Music.execCallback">Music.execCallback</A><BR>
+			<A HREF="#Music.execHandler">Music.execHandler</A><BR>
+			<A HREF="#Music.globalThru">Music.globalThru</A><BR>
+			<A HREF="#Music.indexOf">Music.indexOf</A><BR>
+			<A HREF="#Music.isInstance">Music.isInstance</A><BR>
+			<A HREF="#Music.parseAttributes">Music.parseAttributes</A><BR>
+			<A HREF="#Music.tagAttr">Music.tagAttr</A><BR>
+			<A HREF="#Music.wireMethod">Music.wireMethod</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="#Music.addKnownClient">Music.addKnownClient</A><BR>
+			<A HREF="#Music.checkForPlayer">Music.checkForPlayer</A><BR>
+			<A HREF="#Music.meetsMinVersion">Music.meetsMinVersion</A><BR>
+			<A HREF="#Music.openWindow">Music.openWindow</A><BR>
+			<A HREF="#Music.retrieveVersion">Music.retrieveVersion</A><BR>
+			<A HREF="#Music.setClientInfo">Music.setClientInfo</A><BR>
+			<A HREF="#Music.stringHasAny">Music.stringHasAny</A><BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Instance Properties</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			<A HREF="#objectName">objectName</A><BR>
+			<A HREF="#volumeScalars">volumeScalars</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Static Properties</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			<A HREF="#Music.global">Music.global</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="#Music.minFadeInterval">Music.minFadeInterval</A><BR>
+			<A HREF="#Music.publicInstanceCallbacks">Music.publicInstanceCallbacks</A><BR>
+			<A HREF="#Music.publicStaticCallbacks">Music.publicStaticCallbacks</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="#Music.client">Music.client</A><BR>
+			<A HREF="#Music.enableJavaPrompt">Music.enableJavaPrompt</A><BR>
+			<A HREF="#Music.getPlayerText">Music.getPlayerText</A><BR>
+			<A HREF="#Music.installPrompt">Music.installPrompt</A><BR>
+			<A HREF="#Music.knownClients">Music.knownClients</A><BR>
+			<A HREF="#Music.upgradePrompt">Music.upgradePrompt</A><BR>
+			<A HREF="#Music.upgradePlayerText">Music.upgradePlayerText</A><BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Global Variables</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="#mo_delayPlayerCheck">mo_delayPlayerCheck</A><BR>
+		</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+</BODY></HTML>

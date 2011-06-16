@@ -1,0 +1,1122 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Auto Disengage</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Auto Disengage
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Auto Disengage extension provides features to help alleviate the conflicts that may occur in some system configurations when the Beatnik Player and other audio players are being used together in the same Web site. Along with the ability to have the Beatnik Player automatically release the system's audio device when the player is not in use by the sonified site, the extension also provides a way to automatically force the player to release the audio device when the user clicks on a link to any type of media file that is not supported by the Beatnik Player (such as a streaming Real Audio file).</P>
+
+<DIV CLASS=subsection>Background to the Audio Device Contention Problem</DIV>
+
+<P>On some Windows systems, limitations in the installed sound hardware, the software drivers for the sound hardware, or the operating system's audio architecture may result in a situation where the Beatnik Player cannot play audio at the same time as other media players that wish to play audio. Typically, with these systems only one application can use the system's audio services at a time. This limitation may often result in the undesirable situation where sonification of a Web site using the Beatnik Player prevents links to other media on the Web site from working correctly.</P>
+
+<P>If the Beatnik Player is using the system's audio device for the site's sonification at the time that the user clicks on a link to a RealAudio file, for example, then the RealPlayer may not be able to play the file that is being linked to, since the Beatnik Player may still be holding on to the audio device - even if the Beatnik-sonified window that launched the RealPlayer is no longer in the foreground.</P>
+
+<DIV CLASS=subsection>Audio Device Contention Manager in 2.1</DIV>
+
+<P>To address this problem, Beatnik went to great lengths to develop the <A HREF="../../adcm.html">Audio Device Contention Manager</A> (ADCM) system for the Beatnik Player 2.1. This system manages the device contention problem and very effectively handles many common cases where the Beatnik Player might, otherwise, contend with other media players for the audio device.</P>
+
+<P>While the ADCM is a great system and does a really good job of avoiding these conflicts, it was only introduced at version 2.1 of the Beatnik Player, and there is still quite a large installed base of older versions out there. Unless you're willing to make your sonified content require version 2.1 as a minimum version, you will still be saddled with this issue. So, in order to provide some level of relief when an older version of the player is installed in the user's browser, the Auto Disengage extension has been developed.</P>
+
+<DIV CLASS=subsection>Components of the System</DIV>
+
+<P>The Auto Disengage extension does the best that it can to alleviate the audio device contention issue, even with the limited options available to it. The following three mechanisms are involved...</P>
+
+<UL>
+	<LI><A NAME="mechanism/auto-disengage"></A><B>Auto Disengage When No Audio Activity</B>
+		<P>The key way that the Auto Disengage extension increases the likelihood of other media players being able to use the system's audio device is by reducing, to a bare minimum, the amount of time that the Beatnik Player is using the audio device. Rather than having the player hold onto the audio device all the time that it is loaded, the Auto Disengage extension instructs the player (using the <A HREF="../../static-methods.html#Music.engageAudio"><B>Music.engageAudio</B></A> static method) when the audio device is not needed.</P>
+		<P>A detection mechanism within the extension recognizes when there is no audio activity within a sonified document, and can then initiate the auto disengage process. A document is considered to have no audio activity when the <A HREF="../../instance-properties.html#audible"><B>audible</B></A> instance property for every Music Object instance in the document is set to <SPAN CLASS=value>false</SPAN>. If the <B>audible</B> property for any instance is set to <SPAN CLASS=value>true</SPAN>, then the document is considered to still have audio activity.</P>
+		<P>The API for customizing the behavior of the auto disengage mechanism includes the <A HREF="#Music.autoDisengageDelay"><B>Music.autoDisengageDelay</B></A> and <A HREF="#Music.autoDisengageEnabled"><B>Music.autoDisengageEnabled</B></A> static properties.</P>
+	<LI><A NAME="mechanism/auto-engage"></A><B>Auto Engage on Audio Activity</B>
+		<P>Because the audio engine could become disengaged as a result of the auto disengage mechanism (see <A HREF="#mechanism/auto-disengage">Auto Disengage When No Audio Activity</A> above) or the link interception mechanism (see <A HREF="#mechanism/link-interception">Media File Link Interception</A> below), there needs to also be some mechanism for eventually re-engaging the audio engine - otherwise the Beatnik-sonified content could be rendered permanently mute while the user continues to browse the sonified site in silence.</P>
+		<P>The auto engage mechanism, which addresses this need, contains a detection mechanism that recognizes when any Music Object instance becomes audible within a sonified document, and attempts to then re-engage the audio engine. If the attempt to re-engage the audio engine fails, then the auto engage mechanism will be triggered once again the next time that a Music Object instance becomes audible. A Music Object instance is considered to become audible when the value of its <B>audible</B> instance property changes from <SPAN CLASS=value>false</SPAN> to <SPAN CLASS=value>true</SPAN>.</P>
+		<P>The trigger mode for the auto engage mechanism can be customized by setting the <A HREF="#Music.autoEngageMode"><B>Music.autoEngageMode</B></A> static property. The behavior of the auto engage mechanism is also influenced by the value of the <A HREF="#Music.mediaLinkShutoutTime"><B>Music.mediaLinkShutoutTime</B></A> static property.</P>
+	<LI><A NAME="mechanism/link-interception"></A><B>Media File Link Interception</B>
+		<P>On systems that are incapable of mixing audio from multiple applications, a Beatnik-sonified Web site that has a "soundtrack" throughout (implemented in a persistent frame) could create problems if the site also has links to media files that are handled by other media players. If these other media players also need to use the system's audio device, then the sonification of the Web site could prevent such media players from being able to play audio.</P>
+		<P>A classic example would be a sonified Web site that also has links to RealAudio files. On systems that cannot mix, the RealPlayer may not be able to play a RealAudio stream that is linked to from such a site, because the sonification may cause the Beatnik Player to hold onto the system's audio device.</P>
+		<P>The link interception mechanism provides a way of automatically intercepting links to media file types that are known by the Auto Disengage extension (see the section <A HREF="#built-in-media-file-extensions"><B>Built-in Media File Extensions</B></A>), so that these links can disengage the audio engine when clicked, thereby giving the other media player an opportunity to grab the system's audio device for its own purposes.</P>
+		<P>Beyond merely disengaging the audio engine, these media link interceptors can also shut out the auto engage mechanism for a specified period of time (see the <A HREF="#Music.mediaLinkShutoutTime"><B>Music.mediaLinkShutoutTime</B></A> static property). Because it may sometimes take certain media player applications several seconds to load up and start playing the file that is being linked to, this shutout mechanism helps to protect against the auto engage mechanism (see <A HREF="#mechanism/auto-engage">Auto Engage on Audio Activity</A> above) re-engaging the audio engine while the media player is still loading (which could, otherwise, prevent it from being able to use the audio device).</P>
+		<P>The API for customizing the behavior of the media link interception mechanism includes the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> and <A HREF="#Music.mediaLinkClicked"><B>Music.mediaLinkClicked</B></A> static methods, as well as the <A HREF="#Music.mediaLinkInterception"><B>Music.mediaLinkInterception</B></A>, <A HREF="#Music.mediaLinkShutoutTime"><B>Music.mediaLinkShutoutTime</B></A>, and <A HREF="#Music.mediaLinksNoOnClicks"><B>Music.mediaLinksNoOnClicks</B></A> static properties.</P>
+</UL>
+
+<A NAME="built-in-media-file-extensions"></A>
+<DIV CLASS=subsection>Built-in Media File Extensions</DIV>
+
+<P>The Auto Disengage extension contains a built-in default set of file extensions for media file types that are supported by other media players that may contend for the audio device on systems that are not capable of mixing audio from multiple applications. This built-in set cannot anticipate new file types that may be supported by various media players in future. The built-in set may also not cover file types that are supported by lesser known media players.</P>
+
+<P>The table below lists all the media file type extensions that are built into the Auto Disengage extension...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+<TR>
+	<TD CLASS=data-table-column-header>Media Player</TD>
+	<TD CLASS=data-table-column-header>File Types Supported</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item-highlighted>Apple's QuickTime</TD>
+	<TD CLASS=data-table-item>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5><TR VALIGN=TOP>
+			<TD>
+				.aif<BR>
+				.aifc<BR>
+				.aiff<BR>
+			</TD>
+			<TD>
+				.au<BR>
+				.kar<BR>
+				.mid<BR>
+			</TD>
+			<TD>
+				.midi<BR>
+				.mov<BR>
+				.qcp<BR>
+			</TD>
+			<TD>
+				.qt<BR>
+				.qts<BR>
+				.rts<BR>
+			</TD>
+			<TD>
+				.rtsp<BR>
+				.sd2<BR>
+				.smf<BR>
+			</TD>
+			<TD>
+				.snd<BR>
+				.ulw<BR>
+				.wav<BR>
+			</TD>
+		</TR></TABLE>
+	</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item-highlighted>Cakewalk</TD>
+	<TD CLASS=data-table-item>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5><TR VALIGN=TOP>
+			<TD>
+				.mff<BR>
+			</TD>
+			<TD>
+				.mid<BR>
+			</TD>
+			<TD>
+				.rmi<BR>
+			</TD>
+			<TD>
+				.smf<BR>
+			</TD>
+		</TR></TABLE>
+	</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item-highlighted>Microsoft's Windows Media Player</TD>
+	<TD CLASS=data-table-item>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5><TR VALIGN=TOP>
+			<TD>
+				.au<BR>
+				.avi<BR>
+			</TD>
+			<TD>
+				.m1v<BR>
+				.m3u<BR>
+			</TD>
+			<TD>
+				.mpa<BR>
+				.mpe<BR>
+			</TD>
+			<TD>
+				.mpeg<BR>
+				.mpv2<BR>
+			</TD>
+			<TD>
+				.snd<BR>
+				.wav<BR>
+			</TD>
+		</TR></TABLE>
+	</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item-highlighted>Real Networks' RealPlayer</TD>
+	<TD CLASS=data-table-item>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5><TR VALIGN=TOP>
+			<TD>
+				.aif<BR>
+				.aiff<BR>
+				.au<BR>
+				.avi<BR>
+			</TD>
+			<TD>
+				.m3u<BR>
+				.mp1<BR>
+				.mp2<BR>
+				.mp3<BR>
+			</TD>
+			<TD>
+				.mpa<BR>
+				.mpeg<BR>
+				.mpg<BR>
+				.mpga<BR>
+			</TD>
+			<TD>
+				.mpv<BR>
+				.pls<BR>
+				.ra<BR>
+				.ram<BR>
+			</TD>
+			<TD>
+				.rf<BR>
+				.rm<BR>
+				.rmm<BR>
+				.rnx<BR>
+			</TD>
+			<TD>
+				.rv<BR>
+				.ssm<BR>
+				.wav<BR>
+				.xpl<BR>
+			</TD>
+		</TR></TABLE>
+
+	</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item-highlighted>Liquid Audio's Liquid Player</TD>
+	<TD CLASS=data-table-item>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5><TR VALIGN=TOP>
+			<TD>
+				.la1<BR>
+			</TD>
+			<TD>
+				.lar<BR>
+			</TD>
+			<TD>
+				.lav<BR>
+			</TD>
+			<TD>
+				.lavs<BR>
+			</TD>
+			<TD>
+				.lqp<BR>
+			</TD>
+			<TD>
+				.lqt<BR>
+			</TD>
+			<TD>
+				.lsl<BR>
+			</TD>
+		</TR></TABLE>
+	</TD>
+</TR>
+<TR>
+	<TD CLASS=data-table-item-highlighted>nullsoft's Winamp</TD>
+	<TD CLASS=data-table-item>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5><TR VALIGN=TOP>
+			<TD>
+				.669<BR>
+				.asx<BR>
+				.cda<BR>
+			</TD>
+			<TD>
+				.dsm<BR>
+				.far<BR>
+				.it<BR>
+			</TD>
+			<TD>
+				.m3u<BR>
+				.med<BR>
+				.mid<BR>
+			</TD>
+			<TD>
+				.mod<BR>
+				.mp2<BR>
+				.mp3<BR>
+			</TD>
+			<TD>
+				.mpg<BR>
+				.mtm<BR>
+				.pls<BR>
+			</TD>
+			<TD>
+				.s3m<BR>
+				.stm<BR>
+				.ult<BR>
+			</TD>
+			<TD>
+				.voc<BR>
+				.wav<BR>
+				.xm<BR>
+			</TD>
+		</TR></TABLE>
+	</TD>
+</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are developing Beatnik-sonified content that may contain links to audio or video files (or any other types of media files) that are not covered by this built-in set of file extensions, and the media player(s) that support these file types are likely to need the system's audio device, then the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> method provides an easy way to register the file extensions for these media file types.</P>
+
+<DIV CLASS=subsection>The Auto Disengage Extension and the Audio Device Contention Manager</DIV>
+
+<P>As mentioned earlier, versions 2.1 and higher of the Beatnik Player incorporate a sophisticated and well thought-out system for effectively managing the audio device contention issue: the Audio Device Contention Manager (ADCM). Both the Auto Disengage extension and the ADCM have been designed to be able to work together. They do not work at odds with each other - they are cooperative.</P>
+
+<P>The primary way that the Auto Disengage extension tries to alleviate device contention is to manage the engaged state of the audio engine through the <A HREF="../../static-methods.html#Music.engageAudio"><B>Music.engageAudio</B></A> static method. It is because of the improved behavior of the <B>Music.engageAudio</B> method (in Beatnik Player versions 2.1 and higher) that the Auto Disengage extension and the ADCM can actually work together. For more information, consult the section <A HREF="../../adcm.html#new-engageAudio-behavior">New Behavior for the Music.engageAudio Method</A>.</P>
+
+<DIV CLASS=subsection>Sensible Defaults</DIV>
+
+<P>Because of sensible default values for the various static properties of the Auto Disengage extension, no customization may be required in many cases in order to gain the benefits of using the extension. Often, all that will be required is to merely source the extension into sonified documents, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-x-disengage.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+bgMusic = new Music ();
+bgMusic.magicEmbed (
+   'SRC="music/story-time.rmf" ' +
+   'WIDTH=0 HEIGHT=0 HIDDEN ' +
+   'AUTOSTART=TRUE LOOP=TRUE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;P&gt;&lt;B&gt;Streaming Short Stories&lt;/B&gt;&lt;/P&gt;
+
+&lt;A HREF="pennies.ra"&gt;A Pocketful of Pennies&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="shame.ra"&gt;The Shame of Felix Humphreys&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="middle-life.ra"&gt;Journey Into the Middle of One's Life&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="tears.ra"&gt;Crying Glass Tears&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="apirations.ra"&gt;Aspirations Run Dry&lt;/A&gt;&lt;BR&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Differences in Player Versions</DIV>
+
+<P>Because of significant differences between player versions earlier than 2.1, and player versions 2.1 and higher, content that uses the Auto Disengage extension will behave somewhat differently depending on the version of the player that is installed in a user's browser.</P>
+
+<P>With player versions earlier than 2.1, the <B>Music.engageAudio</B> static method always sets the global engaged state of the audio engine. Consequently, different sonified windows that are using the Auto Disengage extension and that do not have any knowledge of each other could "trample" on each other when engaging or disengaging the audio engine. For example, one window might think that there is no audio activity, simply because all of the Music Object instances that it knows about are in a stopped state. The Auto Disengage extension, operating within this window, may then disengage the audio engine while there is still audio activity in another sonified window - arguably an inappropriate behavior.</P>
+
+<P>In player versions 2.1 and higher, the whole system for alleviating audio device contentions ensures a much better user experience on systems that are not capable of mixing audio from multiple applications. Specifically, it is because of the improved behavior of the <B>Music.engageAudio</B> method in these versions that the Auto Disengage extension can be used in multiple windows in a cooperative manner, so that the audio engine will only become disengaged if there is no audio activity in all sonified windows. For more information, consult the section <A HREF="../../adcm.html#new-engageAudio-behavior">New Behavior for the Music.engageAudio Method</A>.</P>
+
+<DIV CLASS=subsection>A Bug in Netscape 6</DIV>
+
+<P>With the initial release of Netscape 6, it was discovered that this browser had a significant issue that could cause the automatic attachment of handlers to HTML elements, using JavaScript, to interfere with other aspects of the proper functioning of HTML pages.</P>
+
+<P>The Auto Disengage extension achieves its interception of media file links by attaching handlers to the <B>ONCLICK</B> events of links to any media file types that it knows about (see the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> static method). To prevent the Auto Disengage extension from potentially crippling pages when they are browsed in Netscape 6, the interception of media file links is disabled by default for Netscape 6.</P>
+
+<P>The <A HREF="#Music.mediaLinksNoOnClicks"><B>Music.mediaLinksNoOnClicks</B></A> static property is offered as a way of extending the link interception behavior to Netscape 6 as well. This property needs to be explicitly set to <SPAN CLASS=value>true</SPAN> in order for media link interception to be active in Netscape 6, and this should only be done if you are absolutely certain that the media file links to which the Auto Disengage extension would add interceptors don't already have existing <B>ONCLICK</B> event handlers in the HTML code.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-disengage.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-disengage.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-disengage.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-disengage.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addMediaFileExtensions">Music.addMediaFileExtensions</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register additional file extensions for media file types that are not handled by the Beatnik Player.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.mediaLinkClicked">Music.mediaLinkClicked</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you explicitly register that a link to a media file has been clicked.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.autoDisengageDelay">Music.autoDisengageDelay</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer specifying for how long audio needs to be inactive in order for the auto disengage process to be initiated.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.autoDisengageEnabled">Music.autoDisengageEnabled</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean acting as a master switch to either enable or disable the Auto Disengage extension.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.autoEngageMode">Music.autoEngageMode</A></TD>
+	<TD CLASS=contents-table-item-desc>A string specifying the conditions necessary for automatically re-engaging the audio engine.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.mediaLinkInterception">Music.mediaLinkInterception</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean specifying whether or not links to known types of media files should be intercepted in order to initiate the auto disengage process.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.mediaLinkShutoutTime">Music.mediaLinkShutoutTime</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer specifying for how long (measured in milliseconds) the auto engage mechanism should be temporarily disabled, after the auto disengage process has been initiated from an intercepted media file link.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.mediaLinksNoOnClicks">Music.mediaLinksNoOnClicks</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean specifying if the links to media file types that are known by the Auto Disengage extension have no manually code ONCLICK event handlers.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.addMediaFileExtensions"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addMediaFileExtensions</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addMediaFileExtensions</B> static method lets you register additional file extensions for media file types that are not handled by the Beatnik Player.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.addMediaFileExtensions (</B> AudioFileExtensionsSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The Auto Disengage extension contains a built-in default set of file extensions for media file types that are supported by other media players that may contend for the audio device (see the section <A HREF="#built-in-media-file-extensions">Built-in Media File Extensions</A>). If you are developing Beatnik-sonified content that may contain links to media file types that are not covered by this built-in set, and the media player(s) that support these file types are likely to need the system's audio device, then the <B>Music.addMediaFileExtensions</B> method provides an easy way to register the file extensions for these media file types.</P>
+
+<DIV CLASS=subsection>Register the Extensions You Would Use</DIV>
+
+<P>The Auto Disengage extension's set of media file extensions is only used in determining which links need to automatically have interceptors added to them, so that the auto disengage process can be initiated when the user clicks these links and so that the media player that will handle the file that is being linked to will stand a good chance of getting to use the system's audio device.</P>
+
+<P>So, it is not really necessary to use the <B>Music.addMediaFileExtensions</B> method to register all the media file extensions that are supported by a particular media player you may be using to handle certain links. It is only necessary to register the file extensions for the media file types that you will be linking to. In some cases, this may be only a small subset of the media file extensions that are handled by a player.</P>
+
+<P>Of course, there is no danger in registering additional redundant media file extensions. In fact, it could even be useful - especially if there is some likelihood that you may choose to use those other media types at some point in the future, or if there is a chance that some other developers may later update the sonified pages and choose to use those other media types.</P>
+
+<DIV CLASS=subsection>An Example</DIV>
+
+<P>To illustrate the process for registering additional media file extensions, let's take a look at a simple example. Let's say we were creating a Beatnik-sonified page that was to use the hypothetical Mystery X Player from the hypothetical company Mystery X Software Technologies Inc. Now, let's say that the Mystery X Player supported the playback of several media formats developed by Mystery X Software Technologies Inc., including the original Mystery file (.mys), the Mystery X Format (.mxf), the Mystery X Playlist (.mxp), and the revolutionary new Mystery X Generation II Format (.mys2).</P>
+
+<P>Now, if our Beatnik-sonified page were only to contain links to files of the original Mystery file format (.mys), then the code may look as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-x-disengage.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<SPAN CLASS=sample-code-highlighted>Music.addMediaFileExtensions ('Mystery X Player |mys|');</SPAN>
+
+bgMusic = new Music ();
+bgMusic.magicEmbed (
+   'SRC="music/mystery-theme.rmf" ' +
+   'WIDTH=0 HEIGHT=0 HIDDEN ' +
+   'AUTOSTART=TRUE LOOP=TRUE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;A HREF="caught-in-sail.mys"&gt;Caught in the Sail&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="helix.mys"&gt;Helix in my Pocket&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="substance.mys"&gt;Men of Liquid Substance&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="night-out.mys"&gt;Night Out on the Ghost Town&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="arguing.mys"&gt;In the Mood for Arguing&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="acropolis.mys"&gt;Acropolis Now&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="the-days.mys"&gt;Them Thar was the Days&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="decency.mys"&gt;Public Decency&lt;/A&gt;&lt;BR&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the above sample code listing, the highlighted code indicates the code needed in order to use the Auto Disengage extension to make links to ".mys" files automatically initiate the auto disengage process when clicked. Now, as stated earlier, it is not necessary to register the file extensions for only those media file types you will be linking to in a page. It is perfectly valid to register further file extensions for file types that may be used at a future date.</P>
+
+<P>So, in order to register all of the file extensions that are handled by the Mystery X Player, the modified code would look as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-disengage.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.addMediaFileExtensions ('Mystery X Player |mys|<SPAN CLASS=sample-code-highlighted>mxf|mxp|mys2|</SPAN>');
+
+bgMusic = new Music ();
+bgMusic.magicEmbed (
+   'SRC="music/mystery-theme.rmf" ' +
+   'WIDTH=0 HEIGHT=0 HIDDEN ' +
+   'AUTOSTART=TRUE LOOP=TRUE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;A HREF="caught-in-sail.mys"&gt;Caught in the Sail&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="helix.mys"&gt;Helix in my Pocket&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="substance.mys"&gt;Men of Liquid Substance&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="night-out.mys"&gt;Night Out on the Ghost Town&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="arguing.mys"&gt;In the Mood for Arguing&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="acropolis.mys"&gt;Acropolis Now&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="the-days.mys"&gt;Them Thar was the Days&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="decency.mys"&gt;Public Decency&lt;/A&gt;&lt;BR&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>This time, the highlighted code indicates the code that was added in order to register the additional ".mxf", ".mxp", and ".mys2" file extensions.</P>
+
+<P>In this particular example, there are no links to any files of the other formats supported by the Mystery X Player. However, this sonified document could be safely handed off to another person who has no understanding of the sonification or the Auto Disengage extension, and this person could add new links to files of the other Mystery X Player formats without having to worry about the page ceasing to function correctly.</P>
+
+<DIV CLASS=subsection>Syntax for the AudioFileExtensionsSTR Parameter</DIV>
+
+<P>In order to register additional file extensions that are not built into the Auto Disengage extension, these file extensions must be specified inside the <B>AudioFileExtensionsSTR</B> parameter. When constructing a valid value for this parameter, the following simple rules should be observed...</P>
+
+<UL>
+	<LI><B>Not Case-sensitive</B>
+		<P>File extensions are not case-sensitive. So, for example, the statement...</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('|mys|');</PRE></TD></TR></TABLE>
+		<P>...has the same effect as the statement...</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('|MYS|');</PRE></TD></TR></TABLE>
+		<P></P>
+	<LI><B>Enclosed in Pipes</B>
+		<P>Each file extension must be enclosed with a pipe character ("|") on either side of it. The following two examples contrast the incorrect way of enclosing file extensions with the correct way.</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+		<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('mys');</PRE></TD></TR>
+		<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('|mys|');</PRE></TD></TR>
+		</TABLE>
+		<P></P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+		<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('mys|mxf|mxp|mys2');</PRE></TD></TR>
+		<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('|mys|mxf|mxp|mys2|');</PRE></TD></TR>
+		</TABLE>
+		<P>Notice in the second example how it is acceptable for consecutively listed file extensions to share adjacent pipe characters. Sharing pipe characters is perfectly valid, since it does not break the rule that each file extension should be enclosed in pipe characters.</P>
+	<LI><B>Padding Not Allowed</B>
+		<P>There must be no other characters (such as spaces) between a file extension's enclosing pipe characters and the file extension itself. The following example contrasts an incorrect way of registering file extensions with the correct way...</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+		<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('| mys | mxf | mxp | mys2 |');</PRE></TD></TR>
+		<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('|mys|mxf|mxp|mys2|');</PRE></TD></TR>
+		</TABLE>
+		<P></P>
+	<LI><B>No Prefixed Period</B>
+		<P>File extensions must not be prefixed with a period character ("."). Even though file extensions may often appear prefixed with a period character in documentation, there must be no period prefixed when using the <B>Music.addMediaFileExtensions</B> method. The following example contrasts an incorrect way of registering file extensions with the correct way...</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+		<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('|.mys|.mxf|.mxp|.mys2|');</PRE></TD></TR>
+		<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+		<TR><TD CLASS=sample-code><PRE>Music.addMediaFileExtensions ('|mys|mxf|mxp|mys2|');</PRE></TD></TR>
+		</TABLE>
+		<P></P>
+	<LI><B>Extraneous Text Permitted</B>
+		<P>Additional text that describes the file extensions being registered is permitted. This essentially allows for comments within the value of the <B>AudioFileExtensionsSTR</B> parameter, making it easier to make sense of your code later and making it easier to edit - especially if one call to the <B>Music.addMediaFileExtensions</B> method is being used to register the file extensions for multiple media players. Additional comment text will not be regarded as a file extension and will simply be ignored.</P>
+		<P>In the following example, file extensions for the Mystery X Player as well as the Enigma Y Player are being registered in a single statement...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addMediaFileExtensions (
+   'Mystery X Player |mys|mxf|mxp|mys2| Enigma Y Player |enig|eff|e2f|'
+);
+</PRE>
+</TD></TR></TABLE>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>The <B>Music.addMediaFileExtensions</B> method should be called before the document has completed loading in. Any file extensions that are registered after the document has completed loading in will have no effect on the behavior of the document.
+</UL>
+
+<A NAME="Music.mediaLinkClicked"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.mediaLinkClicked</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.mediaLinkClicked</B> static method lets you explicitly register that a link to a media file has been clicked.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.mediaLinkClicked ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>In most cases it will not be necessary to use this method. On systems that are considered incapable of mixing audio from multiple applications, the Auto Disengage extension will automatically add interceptors to media file links at the time that the document completes loading in. These interceptors are only added on the condition that the <A HREF="#Music.mediaLinkInterception"><B>Music.mediaLinkInterception</B></A> static property is set to <SPAN CLASS=value>true</SPAN> at the time that the document completes loading in, and the user is not using Netscape 6 (unless the <A HREF="#Music.mediaLinksNoOnClicks"><B>Music.mediaLinksNoOnClicks</B></A> static property is set to <SPAN CLASS=value>true</SPAN>).</P>
+
+<P>The <B>Music.mediaLinkClicked</B> method provides an alternative to allowing the Auto Disengage extension to automatically intercept media file links, and there are, in fact, a number of situations where it may be more desirable to use this method...</P>
+
+<UL>
+	<LI><B>Dealing With the Netscape 6 Bug</B>
+		<P>Because of a bug in Netscape 6, the Auto Disengage extension will, by default, not add interceptors to media file links when the user is browsing with Netscape 6. If you want to make use of the link interception feature and you're certain that none of the links have existing <B>ONCLICK</B> event handlers in the HTML code, then you can add a statement in the code to set the value of the <A HREF="#Music.mediaLinksNoOnClicks"><B>Music.mediaLinksNoOnClicks</B></A> static property to <SPAN CLASS=value>true</SPAN>.</P>
+		<P>However, if any of these links do have existing <B>ONCLICK</B> event handlers in the HTML code, then the best approach to take is to add a statement in the code to set the value of the <A HREF="#Music.mediaLinkInterception"><B>Music.mediaLinkInterception</B></A> static property to <SPAN CLASS=value>false</SPAN> and then add a call to the <B>Music.mediaLinkClicked</B> method to the <B>ONCLICK</B> event handler in the HTML code for each of the media file links.</P>
+	<LI><B>Not Having to Register Media File Extensions</B>
+		<P>The Auto Disengage extension contains a built-in default set of file extensions for media file types that are supported by other media players that may contend for the audio device on systems that are not capable of mixing audio from multiple applications. This built-in set cannot anticipate new file types that may be supported by various media players in future. The built-in set may also not cover file types that are supported by lesser known media players.</P>
+		<P>One way to get around this, when using the link interception feature, is to add a statement in the code to call the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> in order to register the additional file extensions for media files that you may be linking to in the document. However, another way that this can be handled is to simply add a call to the <B>Music.mediaLinkClicked</B> method to the <B>ONCLICK</B> event handler in the HTML code for each of the links to media file types that are not known by the Auto Disengage extension. For handling just a few media file links, this may be a perfectly adequate approach.</P>
+	<LI><B>A Desire to Do It Manually</B>
+		<P>If you wish to have complete control over which media file links get to initiate the auto disengage process, then you can opt to manually "wire" the desired links to the auto disengage behavior. In this event, you would add a statement in the code to set the value of the <B>Music.mediaLinkInterception</B> static property to <SPAN CLASS=value>false</SPAN> and then add a call to the <B>Music.mediaLinkClicked</B> method to the <B>ONCLICK</B> event handler in the HTML code for each of the media file links.</P>
+		<P>Among the benefits of using this approach are...</P>
+		<UL>
+			<LI><P>It is not necessary to maintain a separate "registry" of file extensions for the media files that will be linked to in your document.</P>
+			<LI><P>Links to media files "fend" for themselves - so to speak - as far as the Auto Disengage extension is concerned, and the specific files being linked to can be changed without having to worry about the link possibly losing its auto disengage behavior if a different file format is chosen for the media file.</P>
+			<LI><P>It may be more workable in cases where sonified pages that contain links to media files are being dynamically generated by a server. If the content of a document is very dynamic and the array of different media file types that it links to is unpredictable, then it may be easier for the server side code to just include a call to the <B>Music.mediaLinkClicked</B> method in the <B>ONCLICK</B> attribute of each media file link, rather than trying to dynamically forge a consolidated list of the media file extensions into a call to the <B>Music.addMediaFileExtensions</B> method, or trying to have a fixed "mega-list" that gets included.</P>
+		</UL>
+		<P>Among the disadvantages of using this approach are...</P>
+		<UL>
+			<LI><P>With documents that contain a lot of links to media files, it could be tedious to add code to the <B>ONCLICK</B> attributes for these links.</P>
+			<LI><P>The <B>Music.mediaLinkInterception</B> static property cannot be used as a master switch to disable the auto disengage behavior for links that have had manual calls to the <B>Music.mediaLinkClicked</B> method added.</P>
+		</UL>
+		<P></P>
+	<LI><B>Indirect Links to Media Files</B>
+		<P>There may be some cases where a sonified document contains links to cgi scripts that may actually resolve to media files. Often, a typical file URL for such a cgi script link may not even end in the file extension for the media type that the link will actually resolve to. So, as a result, the link interception mechanism within the Auto Disengage extension may not recognize these links as media file links and may, therefore, not add interceptors to them. The simple way to deal with this issue is to add a call to the <B>Music.mediaLinkClicked</B> method to the <B>ONCLICK</B> event handler in the HTML code for all such links.</P>
+	<LI><B>Launching Media-Rich Windows</B>
+		<P>In yet another scenario, a link within a sonified document may result in a new window opening up that contains audio-rich media. While such a link may not be recognized by the Auto Disengage extension as a link to a media file, per se, the link nevertheless has just about the same practical effect. The new window that is popped open, because it contains rich media that may desire to use the audio device, could be regarded as a "player" of a sort. Therefore, it would be desirable for this type of link to initiate the auto disengage when clicked.</P>
+		<P>Because interceptors will not be added to such links by the Auto Disengage extension, the simple remedy is to add a call to the <B>Music.mediaLinkClicked</B> method to the <B>ONCLICK</B> event handler in the HTML code for all such links.</P>
+	<LI><B>More Than Just Links</B>
+		<P>The link interception mechanism of the Auto Disengage extension only considers links and does not look at other possible ways that media files can be "linked" to. For example, form buttons could be used in place of traditional links as a means of launching media players. For all such HTML elements, other than links, that may result in media players being launched, a call to the <B>Music.mediaLinkClicked</B> method may be added to the <B>ONCLICK</B> event handler in the HTML code for the elements.</P>
+	<LI><B>Non-HTML Sonified Media</B>
+		<P>Finally, in some rare cases, sonified documents may use another media player to create the graphical front-end. One such example would be an interface that is implemented using Macromedia's Flash Player, combined with sonification of that interface that is implemented using the Beatnik Player. Media players like the Flash Player, Apple's QuickTime Player, and others, quite often also allow links to be coded into the file formats for these players. Because such links are embedded into these files and cannot be scanned automatically using JavaScript, the Auto Disengage extension cannot automatically add interceptors to them.</P>
+		<P>Now, if these embedded links have the effect of opening up media-rich content in new browser windows, or of launching other media players to play back the files that are being linked to, then there is the potential for audio device contention problems. In order to deal with this, the same mechanism that allows the player that is being used for the graphical front-end to communicate to its host HTML document in order to achieve the Beatnik-sonification, can also be used in order to initiate the auto disengage process. Through whatever connection mechanism exists, the embedded media file link must be "wired" to the host HTML page so that the <B>Music.mediaLinkClicked</B> method is called when the link is clicked.</P>
+</UL>
+
+<DIV CLASS=subsection>A Simple Example</DIV>
+
+<P>In the following rather simple example, the media file links already contained <B>ONCLICK</B> event handler code before the document was sonified. And, because of the bug in Netscape 6, the Auto Disengage extension would not automatically add link interceptors to these links when the document is browsed in Netscape 6. Now, because the link auto disengage behavior was considered desirable even for Netscape 6, it was decided to manually add a call to the <B>Music.mediaLinkClicked</B> method into the <B>ONCLICK</B> attribute for each of the links, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-x-disengage.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<SPAN CLASS=sample-code-highlighted>Music.mediaLinkInterception = false;</SPAN>
+
+bgMusic = new Music ();
+bgMusic.magicEmbed (
+   'SRC="music/story-time.rmf" ' +
+   'WIDTH=0 HEIGHT=0 HIDDEN ' +
+   'AUTOSTART=TRUE LOOP=TRUE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;P&gt;&lt;B&gt;Streaming Short Stories&lt;/B&gt;&lt;/P&gt;
+
+&lt;A
+   HREF="pennies.ra"
+   ONCLICK="
+      <SPAN CLASS=sample-code-highlighted>Music.mediaLinkClicked ();</SPAN>
+      window.defaultStatus = 'LOADING... A Pocketful of Pennies';
+      return true
+   "
+&gt;
+   A Pocketful of Pennies
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;A
+   HREF="shame.ra"
+   ONCLICK="
+      <SPAN CLASS=sample-code-highlighted>Music.mediaLinkClicked ();</SPAN>
+      window.defaultStatus = 'LOADING... The Shame of Felix Humphreys';
+      return true
+   "
+&gt;
+   The Shame of Felix Humphreys
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;A
+   HREF="middle-life.ra"
+   ONCLICK="
+      <SPAN CLASS=sample-code-highlighted>Music.mediaLinkClicked ();</SPAN>
+      window.defaultStatus = 'LOADING... Journey Into the Middle of One\'s Life';
+      return true
+   "
+&gt;
+   Journey Into the Middle of One's Life
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;A
+   HREF="tears.ra"
+   ONCLICK="
+      <SPAN CLASS=sample-code-highlighted>Music.mediaLinkClicked ();</SPAN>
+      window.defaultStatus = 'LOADING... Crying Glass Tears';
+      return true
+   "
+&gt;
+   Crying Glass Tears
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;A
+   HREF="apirations.ra"
+   ONCLICK="
+      <SPAN CLASS=sample-code-highlighted>Music.mediaLinkClicked ();</SPAN>
+      window.defaultStatus = 'LOADING... Aspirations Run Dry';
+      return true
+   "
+&gt;
+   Aspirations Run Dry
+&lt;/A&gt;&lt;BR&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>The auto disengage process will only be initiated if the <A HREF="#Music.autoDisengageEnabled"><B>Music.autoDisengageEnabled</B></A> static property is set to <SPAN CLASS=value>true</SPAN> at the time that the <B>Music.mediaLinkClicked</B> method is called.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.autoDisengageDelay"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.autoDisengageDelay</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>500</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.autoDisengageDelay</B> static property is an integer variable, specifying for how long (measured in milliseconds) audio needs to be inactive in order for the auto disengage process to be initiated.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>In certain sonified content, such as a case where the only Music Object instance that is playing is being used to play musical notes for user interface sonification and has its <A HREF="../../instance-properties.html#usage"><B>usage</B></A> instance property set to "<SPAN CLASS=value>notes</SPAN>", the audio for the sonified document could switch back and forth quite rapidly between audible and inaudible states, as new notes are triggered and old notes die. For performance reasons, it may be desirable in such cases to limit the amount of rapid engaging and disengaging of the audio engine that occurs, so that the Auto Disengage extension does not actually hamper the user experience rather than improve it.</P>
+
+<P>The <B>Music.autoDisengageDelay</B> property, therefore, provides a way to buffer against this rapid flip-flopping of the audio engine's engaged state that could occur with certain types of sonified content. So, for example, if this property was set to the value <SPAN CLASS=value>5000</SPAN>, then the sonified document would have to remain inaudible for 5000 milliseconds (5 seconds) before the auto disengage process could be initiated. And, if something happened to result in the document becoming audible once again during this delay period, then the pending auto disengage process would be aborted.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property can be modified at any time, and its value at the moment that audio becomes inactive will determine the auto disengage delay for that moment.
+	<LI>If the <A HREF="#Music.autoDisengageEnabled"><B>Music.autoDisengageEnabled</B></A> static property is set to <SPAN CLASS=value>false</SPAN>, then the <B>Music.autoDisengageDelay</B> property will have no effect on the behavior of the document.
+</UL>
+
+<A NAME="Music.autoDisengageEnabled"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.autoDisengageEnabled</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>true</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.autoDisengageEnabled</B> static property is a boolean variable, acting as a master switch to either enable or disable the Auto Disengage extension.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When this property is set to <SPAN CLASS=value>true</SPAN>, then the Auto Disengage extension will be enabled. And when this property is set to <SPAN CLASS=value>false</SPAN>, then the Auto Disengage extension will be disabled. Being set to <SPAN CLASS=value>false</SPAN> at the time that the document loads in will not, in itself, cause media link interceptors to not be added. It is other factors, such as the values of the <A HREF="#Music.mediaLinkInterception"><B>Music.mediaLinkInterception</B></A> and <A HREF="#Music.mediaLinksNoOnClicks"><B>Music.mediaLinksNoOnClicks</B></A> static properties, that actually determine whether or not link interceptors are added.</P>
+
+<P>If link interceptors have been added, however, a value of <SPAN CLASS=value>false</SPAN> for the <B>Music.autoDisengageEnabled</B> property will prevent those link interceptors from initiating the auto disengage process, and they will not perform any auto disengage action until such a time as the <B>Music.autoDisengageEnabled</B> property is set to <SPAN CLASS=value>true</SPAN>.</P>
+
+<P>The <B>Music.autoDisengageEnabled</B> property provides a convenient way, while testing content, to compare the behavior of the content when the Auto Disengage extension is enabled to its behavior when the extension is disabled - without having to maintain separate documents. This is all the more helpful if your content is making use of the other customization options for this extension, in which case, maintaining separate versions of the content for comparison purposes could be a real nuisance.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property can be used to enable or disable the Auto Disengage extension at any time, even after the document has completed loading in.
+</UL>
+
+<A NAME="Music.autoEngageMode"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.autoEngageMode</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;"<SPAN CLASS=value>always</SPAN>"&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.autoEngageMode</B> static property is a string variable, specifying the conditions necessary for automatically re-engaging the player's underlying audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>Because the Auto Disengage extension could cause the player's audio engine to become disengaged, as a result of audio inactivity or the user clicking on a link to a media file that is known (see the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> static method), there needs to be some mechanism for eventually re-engaging the audio engine - otherwise the Beatnik-sonified content could be rendered permanently mute while the user continues to browse the sonified site.</P>
+
+<P>In most cases, when the audio engine has been disengaged as a result of audio inactivity, it may be appropriate for the engine to re-engage once again when audio activity commences. In some cases, however, where the audio engine has been disengaged as a result of the user clicking on a link to a media file that is known by the Auto Disengage extension, it may not be appropriate for the audio engine to re-engage while the other media player window is still focused and the browser window containing the Beatnik-sonified content is behind it. In such cases, it may only be appropriate for the audio engine to attempt re-engaging if the Beatnik-sonified content is focused.</P>
+
+<P>Three different auto engage modes are supported...</P>
+
+<UL>
+	<LI>"<SPAN CLASS=value>always</SPAN>"<BR>
+		<P>When the <B>Music.autoEngageMode</B> property is set to the value "<SPAN CLASS=value>always</SPAN>", the Auto Disengage extension will attempt to re-engage the audio engine whenever a Music Object instance becomes audible (ie. the value of its <A HREF="../../instance-properties.html#audible"><B>audible</B></A> property becomes <SPAN CLASS=value>true</SPAN> after having previously been <SPAN CLASS=value>false</SPAN>). An instance could become audible if it is started playing after having been in a stopped or paused state, or, in the case of instances where the <A HREF="../../instance-properties.html#usage"><B>usage</B></A> property is set to the value "<SPAN CLASS=value>notes</SPAN>", a musical note is played through the instance.</P>
+	<LI>"<SPAN CLASS=value>when focused</SPAN>"<BR>
+		<P>When the <B>Music.autoEngageMode</B> property is set to the value "<SPAN CLASS=value>when focused</SPAN>", the Auto Disengage extension will only attempt to re-engage the audio engine when a Music Object instance becomes audible and the window containing the sonified content is focused.</P>
+	<LI>"<SPAN CLASS=value>never</SPAN>"<BR>
+		<P>When the <B>Music.autoEngageMode</B> property is set to the value "<SPAN CLASS=value>never</SPAN>", the Auto Disengage extension will never attempt to re-engage the audio engine. This affords you the option of implementing your own custom re-engage behaviors.</P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property can be modified at any time, and its value at the moment that a potential auto engage condition arises will determine whether or not the audio engine actually attempts to re-engage.
+</UL>
+
+<A NAME="Music.mediaLinkInterception"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.mediaLinkInterception</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>true</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.mediaLinkInterception</B> static property is a boolean variable, specifying whether or not links to known types of media files should be intercepted in order to initiate the auto disengage process.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>If the <B>Music.mediaLinkInterception</B> property is set to <SPAN CLASS=value>false</SPAN> at the time that the document completes loading in, then links to media files will not be intercepted, and the values of the <A HREF="#Music.mediaLinkShutoutTime"><B>Music.mediaLinkShutoutTime</B></A> and <A HREF="#Music.mediaLinksNoOnClicks"><B>Music.mediaLinksNoOnClicks</B></A> static properties will have no effect on the behavior of the document.</P>
+
+<P>If, on the other hand, the <B>Music.mediaLinkInterception</B> property is set to <SPAN CLASS=value>true</SPAN> at the time that the document completes loading in, and the user's system is not capable of mixing audio from multiple applications, and the document is not being browsed in Netscape 6 or the <A HREF="#Music.mediaLinksNoOnClicks"><B>Music.mediaLinksNoOnClicks</B></A> static property is set to <SPAN CLASS=value>true</SPAN>, then all links to media file types that are known by the Auto Disengage extension (see the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> static method) will have interceptors added to them, so that the auto disengage process can be initiated when the user clicks on these links.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>The <B>Music.mediaLinkInterception</B> property should be set before the document has completed loading in. Any value that is set for this property after the document has completed loading in will have no effect on the behavior of the document.
+</UL>
+
+<A NAME="Music.mediaLinkShutoutTime"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.mediaLinkShutoutTime</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>4000</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.mediaLinkShutoutTime</B> static property is an integer variable, specifying for how long (measured in milliseconds) the auto engage mechanism should be temporarily disabled, after the auto disengage process has been initiated from an intercepted media file link.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>On systems that cannot mix audio from multiple applications, the purpose behind the Auto Disengage extension's interception of media file links is to give other media players the opportunity to use the system's audio device by initiating the auto disengage process and forcing the Beatnik Player's underlying audio engine to relinquish the audio device. Because it may sometimes take certain media player applications several seconds to load up and start playing the file that is being linked to, the shutout mechanism provides a way to protect against the auto engage mechanism (see the <A HREF="#Music.autoEngageMode"><B>Music.autoEngageMode</B></A> static property) re-engaging the audio engine while the media player is still loading (which could, otherwise, prevent it from being able to use the audio device).</P>
+
+<P>So, when a link to a type of media file that is known by the Auto Disengage extension (see the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> static method) is intercepted and the auto disengage process is initiated, then it will not be possible for the auto engage process to occur for at least the amount of time specified by the <B>Music.mediaLinkShutoutTime</B> property.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This property can be modified at any time, and its value at the moment that a media file link is intercepted will determine for how long, after the auto disengage process is initiated, that the auto engage process will be shut out.
+	<LI>If the <A HREF="#Music.mediaLinkInterception"><B>Music.mediaLinkInterception</B></A> static property is set to <SPAN CLASS=value>false</SPAN> at the time that the document completes loading in, then interceptors are not automatically added to media file links and the value of the <B>Music.mediaLinkShutoutTime</B> property will have no effect on the behavior of the document.
+</UL>
+
+<A NAME="Music.mediaLinksNoOnClicks"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.mediaLinksNoOnClicks</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Auto Disengage</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>false</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.mediaLinksNoOnClicks</B> static property is a boolean variable, specifying if the links to media file types that are known by the Auto Disengage extension have no manually code <B>ONCLICK</B> event handlers.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The default value of this property is <SPAN CLASS=value>false</SPAN>, and the property should only be set to <SPAN CLASS=value>true</SPAN> if it is known for certain that none of the links to media files that could be intercepted by the Auto Disengage extension have pre-existing <B>ONCLICK</B> event handlers in the HTML code.</P>
+
+<DIV CLASS=subsection>A Bug in Netscape 6</DIV>
+
+<P>The <B>Music.mediaLinksNoOnClicks</B> property exists purely because of a bug in Netscape 6. With the initial release of Netscape 6, it was discovered that this browser had a significant issue that could cause the automatic attachment of handlers to HTML elements, using JavaScript, to interfere with other aspects of the proper functioning of HTML pages. The Auto Disengage extension achieves its interception of links to media files by attaching handlers to the <B>ONCLICK</B> events of links to any media file types that it knows about (see the <A HREF="#Music.addMediaFileExtensions"><B>Music.addMediaFileExtensions</B></A> static method).</P>
+
+<P>The value of this property will be used to determine whether or not event handlers can be automatically attached to HTML elements in order to intercept media file links, if the user is browsing with Netscape 6. If the user is browsing with Netscape 6 and this property is set to <SPAN CLASS=value>false</SPAN>, then media file links will not be intercepted, regardless of the value of the <A HREF="#Music.mediaLinkInterception"><B>Music.mediaLinkInterception</B></A> static property, or any other of the Auto Disengage extension's properties.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>The <B>Music.mediaLinksNoOnClicks</B> property should be set before the document has completed loading in. Any value that is set for this property after the document has completed loading in will have no effect on the behavior of the document.
+	<LI>If the <A HREF="#Music.mediaLinkInterception"><B>Music.mediaLinkInterception</B></A> static property is set to <SPAN CLASS=value>false</SPAN> at the time that the document completes loading in, then interceptors are not automatically added to media file links and the value of the <B>Music.mediaLinksNoOnClicks</B> property will have no effect on the behavior of the document.
+</UL>
+
+</BODY></HTML>

@@ -1,0 +1,141 @@
+<HTML>
+<HEAD>
+	<TITLE>Migrating Content from Music Object 3.0.x to 3.1.x</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Migrating Content from Music Object 3.0.x to 3.1.x
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Some fairly minor, but nevertheless noteworthy changes have been made to the Music Object API between versions 3.0.x and 3.1.x. Some of these changes may require that your existing sonified code be modified in some small way. To help transition your code to use the 3.1.x (and later) versions of Music Object, this document provides guidelines for easily updating your code.</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+If your content has been not been authored for a Music Object 3.0.x version, then you should first consult previous sections about migrating your content, starting from the Music Object version your content is currently using and working your way up to version 3.0.x. Once all your content has been migrated to version 3.0.x, then it will be safe to follow the guidelines in this document to upgrade further to version 3.1.x.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="guidelines"></A>
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+1. Make Backups
+</TD></TR></TABLE>
+<BR>
+
+<P>Create a backup of the local versions of any Web sites you wish to update <B>BEFORE</B> you make any of the following changes. This is a wise safety measure.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+2. Download the Latest Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Download the new "music-object.js" file by <B>right-clicking</B> (click-and-hold for Mac users) on the link below and selecting the 'Save Link As...' or 'Save Target As...' option from the pop-up menu. Save the file to your local hard drive.</P>
+
+<P><A HREF="../../javascript/music-object.js" TARGET="_top">music-object.js</A></P>
+
+<P>If this does not work or you do not see a 'Save Link As...' or 'Save Target As...' option in the pop-up, you can also obtain the new "music-object.js" file if you <A HREF="../../index-body.html#download-it" TARGET="_parent">download</A> the latest version of the Beatnik Music Object Documentation. Once you have downloaded and de-archived the documentation, you can find the "music-object.js" file by following these steps...</P>
+
+<OL>
+	<LI>Open up the documentation's main folder.
+	<LI>Then, from inside the documentation's main folder, open up the folder called "web-authoring".
+	<LI>Inside this folder, you will see a folder called "javascript". This is where the "music-object.js" file is located.
+	<LI>Copy the file from this location.
+		<P><IMG SRC="../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Be sure NOT to move the "music-object.js" file outside of the "javascript" folder, as this would cause the documentation to not function correctly.</P>
+</OL>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+3. Replace Your Existing Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that you have the latest "music-object.js" file, simply replace the existing "music-object.js" file you are using in any and all Web sites that you have authored with interactive Beatnik content.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+4. Modify Your Code
+</TD></TR></TABLE>
+<BR>
+
+<P>Although we've provided the backwards compatibility patch, <A HREF="#compatibility-patch">Music Object Patch - Pre 3.1.0</A>, we strongly advocate that you play it safe and just go through the process of updating your code as soon as you start using Music Object 3.1.x. The changes in the Music Object API may not even affect your code, depending on whether or not your code made reliance upon any of the features that have changed. Either way, the best course of action is to religiously follow the steps outlined below on each sonified Web page.</P>
+
+<OL>
+	<LI><B>Open the sonified page(s) in a good text editor</B><BR>
+		If you have a text editor that can open multiple documents at the same time and perform a search-and-replace procedure through all the currently open documents, this would be ideal. You should open up all documents that have been sonified using the Music Object API into this text editor. If, on the other hand, your text editor cannot open multiple documents, then you will have to repeat this process for each sonified document by loading in the documents one at a time and performing the search-and-replace procedures listed below.
+		<P></P>
+	<LI><B>Change "new musicObject" to "new Music"</B><BR>
+		Perform a search-and-replace procedure to change all occurrences of the text "new musicObject" with the new text "new Music". This will take care of the deprecated "musicObject" constructor name no longer being supported in 3.1.x.
+		<P></P>
+	<LI><B>Change "playGroovoid" to "play"</B><BR>
+		Perform a search-and-replace procedure to change all occurrences of the text "playGroovoid" with the new text "play". This will take care of the "playGroovoid" method no longer being supported. All the functionality of the "playGroovoid" method is supported by the "play" method. There is no need to change the parameters you were previously using in the "playGroovoid" method.
+		<P></P>
+	<LI><B>Change "fadeFromTo" to "fadeVolume"</B><BR>
+		Perform a search-and-replace procedure to change all occurrences of the text "fadeFromTo" with the new text "fadeVolume". This will take care of the "fadeFromTo" method no longer being supported. All the functionality of the "fadeFromTo" method is supported by the "fadeVolume" method. There is no need to change the parameters you were previously using in the "fadeFromTo" method.
+		<P></P>
+	<LI><B>Change both "isReady ()" and "isReady()" to "ready"</B><BR>
+		Perform two separate search-and-replace procedures to change all occurrences of the text "isReady ()" and all occurrences of the text "isReady()" with the new text "ready". This will take care of the "isReady" method no longer being supported and being replaced by the "ready" instance property. Performing both search-and-replace steps is necessary if there is any chance that your coding style is inconsistent or if more than one person has worked on the sonification code. If you are skilled at GREP-style search-and-replace you may be able to get away with just one step.
+		<P></P>
+	<LI><B>Change "mo_installBeatnik" to "Music.installPlayer"</B><BR>
+		Perform a search-and-replace procedure to change all occurrences of the text "mo_installBeatnik" with the new text "Music.installPlayer". This will take care of the deprecated "mo_installBeatnik" function no longer being supported in 3.1.x.
+		<P></P>
+	<LI><B>Modify all uses of "stopAll"</B><BR>
+		Perform a search procedure to find each instance of the text "stopAll". For each instance that you find, be sure to replace the prefixed Music Object instance name with just "<NOBR>Music</NOBR>". For example, "<NOBR>myMusicObject.stopAll ()</NOBR>" should be replaced with "<NOBR>Music.stopAll ()</NOBR>". If the "stopAll" method is being used within a "with" statement and there is no instance name prefixing the actual call to the method, then you will have to prefix "Music." to the method. For example, "<NOBR>with (myMusicObject) {setVolume (0); stopAll ()}</NOBR>" will have to become "<NOBR>with (myMusicObject) {setVolume (0); Music.stopAll ()}</NOBR>".
+		<P></P>
+	<LI><B>Modify all uses of "getNoteName"</B><BR>
+		Perform a search procedure to find each instance of the text "getNoteName". For each instance that you find, be sure to replace the prefixed Music Object instance name with just "<NOBR>Music</NOBR>". For example, "<NOBR>myMusicObject.getNoteName (62)</NOBR>" should be replaced with "<NOBR>Music.getNoteName (62)</NOBR>". If the "getNoteName" method is being used within a "with" statement and there is no instance name prefixing the actual call to the method, then you will have to prefix "Music." to the method. For example, "<NOBR>with (myMusicObject) {playNote (1,0,1,getNoteName (62),127,1000)}</NOBR>" will have to become "<NOBR>with (myMusicObject) {playNote (1,0,1,Music.getNoteName (62),127,1000)}</NOBR>".
+		<P></P>
+	<LI><B>Modify all uses of "getNoteNumber"</B><BR>
+		Perform a search procedure to find each instance of the text "getNoteNumber". For each instance that you find, be sure to replace the prefixed Music Object instance name with just "<NOBR>Music</NOBR>". For example, "<NOBR>myMusicObject.getNoteNumber ('A3')</NOBR>" should be replaced with "<NOBR>Music.getNoteNumber ('A3')</NOBR>". If the "getNoteNumber" method is being used within a "with" statement and there is no instance name prefixing the actual call to the method, then you will have to prefix "Music." to the method. For example, "<NOBR>with (myMusicObject) {playNote (1,0,1,getNoteNumber ('A3'),127,1000)}</NOBR>" will have to become "<NOBR>with (myMusicObject) {playNote (1,0,1,Music.getNoteNumber ('A3'),127,1000)}</NOBR>".
+		<P></P>
+	<LI><B>Modify all uses of "getVersion"</B><BR>
+		Perform a search procedure to find each instance of the text "getVersion". For each instance that you find, be sure to replace both the instance name and the method with just "<NOBR>Music.playerVersion</NOBR>". For example, "<NOBR>myMusicObject.getVersion ()</NOBR>" should be replaced with "<NOBR>Music.playerVersion</NOBR>". If the "getVersion" method is being used within a "with" statement and there is no instance name prefixing the actual call to the method, then you must also replace the method call with the full "Music.playerVersion". For example, "<NOBR>with (myMusicObject) {setVolume (0); myVariable = getVersion ()}</NOBR>" will have to become "<NOBR>with (myMusicObject) {setVolume (0); myVariable = Music.playerVersion}</NOBR>".
+		<P></P>
+</OL>
+
+<P>After performing the above changes to your code, your content will then be Music Object 3.1.x compliant. <B>Under no circumstances</B> should you perform this procedure upon the "music-object.js" file itself - <B>ONLY</B> your sonified documents which source in the "music-object.js" file.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+5. Test Your Content
+</TD></TR></TABLE>
+<BR>
+
+<P>Check your Web site pages locally to ensure that all your content is still working. If possible, use several browser versions in your testing. Do not delete the backup(s) that you made in step 1 until you have uploaded the changes to the online version of your Web site and verified that all your content works online as well. There are some authoring issues that only impact content when it is being served from a Web server. Even if you have tested your content online and are confident everything is peachy, you may still wish to keep the backups hanging around for a week or so, just in case. Sometimes it is not possible to test all possibilities and you may receive reports from Web site visitors saying that things are suddenly amiss with your content. Always play it safe with your Web content.</P>
+
+<A NAME="compatibility-patch"></A>
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object Patch - Pre 3.1.0
+</TD></TR></TABLE>
+<BR>
+
+<P>For your convenience, Beatnik Inc. is providing a temporary Music Object patch to ease the transition to the new 3.1.x (and higher) versions. All that is necessary is to source in the tiny additional JavaScript file immediately after sourcing in the "music-object.js" file, as follows...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-p-pre310.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Using this JavaScript file will smooth over the API differences between versions 3.0.x and 3.1.x, and existing code should continue to work without further modification. You can find the "music-object-p-pre310.js" file inside the "javascript" folder of this documentation. If you absolutely need to upgrade to a 3.1.x (or later) version of Music Object because of some new features you need to use in your code, but you don't have the time to immediately make the changes outlined above, then this may be an acceptable temporary solution. However, it is still recommended that you follow the <A HREF="#guidelines">guidelines</A> above for updating your content as soon as possible.</P>
+
+<BLOCKQUOTE>
+<IMG SRC="../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;If you are unfamiliar with Music Object extensions, consult the section <A HREF="../../music-object-reference/extensions/intro.html">About Music Object Extensions</A>.
+</BLOCKQUOTE>
+
+</BODY></HTML>

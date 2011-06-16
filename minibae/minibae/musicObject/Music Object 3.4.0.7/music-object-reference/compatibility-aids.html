@@ -1,0 +1,251 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Compatibility Aids</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Compatibility Aids
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#auto-install">Auto Install</A>
+			<LI><A HREF="#dont-bug-the-user">Don't Bug the User</A>
+			<LI><A HREF="#filling-the-holes">Filling the Holes</A>
+			<LI><A HREF="#panel-substitute">Control Panel Substitute Graphics</A>
+			<LI><A HREF="#cutting-edge-content">Cutting Edge Content</A>
+<!--			<LI><A HREF="#other-audio-players">Co-existing With Other Audio Players</A>-->
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="auto-install"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Auto Install
+</TD></TR></TABLE>
+<BR>
+
+<P>Web content authors are understandably concerned about any reliance their content may have upon browser add-on components shipped by third party developers. For one thing, such add-on components have traditionally required the user to download large installers and then interrupt their browsing in order to install the component into the browser. Not only would this installation potentially take a long time, but the user may not even return immediately to the Web site they were visiting after installation is complete.</P>
+
+<P>Well, with the advent of the 4.x browsers (Netscape Navigator 4.x and Microsoft Internet Explorer 4.x), it is now possible for users who do not have the Beatnik Player installed to install it while still using their browser. It is no longer necessary for users to download a large manual installer, quit their browser, locate and run the downloaded installer, then relaunch their browser and attempt to continue browsing where they left off.</P>
+
+<P>Beatnik Inc. offers an easy online way to install the Beatnik Player - the Beatnik Player Install Wizard - which works for Netscape Navigator and Microsoft Internet Explorer. By using Music Object, sonified pages can invoke the Beatnik Player Install Wizard automatically without even taking the user away from the Web page they're on at the time. A small prompt window (shown below) opens up to take the user step-by-step through the installation process. At any time, the user has the option of cancelling the install and may still browse the Web page they were on - just without any Beatnik music or audio functionality.</P>
+
+<P ALIGN=CENTER><IMG SRC="../images/compatibility-auto-install.gif" WIDTH=512 HEIGHT=323 ALT="Beatnik Enhanced Content!!"></P>
+
+<!--***********************************************************************-->
+
+<A NAME="dont-bug-the-user"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Don't Bug the User
+</TD></TR></TABLE>
+<BR>
+
+<P>Another concern that some Web content developers have is that they do not wish to interrupt the Web browsing experience for users - even if a user needs to have a certain component installed in order to get a richer experience. To such content developers, site sonification is seen as an enhancement that is of secondary importance to the basic function that the Web site provides. These Web developers may be quite happy knowing that the investment of time and energy put into sonifying the Web content will provide a richer experience for those users who have the Beatnik Player installed, but may be lost on those users who do not have the Player installed.</P>
+
+<P>In cases like this where not interfering in any way with the user's browsing of the site is of paramount importance, it is possible to suppress the default behavior of Music Object by setting the <A HREF="static-properties.html#Music.showCompatibilityPrompt"><B>Music.showCompatibilityPrompt</B></A> property to a value of <SPAN CLASS=value>false</SPAN> subsequent to sourcing in the "music-object.js" file, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   Music.showCompatibilityPrompt = false;
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>When a sonified Web page loads and Music Object detects that the Beatnik Player is not installed on a user's system and the <B>Music.showCompatibilityPrompt</B> property is set to <SPAN CLASS=value>false</SPAN>, the <A HREF="#auto-install">auto install prompt</A> will not be displayed. Instead, the page will still behave normally except there will not be any music or audio functionality through Beatnik.</P>
+
+<BLOCKQUOTE>
+	<IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;Setting this property to false will also suppress an auto install prompt that may result from the sonified content requiring a version of the Beatnik Player that is greater than the version currently installed in the user's browser. See the <A HREF="#cutting-edge-content">Cutting Edge Content</A> section for more information.
+</BLOCKQUOTE>
+
+<!--***********************************************************************-->
+
+<A NAME="filling-the-holes"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Filling the Holes
+</TD></TR></TABLE>
+<BR>
+
+<P>So, Music Object has the ability to detect if the Beatnik Player is installed or not. But, what happens when you're embedding the Beatnik Player onto a page and you've specified the control panel to be visible? If the Beatnik Player is not installed, what does the user see instead? Well, since maintaining the Web page's layout integrity is of key importance, it wouldn't really be acceptable for nothing to be put in place of the Player control panel - only to have the rest of the document's layout offset as a result. Nor would it be acceptable for there simply to be an inexplicable blank hole left in the page, with the user having no clue as to the purpose of the hole.</P>
+
+<P>
+<IMG SRC="../images/panel-get-beatnik.gif" WIDTH=144 HEIGHT=60 ALT="Get Beatnik!" HSPACE=4 ALIGN=RIGHT>
+So, Music Object fills the space that would otherwise be occupied by the Player control panel with a table of the exact same dimensions, as specified by the <B>WIDTH</B> and <B>HEIGHT</B> attributes. In cases where the user does not have the Beatnik Player installed at all, the table will contain the text "Get Beatnik!", as shown in the figure to the right. The text will be linked so that clicking on it will invoke the Beatnik Player Install Wizard.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>
+<IMG SRC="../images/panel-upgrade-beatnik.gif" WIDTH=144 HEIGHT=60 ALT="Upgrade Beatnik!" HSPACE=4 ALIGN=RIGHT>
+In cases where the user has a version of the Beatnik Player installed, but that version is lower than a minimum version required by the sonified content and the <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A> static property is set to <SPAN CLASS=value>true</SPAN>, then the text "Upgrade Beatnik!" will be displayed as shown in the figure to the right. The text will be linked to invoke the Beatnik Player Install Wizard.
+<BR CLEAR=RIGHT>
+</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL>
+	<LI>the color for the substitute table is always white.
+	<LI>the table is sized to take up the same amount of space in the layout as the Player control panel would have taken.
+	<LI>the table will not be shown if the <B>HIDDEN</B> attribute is specified when embedding the instance.
+	<LI>the table will also not be shown if the user's browser / platform combination is not supported by the Beatnik Player, or if it is supported but the Beatnik Player Install Wizard is not able to update the user's browser - such as is the case with WebTV.
+	<LI>if the specified WIDTH is less than 90 or the specified HEIGHT is less than 15, then the table and linked text will not be displayed, but a blank table with no text will be created to take up the same amount of space as specified by the WIDTH and HEIGHT attributes.
+	<LI>if the specified HEIGHT is less than 30, then the linked text inside the table will be scaled down to a smaller font size in order to still fit.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="panel-substitute"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Control Panel Substitute Graphics
+</TD></TR></TABLE>
+<BR>
+
+<P>In addition to the built-in mechanism that creates a substitute "Get Beatnik!" table in cases where the Beatnik Player is not installed on the user's system, or a substitute "Upgrade Beatnik" table when the version installed is not adequate for the sonified content, Music Object also provides the option of displaying substitute graphics in place of Player control panels. Unlike the substitute table mechanism which is self-contained inside Music Object, using the substitute graphics mechanism requires you to serve additional graphics from your Web site. You can serve these graphics from anywhere on your Web site, as long as you specify the correct path to these graphics from the current HTML page.</P>
+
+<DIV CLASS=subsection>An Example</DIV>
+
+<P>Take a look at the example below. In order to use the substitute graphics mechanism, we simply define the static property <A HREF="static-properties.html#Music.getPlayerImagesPath"><B>Music.getPlayerImagesPath</B></A> subsequent to sourcing in the "music-object.js" file, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   Music.getPlayerImagesPath = "<SPAN CLASS=sample-code-highlighted>http://www.my-web-site.com/my-images-folder/</SPAN>";
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The <B>Music.getPlayerImagesPath</B> static property is a String variable specifying the Internet location of the graphics that are to be used as substitutes for the control panel. You do not name the individual graphics - just the directory in which they reside. Music Object expects that the graphics have very specific names, as listed in the table further below. If you do not name your graphics exactly as required, then the substitute mechanism will not work and the user will see broken graphics symbols on the page where the Player control panel was to be. Note that the directory path you specify must also end with a forward slash ("/").</P>
+
+<P>In our example, we have specified an absolute URL. Of course, you could also specify a relative URL, but the advantage of specifying an absolute URL in this case is that you can copy the exact same line of code into all your sonified HTML pages. In fact, you could even put this statement into a general Music Object preferences file that is sourced into all sonified documents, in much the same way as the shared "debug-prefs.js" file discussed in the <A HREF="debugging-aids.html#sharing-debug-settings">Debugging Aids</A> section.</P>
+
+<DIV CLASS=subsection>Substitute Graphics Filenames</DIV>
+
+<P>The filenames required for the various substitute graphics are shown in the table below, along with their exact dimensions. When you serve these graphic files from your own Web site, it is imperative that you name them exactly the same as shown here. <!--To include the graphics shown in the table with your own Web site media, save the images to an appropriate place in the local mirror of your Web site. To do this, right-click (click-and-hold for Mac users) on an image to bring up its contextual menu and then select the "Save Image As..." option. Repeat this for each image.--></P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-column-header>Image&nbsp;Filename</TD>
+<!--		<TD CLASS=data-table-column-header>Image</TD>-->
+		<TD CLASS=data-table-column-header>Width</TD>
+		<TD CLASS=data-table-column-header>Height</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted>get-player-144x60.gif</TD>
+<!--		<TD CLASS=data-table-item><IMG SRC="../images/get-player/style-01/get-player-144x60.gif" WIDTH=144 HEIGHT=60></TD>-->
+		<TD CLASS=data-table-item ALIGN=CENTER>144</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>60</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted>get-player-144x45.gif</TD>
+<!--		<TD CLASS=data-table-item><IMG SRC="../images/get-player/style-01/get-player-144x45.gif" WIDTH=144 HEIGHT=45></TD>-->
+		<TD CLASS=data-table-item ALIGN=CENTER>144</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>45</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item-highlighted>get-player-144x15.gif</TD>
+<!--		<TD CLASS=data-table-item><IMG SRC="../images/get-player/style-01/get-player-144x15.gif" WIDTH=144 HEIGHT=15></TD>-->
+		<TD CLASS=data-table-item ALIGN=CENTER>144</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER>15</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--<P>There are actually a few variations of these substitute graphics to choose from. For the full list, consult the Appendix <A HREF="../appendixes/control-panel-substitutes.html">Control Panel Substitute Graphics</A>.</P>-->
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL>
+	<LI>If you name the images incorrectly in your Web site media, the mechanism will not work.
+	<LI>If you specify an incorrect path to the images from the sonified document, the mechanism will not work.
+	<LI>If you're using WIDTH and HEIGHT attribute values other than those listed in the table, the substitute graphics mechanism will not be used, but the substitute table mechanism will be used instead.
+	<LI>Unlike the substitute table mechanism, there is no provision for a variation on the graphics for when the user has an installed version of the Beatnik Player that is lower than a version required by the content - the same graphic will be used for both the "Get Beatnik!" and "Upgrade Beatnik" situations.
+</UL>
+
+<DIV CLASS=subsection>Your Own Look and Feel</DIV>
+
+<P><!--While Beatnik Inc. provides a standard set of substitute graphics, there's nothing to say that you can't craft your own.-->You are free to craft your own Beatnik Player substitute graphics. After all, it's your Web site and the graphics that appear in your pages should match the look and feel of the other graphics in your pages, as well as the site's overall aesthetic. If you create your own substitute graphics, you need to make sure that they are in the GIF format and are named exactly as shown in the table above, matching even the case of the letters.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="cutting-edge-content"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Cutting Edge Content
+</TD></TR></TABLE>
+<BR>
+
+<P>At some point you may find yourself in a position where you're creating content that uses features of the most recent version of the Beatnik Player. Your content may be so dependent upon certain new features that you may not wish the user to experience the content unless they have the very latest version installed. In this event, the <A HREF="static-methods.html#Music.requireMinPlayerVersion"><B>Music.requireMinPlayerVersion</B></A> static method lets you specify a minimum version that is needed in order for the content to be viewed. If the user doesn't have at least this version installed when they encounter your sonified content, a prompt window (seen below) will pop up prompting them to upgrade their version of the Player.</P>
+
+<P ALIGN=CENTER><IMG SRC="../images/compatibility-upgrade.gif" WIDTH=512 HEIGHT=323 ALT="Please Upgrade Beatnik"></CENTER>
+
+<P>Also, if the <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A> static property is set to <SPAN CLASS=value>true</SPAN>, then no Beatnik Player instances will be embedded in the page and the page will have no music or audio functionality through Beatnik. Instead, either substitute tables or a substitute graphics will be shown in the place of all Player control panels that would otherwise have appeared on the page. See the <A HREF="#filling-the-holes">Filling the Holes</A> and <A HREF="#panel-substitute">Control Panel Substitute Graphics</A> sections for more information.</P>
+
+<DIV CLASS=subsection>An Example</DIV>
+
+<P>The <B>Music.requireMinPlayerVersion</B> static method lets you specify the minimum version of the Player that is required in order for the content to function correctly. Typically, you will specify the version number as three digits separated by dots (periods), as in "1.3.2". The first digit represents the major version number, the second digit represents the minor version number, and the third digit represents a bug fix or maintenance release number. Using the <B>Music.requireMinPlayerVersion</B> static method is easy. Simply call the method subsequent to sourcing in the "music-object.js" file, as follows...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   Music.requireMinPlayerVersion ('2.0.0');
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL>
+	<LI>when trying to ensure feature support, it is best not to specify the third digit (bug fix / maintenance release number) in your required minimum version, as this number may vary significantly between different SKU's of the Beatnik Player - such as the Beatnik Player for Netscape Navigator (Windows), the Beatnik Player for Microsoft Internet Explorer (Windows), the Beatnik Player PRO for Netscape Navigator (MacOS), etc.
+	<LI>the "upgrade" prompt will not be shown if the <B>Music.showCompatibilityPrompt</B> static property is set to false. See the <A HREF="#dont-bug-the-user">Don't Bug the User</A> section for more information.
+</UL>
+
+<!--***********************************************************************
+
+<A NAME="other-audio-players"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Co-existing With Other Audio Players
+</TD></TR></TABLE>
+<BR>
+
+-->
+
+</BODY></HTML>

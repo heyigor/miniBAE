@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 1.6.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 1.6.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1997-06-26</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD: playGroovoid</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../obsoleted-features.html#playGroovoid" TARGET="_parent"><B>playGroovoid</B></A> instance method provides a convenient way to play Groovoids, simply by specifying the Groovoid name using a string parameter.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD: getInfo</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-methods.html#getInfo" TARGET="_parent"><B>getInfo</B></A> instance method provides a way to obtain specific meta data information from an RMF file that is currently loaded into a Music Object instance.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD: getPanelMode</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-methods.html#getPanelMode" TARGET="_parent"><B>getPanelMode</B></A> instance method returns a string value, indicating the Music Object instance's current control panel mode.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW INSTANCE METHOD: getPanelDisplay</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../instance-methods.html#getPanelDisplay" TARGET="_parent"><B>getPanelDisplay</B></A> instance method returns a string value, indicating the Music Object instance's current control panel display type. 
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE: getReverb Becomes getReverbType</DIV>
+
+<BLOCKQUOTE>
+It was decided that the name of the method used to query the audio engine's currently selected reverb type should be more specific that just "getReverb". Consequently, the <B>getReverb</B> instance method has been replaced by the functionally equivalent <A HREF="../../obsoleted-features.html#getReverbType" TARGET="_parent"><B>getReverbType</B></A> instance method.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE: setReverb Becomes setReverbType</DIV>
+
+<BLOCKQUOTE>
+It was decided that the name of the method used to set the audio engine's global reverb type should be more specific that just "setReverb". Consequently, the <B>setReverb</B> instance method has been replaced by the functionally equivalent <A HREF="../../obsoleted-features.html#setReverbType" TARGET="_parent"><B>setReverbType</B></A> instance method.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW GLOBAL FUNCTION: random</DIV>
+
+<BLOCKQUOTE>
+The new <B>random</B> global function provides a convenient way to generate random numbers within a specified range.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW GLOBAL FUNCTION: magicEmbed</DIV>
+
+<BLOCKQUOTE>
+The new <B>magicEmbed</B> global function provides a convenient way to generate the HTML code necessary to embed a player instance.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW GLOBAL FUNCTION: hasBeatnik</DIV>
+
+<BLOCKQUOTE>
+The new <B>hasBeatnik</B> global function provides a way to easily determine whether or not the player is installed in the user's browser.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW OBJECT: randomPP</DIV>
+
+<BLOCKQUOTE>
+The new <B>randomPP</B> object provides a convenient way to generate a sequence of random numbers within a specified range, and where there is a very low probability of any one random number being repeated twice in a row.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Improved Note Playing Methods</DIV>
+
+<BLOCKQUOTE>
+The behavior of the <B>noteOn</B>, <B>noteOff</B>, and <B>playNote</B> instance methods has been improved to more correctly implement the channel monophonic state (as set by the <B>setMonophonic</B> instance method and queried by the <B>getMonophonic</B> instance method).
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>OBSOLETED FEATURE: xFrame Function</DIV>
+
+<BLOCKQUOTE>
+The <B>xFrame</B> global function is no longer offered as part of the core Music Object API.
+</BLOCKQUOTE>
+
+</BODY></HTML>

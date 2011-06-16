@@ -1,0 +1,234 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 3.4.0</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<HEAD><TITLE>Music Object Version 3.4.0</TITLE></HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 3.4.0<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 2001-03-16</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are upgrading from an older version of the Music Object API and would like to find out about the significant changes that have occurred between the version you are using and this version, please consult the section <A HREF="../intro.html#using-an-old-version">Using an Old Version of Music Object?</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="this-version"></A>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Summary of What's New</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#api">Music Object API Changes</A>
+				<UL>
+					<LI><A HREF="#api/general-improvements">General Improvements</A>
+						<UL>
+							<LI><A HREF="#api/general-improvements/mac-ie-support">Support for Microsoft Internet Explorer on the MacOS</A>
+							<LI><A HREF="#api/general-improvements/Music.promptUser">Improved Music.promptUser Static Method</A>
+						</UL>
+					<LI><A HREF="#api/new-extensibility-api-static-methods">Improved Extensibility API</A>
+						<UL>
+							<LI><A HREF="#api/improved-extensibility-api/Music.addKnownClient">Improved Music.addKnownClient Static Method</A>
+						</UL>
+					<LI><A HREF="#api/improved-extensions">Improved Music Object Extensions</A>
+						<UL>
+							<LI><A HREF="#api/improved-extensions/ducking">Improved Ducking Extension</A>
+							<LI><A HREF="#api/improved-extensions/song-info">Improved Song Info Extension</A>
+							<LI><A HREF="#api/improved-extensions/instruments">Instruments Extension Bug Fixed</A>
+						</UL>
+					<LI><A HREF="#api/general-changes">General Changes</A>
+						<UL>
+							<LI><A HREF="#api/general-changes/navigator-4.0">Netscape Navigator 4.0.x No Longer Supported</A>
+						</UL>
+				</UL>
+				<HR NOSHADE SIZE=1>
+			<LI><A HREF="#doc">Documentation Changes</A>
+				<UL>
+					<LI><A HREF="#doc/new-information">New Information</A>
+						<UL>
+							<LI><A HREF="#doc/new-information/emulating-contention">Emulating Audio Device Contention</A>
+						</UL>
+<!--
+					<LI><A HREF="#doc/new-tips-techniques">New Tips & Techniques</A>
+						<UL>
+							<LI><A HREF="#doc/new-tips-techniques/frameset-based-sonification">Frameset-based Sonification</A>
+						</UL>
+-->
+<!--
+					<LI><A HREF="#doc/new-demos">New Demos</A>
+						<UL>
+							<LI><A HREF="#doc/new-demos/ducking-extension">The Ducking Extension</A>
+						</UL>
+-->
+					<LI><A HREF="#doc/general-improvements">General Improvements</A>
+						<UL>
+							<LI><A HREF="#doc/general-improvements/new-branding">New Company Branding</A>
+							<LI><A HREF="#doc/general-improvements/more-printer-friendly">More Printer-friendly</A>
+							<LI><A HREF="#doc/general-improvements/improved-navigation">Improved Navigation</A>
+							<!--<LI><A HREF="#doc/general-improvements/beatnik-and-flash">"Using Beatnik and Flash Together" Section Improved</A>-->
+						</UL>
+				</UL>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<A NAME="api"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object API Changes
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="api/general-improvements"></A>
+
+<A NAME="api/general-improvements/mac-ie-support"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Support for Microsoft Internet Explorer on the MacOS</DIV>
+
+<BLOCKQUOTE>
+<P>While Microsoft Internet Explorer on the MacOS has basic support for the Netscape Plug-in API, it does not support the LiveConnect system of the plug-in API (LiveConnect is a technology developed by Netscape to allow communication between Java code, scripting code in HTML pages, and plug-ins). Because of this missing feature it has not been possible to offer support for sonification in this browser, since the crux of Beatnik's sonification platform relies on the ability to "wire" HTML, DHTML, Flash movies, etc. to the powerful interactive audio features of the Beatnik Player.</P>
+
+<P>So, it is with great pleasure that Beatnik can announce that it has developed its own proprietary system to work around this obstacle. In so doing, the Beatnik Player takes on the honor of being the very first scriptable plug-in for Microsoft Internet Explorer on the MacOS, and thereby further expands its broad range of platform support.</P>
+
+<P>Users can now experience your sonified content in Microsoft Internet Explorer on the MacOS. A first!</P>
+
+<IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;There are certain limitations and authoring considerations to be aware of when creating sonified content that is to be fully compatible with Internet Explorer on the Mac OS. For more information, see the section <A HREF="../../../tips-techniques/authoring-issues/index.html?issues/msie-mac.html" TARGET="_parent">Issues for Internet Explorer on the MacOS</A>.
+</BLOCKQUOTE>
+
+<A NAME="api/general-improvements/Music.promptUser"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Improved Music.promptUser Static Method</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../static-methods.html#Music.promptUser" TARGET="_parent"><B>Music.promptUser</B></A> static method has been improved so that the enter and escape keys can now be used in Microsoft Internet Explorer in order to trigger the ok and cancel actions for dialog boxes opened using this method. Previously, these keyboard shortcuts were only supported for Netscape browsers.
+</BLOCKQUOTE>
+
+<A NAME="api/improved-extensibility-api"></A>
+
+<A NAME="api/improved-extensibility-api/Music.addKnownClient"></A>
+<DIV CLASS=subsection>IMPROVED EXTENSIBILITY API: Improved Music.addKnownClient Static Method</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../extensibility-api.html#Music.addKnownClient" TARGET="_parent"><B>Music.addKnownClient</B></A> static method of the Music Object Extensibility API has been improved to offer the additional <B>CustomPropertiesOBJ</B> parameter. This optional parameter lets you register additional information for a known client, which can then later be accessed and handled by your custom compatibility code.
+</BLOCKQUOTE>
+
+<A NAME="api/improved-extensions"></A>
+
+<A NAME="api/improved-extensions/ducking"></A>
+<DIV CLASS=subsection>IMPROVED EXTENSIONS: Improved Ducking Extension</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../extensions/ducking/index.html" TARGET="_parent"><B>Ducking extension</B></A> has been improved to include the convenient new <A HREF="../../extensions/ducking/index.html#Music.duckingAttackTime" TARGET="_parent"><B>Music.duckingAttackTime</B></A>, <A HREF="../../extensions/ducking/index.html#Music.duckingSustainLevel" TARGET="_parent"><B>Music.duckingSustainLevel</B></A>, and <A HREF="../../extensions/ducking/index.html#Music.duckingReleaseTime" TARGET="_parent"><B>Music.duckingReleaseTime</B></A> static properties. These new properties make it easy for you to set your own logical default values for the <B>AttackTimeMsINT</B>, <B>SustainLevel0to100</B>, and <B>ReleaseTimeMsINT</B> parameters, so that these parameters can be omitted when setting up multiple ducking relationships. In addition to these new static properties, a bug that was found with the <A HREF="../../extensions/ducking/index.html#addDuckingMasters" TARGET="_parent"><B>addDuckingMasters</B></A> instance method was fixed for this version.
+</BLOCKQUOTE>
+
+<A NAME="api/improved-extensions/song-info"></A>
+<DIV CLASS=subsection>IMPROVED EXTENSIONS: Improved Song Info Extension</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../extensions/song-info/index.html" TARGET="_parent"><B>Song Info extension</B></A> has been improved to allow the newer "genre", "subgenre", "<NOBR>tempo description</NOBR>", and "<NOBR>original source</NOBR>" info field names to be specified in the <B>SongInfoFieldsSTR</B> parameter when calling the <B>showSongInfo</B> instance method.
+</BLOCKQUOTE>
+
+<A NAME="api/improved-extensions/instruments"></A>
+<DIV CLASS=subsection>IMPROVED EXTENSIONS: Instruments Extension Bug Fixed</DIV>
+
+<BLOCKQUOTE>
+A bug was found with the <B>Music.getPercussionName</B> and <B>Music.getProgramName</B> static methods and the <B>getProgramName</B> instance method. This bug has been fixed in <A HREF="../../extensions/instruments/version-history/index.html?versions/version-1.1.1.html" TARGET="_parent">maintenance release 1.1.1</A> of the Instruments extension.
+</BLOCKQUOTE>
+
+<A NAME="api/general-changes"></A>
+
+<A NAME="api/general-changes/navigator-4.0"></A>
+<DIV CLASS=subsection>GENERAL CHANGES: Netscape Navigator 4.0.x No Longer Supported</DIV>
+
+<BLOCKQUOTE>
+Because of a significantly dwindling installed base for 4.0.x versions of Netscape Navigator, and because of significant issues found specifically with versions 4.04 and 4.05, it was decided to discontinue support for 4.0.x versions of Navigator. Beatnik continues to support Navigator versions 4.5 and higher as well as the Netscape 6 browser. As a result of no longer supporting 4.0.x versions, the patch <A HREF="../../obsoleted-features.html#patch/navigator-4.04-bug" TARGET="_parent">Music Object Patch - Navigator 4.04 Bug</A> has been obsoleted.
+</BLOCKQUOTE>
+
+<A NAME="doc"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Documentation Changes
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="doc/new-information"></A>
+
+<A NAME="doc/new-information/emulating-contention"></A>
+<DIV CLASS=subsection>NEW INFORMATION: Emulating Audio Device Contention</DIV>
+
+<BLOCKQUOTE>
+In order to help you in customizing your sonified content to best make use of the ADCM (<A HREF="../../adcm.html" TARGET="_parent">Audio Device Contention Manager</A>), a feature was added to Beatnik Player version 2.2 (Windows only) to allow you to coerce the player into thinking that the system either does or does not exhibit the audio device contention issue (regardless of whether it truly does or not). Among other things, this new feature allows you to test your ADCM settings on a Windows system that does not exhibit the audio device contention issue. This feature is described in full in the new section <A HREF="../../adcm.html#emulating-contention" TARGET="_parent">Emulating Audio Device Contention</A>.
+</BLOCKQUOTE>
+
+<!--
+<A NAME="doc/new-tips-techniques"></A>
+
+<A NAME="doc/new-tips-techniques/frameset-based-sonification"></A>
+<DIV CLASS=subsection>NEW TIPS & TECHNIQUES SECTION: Frameset-based Sonification</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../tips-techniques/frameset-sonification.html" TARGET="_parent">Frameset-based Sonification</A> section describes powerful ways of utilizing framesets to provide a smooth audio experience that can flow throughout a Web site. With frameset-based sonification, users need not experience audio interruptions and abrupt ends to audio and music. Instead, users can experience a steady Web site soundtrack that flows over pages changes and navigation. This section explains how to employ cool frameset-based sonification techniques, like page transition sounds that play between pages, music that continues playing after leaving a page, shared audio services that speed up page load times across a sonified site, and more.
+</BLOCKQUOTE>
+-->
+
+<!--
+<A NAME="doc/new-demos"></A>
+
+<A NAME="doc/new-demos/ducking-extension"></A>
+<DIV CLASS=subsection>NEW DEMO: The Ducking Extension</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../extensions/ducking/index.html" TARGET="_parent">Ducking extension</A> provides methods for linking Music Object instances to one another and setting up automated ducking relationships. The new <A HREF="../../../demos/index.html?demos/ducking.html" TARGET="_parent">demo</A> for the Ducking extension, included in the documentation, provides practical examples of how the Ducking extension can be used in real life situations.
+</BLOCKQUOTE>
+-->
+
+<A NAME="doc/general-improvements"></A>
+
+<A NAME="doc/general-improvements/new-branding"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: New Company Branding</DIV>
+
+<BLOCKQUOTE>
+The Music Object API documentation has been updated to reflect the company's new corporate branding.
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements/more-printer-friendly"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: More Printer-friendly</DIV>
+
+<BLOCKQUOTE>
+<P>Several changes have been made to the layout of the documentation in order to help make it more printer-friendly. Among these improvements are...</P>
+<UL>
+	<LI><B>No Underlined Links</B>
+		<P>Links are no longer underlined, making the documentation much cleaner looking when printed. Sections containing large numbers of links now print out much less cluttered than before. Because links only apply to browsing the documentation, it is appropriate that links stand out less in print. Links can still be identified easily enough when browsing, since they are highlighted using a different color to the standard text. They also appear underlined when the mouse is moved over them (in browsers that support this feature).</P>
+	<LI><B>No "EDIT" Buttons For Methodizer</B>
+		<P>In previous versions of the documentation, an "EDIT" button would appear in certain method reference sections. This was to allow you to launch the <A HREF="../../../tools/methodizer/intro.html" TARGET="_parent">Music Object Methodizer</A> directly to those methods so that you could edit their parameters. This functionality still exists in the documentation, but there are no longer dedicated "EDIT" buttons. Instead, the method names for methods that can be edited in the Methodizer are linked to launch the Methodizer (for more information, see the section "<A HREF="../../../tools/methodizer/intro.html#launching-from-reference-sections" TARGET="_parent">Launching the Methodizer from Reference Sections</A>"). Because there are no longer dedicated "EDIT" buttons, this convenient interactive feature that is only applicable to browsing the documentation is now hidden when the documentation is printed.</P>
+	<LI><B>Improved Table Styles</B><BR>
+		<P>Styles for tables have been modified to improve how they appear in print. This includes making headings stronger and row and column boundary lines clearer.</P>
+</UL>
+</BLOCKQUOTE>
+
+<A NAME="doc/general-improvements/improved-navigation"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: Improved Navigation</DIV>
+
+<BLOCKQUOTE>
+The listbox navigation system that is used in the Tutorials, Demos, Sample Code Examples, Version Histories, and various other sections throughout the documentation has been improved in order to make the system more intuitive. Before, the arrows on the left and right hand sides of the listbox would always be active, allowing you to "wrap around" from the start to the end (using the left arrow) and from the end to the start (using the left arrow). This behavior has been changed to present a clearer idea of when you are at the start or the end of a set of pages. When you are at the start, the left arrow is now "grayed out". And when you are at the end, the right arrow is "grayed out".
+</BLOCKQUOTE>
+
+<!--
+<A NAME="doc/general-improvements/beatnik-and-flash"></A>
+<DIV CLASS=subsection>GENERAL IMPROVEMENT: "Using Beatnik and Flash Together" Section Improved</DIV>
+
+<BLOCKQUOTE>
+The <A HREF="../../../tips-techniques/beatnik-and-flash.html" TARGET="_parent">Using Beatnik and Flash Together</A> section has been enhanced to include new information on advanced techniques, such as how to substitute an alternative Flash movie for when the Beatnik Player is not installed, and how to delay the start of a Flash movie until all Beatnik music and audio media has loaded in.
+</BLOCKQUOTE>
+-->
+
+</BODY></HTML>

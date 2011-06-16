@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (The Numbered File approach)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 1: The Numbered File approach
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>The numbered-file approach uses JavaScript to generate a random number in a range determined by the number of files you'd like randomized. For example, if you have 15 music files that you'd like randomized, name the files something1.rmf, something2.rmf, something3.rmf,........something15.rmf. Then place these files in the same folder along with the HTML file that is to play them. The JavaScript will then generate a random number between 1 and 15 and create a filename using this number.</P>
+
+<P>The JavaScript for this approach is shown in the source code listing below. Place it towards the end of your HTML file, in the spot where you'd like the random music file to be embedded. There are three variables you can use to customize the randomisation code: <SPAN CLASS=sample-code-highlighted>totalFiles</SPAN>, <SPAN CLASS=sample-code-highlighted>filesPrefix</SPAN>, and <SPAN CLASS=sample-code-highlighted>filesSuffix</SPAN>. They are highlighted in the copy-and-paste code listing.</P>
+
+<UL>
+	<LI><B>totalFiles</B>
+		<P>The number of music files you have to randomize. Number your files starting at 1.</P>
+	<LI><B>filesPrefix</B>
+		<P>The part of the filename that appears before the number, and is the same in all the files you wish to randomize. For example, if you named the files "something1.rmf", "something2.rmf", etc., you would specify <NOBR><B>filesPrefix = "something";</B></NOBR></P>
+		<P>You can also use the filesPrefix variable to specify a complete directory path to your files. For instance, if all the "something" files were buried in a deeper folder than the folder containing the HTML document in which you wish to place the random file, (eg. "music/random-pick/"), you would specify the path to the directory with the statement <NOBR><B>filesPrefix = "music/random-pick/something";</B></NOBR></P>
+	<LI><B>filesSuffix</B>
+		<P>The part of the filename that follows the number and is the same in all the files you wish to randomize. In most cases this will be just the file extension for your set of files. For example ".rmf" for RMF files, ".mid" for MIDI files, ".aiff" for AIFF files, ".wav" for WAV files, or ".au" for AU files. However, as is the case with the filesPrefix variable, you can use the filesSuffix variable to specify any amount of the tail end of the file name that is common to all of the files you are randomizing. For instance, if your files were named "something1-mellow.rmf", "something2-mellow.rmf", etc. then you could use the statement <NOBR><B>filesSuffix = "-mellow.rmf";</B></NOBR> to specify this part of the filename that is common to all of your files.</P>
+</UL>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+totalFiles = <SPAN CLASS=sample-code-highlighted>15</SPAN>;
+filesPrefix = "<SPAN CLASS=sample-code-highlighted>your-files-prefix</SPAN>";
+filesSuffix = "<SPAN CLASS=sample-code-highlighted>your-files-suffix</SPAN>";
+
+Music.magicEmbed (
+   'SRC="' +
+   filesPrefix +
+   (Math.round (Math.random () * (totalFiles - 1)) + 1) +
+   filesSuffix + '" ' +
+   'TYPE="audio/rmf" ' +
+   'AUTOSTART=TRUE ' +
+   'WIDTH=0 ' +
+   'HEIGHT=0 ' +
+   'VOLUME=100 ' +
+   'LOOP=TRUE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Notice how we are using the <A HREF="../../../music-object-reference/static-methods.html#Music.magicEmbed" TARGET="_parent"><B>Music.magicEmbed</B></A> function, which is defined in the "music-object.js" JavaScript file that is sourced into the HTML document. We could have just used a <B>document.writeln</B> statement instead, but Music Object's <B>Music.magicEmbed</B> function performs some automatic compatibility testing to see if the user has the Beatnik Player installed. The <B>Music.magicEmbed</B> function also writes the correct EMBED tag or OBJECT tag syntax into the HTML document, depending on whether the user is browsing with Netscape Navigator or Microsoft Internet Explorer.</P>
+
+</BODY></HTML>

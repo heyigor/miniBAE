@@ -1,0 +1,22 @@
+BODY {
+	background: #036;
+	color: #FFF;
+}
+A {
+	color: #FFF;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 15px;
+	text-decoration: none;
+	font-weight: bold;
+}
+A:hover {
+	color: #000;
+	background: #FFF;
+	text-decoration: underline;
+}
+.index-heading {
+	color: #FFF;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 15px;
+	font-weight: bold;
+}

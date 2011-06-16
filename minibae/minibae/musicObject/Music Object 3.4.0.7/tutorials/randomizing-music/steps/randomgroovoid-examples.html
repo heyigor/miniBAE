@@ -1,0 +1,230 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (Examples Using the randomGroovoid Static Method)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 7: Examples Using the randomGroovoid Static Method
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>This example simply demonstrates the different kinds of results that can be achieved by passing different parameter values to the <B>randomGroovoid</B> static method. Clicking on the following links will play Groovoids that are randomly selected from different main categories. Because the selection is truly random, you may sometimes get the same Groovoid selected twice in a row. This is especially noticable in Groovoid categories that only contain a small number of Groovoids, such as the "Misc" category.</P>
+
+<CENTER>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-x-dynamic.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+groovoid = new Music ();
+
+groovoid.magicEmbed (
+	'SRC="../../../music/stub.rmf" ' +
+	'AUTOSTART=TRUE ' +
+	'DISPLAY=SONG ' +
+	'MODE=COPYRIGHT ' +
+	'LOOP=FALSE ' +
+	'VOLUME=100'
+);
+
+// --></SCRIPT>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5>
+	<TR>
+		<TD>
+			<UL>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('Background'))"
+					>
+						Play a random "Background" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('Fanfare'))"
+					>
+						Play a random "Fanfare" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('Hits'))"
+					>
+						Play a random "Hits" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('Hits-Kicker'))"
+					>
+						Play a random "Hits-Kicker" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('Misc'))"
+					>
+						Play a random "Misc" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('UI'))"
+					>
+						Play a random "UI" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('UI-Click'))"
+					>
+						Play a random "UI-Click" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('UI-MouseOver'))"
+					>
+						Play a random "UI-MouseOver" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('UI-Notification'))"
+					>
+						Play a random "UI-Notification" Groovoid
+					</A>
+				<LI>
+					<A
+						HREF="javascript://"
+						ONCLICK="groovoid.play (Music.randomGroovoid ('UI-OpenOrClose'))"
+					>
+						Play a random "UI-OpenOrClose" Groovoid
+					</A>
+			</UL>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;CENTER&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="javascript/music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+groovoid = new Music ();
+
+groovoid.magicEmbed (
+   'SRC="music/stub.rmf" ' +
+   'AUTOSTART=TRUE ' +
+   'DISPLAY=SONG ' +
+   'MODE=COPYRIGHT ' +
+   'LOOP=FALSE ' +
+   'VOLUME=100'
+);
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;UL&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('Background'))"</SPAN>
+               &gt;
+                  Play a random "Background" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('Fanfare'))"</SPAN>
+               &gt;
+                  Play a random "Fanfare" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('Hits'))"</SPAN>
+               &gt;
+                  Play a random "Hits" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+                  HREF="javascript://"
+<SPAN CLASS=sample-code-highlighted>                  ONCLICK="groovoid.play (Music.randomGroovoid ('Hits-Kicker'))"</SPAN>
+               &gt;
+                  Play a random "Hits-Kicker" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('Misc'))"</SPAN>
+               &gt;
+                  Play a random "Misc" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('UI'))"</SPAN>
+               &gt;
+                  Play a random "UI" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('UI-Click'))"</SPAN>
+               &gt;
+                  Play a random "UI-Click" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('UI-MouseOver'))"</SPAN>
+               &gt;
+                  Play a random "UI-MouseOver" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('UI-Notification'))"</SPAN>
+               &gt;
+                  Play a random "UI-Notification" Groovoid
+               &lt;/A&gt;
+            &lt;LI&gt;
+               &lt;A
+<SPAN CLASS=sample-code-highlighted>                  HREF="javascript://"
+                  ONCLICK="groovoid.play (Music.randomGroovoid ('UI-OpenOrClose'))"</SPAN>
+               &gt;
+                  Play a random "UI-OpenOrClose" Groovoid
+               &lt;/A&gt;
+         &lt;/UL&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;P&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

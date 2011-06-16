@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (A Simple EMBED)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 1: A Simple EMBED
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>A Beatnik player can be placed on a page using Netscape's <B>&lt;EMBED&gt;</B> tag syntax. This tag allows an author to embed any Netscape plug-in in an HTML page. Below we have a Beatnik plug-in that has been embedded into this page. Notice how the music did not play immediately upon loading of the page. This is because the AUTOSTART attribute in the EMBED tag has been set to FALSE. To start the file playing, click on the play button of the control panel.</P>
+
+<CENTER>
+<EMBED
+	SRC="../../../music/trance.rmf"
+	TYPE="audio/rmf"
+	WIDTH=144
+	HEIGHT=60
+	DISPLAY=SONG
+	AUTOSTART=FALSE
+	LOOP=FALSE
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+>
+</CENTER>
+
+<P>Take a look at the HTML source code below. The text that is highlighted indicates the filename of the music file that was embedded with this Beatnik Player instance. When placing your own music on your Web pages, you should replace this value with the correct file path of a music file that you have on your Web site. In this example, the file named "trance.rmf" is assumed to be in the same folder as the HTML file you wish to embed the music in.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="<SPAN CLASS=sample-code-highlighted>trance.rmf</SPAN>"
+   TYPE="audio/rmf"
+   WIDTH=144
+   HEIGHT=60
+   DISPLAY=SONG
+   AUTOSTART=FALSE
+   LOOP=FALSE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The size of the full Beatnik Player control panel is 144 pixels wide by 60 pixels high. You will see this specified by the EMBED tag's WIDTH and HEIGHT attributes. It is absolutely essential that you specify width and height values in your EMBED tag. There are other values that you can use for the WIDTH and HEIGHT attributes that will achieve different control panel appearances. These are discussed in further steps of this tutorial.</P>
+
+</BODY></HTML>

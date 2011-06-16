@@ -1,0 +1,524 @@
+<SEARCH PARENT="index.html" SEED=OFF SEARCHABLE=ON INDEXABLE=OFF>
+<HTML>
+<HEAD>
+	<TITLE>Music Object Methodizer (code)</TITLE>
+	<STYLE TYPE="text/css"><!--
+		BODY {
+			background: #ddd url(../../style/images/texture.jpg);
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 13px;
+			color: #000;
+		}
+		P, BLOCKQUOTE, TD, OL {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 13px;
+		}
+		A {
+			color: #008;
+			text-decoration: none;
+		}
+		A:hover {
+			text-decoration: underline;
+		}
+	--></STYLE>
+</HEAD>
+<BODY MARGINWIDTH=0 MARGINHEIGHT=0 ONLOAD="initialize ()">
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                   ©1997,1998 Headspace,Inc.                       *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-debug.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-dynamic.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/library-url.js"></SCRIPT>
+<SCRIPT SRC="javascript/object-method-and-parameter.js"></SCRIPT>
+<SCRIPT SRC="javascript/definitions-methods.js"></SCRIPT>
+<SCRIPT SRC="javascript/definitions-parameters.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+
+isMSIE = navigator.appName == 'Microsoft Internet Explorer';
+
+function escapeStr (sourceStr) {
+	var result = '';
+	for (var charNo = 0; charNo < sourceStr.length; charNo++) {
+		var currentChar = sourceStr.charAt (charNo);
+		if (currentChar == "'" || currentChar == '"' || currentChar == '\\') result += '\\';
+		result += currentChar;
+	}
+	return result;
+}
+
+function unescapeStr (sourceStr) {
+	var
+		result = '',
+		inEscape = false
+	;
+	for (var charNo = 0; charNo < sourceStr.length; charNo++) {
+		var currentChar = sourceStr.charAt (charNo);
+		if (currentChar != "\\" || inEscape) result += currentChar;
+		inEscape = currentChar == "\\" && !inEscape;
+	}
+	return result;
+}
+
+function urlize (unurlized) {
+	result = unurlized.toLowerCase ();
+	newResult = '';
+	for (charNo = 1; charNo <= result.length; charNo++)
+		newResult += (result.substring (charNo-1,charNo) == ' ') ? '-' : result.substring (charNo-1,charNo)
+	;
+	return newResult;
+}
+
+function stripComment (paramToStrip) {
+	if (typeof paramToStrip == 'number') {
+		return paramToStrip;
+	} else {
+		if (paramToStrip == '' || '0123456789-'.indexOf (paramToStrip.charAt (0)) == -1) {
+			return paramToStrip;
+		} else {
+			var spacePos = paramToStrip.indexOf (' ');
+			return ((spacePos == -1) ? paramToStrip : paramToStrip.substring (0,spacePos)) - 0;
+		}
+	}
+}
+
+function stripPadding (paramStr) {
+	startPos = paramStr.length;
+	for (charNo = 0; charNo <= paramStr.length - 1; charNo++) {
+		if (paramStr.substring (charNo,charNo+1) != ' ') {
+			startPos = charNo;
+			break;
+		}
+	}
+	for (charNo = paramStr.length - 1; charNo >= 0; charNo--) {
+		if (paramStr.substring (charNo,charNo+1) != ' ') {
+			endPos = charNo;
+			break;
+		}
+	}
+	return paramStr.substring (startPos,endPos+1);
+}
+
+function closestParameterType (paramToMatch,mustHaveHelp) {
+	if (typeof mustHaveHelp != 'boolean') mustHaveHelp = false;
+	if (
+		typeof Parameter.instances [paramToMatch] != 'undefined' &&
+		(!mustHaveHelp || Parameter.instances [paramToMatch].hasHelp)
+	) {
+		result = Parameter.instances [paramToMatch];
+	} else {
+		result = null;
+		for (var paramName in Parameter.instances) {
+			var param = Parameter.instances [paramName];
+			if (
+				param.name != paramToMatch &&
+				param.name.length <= paramToMatch.length &&
+				paramToMatch.substring (paramToMatch.length - param.name.length) == param.name &&
+				(result == null || param.name.length > result.name.length) &&
+				(!mustHaveHelp || param.hasHelp)
+			) {
+				result = param;
+			}
+		}
+	}
+	return result;
+}
+
+preferences = new Array ();
+preferences ['Shift Buttons'] = false;
+preferences ['Auto Preview'] = false;
+
+methodName = '';
+
+function initializeParams () {
+	var formHandle = parent.editParamsFrame.document.paramsForm;
+	for (var paramNo = 0; paramNo < methodParams.length; paramNo++) {
+		var
+			paramName = methodParams [paramNo],
+			param = closestParameterType (paramName),
+			paramInitVal = param.defaultSetting
+		;
+		if (typeof formHandle ['param' + paramNo] != 'undefined') {
+			formElement = formHandle ['param' + paramNo];
+			if (formElement.type == 'select-one') {
+				formElement.options.length--;
+				setListboxValue (formElement,stripComment (paramInitVal),true);
+			} else {
+				formElement.value = paramInitVal;
+			}
+		}
+	}
+	updateCopyPaste ();
+}
+
+function showHelp (helpURL) {
+	top.opener.location.href = helpURL;
+	top.opener.top.focus ();
+}
+
+function helpOnParameter (parameterName) {
+	showHelp ('../../music-object-reference/parameters.html#' + parameterName);
+}
+
+function helpOnMethod () {
+	showHelp ('../../music-object-reference/' + ((methodName.indexOf ('Music.') == 0) ? 'static' : 'instance') + '-methods.html#' + methodName);
+}
+
+function methodNameStr (methodStr) {
+	delimPos = Music.indexOf (methodStr,'(');
+	resultStr = methodStr.substring (0,delimPos);
+	delimPos = Music.indexOf (resultStr,' ');
+	return resultStr.substring (0,delimPos);
+}
+
+function paramListStr (methodStr) {
+	openParen = Music.indexOf (methodStr,'(');
+	closeParen = methodStr.lastIndexOf (')');
+	if (closeParen == -1) closeParen = methodStr.length;
+	return methodStr.substring (openParen+1,closeParen);
+}
+
+function valueFromListbox (selectHandle) {
+	return selectHandle.options [selectHandle.selectedIndex].text;
+}
+
+function setListboxValue (selectHandle,value,mustStripComment) {
+	if (typeof value != 'undefined') {
+		if (typeof mustStripComment != 'boolean') mustStripComment = false;
+		if (mustStripComment) value = stripComment (value);
+		for (var optionNo = 0; optionNo < selectHandle.options.length; optionNo++) {
+			var optionValue = selectHandle.options [optionNo].text;
+			if (value == (mustStripComment ? stripComment (optionValue) : optionValue)) {
+				selectHandle.selectedIndex = optionNo;
+				break;
+			}
+		}
+	}
+}
+
+function previewMethod () {
+	if (Method.instances [methodName].previewable) {
+		currentMethod = top.copyPasteFrame.document.copyPasteForm.currentMethod.value;
+		var returnValue = eval (((currentMethod.indexOf ('Music.') != 0) ? 'music.' : '') + currentMethod);
+		top.previewFrame.document.prefsForm.returnValue.value = (typeof returnValue != 'undefined') ? returnValue : '--- NO RETURN VALUE ---';
+	}
+}
+
+function selectVariation () {
+	var
+		paramList = valueFromListbox (document.selectMethodForm.selectVariationBox),
+		paramFieldWidth = 255,
+		paramFieldWidthStr = isMSIE ? (' STYLE="width: ' + paramFieldWidth + 'px;"') : '',
+		fontStyle = 'font-family: Arial, Helvetica, Verdana; font-size: 13px; color: #000;'
+	;
+//	Method.instances [methodName].defaultVariation = paramList;
+	methodParams = (paramList == '') ? new Array () : paramList.split (',');
+	var htmlOutput =
+		'<HTML><HEAD>' +
+		'<TITLE></TITLE>' +
+		'<BASE HREF="' + baseURL + '">' +
+		'</HEAD>' +
+		'<BODY BGCOLOR=DDDDDD BACKGROUND="../../style/images/texture.jpg" ONLOAD="top.wizardFrame.initializeParams ()">'
+	;
+	if (methodParams.length > 0 || true) {
+		htmlOutput +=
+			'<FORM NAME="paramsForm" METHOD=GET ACTION="javascript://" ONSUBMIT="top.wizardFrame.updateCopyPaste (); top.wizardFrame.previewMethod ();">' +
+			'<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3>'
+		;
+		for (var paramNo = 0; paramNo < methodParams.length; paramNo++) {
+			var
+				paramName = methodParams [paramNo],
+				param = closestParameterType (paramName)
+			;
+			helpParam = closestParameterType (param.name,true);
+			htmlOutput +=
+				'<TR>' +
+				'<TD ALIGN=RIGHT VALIGN=CENTER STYLE="' + fontStyle + '">' +
+				((paramNo == 0) ? ('&nbsp;&nbsp;<B>' + methodName + ' ( </B>') : '') + paramName + '</TD>' +
+				'<TD VALIGN=CENTER>' + ((helpParam == null) ? ('<IMG SRC="../../style/images/blank.gif" WIDTH=15 HEIGHT=15 HSPACE=0 VSPACE=0">') : ('<A HREF="javascript://" ONCLICK="top.wizardFrame.helpOnParameter (\'' + helpParam.name + '\'); return false"><IMG SRC="../../style/images/button-help.gif" WIDTH=15 HEIGHT=15 HSPACE=0 VSPACE=0 BORDER=0 ALT="Help on this parameter"></A>')) + '</TD>' +
+//				((helpParam != null) ? ('<B>' + paramName.substring (0,paramName.length - helpParam.name.length) + '<A HREF="javascript://" ONCLICK="top.wizardFrame.helpOnParameter (\'' + helpParam.name + '\'); return false" STYLE="' + fontStyle + ' color: #008; text-decoration: none;">' + helpParam.name + '</A></B>') : ((paramName != 'null') ? ('<B>' + paramName + '</B>') : '')) +
+				'</TD><TD VALIGN=CENTER STYLE="' + fontStyle + '">'
+			;
+			if (preferences ['Shift Buttons']) {
+				htmlOutput +=
+					'<INPUT TYPE=button VALUE="|< ">' +
+					'<INPUT TYPE=button VALUE="<< ">' +
+					'<INPUT TYPE=button VALUE=" < ">' +
+					'<INPUT TYPE=button VALUE=" > ">' +
+					'<INPUT TYPE=button VALUE=" >>">' +
+					'<INPUT TYPE=button VALUE=" >|">'
+				;
+			}
+			if (param.options != null) {
+				if (param.options.length == 1) {
+					htmlOutput += '<TABLE WIDTH=' + paramFieldWidth + ' BORDER=1 CELLSPACING=0 CELLPADDING=1 ALIGN=LEFT><TR VALIGN=CENTER><TD STYLE="' + fontStyle + '">&nbsp;' + param.options [0] + '</TD></TR></TABLE>';
+				} else {
+					htmlOutput += '<SELECT STYLE="width: 255px;" NAME="param' + paramNo + '" ONCHANGE="if (this.focus) top.wizardFrame.updateCopyPaste ();"' + paramFieldWidthStr + '>';
+					for (optionNo = 0; optionNo < param.options.length; optionNo++) {
+						htmlOutput += '<OPTION>' + param.options [optionNo];
+					}
+					htmlOutput +=
+						'<OPTION>--------------------------------------------------------' +
+						'</SELECT>'
+					;
+				}
+			} else {
+				htmlOutput += '<INPUT TYPE="text" VALUE="" NAME="param' + paramNo + '" SIZE=22 ONBLUR="top.wizardFrame.updateCopyPaste ()"' + paramFieldWidthStr + '>';
+			}
+			htmlOutput += ' ' + ((paramNo == methodParams.length - 1) ? '<B>)</B>' : ',') + '</TD></TR>';
+		}
+		htmlOutput +=
+			'</TABLE>' +
+			'</FORM>' +
+			'</BODY></HTML>'
+		;
+		docHandle = parent.editParamsFrame.document;
+		docHandle.open ('text/html');
+		docHandle.writeln (htmlOutput);
+		docHandle.close ();
+	}
+}
+
+function selectMethod (variation) {
+	var
+		formHandle = document.selectMethodForm,
+		newMethodName = valueFromListbox (formHandle.selectMethodBox),
+		methodChanged = newMethodName != methodName,
+		method = Method.instances [newMethodName],
+		variationListbox = formHandle.selectVariationBox
+	;
+	if (methodChanged) {
+		methodName = newMethodName;
+		var variations = Music.kwiklistToArray (method.variations);
+		variationListbox.options.length = variations.length;
+		for (var variationNo = 0; variationNo < variations.length; variationNo++) {
+			variationListbox.options [variationNo] = new Option (variations [variationNo]);
+		}
+		if (method.defaultVariation == null) method.defaultVariation = variations [0];
+	}
+	if (typeof variation != 'string') variation = method.defaultVariation;
+	if (methodChanged || variation != valueFromListbox (variationListbox)) {
+		setListboxValue (variationListbox,variation);
+		selectVariation ();
+	}
+}
+
+function getTotalParams (paramList) {
+	delimPos = -1;
+	totalCommas = 0;
+	while (true) {
+		delimPos = nextComma (paramList,delimPos+1);
+		if (delimPos != -1) {
+			totalCommas++;
+		} else {
+			break;
+		}
+	}
+	return totalCommas + ((paramList != '') ? 1:0);
+}
+
+function nextComma (stringToParse,startPos) {
+	currentQuote = '';
+	inEscape = false;
+	for (charNo = startPos; charNo <= stringToParse.length - 1; charNo++) {
+		currentChar = stringToParse.substring (charNo,charNo+1);
+		if (currentChar == ',') {
+			if (currentQuote == '') {
+				return charNo;
+				break;
+			}
+		} else if (currentChar == "'" || currentChar == '"') {
+			if (currentChar == currentQuote) {
+				currentQuote = '';
+			} else {
+				if (currentQuote == '') currentQuote = currentChar;
+			}
+		}
+		inEscape = (currentChar == '\\');
+	}
+	return -1;
+}
+
+function parseCurrentMethod () {
+	updateCopyPaste ();
+/*
+	currentMethod = top.copyPasteFrame.document.copyPasteForm.currentMethod.value;
+	methodName = methodNameStr (currentMethod);
+	var selectHandle = document.selectMethodForm.selectMethodBox;
+	methodNameFound = false;
+	methodFound = false;
+	paramList = paramListStr (currentMethod);
+	totalParams = getTotalParams (paramList);
+	for (methodNo = 0; methodNo < selectHandle.options.length && !methodFound; methodNo++) {
+		var option = selectHandle.options [methodNo];
+		if (methodName == methodNameStr (option.text)) {
+			methodNameFound = true;
+			if (totalParams == getTotalParams (paramListStr (option.text))) {
+				methodFound = true;
+				if (!option.selected) option.selected = true;
+				selectMethod (paramList);
+			}
+		}
+	}
+	if (!methodFound) {
+		if (methodNameFound) {
+			alert ('You have specified an invalid number of arguments for the "' + methodName + '" method. If you are uncertain, please consult the drop-down list of method templates.');
+		} else {
+			alert ('"' + methodName + '" is not a valid Music Object method. Check spelling and case, and make sure there are no spaces in the method name. If you are uncertain, please consult the drop-down list of method templates.');
+		}
+	}
+	autoPreviewMethod ();
+*/
+}
+
+function updateCopyPaste () {
+	currentMethod = methodName + ' (';
+	for (paramNo = 0; paramNo < methodParams.length; paramNo++) {
+		var param = closestParameterType (methodParams [paramNo]);
+		if (param.options == null || param.options.length > 1) {
+			formElement = parent.editParamsFrame.document.paramsForm ['param' + paramNo];
+			paramValue = (formElement.type == 'select-one') ? stripComment (formElement.options [formElement.selectedIndex].text) : formElement.value;
+		} else {
+			paramValue = param.options [0];
+		}
+		if (param.type == 'string' || param.type == 'link') paramValue = "'" + escapeStr (paramValue) + "'";
+		currentMethod += paramValue + ((paramNo == methodParams.length - 1) ? '' : ',');
+	}
+	currentMethod += ')';
+	top.copyPasteFrame.document.copyPasteForm.currentMethod.value = currentMethod;
+	autoPreviewMethod ();
+}
+
+function autoPreviewMethod () {if (preferences ['Auto Preview']) previewMethod ()}
+
+function toggleAutoPreview () {
+	preferences ['Auto Preview'] = !preferences ['Auto Preview'];
+	top.previewFrame.document.prefsForm.autoPreview.checked = preferences ['Auto Preview'];
+	autoPreviewMethod ();
+}
+
+function updatePrefs () {
+	preferences ['Auto Preview'] = top.previewFrame.document.prefsForm.autoPreview.checked;
+}
+
+function resetAll () {
+	music.onLoad ();
+	music.onPause ();
+	music.onPlay ();
+	music.onStop ();
+	music.onMetaEvent ();
+	music.setTranspose (0);
+	music.setAutostart (true);
+	music.setStartTime (0);
+	music.setMonophonic (0,false);
+	music.setVolume (100);
+	music.play (true,'../../music/stub.rmf');
+}
+
+function readInstructions (instructionsStr) {
+	var
+		initialMethod = 'playNote',
+		initialVariation = null,
+		toEdit = null
+	;
+	if (instructionsStr != '') {
+		var instructions = instructionsStr.split ('&');
+		for (var instructionNo = 0; instructionNo < instructions.length; instructionNo++) {
+			var instruction = instructions [instructionNo].split ('=');
+			instruction [0] = instruction [0].toLowerCase ();
+			if (instruction [0] == 'method') {
+				initialMethod = instruction [1];
+			} else if (instruction [0] == 'variation') {
+				initialVariation = instruction [1];
+			} else if (instruction [0] == 'edit') {
+				toEdit = instruction [1];
+			}
+		}
+	}
+	if (toEdit != null) {
+		top.copyPasteFrame.document.copyPasteForm.currentMethod.value = toEdit;
+		parseCurrentMethod ();
+	} else {
+		setListboxValue (document.selectMethodForm.selectMethodBox,initialMethod);
+		selectMethod (initialVariation);
+	}
+}
+
+function initialize () {
+	var selectOptions = document.selectMethodForm.selectMethodBox.options;
+	for (var methodNo = 0; methodNo < methods.length; methodNo++) {
+		selectOptions [methodNo] = new Option (methods [methodNo].name);
+	}
+	readInstructions (window.location.search.substring (1));
+}
+
+music.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<FORM NAME="selectMethodForm">
+	<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>
+		<TR>
+			<TD ROWSPAN=2>&nbsp;</TD>
+			<TD><B>Method</B></TD>
+			<TD ROWSPAN=2>&nbsp;</TD>
+			<TD><B>Parameters</B></TD>
+		</TR>
+		<TR>
+			<TD>
+				<SELECT NAME="selectMethodBox" ONCHANGE="selectMethod ()" STYLE="width: 240px;">
+					<OPTION>--------------------------------------
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+				</SELECT>
+			</TD>
+			<TD>
+				<SELECT NAME="selectVariationBox" ONCHANGE="selectVariation ()" STYLE="width: 713px;">
+					<OPTION>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+					<OPTION>
+				);
+				</SELECT>
+			</TD>
+		</TR>
+	</TABLE>
+</FORM>'
+
+</BODY>
+</HTML>

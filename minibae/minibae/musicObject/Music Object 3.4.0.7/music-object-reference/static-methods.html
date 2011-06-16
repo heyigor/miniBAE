@@ -1,0 +1,1727 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Static Methods</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Static Methods
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../javascript/shared-launch-methodizer.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+methodizerPath = '../tools/methodizer/';
+
+// --></SCRIPT>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Static&nbsp;Method&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#embedding"><B>Embedding</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.magicEmbed">Music.magicEmbed</A></TD>
+	<TD CLASS=contents-table-item-desc>Embeds a non-scriptable Beatnik Player instance on a page.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#compatibility"><B>Compatibility</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.hasMinVersion">Music.hasMinVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>Checks to see if the currently installed Beatnik Player version is equal to or higher than the version that you specify.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.installPlayer">Music.installPlayer</A></TD>
+	<TD CLASS=contents-table-item-desc>Launches the Beatnik Player Install Wizard in a separate window.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.isPlayerCompatible">Music.isPlayerCompatible</A></TD>
+	<TD CLASS=contents-table-item-desc>Performs a compatibility test for the user's installed Beatnik Player version.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.promptClose">Music.promptClose</A></TD>
+	<TD CLASS=contents-table-item-desc>Closes a prompt that was opened using the Music.promptUser method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.promptUser">Music.promptUser</A></TD>
+	<TD CLASS=contents-table-item-desc>Opens a prompt window that offers the user up to two options from which to choose.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.requireMinPlayerVersion">Music.requireMinPlayerVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you specify a minimum player version that is required by a module of sonification code.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#musical-notes"><B>Musical Notes</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getNoteName">Music.getNoteName</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a string value representing the symbolic note name of the MIDI note number that you specify.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getNoteNumber">Music.getNoteNumber</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value representing the MIDI note number of the symbolic note name that you specify.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#general"><B>General</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addCallbackHandler">Music.addCallbackHandler</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you add a callback handler to the stack of callback handlers for a specified instance callback.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.engageAudio">Music.engageAudio</A></TD>
+	<TD CLASS=contents-table-item-desc>Allows you to engage or disengage the audio device that is used by the underlying audio engine.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getAudioDevicePriority">Music.getAudioDevicePriority</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the current audio device priority setting for the sonified document.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getReverbType">Music.getReverbType</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer representing the audio engine's currently selected global reverb type.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.isAudioDeviceShared">Music.isAudioDeviceShared</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not the Beatnik Player can share the system's audio device with other media players.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.isAudioEngaged">Music.isAudioEngaged</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not the player's underlying audio engine is engaged.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.isAudioSupported">Music.isAudioSupported</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a boolean value, indicating whether or not the user's system provides audio services that are compatible with the player.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.kill">Music.kill</A></TD>
+	<TD CLASS=contents-table-item-desc>Stops all player instances that are currently playing music on a page and disables all further sonification.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.onAudioEngagedChange">Music.onAudioEngagedChange</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register JavaScript code that is to be executed each time there is a change in the engaged state of the player's underlying audio engine.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.onEngageAudio">Music.onEngageAudio</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you register JavaScript code that is to be executed after each call to the <B>Music.engageAudio</B> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.setAudioDevicePriority">Music.setAudioDevicePriority</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the audio device priority for the sonified document.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.setGlobalMute">Music.setGlobalMute</A></TD>
+	<TD CLASS=contents-table-item-desc>Mutes or unmutes all sound that is playing through the audio engine.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.setReverbType">Music.setReverbType</A></TD>
+	<TD CLASS=contents-table-item-desc>Sets the audio engine's global reverb type that is used by the  when playing back.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.stopAll">Music.stopAll</A></TD>
+	<TD CLASS=contents-table-item-desc>Stops all player instances that are currently playing music on the page.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="embedding"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Embedding
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.magicEmbed"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.magicEmbed</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.magicEmbed</B> method is identical to the <A HREF="instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method in every respect, excepting that the player instance that is embedded using this method is not associated with any Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.magicEmbed (</B> <A HREF="parameters.html#EmbedLineSTR">EmbedLineSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>This method is useful on pages where you are already sourcing in the "music-object.js" file for interactive sonification, but also wish to embed non-interactive background music, or multiple player instances with control panels that let the user control playback of the files. In cases where you do not expect to script interactive control of a player instance, it is better to use the <B>Music.magicEmbed</B> method, since there is naturally some memory and performance overhead involved in creating a Music Object instance and there is no sense in creating a Music Object instance if you do not intend to use the scriptable methods of the Music Object class.</P>
+
+<P>If your Web site makes use of interactive sonification and there is some likelihood that some pages on the site will be loading in the "music-object.js" file, then it is also appropriate to source in the "music-object.js" file on pages where there will not be any interactive sonification, just so that you can make use of the <B>Music.magicEmbed</B> method to embed non-interactive music. The "music-object.js" file will either be cached in from the user encountering the other pages that employed interactive sonification, or the file will load in first on a non-interactive page and cache so that subsequent loading of the interactively sonified pages is faster.</P>
+
+<P>So, if you will be using the "music-object.js" file for interactive sonification on your site, don't be afraid to source the file in on pages where you wish to have non-interactive music playing. And because the parameter syntax for both the <B>magicEmbed</B> method and the <B>Music.magicEmbed</B> method is exactly the same, it is easy to upgrade your coding when you decide to use scripting to control a file that was initially embedded as a non-scriptable player instance.</P>
+
+<P>The following example shows how a page using the <B>Music.magicEmbed</B> method can be upgraded to use the <B>magicEmbed</B> method. In the second block of source code, the significant changes that have been made to make the player instance scriptable are highlighted in red.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Embedding a non-scriptable player instance</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Non-scriptable Player Instance&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="<B>correct-path-here/</B>music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- BODY OF DOCUMENT HERE --&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.magicEmbed ('SRC="<B>my-music-file</B>.rmf" WIDTH=144 HEIGHT=60');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Upgrading the code to make the player instance scriptable</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Non-scriptable Player Instance&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="<B>correct-path-here/</B>music-object.js"&gt;&lt;/SCRIPT&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<B>myMusicObject</B> = new Music ();
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;!-- BODY OF DOCUMENT HERE --&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<SPAN CLASS=sample-code-highlighted>myMusicObject</B>.</SPAN>magicEmbed ('SRC="<B>my-music-file</B>.rmf" WIDTH=144 HEIGHT=60');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="compatibility"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Compatibility
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.hasMinVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.hasMinVersion</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.hasMinVersion</B> method returns a boolean value, indicating whether or not the Beatnik Player version currently installed in the user's browser meets the minimum version you specify.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.hasMinVersion'); return false">Music.hasMinVersion</A> (</B> MinimumVersionSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>boolean</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>If the currently installed version is equal to or exceeds the version specified in the <B>MinimumVersionSTR</B> parameter, then this method will return a value of <SPAN CLASS=value>true</SPAN>. But, if the installed version is less than that specified in the <B>MinimumVersionSTR</B> parameter, then a value of <SPAN CLASS=value>false</SPAN> is returned.</P>
+
+<P>The following table indicates the results returned by this method under several different circumstances...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Installed<BR>Version</TD>
+		<TD CLASS=data-table-column-header>Static&nbsp;Method&nbsp;Call</TD>
+		<TD CLASS=data-table-column-header>Result</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.1.7</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('1.0')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>true</SPAN></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.0</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('1.1.7')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>false</SPAN></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.1.7</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('1.1.7')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>true</SPAN></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.3</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('1.3.1')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>false</SPAN></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.3</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('1.3.0')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>true</SPAN></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.3.1</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('1.3')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>true</SPAN></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.3.1</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('2')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>false</SPAN></TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>1.3.1</TD>
+		<TD CLASS=data-table-item>Music.hasMinVersion ('1')</TD>
+		<TD CLASS=data-table-item ALIGN=CENTER><SPAN CLASS=value>true</SPAN></TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>When the minimum version string that you specify has fewer subversion places than the version string of the currently installed Beatnik Player, then all "missing" subversion places are assumed to be zero. For example, if the currently installed player version is "1.1.7" and you specify a minimum version of "1", then the minimum version will be regarded as "1.0.0" for the purpose of the comparison. Similarly, if the minimum version you specify contains more subversion places than the version string of the currently installed Beatnik Player, then the version string for the installed player will be "padded" for the sake of the comparison. For example, if the currently installed player's version string is "1.3" and the minimum version you specify is "1.3.1", then the player's version string will be padded to become "1.3.0".</P>
+
+<P>So an important rule to remember with version comparison using the <B>Music.hasMinVersion</B> method is that a version string such as "1.3" does not encompass all "1.3.x" versions, but is seen strictly as representing version "1.3.0.0" when comparisons are made.</P>
+
+<P>This method returns a <SPAN CLASS=value>false</SPAN> value when the user's platform and/or operating system is not supported by the Beatnik Player. Because of this, you should not indiscriminately use a <SPAN CLASS=value>false</SPAN> return value as an indication that "Get Beatnik" graphics or text should be written into an HTML page using <B>document.writeln</B> statements. Instead, you should also check the <A HREF="static-properties.html#Music.clientSupported"><B>Music.clientSupported</B></A> property's value in any condition that may result in Beatnik substitution code being written into an HTML page.</P>
+
+<P>For example,</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+if (Music.clientSupported && !Music.hasMinVersion ('1.3.2')) {
+   document.writeln (
+      '&lt;A HREF="javascript:Music.installPlayer ()"&gt;Please upgrade Beatnik&lt;/A&gt;'
+   );
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For more information on using this method in conjunction with the other compatibility methods and properties, see the section <A HREF="compatibility-aids.html">Music Object Compatibility Aids</A>.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>If you use the <B>Music.hasMinVersion</B> method immediately after sourcing in the "music-object.js" file but before any player instances have been embedded in the page, the method may fail to produce reliable results in the case of Internet Explorer with the Beatnik ActiveX control installed. This is because there is no way in Internet Explorer to obtain version information about an installed ActiveX control without "talking" to an instance of the control that has loaded on the page.
+</UL>
+-->
+
+<A NAME="Music.installPlayer"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.installPlayer</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.installPlayer</B> method lets you launch the Beatnik Player Install Wizard in a separate small window that the user can optionally dismiss without it interrupting their Web browsing.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.installPlayer'); return false">Music.installPlayer</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The Beatnik Player Install Wizard should only be invoked as a result of a failed compatibility test using the <A HREF="#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> method. If you call this method without performing an appropriate compatibility test and the user actually has the latest version of the Beatnik Player installed, then the Beatnik Player Install Wizard that opens in a separate window will show a message to this effect.</P>
+
+<P>For more information on using this method in conjunction with the other compatibility methods and properties, see the section <A HREF="compatibility-aids.html">Music Object Compatibility Aids</A>.</P>
+
+<A NAME="Music.isPlayerCompatible"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.isPlayerCompatible</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.isPlayerCompatible</B> method lets you force Music Object to perform the compatibility test even before any attempts are made in the authoring to embed Beatnik Player instances into the page.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.isPlayerCompatible'); return false">Music.isPlayerCompatible</A> (</B><BR>
+			&nbsp;&nbsp;&nbsp; MinimumVersionSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; SilentIfInadequateBOOL <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ShowCompatibilityPromptBOOL<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>boolean</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>This method returns a boolean value, where a value of <SPAN CLASS=value>true</SPAN> indicates that the user's installed Beatnik Player is compatible with the author's requirements, and a value of <SPAN CLASS=value>false</SPAN> indicates that the user's installed player fails to meet the author's requirements. Regardless of the author's specified version requirement, if a user does not have any version of the Beatnik Player installed, then this method always returns a <SPAN CLASS=value>false</SPAN> value.</P>
+
+<P>This method also returns a <SPAN CLASS=value>false</SPAN> value when the user's platform and/or operating system is not supported by the Beatnik Player. Because of this, you should not indiscriminately use a <SPAN CLASS=value>false</SPAN> return value as an indication that "Get Beatnik" graphics or text should be written into an HTML page using <B>document.writeln</B> statements. Instead, you should also check the <A HREF="static-properties.html#Music.clientSupported"><B>Music.clientSupported</B></A> property's value in any condition that may result in Beatnik substitution code being written into an HTML page.</P>
+
+<P>For example,</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+if (Music.clientSupported && !Music.isPlayerCompatible ()) {
+   document.writeln ('&lt;A HREF="javascript:Music.installPlayer ()"&gt;Get Beatnik&lt;/A&gt;');
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Values specified for the <B>SilentIfInadequateBOOL</B> and <B>ShowCompatibilityPromptBOOL</B> parameters will not only be used when the compatibility test is performed, but will also set the values of the <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A> and <A HREF="static-properties.html#Music.showCompatibilityPrompt"><B>Music.showCompatibilityPrompt</B></A> properties, respectively. The value specified for the <B>MinimumVersionSTR</B> parameter may also set the value of the <A HREF="static-properties.html#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A> property, if the version specified by the <B>MinimumVersionSTR</B> parameter is higher than the current <B>Music.requiredMinVersion</B> value.</P>
+
+<P>For more information on using this method in conjunction with the other compatibility methods and properties, see the section <A HREF="compatibility-aids.html">Music Object Compatibility Aids</A>.</P>
+
+<IMG SRC="../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>MinimumVersionSTR</B> parameter, then the value of the <A HREF="static-properties.html#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A> property will be used in the compatibility test.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SilentIfInadequateBOOL</B> parameter, then the value of the <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A> property will be used for the compatibility test.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>ShowCompatibilityPromptBOOL</B> parameter, then the value of the <A HREF="static-properties.html#Music.showCompatibilityPrompt"><B>Music.showCompatibilityPrompt</B></A> property will be used to determine if a prompt should be shown as a result of a failed compatibility test.
+</UL>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.isPlayerCompatible','MinimumVersionSTR,SilentIfInadequateBOOL'); return false">Music.isPlayerCompatible</A> (</B> MinimumVersionSTR <B>,</B> SilentIfInadequateBOOL <B>)</B>
+		<P>When no value is specified for the <B>ShowCompatibilityPromptBOOL</B> parameter, then the value of the <A HREF="static-properties.html#Music.showCompatibilityPrompt"><B>Music.showCompatibilityPrompt</B></A> property will be used to determine if a prompt should be shown as a result of a failed compatibility test.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.isPlayerCompatible','MinimumVersionSTR'); return false">Music.isPlayerCompatible</A> (</B> MinimumVersionSTR <B>)</B>
+		<P>When no value is specified for the <B>SilentIfInadequateBOOL</B> parameter, then the value of the <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A> property will be used for the compatibility test.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.isPlayerCompatible',''); return false">Music.isPlayerCompatible</A> ()</B>
+		<P>When no value is specified for the <B>MinimumVersionSTR</B> parameter, then the value of the <A HREF="static-properties.html#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A> property will be used in the compatibility test. Using this variation of the method has the effect of forcing the compatibility test to take place, but without overriding any of the previously set values for the <A HREF="static-properties.html#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A>, <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A>, and <A HREF="static-properties.html#Music.showCompatibilityPrompt"><B>Music.showCompatibilityPrompt</B></A> properties.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<A NAME="Music.promptClose"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.promptClose</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.promptClose</B> method lets you close a prompt window that was opened by the <A HREF="#Music.promptUser"><B>Music.promptUser</B></A> method.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.promptClose'); return false">Music.promptClose</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>If there is currently no prompt window open, then this method will do nothing and will not produce any error messages.</P>
+
+<A NAME="Music.promptUser"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.promptUser</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.promptUser</B> static method lets you open up a non-modal dialog window to prompt the user to make a decision.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.promptUser'); return false">Music.promptUser</A> (</B><BR>
+			&nbsp;&nbsp;&nbsp; HeadingSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MessageSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; OkTextSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Ok<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; CancelTextSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Cancel<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ShowStatusBarBOOL<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.promptUser</B> method is also used within Music Object to show the <A HREF="static-properties.html#Music.showCompatibilityPrompt">compatibility prompt</A> as well to alert the user to other problems, like Java not being enabled in Netscape Navigator. Using this method in place of the JavaScript <B>alert</B> or <B>confirm</B> function provides several benefits...</P>
+
+<UL>
+	<LI>more aesthetically pleasing layout with border, heading, and message areas
+	<LI>customizable button text for OK and CANCEL actions
+	<LI>both the OK and CANCEL buttons are optional
+	<LI>easy to specify code to handle OK and CANCEL actions
+	<LI>enter and escape keys automatically mapped to OK and CANCEL actions
+	<LI>non-modal, so other code can continue being processed
+</UL>
+
+<P>The <B>promptUser</B> method may be valuable in performing your own compatibility tests. If the user's configuration fails to meet your requirements, then you can use this method to alert the user. Using the method is quite easy - we will use a simple example to illustrate...</P>
+
+<P>Let's say that we have created a page where both the Flash Player and Beatnik Player are to be used together to form a cohesive sonified visual experience. Since we will be relying on Flash to provide the visual element of this experience, there is hardly much sense in letting the user get only half the experience if, for some reason, Flash is not installed in their browser while the Beatnik Player is. In such cases, one will want to hold off on loading in all the music and audio media until the user has the Flash Player installed. And, in order to initiate the Flash download, the user will have to be prompted first. This is where the <B>promptUser</B> method comes in.</P>
+
+<P>Now, traditionally, one might use the JavaScript <B>confirm</B> function to prompt the user for a decision. An example of this type of code is shown below. In the code sample, we are assuming that we have already determined whether or not the Flash Player is installed and have assigned the result of this check to the boolean variable "hasFlash", so the code that assigns "hasFlash" its value is not shown.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+if (!hasFlash) {
+   if (
+      confirm (
+         'Flash Not Installed!!\n' +
+         '=====================\n\n' +
+         'This page uses the Beatnik and' +
+         ' Macromedia Flash players together\n' +
+         ' to create awesome interactive content.\n\n' +
+         'If you choose not to install Flash,' +
+         ' you won\'t be getting the full experience.\n\n' +
+         'INSTALL NOW ?'
+      )
+   ) {
+      top.location.href = 'http://www.macromedia.com';
+   }
+} else {
+   // code to initialize page
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Let's examine the logic behind the above code. In the conditional statement, we are checking to see if Flash is not installed and, if this is the case, the <B>confirm</B> function is used to prompt the user to approve installation. If the user approves by clicking the OK button, then the statement executed by the <B>if</B> condition will cause the browser to redirect to Macromedia's Web site, where the user can locate and install the Flash Player. On the other hand, if the user refuses the installation by clicking on the CANCEL button, then no action is performed. Notice how the page initialization code is only performed if the user has Flash installed.</P>
+
+<P>The type of output that one gets from the <B>confirm</B> function is not all that pretty. In fact, at the sight of these gray dialog boxes, Web surfers are inclined to panic and think that their browser may be about to crash. Also, because the <B>confirm</B> function always imposes an OK and CANCEL button, it forces one to state the message in the dialog box in such a way that the last sentence is always a question that can have a simple yes/no type of answer.</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="../images/confirm-dialog.gif" WIDTH=419 HEIGHT=201 ALT="Example confirm dialog" BORDER=0>
+</P>
+
+<P>So, how would we translate our code so that we could instead use Music Object's <B>promptUser</B> static method? Well, as explained before, the prompt window that opens does not interrupt program flow in the way that a native JavaScript <B>alert</B> or <B>prompt</B> statement does. This is because the window that is opened up is a standard browser window containing HTML and is distinct from the window that opened it - it has its own program flow. So, in order to achieve a similar kind of effect to a JavaScript <B>alert</B> or <B>prompt</B> statement, we need to organize the code in a special way. Take a look at the following example source code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function downloadFlash () {
+   Music.promptClose ();
+   top.location.href = 'http://www.macromedia.com';
+}
+
+if (!hasFlash) {
+   Music.promptUser (
+      'Flash Not Installed!!',
+      'This page uses the &lt;B&gt;Beatnik&lt;/B&gt; and' +
+         ' Macromedia &lt;B&gt;Flash&lt;/B&gt; players' +
+         ' together to create awesome interactive content.&lt;P&gt;If you choose not' +
+         ' to install Flash, you won\'t be getting the full experience.'
+      ,
+      'DOWNLOAD FLASH...',
+      'downloadFlash ()',
+      'IGNORE',
+      ''
+   );
+} else {
+   // code to initialize page
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>We've now created a specific <B>downloadFlash</B> function to handle the OK action for the prompt window that will be opened up. This is necessary, because program flow is not halted by the <B>promptUser</B> method. We can't just wait at the spot where the <B>promptUser</B> method is called until the user has decided. By the very nature of the <B>promptUser</B> method, program flow just keeps moving forward, regardless of how long the user takes to respond.</P>
+
+<P>So, the separate <B>downloadFlash</B> function is ready to be called at any moment if the user approves the installation of Flash. Notice how a call to the <B>downloadFlash</B> function is, indeed, one of the parameters in the <B>promptUser</B> method call. The first thing that <B>downloadFlash</B> function does when it is called is to close the prompt window using the <A HREF="#Music.promptClose"><B>Music.promptClose</B></A> static method. Then, the user's browser is redirected to Macromedia's Web site, to locate and install the Flash Player.</P>
+
+<P>In the prompt window below, notice how the value "<SPAN CLASS=value>Flash Not Installed!!</SPAN>" that we specified for the <B>HeadingSTR</B> parameter is also used as the title for the prompt window.</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="../images/prompt-user.gif" WIDTH=512 HEIGHT=323 ALT="Example display of the Music.promptUser method" BORDER=0>
+</P>
+
+<IMG SRC="../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>If you specify an empty string for the <B>MessageSTR</B> parameter, then no message will be displayed in the prompt window.
+	<LI>If the value <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>HeadingSTR</B> parameter, then no heading bar will be displayed for the prompt.
+	<LI>If the value <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>OkTextSTR</B> parameter, then no OK button will appear in the prompt window. For users of Netscape Navigator 4.x and higher, hitting the "Enter" key on the keyboard will still dismiss the prompt window.
+	<LI>If the value <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>CancelButtonTextSTR</B> parameter, then no cancel button will appear in the prompt window. For users of Netscape Navigator 4.x and higher, hitting the "Esc" key on the keyboard will still dismiss the prompt window.
+	<LI>If you specify a non-null value for the <B>OkTextSTR</B> parameter, but specify the value <SPAN CLASS=value>null</SPAN> (or an empty string) for the <B>OkJavaScriptSTR</B> parameter, then an OK button will be displayed and its action will be to dismiss the prompt window.
+	<LI>If you specify a non-null value for the <B>CancelButtonTextSTR</B> parameter, but specify the value <SPAN CLASS=value>null</SPAN> (or an empty string) for the <B>CancelJavaScriptSTR</B> parameter, then a cancel button will be displayed and its action will be to dismiss the prompt window.
+</UL>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.promptUser','HeadingSTR,MessageSTR,OkTextSTR,OkJavaScriptSTR,CancelTextSTR,CancelJavaScriptSTR'); return false">Music.promptUser</A> (</B> HeadingSTR <B>,</B> MessageSTR <B>,</B> OkTextSTR <B>,</B> Ok<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B> CancelTextSTR <B>,</B> Cancel<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<P>When the <B>ShowStatusBarBOOL</B> parameter is omitted, no status bar will appear in the prompt window that is opened. This has the same effect as if the value <SPAN CLASS=value>false</SPAN> is specified for the <B>ShowStatusBarBOOL</B> parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.promptUser','HeadingSTR,MessageSTR,OkTextSTR,OkJavaScriptSTR'); return false">Music.promptUser</A> (</B> HeadingSTR <B>,</B> MessageSTR <B>,</B> OkTextSTR <B>,</B> Ok<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<P>When the <B>CancelButtonTextSTR</B>, <B>Cancel</B>, and <B>ShowStatusBarBOOL</B> parameters are omitted, no cancel button will appear in the prompt window that is opened. The only option the user will have is to click on the "OK" button.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.promptUser','HeadingSTR,MessageSTR'); return false">Music.promptUser</A> (</B> HeadingSTR <B>,</B> MessageSTR <B>)</B>
+		<P>When the <B>OkTextSTR</B>, <B>OkJavaScriptSTR</B>, <B>CancelButtonTextSTR</B>, <B>CancelJavaScriptSTR</B>, and <B>ShowStatusBarBOOL</B> parameters are omitted, no buttons at all will appear in the prompt window that is opened. The only way the user will be able to close the window is using the close window icon in the window's title bar. The prompt window can also be closed in your scripting using the <A HREF="#Music.promptClose"><B>Music.promptClose</B></A> method. This type of buttonless prompt can be used effectively to inform the user that a process is taking place and that they should wait for its completion. Scripting can then be used to either close the prompt window when the process is complete, or replace the prompt window with a new prompt window that informs the user that the process is complete and gives them an "OK" button to dismiss the window.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>It is not possible to open up multiple prompts at the same. Calling the <B>Music.promptUser</B> method while a prompt is already open will replace that prompt with the new one.
+</UL>
+
+<A NAME="Music.requireMinPlayerVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.requireMinPlayerVersion</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-compatibility">Music Object Component - Compatibility</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.requireMinPlayerVersion</B> static method lets you specify a minimum player version that is required by a module of sonification code.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.requireMinPlayerVersion (</B> MinimumVersionSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Starting from Music Object version 3.3, the <A HREF="static-properties.html#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A> static property is a read-only property and should not be set explicitly - the <B>Music.requireMinPlayerVersion</B> static method should be used instead. The <B>Music.requireMinPlayerVersion</B> method allows separate code modules to independently request a minimum player version, such that the highest minimum player version that is requested by all code modules will be the version used to determine if the player installed on the user's system is adequate for the content as a whole. This allows separate code modules to co-exist and declare their player dependencies in a more cooperative manner.</P>
+
+<P>By default, Music Object does not require any specific version of the Beatnik Player to be installed. It is up to an author to judge based upon the features that their content makes use of, as to which minimum version should be installed in order for the content to work effectively enough. Compromises can be made, depending on how the content is authored. For instance, if the features of newer player versions are only used to enhance the experience but the authoring is not critically dependent upon these features, then an earlier version can be specified using the <B>Music.requireMinPlayerVersion</B> method.</P>
+
+<P>In order for an author's requirement to be used when the compatibility test takes place, this method should be called before any calls are made to the <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> or <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> static methods, or the <A HREF="instance-methods.html#magicEmbed"><B>magicEmbed</B></A>, <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A>, or <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A> instance methods. The best way to ensure this is to call the method in the code immediately following the SCRIPT tag that sources in the "music-object.js" file.</P>
+
+<P>For example:</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+   <SPAN CLASS=sample-code-highlighted>Music.requireMinPlayerVersion ('1.3.2');</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- The rest of your document follows.... --&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For more information on using this method in conjunction with the other compatibility methods and properties, see the section <A HREF="compatibility-aids.html">Music Object Compatibility Aids</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="musical-notes"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Musical Notes
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.getNoteName"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getNoteName</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getNoteName</B> static method returns a string value, indicating the musical note name of the specified MIDI note number.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.getNoteName'); return false">Music.getNoteName</A> (</B> <A HREF="parameters.html#NoteNumber0to127">NoteNumber0to127</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="parameters.html#NoteNameSTR">NoteNameSTR</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>See also the <A HREF="#Music.getNoteNumber"><B>Music.getNoteNumber</B></A> static method.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>the name is always returned with the note capitalized.
+	<LI>always returns sharps rather than flats for the "black keys" (eg. D# instead of Eb, F# instead of Gb, etc.).
+</UL>
+
+<A NAME="Music.getNoteNumber"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getNoteNumber</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getNoteNumber</B> static method returns an integer value, indicating the MIDI note number of the specified musical note name.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.getNoteNumber'); return false">Music.getNoteNumber</A> (</B> <A HREF="parameters.html#NoteNameSTR">NoteNameSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="parameters.html#NoteNumber0to127">NoteNumber0to127</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The first character of the <B>NoteNameSTR</B> parameter must be one of the letters "A", "B", "C", "D", "E", "F", or "G". This can be followed by an optional accidental. The sharp accidental is indicated by the "#" character, and the flat accidental is indicated by a lowercase "b". Following that, and at the end of the string, should be the octave number. For example, "D#5" specifies D-sharp in the 5th octave. And "Fb3" specifies F-flat in the 3rd octave. Middle C is represented by "C4".</P>
+
+<P>See also the <A HREF="#Music.getNoteName"><B>Music.getNoteName</B></A> static method.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="general"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+General
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.addCallbackHandler"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addCallbackHandler</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addCallbackHandler</B> static method lets you add a callback handler to the stack of callback handlers for a specified static callback.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.addCallbackHandler'); return false">Music.addCallbackHandler</A> (</B> <A HREF="parameters.html#StaticCallbackTypeSTR">StaticCallbackTypeSTR</A> <B>,</B> Handler<A HREF="parameters.html#Function">Function</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.addCallbackHandler (</B> <A HREF="parameters.html#StaticCallbackTypeSTR">StaticCallbackTypeSTR</A> <B>,</B> Handler<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called at any time.
+	<LI>See the section <A HREF="concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks.
+	<LI>Compare to the <A HREF="instance-methods.html#addCallbackHandler"><B>addCallbackHandler</B></A> instance method that is used to register callback handlers for instance callbacks.
+</UL>
+
+<A NAME="Music.engageAudio"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.engageAudio</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.engageAudio</B> static method allows you, at any time, to engage or disengage the audio device that is used by the Beatnik Player's underlying audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.engageAudio'); return false">Music.engageAudio</A> (</B> AudioEngagedBOOL <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>By default, the Beatnik Player on the Windows platform will try to occupy the system's WAV device (which is used by applications that wish to use sound). This can cause problems in Web pages that combine multiple plug-in media types that are all trying to use sound. Because of performance reasons, the Beatnik Player does not currently use Microsoft's DirectSound technology, which would let Beatnik share the system's sound resources with other applications that were written to use DirectSound. DirectSound is also not universally installed on Windows systems, and is not universally used by other audio applications.</P>
+
+<P>The <B>Music.engageAudio</B> method gives authors a way to "free up" the WAV device from Beatnik so that other plug-in media types can play sound. This approach does, however, require some carefully thought-out scripting. The method takes a boolean parameter indicating whether the audio is to be engaged or not. If you specify a value of <SPAN CLASS=value>false</SPAN> then the audio will be disengaged. And if you specify a value of <SPAN CLASS=value>true</SPAN> then the audio will be reengaged. This method is not applicable on the Mac platform where the built-in SoundManager provides the services necessary to allow multiple applications to be using the system's sound resources at the same time.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Only applicable on the Windows platform
+	<LI>This method may be called anytime after at least one Music Object instance has been embedded and is ready.
+</UL>
+
+<A NAME="Music.getAudioDevicePriority"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getAudioDevicePriority</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getAudioDevicePriority</B> static method returns an integer value, indicating the current audio device priority setting for the sonified document.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.getAudioDevicePriority'); return false">Music.getAudioDevicePriority</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="parameters.html#AudioDevicePriority0to3">AudioDevicePriority0to3</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Audio device priority for a sonified document can be set using the <A HREF="#Music.setAudioDevicePriority"><B>Music.setAudioDevicePriority</B></A> static method.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called at any time.
+	<LI>See the section <A HREF="adcm.html">Audio Device Contention Manager</A> to gain a clearer understanding of how this method relates to other methods that can be used to manage the engaged state behavior of the player's underlying audio engine.
+</UL>
+
+<A NAME="Music.getReverbType"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getReverbType</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getReverbType</B> static method returns an integer value, indicating the current global reverb type that is set for the underlying Beatnik audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.getReverbType'); return false">Music.getReverbType</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="parameters.html#ReverbType1to11">ReverbType1to11</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Reverb type can be set by a MIDI controller message within an RMF or MIDI file, but can also be set via scripting using the <A HREF="#Music.setReverbType"><B>Music.setReverbType</B></A> static method.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called anytime after at least one Music Object instance has been embedded and is ready.
+</UL>
+
+<A NAME="Music.isAudioDeviceShared"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.isAudioDeviceShared</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.isAudioDeviceShared</B> static method returns a boolean value, indicating whether or not the Beatnik Player can share the system's audio device with other media players.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.isAudioDeviceShared'); return false">Music.isAudioDeviceShared</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>boolean</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>A value of <SPAN CLASS=value>true</SPAN> indicates that the system's audio device can be shared, while a value of <SPAN CLASS=value>false</SPAN> indicates that the audio device cannot be shared. For a clearer understanding of how the <B>Music.isAudioDeviceShared</B> method relates to other methods that can be used to manage and monitor the engaged state behavior of the player's underlying audio engine, consult the section <A HREF="adcm.html">Audio Device Contention Manager</A>.</P>
+
+<DIV CLASS=subsection>The "Best Guess" Situation</DIV>
+
+<P>Because this method relies upon the cooperation of player versions 2.1 and higher, the method will be unable to determine conclusively whether or not the system's audio device can be shared if the version of the installed player is earlier than 2.1, or there is no player installed. In such cases, the <B>Music.isAudioDeviceShared</B> method will return a "best guess" value based upon the user's operating system. The value <SPAN CLASS=value>false</SPAN> will be returned for Windows 95, Windows 98, and versions of Window NT earlier than 5.0, and the value <SPAN CLASS=value>true</SPAN> will be returned for all other operating systems.</P>
+
+<DIV CLASS=subsection>An Example</DIV>
+
+<P>In order for the <B>Music.isAudioDeviceShared</B> method to return reliable results, this method should only be called after at least one Music Object instance has been embedded and is ready. The following sample code template shows how to correctly use this method...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+function checkAudioDeviceShared () {
+   if (!Music.isAudioDeviceShared ()) {
+      // code to handle systems that cannot mix audio from multiple applications
+   }
+}
+
+music = new Music ();
+music.onReady (checkAudioDeviceShared);
+music.stubEmbed ('stub.rmf');
+
+/*** Your Sonification Code Follows ***/
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called anytime after at least one Music Object instance has been embedded and is ready.
+	<LI>If version 2.1 (or higher) of the Beatnik Player is installed and this method is called before at least one instance has been embedded and has become ready, then this method will return the value <SPAN CLASS=value>null</SPAN>.
+</UL>
+
+<A NAME="Music.isAudioEngaged"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.isAudioEngaged</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.isAudioEngaged</B> static method returns a boolean value, indicating whether or not the player's underlying audio engine is engaged.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.isAudioEngaged'); return false">Music.isAudioEngaged</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>boolean</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>A value of <SPAN CLASS=value>true</SPAN> indicates that the audio engine is engaged, while a value of <SPAN CLASS=value>false</SPAN> indicates that the audio engine is disengaged. One common way to use this method is in a handler for the <A HREF="concepts.html#callbacks/onAudioEngagedChange"><B>onAudioEngagedChange</B></A> static callback. Because the <B>onAudioEngagedChange</B> callback is triggered when the audio engine becomes engaged as well as when it becomes disengaged, the <B>Music.isAudioEngaged</B> method can be used at the time that the callback is triggered to determine what the new engaged state of the audio engine is.</P>
+
+<P>The <B>Music.isAudioEngaged</B> method is only supported for player versions 2.1 and higher, and the primary way that the audio engine would switch from being engaged to being disengaged (or vice versa) in these player versions would be as a result of the Audio Device Contention Manager that is built into these versions. For a clearer understanding of how the <B>Music.isAudioEngaged</B> method relates to other methods that can be used to manage and monitor the engaged state behavior of the player's underlying audio engine, consult the section <A HREF="adcm.html">Audio Device Contention Manager</A>.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called anytime after at least one Music Object instance has been embedded and is ready.
+	<LI>If this method is called before at least one Music Object instance has been embedded and is ready, or a version of the player earlier than version 2.1 is installed, or there is no player installed at all, then this method will return the value <SPAN CLASS=value>null</SPAN>.
+</UL>
+
+<A NAME="Music.isAudioSupported"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.isAudioSupported</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.isAudioSupported</B> method returns a boolean value, indicating whether or not the user's system provides audio services that are compatible with the player.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.isAudioSupported'); return false">Music.isAudioSupported</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>boolean</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>In most cases, if a system has sound hardware (such as a soundcard, or a sound chip that is integrated into the motherboard), then the <B>Music.isAudioSupported</B> method will return the value <SPAN CLASS=value>true</SPAN>. That said, however, there may be a very small number of systems where sound hardware is installed but the sound hardware's software drivers are incompatible with the Beatnik Player (or some aspect of the operating system's underlying audio services that are used by the Beatnik Player).</P>
+
+<DIV CLASS=subsection>Denying Access to Content</DIV>
+
+<P>Certain types of sonified content may rely so heavily upon the audio features of the Beatnik Player that it may not be worth letting users experience the content if their system has no audio support. In fact, allowing users to enter music remixing applications, for example, when their system doesn't even have audio support may just be a source of confusion for such users, as well as a source of technical support e-mails or phonecalls for you. The <B>Music.isAudioSupported</B> method can be used to deny a user access to such content if their system has no audio support.</P>
+
+<DIV CLASS=subsection>Benefit of the Doubt</DIV>
+
+<P>If the <B>Music.isAudioSupported</B> method is called before at least one Music Object instance has been embedded and is ready, or a version of the player earlier than version 2.1 is installed, or there is no player installed at all, then the method will return the value <SPAN CLASS=value>true</SPAN>. This is somewhat of a "benefit of the doubt" approach, where the user's system is assumed to have audio support unless it can be determined conclusively, using the player, that their system does not have audio support.</P>
+
+<DIV CLASS=subsection>An Example</DIV>
+
+<P>In order for the <B>Music.isAudioSupported</B> method to return reliable results, this method should only be called after at least one Music Object instance has been embedded and is ready. The following sample code listing shows one example of how this method can be used correctly to filter out users who attempt to experience sonified content when their system has no audio support.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+function gotoSonifiedContent () {
+   document.location.href = 'sonified.html';
+}
+
+function gotoApologyPage () {
+   document.location.href = 'sorry.html';
+}
+
+function checkAudioSupported () {
+   Music.isAudioSupported () ? gotoSonifiedContent () : gotoApologyPage ();
+}
+
+if (!Music.hasPlayer) {
+   gotoApologyPage ();
+} else if (Music.clientPlatform != 'Win32') {
+   gotoSonifiedContent ();
+} else if (Music.hasMinVersion ('2.1')) {
+   music = new Music ();
+   music.onReady (checkAudioSupported);
+   music.stubEmbed ('stub.rmf');
+} else {
+   Music.promptUser (
+      'System Supports Audio?',
+      'With the version of the Beatnik Player that is installed in ' +
+         'your browser, it is not possible to automatically determine ' +
+         'if your system supports audio.&lt;P&gt;This sonified content ' +
+         'requires that your system have audio hardware and may not ' +
+         'work correctly or may even crash your browser if sound ' +
+         'hardware is not installed.&lt;P&gt;' +
+         'Does your system support audio?',
+      'YES','gotoSonifiedContent ()',
+      'NO','gotoApologyPage ()'
+   );
+}
+
+/*** Your Sonification Code Follows ***/
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, it is assumed that an HTML page "sorry.html" will attempt to console users who do not have the Beatnik Player installed or who's systems do not have audio support. Any user who's system meets the requirements for the sonified content will be directed to the actual sonified HTML page "sonified.html". In cases where it is not possible to automatically detect if the user's system has audio support, the user is prompted to make that judgement for themselves and, based upon the response, the user will either be directed to the "sorry.html" page or the "sonified.html" page.</P>
+
+<P>Notice how the <B>Music.isAudioSupported</B> method is only called if the function "checkAudioSupported" is called. This function is set up as a handler for the onReady callback of the Music Object instance "music", and this instance is only created if the user has the player installed and they are running a Windows system. The reason for this shortcut is that the MacOS and WebTV platforms have built-in audio hardware that is supported by Beatnik and, therefore, the problem of having no audio support is almost certain to occur only on some Windows systems. So, the call to the <B>Music.isAudioSupported</B> method is not really necessary on systems other than Windows systems.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the section <A HREF="../tips-techniques/authoring-issues/index.html?issues/incompatible-hardware.html">Authoring Issues: Systems with Incompatible Sound Hardware</A>.
+	<LI>This method may be called anytime after at least one Music Object instance has been embedded and is ready.
+	<LI>If this method is called before at least one Music Object instance has been embedded and is ready, or a version of the player earlier than version 2.1 is installed, or there is no player installed at all, then this method will return the value <SPAN CLASS=value>true</SPAN>.
+</UL>
+
+<A NAME="Music.kill"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.kill</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.kill</B> static method lets you stop all player instances that are currently playing music on a page and disable all further sonification, all in a single step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.kill ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>In effect, the <B>Music.kill</B> static method stops all player instances on the page in much the same way as the <A HREF="#Music.stopAll"><B>Music.stopAll</B></A> static method, and then disables all further sonification on the page by setting the <A HREF="static-properties.html#Music.enabled"><B>Music.enabled</B></A> static property to <SPAN CLASS=value>false</SPAN>.</P>
+
+<P>This method may be called even before player instances have been embedded on the page. In this event, the sonification would be disabled and no instances would be embedded as a result of calls to the Music Object API's various embedding methods (<A HREF="instance-methods.html#magicEmbed"><B>magicEmbed</B></A>, <A HREF="instance-methods.html#stubEmbed"><B>stubEmbed</B></A>, <A HREF="instance-methods.html#preloadEmbed"><B>preloadEmbed</B></A>, and <A HREF="#Music.magicEmbed"><B>Music.magicEmbed</B></A>), unless some code set the <B>Music.enabled</B> static property to <SPAN CLASS=value>true</SPAN> again before the embedding methods were called. Because the <B>Music.kill</B> method disables sonification by setting the <B>Music.enabled</B> static property to <SPAN CLASS=value>false</SPAN>, it would be possible to re-enable sonification after this method has been called, simply by executing the statement <SPAN CLASS=sample-code><NOBR>Music.enabled = true</NOBR></SPAN>.</P>
+
+<A NAME="Music.onAudioEngagedChange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.onAudioEngagedChange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.onAudioEngagedChange</B> static method lets you register JavaScript code that is to be executed each time there is a change in the engaged state of the player's underlying audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onAudioEngagedChange'); return false">Music.onAudioEngagedChange</A> (</B> Handler<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <A HREF="concepts.html#callbacks/onAudioEngagedChange"><B>onAudioEngagedChange</B></A> static callback is triggered each time there is a change in the audio engaged state of the player's underlying audio engine. At the time that the <B>onAudioEngagedChange</B> callback is triggered, the current engaged state of the audio engine can be determined using the <A HREF="#Music.isAudioEngaged"><B>Music.isAudioEngaged</B></A> static method.</P>
+
+<P>The <B>onAudioEngagedChange</B> callback is only supported for player versions 2.1 and higher, and the primary way that the audio engine would switch from being engaged to being disengaged (or vice versa) in these player versions would be as a result of the Audio Device Contention Manager that is built into these versions. For a clearer understanding of how the <B>Music.onAudioEngagedChange</B> method relates to other methods that can be used to manage and monitor the engaged state behavior of the player's underlying audio engine, consult the section <A HREF="adcm.html">Audio Device Contention Manager</A>.</P>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onAudioEngagedChange','HandlerFunction'); return false">Music.onAudioEngagedChange</A> (</B> Handler<A HREF="parameters.html#Function">Function</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onAudioEngagedChange','null'); return false">Music.onAudioEngagedChange</A> (</B> null <B>)</B>
+		<P>When the value <SPAN CLASS=value>null</SPAN> is specified in place of a <B>HandlerJavaScriptSTR</B> or <B>HandlerFunction</B> parameter, then the currently registered handler for this callback is cleared.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onAudioEngagedChange',''); return false">Music.onAudioEngagedChange</A> ( )</B>
+		<P>When no parameter is specified for the <B>Music.onAudioEngagedChange</B> method, then the currently registered handler for this callback is cleared.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called at any time.
+	<LI>See the section <A HREF="concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks.
+	<LI>See the section <A HREF="adcm.html">Audio Device Contention Manager</A> to gain a clearer understanding of how this method relates to other methods that can be used to manage the engaged state behavior of the player's underlying audio engine.
+</UL>
+
+<A NAME="Music.onEngageAudio"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.onEngageAudio</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.onEngageAudio</B> static method lets you register JavaScript code that is to be executed after each call to the <A HREF="#Music.engageAudio"><B>Music.engageAudio</B></A> static method.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onEngageAudio'); return false">Music.onEngageAudio</A> (</B> Handler<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <A HREF="concepts.html#callbacks/onEngageAudio"><B>onEngageAudio</B></A> static callback is triggered after each call to the <B>Music.engageAudio</B> static method. At the time that this callback is triggered, the value specified in the most recent call to the <B>Music.engageAudio</B> method is reflected in the <B>Music.embedDefaults.AUDIOENGAGED</B> static property (see the reference section for the <A HREF="static-properties.html#Music.embedDefaults"><B>Music.embedDefaults</B></A> static property). Registering a handler for the <B>onEngageAudio</B> callback can be a convenient way to monitor the activity of the <A HREF="extensions/auto-disengage/index.html">Auto Disengage extension</A>.</P>
+
+<IMG SRC="../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onEngageAudio','HandlerFunction'); return false">Music.onEngageAudio</A> (</B> Handler<A HREF="parameters.html#Function">Function</A> <B>)</B>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onEngageAudio','null'); return false">Music.onEngageAudio</A> (</B> null <B>)</B>
+		<P>When the value <SPAN CLASS=value>null</SPAN> is specified in place of a <B>HandlerJavaScriptSTR</B> or <B>HandlerFunction</B> parameter, then the currently registered handler for this callback is cleared.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.onEngageAudio',''); return false">Music.onEngageAudio</A> ( )</B>
+		<P>When no parameter is specified for the <B>Music.onEngageAudio</B> method, then the currently registered handler for this callback is cleared.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called at any time.
+	<LI>See the section <A HREF="concepts.html#callbacks">Important Concepts: Callbacks</A> for more information on using callbacks.
+	<LI>The <B>onEngageAudio</B> callback is only triggered within a document for calls to the <B>Music.engageAudio</B> static method that occur within the same document.
+</UL>
+
+<A NAME="Music.setAudioDevicePriority"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.setAudioDevicePriority</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;2.1.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.setAudioDevicePriority</B> static method lets you set the audio device priority for the sonified document.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.setAudioDevicePriority'); return false">Music.setAudioDevicePriority</A> (</B> <A HREF="parameters.html#AudioDevicePriority0to3">AudioDevicePriority0to3</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The current audio device priority setting for a sonified document can be queried using the <A HREF="#Music.getAudioDevicePriority"><B>Music.getAudioDevicePriority</B></A> static method.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called anytime before all instances have been embedded, or after at least one Music Object instance has been embedded and is ready. If this method is called after all instances have been embedded but before any instances have become ready, then this method will have no effect.
+	<LI>If a version of the player earlier than version 2.1 is installed, or there is no player installed at all, then this method will have no effect.
+	<LI>Although this method is only supported for player versions 2.1 and higher, calling this method when a version of the player earlier than 2.1 is installed will not result in scripting errors.
+	<LI>See the section <A HREF="adcm.html">Audio Device Contention Manager</A> to gain a clearer understanding of how this method relates to other methods that can be used to manage the engaged state behavior of the player's underlying audio engine.
+</UL>
+
+<A NAME="Music.setGlobalMute"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.setGlobalMute</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.setGlobalMute</B> static method lets you set the global mute state for the underlying Beatnik audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.setGlobalMute'); return false">Music.setGlobalMute</A> (</B> <A HREF="parameters.html#MuteStateBOOL">MuteStateBOOL</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>Music.setGlobalMute</B> method has the same effect as if the user were to click the global mute button that appears on the top portion of the player's control panel when it is in SYSTEM display. The global mute state affects all player instances that are embedded in all frames of all browser windows that may currently be open. This method takes a boolean parameter representing the mute state you would like to invoke. If you specify a value of <SPAN CLASS=value>true</SPAN>, then all players will become silent. And if you specify a value of <SPAN CLASS=value>false</SPAN>, then the global mute state will be disabled.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called anytime after at least one Music Object instance has been embedded and is ready.
+</UL>
+
+<A NAME="Music.setReverbType"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.setReverbType</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.setReverbType</B> static method lets you set the global reverb type for the underlying Beatnik audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.setReverbType'); return false">Music.setReverbType</A> (</B> <A HREF="parameters.html#ReverbType1to11">ReverbType1to11</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>See the <B><A HREF="parameters.html#ReverbType1to11">ReverbType1to11</A></B> parameter for a list of the Beatnik Player's possible reverb types.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>This method may be called anytime after at least one Music Object instance has been embedded and is ready.
+</UL>
+
+<A NAME="Music.stopAll"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.stopAll</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.stopAll</B> static method lets you stop all Music Object instances that are currently playing music on the page.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B><A HREF="javascript://" ONCLICK="launchMethodizer ('Music.stopAll'); return false">Music.stopAll</A> ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Only instances that exist in the same document that contains the "music-object.js" file will be stopped - other sonified frames or windows will not be affected by this method.</P>
+
+</BODY></HTML>

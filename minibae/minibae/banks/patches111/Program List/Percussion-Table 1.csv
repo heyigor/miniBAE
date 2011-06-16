@@ -1,0 +1,70 @@
+Note#,Note Name,GM Bank (0),Special Bank (1)
+27,D#1,Hi-Q,empty
+28,E1,Slap,empty
+29,F1,Scratch Push,empty
+30,F#1,Scratch Pull,empty
+31,G1,Sticks,empty
+32,G#1,Square Click,empty
+33,A1,Metronome Click,empty
+34,A#1,Metronome Bell,empty
+35,B1,Low Kick,empty
+36,C2,Kick,empty
+37,C#2,Rimclik,empty
+38,D2,Electric Snare,empty
+39,D#2,Handclap,empty
+40,E2,Acoustic Snare,empty
+41,F2,Tom Low,empty
+42,F#2,Closed Hi-Hat,empty
+43,G2,Tom Hi,empty
+44,G#2,Pedal Hi-Hat,empty
+45,A2,Tom Hi,empty
+46,A#2,Open Hi-Hat,Tablaesque - Low
+47,B2,Low Mid Tom,Tablaesque - Hi
+48,C3,High Mid Tom,Nine Inch Kick
+49,C#3,Crash Cymbal 1,HippiShake
+50,D3,High Tom,ScienceTom
+51,D#3,Ride Cymbal 1,Click
+52,E3,Chinese Cymbal,Rvs Cymb Pan Long
+53,F3,Ride Bell,Rvs Cymb Pan Med
+54,F#3,Tambourine,Rvs Cymb Pan Short
+55,G3,Splash Cymbal,Woodstick
+56,G#3,Cowbell,ElectroBrite
+57,A3,Crash Cymbal 2,SloLaser
+58,A#3,Vibraslap,UFO-by
+59,B3,Ride Cymbal 2,Air Snare
+60,C4,High Bongo,Weird Snare
+61,C#4,Low Bongo,Flange Snare
+62,D4,Mute High Conga,Ping Drum
+63,D#4,Open High Conga,Itchy-Scratch
+64,E4,Low Conga,Itchy-Scratch 2
+65,F4,High Timbale,Hi Metallic Snare
+66,F#4,Low Timbale,Noise Echo
+67,G4,High Agogo,Buzzy Hit
+68,G#4,Low Agogo,Rez Hat
+69,A4,Cabasa,Bucket Hit
+70,A#4,Maracas,Ice Cube
+71,B4,Short Whistle,Explosive Kick
+72,C5,Long Whistle,Mutant Cowbell
+73,C#5,Short Guiro,Temple Bell
+74,D5,Long Guiro,Hi Temple Gong
+75,D#5,Claves,Thuddy Kick
+76,E5,High Wood Block,Lo Bell
+77,F5,Low Wood Block,Sine Chirp
+78,F#5,Mute Cuica,Hollow Metal Hit
+79,G5,Open Cuica,Woodblock
+80,G#5,Close Triangle,Reverse Cymbal
+81,A5,Open Triangle,Tablaesque Slap
+82,A#5,Shaker,Sonar Blip
+83,B5,Jingle Bell,Sine Hit
+84,C6,Bell Tree,Sine Block
+85,C#6,Castanets,Krell Tone
+86,D6,Mute Surdo,Sine Kick
+87,D#6,Open Surdo,Hi Tone
+88,E6,empty,Hi Click
+89,F6,empty,Gate Tone
+90,F#6,empty,Chem Tone
+91,G6,empty,Dub Kick
+92,G#6,empty,empty
+93,A6,empty,empty
+94,A#6,Brush Snare High,empty
+95,B6,Brush Snare Low,empty

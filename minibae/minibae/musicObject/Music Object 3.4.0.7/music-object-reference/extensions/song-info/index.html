@@ -1,0 +1,586 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Song Info</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Song Info<BR>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Song Info extension provides additional features for displaying an RMF file's copyright information in a pop-up window. This extension is also useful in that it allows you to conveniently display certain song information fields that may not be displayed in the Beatnik Player's standard "Copyright Information" window, such as the <B>GENRE</B>, <B>SUBGENRE</B>, <B>TEMPO DESCRIPTION</B>, <B>ORIGINAL SOURCE</B>, <B>PLAYLENGTH</B>, and <B>SIZE</B> fields.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-song-info.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-song-info.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-song-info.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-song-info.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#showSongInfo">showSongInfo</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you display the copyright and other information for an RMF file that is loaded into the Music Object instance.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.songInfoFieldNameStyle">Music.songInfoFieldNameStyle</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the SongInfoFieldNameStyleSTR parameter, if this parameter is not specified when calling the showSongInfo instance method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.songInfoFields">Music.songInfoFields</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the SongInfoFieldsSTR parameter, if this parameter is not specified when calling the showSongInfo instance method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.songInfoFieldValueStyle">Music.songInfoFieldValueStyle</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the SongInfoFieldValueStyleSTR parameter, if this parameter is not specified when calling the showSongInfo instance method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.songInfoImageURL">Music.songInfoImageURL</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable, specifying the default value that should be used for the SongInfoImageUrlSTR parameter, if this parameter is not specified when calling the showSongInfo instance method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.songInfoWindow">Music.songInfoWindow</A></TD>
+	<TD CLASS=contents-table-item-desc>An object reference, being a handle to the song info window that is popped open by the showSongInfo instance method.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#common-parameters">Common Parameters</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#SongInfoFieldsSTR">SongInfoFieldsSTR</A></TD>
+	<TD CLASS=contents-table-item-desc>A string, specifying the song info fields that should be displayed, as well as the order in which they should appear.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="showSongInfo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;showSongInfo</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Song Info</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.3.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>showSongInfo</B> instance method lets you display the copyright and other information for an RMF file that is loaded into the Music Object instance
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>showSongInfo (</B><BR>
+			&nbsp;&nbsp;&nbsp;SongInfoFieldsSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp;SongInfoImageUrlSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp;SongInfoFieldNameStyleSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp;SongInfoFieldValueStyleSTR<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P></P>
+
+<IMG SRC="../../../style/images/subheading-parameters.gif" WIDTH=122 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="PARAMETERS"><BR>
+<UL>
+	<LI><B>SongInfoFieldsSTR</B>
+		<P>Lets you specify the song info fields that should be displayed, as well as the order in which they should appear. For more information on the valid field names that can be specified, see the dedicated section for the <A HREF="#SongInfoFieldsSTR"><B>SongInfoFieldsSTR</B></A> parameter.</P>
+	<LI><B>SongInfoImageUrlSTR</B>
+		<P>Lets you specify the URL of an image that should be displayed as the background for the song info window.</P>
+	<LI><B>SongInfoFieldNameStyleSTR</B>
+		<P>Lets you specify a style definition for customizing the display of field names in the song info window.</P>
+	<LI><B>SongInfoFieldValueStyleSTR</B>
+		<P>Lets you specify a style definition for customizing the display of field value in the song info window.</P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SongInfoFieldsSTR</B> parameter, then the value of the <A HREF="#Music.songInfoFields"><B>Music.songInfoFields</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SongInfoImageUrlSTR</B> parameter, then the value of the <A HREF="#Music.songInfoImageURL"><B>Music.songInfoImageURL</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SongInfoFieldNameStyleSTR</B> parameter, then the value of the <A HREF="#Music.songInfoFieldNameStyle"><B>Music.songInfoFieldNameStyle</B></A> static property is used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>SongInfoFieldValueStyleSTR</B> parameter, then the value of the <A HREF="#Music.songInfoFieldValueStyle"><B>Music.songInfoFieldValueStyle</B></A> static property is used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>showSongInfo (</B> SongInfoFieldsSTR <B>,</B> SongInfoImageUrlSTR <B>,</B> SongInfoFieldNameStyleSTR <B>)</B>
+		<P>When no <B>SongInfoFieldValueStyleSTR</B> parameter is specified, then the value of the <B>Music.songInfoFieldValueStyle</B> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>showSongInfo (</B> SongInfoFieldsSTR <B>,</B> SongInfoImageUrlSTR <B>)</B>
+		<P>When there is also no <B>SongInfoFieldNameStyleSTR</B> parameter specified, then the value of the <B>Music.songInfoFieldNameStyle</B> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>showSongInfo (</B> SongInfoFieldsSTR <B>)</B>
+		<P>When there is also no <B>SongInfoImageUrlSTR</B> parameter specified, then the value of the <B>Music.songInfoImageURL</B> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>showSongInfo ( )</B>
+		<P>When there is also no <B>SongInfoFieldsSTR</B> parameter specified, then the value of the <B>Music.songInfoFields</B> static property is used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.songInfoFieldNameStyle"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.songInfoFieldNameStyle</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Song Info</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-- see below --&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.songInfoFieldNameStyle</B> static property is s string variable, specifying the default value that should be used for the <B>SongInfoFieldNameStyleSTR</B> parameter, if this parameter is not specified when calling the <A HREF="#showSongInfo"><B>showSongInfo</B></A> instance method.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The default value for the <B>Music.songInfoFields</B> property is "<SPAN CLASS=value>text-align: right; color: #000; font-family: Arial, Helvetica, Verdana; font-size: 10pt; font-weight: bold;</SPAN>".</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.songInfoFields"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.songInfoFields</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Song Info</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-- see below --&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.songInfoFields</B> static property is a string variable, specifying the default value that should be used for the <B>SongInfoFieldsSTR</B> parameter, if this parameter is not specified when calling the <A HREF="#showSongInfo"><B>showSongInfo</B></A> instance method.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The default value for the <B>Music.songInfoFields</B> property is "<SPAN CLASS=value>TITLE, PLAYLENGTH, SIZE, COMPOSER, COPYRIGHT, PERFORMER, PUBLISHER, USE, LICENSEE, TERM, EXPIRATION, NOTES</SPAN>".</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.songInfoFieldValueStyle"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.songInfoFieldValueStyle</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Song Info</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-- see below --&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.songInfoFieldValueStyle</B> static property is a string variable, specifying the default value that should be used for the <B>SongInfoFieldValueStyleSTR</B> parameter, if this parameter is not specified when calling the <A HREF="#showSongInfo"><B>showSongInfo</B></A> instance method.
+
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The default value for the <B>Music.songInfoFields</B> property is "<SPAN CLASS=value>color: #000; font-family: Arial, Helvetica, Verdana; font-size: 10pt;</SPAN>".</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.songInfoImageURL"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.songInfoImageURL</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Song Info</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;an empty string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.songInfoImageURL</B> static property is a string variable, specifying the default value that should be used for the <B>SongInfoImageUrlSTR</B> parameter, if this parameter is not specified when calling the <A HREF="#showSongInfo"><B>showSongInfo</B></A> instance method.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.songInfoWindow"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.songInfoWindow</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Song Info</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.songInfoWindow</B> static property is an object reference, being a handle to the song info window that is popped open by the <A HREF="#showSongInfo"><B>showSongInfo</B></A> instance method.
+<BR CLEAR=RIGHT>
+</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="common-parameters"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Common Parameters
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="SongInfoFieldsSTR"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;SongInfoFieldsSTR</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Parameter&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>The <B>SongInfoFieldsSTR</B> parameter is a string, specifying the song info fields that should be displayed, as well as the order in which they should appear.</P>
+<BR CLEAR=RIGHT>
+
+<P>The <B>SongInfoFieldsSTR</B> parameter consists of a series of song info field names seperated by commas (','). The order in which the field names appear determines the order in which they are displayed in the window that is popped open by the <A HREF="#showSongInfo"><B>showSongInfo</B></A> instance method.</P>
+
+<P>For the <B>SongInfoFieldsSTR</B> parameter, the following info field names can be specified...</P>
+
+<UL>
+	<LI><B>TITLE</B><BR>
+		Corresponds to the "Song Title" field in the Beatnik Player's "Copyright Information" window and the "Title" field in the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>COMPOSER</B><BR>
+		Corresponds to the "Composer(s)" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>COPYRIGHT</B><BR>
+		Corresponds to the "Copyright" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>PERFORMER</B><BR>
+		Corresponds to the "Performed By" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>PUBLISHER</B><BR>
+		Corresponds to the "Publisher Contact Information" field in the Beatnik Player's "Copyright Information" window and the "Publisher Contact" field in the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>USE</B><BR>
+		Corresponds to the "Use of License" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>LICENSEE</B><BR>
+		Corresponds to the "Licensed To URL" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>TERM</B><BR>
+		Corresponds to the "License Term" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>EXPIRATION</B><BR>
+		Corresponds to the "Expiration Date" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>NOTES</B><BR>
+		Corresponds to the "Composer Notes" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>INDEX</B><BR>
+		Corresponds to the "Index Number" field in the Beatnik Player's "Copyright Information" window and the Beatnik Editor's "Song Info" window.
+		<P></P>
+	<LI><B>GENRE</B><BR>
+		Corresponds to the "Genre" field in the Beatnik Editor's "Song Info" window (not displayed in the Beatnik Player's "Copyright Information" window).
+		<P></P>
+	<LI><B>SUBGENRE</B><BR>
+		Corresponds to the "Sub Genre" field in the Beatnik Editor's "Song Info" window (not displayed in the Beatnik Player's "Copyright Information" window).
+		<P></P>
+	<LI><B>TEMPO DESCRIPTION</B><BR>
+		Corresponds to the "Tempo Description" field in the Beatnik Editor's "Song Info" window (not displayed in the Beatnik Player's "Copyright Information" window).
+		<P></P>
+	<LI><B>ORIGINAL SOURCE</B><BR>
+		Corresponds to the "Original Source" field in the Beatnik Editor's "Song Info" window (not displayed in the Beatnik Player's "Copyright Information" window).
+		<P></P>
+	<LI><B>PLAYLENGTH</B><BR>
+		The duration of the song, as returned by the <A HREF="../../instance-methods.html#getPlayLength"><B>getPlayLength</B></A> instance method.
+		<P></P>
+	<LI><B>SIZE</B><BR>
+		The actual filesize of the currently loaded file, as returned by the <A HREF="../../instance-methods.html#getFileSize"><B>getFileSize</B></A> instance method.
+		<P></P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Song info field names are not case-sensitive.
+	<LI>Methods using this parameter: <A HREF="#showSongInfo"><B>showSongInfo</B></A>.
+</UL>
+
+</BODY></HTML>

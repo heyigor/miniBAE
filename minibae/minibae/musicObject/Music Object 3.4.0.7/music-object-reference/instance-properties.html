@@ -1,0 +1,335 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Instance Properties</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Instance Properties
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Property&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#player-state"><B>Player State</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#locked">locked</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean value, indicating whether or not a player instance is permitted to respond to methods that change its state.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#ready">ready</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean value, indicating whether or not a player instance is ready to receive scripting control.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#general"><B>General</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#audible">audible</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean value, indicating whether or not the Music Object instance is considered audible.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#averageNoteRelease">averageNoteRelease</A></TD>
+	<TD CLASS=contents-table-item-desc>An integer value, representing the average release time (measured in milliseconds) for notes being played through a Music Object instance.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#usage">usage</A></TD>
+	<TD CLASS=contents-table-item-desc>A string value, specifying the purpose for which the Music Object instance is being used.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="player-state"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Player State
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="locked"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;locked</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>false</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>locked</B> property provides a way to disallow (or allow) the state of a Music Object instance to be changed.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When this property is set to <SPAN CLASS=value>true</SPAN>, any attempts to alter the state of the Music Object instance are effectively blocked. In this condition, it is still possible to obtain state information about the instance using the "get" type methods, but it is not possible to alter the state of the instance using the "set" type methods or the transport control methods, such as <B>play</B>, <B>pause</B>, and <B>stop</B>. This is a convenient way to switch off certain aspects of the sonification of a page's user interface, since all attempts to instruct an instance to play musical notes, Groovoids, or music files will be blocked when its <B>locked</B> property is set <SPAN CLASS=value>true</SPAN>.</P>
+
+<P>It's important to note that setting this property to <SPAN CLASS=value>true</SPAN> will not stop music that is currently playing through the instance, but will merely block further attempts to change the state of the instance. So, depending on the way you wish to use this property, you may need to use the <B>stop</B> method before setting the <B>locked</B> property to <SPAN CLASS=value>true</SPAN>. Of course, if you first set the property to <SPAN CLASS=value>true</SPAN> and then try to use the <B>stop</B> method, you will not succeed in stopping the music that's playing because having the property set to <SPAN CLASS=value>true</SPAN> will block all attempts to change the state of the instance, including attempts to stop it playing.</P>
+
+<P>Compare this instance property to the <A HREF="static-properties.html#Music.enabled"><B>Music.enabled</B></A> static property, which can be used as a master switch to enable or disable sonification across all Music Object instances.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="ready"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;ready</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-basic">Music Object Component - Basic</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>ready</B> instance property is a boolean variable, indicating whether or not a player instance is ready to receive scripting control.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When this property has a value of <SPAN CLASS=value>true</SPAN>, then the instance is ready for scripting, and when the property has a value of <SPAN CLASS=value>false</SPAN>, the instance is not yet ready for scripting control. This property replaces the <B>isReady</B> method that was supported in versions of Music Object earlier than 3.1.0.</P>
+
+<P>It is also possible (and often more advisable) to determine when an instance becomes ready by registering a callback handler for the ready event using the <A HREF="instance-methods.html#onReady"><B>onReady</B></A> or <A HREF="extensions/callbacks/index.html#addOnReady"><B>addOnReady</B></A> methods. Using the callback approach, there is no guesswork involved as the ready event is only triggered when the player instance becomes ready for scripting control - no sooner and no later.</P>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="general"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+General
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="audible"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;audible</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;boolean&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read only&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>audible</B> instance property is a boolean variable, indicating whether or not the Music Object instance is considered audible.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The behavior of this property is affected by the values of the <A HREF="#usage"><B>usage</B></A> and <A HREF="#averageNoteRelease"><B>averageNoteRelease</B></A> instance properties.</P>
+
+<P>The <B>audible</B> property will be set to <SPAN CLASS=value>true</SPAN> in the following cases...</P>
+
+<UL>
+	<LI>The <B>usage</B> instance property is set to the string value "<SPAN CLASS=value>music</SPAN>", the Music Object instance is in a playing state (not paused or stopped), and its output volume (which can be queried using the <A HREF="instance-methods.html#getOutputVolume"><B>getOutputVolume</B></A> instance method) is greater than <SPAN CLASS=value>0</SPAN>.
+		<P></P>
+	<LI>The <B>usage</B> instance property is set to the string value "<SPAN CLASS=value>notes</SPAN>", the Music Object instance is in a playing state (not paused or stopped), its output volume is greater than <SPAN CLASS=value>0</SPAN>, and there are one or more notes that were triggered through the note playing methods of the Music Object API (eg. <B>noteOn</B>, <B>playNote</B>, <B>playRandomNote</B>, <B>playChord</B>, etc.) that are still on, or all notes that were triggered through the note playing methods have been turned off but the amount of time specified by the <B>averageNoteRelease</B> instance property has not yet elapsed since the last remaining note was turned off.
+</UL>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>It is important to note that the Music Object API does not take into account the settings for channel volume, track mute, track solo, channel mute, or channel solo when determining whether or not an instance is audible. So, it is possible for an instance to have no audio output (as a result of all the tracks being muted, for example), but for the <B>audible</B> property still to be set to <SPAN CLASS=value>true</SPAN>. This is a limitation that you should keep in mind if you are designing more sophisticated interactive audio applications.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#usage"><B>usage</B></A> and <A HREF="#averageNoteRelease"><B>averageNoteRelease</B></A> instance properties.
+</UL>
+
+<A NAME="averageNoteRelease"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;averageNoteRelease</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;integer&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>0</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>averageNoteRelease</B> instance property is an integer variable, representing the average release time (measured in milliseconds) for notes being played through a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>When a Music Object instance is in a playing state (not paused or stopped), its output volume (which can be queried using the <A HREF="instance-methods.html#getOutputVolume"><B>getOutputVolume</B></A> instance method) is greater than <SPAN CLASS=value>0</SPAN>, and the <A HREF="#usage"><B>usage</B></A> instance property is set to the string value "<SPAN CLASS=value>notes</SPAN>", then the value of the <B>averageNoteRelease</B> property will determine how long it takes, after all notes that were triggered via scripting have been turned off, for the instance to no longer be considered audible (ie. the value of the <A HREF="#audible"><B>audible</B></A> instance property becomes <SPAN CLASS=value>false</SPAN>).
+
+<P>In the example shown in the illustration below, three notes are being triggered. The first note being triggered has a duration of 2500 milliseconds. The second note, which also has a duration of 2500 milliseconds, is being triggered 500 milliseconds after the first note. Finally, a third note with a duration of 1500 milliseconds is being triggered 750 milliseconds after the first note.</P>
+
+<P ALIGN=CENTER><IMG SRC="../images/average-note-release.gif" WIDTH=640 HEIGHT=163 HSPACE=0 VSPACE=0 BORDER=0 ALT="averageNoteRelease Illustration"></P>
+
+<P>Because of the timing and duration of the notes, it actually turns out that the second note that is triggered will be the last of the notes to be turned off, and it will be turned off 3000 milliseconds after the first note is turned on. Now, in this example the <B>averageNoteRelease</B> property is set to <SPAN CLASS=value>1000</SPAN>, so the value of the <B>audible</B> property will become <SPAN CLASS=value>false</SPAN> exactly 1000 milliseconds later, which is 4000 milliseconds after the first note is triggered.</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>The value of the <B>averageNoteRelease</B> property only affects the behavior of the <B>audible</B> instance property when the <B>usage</B> instance property is set to "<SPAN CLASS=value>notes</SPAN>". So, if the <B>usage</B> property is set "<SPAN CLASS=value>music</SPAN>", then the <B>averageNoteRelease</B> property has no effect.
+</UL>
+
+<A NAME="usage"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;usage</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Core</A>&nbsp;<BR>&nbsp;<A HREF="core-components.html#component-advanced">Music Object Component - Advanced</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Type&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;string&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Default Value&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<SPAN CLASS=value>music</SPAN>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Access&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;read / write&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>usage</B> instance property is a string variable, specifying the purpose for which the Music Object instance is being used.
+<BR CLEAR=RIGHT>
+</P>
+
+<P>The value set for this property is used in determining whether or not the Music Object instance is audible, and affects the behavior of the <A HREF="#audible"><B>audible</B></A> instance property.</P>
+
+<P>There are two possible values for this property...</P>
+
+<UL>
+	<LI>"<SPAN CLASS=value>music</SPAN>"<BR>
+		Indicates that the instance is being used to play music files. When this value is set for the <B>usage</B> property, the <B>audible</B> instance property will be set to <SPAN CLASS=value>true</SPAN> whenever the instance is in a playing state (not paused or stopped) and the output volume (which can be queried using the <A HREF="instance-methods.html#getOutputVolume"><B>getOutputVolume</B></A> instance method) is greater than 0.
+		<P></P>
+	<LI>"<SPAN CLASS=value>notes</SPAN>"<BR>
+		Indicates that the instance is being used exclusively to play musical notes (possibly for user interface sounds) through the note playing methods of the Music Object API (eg. <B>noteOn</B>, <B>playNote</B>, <B>playRandomNote</B>, <B>playChord</B>, etc.). When this value is set for the <B>usage</B> property, then the <B>audible</B> instance property will only be set to <SPAN CLASS=value>true</SPAN> when the instance is in a playing state (not paused or stopped), the output volume is greater than 0, and there are one or more notes that were triggered through the note playing methods that are still on, or all notes that were triggered through the note playing methods have been turned off but the amount of time specified by the <A HREF="#averageNoteRelease"><B>averageNoteRelease</B></A> instance property has not yet elapsed since the last remaining note was turned off.
+		<P></P>
+</UL>
+
+<!--
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+</UL>
+-->
+
+</BODY></HTML>

@@ -1,0 +1,212 @@
+SONG resource map
+
+DWRD	Resource ID (Object Midi/emid/ecmi,cmid)
+DBYT	Reserved (Set to 0)
+DBYT	NEW Reverb Type (0 for default, 1 for off)
+DWRD	Tempo (or 0, default 16667) < slower, > faster
+KUBT	Format Type
+	CASE	SMS=0
+	CASE	RMF structured format=1
+	CASE	RMF linear format=2
+KEYB	0
+	DBYT	Song pitch shift (12 is up an octave, -12 is down an octave)
+	DBYT	Max sound effects
+	DBYT	Max Midi Notes
+	DWRD	Mix Level
+	BBIT	Locked
+	BBIT	Terminate decaying notes early when exceeding Max Norm Notes?
+	BBIT	Reserved (Set to 0)
+	BBIT	Reserved (Set to 0)
+	BBIT	Set Default programs:
+0-program=channel,
+1-program=track
+	BBIT	Enable MIDI Program Change for INST settings?
+	BBIT	Disable note click removal?
+	BBIT	Use Lead INST for all voices?
+	DBYT	Reserved (Set to 0)
+	DBYT	Default percussion program for Channel 10; use 0 for none; use -1 for GM percussion.
+	BBIT	NEW Ignore bad instruments
+	BBIT	Reserved (Set to 0)
+	BBIT	Reserved (Set to 0)
+	BBIT	Reserved (Set to 0)
+	BBIT	Reserved (Set to 0)
+	BBIT	Reserved (Set to 0)
+	BBIT	Reserved (Set to 0)
+	BBIT	Reserved (Set to 0)
+	OCNT	INST Remaps:
+	LSTC	-------
+		DWRD	Midi Program
+		DWRD	INST ID
+	LSTE	********
+	PSTR	Copyright Date
+	PSTR	Composer(s)
+	PSTR	Title
+	PSTR	Licensor Contact
+KEYE	
+KEYB	1
+	BFLG	Locked (dont change)
+	DWRD	Song pitch shift (12 is up an octave, -12 is down an octave)
+	DWRD	Max sound effects
+	DWRD	Max Midi Notes
+	DWRD	Mix Level
+	DWRD	Volume (63 = 50%, 127 = 100%, 254 = 200%)
+	BFLG	embedded
+	F01D	
+	OCNT	Song resources
+	LSTC	
+		KTYP	
+			CASE	Title=TITL
+			CASE	Performed by=PERF
+			CASE	Composer(s)=COMP
+			CASE	Copyright Date=COPD
+			CASE	Copyright Line=COPL
+			CASE	Publisher Contact Info=LICC
+			CASE	Use of License=LUSE
+			CASE	Licensed to what domain=LDOM
+			CASE	License term=LTRM
+			CASE	Expiration Date=EXPD
+			CASE	Composer Notes=NOTE
+			CASE	Index Number=INDX
+			CASE	Velocity curve=VELC
+			CASE	Instrument remap=RMAP
+			CASE	Genre=GENR
+			CASE	Sub Genre=SUBG
+		KEYB	TITL
+			CSTR	Title
+		KEYE	
+		KEYB	PERF
+			CSTR	Performed by
+		KEYE	
+		KEYB	COMP
+			CSTR	Composer(s)
+		KEYE	
+		KEYB	COPD
+			CSTR	Copyright Date
+		KEYE	
+		KEYB	COPL
+			CSTR	Copyright Line
+		KEYE	
+		KEYB	LICC
+			CSTR	Publisher Contact Info
+		KEYE	
+		KEYB	LDOM
+			CSTR	Licensed to what domain
+		KEYE	
+		KEYB	LUSE
+			CSTR	Use of License
+		KEYE	
+		KEYB	LTRM
+			CSTR	License term
+		KEYE	
+		KEYB	EXPD
+			CSTR	Expiration Date
+		KEYE	
+		KEYB	NOTE
+			CSTR	Composer Notes
+		KEYE	
+		KEYB	INDX
+			CSTR	Index Number
+		KEYE	
+		KEYB	VELC
+			FCNT	128 Midi Velocity
+			LSTC	
+				DWRD	
+			LSTE	
+		KEYE	
+		KEYB	RMAP
+			OCNT	Instrument remap
+			LSTC	
+				DWRD	Midi Program
+				DWRD	INST ID
+			LSTE	
+		KEYE	
+		KEYB	GENR
+			CSTR	Genre
+		KEYE	
+		KEYB	SUBG
+			CSTR	Sub Genre
+		KEYE	
+	LSTE	
+KEYE	
+KEYB	2
+	BFLG	Locked
+	DWRD	Max sound effects
+	DWRD	Max Midi notes
+	DWRD	Mix Level
+	DWRD	Volume (50 = 50%, 100 = 100%, 200 = 200%)
+	TNAM	PCM Audio Resource Type
+	FIXD	Sample rate (16.16) fixed point
+	ULNG	Uncompressed byte size
+	ULNG	Number of sample frames
+	DBYT	Channels
+	DBYT	Bit depth
+	BBIT	Disable embedded loop points
+	BBIT	Reserved (set to 0)
+	BBIT	Reserved (set to 0)
+	BBIT	Reserved (set to 0)
+	BBIT	Reserved (set to 0)
+	BBIT	Reserved (set to 0)
+	BBIT	Reserved (set to 0)
+	BBIT	Reserved (set to 0)
+	F00D	
+	OCNT	Song resources
+	LSTC	
+		KTYP	
+			CASE	Title=TITL
+			CASE	Performed by=PERF
+			CASE	Composer(s)=COMP
+			CASE	Copyright Date=COPD
+			CASE	Copyright Line=COPL
+			CASE	Publisher Contact Info=LICC
+			CASE	Use of License=LUSE
+			CASE	Licensed to what domain=LDOM
+			CASE	License term=LTRM
+			CASE	Expiration Date=EXPD
+			CASE	Composer Notes=NOTE
+			CASE	Index Number=INDX
+			CASE	Genre=GENR
+			CASE	Sub Genre=SUBG
+		KEYB	TITL
+			CSTR	Title
+		KEYE	
+		KEYB	PERF
+			CSTR	Performed by
+		KEYE	
+		KEYB	COMP
+			CSTR	Composer(s)
+		KEYE	
+		KEYB	COPD
+			CSTR	Copyright Date
+		KEYE	
+		KEYB	COPL
+			CSTR	Copyright Line
+		KEYE	
+		KEYB	LICC
+			CSTR	Publisher Contact Info
+		KEYE	
+		KEYB	LDOM
+			CSTR	Licensed to what domain
+		KEYE	
+		KEYB	LUSE
+			CSTR	Use of License
+		KEYE	
+		KEYB	LTRM
+			CSTR	License term
+		KEYE	
+		KEYB	EXPD
+			CSTR	Expiration Date
+		KEYE	
+		KEYB	NOTE
+			CSTR	Composer Notes
+		KEYE	
+		KEYB	INDX
+			CSTR	Index Number
+		KEYE	
+		KEYB	GENR
+			CSTR	Genre
+		KEYE	
+		KEYB	SUBG
+			CSTR	Sub Genre
+		KEYE	
+	LSTE	
+KEYE	

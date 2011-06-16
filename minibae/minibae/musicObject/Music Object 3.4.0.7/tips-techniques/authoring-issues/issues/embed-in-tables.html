@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Issues: Using EMBED in tables</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Using EMBED in tables
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>Sometimes plug-ins that are embedded in table layouts will play perfectly but will not respond to Music Object scripting.</P>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>As in the <A HREF="embed-in-frames.html">Using EMBED in multiple frames</A> issue, there seems to be a failure in LiveConnect to successfully reflect plug-in instances to the JavaScript level. In cases where the plug-in reflection fails, it is not possible to communicate to a plug-in instance through its symbolic handle (as defined in the NAME attribute). The plug-in will still play files, however.</P>
+
+<DIV CLASS=subsection>Cause</DIV>
+
+<P>According to Netscape engineers, "Two-pass tables duplicate their objects in JS, in 3.0, for images, applets, and embeds.  These related bad bugs should be fixed in 4.0, finally.  The standard workaround is to use document.embedName or document.embeds['name'] rather than document.embeds[i]."</P>
+
+<P>The unfortunate news is that we had no success with the <B>document.embedName</B> approach, either.</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>Without a full understanding of the mechanics behind this failure in LiveConnect, and given the fact that the problem can occur even in single level tables in a frameset (not nested tables), our advice is to completely avoid placing plug-in instances in table layouts. This is the safest way to avoid this issue.</P>
+
+</BODY></HTML>

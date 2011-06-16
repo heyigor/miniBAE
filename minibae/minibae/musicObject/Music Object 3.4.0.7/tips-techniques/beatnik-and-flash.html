@@ -1,0 +1,216 @@
+<HTML>
+<HEAD>
+	<TITLE>Using Beatnik and Flash Together</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Using Beatnik and Flash Together
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#why">Why Use Beatnik and Flash Together ?</A>
+			<LI><A HREF="#flash-to-beatnik">Controlling Beatnik from Flash</A>
+			<LI><A HREF="#template">A Beatnik-Flash Sonification Template</A>
+			<LI><A HREF="#fscommand">Adding FSCommand Actions</A>
+			<LI><A HREF="#extension-flash">Using "Music Object Extension - Flash"</A>
+			<LI><A HREF="#springboard">Springboard to a World of Sonification Possibilities</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="why"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Why Use Beatnik and Flash Together ?
+</TD></TR></TABLE>
+<BR>
+
+<P>The Beatnik and Flash technologies are ideal partners for creating high-impact, low-bandwidth, multimedia-rich Web content. In fact, Flash and Beatnik are quite similar in concept - both use an approach to data that results in economical, small file sizes - which, in turn, translate to shorter download times and less waiting for the end-user. With Flash, a vector-based approach to graphics not only results in small file sizes, but it opens up a whole world of opportunities for real-time control and animation. With Beatnik, a structured audio approach to music not only creates music files that are extremely more economical than alternate formats (including streaming formats), but it also opens up immense opportunities for real-time control of the music.</P>
+
+<P>Beatnik and Flash are in fact so similar in principle, they could almost be regarded as cousins. Best of all, both Beatnik and Flash are friendly to external scripting control, so it is possible to tightly integrate Flash movies and Beatnik music on the same HTML page, with Flash movie events being sonified by Beatnik, and Beatnik musical events driving Flash movies, and both Beatnik and Flash responding to user interaction or being synchronized to DHTML actions using JavaScript.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="flash-to-beatnik"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Controlling Beatnik from Flash
+</TD></TR></TABLE>
+<BR>
+
+<P>One of the most typical ways to use Beatnik and Flash together is to sonify Flash movies by controlling Beatnik using Flash FSCommand actions. These actions can be added at key positions in a Flash movie, or can be triggered from user interactions with a Flash movie. In this documentation we will not go into details about how to author Flash movies, but will assume that you already have a background in creating Flash movies. We will also not go into details about the sonification possibilities of the Music Object API, since all the principles that are explained in this documentation that relate to Web page sonification are also applicable to sonifying Flash movies.</P>
+
+<BLOCKQUOTE>
+	<B>NOTE TO FLASH DEVELOPERS :</B><BR>
+	If you are approaching this section of the documentation with only a background in Flash movie authoring, then you should first familiarize yourself with the principles of sonification using the Music Object API. Once you know more about Music Object sonification (and understand the relationship between Music Object and Beatnik), then you can then come back to this section. In fact, it is best if you have even done some basic sonification exercises using plain Web pages and the Music Object API. This will give you a firm grounding in the sonification principles you will be using when you sonify Flash movies with Beatnik.
+</BLOCKQUOTE>
+
+<P>Now, when Beatnik is used on a Web page it is possible to control Beatnik's interactive music and audio capabilities from any events in the page - regardless of whether the events are triggered from HTML elements or from within Flash movies. Both Netscape Navigator and Microsoft Internet Explorer offer ways to communicate between browser add-on components and the browser's scripting layer, so it is possible to sonify Flash movies in a way that will work in both browsers. Beatnik and Flash can effectively "talk" to each other through the language of JavaScript.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="template"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+A Beatnik-Flash Sonification Template
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to be able to execute Music Object sonification instructions from within a Flash movie, it is necessary to first add some "wrapper" code into your page to support the Flash FSCommand action. A template for this is provided below...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Beatnik and Flash Template&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;OBJECT
+   ID="<SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>"
+   WIDTH=<B>600</B>
+   HEIGHT=<B>400</B>
+   ALIGN=<B>TOP</B>
+   CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+   CODEBASE="http://active.macromedia.com/flash/cabs/swflash.cab"
+&gt;
+   &lt;PARAM NAME="movie" VALUE="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>"&gt;
+   &lt;PARAM NAME="quality" VALUE="<B>high</B>"&gt;
+   &lt;EMBED
+      SRC="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>"
+      WIDTH=<B>600</B>
+      HEIGHT=<B>400</B>
+      ALIGN=<B>TOP</B>
+      NAME="<SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>"
+      QUALITY="<B>high</B>"
+      BASE="<B>http://www.mydomain.com</B>"
+      SWLIVECONNECT=TRUE
+      MAYSCRIPT
+      TYPE="application/x-shockwave-flash"
+      PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+   &gt;
+&lt;/OBJECT&gt;
+
+&lt;!----------- BEGIN FSCommand Wrapper Code -----------&gt;
+
+&lt;SCRIPT LANGUAGE="JavaScript"&gt;&lt;!--
+
+function <SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>_DoFSCommand (command,args) {
+   eval (command + ((command.indexOf ('(') == -1) ? ('(' + args + ')') : ''));
+}
+
+//--&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="VBScript"&gt;&lt;!--
+
+Sub <SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>_FSCommand (ByVal command, ByVal args)
+        call <SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>_DoFSCommand (command, args)
+end sub
+
+//--&gt;&lt;/SCRIPT&gt;
+
+&lt;!------------ END FSCommand Wrapper Code ------------&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<SPAN CLASS=sample-code-highlighted>player1</SPAN> = new Music ();
+<SPAN CLASS=sample-code-highlighted>player1</SPAN>.magicEmbed ('SRC="<SPAN CLASS=sample-code-highlighted>my-music-file.rmf</SPAN>" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this template, the highlighted text represents the parts that should be customized to suit the needs of your specific application. These parts are critically important to making the Flash-to-Beatnik wiring work correctly. You should pay close attention to matching up all the things that need to be matched up. For example, all occurrences of "<B>myFlashMovie</B>" in this template should be substituted with the name that you choose for the Flash movie instance. If you don't change all the occurrences to exactly the same name, then the page is almost certain to not work correctly. The same applies to "<B>player1</B>" and "<B>my-flash-movie.swf</B>".</P>
+
+<P>In this template we are creating one Flash movie instance using the OBJECT / EMBED tag combination, and we are creating one Beatnik Player instance using Music Object's <A HREF="../music-object-reference/instance-methods.html#magicEmbed"><B>magicEmbed</B></A> method. You should also note the block of wrapper code that supports the Flash FSCommand action that allows Flash to control Beatnik with JavaScript instructions. You will see that this wrapper code is "stamped" with the name of the Flash movie instance that is to be sonified. This means that each sonified Flash movie on a Web page must have a unique block of FSCommand wrapper code like this.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="fscommand"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Adding FSCommand Actions
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that the Web page has been set up for Flash-to-Beatnik communication, all one needs to do is add FSCommand actions inside the Flash movie to trigger sonification events inside the HTML page. To take a very simple example, let's assume that an RMF music file is playing through Beatnik and, at a certain point in the Flash movie, it is to fade out to a stop. This could be done by simply adding the statement <B><NOBR>player1.stop (true)</NOBR></B> into the Flash movie as an FSCommand action, as shown in the screenshot below...</P>
+
+<P ALIGN=CENTER>
+<IMG SRC="../images/flash-fscommand.gif" WIDTH=571 HEIGHT=320 ALT="Adding an FSCommand Action">
+</P>
+
+<!--***********************************************************************-->
+
+<A NAME="extension-flash"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Using "Music Object Extension - Flash"
+</TD></TR></TABLE>
+<BR>
+
+<P>To simplify the process of wiring Flash movies to use the FSCommand, Beatnik Inc. has provided the convenient <A HREF="../music-object-reference/extensions/flash/index.html">Music Object Extension - Flash</A> module. Let's take a look at how the <A HREF="../music-object-reference/extensions/flash/index.html#Music.embedFlashMovie"><B>Music.embedFlashMovie</B></A> static method provided in this Music Object extension can simplify the Beatnik-Flash sonification template shown earlier. Compare the following revised Beatnik-Flash sonification template to the <A HREF="#template">earlier template</A>...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Beatnik-Flash Template Using Music.embedFlashMovie&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.embedFlashMovie (
+   'SRC="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>" NAME="<SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>" BASE="<B>http://www.mydomain.com</B>" ' +
+   'WIDTH=<B>600</B> HEIGHT=<B>400</B> ALIGN=<B>TOP</B> QUALITY="<B>high</B>"'
+);
+<SPAN CLASS=sample-code-highlighted>player1</SPAN> = new Music ();
+<SPAN CLASS=sample-code-highlighted>player1</SPAN>.magicEmbed ('SRC="<SPAN CLASS=sample-code-highlighted>my-music-file.rmf</SPAN>" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>As you can see, by using the <B>Music.embedFlashMovie</B> method, the number of places has been reduced where you have to make sure values exactly match up, and the code is also far simpler, cleaner, and easier to update.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="springboard"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Springboard to a World of Sonification Possibilities
+</TD></TR></TABLE>
+<BR>
+
+<P>Understanding this very basic principle of "wiring" Flash to Beatnik, there are so many possibilities for interactive music / audio that are opened up. You only need to visit the <A HREF="http://www.beatnik.com/to/?showcase" TARGET="_top">Beatnik Showcase</A> to get an idea of the many cool ways one could use Beatnik together with Flash. To reiterate, all the principles that apply to sonifying Web page HTML elements using Beatnik apply as well to sonifying events within Flash movies.</P>
+
+</BODY></HTML>

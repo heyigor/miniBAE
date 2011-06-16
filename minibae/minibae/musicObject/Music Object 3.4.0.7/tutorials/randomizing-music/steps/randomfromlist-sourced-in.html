@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (Sourcing in the randomFromList Method)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 3: Sourcing in the randomFromList Method
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P ALIGN=CENTER>
+
+<!-- ************************************************************************** -->
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-x-dynamic.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+fileToPlay = Music.randomFromList (
+	'ambient',
+	'classical',
+	'house',
+	'jungle',
+	'lounge',
+	'modern-rock',
+	'sfx-medley',
+	'techno',
+	'trance'
+);
+
+Music.magicEmbed (
+	'SRC="../../../music/' + fileToPlay + '.rmf" ' +
+	'AUTOSTART=TRUE ' +
+	'DISPLAY=SONG ' +
+	'MODE=INFO ' +
+	'LOOP=FALSE ' +
+	'VOLUME=100'
+);
+
+// --></SCRIPT>
+
+<!-- ************************************************************************** -->
+
+</P>
+
+<P>This example makes use of <A HREF="../../../music-object-reference/extensions/dynamic/index.html#Music.randomFromList" TARGET="_parent"><B>Music.randomFromList</B></A> static method in exactly the same way as the previous example's <B>randomFromList</B> function, except that in this case we are relying on the fact that the static method is defined in the JavaScript extension file "<A HREF="../../../music-object-reference/extensions/dynamic/index.html" TARGET="_parent">music-object-x-dynamic.js</A>".</P>
+
+<P>Try <A HREF="randomfromlist-sourced-in.html">reloading this page</A> several times. It should behave in exactly the same way as the previous example where the <B>randomFromList</B> function was explicitly pasted into the HTML document. The JavaScript is shown in the source code listing below. Once again, place this JavaScript towards the end of your HTML file, in the spot where you'd like the random music file to be embedded. Follow the same guidelines for using the <B>randomFromList</B> function as outlined in the previous example.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object-x-dynamic.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+fileToPlay = Music.randomFromList (
+<SPAN CLASS=sample-code-highlighted>   'ambient',
+   'classical',
+   'house',
+   'jungle',
+   'lounge',
+   'modern-rock',
+   'sfx-medley',
+   'techno',
+   'trance'</SPAN>
+);
+
+Music.magicEmbed (
+   'SRC="<SPAN CLASS=sample-code-highlighted>music/</SPAN>' + fileToPlay + '<SPAN CLASS=sample-code-highlighted>.rmf</SPAN>" ' +
+   'AUTOSTART=TRUE ' +
+   'DISPLAY=SONG ' +
+   'MODE=INFO ' +
+   'LOOP=FALSE ' +
+   'VOLUME=100'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

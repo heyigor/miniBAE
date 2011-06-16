@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Issues: Clicking on links before media has finished downloading</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Clicking on links before media has finished downloading
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>Clicking on links before media has finished downloading stops that media from downloading and results in broken graphics and sometimes breaks the sonification of that page.</P>
+
+<DIV CLASS=subsection>Background</DIV>
+
+<P>Netscape's implementation of JavaScript supports a special URL syntax which allows one to execute JavaScript statements when a user clicks on a link (&lt;A&gt; tag) or hotspot (&lt;AREA&gt; tag). An example would be:</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;A HREF="javascript:alert ('You clicked me!')"&gt;Click me, please!&lt;/A&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>Unfortunately, with the way links are implemented in Navigator, when a user clicks on a link while a page is still downloading, all media for that page stops downloading. This is especially destructive to pages where links are not designed to leave the current page but instead to enable interactivity for that page. It seems the assumption is made that links are expected to leave the current page, so why continue downloading media that belongs to it? This same problem is encountered when downloading a large document with TOC (Table Of Contents) anchor links at the top of the document. Clicking on one of the TOC items before the section that the item links to has finished loading in will lead to a "Transfer interrupted" type condition where you don't link to the section you were trying to because the very act of clicking on the link stopped that section from loading in.</P>
+
+<P>It should also be <B>strongly noted</B> that, although this problem does not diretly apply to <B>MOUSEOVER</B> and <B>MOUSEOUT</B> events, in order to use these event handlers one must first 'activate' an HTML layout object by putting a link around it, or by using a client-side image map (both of which require <B>HREF</B> attributes).</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>If you wish to have links solely for a user's interaction with a page and do not intend those links to leave the current page, don't use the JavaScript URL syntax to contain your scripting. Instead, place all your scripting inside the ONCLICK event handler with a "return false" statement at the end of your scripting block. You may use "javascript://" as a dummy URL to satisfy the link tag's HREF.</P>
+
+<P>So, for example, instead of using....</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;A HREF="javascript:music.playNote (1,60,127,1000)"&gt;Play a piano middle C note&lt;/A&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>use...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 CLASS=sample-code>
+<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;A HREF="javascript://" ONCLICK="music.playNote (1,60,127,1000); return false"&gt;Play a piano middle C note&lt;/A&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Be aware that returning false at the end of an ONCLICK event handler's statement block has the effect of cancelling any HREF link that you have specified - the link will simply be ignored. So, if you wish to use an ONCLICK event handler on a link that is also designed to take the user to a new page, <B>do not</B> return false at the end of the ONCLICK statement block.</P>
+
+</BODY></HTML>

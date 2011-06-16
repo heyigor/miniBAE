@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 2.6.9</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 2.6.9<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1998-10-15</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Many, many versions of Music Object have come and gone since the last version that was documented in this version history. Take this as a sign that Beatnik Inc. is improving its technology faster than it can document the improvements in its technology. Despite many revisions and many feature additions, the music-object.js file has grown by only around 2Kb since version 2.3.1 - quite an achievement considering how much has changed and how much is new!</P>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>NEW FEATURE - mo_magicEmbed</DIV>
+
+<BLOCKQUOTE>
+The new <A HREF="../../obsoleted-features.html#mo_magicEmbed" TARGET="_parent"><B>mo_magicEmbed</B></A> global function is now offered as a way of embedding non-scriptable Beatnik Player instances on a page. This function offers all the Navigator/IE compatibility features of Music Object's similarly named <B>magicEmbed</B> instance method, but without the memory overhead of creating a Music Object instance. This function can be used in cases where scripting is not needed for a Beatnik Player.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW FEATURE - Compatibility Functions</DIV>
+
+<BLOCKQUOTE>
+Several new global functions have been added to enhance compatibility testing for different browser, operating system, and installed player version. These functions include the following...
+<UL>
+	<LI><A HREF="../../obsoleted-features.html#mo_installBeatnik" TARGET="_parent"><B>mo_installBeatnik</B></A>
+	<LI><A HREF="../../obsoleted-features.html#mo_isPlayerCompatible" TARGET="_parent"><B>mo_isPlayerCompatible</B></A>
+	<LI><A HREF="../../obsoleted-features.html#mo_hasMinVersion" TARGET="_parent"><B>mo_hasMinVersion</B></A>
+	<LI><A HREF="../../obsoleted-features.html#mo_promptClose" TARGET="_parent"><B>mo_promptClose</B></A>
+	<LI><A HREF="../../obsoleted-features.html#mo_promptUser" TARGET="_parent"><B>mo_promptUser</B></A>
+</UL>
+
+<P>In addition to these new functions, the compatibility testing logic has also been greatly improved. MusicObject has been linked directly to the online Beatnik Player Install Wizard, making it easier for user's who do not have the player installed to get setup quickly so they can proceed to experience your Beatnik-enhanced Web content.</P>
+
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW FEATURE - Compatibility Properties</DIV>
+
+<BLOCKQUOTE>
+As a companion to the new compatibility functions, the following compatibility properties (global variables) have also been added to further allow authors to customize Music Object's behavior when a user's configuration fails the author's requirements.
+<UL>
+	<LI><A HREF="../../obsoleted-features.html#mo_ignoreJavaDisabled" TARGET="_parent"><B>mo_ignoreJavaDisabled</B></A>
+	<LI><A HREF="../../obsoleted-features.html#mo_requiredMinVersion" TARGET="_parent"><B>mo_requiredMinVersion</B></A>
+	<LI><A HREF="../../obsoleted-features.html#mo_showCompatibilityPrompt" TARGET="_parent"><B>mo_showCompatibilityPrompt</B></A>
+	<LI><A HREF="../../obsoleted-features.html#mo_silentIfInadequate" TARGET="_parent"><B>mo_silentIfInadequate</B></A>
+</UL>
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW FEATURE - New "play" Method Variations</DIV>
+
+<BLOCKQUOTE>
+The <B>play</B> method has been further enhanced to offer several new and convenient variations. Some of these variations make it possible to easily use the <B>play</B> method for playing Groovoids. New variations include...
+<UL>
+	<LI>play ( loop state , GroovoidNameSTR )
+	<LI>play ( 'auto' , GroovoidNameSTR )
+	<LI>play ( file URL )
+	<LI>play ( GroovoidNameSTR )
+</UL>
+As a result of now being able to easily specify a Groovoid name where one would specify a file URL, the <A HREF="../../obsoleted-features.html#playGroovoid" TARGET="_parent"><B>playGroovoid</B></A> method has been deprecated. Content using the method should still work as normal, but authors should update their content to use the new variations of the play method that allow a Groovoid name to be specified in place of a file URL.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW FEATURE - Improved Debugging</DIV>
+
+<BLOCKQUOTE>
+MusicObject now extends its error catching capabilities to all frames of all framesets of a window that sources in the music-object.js file into any one of its frames. So, even errors that don't occur in the document that sources in music-object.js will be caught and reported through Music Object's debug mechanism, using the error reporting preferences you set.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>OPTIMIZATION - Syntax</DIV>
+
+<BLOCKQUOTE>
+Various JavaScript syntactical changes were made to marginally reduce filesize.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>OPTIMIZATION - General Improvements</DIV>
+
+<BLOCKQUOTE>
+Countless optimizations have been made since version 2.3.1 that have made it possible to add many features to Music Object while still keeping the code to roughly the same size.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - Debugging</DIV>
+
+<BLOCKQUOTE>
+The debug output function now checks to ensure that the "java" object exists, avoiding possible JavaScript errors in Internet Explorer.
+</BLOCKQUOTE>
+
+<!--***********************************************************************-->
+
+</BODY></HTML>

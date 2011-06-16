@@ -1,0 +1,499 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Core Components</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Core Components
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#introduction">Introduction</A>
+			<LI><A HREF="#sourcing-rules">Rules for Sourcing in Core Components</A>
+			<LI><A HREF="#getting-them">Getting the Core Components</A>
+			<LI><A HREF="#component-basic">Music Object Component - Basic</A>
+			<LI><A HREF="#component-advanced">Music Object Component - Advanced</A>
+			<LI><A HREF="#component-compatibility">Music Object Component - Compatibility</A>
+			<LI><A HREF="#divisions">How Features are Divided Between the Components</A>
+			<LI><A HREF="#suite">Building Components Into a Suite</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="introduction"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Introduction
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>What are Core Components?</DIV>
+
+<P>The core Music Object API is comprised of three core components: <A HREF="#component-basic">Basic</A>, <A HREF="#component-advanced">Advanced</A>, and <A HREF="#component-compatibility">Compatibility</A>. These core components are available separately in the form of JavaScript files. Each core component provides a certain subset of the capabilities of the core Music Object API ("music-object.js"), so when using the separate core component JavaScript files, the core components may be used together in different combinations, depending on the needs of the sonification job at hand.</P>
+
+<DIV CLASS=subsection>What is the Benefit of Core Components?</DIV>
+
+<P>Dividing the core Music Object API into logical core components provides authors with a way to potentially reduce the load time of sonified pages. For instance, if a particular sonified Web site was only targeted to an audience that already had the Beatnik Player installed, or if a gateway page for the site ensured that all those who entered already had the Player installed, then using the compatibility core component in sonified pages of the site would be unnecessary. So, one could then use only the basic and advanced core components. For convenience, core components can also be combined together into a <A HREF="intro.html#suite">Music Object Suite</A>, as per the specific needs of any given sonification job.</P>
+
+<DIV CLASS=subsection>How Does One Use Components?</DIV>
+
+<P>Using the Music Object core components is easy. Components are simply JavaScript files like the "music-object.js" file that can be sourced into sonified pages as needed. In the following example, the <A HREF="#component-basic">basic</A> and <A HREF="#component-compatibility">compatibility</A> core components are being used...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;TITLE&gt;Page Using Music Object Core Components&lt;/TITLE&gt;&lt;/HTML&gt;
+&lt;BODY&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-compatibility.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+    // ***************************
+    // SOME SONIFICATION SCRIPTING
+    // ***************************
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- ****************** --&gt;
+&lt;!-- SOME SONIFIED HTML --&gt;
+&lt;!-- ****************** --&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In another example, if none of the features of the compatibility component need to be used because it is expected that all the visitors to a sonified Web page will already have the Beatnik Player installed, and none of the features of the advanced component need to be used because the page sonification is only making use of Music Object's <B>play</B> and <B>stop</B> methods, then only the basic component needs to be sourced in. The HTML for such a page would look as follows...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;TITLE&gt;Page Using Just the Basic Core Component&lt;/TITLE&gt;&lt;/HTML&gt;
+&lt;BODY&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+    // ***************************
+    // SOME SONIFICATION SCRIPTING
+    // ***************************
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- ****************** --&gt;
+&lt;!-- SOME SONIFIED HTML --&gt;
+&lt;!-- ****************** --&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>When all three core components are sourced into a page as separate JavaScript files, this has the same effect as sourcing in the standard "music-object.js" file.</P>
+
+<P>So, in other words, the following code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-advanced.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-compatibility.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...has the same effect as just...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Technically, it's not incorrect to source in all three core components as separate JavaScript files. But, it's usually better to reduce the number of connections that a page makes to the server to retrieve resources, as each connection can incur a slight delay in page loading. In most cases, sourcing in all three core components is inefficient, unless the majority of the sonified pages in a Web site use only some of the core components, and only a few of the pages need to use all three core components. In this case, two of the core components may already have been cached by the time a page is loaded that is using all three components, and then the extra load time will only be for the additional component that is not yet cached, as opposed to loading in the entire "music-object.js" file.</P>
+
+<P>If you are using the core components in sonification of a Web site, then you will need to use your own judgement in deciding if it's more efficient overall for your site to source in all three components for pages that need the full Music Object API, or more efficient to source in the "music-object.js" file in such cases.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="sourcing-rules"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Rules for Sourcing in Core Components
+</TD></TR></TABLE>
+<BR>
+
+<P>The following rules can be used to check that you are sourcing in the core components correctly. If the way you are sourcing in the core components complies with all of the following rules, then the core components will be able to function correctly.</P>
+
+<DIV CLASS=subsection>Rules</DIV>
+
+<OL>
+	<LI>If the basic component is used, then it should be the first component sourced in.
+	<LI>If the advanced component is used, then the basic component must also be used.
+	<LI>If Music Object extensions or patches are being used, then both the basic and advanced components must be used.
+	<LI>If Music Object language modules are being used, then the compatibility component must be used.
+</OL>
+
+<P>The following notes should act as a further guide when using core components...</P>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL>
+	<LI>When using the core components in a page, the "music-object.js" file should not also be sourced into the same page.
+	<LI>If you're sourcing in all three core components into a sonified page, this is effectively the same as sourcing in the full "music-object.js" JavaScript file.
+	<LI>If you are using Music Object extensions, patches, or language modules in a page's sonification, then these modules should always be sourced in after all core components have been sourced in.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-them"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting the Core Components
+</TD></TR></TABLE>
+<BR>
+
+<P>If you have the <A HREF="../index-body.html#download-it">downloaded version</A> of this documentation, then you can simply grab the core component JavaScript files from the documentation's "javascript" folder. The files are named "<B>music-object-c-basic</B>", "<B>music-object-c-advanced</B>", and "<B>music-object-c-compatibility</B>".</P>
+
+<P>Alternatively, you can use the links provided below. To get one of the core component JavaScript files from the list, simply right-click on its link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file into an appropriate folder of the local copy of your Web site. Make sure to save the file with the correct filename (as shown in the list).</P>
+
+<UL>
+	<LI><A HREF="../javascript/music-object-c-basic.js" TARGET="_blank"><B>music-object-c-basic.js</B></A> (Music Object Component - Basic)
+	<LI><A HREF="../javascript/music-object-c-advanced.js" TARGET="_blank"><B>music-object-c-advanced.js</B></A> (Music Object Component - Advanced)
+	<LI><A HREF="../javascript/music-object-c-compatibility.js" TARGET="_blank"><B>music-object-c-compatibility.js</B></A> (Music Object Component - Compatibility)
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="component-basic"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object Component - Basic
+</TD></TR></TABLE>
+<BR>
+
+<P>The basic core component provides the most basic and limited set of functionality that may be required in very simply sonification, such as the ability to play, pause, and stop music for a Music Object instance, as well as the ability to set an instance's playback volume. The basic component also provides the foundation for the advanced component, and the basic component is always needed when the advanced component is used. On the other hand, the compatibility component, which can stand alone, does not require the basic component.</P>
+
+<P>There are typically only three cases where the basic component will be used...</P>
+
+<UL>
+	<LI><B>On its own</B><BR>
+		The basic component can be used alone in cases where only the simplest of sonification features are required, and where it is expected that all visitors to a sonified page will already have the Beatnik Player installed.
+		<P></P>
+	<LI><B>With just the advanced component</B><BR>
+		The basic component can be used alongside the advanced component in cases where sophisticated sonification is required, but where it is expected that all visitors to a sonified page will already have the Beatnik Player installed.
+		<P></P>
+	<LI><B>With just the compatibility component</B><BR>
+		The basic component can be used alongside the compatibility component in cases where only the simplest of sonification features are required, but where there is no certainty of the site visitors having the Beatnik Player installed.
+		<P></P>
+</UL>
+
+<P>For a breakdown of the exact methods and properties defined by the basic core component, see the section <A HREF="#divisions">How Features are Divided Between the Components</A>.</P>
+
+<P>To get the basic component's JavaScript file, see the section <A HREF="#getting-them">Getting the Core Components</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="component-advanced"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object Component - Advanced
+</TD></TR></TABLE>
+<BR>
+
+<P>The advanced component exposes all of the really powerful features of the Music Object API. If realtime music remixing is your thing, then this is the component for you. The majority of the core Music Object API is implemented in this component.</P>
+
+<P>Because the basic component provides the foundation for the advanced component, it is not possible to use the advanced component without the basic component being sourced in. Not only must the basic component be sourced into pages that use the advanced component, but the basic component must be sourced in <B>before</B> the advanced component.</P>
+
+<P>Consider the following examples. The first example below is incorrect because the advanced component needs the foundation provided by the basic component to build upon. The advanced component cannot stand alone.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object-c-advanced.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The next example, directly below, is also incorrect. The basic component must be sourced in first, because the advanced component needs to build upon the foundation provided by the basic component.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object-c-advanced.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Whereas, the previous two examples were incorrect, the final example below is correct because the basic component is sourced in first, defining the foundation that the advanced component builds upon when it is sourced into the page.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-advanced.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For a breakdown of the exact methods and properties defined by the advanced core component, see the section <A HREF="#divisions">How Features are Divided Between the Components</A>.</P>
+
+<P>To get the advanced component's JavaScript file, see the section <A HREF="#getting-them">Getting the Core Components</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="component-compatibility"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object Component - Compatibility
+</TD></TR></TABLE>
+<BR>
+
+<P>The compatibility component provides all the <A HREF="compatibility-aids.html">compatibility features</A> of the core Music Object API. Using the features in this component, you can gain complete control over how your sonified content behaves when users don't have the Beatnik Player already installed.</P>
+
+<P>Unlike the advanced component, the compatibility component can stand alone and does not require that the basic component be sourced in first. This makes it ideal for use on a gateway page of a sonified Web site that is intended to channel visitors who don't have the Beatnik Player installed through the installation process. If the compatibility test is only to be performed once - on the site's gateway page - then all other sonified pages in the site do not need to use the compatibility component.</P>
+
+<P>Although the compatibility component can stand alone, if you do use it with the other core components, then it must be sourced in after the basic component. Consider the following examples. The first example, below, is incorrect because the compatibility component is sourced in first. When the basic component is used, then the basic component must always be the first component sourced into the page.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code-header-bad>&nbsp;&nbsp;INCORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object-c-compatibility.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The second example, below, is correct because the basic component must never be sourced in after the other core components. In this case, it is correctly sourced in first.</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR><TD CLASS=sample-code-header-good>&nbsp;&nbsp;CORRECT</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object-c-basic.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-c-compatibility.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For a breakdown of the exact methods and properties defined by the compatibility core component, see the section <A HREF="#divisions">How Features are Divided Between the Components</A>.</P>
+
+<P>To get the compatibility component's JavaScript file, see the section <A HREF="#getting-them">Getting the Core Components</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="divisions"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+How Features are Divided Between the Components
+</TD></TR></TABLE>
+<BR>
+
+<P>The following table illustrates how the public authoring API features (methods and properties) of the core Music Object API are broken up between the three core components. Each column of the table represents a core component, and each row in the table represents a type of feature of the Music Object API (instance methods, static methods, instance properties, and static properties).</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+If you are creating your own Music Object extensions (or you are using the Music Object Extensibility API in other ways) and you would like to understand how the extensibility features are divided between the different core components, consult the section <A HREF="extensibility-api.html#divisions">How Extensibility API Features are Divided Between the Core Components</A>.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Basic Component</TD>
+		<TD CLASS=data-table-column-header>Advanced Component</TD>
+		<TD CLASS=data-table-column-header>Compatibility Component</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Instance Methods</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			<A HREF="instance-methods.html#getOutputVolume">getOutputVolume</A><BR>
+			<A HREF="instance-methods.html#magicEmbed">magicEmbed</A><BR>
+			<A HREF="instance-methods.html#pause">pause</A><BR>
+			<A HREF="instance-methods.html#play">play</A><BR>
+			<A HREF="instance-methods.html#setVolume">setVolume</A><BR>
+			<A HREF="instance-methods.html#stop">stop</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5><TR VALIGN=TOP>
+				<TD CLASS=data-table-item>
+					<A HREF="instance-methods.html#addCallbackHandler">addCallbackHandler</A><BR>
+					<A HREF="instance-methods.html#doMenuItem">doMenuItem</A><BR>
+					<A HREF="instance-methods.html#endVolumeFade">endVolumeFade</A><BR>
+					<A HREF="instance-methods.html#fadeTo">fadeTo</A><BR>
+					<A HREF="instance-methods.html#fadeVolume">fadeVolume</A><BR>
+					<A HREF="instance-methods.html#getAutostart">getAutostart</A><BR>
+					<A HREF="instance-methods.html#getChannelMute">getChannelMute</A><BR>
+					<A HREF="instance-methods.html#getChannelSolo">getChannelSolo</A><BR>
+					<A HREF="instance-methods.html#getController">getController</A><BR>
+					<A HREF="instance-methods.html#getFileSize">getFileSize</A><BR>
+					<A HREF="instance-methods.html#getInfo">getInfo</A><BR>
+					<A HREF="instance-methods.html#getLoop">getLoop</A><BR>
+					<A HREF="instance-methods.html#getMonophonic">getMonophonic</A><BR>
+					<A HREF="instance-methods.html#getPanelDisplay">getPanelDisplay</A><BR>
+					<A HREF="instance-methods.html#getPanelMode">getPanelMode</A><BR>
+					<A HREF="instance-methods.html#getPlayLength">getPlayLength</A><BR>
+					<A HREF="instance-methods.html#getPosition">getPosition</A><BR>
+					<A HREF="instance-methods.html#getProgram">getProgram</A><BR>
+					<A HREF="instance-methods.html#getTempo">getTempo</A><BR>
+				</TD><TD CLASS=data-table-item>
+					<A HREF="instance-methods.html#getTrackMute">getTrackMute</A><BR>
+					<A HREF="instance-methods.html#getTrackSolo">getTrackSolo</A><BR>
+					<A HREF="instance-methods.html#getTransposable">getTransposable</A><BR>
+					<A HREF="instance-methods.html#getTranspose">getTranspose</A><BR>
+					<A HREF="instance-methods.html#getVolume">getVolume</A><BR>
+					<A HREF="instance-methods.html#isPaused">isPaused</A><BR>
+					<A HREF="instance-methods.html#isPlaying">isPlaying</A><BR>
+					<A HREF="instance-methods.html#noteOff">noteOff</A><BR>
+					<A HREF="instance-methods.html#noteOn">noteOn</A><BR>
+					<A HREF="instance-methods.html#onLoad">onLoad</A><BR>
+					<A HREF="instance-methods.html#onMetaEvent">onMetaEvent</A><BR>
+					<A HREF="instance-methods.html#onPause">onPause</A><BR>
+					<A HREF="instance-methods.html#onPlay">onPlay</A><BR>
+					<A HREF="instance-methods.html#onReady">onReady</A><BR>
+					<A HREF="instance-methods.html#onStop">onStop</A><BR>
+					<A HREF="instance-methods.html#pause">pause</A><BR>
+					<A HREF="instance-methods.html#play">play</A><BR>
+					<A HREF="instance-methods.html#playNote">playNote</A><BR>
+					<A HREF="instance-methods.html#preloadEmbed">preloadEmbed</A><BR>
+				</TD><TD CLASS=data-table-item>
+					<A HREF="instance-methods.html#setAutostart">setAutostart</A><BR>
+					<A HREF="instance-methods.html#setChannelMute">setChannelMute</A><BR>
+					<A HREF="instance-methods.html#setChannelSolo">setChannelSolo</A><BR>
+					<A HREF="instance-methods.html#setController">setController</A><BR>
+					<A HREF="instance-methods.html#setEndTime">setEndTime</A><BR>
+					<A HREF="instance-methods.html#setLoop">setLoop</A><BR>
+					<A HREF="instance-methods.html#setMonophonic">setMonophonic</A><BR>
+					<A HREF="instance-methods.html#setPanelDisplay">setPanelDisplay</A><BR>
+					<A HREF="instance-methods.html#setPanelMode">setPanelMode</A><BR>
+					<A HREF="instance-methods.html#setPosition">setPosition</A><BR>
+					<A HREF="instance-methods.html#setProgram">setProgram</A><BR>
+					<A HREF="instance-methods.html#setStartTime">setStartTime</A><BR>
+					<A HREF="instance-methods.html#setTempo">setTempo</A><BR>
+					<A HREF="instance-methods.html#setTrackMute">setTrackMute</A><BR>
+					<A HREF="instance-methods.html#setTrackSolo">setTrackSolo</A><BR>
+					<A HREF="instance-methods.html#setTransposable">setTransposable</A><BR>
+					<A HREF="instance-methods.html#setTranspose">setTranspose</A><BR>
+					<A HREF="instance-methods.html#stop">stop</A><BR>
+					<A HREF="instance-methods.html#stubEmbed">stubEmbed</A><BR>
+				</TD>
+			</TR></TABLE>
+		</TD>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Static Methods</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			<A HREF="static-methods.html#Music.magicEmbed">Music.magicEmbed</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="static-methods.html#Music.engageAudio">Music.engageAudio</A><BR>
+			<A HREF="static-methods.html#Music.getAudioDevicePriority">Music.getAudioDevicePriority</A><BR>
+			<A HREF="static-methods.html#Music.getNoteName">Music.getNoteName</A><BR>
+			<A HREF="static-methods.html#Music.getNoteNumber">Music.getNoteNumber</A><BR>
+			<A HREF="static-methods.html#Music.getReverbType">Music.getReverbType</A><BR>
+			<A HREF="static-methods.html#Music.isAudioDeviceShared">Music.isAudioDeviceShared</A><BR>
+			<A HREF="static-methods.html#Music.isAudioEngaged">Music.isAudioEngaged</A><BR>
+			<A HREF="static-methods.html#Music.isAudioSupported">Music.isAudioSupported</A><BR>
+			<A HREF="static-methods.html#Music.kill">Music.kill</A><BR>
+			<A HREF="static-methods.html#Music.onAudioEngagedChange">Music.onAudioEngagedChange</A><BR>
+			<A HREF="static-methods.html#Music.onEngageAudio">Music.onEngageAudio</A><BR>
+			<A HREF="static-methods.html#Music.setAudioDevicePriority">Music.setAudioDevicePriority</A><BR>
+			<A HREF="static-methods.html#Music.setGlobalMute">Music.setGlobalMute</A><BR>
+			<A HREF="static-methods.html#Music.setReverbType">Music.setReverbType</A><BR>
+			<A HREF="static-methods.html#Music.stopAll">Music.stopAll</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="static-methods.html#Music.installPlayer">Music.installPlayer</A><BR>
+			<A HREF="static-methods.html#Music.isPlayerCompatible">Music.isPlayerCompatible</A><BR>
+			<A HREF="static-methods.html#Music.hasMinVersion">Music.hasMinVersion</A><BR>
+			<A HREF="static-methods.html#Music.promptClose">Music.promptClose</A><BR>
+			<A HREF="static-methods.html#Music.promptUser">Music.promptUser</A><BR>
+			<A HREF="static-methods.html#Music.requireMinPlayerVersion">Music.requireMinPlayerVersion</A><BR>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Instance Properties</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			<A HREF="instance-properties.html#ready">ready</A><BR>
+			<A HREF="instance-properties.html#locked">locked</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="instance-properties.html#averageNoteRelease">averageNoteRelease</A><BR>
+			<A HREF="instance-properties.html#usage">usage</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-section COLSPAN=3>Static Properties</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>
+			<A HREF="static-properties.html#Music.enabled">Music.enabled</A><BR>
+		</TD>
+		<TD CLASS=data-table-item>
+			&nbsp;
+		</TD>
+		<TD CLASS=data-table-item>
+			<A HREF="static-properties.html#Music.clientSupported">Music.clientSupported</A><BR>
+			<A HREF="static-properties.html#Music.getPlayerImagesPath">Music.getPlayerImagesPath</A><BR>
+			<A HREF="static-properties.html#Music.hasPlayer">Music.hasPlayer</A><BR>
+			<A HREF="static-properties.html#Music.ignoreJavaDisabled">Music.ignoreJavaDisabled</A><BR>
+			<A HREF="static-properties.html#Music.installerOptions">Music.installerOptions</A><BR>
+			<A HREF="static-properties.html#Music.platform">Music.platform</A><BR>
+			<A HREF="static-properties.html#Music.playerType">Music.playerType</A><BR>
+			<A HREF="static-properties.html#Music.playerVersion">Music.playerVersion</A><BR>
+			<A HREF="static-properties.html#Music.requiredMinVersion">Music.requiredMinVersion</A><BR>
+			<A HREF="static-properties.html#Music.showCompatibilityPrompt">Music.showCompatibilityPrompt</A><BR>
+			<A HREF="static-properties.html#Music.silentIfInadequate">Music.silentIfInadequate</A><BR>
+		</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="suite"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Building Components Into a Suite
+</TD></TR></TABLE>
+<BR>
+
+<P>It is possible to build a custom Music Object suite that combines only those core components that are absolutely necessary for your specific circumstances. By excluding a core component that may not be necessary under your circumstances, you can reduce the size of the JavaScript file that needs to be sourced into your sonified pages. For more information, consult the section <A HREF="intro.html#suite">Making a Custom Music Object Suite</A></P>
+
+</BODY></HTML>

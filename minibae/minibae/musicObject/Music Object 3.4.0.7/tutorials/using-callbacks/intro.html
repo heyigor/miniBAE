@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Using Player Callbacks (intro)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Introduction
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>The Music Object class supplies several methods with which to register callback functions that are to be executed when certain events occur in a Music Object instance's player. For full details on the callback methods and their syntax, see the <A HREF="../../music-object-reference/instance-methods.html#callbacks" TARGET="_parent">Callbacks</A> section of the Music Object reference. To summarize, the methods are...</P>
+<UL>
+	<LI><B>onMetaEvent</B> - registers the function to be executed when the player encounters a meta event inside an RMF or MIDI file.
+	<LI><B>onPause</B> - registers the function to be executed when the player enters pause mode.
+	<LI><B>onPlay</B> - registers the function to be executed when the player enters play mode.
+	<LI><B>onStop</B> - registers the function to be executed when the player enters stop mode.
+</UL>
+
+<P>It is important to bear in mind that the <B>onPause</B>, <B>onPlay</B>, and <B>onStop</B> callbacks get called irrespective of whether the user triggers an event by using the control panel's transport controls, or the player is sent a transport control type instruction through Music Object scripting. Also, an event such as <B>onStop</B> will also be triggered if a file, that is not set to loop, plays itself out and naturally reaches its end. So, whatever initiates one of these types of events in the player, the callback will still be executed.</P>
+
+<P>When a Music Object instance is first created, there are by default no functions registered to handle the callbacks. Consequently, when one of the events described above occurs within the player, nothing will happen. Using the callback registering methods you can set up callback handlers for any or all of the possible callback events.</P>
+
+</BODY></HTML>

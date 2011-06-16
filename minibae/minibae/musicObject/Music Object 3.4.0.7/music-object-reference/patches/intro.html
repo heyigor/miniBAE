@@ -1,0 +1,128 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Patches (intro)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+About Music Object Patches
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#introduction">Introduction</A>
+			<LI><A HREF="#available-patches">What Patches are Available?</A>
+			<LI><A HREF="#suite">Building Patches Into a Suite</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="introduction"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Introduction
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>What are Patches?</DIV>
+
+<P>Music Object patches are quite similar to <A HREF="../extensions/intro.html" TARGET="_parent">Music Object extensions</A> in that they are presented as optional add-on modules of JavaScript code that build upon the core Music Object API. Unlike extensions, however, patches do not add new features or capabilities to the API, but are intended to work around certain problems that may arise from browser compatibility issues or changes that occur between different versions of the Music Object API.</P>
+
+<P>For example, <A HREF="patches/pre-3.3.0.html">Music Object Patch - Pre 3.3.0</A> is designed to help authors transition from Music Object version 3.2.x to version 3.3.0 without having to change any sonification scripting, even though changes were made to the API between version 3.2.x and version 3.3.0.</P>
+
+<DIV CLASS=subsection>What are the Benefits of Patches?</DIV>
+<UL>
+	<LI>they work around certain browser-related problems
+	<LI>they act as a buffer to help authors transition to newer versions of the Music Object API
+	<LI>they are modular and can be used in different combinations as needed (workarounds for certain browser issues can be optionally sourced in, depending on the author's judgement of the problem's severity in their specific circumstances)
+	<LI>they don't increase the size of the core Music Object API
+</UL>
+
+<DIV CLASS=subsection>How Does One Use Patches?</DIV>
+
+<P>Using the Music Object patches is easy. Patches are simply JavaScript files like the "music-object.js" file that can be sourced into sonified pages as needed. In the following example, <A HREF="patches/pre-3.3.0.html">Music Object Patch - Pre 3.3.0</A> is being used...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;TITLE&gt;Page Using Music Object Patch&lt;/TITLE&gt;&lt;/HTML&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-p-pre330.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+    // ***************************
+    // SOME SONIFICATION SCRIPTING
+    // ***************************
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- ****************** --&gt;
+&lt;!-- SOME SONIFIED HTML --&gt;
+&lt;!-- ****************** --&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>With the majority of patches, it doesn't matter in which order you source in the patches, as long as they are all sourced in following the "music-object.js" file, and <B>not before it</B>. If you source in a patch file before sourcing in "music-object.js", the patch simply will not work. This would be similar to trying to use a JavaScript function before you have defined it. In order to add a patch to Music Object, Music Object must first be defined.</P>
+
+<P>In most cases, patches have been designed to be independent of other patches or extensions. However, there may be some exceptions to this rule, as it is possible that a patch may require some of the features of another patch or extension in order to function correctly. To be 100% certain of the order in which patches and extensions should be sourced in, consult the documentation for individual patches to find out what their dependencies are. As a simple rule, if a patch depends on another patch or extension, then that required patch or extension should be sourced in before the patch that depends on it.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="available-patches"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What Patches are Available?
+</TD></TR></TABLE>
+<BR>
+
+<P>The Music Object patches listed below are released and fully documented.</P>
+
+<UL>
+	<LI><B><A HREF="patches/pre-3.3.0.html">Music Object Patch - Pre 3.3.0</A></B><BR>
+		Acts as a buffer to changes in the core Music Object API between version 3.2.x and version 3.3.0. This patch makes it possible to use Music Object version 3.3.0 without making any changes to sonified content.
+		<P></P>
+	<LI><B><A HREF="patches/pre-3.2.0.html">Music Object Patch - Pre 3.2.0</A></B><BR>
+		Acts as a buffer to changes in the core Music Object API between version 3.1.x and version 3.2.0. This patch makes it possible to use Music Object version 3.2.0 without making any changes to sonified content.
+		<P></P>
+	<LI><B><A HREF="patches/pre-3.1.0.html">Music Object Patch - Pre 3.1.0</A></B><BR>
+		Acts as a buffer to changes in the core Music Object API between version 3.0.x and version 3.1.0. This patch makes it possible to use Music Object version 3.1.0 without making any changes to sonified content.
+		<P></P>
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="suite"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR VALIGN=CENTER><TD CLASS=section>
+&nbsp;Building Patches Into a Suite
+</TD>
+<TD CLASS=section ALIGN=RIGHT><IMG SRC="../../style/images/advanced.gif" WIDTH=136 HEIGHT=30 HSPACE=0 VSPACE=0 BORDER=0 ALT="ADVANCED"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>If you find yourself regularly using a particular patch (or group of patches) in all your sonified Web pages, then you may wish to consider building a Music Object suite to simplify your authoring and to make your life a little easier. For more information, consult the section <A HREF="../intro.html#suite" TARGET="_parent">Making a Custom Music Object Suite</A></P>
+
+</BODY>
+</HTML>

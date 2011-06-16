@@ -1,0 +1,679 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Fades</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Fades
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>Creating realtime music remixing applications on the Web becomes even more compelling when you add the element of fading individual parts of a mix. Using this extension, not only can you easily fade in and fade out musical parts, but you can also easily fade parts from the left side of the stereo field to the right side, or vice versa. What's more, you can set up your own custom fade processes to do anything you want, including moving DHTML layers around.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-fades.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-fades.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-fades.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-fades.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#fadeController">fadeController</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you fade the value of the specified MIDI controller.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#fadeTempo">fadeTempo</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you transition the song playback tempo to a new tempo over a specified time.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#fadeVolumeScalar">fadeVolumeScalar</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you fade any of the custom volume scalars registered for an instance.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.fade">Music.fade</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you initiate your own custom fade process to affect anything you desire.</TD>
+</TR>
+
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-properties">Instance Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#"></A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#objects">Objects</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.Fade">Music.Fade</A></TD>
+	<TD CLASS=contents-table-item-desc>An object that lets you store the values for a fade process and trigger the fade at any time.</TD>
+</TR>
+
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.">Music.</A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="fadeController"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;fadeController</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Fades</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>fadeController</B> method lets you fade the value of the specified MIDI controller.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>fadeController (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#ControllerNumber0to127">ControllerNumber0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; StartValueINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; EndValueINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="#Music.Fade">FadeOBJ</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>fadeController</B> method lets you fade the value of the specified MIDI controller from a specified start value to a specified end value. This is useful for remix applications and allows you to, among other things, fade in or fade out the channel volume for a musical part, or even fade parts from the left side of the stereo field to the right side, or vice versa.</P>
+
+<P>In order to perform a channel volume fade, just use the value <SPAN CLASS=value>7</SPAN> for the <B>ControllerNumber0to127</B> parameter. For example, the statement <B><NOBR>myMusicObject.fadeController (1,7,127,0,2000)</NOBR></B> will fade out the channel volume for MIDI channel 1 over 2 seconds. In this example, notice how we are specifying the value <SPAN CLASS=value>127</SPAN> for the <B>StartValueINT</B> parameter. We're starting the channel volume fade from 127 because we're assuming that this is the current channel volume for MIDI channel 1. However, if we had no way of easily knowing the current channel volume for the MIDI channel we wanted to do a fade on, we could use the special value <SPAN CLASS=value>null</SPAN> for the <B>StartValueINT</B> parameter to indicate that the fade should start at the current value of the specified controller, as in <B><NOBR>myMusicObject.fadeController (1,7,null,0,2000)</NOBR></B>.</P>
+
+<P>In order to perform a panning fade from left to right, you would use the value <SPAN CLASS=value>10</SPAN> for the <B>ControllerNumber0to127</B> parameter. For example, the statement <B><NOBR>myMusicObject.fadeController (1,10,0,127,2000)</NOBR></B> will fade the channel pan for MIDI channel from hard left to hard right 1 over 2 seconds.</P>
+
+<P>For more ideas on controllers that can be faded, consult the appendix <A HREF="../../../appendixes/supported-midi-controllers.html">Supported MIDI Controllers</A>.</P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>StartValueINT</B> parameter, then the current value of the specified MIDI controller is used as the start value for the fade (ie. fade from current value).
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>fadeController (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#ControllerNumber0to127">ControllerNumber0to127</A> <B>,</B> StartValueINT <B>,</B> EndValueINT <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>)</B>
+		<P>When no <B>FadeEndCallback</B> parameter is specified, no additional action is performed when the fade comes to an end.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeController (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#ControllerNumber0to127">ControllerNumber0to127</A> <B>,</B> StartValueINT <B>,</B> EndValueINT <B>)</B>
+		<P>When there is also no <B>FadeTimeMsINT</B> parameter specified, then the value <SPAN CLASS=value>1000</SPAN> (1 second) is chosen as the default value for the fade time.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeController (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#ControllerNumber0to127">ControllerNumber0to127</A> <B>,</B> StartValueINT <B>)</B>
+		<P>When there is also no <B>EndValueINT</B> parameter specified, then the value <SPAN CLASS=value>0</SPAN> is chosen as the default value for the fade's end value.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeController (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#ControllerNumber0to127">ControllerNumber0to127</A> <B>)</B>
+		<P>When there is also no <B>StartValueINT</B> parameter specified, then the current value of the specified MIDI controller is used as the fade's start value.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="fadeTempo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;fadeTempo</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Fades</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>fadeTempo</B> method lets you transition the song playback tempo to a new tempo over a specified time.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>fadeTempo (</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="../../parameters.html#TempoBPM0to300">TempoBPM0to300</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="../../parameters.html#TempoBPM0to300">TempoBPM0to300</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="#Music.Fade">FadeOBJ</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>fadeTempo</B> method lets you transition the song playback tempo to a new tempo over a specified time. For example, the statement <B><NOBR>myMusicObject.fadeTempo (120,200,5000)</NOBR></B> will transition the tempo from the modest tempo of 120 up to the somewhat speedy tempo of 200 over 5 seconds.</P>
+
+<P>In this example, if the current tempo of the instance wasn't already set to 120 at the time of the fade, then there might be a noticeable "hiccup" as the tempo fade is triggered. If we had no way of easily knowing the current tempo for the instance, then we could use the special value <SPAN CLASS=value>null</SPAN> for the <B>StartTempoBPM0to300</B> parameter to indicate that the tempo fade should start at the current tempo value, as in <B><NOBR>myMusicObject.fadeTempo (null,200,5000)</NOBR></B>.</P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>StartTempoBPM0to300</B> parameter, then the current tempo is used as the start value for the tempo fade.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>fadeTempo (</B> Start<A HREF="../../parameters.html#TempoBPM0to300">TempoBPM0to300</A> <B>,</B> End<A HREF="../../parameters.html#TempoBPM0to300">TempoBPM0to300</A> <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>)</B>
+		<P>When no <B>FadeEndCallback</B> parameter is specified, no additional action is performed when the fade comes to an end.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeTempo (</B> Start<A HREF="../../parameters.html#TempoBPM0to300">TempoBPM0to300</A> <B>,</B> End<A HREF="../../parameters.html#TempoBPM0to300">TempoBPM0to300</A> <B>)</B>
+		<P>When there is also no <B>FadeTimeMsINT</B> parameter specified, then the value <SPAN CLASS=value>1000</SPAN> (1 second) is chosen as the default value for the fade time.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="fadeVolumeScalar"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;fadeVolumeScalar</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Fades</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI, WAV, AIFF, AU&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>fadeVolumeScalar</B> method lets you fade any of the custom volume scalars that are registered for a Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>fadeVolumeScalar (</B><BR>
+			&nbsp;&nbsp;&nbsp; VolumeScalarNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeStepCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="#Music.Fade">FadeOBJ</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>StartVolumeLevel</B> parameter, then the current volume setting of the specified volume scalar will be used as the starting volume for the fade.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>EndVolumeLevel</B> parameter, then the fade will end at volume <SPAN CLASS=value>0</SPAN> (silence).
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>FadeTimeMsINT</B> parameter, then the fade will have a default duration of 1 second (1000ms), which is equivalent to specifying the value <SPAN CLASS=value>1000</SPAN> for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>FadeEndCallback</B> parameter, then no callback will be executed when the fade reaches its conclusion.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>fadeVolumeScalar (</B> VolumeScalarNameSTR <B>,</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B> FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<P>When no <B>FadeStepCallback</B> parameter is specified, then no handler for the <B>onOutputVolumeChange</B> callback will be set.
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeVolumeScalar (</B> VolumeScalarNameSTR <B>,</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>)</B>
+		<P>When there is also no <B>FadeEndCallback</B> parameter specified, then no callback will be executed when the fade reaches its conclusion.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeVolumeScalar (</B> VolumeScalarNameSTR <B>,</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B>
+		<P>When there is also no <B>FadeTimeMsINT</B> parameter specified, then the fade will have a default duration of 1 second (1000ms), which is equivalent to specifying the value <SPAN CLASS=value>1000</SPAN> for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeVolumeScalar (</B> VolumeScalarNameSTR <B>,</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B>
+		<P>When there is also no <B>EndVolume0to100</B> parameter specified, then the fade will have a default end volume of <SPAN CLASS=value>0</SPAN>.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>fadeVolumeScalar (</B> VolumeScalarNameSTR <B>)</B>
+		<P>When there is also no <B>StartVolume0to100</B> parameter specified, then the fade will start at the current volume level of the specified volume scalar.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.fade"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.fade</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Fades</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.fade</B> static method lets you initiate your own custom fade process to affect anything you desire.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.fade (</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; StartValueINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; EndValueINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; EndIfInProgressBOOL<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="#Music.Fade">FadeOBJ</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>FadeNameSTR</B> parameter is a unique identifier for the fade you wish to initiate. This allows the fade to be triggered multiple times without Music Object assigning new fade tasks. This is essential if one wishes to do things like fade the tempo or fade the volume of an instance. It doesn't make all that much sense to have multiple fade tasks in progress that are all fighting with each other to set the same parameter. For instance, it wouldn't make any sense to have three separate fade tasks in progress that are fading in completely different directions, yet are all trying to set the player volume.</P>
+
+<P>The <B>UpdateHandler</B> parameter is used to register the function or JavaScript statements you would like executed each time the fade value is updated. If you register a function as the update handler, then this function should expect to take one parameter, being the current value of the fade. If, on the other hand, you register a string statement block that is to be executed for each update, then the statements in this statement block can refer to the variable <B>fadeValue</B> which will be defined only for the scope of the statement block.</P>
+
+<P>The <B>FadeEndCallback</B> parameter is used to register the function or JavaScript statements you would like executed when the fade completes. And the <B>EndIfInProgressBOOL</B> parameter indicates whether a pre-existing fade by the same name as that specified by the <B>FadeNameSTR</B> parameter should be stopped before the new fade is initiated, or whether the pre-existing fade by that name should simply be updated with the new fade settings.</P>
+
+<P>Some of these principles are a little hard to explain without an example, so let's take a look at one. In the following straightforward example, we're using this method to initiate a tempo fade for the Music Object instance "myMusicObject"...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.fade (
+   'myMusicObject_fadeTempo',
+   120,
+   200,
+   5000,
+   'myMusicObject.setTempo (fadeValue)'
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>What we have here is a fade that is named "myMusicObject_fadeTempo", which starts fading from the value 120 and reaches the value 200 over a period of 5 seconds. And each time the fade value is updated, the JavaScript statement <B><NOBR>myMusicObject.setTempo (fadeValue)</NOBR></B> is executed, where the variable <B>fadeValue</B> holds the current value for the fade. This variable only exists within the scope of this statement block, so referring to it elsewhere in the code may cause errors.</P>
+
+<P>Notice how we haven't specified the <B>FadeEndCallback</B> or <B>EndIfInProgressBOOL</B> parameters in this example. This is because there are variations of this method (see below) where it is not necessary to specify these parameters. Now, of course, we could have used the ready-made <A HREF="#fadeTempo"><B>fadeTempo</B></A> instance method to achieve the same results as we have here, but this is just an example to illustrate how the <B>Music.fade</B> static method is used.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.fade (</B> FadeNameSTR <B>,</B> StartValueINT <B>,</B> EndValueINT <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B> UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B> FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<P>When no <B>EndIfInProgressBOOL</B> parameter is specified, the default behavior is for the new fade to not end any pre-existing fade by the same name. The pre-existing fade will merely be updated with the new fade values.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fade (</B> FadeNameSTR <B>,</B> StartValueINT <B>,</B> EndValueINT <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B> UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<P>When there is also no <B>FadeEndCallback</B> parameter specified, then no additional action is performed when the fade comes to an end.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<!--***********************************************************************-->
+
+<A NAME="objects"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Objects
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.Fade"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.Fade</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Object Constructor&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Fades</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.Fade</B> object lets you store the values for a fade process and trigger the fade at any time.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.Fade (</B><BR>
+			&nbsp;&nbsp;&nbsp; StartValueINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; EndValueINT <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; RestoreStartValueBOOL<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>FadeOBJ</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>UpdateHandler</B> parameter is used to register the function or JavaScript statements you would like executed each time the fade value is updated. If you register a function as the update handler, then this function should expect to take one parameter, being the current value of the fade. If, on the other hand, you register a string statement block that is to be executed for each update, then the statements in this statement block can refer to the variable <B>fadeValue</B> which will be defined only for the scope of the statement block.</P>
+
+<P>The <B>FadeEndCallback</B> parameter is used to register the function or JavaScript statements you would like executed when the fade completes. And the <B>RestoreStartValueBOOL</B> parameter indicates whether or not the registered update handler should be called when the fade completes with the initial fade start value as a parameter, allowing whatever was being affected by the fade to be reset to its start value.</P>
+
+<DIV CLASS=subsection>Constructor</DIV>
+<UL>
+	<LI><B>Music.Fade (</B> StartValueINT <B>,</B> EndValueINT <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B> UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B> FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B> RestoreStartValueBOOL <B>)</B><BR>
+	To create an instance of this object, use the <B>Music.Fade</B> constructor in a JavaScript "new" statement, as in <B><NOBR>myFade = new Music.Fade (120,200,5000,'myMusicObject.setTempo (fadeValue)')</NOBR></B>.
+</UL>
+
+<DIV CLASS=subsection>Instance Methods</DIV>
+<UL>
+	<LI><A NAME="Music.Fade.end"></A><B>end ( )</B><BR>
+		For the specific instance of this object, terminates the fade task. If the task is not currently in progress, this method has no effect. After this method is called, the <A HREF="#Music.Fade.inProgress"><B>inProgress</B></A> property for the Fade object instance will be set to the boolean value <SPAN CLASS=value>false</SPAN>.
+		<P><P>
+	<LI><A NAME="Music.Fade.start"></A><B>start ( )</B><BR>
+		For the specific instance of this object, initiates the fade task. If the task is currently in progress, this method has no effect. After this method is called, the <A HREF="#Music.Fade.inProgress"><B>inProgress</B></A> property for the Fade object instance will typically be set to the boolean value <SPAN CLASS=value>true</SPAN>.
+		<P></P>
+	<LI><A NAME="Music.Fade.update"></A><B>update (</B> StartValueINT <B>,</B> EndValueINT <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B> UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B> RestoreStartValueBOOL <B>)</B><BR>
+		For the specific instance of this object, updates the settings for the fade process. If the fade task is currently in progress, then the fade will continue according to the new settings.
+		<P></P>
+</UL>
+
+<DIV CLASS=subsection>Instance Properties</DIV>
+<UL>
+	<LI><A NAME="Music.Fade.fadeValue"></A><B>fadeValue</B><BR>
+		An integer property, indicating the current value for the Fade object instance. Each time that this value changes while a fade is in progress, the handler registered using the <B>UpdateHandler</B> parameter will be executed.
+		<P><P>
+	<LI><A NAME="Music.Fade.inProgress"></A><B>inProgress</B><BR>
+		A boolean property, indicating whether or not the <B>Fade</B> object instance is in the process of performing its fade task. A value of <SPAN CLASS=value>true</SPAN> indicates that the fade task is in progress, while a value of <SPAN CLASS=value>false</SPAN> indicates that the fade task is not in progress. This property is typically set to <SPAN CLASS=value>true</SPAN> after the <B>Fade</B> object instance's <A HREF="#Music.Fade.start"><B>start</B></A> method is called, and set to <SPAN CLASS=value>false</SPAN> after its <A HREF="#Music.Fade.end"><B>end</B></A> method is called.
+		<P><P>
+</UL>
+
+<P>Following is a simple example of how the <B>Music.Fade</B> object could be used...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myTempoFade = new Music.Fade (
+   120,
+   200,
+   5000,
+   'myMusicObject.setTempo (fadeValue)'
+);
+
+myTempoFade.start ();
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, we are creating an instance of a <B>Music.Fade</B> object for the purpose of fading the tempo of the Music Object instance "myMusicObject" from the value 120 to the value 200 over a period of 5 seconds. Each time the fade value is updated, the JavaScript statement <B><NOBR>myMusicObject.setTempo (fadeValue)</NOBR></B> is executed, where the variable <B>fadeValue</B> holds the current value for the fade. This variable only exists within the scope of this statement block, so referring to it elsewhere in the code may cause errors.</P>
+
+<P>Notice how we haven't specified the <B>FadeEndCallback</B> or <B>RestoreStartValueBOOL</B> parameters in the <B>Music.Fade</B> constructor in this example. This is because there are variations of the constructor (see below) where it is not necessary to specify these parameters. Although we could have used the ready-made <A HREF="#fadeTempo"><B>fadeTempo</B></A> instance method to achieve the same results as we have here, this is just an example to illustrate how the <B>Music.Fade</B> object is used.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.Fade (</B> StartValueINT <B>,</B> EndValueINT <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B> UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<P>When no <B>RestoreStartValueBOOL</B> parameter is specified, the default behavior is for the registered update handler not to be called when the fade completes, so whatever was being affected by the fade will not be reset to its start value when the fade ends.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.Fade (</B> StartValueINT <B>,</B> EndValueINT <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B> UpdateHandler<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>)</B>
+		<P>When there is also no <B>FadeEndCallback</B> parameter specified, then no additional action is performed when the fade comes to an end.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+</BODY></HTML>

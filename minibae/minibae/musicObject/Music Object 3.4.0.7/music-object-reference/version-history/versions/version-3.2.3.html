@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 3.2.3</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 3.2.3<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 2000-07-14</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are upgrading from Music Object version 2.x and would like to know about the significant changes that have occurred between versions 2.x and 3.0.x, please consult the version history for <A HREF="version-3.0.0.html">Music Object Version 3.0.0</A>.</P>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>IMPROVEMENT - Support for Netscape Communicator Variants</DIV>
+
+<BLOCKQUOTE>
+Music Object 3.2.3 provides broader support for customized versions of the Netscape Communicator browser, including versions that are shipped with some brands of laptop computers.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Install Wizard "Boomerang" Mechanism</DIV>
+
+<BLOCKQUOTE>
+Music Object 3.2.3 has been enhanced to make greater use of the Beatnik Player Install Wizard's new "boomerang" mechanism. Music Object now provides the Install Wizard with the URL of the page that the install process is launched from, so that the installer can then automatically return the user to this URL after the Beatnik Player installation is complete. This improvement helps to minimize the player installation's disruption to the user's browsing.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>BUG FIX - Frameset Bug Affecting the Wizards Extension</DIV>
+
+<BLOCKQUOTE>
+A bug was found within Music Object 3.2.2 (and earlier) that affected the Wizards extension's ability to correctly sonify links and form elements across frames of a frameset. When the Wizards extension was used across frames to sonify the links or form elements of another frame, any event handlers previously registered for the elements being sonified would no longer be triggered correctly. As an example, let's assume that we have a frameset in which frame A contains graphical links with existing event handler code to implement image rollovers. Now, frame B contains Music Object and all the Music Object instances required for sonification. The Wizards extension, sourced into frame B, will be used to sonify the graphical links in frame A. Because of the bug in Music Object, the act of sonifying the graphical links in frame A using the Wizards extension in frame B would effectively destroy the image rollovers for the links. This bug has been fixed.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>NEW LANGUAGE MODULE - Japanese Shift-JIS</DIV>
+
+<BLOCKQUOTE>
+With the new <A HREF="../../language-modules.html#available-languages" TARGET="_parent">Japanese language module</A>, content authors who are sonifying Japanese Web sites (or Web sites that are localized for the Japanese language) can ensure that compatibility dialogs that may display, as a result of the Beatnik Player not being installed, are displayed in a language appropriate to the Web site. And thanks to the Japanese version of the Beatnik Player installer, Japanese users can now be presented with a consistent and user-friendly experience when they encounter sonified content but don't have the player already installed.
+</BLOCKQUOTE>
+
+</BODY></HTML>

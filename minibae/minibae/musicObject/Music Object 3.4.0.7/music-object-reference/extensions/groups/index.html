@@ -1,0 +1,775 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Groups</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Groups
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>Unlike the <B>getChannelMute</B>, <B>getChannelSolo</B>, <B>getTrackMute</B>, <B>getTrackSolo</B>, <B>setChannelMute</B>, <B>setChannelSolo</B>, <B>setTrackMute</B>, and <B>setTrackSolo</B> methods provided by the core Music Object API that only allow one to test and affect the state of one channel or track at a time, the additional methods in this extension allow one to test and affect the state of multiple channels or tracks in a single operation.</P>
+
+<P>Consider the following before-and-after example. Using the core Music Object API's <B>setTrackMute</B> method, it takes a chunk of code to mute 8 tracks. However, using the <B>setTracksMute</B> method provided in this extension, the same code can be neatly folded into a single statement - nice and clean.</P>
+
+<TABLE ALIGN=CENTER WIDTH=100% BORDER=0 CELLSPACING=3 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE (Using setTrackMute)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setTrackMute (1,true);
+myMusicObject.setTrackMute (7,true);
+myMusicObject.setTrackMute (15,true);
+myMusicObject.setTrackMute (24,true);
+myMusicObject.setTrackMute (42,true);
+myMusicObject.setTrackMute (43,true);
+myMusicObject.setTrackMute (47,true);
+myMusicObject.setTrackMute (59,true);
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using setTracksMute)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setTracksMute ('1,7,15,24,42,43,47,59',true);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+</CENTER>
+
+<P>The methods provided by this extension make it easier to program Web-based "remix" interfaces, where musical compositions are "performed" as the user switches on and switches off different parts of the music - these parts often being made up of multiple channels or tracks.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-groups.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-groups.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-groups.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-groups.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelsMute">getChannelsMute</A></TD>
+	<TD CLASS=contents-table-item-desc>Determines the overall channel mute state for multiple channels in one simple step.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelsSolo">getChannelsSolo</A></TD>
+	<TD CLASS=contents-table-item-desc>Determines the overall channel solo state for multiple channels in one simple step.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getTracksMute">getTracksMute</A></TD>
+	<TD CLASS=contents-table-item-desc>Determines the overall track mute state for multiple tracks in one simple step.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getTracksSolo">getTracksSolo</A></TD>
+	<TD CLASS=contents-table-item-desc>Determines the overall track solo state for multiple tracks in one simple step.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelsMute">setChannelsMute</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the channel mute state for multiple channels in one simple step.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelsSolo">setChannelsSolo</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the channel solo state for multiple channels in one simple step.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setTracksMute">setTracksMute</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the track mute state for multiple tracks in one simple step.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setTracksSolo">setTracksSolo</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the track solo state for multiple tracks in one simple step.</TD>
+</TR>
+
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.">Music.</A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-properties">Instance Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#"></A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.">Music.</A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="getChannelsMute"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelsMute</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelsMute</B> method determines the overall channel mute state for multiple channels in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelsMute (</B> MidiChannelGroupSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>getChannelsMute</B> method returns a boolean value representing the overall mute state of the specified channel group. If all channels in the specified group are muted, then the group is regarded as being muted and the <B>getChannelsMute</B> method returns a value of <SPAN CLASS=value>true</SPAN>. However, if any or all of the channels in the group are not muted, then the group is not regarded as being muted and a value of <SPAN CLASS=value>false</SPAN> is returned. It is possible to toggle the mute state of a channel group with a statement such as...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelsMute ('1,4,7,15',!myMusicObject.getChannelsMute ('1,4,7,15'));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>This is not the same as the statement <B>myMusicObject.setChannelsMute ('1,4,7,15','Toggle')</B>, since the <SPAN CLASS=value>Toggle</SPAN> value will have the effect of toggling the mute states of each of the individual channels that make up the group, thereby "inverting" the mute state of the group. It is, however, equivalent to the statement <B>myMusicObject.setChannelsMute ('1,4,7,15','Toggle Group')</B>, since using the <SPAN CLASS=value>Toggle Group</SPAN> value results in the <B>setChannelsMute</B> method first determining the mute state of the group as a whole, and then setting all the specified channels to the opposite state.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>getChannelsMute (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>)</B>
+		<P>When the <B>MidiChannel0to16</B> parameter is used in place of the <B>MidiChannelGroupSTR</B> parameter, then the <B>getChannelsMute</B> method can be used in just the same way as the <B>getChannelMute</B> method, making the <B>getChannelsMute</B> method more versatile, because you could pass it a parameter that is a Number representing a single MIDI channel, or a String representing a group of MIDI channels.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#getChannelMute"><B>getChannelMute</B></A> method.
+</UL>
+
+<A NAME="getChannelsSolo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelsSolo</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelsSolo</B> method determines the overall channel solo state for multiple channels in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelsSolo (</B> MidiChannelGroupSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>getChannelsSolo</B> method returns a boolean value representing the overall solo state of the specified channel group. If all channels in the specified group are soloed, then the group is regarded as being soloed and the <B>getChannelsSolo</B> method returns a value of <SPAN CLASS=value>true</SPAN>. However, if any or all of the channels in the group are not soloed, then the group is not regarded as being soloed and a value of <SPAN CLASS=value>false</SPAN> is returned. It is possible to toggle the solo state of a channel group with a statement such as...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelsSolo ('1,4,7,15',!myMusicObject.getChannelsSolo ('1,4,7,15'));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>This is not the same as the statement <B>myMusicObject.setChannelsSolo ('1,4,7,15','Toggle')</B>, since the <SPAN CLASS=value>Toggle</SPAN> value will have the effect of toggling the solo states of each of the individual channels that make up the group, thereby "inverting" the solo state of the group. It is, however, equivalent to the statement <B>myMusicObject.setChannelsSolo ('1,4,7,15','Toggle Group')</B>, since using the <SPAN CLASS=value>Toggle Group</SPAN> value results in the <B>setChannelsSolo</B> method first determining the solo state of the group as a whole, and then setting all the specified channels to the opposite state.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>getChannelsSolo (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>)</B>
+		<P>When the <B>MidiChannel0to16</B> parameter is used in place of the <B>MidiChannelGroupSTR</B> parameter, then the <B>getChannelsSolo</B> method can be used in just the same way as the <B>getChannelSolo</B> method, making the <B>getChannelsSolo</B> method more versatile, because you could pass it a parameter that is a Number representing a single MIDI channel, or a String representing a group of MIDI channels.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#getChannelSolo"><B>getChannelSolo</B></A> method.
+</UL>
+
+<A NAME="getTracksMute"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getTracksMute</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getTracksMute</B> method determines the overall track mute state for multiple tracks in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getTracksMute (</B> TrackGroupSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>getTracksMute</B> method returns a boolean value representing the overall mute state of the specified track group. If all tracks in the specified group are muted, then the group is regarded as being muted and the <B>getTracksMute</B> method returns a value of <SPAN CLASS=value>true</SPAN>. However, if any or all of the tracks in the group are not muted, then the group is not regarded as being muted and a value of <SPAN CLASS=value>false</SPAN> is returned. It is possible to toggle the mute state of a track group with a statement such as...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setTracksMute ('3,12,18,19,27',!myMusicObject.getTracksMute ('3,12,18,19,27'));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>This is not the same as the statement <B>myMusicObject.setTracksMute ('3,12,18,19,27','Toggle')</B>, since the <SPAN CLASS=value>Toggle</SPAN> value will have the effect of toggling the mute states of each of the individual tracks that make up the group, thereby "inverting" the mute state of the group. It is, however, equivalent to the statement <B>myMusicObject.setTracksMute ('3,12,18,19,27','Toggle Group')</B>, since using the <SPAN CLASS=value>Toggle Group</SPAN> value results in the <B>setTracksMute</B> method first determining the mute state of the group as a whole, and then setting all the specified tracks to the opposite state.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>getTracksMute (</B> <A HREF="../../parameters.html#TrackNumber0to64">TrackNumber0to64</A> <B>)</B>
+		<P>When the <B>TrackNumber0to64</B> parameter is used in place of the <B>TrackGroupSTR</B> parameter, then the <B>getTracksMute</B> method can be used in just the same way as the <B>getTrackMute</B> method, making the <B>getTracksMute</B> method more versatile, because you could pass it a parameter that is a Number representing a single track, or a String representing a group of tracks.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#getTrackMute"><B>getTrackMute</B></A> method.
+</UL>
+
+<A NAME="getTracksSolo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getTracksSolo</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getTracksSolo</B> method determines the overall track solo state for multiple tracks in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getTracksSolo (</B> TrackGroupSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>getTracksSolo</B> method returns a boolean value representing the overall solo state of the specified track group. If all tracks in the specified group are soloed, then the group is regarded as being soloed and the <B>getTracksSolo</B> method returns a value of <SPAN CLASS=value>true</SPAN>. However, if any or all of the tracks in the group are not soloed, then the group is not regarded as being soloed and a value of <SPAN CLASS=value>false</SPAN> is returned. It is possible to toggle the solo state of a track group with a statement such as...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setTracksSolo ('3,12,18,19,27',!myMusicObject.getTracksSolo ('3,12,18,19,27'));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>This is not the same as the statement <B>myMusicObject.setTracksSolo ('3,12,18,19,27','Toggle')</B>, since the <SPAN CLASS=value>Toggle</SPAN> value will have the effect of toggling the solo states of each of the individual tracks that make up the group, thereby "inverting" the solo state of the group. It is, however, equivalent to the statement <B>myMusicObject.setTracksSolo ('3,12,18,19,27','Toggle Group')</B>, since using the <SPAN CLASS=value>Toggle Group</SPAN> value results in the <B>setTracksSolo</B> method first determining the solo state of the group as a whole, and then setting all the specified tracks to the opposite state.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>getTracksSolo (</B> <A HREF="../../parameters.html#TrackNumber0to64">TrackNumber0to64</A> <B>)</B>
+		<P>When the <B>TrackNumber0to64</B> parameter is used in place of the <B>TrackGroupSTR</B> parameter, then the <B>getTracksSolo</B> method can be used in just the same way as the <B>getTrackSolo</B> method, making the <B>getTracksSolo</B> method more versatile, because you could pass it a parameter that is a Number representing a single track, or a String representing a group of tracks.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#getTrackSolo"><B>getTrackSolo</B></A> method.
+</UL>
+
+<A NAME="setChannelsMute"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelsMute</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelsMute</B> method lets you set the channel mute state for multiple channels in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelsMute (</B> MidiChannelGroupSTR <B>,</B> <A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>setChannelsMute</B> method lets you set the mute state of multiple MIDI channels in one simple step. This lets you treat multiple MIDI channels together as a group. This is quite useful, among other things, for coding Web-based "remix" interfaces. A MIDI channel group is specified as a string value, containing a comma-separated list of MIDI channel numbers, as in <B><NOBR>myMusicObject.setChannelsMute ('1,3,4,8,10,11',true)</NOBR></B>.</P>
+
+<P>By using one of its variations, the <B>setChannelsMute</B> method also lets you use a convenient <SPAN CLASS=value>Toggle</SPAN> value to automatically invert the mute states of all channels in a group, as in <B><NOBR>myMusicObject.setChannelsMute ('1,3,4,8,10,11','Toggle')</NOBR></B>.</P>
+
+<P>One can also use the <SPAN CLASS=value>Toggle Group</SPAN> value to automatically toggle the mute state of the group as a whole, as in <B><NOBR>myMusicObject.setChannelsMute ('1,3,4,8,10,11','Toggle Group')</NOBR></B>. After using the <SPAN CLASS=value>Toggle Group</SPAN> value, all channels in the group will have the same mute state - either muted or unmuted - depending on the original overall mute state of the group.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>setChannelsMute (</B> MidiChannelGroupSTR <B>,</B> <A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A> <B>,</B> ExclusiveBOOL <B>)</B>
+		<P>When a value of <SPAN CLASS=value>true</SPAN> is specified for the optional <B>ExclusiveBOOL</B> parameter, then all channels other than those specified in the <B>MidiChannelGroupSTR</B> parameter will be set to the opposite state of the channels in the group. So, the statement <B><NOBR>myMusicObject.setChannelsMute ('1,3,4,8,10,11',true,true)</NOBR></B> will mute the channels 1, 3, 4, 8, 10, and 11, and unmute the channels 2, 5, 6, 7, 9, 12, 13, 14, 15, and 16. The <B>ExclusiveBOOL</B> parameter may be used optionally with all other variations of this method.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setChannelsMute (</B> MidiChannelGroupSTR <B>,</B> <A HREF="../../parameters.html#MuteStateSTR">MuteStateSTR</A> <B>)</B>
+		<P>When the <B>MuteStateSTR</B> parameter is used in place of the <B>MuteStateBOOL</B> parameter, it becomes possible to make use of the convenient <SPAN CLASS=value>Toggle</SPAN> value, which makes it easy to toggle the mute states of each channel in a group in one simple step, as in the statement <B><NOBR>myMusicObject.setChannelsMute ('1,3,7,8,11','Toggle')</NOBR></B></P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setChannelsMute (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A><B>or</B><A HREF="../../parameters.html#MuteStateSTR">MuteStateSTR</A> <B>)</B>
+		<P>When the <B>MidiChannel0to16</B> parameter is used in place of the <B>MidiChannelGroupSTR</B> parameter, then the <B>setChannelsMute</B> method can be used to affect the state of a single channel in the same way as the <B>setChannelMute</B> method. So, the <B>setChannelsMute</B> method is more versatile, because you could pass it a parameter that is a Number representing a single MIDI channel, or a String representing a group of MIDI channels. This also makes the convenient <SPAN CLASS=value>Toggle</SPAN> value available when simply affecting the state of one MIDI channel, as in <B><NOBR>myMusicObject.setChannelsMute (1,'Toggle')</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setChannelsMute (</B> MidiChannelGroupSTR<B>or</B><A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>)</B>
+		<P>When no <B>MuteStateBOOL</B> or <B>MuteStateSTR</B> parameter is specified, then the <B>setChannelsMute</B> method will mute all the channels in the specified MIDI channel group. So, the statement <B><NOBR>myMusicObject.setChannelsMute ('1,3,4,8,10,11')</NOBR></B> would have the same effect as the statement <B><NOBR>myMusicObject.setChannelsMute ('1,3,4,8,10,11',true)</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#setChannelMute"><B>setChannelMute</B></A> method.
+</UL>
+
+<A NAME="setChannelsSolo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelsSolo</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelsSolo</B> method lets you set the channel solo state for multiple channels in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelsSolo (</B> MidiChannelGroupSTR <B>,</B> <A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>setChannelsSolo</B> method lets you set the solo state of multiple MIDI channels in one simple step. This lets you treat multiple MIDI channels together as a group. This is quite useful, among other things, for coding Web-based "remix" interfaces. A MIDI channel group is specified as a string value, containing a comma-separated list of MIDI channel numbers, as in <B><NOBR>myMusicObject.setChannelsSolo ('1,3,4,8,10,11',true)</NOBR></B>.</P>
+
+<P>By using one of its variations, the <B>setChannelsSolo</B> method also lets you use a convenient <SPAN CLASS=value>Toggle</SPAN> value to automatically invert the solo states of all channels in a group, as in <B><NOBR>myMusicObject.setChannelsSolo ('1,3,4,8,10,11','Toggle')</NOBR></B>.</P>
+
+<P>One can also use the <SPAN CLASS=value>Toggle Group</SPAN> value to automatically toggle the solo state of the group as a whole, as in <B><NOBR>myMusicObject.setChannelsSolo ('1,3,4,8,10,11','Toggle Group')</NOBR></B>. After using the <SPAN CLASS=value>Toggle Group</SPAN> value, all channels in the group will have the same solo state - either soloed or unsoloed - depending on the original overall solo state of the group.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>setChannelsSolo (</B> MidiChannelGroupSTR <B>,</B> <A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A> <B>,</B> ExclusiveBOOL <B>)</B>
+		<P>When a value of <SPAN CLASS=value>true</SPAN> is specified for the optional <B>ExclusiveBOOL</B> parameter, then all channels other than those specified in the <B>MidiChannelGroupSTR</B> parameter will be set to the opposite state of the channels in the group. So, the statement <B><NOBR>myMusicObject.setChannelsSolo ('1,3,4,8,10,11',true,true)</NOBR></B> will solo the channels 1, 3, 4, 8, 10, and 11, and unsolo the channels 2, 5, 6, 7, 9, 12, 13, 14, 15, and 16. The <B>ExclusiveBOOL</B> parameter may be used optionally with all other variations of this method.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setChannelsSolo (</B> MidiChannelGroupSTR <B>,</B> <A HREF="../../parameters.html#SoloStateSTR">SoloStateSTR</A> <B>)</B>
+		<P>When the <B>SoloStateSTR</B> parameter is used in place of the <B>SoloStateBOOL</B> parameter, it becomes possible to make use of the convenient <SPAN CLASS=value>Toggle</SPAN> value, which makes it easy to toggle the solo states of each channel in a group in one simple step, as in the statement <B><NOBR>myMusicObject.setChannelsSolo ('1,3,7,8,11','Toggle')</NOBR></B></P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setChannelsSolo (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A><B>or</B><A HREF="../../parameters.html#SoloStateSTR">SoloStateSTR</A> <B>)</B>
+		<P>When the <B>MidiChannel0to16</B> parameter is used in place of the <B>MidiChannelGroupSTR</B> parameter, then the <B>setChannelsSolo</B> method can be used to affect the state of a single channel in the same way as the <B>setChannelSolo</B> method. So, the <B>setChannelsSolo</B> method is more versatile, because you could pass it a parameter that is a Number representing a single MIDI channel, or a String representing a group of MIDI channels. This also makes the convenient <SPAN CLASS=value>Toggle</SPAN> value available when simply affecting the state of one MIDI channel, as in <B><NOBR>myMusicObject.setChannelsSolo (1,'Toggle')</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setChannelsSolo (</B> MidiChannelGroupSTR<B>or</B><A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>)</B>
+		<P>When no <B>SoloStateBOOL</B> or <B>SoloStateSTR</B> parameter is specified, then the <B>setChannelsSolo</B> method will solo all the channels in the specified MIDI channel group. So, the statement <B><NOBR>myMusicObject.setChannelsSolo ('1,3,4,8,10,11')</NOBR></B> would have the same effect as the statement <B><NOBR>myMusicObject.setChannelsSolo ('1,3,4,8,10,11',true)</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#setChannelSolo"><B>setChannelSolo</B></A> method.
+</UL>
+
+<A NAME="setTracksMute"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setTracksMute</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setTracksMute</B> method lets you set the track mute state for multiple tracks in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setTracksMute (</B> TrackGroupSTR <B>,</B> <A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>setTracksMute</B> method lets you set the mute state of multiple tracks in one simple step. This lets you treat multiple tracks together as a group. This is quite useful, among other things, for coding Web-based "remix" interfaces. A track group is specified as a string value, containing a comma-separated list of track numbers, as in <B><NOBR>myMusicObject.setTracksMute ('5,6,7,8,9,10',true)</NOBR></B>.</P>
+
+<P>By using one of its variations, the <B>setTracksMute</B> method also lets you use a convenient <SPAN CLASS=value>Toggle</SPAN> value to automatically invert the mute states of all tracks in a group, as in <B><NOBR>myMusicObject.setTracksMute ('5,6,7,8,9,10','Toggle')</NOBR></B>.</P>
+
+<P>One can also use the <SPAN CLASS=value>Toggle Group</SPAN> value to automatically toggle the mute state of the group as a whole, as in <B><NOBR>myMusicObject.setTracksMute ('5,6,7,8,9,10','Toggle Group')</NOBR></B>. After using the <SPAN CLASS=value>Toggle Group</SPAN> value, all tracks in the group will have the same mute state - either muted or unmuted - depending on the original overall mute state of the group.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>setTracksMute (</B> TrackGroupSTR <B>,</B> <A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A> <B>,</B> ExclusiveBOOL <B>)</B>
+		<P>When a value of <SPAN CLASS=value>true</SPAN> is specified for the optional <B>ExclusiveBOOL</B> parameter, then all tracks other than those specified in the <B>TrackGroupSTR</B> parameter will be set to the opposite state of the tracks in the group. So, the statement <B><NOBR>myMusicObject.setTracksMute ('5,6,7,8,9,10',true,true)</NOBR></B> will mute the tracks 5, 6, 7, 8, 9, and 10 and unmute all other tracks. The <B>ExclusiveBOOL</B> parameter may be used optionally with all other variations of this method.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setTracksMute (</B> TrackGroupSTR <B>,</B> <A HREF="../../parameters.html#MuteStateSTR">MuteStateSTR</A> <B>)</B>
+		<P>When the <B>MuteStateSTR</B> parameter is used in place of the <B>MuteStateBOOL</B> parameter, it becomes possible to make use of the convenient <SPAN CLASS=value>Toggle</SPAN> value, which makes it easy to toggle the mute states of each track in a group in one simple step, as in the statement <B><NOBR>myMusicObject.setTracksMute ('5,6,7,21,22','Toggle')</NOBR></B></P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setTracksMute (</B> <A HREF="../../parameters.html#TrackNumber0to64">TrackNumber0to64</A> <B>,</B> <A HREF="../../parameters.html#MuteStateBOOL">MuteStateBOOL</A><B>or</B><A HREF="../../parameters.html#MuteStateSTR">MuteStateSTR</A> <B>)</B>
+		<P>When the <B>TrackNumber0to64</B> parameter is used in place of the <B>TrackGroupSTR</B> parameter, then the <B>setTracksMute</B> method can be used to affect the state of a single track in the same way as the <B>setTrackMute</B> method. So, the <B>setTracksMute</B> method is more versatile, because you could pass it a parameter that is a Number representing a single track, or a String representing a group of tracks. This also makes the convenient <SPAN CLASS=value>Toggle</SPAN> value available when simply affecting the state of one track, as in <B><NOBR>myMusicObject.setTracksMute (1,'Toggle')</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setTracksMute (</B> TrackGroupSTR<B>or</B><A HREF="../../parameters.html#TrackNumber0to64">TrackNumber0to64</A> <B>)</B>
+		<P>When no <B>MuteStateBOOL</B> or <B>MuteStateSTR</B> parameter is specified, then the <B>setTracksMute</B> method will mute all the tracks in the specified track group. So, the statement <B><NOBR>myMusicObject.setTracksMute ('5,6,7,8,9,10')</NOBR></B> would have the same effect as the statement <B><NOBR>myMusicObject.setTracksMute ('5,6,7,8,9,10',true)</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#setTrackMute"><B>setTrackMute</B></A> method.
+</UL>
+
+<A NAME="setTracksSolo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setTracksSolo</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Groups</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setTracksSolo</B> method lets you set the track solo state for multiple tracks in one simple step.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setTracksSolo (</B> TrackGroupSTR <B>,</B> <A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>setTracksSolo</B> method lets you set the solo state of multiple tracks in one simple step. This lets you treat multiple tracks together as a group. This is quite useful, among other things, for coding Web-based "remix" interfaces. A track group is specified as a string value, containing a comma-separated list of track numbers, as in <B><NOBR>myMusicObject.setTracksSolo ('5,6,7,8,9,10',true)</NOBR></B>.</P>
+
+<P>By using one of its variations, the <B>setTracksSolo</B> method also lets you use a convenient <SPAN CLASS=value>Toggle</SPAN> value to automatically invert the solo states of all tracks in a group, as in <B><NOBR>myMusicObject.setTracksSolo ('5,6,7,8,9,10','Toggle')</NOBR></B>.</P>
+
+<P>One can also use the <SPAN CLASS=value>Toggle Group</SPAN> value to automatically toggle the solo state of the group as a whole, as in <B><NOBR>myMusicObject.setTracksSolo ('5,6,7,8,9,10','Toggle Group')</NOBR></B>. After using the <SPAN CLASS=value>Toggle Group</SPAN> value, all tracks in the group will have the same solo state - either soloed or unsoloed - depending on the original overall solo state of the group.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>setTracksSolo (</B> TrackGroupSTR <B>,</B> <A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A> <B>,</B> ExclusiveBOOL <B>)</B>
+		<P>When a value of <SPAN CLASS=value>true</SPAN> is specified for the optional <B>ExclusiveBOOL</B> parameter, then all tracks other than those specified in the <B>TrackGroupSTR</B> parameter will be set to the opposite state of the tracks in the group. So, the statement <B><NOBR>myMusicObject.setTracksSolo ('5,6,7,8,9,10',true,true)</NOBR></B> will solo the tracks 5, 6, 7, 8, 9, and 10 and unsolo all other tracks. The <B>ExclusiveBOOL</B> parameter may be used optionally with all other variations of this method.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setTracksSolo (</B> TrackGroupSTR <B>,</B> <A HREF="../../parameters.html#SoloStateSTR">SoloStateSTR</A> <B>)</B>
+		<P>When the <B>SoloStateSTR</B> parameter is used in place of the <B>SoloStateBOOL</B> parameter, it becomes possible to make use of the convenient <SPAN CLASS=value>Toggle</SPAN> value, which makes it easy to toggle the solo states of each track in a group in one simple step, as in the statement <B><NOBR>myMusicObject.setTracksSolo ('5,6,7,21,22','Toggle')</NOBR></B></P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setTracksSolo (</B> <A HREF="../../parameters.html#TrackNumber0to64">TrackNumber0to64</A> <B>,</B> <A HREF="../../parameters.html#SoloStateBOOL">SoloStateBOOL</A><B>or</B><A HREF="../../parameters.html#SoloStateSTR">SoloStateSTR</A> <B>)</B>
+		<P>When the <B>TrackNumber0to64</B> parameter is used in place of the <B>TrackGroupSTR</B> parameter, then the <B>setTracksSolo</B> method can be used to affect the state of a single track in the same way as the <B>setTrackSolo</B> method. So, the <B>setTracksSolo</B> method is more versatile, because you could pass it a parameter that is a Number representing a single track, or a String representing a group of tracks. This also makes the convenient <SPAN CLASS=value>Toggle</SPAN> value available when simply affecting the state of one track, as in <B><NOBR>myMusicObject.setTracksSolo (1,'Toggle')</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>setTracksSolo (</B> TrackGroupSTR<B>or</B><A HREF="../../parameters.html#TrackNumber0to64">TrackNumber0to64</A> <B>)</B>
+		<P>When no <B>SoloStateBOOL</B> or <B>SoloStateSTR</B> parameter is specified, then the <B>setTracksSolo</B> method will solo all the tracks in the specified track group. So, the statement <B><NOBR>myMusicObject.setTracksSolo ('5,6,7,8,9,10')</NOBR></B> would have the same effect as the statement <B><NOBR>myMusicObject.setTracksSolo ('5,6,7,8,9,10',true)</NOBR></B>.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Compare to the <A HREF="../../instance-methods.html#setTrackSolo"><B>setTrackSolo</B></A> method.
+</UL>
+
+</BODY></HTML>

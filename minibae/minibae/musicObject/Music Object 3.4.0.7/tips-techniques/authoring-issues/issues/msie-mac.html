@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+	<TITLE>Issues for Internet Explorer on the MacOS</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Issues for Internet Explorer on the MacOS
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>Like any browser, Microsoft Internet Explorer for the Mac OS brings its own set of issues and limitations that need to be considered when creating sonified content. Some of these issues relate to the browser itself, while other relate to the specific mechanism that is used to achieve scriptable control over the Beatnik Player.</P>
+
+<DIV CLASS=subsection>Issues</DIV>
+
+<P></P>
+
+<UL>
+	<LI><B>All Methods Are Asynchronous</B>
+		<P>Because of the specific mechanism that is used to achieve scriptable control over the Beatnik Player in Internet Explorer for Mac OS, all of the instance methods are asynchronous in this browser. With other browser / platform combinations, all methods are synchronous, although some methods may appear to behave asynchronously because they place events in the MIDI event queue that only take effect at the audio engine level some time later (see the section <A HREF="../../../music-object-reference/concepts.html#midi-event-queue" TARGET="_parent">Important Concepts: MIDI Event Queue</A>).</P>
+		<P>To illustrate the difference between synchronous and asynchronous behavior, consider the following sample code example...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Synchronous / Asynchronous&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music = new Music ();
+music.onLoad ('music.play (); alert (music.isPlaying ())');
+music.preloadEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+		<P>Now, if this example is loaded into a Beatnik-supported browser other than Internet Explorer for Mac OS, the alert dialog box that pops up should always display the value <SPAN CLASS=value>true</SPAN>. This is because the <B>play</B> method behaves synchronously in these browsers and completes its action (initiating playback) before the JavaScript interpreter can continue on to executing the statement that calls the <B>isPlaying</B> method.</P>
+		<P>By contrast, in Internet Explorer for Mac OS the <B>play</B> method behaves asynchronously and does not necessarily complete its action before the JavaScript interpreter continues on to execute the call to the <B>isPlaying</B> method. As a result, even though the <B>play</B> method is being called before the <B>isPlaying</B> method is being called, the player is likely not to have started playing by the time the <B>isPlaying</B> method is called, and so this method will almost always return the value <SPAN CLASS=value>false</SPAN> in this example.</P>
+		<P>In this kind of situation, a more reliable way of knowing when the player has actually started playing is to register a handler for the <B>onPlay</B> callback.</P>
+	<LI><B>Higher Latency</B>
+		<P>The amount of time lag (latency) between initiating an event using the Music Object API and hearing that event take effect in the Beatnik Player is influenced by several factors. For one thing, the speed of the JavaScript interpreter will affect how fast your sonification code can be processed. And then, the specific interconnection mechanism (that allows instructions to be carried from the JavaScript level in the browser to the native code level of a browser component) introduces a little more delay. Finally, the Beatnik Player's underlying audio engine introduces further latency as a result of building up audio buffers for synthesizing music.</P>
+		<P>Now, because of the specific mechanism that is used to achieve scriptable control over the Beatnik Player in Internet Explorer for Mac OS, a significant (yet not extreme) amount of additional latency is introduced. For most applications, this latency is still within acceptable limits. However, if you are creating interactive audio applications that are very time-critical, then you should be aware that this content may not perform as well in Internet Explorer on the Mac OS than it may perform in other browser / platform combinations.</P>
+	<LI><B>Performance Limitations When Using Many Instances</B>
+		<P>Because of the specific mechanism that is used to achieve scriptable control over the Beatnik Player in Internet Explorer for Mac OS, there is a significant (yet not extreme) amount of added CPU overhead. In most applications, this additional CPU overhead is not even noticeable. However, the more Beatnik Player instances that are created, the greater the impact on the CPU from the interconnection mechanism. If your content is using a large number of instances (eg. more than 16), then you may notice a substantial and highly undesirable impact on the performance of the system.</P>
+		<P>To avoid serious performance problems, try to always test your sonified content in Mac IE and "tune" your content as needed.</P>
+	<LI><B>Image Swapping Considerably Slower</B>
+		<P>Image swapping has been found to be somewhat slower in Internet Explorer on the Mac OS than with other browser / platform combinations. If your sonified content is making use of image swapping and you are finding it to be sluggish in Mac IE, then one alternative to consider would be to use layers for storing the different states for buttons.</P>
+	<LI><B>Different Behavior for SELECT Element's ONFOCUS Event</B>
+		<P>The ONFOCUS event for form SELECT elements is implemented quite differently in Microsoft Internet Explorer on the Mac OS than it is in other browsers. As a result, the sonification of SELECT elements in forms using the <A HREF="../../../music-object-reference/extensions/wizards/index.html" TARGET="_parent">Wizards extension</A> may not behave quite as expected in this browser.</P>
+</UL>
+
+</BODY></HTML>

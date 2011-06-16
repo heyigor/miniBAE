@@ -1,0 +1,573 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Flash</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Flash
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>This extension is designed to make the process of sonifying Flash movies with Beatnik a little easier. The extension is currently quite simple, offering just two static methods. In time, as we learn more about the specific needs of Flash authors, this extension may be expanded to include other capabilities that benefit Beatnik sonification of Flash content.</P>
+
+<P>For further information on sonifying Flash movies using Beatnik, consult the section <A HREF="../../../tips-techniques/beatnik-and-flash.html">Using Beatnik and Flash Together</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-flash.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-flash.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-flash.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-flash.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#"></A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.embedFlashMovie">Music.embedFlashMovie</A></TD>
+	<TD CLASS=contents-table-item-desc>Puts the necessary HTML code into the page to embed a Flash movie that is also "wired" to control Beatnik.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.wireFlashMovie">Music.wireFlashMovie</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds the necessary code to the page to enable a Flash movie to control Beatnik using the FSCommand.</TD>
+</TR>
+
+<!--
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-properties">Instance Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#"></A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties">Static Properties</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.">Music.</A></TD>
+	<TD CLASS=contents-table-item-desc>.</TD>
+</TR>
+-->
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.embedFlashMovie"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.embedFlashMovie</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Flash</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.embedFlashMovie</B> static method puts the necessary HTML code into the page to embed a Flash movie that is also "wired" to control Beatnik.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.embedFlashMovie (</B> FlashEmbedLineSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.embedFlashMovie</B> static method goes even further than the <B><A HREF="#Music.wireFlashMovie">Music.wireFlashMovie</A></B> static method, in that it also generates the HTML code necessary to embed a Flash movie into a page in a way that is compatible with both Netscape Navigator and Microsoft Internet Explorer. If you are already familiar with Music Object's <A HREF="../../instance-methods.html#magicEmbed">magicEmbed</A> method, then using the <B>Music.embedFlashMovie</B> static method will be a snap. In principal, these two methods are much the same.</P>
+
+<P>When using this method, all that is necessary is to specify the desired attribute values for the Flash movie using a String parameter. The syntax for the attribute name/value pairs is very similar to the format of an HTML EMBED tag, excepting that it is not necessary to specify the opening "<B>&lt;EMBED</B>" and closing "<B>&gt;</B>" in the String.</P>
+
+<P>In the before-and-after example below, a typical Flash movie EMBED tag is transformed to its <B>Music.embedFlashMovie</B> equivalent...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+<SPAN CLASS=sample-code-highlighted>   SRC="my-flash-movie.swf"
+   WIDTH=600
+   HEIGHT=400
+   ALIGN=TOP
+   NAME="myFlashMovie"
+   QUALITY="high"
+   BASE="http://www.mydomain.com"</SPAN>
+   SWLIVECONNECT=TRUE
+   MAYSCRIPT
+   TYPE="application/x-shockwave-flash"
+   PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Music.embedFlashMovie)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.embedFlashMovie (
+   '<SPAN CLASS=sample-code-highlighted>SRC="my-flash-movie.swf" NAME="myFlashMovie" BASE="http://www.mydomain.com"</SPAN> ' +
+   '<SPAN CLASS=sample-code-highlighted>WIDTH=600 HEIGHT=400 ALIGN=TOP QUALITY="high"</SPAN>'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>In the above example, the text that is highlighted in the "before" stage represents those attributes that should be specified in the <B>Music.embedFlashMovie</B> method, and you will see these same attributes highlighted in the "after" stage. Most importantly, you will notice that some of the attributes in the EMBED tag in the "before" stage have not been specified in the call to the <B>Music.embedFlashMovie</B> method in the "after" stage. That's because these attributes always have the same value for all Flash movies and the <B>Music.embedFlashMovie</B> method writes these attributes into the generated HTML EMBED tag automatically. This, of course, makes life a whole lot easier.</P>
+
+<P>Now, we've deliberately kept our before-and-after example simple, not including the OBJECT tag that is necessary to achieve compatibility with Microsoft Internet Explorer. By looking at the expanded before-and-after example below that includes the OBJECT tag, you will get a better idea of just how much time the <B>Music.embedFlashMovie</B> method can save you...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;OBJECT
+<SPAN CLASS=sample-code-highlighted>   ID="myFlashMovie"
+   WIDTH=600
+   HEIGHT=400
+   ALIGN=TOP</SPAN>
+   CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+   CODEBASE="http://active.macromedia.com/flash/cabs/swflash.cab"
+&gt;
+<SPAN CLASS=sample-code-highlighted>   &lt;PARAM NAME="movie" VALUE="my-flash-movie.swf"&gt;
+   &lt;PARAM NAME="quality" VALUE="high"&gt;</SPAN>
+   &lt;EMBED
+<SPAN CLASS=sample-code-highlighted>      SRC="my-flash-movie.swf"
+      WIDTH=600
+      HEIGHT=400
+      ALIGN=TOP
+      NAME="myFlashMovie"
+      QUALITY="high"
+      BASE="http://www.mydomain.com"</SPAN>
+      SWLIVECONNECT=TRUE
+      MAYSCRIPT
+      TYPE="application/x-shockwave-flash"
+      PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+   &gt;
+&lt;/OBJECT&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Music.embedFlashMovie)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.embedFlashMovie (
+   '<SPAN CLASS=sample-code-highlighted>SRC="my-flash-movie.swf" NAME="myFlashMovie" BASE="http://www.mydomain.com"</SPAN> ' +
+   '<SPAN CLASS=sample-code-highlighted>WIDTH=600 HEIGHT=400 ALIGN=TOP QUALITY="high"</SPAN>'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>You can see now that between the EMBED and OBJECT tags, there are quite a few attributes that you no longer need to specify when using the <B>Music.embedFlashMovie</B> method, specifically the SWLIVECONNECT, MAYSCRIPT, TYPE, and PLUGINSPAGE attributes for the EMBED tag, and the CLASSID and CODEBASE attributes for the OBJECT tag. Not having to specify these attributes simplifies things somewhat.</P>
+
+<P>Another very important thing to notice is how the ID attribute and MOVIE parameter for the OBJECT tag are not specified when using <B>Music.embedFlashMovie</B>. This is because the method uses the value specified for the NAME attribute as the value for the ID attribute in the OBJECT tag HTML that is generated, and the value specified for the SRC attribute is used as the value for the MOVIE parameter in the OBJECT tag HTML that is generated. So, when using the <B>Music.embedFlashMovie</B> method it is only necessary to specify the Flash movie's source file location once using the SRC attribute, and it is only necessary to specify the Flash Player instance's name once using the NAME attribute.</P>
+
+<P>Finally, if you are already familiar with the <A HREF="#Music.wireFlashMovie"><B>Music.wireFlashMovie</B></A> static method, then let's take a look at a before-and-after example to see how the newer <B>Music.embedFlashMovie</B> can simplify your coding...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE (Using just Music.wireFlashMovie)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Beatnik and Flash Template&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;OBJECT
+   ID="<SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>"
+   WIDTH=<B>600</B>
+   HEIGHT=<B>400</B>
+   ALIGN=<B>TOP</B>
+   CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+   CODEBASE="http://active.macromedia.com/flash/cabs/swflash.cab"
+&gt;
+   &lt;PARAM NAME="movie" VALUE="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>"&gt;
+   &lt;PARAM NAME="quality" VALUE="<B>high</B>"&gt;
+   &lt;EMBED
+      SRC="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>"
+      WIDTH=<B>600</B>
+      HEIGHT=<B>400</B>
+      ALIGN=<B>TOP</B>
+      NAME="<SPAN CLASS=sample-code-highlighted>myFlashMovie</B></SPAN>"
+      QUALITY="<B>high</B>"
+      BASE="<B>http://www.mydomain.com</B>"
+      SWLIVECONNECT=TRUE
+      MAYSCRIPT
+      TYPE="application/x-shockwave-flash"
+      PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+   &gt;
+&lt;/OBJECT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.wireFlashMovie ('myFlashMovie');
+<SPAN CLASS=sample-code-highlighted>player1</SPAN> = new Music ();
+<SPAN CLASS=sample-code-highlighted>player1</SPAN>.magicEmbed ('SRC="<SPAN CLASS=sample-code-highlighted>my-music-file.rmf</SPAN>" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Music.embedFlashMovie)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Beatnik and Flash Template&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.embedFlashMovie (
+   'SRC="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>" NAME="<SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>" BASE="<B>http://www.mydomain.com</B>" ' +
+   'WIDTH=<B>600</B> HEIGHT=<B>400</B> ALIGN=<B>TOP</B> QUALITY="<B>high</B>"'
+);
+<SPAN CLASS=sample-code-highlighted>player1</SPAN> = new Music ();
+<SPAN CLASS=sample-code-highlighted>player1</SPAN>.magicEmbed ('SRC="<SPAN CLASS=sample-code-highlighted>my-music-file.rmf</SPAN>" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+</CENTER>
+
+<P>As you can see, not only has the number of places been reduced where you have to make sure values exactly match up, but the code using the <B>Music.embedFlashMovie</B> is simpler, cleaner, and easier to update.</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+</UL>
+-->
+
+<A NAME="Music.wireFlashMovie"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.wireFlashMovie</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Flash</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.wireFlashMovie</B> static method adds the necessary code to the page to enable a Flash movie to control Beatnik using the FSCommand.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.wireFlashMovie (</B> FlashInstanceNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.wireFlashMovie</B> method makes it easier to wire Flash movies so that they can use the FSCommand action to control the Music Object API. Using this method can clean up your sonification code considerably and also help to prevent mistakes that cause the Flash-to-Beatnik wiring to break. Consider the following before-and-after example to see how the code is simplified by using this method...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="JavaScript"&gt;&lt;!--
+
+function myFlashMovie_DoFSCommand (command,args) {
+   eval (command + ((command.indexOf ('(') == -1) ? ('(' + args + ')') : ''));
+}
+
+//--&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="VBScript"&gt;&lt;!--
+
+Sub myFlashMovie_FSCommand (ByVal command, ByVal args)
+        call myFlashMovie_DoFSCommand (command, args)
+end sub
+
+//--&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Music.wireFlashMovie)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.wireFlashMovie ('myFlashMovie');
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+</CENTER>
+
+<P>It becomes clear, looking at the example, that using the <B>wireFlashMovie</B> method also reduces the number of occurrences of the name "<B>myFlashMovie</B>", thereby reducing the chances of human error occurring. Furthermore, because each individual Flash movie needs to have its own unique FSCommand wrapper code, cases where more than one Flash movie in the same page are to be sonified create an even more compelling reason to use this method for the savings it provides. Consider the following before-and-after example involving two Beatnik-sonified Flash movies...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="JavaScript"&gt;&lt;!--
+
+function myFlashMovie1_DoFSCommand (command,args) {
+   eval (command + ((command.indexOf ('(') == -1) ? ('(' + args + ')') : ''));
+}
+
+function myFlashMovie2_DoFSCommand (command,args) {
+   eval (command + ((command.indexOf ('(') == -1) ? ('(' + args + ')') : ''));
+}
+
+//--&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="VBScript"&gt;&lt;!--
+
+Sub myFlashMovie1_FSCommand (ByVal command, ByVal args)
+        call myFlashMovie1_DoFSCommand (command, args)
+end sub
+
+Sub myFlashMovie2_FSCommand (ByVal command, ByVal args)
+        call myFlashMovie2_DoFSCommand (command, args)
+end sub
+
+//--&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using Music.wireFlashMovie)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.wireFlashMovie ('myFlashMovie1');
+Music.wireFlashMovie ('myFlashMovie2');
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+</CENTER>
+
+<P>Now, examine the following Beatnik-Flash sonification template to see how this method is used in context...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Beatnik and Flash Template&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>correct-path-here/</SPAN>music-object-x-flash.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;OBJECT
+   ID="<SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>"
+   WIDTH=<B>600</B>
+   HEIGHT=<B>400</B>
+   ALIGN=<B>TOP</B>
+   CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+   CODEBASE="http://active.macromedia.com/flash/cabs/swflash.cab"
+&gt;
+   &lt;PARAM NAME="movie" VALUE="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>"&gt;
+   &lt;PARAM NAME="quality" VALUE="<B>high</B>"&gt;
+   &lt;EMBED
+      SRC="<SPAN CLASS=sample-code-highlighted>my-flash-movie.swf</SPAN>"
+      WIDTH=<B>600</B>
+      HEIGHT=<B>400</B>
+      ALIGN=<B>TOP</B>
+      NAME="<SPAN CLASS=sample-code-highlighted>myFlashMovie</SPAN>"
+      QUALITY="<B>high</B>"
+      BASE="<B>http://www.mydomain.com</B>"
+      SWLIVECONNECT=TRUE
+      MAYSCRIPT
+      TYPE="application/x-shockwave-flash"
+      PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+   &gt;
+&lt;/OBJECT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.wireFlashMovie ('myFlashMovie');
+<SPAN CLASS=sample-code-highlighted>player1</SPAN> = new Music ();
+<SPAN CLASS=sample-code-highlighted>player1</SPAN>.magicEmbed ('SRC="<SPAN CLASS=sample-code-highlighted>my-music-file.rmf</SPAN>" WIDTH=0 HEIGHT=0 HIDDEN AUTOSTART=TRUE');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You can simplify your code even further by using the newer <A HREF="#Music.embedFlashMovie"><B>Music.embedFlashMovie</B></A> static method.</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+</UL>
+-->
+
+</BODY></HTML>

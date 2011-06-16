@@ -1,0 +1,130 @@
+<HTML><HEAD><TITLE>EXAMPLE: A JavaScript Seashore (source)</TITLE></HEAD>
+<BODY BGCOLOR=FFFFFF TEXT=000000 LINK=000088 VLINK=880088>
+
+<PRE>
+&lt;!--SEARCH PARENT="../index.html"--&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+   &lt;TITLE&gt;EXAMPLE: A JavaScript Seashore (sample)&lt;/TITLE&gt;
+   &lt;LINK REL="stylesheet" HREF="../../style/style.css"&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;!--*********************************************************************--&gt;
+&lt;!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *--&gt;
+&lt;!--*                -- http://www.tomkidding.com --                    *--&gt;
+&lt;!--*                                                                   *--&gt;
+&lt;!--*                    ©1997-1999 Beatnik, Inc.                       *--&gt;
+&lt;!--*********************************************************************--&gt;
+
+&lt;CENTER&gt;
+
+&lt;BR&gt;&lt;BR&gt;
+&lt;P&gt;&lt;IMG SRC="images/seashore1.jpg" NAME="seashoreImage" WIDTH=500 HEIGHT=362 ALT="A JavaScript Seashore"&gt;&lt;/P&gt;
+
+&lt;SCRIPT SRC="../../javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="../../javascript/music-object-prefs.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="../../javascript/music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="JavaScript"&gt;&lt;!-- //
+
+music = new Music ();
+
+globalTranspose = -24;
+
+currentImage = 1;
+totalImages = 3;
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+fastUpdate = false;
+
+function wave_newValue () {
+   newValue = Math.max (2,Math.min (this.value + Math.round (Math.random () * 2) - 1,this.notches));
+   if (newValue != this.value) {
+      this.value = newValue;
+      if (!this.soundInitialized && music.ready) {
+         music.setMonophonic (this.channelNo);
+         music.setController (this.channelNo,7,this.level);
+         music.setController (this.channelNo,10,this.pan);
+         this.soundInitialized = true;
+      }
+      lowerNotch = Math.round (this.notches / 2 - this.totalNotes / 2);
+      upperNotch = lowerNotch + this.totalNotes - 1;
+      if (this.value &gt; upperNotch) {
+         amountAbove = this.value - upperNotch;
+         octaveShift = (Math.floor ((amountAbove - 1) / this.notes.length) + 1) * 12;
+         newNote = this.notes [((this.value - upperNotch - 1) % this.notes.length)] + octaveShift;
+      } else {
+         if (this.value &lt; lowerNotch) {
+            amountBelow = lowerNotch - this.value;
+            octaveShift = (Math.floor ((amountBelow - 1) / this.notes.length) + 1) * 12;
+            newNote = this.notes [this.notes.length - ((lowerNotch - this.value - 1) % this.notes.length) - 1] - octaveShift;
+         } else {
+            newNote = this.notes [this.value - lowerNotch];
+         }
+      }
+      if (this.notePlaying == 0 || (newNote != this.notePlaying && Math.random () &lt; this.retriggerProbability)) {
+         this.velocity = 127 - Math.round ((newNote / 127) * 96);
+         this.notePlaying = newNote;
+         music.noteOn (this.channelNo,0,this.programNo,this.notePlaying - globalTranspose,this.velocity);
+      }
+
+   }
+}
+
+function wave (name,notches,channelNo,level,pan,programNo,velocity,notes,retriggerProbability) {
+   this.name = name;
+   this.notches = notches;
+   this.channelNo = channelNo;
+   this.level = level;
+   this.pan = pan;
+   this.programNo = programNo;
+   this.velocity = velocity;
+   this.notes = notes;
+   this.retriggerProbability = retriggerProbability;
+
+   this.totalNotes = 5;
+   this.notePlaying = 0;
+   this.value = Music.random (this.notches);
+   this.newValue = wave_newValue;
+   this.soundInitialized = false;
+}
+
+function seashore () {
+}
+
+function updateSeashore () {
+   for (waveNo = 1; waveNo &lt;=5; waveNo++) {
+      seashore [waveNo].newValue ();
+   }
+   setTimeout ('updateSeashore ()', fastUpdate ? 10: 1000);
+}
+
+function updateImage () {
+   if (currentImage == totalImages) currentImage = 1
+      else currentImage++;
+   if (isJavaScript1_1) document.seashoreImage.src = baseURL + "images/seashore" + currentImage + ".jpg";
+   setTimeout ('updateImage ()',8000);
+}
+
+seashore [1] = new wave ('seashore [1]',10,1,80,0,122,90,new Array (50,63,75,80,90),0.3);
+seashore [2] = new wave ('seashore [2]',10,2,100,32,122,90,new Array (43,48,54,59,63),0.3);
+seashore [3] = new wave ('seashore [3]',10,3,100,64,122,90,new Array (20,25,30,35,40),0.3);
+seashore [4] = new wave ('seashore [4]',10,4,100,96,122,90,new Array (41,52,57,61,65),0.3);
+seashore [5] = new wave ('seashore [5]',10,5,80,127,122,90,new Array (63,69,75,84,94),0.3);
+
+setTimeout ('updateSeashore ()',1000);
+setTimeout ('updateImage ()',8000);
+
+music.stubEmbed ('../../music/stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;</PRE>
+
+</BODY>
+</HTML>

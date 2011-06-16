@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: Music List (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-callbacks.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+
+<FORM NAME=logForm>
+	<TEXTAREA NAME=logField ROWS=10 COLS=50></TEXTAREA>
+</FORM>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+function logMessage (message) {
+	document.logForm.logField.value += message + '\n';
+}
+
+Music.onFirstReady ('logMessage (\'first instance ready\')');
+Music.onReady ('logMessage (\'all instances ready\')');
+
+music1 = new Music ();
+music2 = new Music ();
+music3 = new Music ();
+
+music1.magicEmbed ('SRC="../../music/stub.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=TRUE VOLUME=100');
+music2.magicEmbed ('SRC="../../music/stub.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=TRUE VOLUME=100');
+music3.magicEmbed ('SRC="../../music/stub.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=TRUE VOLUME=100');
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

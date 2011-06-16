@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (Sourcing in the randomGroovoid Static Method)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 6: Sourcing in the randomGroovoid Static Method
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P ALIGN=CENTER>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-x-dynamic.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+Music.magicEmbed (
+	'SRC="../../../music/stub.rmf" ' +
+	'GROOVOID="' + Music.randomGroovoid ('Background-') + '" ' +
+	'AUTOSTART=TRUE ' +
+	'DISPLAY=SONG ' +
+	'MODE=INFO ' +
+	'LOOP=TRUE ' +
+	'VOLUME=100'
+);
+
+// --></SCRIPT>
+
+</P>
+
+<P>This example makes use of <B>randomGroovoid</B> in exactly the same way as the previous example, except that in this case we are relying on the fact that randomGroovoid is defined as a static method in the Music Object extension file "<A HREF="../../../music-object-reference/extensions/dynamic/index.html" TARGET="_parent">music-object-x-dynamic.js</A>".</P>
+
+<P>Try <A HREF="randomgroovoid-sourced-in.html">reloading this page</A> several times. It should behave in exactly the same way as the previous example where the <B>randomGroovoid</B> function was explicitly pasted into the HTML document. The JavaScript is shown in the source code listing below. Once again, place this JavaScript towards the end of your HTML file, in the spot where you'd like the random Groovoid to be embedded. Follow the same guidelines for using the <B>randomGroovoid</B> function as outlined in the previous example.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object-x-dynamic.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.magicEmbed (
+   'SRC="<SPAN CLASS=sample-code-highlighted>stub.rmf</SPAN>" ' +
+   'GROOVOID="' + Music.randomGroovoid ('Background-') + '" ' +
+   'AUTOSTART=TRUE ' +
+   'DISPLAY=SONG ' +
+   'MODE=INFO ' +
+   'LOOP=TRUE ' +
+   'VOLUME=100'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

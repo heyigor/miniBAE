@@ -1,0 +1,332 @@
+//---------------------------------------------------------
+// test05.txt
+//---------------------------------------------------------
+// 
+// A Mini-BAE TestSuite script
+//
+// Usage:  testsuite.exe < test05.txt (at the MS-DOS prompt)
+//
+//---------------------------------------------------------
+//
+// Tests in this script:
+//
+// 1. Play Sound using built-in Custom Sample generator:
+//      a. 22k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+//      b. 44k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+//
+//---------------------------------------------------------
+// Jan. 19, 2000 by Chris Grigg (chrisg@beatnik.com)
+// Based on Mark Deggeler's go.txt
+// (c) 2000 by Beatnik, Inc.  All rights reserved.
+//---------------------------------------------------------
+
+
+
+// create mixer
+1
+1
+1 // open mixer 8hz,16bit
+
+
+
+//---------------------------------------------------------
+// 1.a.i. Play Sound, 8-bit mono 22k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+100000		// 100000 frames long
+8		// 8 bits deep
+1		// mono
+22050		// 22k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+
+
+//---------------------------------------------------------
+// 1.a.ii. Play Sound, 16-bit mono 22k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+100000		// 100000 frames long
+16		// 16 bits deep
+1		// mono
+22050		// 22k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 1.a.iii. Play Sound, 8-bit stereo 22k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+100000		// 100000 frames long
+8		// 8 bits deep
+2		// stereo
+22050		// 22k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 1.a.iv. Play Sound, 16-bit stereo 22k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+100000		// 100000 frames long
+16		// 16 bits deep
+2		// stereo
+22050		// 22k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 1.b.i. Play Sound, 8-bit mono 44k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+200000		// 200000 frames long
+8		// 8 bits deep
+1		// mono
+44100		// 44k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 1.b.ii. Play Sound, 16-bit mono 44k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+200000		// 200000 frames long
+16		// 16 bits deep
+1		// mono
+44100           // 44k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+
+//---------------------------------------------------------
+// 1.b.iii. Play Sound, 8-bit stereo 44k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+200000		// 200000 frames long
+8		// 8 bits deep
+2		// stereo
+44100           // 44k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+//---------------------------------------------------------
+// 1.b.iv. Play Sound, 16-bit stereo 44k
+//---------------------------------------------------------
+
+// create new BAESound object ------------
+2
+2
+1
+1               // slot 1
+
+// make a custom sample ------------------
+2
+2
+7
+1 		// slot 1
+200000		// 200000 frames long
+16		// 16 bits deep
+2		// stereo
+44100		// 44k
+
+// start ---------------------------------
+2
+2
+10
+1               // slot 1
+100             // priority
+1.0             // volume
+0               // starting frame offset
+
+
+
+// PAUSE
+4
+6            // Wait 6 seconds to let file play
+
+
+
+
+// quit
+0	// VERY IMPORTANT TO QUIT AT END!!!!!
+

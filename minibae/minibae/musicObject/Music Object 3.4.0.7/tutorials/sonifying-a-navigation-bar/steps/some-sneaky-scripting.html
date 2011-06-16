@@ -1,0 +1,251 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Sonifying a Navigation Bar - Some Sneaky Scripting</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('../../../music/stub.rmf');
+
+groovoidPlayer = new Music ();
+groovoidPlayer.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 8: Some Sneaky Scripting
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Finally, we can truly show off the versatility of the Beatnik Player's scriptable control by taking what has up until this point been a static sonification behavior for the navigation bar, and turning it into a more entertaining and dynamic sonification behavior. To hear this new behavior for yourself, interact with the navigation bar below, moving your mouse over the navigation options from left to right, to left, to right, to left, and so on. Fool around and try to figure out what the logic is behind this tricky little behavior. Move the mouse faster back and forth and have some fun.</P>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+totalOctaves = 5;
+octaveNo = 1;
+direction = 1;
+
+totalLinks = 3;
+linkFlags = new Array ();
+
+currentNoteNo = 0;
+
+function clearLinkFlags () {
+	for (var linkNo = 0; linkNo < totalLinks; linkNo++)
+		linkFlags [linkNo] = false
+	;
+}
+
+function linkMouseOver (linkNo) {
+	linkFlags [linkNo] = true;
+	currentNoteNo = Music.getNoteNumber ('C3') + linkNo * 2 + (octaveNo - 1) * 12;
+	notePlayer.noteOn (1,1,98,currentNoteNo,127)
+	var allLinkFlagsSet = true;
+	for (linkNo = 0; linkNo < totalLinks; linkNo++) {
+		if (!linkFlags [linkNo]) {
+			allLinkFlagsSet = false;
+			break;
+		}
+	}
+	if (allLinkFlagsSet) {
+		octaveNo += direction;
+		if (octaveNo == totalOctaves || octaveNo == 1)
+			direction = 0 - direction
+		;
+		clearLinkFlags ();
+	}
+}
+
+function linkMouseOut () {
+	if (currentNoteNo != -1) {
+		notePlayer.noteOff (1,currentNoteNo);
+		currentNoteNo = -1;
+	}
+}
+
+clearLinkFlags ();
+
+// --></SCRIPT>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD>
+			<A
+				HREF="buckingham1.html"
+				ONCLICK="linkMouseOut (); groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.stop (true); linkMouseOver (0)"
+				ONMOUSEOUT="linkMouseOut ()"
+			>
+			<IMG SRC="../../../images/example-nav-prev.gif" WIDTH=96 HEIGHT=36 ALT="PREV" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham-home.html"
+				ONCLICK="linkMouseOut (); groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.stop (true); linkMouseOver (1)"
+				ONMOUSEOUT="linkMouseOut ()"
+			>
+			<IMG SRC="../../../images/example-nav-home.gif" WIDTH=302 HEIGHT=36 ALT="HOME" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham3.html"
+				ONCLICK="linkMouseOut (); groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.stop (true); linkMouseOver (2)"
+				ONMOUSEOUT="linkMouseOut ()"
+			>
+			<IMG SRC="../../../images/example-nav-next.gif" WIDTH=96 HEIGHT=36 ALT="NEXT" BORDER=0 HSPACE=0></A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Instead of merely playing the exact same musical notes when mousing over the various navigation options, we are now implementing what can best be described as an "octave rollercoaster". We are still playing the same basic notes for the navigation options, but the octave in which the notes are playing is ascending and descending in somewhat of a rollercoaster fashion.</P>
+
+<P>The octave does not change every time the user mouses over a navigation option, but changes only when the user has moused over every one of the navigation options. When this happens, the octave is shifted up or down, depending on the current direction of the "rollercoaster", and the memory that stores which navigation options have been moused over is cleared. The direction of the octave shifting alternates between up and down, so that the octave "bounces" back and forth between a lower limit and and an upper limit.</P>
+
+<P>With this explanation of the sonification logic in mind, try mousing back and forth over the navigation bar again and try to relate this explanation to the behavior that you experience. Then, take a look at the source code listing below and ponder the code.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('music/stub.rmf');
+
+groovoidPlayer = new Music ();
+groovoidPlayer.stubEmbed ('music/stub.rmf');
+
+<SPAN CLASS=sample-code-highlighted>totalOctaves = 5;
+octaveNo = 1;
+direction = 1;
+
+totalLinks = 3;
+linkFlags = new Array ();
+
+currentNoteNo = 0;
+
+function clearLinkFlags () {
+   for (var linkNo = 0; linkNo &lt; totalLinks; linkNo++)
+      linkFlags [linkNo] = false
+   ;
+}
+
+function linkMouseOver (linkNo) {
+   linkFlags [linkNo] = true;
+   currentNoteNo =
+      Music.getNoteNumber ('C3')
+      + linkNo * 2
+      + (octaveNo - 1) * 12;
+   notePlayer.noteOn (1,1,98,currentNoteNo,127)
+   var allLinkFlagsSet = true;
+   for (linkNo = 0; linkNo &lt; totalLinks; linkNo++) {
+      if (!linkFlags [linkNo]) {
+         allLinkFlagsSet = false;
+         break;
+      }
+   }
+   if (allLinkFlagsSet) {
+      octaveNo += direction;
+      if (octaveNo == totalOctaves || octaveNo == 1)
+         direction = 0 - direction
+      ;
+      clearLinkFlags ();
+   }
+}
+
+function linkMouseOut () {
+   if (currentNoteNo != -1) {
+      notePlayer.noteOff (1,currentNoteNo);
+      currentNoteNo = -1;
+   }
+}
+
+clearLinkFlags ();</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham1.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="
+               groovoidPlayer.stop (true);
+               linkMouseOver (0)"
+            ONMOUSEOUT="linkMouseOut ()"
+            ONCLICK="
+               linkMouseOut ();
+               groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-prev.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="PREV"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+         &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham-home.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="
+               groovoidPlayer.stop (true);
+               linkMouseOver (1)"
+            ONMOUSEOUT="linkMouseOut ()"
+            ONCLICK="
+               linkMouseOut ();
+               groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-home.gif"
+            WIDTH=302
+            HEIGHT=36
+            ALT="HOME"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham3.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="
+               groovoidPlayer.stop (true);
+               linkMouseOver (2)"
+            ONMOUSEOUT="linkMouseOut ()"
+            ONCLICK="
+               linkMouseOut ();
+               groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-next.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="NEXT"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Like the previous example, we are still combining musical note playback with Groovoid playback. However, we have added a fair amount of scripted intelligence to determine exactly which musical note will play when mousing over each navigation option.</P>
+
+<P>We are using the array <B>linkFlags</B> to remember which links have been moused over and which have not. This array is made up of boolean values, one for each navigation link of the navigation bar. When the user mouses over a link, the link's ONMOUSEOVER event handler calls the <B>linkMouseOver</B> function, passing this function a unique number which identifies the link in the set.</P>
+
+<P>The <B>linkMouseOver</B> function then sets the associated element of the <B>linkFlags</B> array to true, and also performs a test to see if all elements of the <B>linkFlags</B> array are set to true. If this test shows that all elements of the array are true, then it indicates that the user has moused over each navigation option and the octave is advanced up or down, and all the elements of the <B>linkFlags</B> array are once again cleared (using the <B>clearLinkFlags</B> function) to allow for the next octave advance. Each time the octave is advanced, a further test is performed to see if the octave has hit its upper or lower limit, in which case the direction is reversed.</P>
+
+</BODY></HTML>

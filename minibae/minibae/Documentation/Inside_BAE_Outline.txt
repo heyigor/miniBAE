@@ -1,0 +1,648 @@
+GenSynth objects
+
+// mixer control
+GM_Mixer
+    GM_Voice                    // static number of voices that can be mixed down
+    GM_SampleCacheEntry         // cached samples for global access
+    GM_Song                     // static number of songs that can be processed at once
+    Q_MIDIEvent                 // global queued midi events
+
+// pcm voice to mix
+GM_Voice
+    GM_ADSR                     // volume envelope
+    GM_LFO                      // static number of LFO units
+        GM_ADSR                 // envelope that the LFO unit is applied during process
+
+// instrument
+GM_Instrument
+    GM_KeymapSplitInfo
+    GM_Waveform
+    GM_LFO
+    GM_ADSR
+    GM_TieTo
+
+// song
+GM_Song
+    GM_Instrument
+
+Class methods that work with a GM_Mixer
+    // constructor/deconstructor
+    GM_InitGeneralSound
+    GM_FinisGeneralSound
+
+    // status
+    GM_GetCurrentMixer
+    GM_Generate16bitOutP
+    GM_GenerateStereoOutP
+    GM_GetQuality
+    GM_ConvertFromOutputQualityToRate
+    GM_GetInterpolationMode
+    GM_GetMixerUsedTime
+    GM_GetMixerUsedTimeInPercent
+    GM_GetSystemVoices
+    GM_ChangeSystemVoices
+    GM_ChangeAudioModes
+
+    // global voice/pcm status
+    GM_GetRealtimeAudioInformation      // uses GM_AudioInfo, but relies on GM_Mixer
+    GM_GetAudioSampleFrame
+    GM_IsAudioActive
+
+    // control
+    GM_PauseGeneralSound
+    GM_IsGeneralSoundPaused
+    GM_ResumeGeneralSound
+    GM_StartHardwareSoundManager
+    GM_StopHardwareSoundManager
+
+    GM_SetupReverb
+    GM_CleanupReverb
+    GM_IsReverbFixed
+    GM_GetReverbEnableThreshold
+    GM_SetReverbType
+    GM_GetReverbType
+
+    // timing information
+    GM_GetSyncTimeStamp
+    GM_GetDeviceTimeStamp
+    GM_UpdateSamplesPlayed
+    GM_GetSyncTimeStampQuantizedAhead
+    GM_GetSamplesPlayed
+
+    GM_SetMasterVolume
+    GM_GetMasterVolume
+
+    // device information
+    GM_MaxDevices
+    GM_SetDeviceID
+    GM_GetDeviceID
+    GM_GetDeviceName
+
+    GM_GetAudioBufferOutputSize
+
+    // callbacks
+    GM_SetAudioTask
+    GM_SetAudioOutput
+    GM_GetAudioOutput
+    GM_GetAudioTask
+
+Class methods that work with a GM_Song
+    // constructor/deconstructor
+    GM_LoadSong
+    GM_FreeSong
+    GM_CreateLiveSong
+
+    GM_PauseSong
+    GM_ResumeSong
+    GM_IsSongPaused
+
+    GM_PrerollSong
+    GM_BeginSong
+    GM_StartLiveSong
+
+    GM_SetSongPriority
+    GM_GetSongPriority
+    GM_GetSongContext
+    GM_SetSongContext
+    GM_GetSongMixer
+    GM_SetSongMixer
+
+    // status
+    GM_GetSongPitchOffset
+    GM_SetSongPitchOffset
+    GM_AllowChannelPitchOffset
+    GM_DoesChannelAllowPitchOffset
+    GM_AreEventsPending
+    GM_IsSongDone
+    GM_GetControllerValue
+    GM_GetPitchBend
+    GM_GetProgramBank
+    GM_ChangeSongVoices
+    GM_GetSongVoices
+    GM_GetChannelVolume
+    GM_SetChannelVolume
+    GM_SetChannelReverb
+    GM_GetChannelReverb
+    GM_SetSongVolume
+    GM_GetSongVolume
+    GM_SetSongStereoPosition
+    GM_GetSetStereoPosition
+
+    GM_EndSong
+    GM_EndSongButKeepActive
+    GM_EndSongNotes
+    GM_KillSongNotes
+    GM_EndSongChannelNotes
+    GM_KillSongEventsFromQueue
+
+    GM_MergeExternalSong
+
+    // song position control and status
+    GM_SongTicks
+    GM_SongMicroseconds
+    GM_GetSongTickLength
+    GM_SetSongTickPosition
+    GM_GetSongMicrosecondLength
+    GM_SetSongMicrosecondPosition
+
+    GM_SetVelocityCurveType
+
+    // channel/track mute controls
+    GM_MuteTrack
+    GM_UnmuteTrack
+    GM_GetTrackMuteStatus
+    GM_SoloTrack
+    GM_UnsoloTrack
+    GM_GetTrackSoloStatus
+    GM_MuteChannel
+    GM_UnmuteChannel
+    GM_GetChannelMuteStatus
+    GM_SoloChannel
+    GM_UnsoloChannel
+    GM_GetChannelSoloStatus
+
+    // song tempo as a factor. 1.0 is normal.
+    GM_SetMasterSongTempo
+    GM_GetMasterSongTempo
+    GM_SetSongTempo
+    GM_GetSongTempo
+    GM_SetSongTempInBeatsPerMinute
+    GM_GetSongTempoInBeatsPerMinute
+
+    GM_AnyStereoInstrumentsLoaded
+
+    // setup reamps (alias)
+    GM_SetupSongRemaps
+    GM_GetSongInstrumentRemap
+    GM_RemapInstrument
+
+    // given a midi file, load all instruments. These functions calls GM_LoadInstrument/GM_UnloadInstrument.
+    // follows remaps
+    GM_LoadSongInstruments
+    GM_UnloadSongInstruments
+
+    // handle an instrument. The instrument is assumed to be the real instrument. No remaps or aliases are taken care of here.
+    GM_IsInstrumentLoaded
+    GM_LoadInstrument
+    GM_LoadInstrumentFromExternalData
+    GM_UnloadInstrument
+
+    // handle an instrument. This follows reamped (aliased) instruments.
+    GM_IsSongInstrumentLoaded
+    GM_IsSongInstrumentRemapped
+    GM_LoadSongInstrument
+    GM_UnloadSongInstrument
+
+    // used when trying to determine which keysample to load. Used by GM_LoadSongInstruments.
+    GM_IsInstrumentRangeUsed
+    GM_IsInstrumentUsed
+
+    // looping control
+    GM_SetSongLoopFlag
+    GM_GetSongLoopFlag
+    GM_SetSongMetaLoopFlag
+    GM_GetSongMetaLoopFlag
+    GM_GetSongLoopMax
+    GM_SetSongLoopMax
+
+    // when the GM_Song structure is deallocated, should we dispose of the midi data pointer or not.
+    GM_SetDisposeSongDataWhenDoneFlag
+    GM_GetDisposeSongDataWhenDoneFlag
+
+    // set an automatic fade for a song.
+    GM_SetSongFadeRate
+
+    // callbacks
+    GM_SetSongCallback
+    GM_SetSongTimeCallback
+    GM_SetSongMetaEventCallback
+    GM_SetControllerCallback
+
+    // send midi events. they will be placed into a queue
+    QGM_NoteOn
+    QGM_NoteOff
+    QGM_ProgramChange
+    QGM_PitchBend
+    QGM_Controller
+    QGM_AllNotesOff
+
+// Classes that deal with a GM_SampleCacheEntry
+    GMCache_BuildSampleCacheEntry
+    GMCache_IncrCacheEntryRef
+    GMCache_DecrCacheEntryRef
+    GMCache_ClearSampleCache
+    GMCache_IsIDInCache
+    GMCache_GetCachePtrFromID
+    GMCache_GetCachePtrFromPtr
+    GMCache_GetSamplePtr
+
+// X objects. These functions are in general utilitarian in nature.
+
+// ANSI like functions.
+    // memory manager
+    XIsOurMemoryPtr
+    XNewPtr
+    XDisposePtr
+    XGetPtrSize
+    XResizePtr
+    XBlockMove
+    XMemCmp
+    XSetMemory
+    XBubbleSortArray
+    XSetBit
+    XClearBit
+    XTestBit
+
+    // ANSI string functions
+    XStrCmp
+    XStrnCmp
+    XStrCpy
+    XStrStr
+    XStrLen
+    XStrCat
+
+    // ANSI like string, except they ignore case
+    XLStrCmp
+    XLStrnCmp
+    XLStrStr
+
+    // more string manipulation.
+    XDuplicateStr
+    XDuplicateAndStripStr
+    XStripStr
+    XLongToStr
+    XStrnToLong
+    XCtoPascalString
+    XCtoPstr
+    XPtoCstr
+
+    // encrypted string functions.
+    XEncryptedStrCpy
+    XDecryptAndDuplicateStr
+
+    // return system clock
+    XMicroseconds
+    XWaitMicroseocnds
+
+    // math functions for XFIXED type. 16.16
+    XFixedDivide
+    XFixedMultiply
+
+    // byte endian issues
+    XDetermineByteOrder
+    XGetShortIntel
+    XGetLongIntel
+    XGetShort
+    XGetLong
+    XPutShort
+    XPutLong
+    XSwapShorts
+    XSwapShort
+    XSwapLong
+
+// Class methods for working with cross platform path names. Works on a XFILENAME.
+    XGetTempXFILENAME
+    XFileDelete
+    XGetFileAsData
+    XConvertNativeFileToXFILENAME
+    XConvertPathToXFILENAME
+
+    XFileIsValidResourceFromName
+
+// Class methods that work on a XFILE
+    // tradition data based read/write file access
+    XFileOpenForRead
+    XFileOpenForWrite
+    XFileClose
+    XFileRead
+    XFileWrite
+    XFileSetPosition
+    XFileGetPosition
+    XFileSetPositionRelative
+    XFileGetLength
+    XFileSetLength
+
+Class methods that also work on an XFILE, but the data is formated into the Beatnik IREZ
+resource format.
+    XFileOpenResource
+    XFileOpenResourceFromMemory
+    XFileOpenForReadFromMemory
+
+    XFileIsValidResource
+    XFileUseThisResourceFile
+    XFileGetCurrentResourceFile
+
+
+    XCreateAccessCache
+    XSwapLongsInAccessCache
+    XFileCreateResourceCache
+    XFileFreeResourceCache
+
+// functions that search the open resource files for its operation.
+    XExistsResource
+    XGetResourceName
+    XGetNamedResource
+    XGetAndDetachResource
+    XGetIndexedResource
+    XGetUniqueResourceID
+    XMakeUniqueResourceID
+    XAddResource
+    XDeleteResource
+    XCountResourcesOfType
+    XCleanResource
+    XGetIndexedType
+    XCountTypes
+    XGetResourceNameOnly
+
+// functions that work on a given resource file and do not search
+    XGetUniqueFileResourceID
+    XMakeUniqueFileResourceID
+    XAddFileResource
+    XDeleteFileResource
+    XExistsFileResource
+    XGetFileResourceName
+    XGetFileResource
+    XGetIndexedFileResource
+    XReadPartialFileResource
+    XCleanResourceFile
+    XCountFileResourcesOfType
+
+    // audio codecs
+    XGetCompressionName
+    XGetShortCompressionName
+    
+    // LZSS decode
+    XDecompressPtr
+    LZSSUncompress
+    LZSSUncompressDeltaMono8
+    LZSSUncompressDeltaStereo8
+    LZSSUncompressDeltaMono16
+    LZSSUncompressDeltaStereo16
+
+    // LZSS encode
+    XCompressPtr
+    LZSSCompress
+    LZSSCompressDeltaMono8
+    LZSSCompressDeltaStereo8
+    LZSSCompressDeltaMono16
+    LZSSCompressDeltaStereo16
+
+    // AIFF encode
+    XAllocateCompressedAiffIma
+    XCompressAiffIma
+
+    // AIFF/WAV decode
+    XExpandAiffIma
+    XExpandAiffImaStream
+    XExpandWavIma
+
+    // ulaw, alaw decode
+    XExpandULawto16BitLinear
+    XExpandALawto16BitLinear
+
+    // unsupported MacOS specific codec
+    XExpandMace1to6
+    XExpandMace1to3
+
+    // general crypto
+    XDecryptData
+    XEncryptData
+
+    // random numbers
+    XRandom
+    XSeedRandom
+    XRandomRange
+
+    // OEM ANSI to MacOS key conversion
+    XIsWinInMac
+    XIsMacInWin
+
+    XTranslateWinToMac
+    XTranslateMacToWin
+
+    // utilities
+    XPhase8BitWaveform
+    XIs8BitSupported
+    XIs16BitSupported
+    XIsStereoSupported
+
+    XGetHardwareVolume
+    XSetHardwareVolume
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+ALIS resource map
+
+ULNG	version (default is 0)
+LCNT	How many aliases?
+LSTC	
+	ULNG	alias from
+	ULNG	to
+LSTE	
+
+

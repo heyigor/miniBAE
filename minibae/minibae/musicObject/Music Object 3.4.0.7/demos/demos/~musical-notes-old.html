@@ -1,0 +1,362 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The noteOn, noteOff, and playNote Methods</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+DEMO: The noteOn, noteOff, and playNote Methods
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+music.stubEmbed ('../../music/stub.rmf');
+
+//--></SCRIPT>
+
+<P>The Music Object API's <B>noteOn</B>, <B>noteOff</B>, and <B>playNote</B> methods let you trigger and stop musical notes from virtually <B>any user interaction</B> within a page. And the great thing about musical notes is that they are <B>free</B>, with <B>no downloads</B> of audio or music files required. The instrument sounds, like the Groovoids, are built directly into the Beatnik Player's soundbank.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="so-many-sounds"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+So Many Sounds, So Few Buttons!
+</TD></TR></TABLE>
+<BR>
+
+<P>Musical notes play through the Beatnik Player's software synthesizer, on any one of the <B>many instrument sounds</B> in the player's soundbank. In case you thought that 72 Groovoids was a lot, the Beatnik Player soundbank contains an incredible <B>256 musical instrument sounds</B>, as well as <B>109 percussion sounds</B>. The percussion sounds are particularly useful for sonifying user interface elements on Web pages - ideal for link click sounds, button click sounds, link mouseover sounds, form submit sounds, and more.</P>
+
+<P>Check out the buttons below. Each button has a different click sound, thanks to sounds chosen from the Beatnik Player's percussion banks. To the right of each button is the source code of the <B>playNote</B> method call for each button. Go on and click 'em...</P>
+
+<CENTER>
+<FORM>
+	<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=0>
+		<TR>
+			<TD><INPUT TYPE="button" VALUE="Button 1" ONCLICK="music.playNote (1,0,128+27,51,127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+27,51,127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD><INPUT TYPE="button" VALUE="Button 2" ONCLICK="music.playNote (1,1,128+88,66,127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,1,128+88,66,127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD><INPUT TYPE="button" VALUE="Button 3" ONCLICK="music.playNote (1,0,128+75,60,127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+75,60,127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD><INPUT TYPE="button" VALUE="Button 4" ONCLICK="music.playNote (1,0,128+85,60,127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+85,60,127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD><INPUT TYPE="button" VALUE="Button 5" ONCLICK="music.playNote (1,1,128+46,79,127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,1,128+46,79,127,1000)&nbsp;</TD>
+		</TR>
+	</TABLE>
+</FORM>
+</CENTER>
+
+<!--***********************************************************************-->
+
+<A NAME="highs-and-lows"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+The Highs and the Lows
+</TD></TR></TABLE>
+<BR>
+
+<P>Your palette of sounds gets <B>extended</B> even further when you take musical instrument sounds and play them at <B>different pitches</B>. Each instrument sound can be played at <B>128 different pitches</B>!</P>
+
+<P>The following buttons <B>all play</B> the Beatnik Player's <B>castanets</B> percussion sound. However, <B>completely different effects</B> are achieved simply by playing the musical notes at different pitches. Using <B>only one sound</B> from the soundbank, each button now has its own distinctive click effect. To the right of each button is the code used to produce the sound for the button.</P>
+
+<CENTER>
+<FORM>
+	<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=0>
+		<TR>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE=" A2 " ONCLICK="music.playNote (1,0,128+85,'A2',127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+85,'A2',127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE=" G3 " ONCLICK="music.playNote (1,0,128+85,'G3',127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+85,'G3',127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE=" F4 " ONCLICK="music.playNote (1,0,128+85,'F4',127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+85,'F4',127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="D#5" ONCLICK="music.playNote (1,0,128+85,'D#5',127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+85,'D#5',127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="C#6" ONCLICK="music.playNote (1,0,128+85,'C#6',127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+85,'C#6',127,1000)&nbsp;</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE=" B6 " ONCLICK="music.playNote (1,0,128+85,'B6',127,1000)"></TD>
+			<TD CLASS=sample-code>&nbsp;myMusicObject.playNote (1,0,128+85,'B6',127,1000)&nbsp;</TD>
+		</TR>
+	</TABLE>
+</FORM>
+</CENTER>
+
+<!--***********************************************************************-->
+
+<A NAME="behaviors"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Roll Your Own Behaviors
+</TD></TR></TABLE>
+<BR>
+
+<P>With the Music Object API, you get <B>full control</B> to make the kind of <B>musical behaviors</B> that you want for your Web page elements. <B>Combine</B> the <B>noteOn</B>, <B>noteOff</B>, and <B>playNote</B> methods to create sonified links in an <B>enormous</B> number of different ways.</P>
+
+<P>Take a look at the links below, for intance. Each link has its own <B>unique sound</B> for when you "<B>mouse over</B>" and for when you <B>click</B>. The "mouse over" sound plays for <B>as long</B> as you are over the link, and then stops as soon as you move the mouse away from the link. The "mouse over" sound also <B>stops when you click</B> on the link and the click sound is played. To the right of each sonified link is the source code used to create the musical behavior for the link. <B>Try it out</B>...</P>
+
+<CENTER>
+<FORM>
+	<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=0>
+		<TR>
+			<TD><A HREF="javascript://" ONMOUSEOVER="music.noteOn (1,1,50,51,127)" ONMOUSEOUT="music.noteOff (1,51)" ONCLICK="music.noteOff (1,51); music.playNote (1,0,128+27,51,127,1000); return false">Just&nbsp;Some&nbsp;Link&nbsp;1</A></TD>
+			<TD CLASS=sample-code>
+				&lt;A<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HREF="javascript://"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOVER="myMusicObject.noteOn (1,1,50,51,127)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOUT="myMusicObject.noteOff (1,51)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONCLICK="<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.noteOff (1,51);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.playNote (1,0,128+27,51,127,1000);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<BR>
+				><BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just&nbsp;Some&nbsp;Link&nbsp;1<BR>
+				&lt;/A&gt;
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD><A HREF="javascript://" ONMOUSEOVER="music.noteOn (1,1,91,76,127)" ONMOUSEOUT="music.noteOff (1,76)" ONCLICK="music.noteOff (1,76); music.playNote (1,0,128+75,60,127,1000); return false">Just&nbsp;Some&nbsp;Link&nbsp;2</A></TD>
+			<TD CLASS=sample-code>
+				&lt;A<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HREF="javascript://"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOVER="myMusicObject.noteOn (1,1,91,76,127)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOUT="myMusicObject.noteOff (1,76)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONCLICK="<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.noteOff (1,76);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.playNote (1,0,128+75,60,127,1000);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<BR>
+				><BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just&nbsp;Some&nbsp;Link&nbsp;2<BR>
+				&lt;/A&gt;
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD><A HREF="javascript://" ONMOUSEOVER="music.noteOn (1,1,86,36,127)" ONMOUSEOUT="music.noteOff (1,36)" ONCLICK="music.noteOff (1,36); music.playNote (1,0,128+85,60,127,1000); return false">Just&nbsp;Some&nbsp;Link&nbsp;3</A></TD>
+			<TD CLASS=sample-code>
+				&lt;A<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HREF="javascript://"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOVER="myMusicObject.noteOn (1,1,86,36,127)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOUT="myMusicObject.noteOff (1,36)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONCLICK="<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.noteOff (1,36);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.playNote (1,0,128+85,60,127,1000);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<BR>
+				><BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just&nbsp;Some&nbsp;Link&nbsp;3<BR>
+				&lt;/A&gt;
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR>
+			<TD><A HREF="javascript://" ONMOUSEOVER="music.noteOn (1,1,98,28,127)" ONMOUSEOUT="music.noteOff (1,28)" ONCLICK="music.noteOff (1,28); music.playNote (1,1,128+46,79,127,1000); return false">Just&nbsp;Some&nbsp;Link&nbsp;4</A></TD>
+			<TD CLASS=sample-code>
+				&lt;A<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HREF="javascript://"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOVER="myMusicObject.noteOn (1,1,98,28,127)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONMOUSEOUT="myMusicObject.noteOff (1,28)"<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ONCLICK="<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.noteOff (1,28);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMusicObject.playNote (1,1,128+46,79,127,1000);<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false<BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<BR>
+				><BR>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just&nbsp;Some&nbsp;Link&nbsp;4<BR>
+				&lt;/A&gt;
+			</TD>
+		</TR>
+	</TABLE>
+</FORM>
+</CENTER>
+
+<!--***********************************************************************-->
+
+<A NAME="stacks-up"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+It All Stacks Up
+</TD></TR></TABLE>
+<BR>
+
+<P>Think that all the <B>possibilities</B> have been exhausted? <B>Think again</B>. There's no saying that you only need to play one musical note at a time. Even <B>more complex textures</B> can be achieved when you <B>combine several musical notes</B>, playing at different pitches, and playing different instrument sounds. You can even make your sonified elements <B>musically correct</B> by playing proper musical <B>chords</B>. Heck, you could even make it so that your Web page elements play chords that are <B>in the same key</B> as a piece of <B>background music</B> you are playing on the same page!!</P>
+
+<P>As an example. try out the following sonified buttons below. In this case, each button is playing a musical chord using a specific instrument sound. To the right of each button is the source code used to create the chord effect for each button.</P>
+
+<CENTER>
+<FORM>
+	<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=0>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="E Minor" ONCLICK="music.playNote (1,0,98,40,127,1000); music.playNote (1,0,98,43,127,1000); music.playNote (1,0,98,47,127,1000); music.playNote (1,0,98,52,127,1000); music.playNote (1,0,98,55,127,1000); music.playNote (1,0,98,64,127,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,98,40,127,1000);<BR>
+				myMusicObject.playNote (1,0,98,43,127,1000);<BR>
+				myMusicObject.playNote (1,0,98,47,127,1000);<BR>
+				myMusicObject.playNote (1,0,98,52,127,1000);<BR>
+				myMusicObject.playNote (1,0,98,55,127,1000);<BR>
+				myMusicObject.playNote (1,0,98,64,127,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="E Major" ONCLICK="music.playNote (1,0,97,40,127,1000); music.playNote (1,0,97,44,127,1000); music.playNote (1,0,97,47,127,1000); music.playNote (1,0,97,52,127,1000); music.playNote (1,0,97,56,127,1000); music.playNote (1,0,97,64,127,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,97,40,127,1000);<BR>
+				myMusicObject.playNote (1,0,97,44,127,1000);<BR>
+				myMusicObject.playNote (1,0,97,47,127,1000);<BR>
+				myMusicObject.playNote (1,0,97,52,127,1000);<BR>
+				myMusicObject.playNote (1,0,97,56,127,1000);<BR>
+				myMusicObject.playNote (1,0,97,64,127,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="F Major" ONCLICK="music.playNote (1,0,95,41,127,1000); music.playNote (1,0,95,45,127,1000); music.playNote (1,0,95,47,127,1000); music.playNote (1,0,95,50,127,1000); music.playNote (1,0,95,52,127,1000); music.playNote (1,0,95,53,127,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,95,41,127,1000);<BR>
+				myMusicObject.playNote (1,0,95,45,127,1000);<BR>
+				myMusicObject.playNote (1,0,95,47,127,1000);<BR>
+				myMusicObject.playNote (1,0,95,50,127,1000);<BR>
+				myMusicObject.playNote (1,0,95,52,127,1000);<BR>
+				myMusicObject.playNote (1,0,95,53,127,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="F Inverted" ONCLICK="music.playNote (1,0,93,41,127,1000); music.playNote (1,0,93,45,127,1000); music.playNote (1,0,93,47,127,1000); music.playNote (1,0,93,50,127,1000); music.playNote (1,0,93,55,127,1000); music.playNote (1,0,93,60,127,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,93,41,127,1000);<BR>
+				myMusicObject.playNote (1,0,93,45,127,1000);<BR>
+				myMusicObject.playNote (1,0,93,47,127,1000);<BR>
+				myMusicObject.playNote (1,0,93,50,127,1000);<BR>
+				myMusicObject.playNote (1,0,93,55,127,1000);<BR>
+				myMusicObject.playNote (1,0,93,60,127,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="G Major" ONCLICK="music.playNote (1,0,92,43,127,1000); music.playNote (1,0,92,47,127,1000); music.playNote (1,0,92,50,127,1000); music.playNote (1,0,92,52,127,1000); music.playNote (1,0,92,55,127,1000); music.playNote (1,0,92,60,127,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,92,43,127,1000);<BR>
+				myMusicObject.playNote (1,0,92,47,127,1000);<BR>
+				myMusicObject.playNote (1,0,92,50,127,1000);<BR>
+				myMusicObject.playNote (1,0,92,52,127,1000);<BR>
+				myMusicObject.playNote (1,0,92,55,127,1000);<BR>
+				myMusicObject.playNote (1,0,92,60,127,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="A Minor" ONCLICK="music.playNote (1,0,88,45,85,1000); music.playNote (1,0,88,48,85,1000); music.playNote (1,0,88,52,85,1000); music.playNote (1,0,88,55,85,1000); music.playNote (1,0,88,57,85,1000); music.playNote (1,0,88,60,127,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,88,45,85,1000);<BR>
+				myMusicObject.playNote (1,0,88,48,85,1000);<BR>
+				myMusicObject.playNote (1,0,88,52,85,1000);<BR>
+				myMusicObject.playNote (1,0,88,55,85,1000);<BR>
+				myMusicObject.playNote (1,0,88,57,85,1000);<BR>
+				myMusicObject.playNote (1,0,88,60,127,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="C Major" ONCLICK="music.playNote (1,0,78,48,70,1000); music.playNote (1,0,78,52,70,1000); music.playNote (1,0,78,55,70,1000); music.playNote (1,0,78,60,70,1000); music.playNote (1,0,78,64,70,1000); music.playNote (1,0,78,67,100,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,78,48,70,1000);<BR>
+				myMusicObject.playNote (1,0,78,52,70,1000);<BR>
+				myMusicObject.playNote (1,0,78,55,70,1000);<BR>
+				myMusicObject.playNote (1,0,78,60,70,1000);<BR>
+				myMusicObject.playNote (1,0,78,64,70,1000);<BR>
+				myMusicObject.playNote (1,0,78,67,100,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="C Inverted" ONCLICK="music.playNote (1,1,93,48,90,1000); music.playNote (1,1,93,50,90,1000); music.playNote (1,1,93,55,90,1000); music.playNote (1,1,93,59,90,1000); music.playNote (1,1,93,62,90,1000); music.playNote (1,1,93,67,127,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,1,93,48,90,1000);<BR>
+				myMusicObject.playNote (1,1,93,50,90,1000);<BR>
+				myMusicObject.playNote (1,1,93,55,90,1000);<BR>
+				myMusicObject.playNote (1,1,93,59,90,1000);<BR>
+				myMusicObject.playNote (1,1,93,62,90,1000);<BR>
+				myMusicObject.playNote (1,1,93,67,127,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="D Major" ONCLICK="music.playNote (1,1,49,38,127,1000); music.playNote (1,1,49,42,127,1000); music.playNote (1,1,49,45,127,1000); music.playNote (1,1,49,50,127,1000); music.playNote (1,1,49,66,70,1000); music.playNote (1,1,49,69,70,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,1,49,38,127,1000);<BR>
+				myMusicObject.playNote (1,1,49,42,127,1000);<BR>
+				myMusicObject.playNote (1,1,49,45,127,1000);<BR>
+				myMusicObject.playNote (1,1,49,50,127,1000);<BR>
+				myMusicObject.playNote (1,1,49,66,70,1000);<BR>
+				myMusicObject.playNote (1,1,49,69,70,1000);<BR>
+			</TD>
+		</TR>
+		<TR><TD COLSPAN=2><TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=CCCCCC><TR><TD><IMG SRC="../../images/blank.gif" WIDTH=1 HEIGHT=1 VSPACE=0 HSPACE=0 BORDER=0></TD></TR></TABLE></TD></TR>
+		<TR VALIGN=CENTER>
+			<TD ALIGN=CENTER><INPUT TYPE="button" VALUE="D Minor" ONCLICK="music.playNote (1,0,52,38,100,1000); music.playNote (1,0,52,41,100,1000); music.playNote (1,0,52,45,100,1000); music.playNote (1,0,52,50,100,1000); music.playNote (1,0,52,65,100,1000); music.playNote (1,0,52,69,100,1000)"></TD>
+			<TD CLASS=sample-code>
+				myMusicObject.playNote (1,0,52,38,100,1000);<BR>
+				myMusicObject.playNote (1,0,52,41,100,1000);<BR>
+				myMusicObject.playNote (1,0,52,45,100,1000);<BR>
+				myMusicObject.playNote (1,0,52,50,100,1000);<BR>
+				myMusicObject.playNote (1,0,52,65,100,1000);<BR>
+				myMusicObject.playNote (1,0,52,69,100,1000);<BR>
+			</TD>
+		</TR>
+	</TABLE>
+</FORM>
+</CENTER>
+
+<P>Of course, there's nothing to say that each one of the musical notes that makes up a chord should play exactly the same instrument sound. You can, most certainly, achieve a <B>stunning variety</B> of different <B>sound textures</B> by combining just the right instrument sounds at just the right pitches.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="randomize-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Randomize It!!!
+</TD></TR></TABLE>
+<BR>
+
+<P>Because the Music Object API is designed for a scripting environment, you can build up more complex behaviors using its basic methods. For example, you could quite easily create your own function for playing random musical notes within certain specified parameters. Beatnik Inc. has even gone to the trouble of offering more advanced features like this in ready-made Music Object extensions, such as <A HREF="../../music-object-reference/extensions/dynamic/index.html" TARGET="_parent">Music Object Extension - Dynamic</A> which offers a <A HREF="../../music-object-reference/extensions/dynamic/index.html#playRandomNote" TARGET="_parent"><B>playRandomNote</B></A> method.</P>
+
+<P>To get an idea of the other cool things that can be done using musical notes, see the <A HREF="play-random-note.html">playRandomNote demo</A>.</P>
+
+</BODY></HTML>

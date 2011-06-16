@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+	<TITLE>The Beatnik EMBEDifier: CHOOSE MUSIC</TITLE>
+	<STYLE TYPE="text/css"><!--
+		BODY {
+			background: #ddd url(../../style/images/texture.jpg);
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 12px;
+			color: #000;
+		}
+		P, TD {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 12px;
+		}
+		INPUT, SELECT {
+			font-family: Arial, Helvetica, Verdana;
+			font-size: 11px;
+		}
+		A {
+			color: #008;
+			text-decoration: none;
+		}
+		A:hover {
+			text-decoration: underline;
+		}
+	--></STYLE>
+</HEAD>
+
+</HEAD>
+<BODY MARGINWIDTH=4 MARGINHEIGHT=0>
+
+<SCRIPT SRC="presets.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+isMSIE = navigator.appName == 'Microsoft Internet Explorer';
+
+// --></SCRIPT>
+
+<FORM NAME="chooseMusicForm">
+
+<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=3>
+	<TR VALIGN=CENTER>
+		<TD ALIGN=LEFT>
+			<B>Your HTML Page URL</B><BR>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+			document.writeln ('<INPUT TYPE=file NAME="pageURL" SIZE=21 ONBLUR="parent.wizardFrame.updateMusicPreview ()" ONCHANGE="parent.wizardFrame.updateMusicPreview ()"' + (isMSIE ? ' STYLE="width:270px; height:19px;"' : '') + '><BR>');
+			// --></SCRIPT>
+			Make SRC path...
+			<INPUT TYPE=radio NAME=pathType CHECKED ONCLICK="parent.wizardFrame.selectPathType ('relative')"><A HREF="javascript://" ONCLICK="parent.wizardFrame.selectPathType ('relative')">relative</A>
+			&nbsp;&nbsp;
+			<INPUT TYPE=radio NAME=pathType ONCLICK="parent.wizardFrame.selectPathType ('absolute')"><A HREF="javascript://" ONCLICK="parent.wizardFrame.selectPathType ('absolute')">absolute</A>
+		</TD>
+		<TD ALIGN=CENTER><IMG SRC="../../style/images/text-separator.gif" WIDTH=2 HEIGHT=55 VSPACE=0 HSPACE=8></TD>
+		<TD ALIGN=LEFT>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				document.writeln (
+					'<B>Your Music File URL</B><BR>' +
+					'<INPUT TYPE=file NAME="musicURL" SIZE=21 ONFOCUS="parent.wizardFrame.selectMusicFile ()" ONBLUR="parent.wizardFrame.selectMusicFile ()" ONCHANGE="parent.wizardFrame.selectMusicFile ()"' + (isMSIE ? ' STYLE="width:270px; height:19px;"' : '') + '><BR>' +
+					'<SELECT NAME="presetName" ONCHANGE="parent.wizardFrame.updateMusicPreview ()"' + (isMSIE ? ' STYLE="width:202px; height:19px;"' : '') + '>' +
+					'<OPTION>'
+				);
+				for (var presetNo = 0; presetNo < presets.length; presetNo++) {
+					document.writeln ('<OPTION>' + presets [presetNo]);
+				}
+				document.writeln (
+					'</SELECT>' +
+					' PRESETS'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+</TABLE>
+
+
+</FORM>
+
+</BODY></HTML>

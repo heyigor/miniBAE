@@ -1,0 +1,727 @@
+<HTML>
+<HEAD>
+	<TITLE>Sonifying a Form (Adding the Listbox Sounds)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 5: Adding the Listbox Sounds
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Once again, we come to an interesting form element that can have a slightly more sophisticated sonification behavior than the radio buttons from the previous step. Drop-down listboxes are created by the <B>SELECT</B> and <B>OPTION</B> tags. In an ideal world we would be able to supply sonification sounds for...</P>
+
+<UL>
+	<LI>...the listbox opening
+	<LI>...the listbox closing
+	<LI>...the user scanning through the options
+	<LI>...the user selecting an option
+</UL>
+
+<P>However, in reality there are only three events that we can reliably make use of : the ONFOCUS, ONBLUR, and ONCHANGE events. In addition to these limited events that we can use, Navigator (Windows) triggers some of these events at somewhat unusual moments which don't quite make all that much sense. For instance, if you click on a drop-down list to focus it, the SELECT element's ONFOCUS event is triggered as one might expect. However, when you grab the scrollbar to scroll the document while the SELECT element is focused, for some bizarre reason Navigator triggers the SELECT element's ONFOCUS event again. This results in the ONFOCUS sound being restarted, creating an audio cue which is unintuitive to an end-user.</P>
+
+<P>The sound that is triggered when a user clicks on a drop-down list to focus it loosely corresponds to the opening of the drop-down list. However, if the user then closes the listbox by clicking on it again, the SELECT element remains focused so that no ONFOCUS event is triggered if the user clicks on the listbox again to open it once more. But even this behavior is inconsistent in Navigator, since the SELECT element's ONFOCUS event behaves differently for documents inside a frameset. The ideal situation would be for the browser to supply an event specifically for when drop-down listboxes open up, perhaps in the form of an ONOPEN or ONDROPDOWN attribute for the SELECT tag.</P>
+
+<P>In addition to these problems with the ONFOCUS event, the ONCHANGE event also fails to meet the ideal requirements of sonification, since it is only triggered when the selection changes. This means that if a user clicks on a drop-down list to select an option, but then proceeds to re-select the option that is already selected, no ONCHANGE event will be triggered and there will be no sound. For sonification purposes it would be ideal if the browser offered an ONSELECT event for the SELECT tag, since it would be more intuitive if there was a sound triggered - even if the user selected the same option that was currently selected.</P>
+
+<P>So we are left with a sonification behavior for listboxes which is less than perfect, but still cool enough to add interactive value to the page. Try out the drop-down listboxes in the form below, keeping in mind the limitations that have just been mentioned.</P>
+
+<!-- ***************************************************************************** -->
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+formSounds = new Music ();
+
+function checkboxSound (checboxID) {
+	if (checboxID.checked) {
+		formSounds.play ('UI-Click7');
+	} else {
+		formSounds.play ('UI-Click6');
+	}
+}
+
+function radioButtonSound () {
+	formSounds.play ('UI-Click2');
+}
+
+function listFocusSound () {
+	formSounds.play ('UI-MouseOver1');
+}
+
+function listChooseSound () {
+	formSounds.play ('UI-SimpleClick2');
+}
+
+function listBlurSound () {
+	formSounds.stop ();
+}
+
+// --></SCRIPT>
+
+<FORM NAME="productForm" METHOD=GET ACTION="thanks.html">
+<TABLE ALIGN=CENTER WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4>
+	<TR>
+		<TD ALIGN=CENTER BGCOLOR=003366>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<FONT COLOR=FFFFFF SIZE=6>
+			Blue Bass & the Neurotic Fishes<BR>
+			</FONT>
+			<FONT COLOR=FFFFFF SIZE=5>
+			-- Merchandise --
+			</FONT>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=666699>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<CENTER><FONT SIZE=5>1. Select your poison...</FONT></CENTER>
+			<P>
+			<INPUT TYPE=checkbox NAME=tshirt ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;<B>T-shirt ($15.95)</B>
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Color</TD>
+					<TD>
+						<SELECT
+							NAME=tshirtColor
+							ONCHANGE="listChooseSound ()"
+							ONFOCUS="listFocusSound ()"
+							ONBLUR="listBlurSound ()"
+						>
+							<OPTION>Oil Slick Black
+							<OPTION>Spiritual White
+							<OPTION SELECTED>Blood Clot Red
+							<OPTION>Summer Sky Blue
+							<OPTION>Underwater Aqua
+							<OPTION>Radioactive Green
+							<OPTION>Militia Khaki
+							<OPTION>Neon Pink
+						</SELECT>
+					</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Size</TD>
+					<TD>
+						<INPUT
+							TYPE=radio
+							NAME=tshirtSize
+							ONCLICK="radioButtonSound ()"
+						>
+							Small&nbsp;&nbsp;&nbsp;
+						<INPUT
+							TYPE=radio
+							NAME=tshirtSize
+							ONCLICK="radioButtonSound ()"
+							CHECKED
+						>
+							Medium&nbsp;&nbsp;&nbsp;
+						<INPUT
+							TYPE=radio
+							NAME=tshirtSize
+							ONCLICK="radioButtonSound ()"
+						>
+							Large&nbsp;&nbsp;&nbsp;
+						<INPUT
+							TYPE=radio
+							NAME=tshirtSize
+							ONCLICK="radioButtonSound ()"
+						>
+							X-Large&nbsp;&nbsp;&nbsp;
+						<INPUT
+							TYPE=radio
+							NAME=tshirtSize
+							ONCLICK="radioButtonSound ()"
+						>
+							XX-Large
+					</TD>
+				</TR>
+			</TABLE>
+			<HR SIZE=1 NOSHADE>
+
+			<INPUT TYPE=checkbox NAME=mug ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;<B>Commemorative Reunion Mug ($19.95)</B>
+				- with printed mugshot of a band member of your choice
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Band Member</TD>
+					<TD>
+						<SELECT
+							NAME=mugPicture
+							ONCHANGE="listChooseSound ()"
+							ONFOCUS="listFocusSound ()"
+							ONBLUR="listBlurSound ()"
+						>
+							<OPTION SELECTED>Blue Bass (lead vocals & bass guitar)
+							<OPTION>Alec Littlefish (lead guitar & vocals)
+							<OPTION>Joe "The Octopus" Malone (drums & percussion)
+							<OPTION>Humphrey Proudfin (keyboards & vocals)
+							<OPTION>Gill Stronglung (harmony vocals)
+							<OPTION>Neville "The Blowfish" Ohrensborg (sax & horns)
+						</SELECT>
+					</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Mug Size</TD>
+					<TD>
+						<SELECT
+							NAME=mugSize
+							ONCHANGE="listChooseSound ()"
+							ONFOCUS="listFocusSound ()"
+							ONBLUR="listBlurSound ()"
+						>
+							<OPTION>Diet Size (9 Fl.Oz.)
+							<OPTION SELECTED>Average Stomach (12 Fl.Oz)
+							<OPTION>Big Mama (20 Fl.Oz)
+						</SELECT>
+					</TD>
+				</TR>
+			</TABLE>
+<BR>
+			<HR SIZE=1 NOSHADE>
+			<B>Albums ($15.95 each)</B>
+			<P>
+			<INPUT TYPE=checkbox NAME=album1989 ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;
+				Underwater Blues (released 1989)<BR>
+			<INPUT TYPE=checkbox NAME=album1991 ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;
+				The Suffocating Sky (released 1991)<BR>
+			<INPUT TYPE=checkbox NAME=album1992 ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;
+				Suckerfish Rising (released 1992)<BR>
+			<INPUT TYPE=checkbox NAME=album1994 ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;
+				Psychedelic Abyss (released 1994)<BR>
+			<INPUT TYPE=checkbox NAME=album1997 ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;
+				The Little Fish That Could (released 1997)<BR>
+			<INPUT TYPE=checkbox NAME=album1998 ONCLICK="checkboxSound (this)">
+				&nbsp;&nbsp;
+				Have You Eaten Fish Today (new release)<BR>
+			<HR SIZE=1 NOSHADE>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=9999CC>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<CENTER><FONT SIZE=5>2. Pay for the poison...</FONT></CENTER>
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Type of Credit Card</TD>
+					<TD>
+						<INPUT
+							TYPE=radio
+							NAME=creditCardType
+							ONCLICK="radioButtonSound ()"
+						>
+							American Express&nbsp;&nbsp;&nbsp;
+						<INPUT
+							TYPE=radio
+							NAME=creditCardType
+							ONCLICK="radioButtonSound ()"
+							CHECKED
+						>
+							VISA&nbsp;&nbsp;&nbsp;
+						<INPUT
+							TYPE=radio
+							NAME=creditCardType
+							ONCLICK="radioButtonSound ()"
+						>
+							Mastercard
+					</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Name on Credit Card</B></TD>
+					<TD><INPUT TYPE=text SIZE=30 NAME=creditCardName></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Credit Card Number</B></TD>
+					<TD><INPUT TYPE=text SIZE=30 NAME=creditCardNumber></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Expiration Date</TD>
+					<TD>
+						<SELECT
+							NAME=creditCardExpirationYear
+							ONCHANGE="listChooseSound ()"
+							ONFOCUS="listFocusSound ()"
+							ONBLUR="listBlurSound ()"
+						>
+							<OPTION SELECTED>1998
+							<OPTION>1999
+							<OPTION>2000
+							<OPTION>2001
+							<OPTION>2002
+							<OPTION>2003
+							<OPTION>2004
+						</SELECT>
+						&nbsp;&nbsp;&nbsp;
+						<SELECT
+							NAME=creditCardExpirationMonth
+							ONCHANGE="listChooseSound ()"
+							ONFOCUS="listFocusSound ()"
+							ONBLUR="listBlurSound ()"
+						>
+							<OPTION SELECTED>01 Jan
+							<OPTION>02 Feb
+							<OPTION>03 Mar
+							<OPTION>04 Apr
+							<OPTION>05 May
+							<OPTION>06 Jun
+							<OPTION>07 Jul
+							<OPTION>08 Aug
+							<OPTION>09 Sep
+							<OPTION>10 Oct
+							<OPTION>11 Nov
+							<OPTION>12 Dec
+						</SELECT>
+					</TD>
+				</TR>
+			</TABLE>
+			<HR SIZE=1 NOSHADE>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=CCCCFF>
+			<FONT FACE="ARIAL,HELVETICA,VERDANA">
+			<CENTER><FONT SIZE=5>3. Deliver the poison...</FONT></CENTER>
+			<P>
+			<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Shipping & Handling Option</TD>
+					<TD>
+						<SELECT
+							NAME=shippingOption
+							ONCHANGE="listChooseSound ()"
+							ONFOCUS="listFocusSound ()"
+							ONBLUR="listBlurSound ()"
+						>
+							<OPTION>US Mail (7 day delivery)
+							<OPTION SELECTED>UPS (2 day delivery)
+							<OPTION>Fedex (overnight delivery)
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD COLSPAN=2 ALIGN=CENTER>&nbsp;</TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Name</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressName SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Address Line 1</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressLine1 SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT>Address Line 2</TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressLine2 SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*City</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressCity SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*State</B> (or Province, or Region)</TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressState SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Zip Code</B> (or Postal Code)</FONT></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressZip SIZE=40></TD>
+				</TR>
+				<TR VALIGN=TOP>
+					<TD ALIGN=RIGHT><B>*Country</B></TD>
+					<TD><INPUT TYPE=TEXT NAME=shippingAddressCountry SIZE=40 VALUE="USA"></TD>
+				</TR>
+			</TABLE>
+			<HR SIZE=1 NOSHADE>
+			</FONT>
+		</TD>
+	</TR>
+	<TR>
+		<TD BGCOLOR=000000>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+				<TR>
+					<TD ALIGN=LEFT><INPUT TYPE=reset VALUE="Reset and start over"></TD>
+					<TD ALIGN=RIGHT><INPUT TYPE=submit VALUE="BUY the poison NOW!!!"></TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+</FORM>
+
+<!-- ***************************************************************************** -->
+
+<P>Now, let's take a look at the HTML source code for this step. All the code that has been added since the previous step is highlighted in red. Take notice of the functions and event handlers that have been added in this step.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+formSounds = new Music ();
+
+function checkboxSound (checboxID) {
+   if (checboxID.checked) {
+      formSounds.play ('UI-Click7');
+   } else {
+      formSounds.play ('UI-Click6');
+   }
+}
+
+function radioButtonSound () {
+   formSounds.play ('UI-Click2');
+}
+
+<SPAN CLASS=sample-code-highlighted>function listFocusSound () {
+   formSounds.play ('UI-MouseOver1');
+}
+
+function listChooseSound () {
+   formSounds.play ('UI-SimpleClick2');
+}
+
+function listBlurSound () {
+   formSounds.stop ();
+}</SPAN>
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;FORM NAME="productForm" METHOD=GET ACTION="thanks.html"&gt;
+&lt;CENTER&gt;
+&lt;TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4&gt;
+   &lt;TR&gt;
+      &lt;TD ALIGN=CENTER BGCOLOR=003366&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;FONT COLOR=00CCFF SIZE=6&gt;
+         Blue Bass & the Neurotic Fishes&lt;BR&gt;
+         &lt;/FONT&gt;
+         &lt;FONT COLOR=FFFFFF SIZE=5&gt;
+         -- Merchandise --
+         &lt;/FONT&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=666699&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;CENTER&gt;&lt;FONT SIZE=5&gt;1. Select your poison...&lt;/FONT&gt;&lt;/CENTER&gt;
+         &lt;P&gt;
+         &lt;INPUT TYPE=checkbox NAME=tshirt ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;&lt;B&gt;T-shirt ($15.95)&lt;/B&gt;
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Color&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT
+                     NAME=tshirtColor
+<SPAN CLASS=sample-code-highlighted>                     ONCHANGE="listChooseSound ()"
+                     ONFOCUS="listFocusSound ()"
+                     ONBLUR="listBlurSound ()"</SPAN>
+                  &gt;
+                     &lt;OPTION&gt;Oil Slick Black
+                     &lt;OPTION&gt;Spiritual White
+                     &lt;OPTION SELECTED&gt;Blood Clot Red
+                     &lt;OPTION&gt;Summer Sky Blue
+                     &lt;OPTION&gt;Underwater Aqua
+                     &lt;OPTION&gt;Radioactive Green
+                     &lt;OPTION&gt;Militia Khaki
+                     &lt;OPTION&gt;Neon Pink
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Size&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=tshirtSize
+                     ONCLICK="radioButtonSound ()"
+                  &gt;
+                     Small&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=tshirtSize
+                     ONCLICK="radioButtonSound ()"
+                     CHECKED
+                  &gt;
+                     Medium&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=tshirtSize
+                     ONCLICK="radioButtonSound ()"
+                  &gt;
+                     Large&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=tshirtSize
+                     ONCLICK="radioButtonSound ()"
+                  &gt;
+                     X-Large&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=tshirtSize
+                     ONCLICK="radioButtonSound ()"
+                  &gt;
+                     XX-Large
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+
+         &lt;INPUT TYPE=checkbox NAME=mug ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;&lt;B&gt;Commemorative Reunion Mug ($19.95)&lt;/B&gt;
+            - with printed mugshot of a band member of your choice
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Band Member&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT
+                     NAME=mugPicture
+<SPAN CLASS=sample-code-highlighted>                     ONCHANGE="listChooseSound ()"
+                     ONFOCUS="listFocusSound ()"
+                     ONBLUR="listBlurSound ()"</SPAN>
+                  &gt;
+                     &lt;OPTION SELECTED&gt;Blue Bass (lead vocals & bass guitar)
+                     &lt;OPTION&gt;Alec Littlefish (lead guitar & vocals)
+                     &lt;OPTION&gt;Joe "The Octopus" Malone (drums & percussion)
+                     &lt;OPTION&gt;Humphrey Proudfin (keyboards & vocals)
+                     &lt;OPTION&gt;Gill Stronglung (harmony vocals)
+                     &lt;OPTION&gt;Neville "The Blowfish" Ohrensborg (sax & horns)
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Mug Size&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT
+                     NAME=mugSize
+<SPAN CLASS=sample-code-highlighted>                     ONCHANGE="listChooseSound ()"
+                     ONFOCUS="listFocusSound ()"
+                     ONBLUR="listBlurSound ()"</SPAN>
+                  &gt;
+                     &lt;OPTION&gt;Diet Size (9 Fl.Oz.)
+                     &lt;OPTION SELECTED&gt;Average Stomach (12 Fl.Oz)
+                     &lt;OPTION&gt;Big Mama (20 Fl.Oz)
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;B&gt;Albums ($15.95 each)&lt;/B&gt;
+         &lt;P&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1989 ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;
+            Underwater Blues (released 1989)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1991 ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;
+            The Suffocating Sky (released 1991)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1992 ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;
+            Suckerfish Rising (released 1992)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1994 ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;
+            Psychedelic Abyss (released 1994)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1997 ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;
+            The Little Fish That Could (released 1997)&lt;BR&gt;
+         &lt;INPUT TYPE=checkbox NAME=album1998 ONCLICK="checkboxSound (this)"&gt;
+            &amp;nbsp;&amp;nbsp;
+            Have You Eaten Fish Today (new release)&lt;BR&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=9999CC&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;CENTER&gt;&lt;FONT SIZE=5&gt;2. Pay for the poison...&lt;/FONT&gt;&lt;/CENTER&gt;
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Type of Credit Card&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=creditCardType
+                     ONCLICK="radioButtonSound ()"
+                  &gt;
+                     American Express&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=creditCardType
+                     ONCLICK="radioButtonSound ()"
+                     CHECKED
+                  &gt;
+                     VISA&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=creditCardType
+                     ONCLICK="radioButtonSound ()"
+                  &gt;
+                     Mastercard
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Name on Credit Card&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=text SIZE=30 NAME=creditCardName&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Credit Card Number&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=text SIZE=30 NAME=creditCardNumber&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Expiration Date&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT
+                     NAME=creditCardExpirationYear
+<SPAN CLASS=sample-code-highlighted>                     ONCHANGE="listChooseSound ()"
+                     ONFOCUS="listFocusSound ()"
+                     ONBLUR="listBlurSound ()"</SPAN>
+                  &gt;
+                     &lt;OPTION SELECTED&gt;1998
+                     &lt;OPTION&gt;1999
+                     &lt;OPTION&gt;2000
+                     &lt;OPTION&gt;2001
+                     &lt;OPTION&gt;2002
+                     &lt;OPTION&gt;2003
+                     &lt;OPTION&gt;2004
+                  &lt;/SELECT&gt;
+                  &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                  &lt;SELECT
+                     NAME=creditCardExpirationMonth
+<SPAN CLASS=sample-code-highlighted>                     ONCHANGE="listChooseSound ()"
+                     ONFOCUS="listFocusSound ()"
+                     ONBLUR="listBlurSound ()"</SPAN>
+                  &gt;
+                     &lt;OPTION SELECTED&gt;01 Jan
+                     &lt;OPTION&gt;02 Feb
+                     &lt;OPTION&gt;03 Mar
+                     &lt;OPTION&gt;04 Apr
+                     &lt;OPTION&gt;05 May
+                     &lt;OPTION&gt;06 Jun
+                     &lt;OPTION&gt;07 Jul
+                     &lt;OPTION&gt;08 Aug
+                     &lt;OPTION&gt;09 Sep
+                     &lt;OPTION&gt;10 Oct
+                     &lt;OPTION&gt;11 Nov
+                     &lt;OPTION&gt;12 Dec
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=CCCCFF&gt;
+         &lt;FONT FACE="ARIAL,HELVETICA,VERDANA"&gt;
+         &lt;CENTER&gt;&lt;FONT SIZE=5&gt;3. Deliver the poison...&lt;/FONT&gt;&lt;/CENTER&gt;
+         &lt;P&gt;
+         &lt;TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Shipping & Handling Option&lt;/TD&gt;
+               &lt;TD&gt;
+                  &lt;SELECT
+                     NAME=shippingOption
+<SPAN CLASS=sample-code-highlighted>                     ONCHANGE="listChooseSound ()"
+                     ONFOCUS="listFocusSound ()"
+                     ONBLUR="listBlurSound ()"</SPAN>
+                  &gt;
+                     &lt;OPTION&gt;US Mail (7 day delivery)
+                     &lt;OPTION SELECTED&gt;UPS (2 day delivery)
+                     &lt;OPTION&gt;Fedex (overnight delivery)
+                  &lt;/SELECT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR&gt;
+               &lt;TD COLSPAN=2 ALIGN=CENTER&gt;&amp;nbsp;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Name&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressName SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Address Line 1&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressLine1 SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;Address Line 2&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressLine2 SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*City&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressCity SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*State&lt;/B&gt; (or Province, or Region)&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressState SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Zip Code&lt;/B&gt; (or Postal Code)&lt;/FONT&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressZip SIZE=40&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR VALIGN=TOP&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;B&gt;*Country&lt;/B&gt;&lt;/TD&gt;
+               &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=shippingAddressCountry SIZE=40 VALUE="USA"&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+         &lt;HR SIZE=1 NOSHADE&gt;
+         &lt;/FONT&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD BGCOLOR=000000&gt;
+         &lt;TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
+            &lt;TR&gt;
+               &lt;TD ALIGN=LEFT&gt;&lt;INPUT TYPE=reset VALUE="Reset and start over"&gt;&lt;/TD&gt;
+               &lt;TD ALIGN=RIGHT&gt;&lt;INPUT TYPE=submit VALUE="BUY the poison NOW!!!"&gt;&lt;/TD&gt;
+            &lt;/TR&gt;
+         &lt;/TABLE&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;P&gt;
+&lt;/CENTER&gt;
+&lt;/FORM&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+formSounds.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Notice how we have added three functions for use in sonifying the different events of listboxes. The <B>listFocusSound</B> function plays the Groovoid "UI-MouseOver1" when the user focuses a listbox, the <B>listChooseSound</B> function plays the Groovoid "UI-SimpleClick2" when the user selects a new option from the listbox, and the <B>listBlurSound</B> function actually doesn't play any Groovoids at all, but simply stops the Groovoid "UI-MouseOver1" that was started by the <B>listFocusSound</B> function.</P>
+
+<P>We have also added ONFOCUS, ONCHANGE, and ONBLUR event handlers to all SELECT tags in the form. The ONFOCUS event handlers all call the <B>listFocusSound</B> function, the ONCHANGE event handlers call the <B>listChooseSound</B> function, and the ONBLUR event handlers call the <B>listBlurSound</B> function.</P>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+formSounds.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY></HTML>

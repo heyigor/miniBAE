@@ -1,0 +1,35 @@
+TestSuite Build notes
+
+9/28/2000
+
+There are six project build types:
+
+Win32 Complete
+	This builds a single CPU windows application. This is the complete MiniBAE
+	running as one application.
+	This project defines BAE_BOTH and all the code compiled is combined in the
+	correct way.
+
+Win32 DSP
+	This builds the DSP side of the codebase. This project defines BAE_DSP and
+	all the code that is required here is compiled into a standalone DSP audio
+	render application. Run this first to play with the dual CPU test cases.
+
+Win32 MCU
+	This builds the MCU side of the codebase. This project defines BAE_MCU and
+	all the code that is required here is compiled into a standalone MCU
+	TestSuite application. This application behaves just like the "Complete" build
+	except its sending messages to the DSP to perform actions.
+
+Win32 Complete MPEG
+Win32 DSP MPEG
+Win32 MCU MPEG
+	These are the same as the above, except for the inclusion of the MPEG code. See the
+	MiniBAE Build Notes.txt for details about MPEG.
+
+The TestSuite_VC6.mak and TestSuite_VC6.dep are the makefile and dependancy
+file. For building outside of Visual Studio 6.
+
+Look at the file MsgHandle.c for the DSP message handling system. Look at DSPMain.c
+for the main loop for the DSP.
+

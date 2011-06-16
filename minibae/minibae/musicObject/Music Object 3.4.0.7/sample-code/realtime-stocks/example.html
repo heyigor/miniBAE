@@ -1,0 +1,184 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: Realtime Stocks (sample)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<!--*********************************************************************-->
+<!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *-->
+<!--*                -- http://www.tomkidding.com --                    *-->
+<!--*                                                                   *-->
+<!--*                    ©1997-1999 Beatnik, Inc.                       *-->
+<!--*********************************************************************-->
+
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+stocksCrash = false;
+
+chartMusic = new Music ();
+
+function bar_newValue () {
+	newValue = Math.max (2,Math.min (this.value + Math.round (Math.random () * 2) - 1,this.notches));
+	if (newValue != this.value) {
+		if (isJavaScript1_1) {
+			if (newValue > this.value) {
+				for (notchNo = this.value + 1; notchNo <= newValue; notchNo ++) {
+					document [this.name + "Notch-" + notchNo].src = this.filled.src;
+				}
+			} else {
+				for (notchNo = this.value; notchNo >= newValue + 1; notchNo --) {
+					document [this.name + "Notch-" + notchNo].src = this.blank.src;
+				}
+			}
+		}
+		this.value = newValue;
+		if (!this.soundInitialized && chartMusic.ready) {
+			chartMusic.setMonophonic (this.channelNo,true);
+			chartMusic.setController (this.channelNo,7,this.level);
+			chartMusic.setController (this.channelNo,10,this.pan);
+			this.soundInitialized = true;
+		}
+		lowerNotch = Math.round (this.notches / 2 - this.notes.length / 2);
+		upperNotch = lowerNotch + this.notes.length - 1;
+		if (this.value > upperNotch) {
+			amountAbove = this.value - upperNotch;
+			octaveShift = (Math.floor ((amountAbove - 1) / this.notes.length) + 1) * 12;
+			if (stocksCrash) {
+				newNote = this.notes [0] + ((this.value - upperNotch - 1) % this.notes.length);
+			} else {
+				newNote = this.notes [((this.value - upperNotch - 1) % this.notes.length)];
+			}
+			newNote += octaveShift;
+		} else {
+			if (this.value < lowerNotch) {
+				amountBelow = lowerNotch - this.value;
+				octaveShift = (Math.floor ((amountBelow - 1) / this.notes.length) + 1) * 12;
+				if (stocksCrash) {
+					newNote = this.notes [0] - (this.notes.length - ((lowerNotch - this.value - 1) % this.notes.length) - 1);
+				} else {
+					newNote = this.notes [this.notes.length - ((lowerNotch - this.value - 1) % this.notes.length) - 1];
+				}
+				newNote -= octaveShift;
+			} else {
+				if (stocksCrash) {
+					newNote = this.notes [0] + this.value - lowerNotch;
+				} else {
+					newNote = this.notes [this.value - lowerNotch];
+				}
+			}
+		}
+		if (newNote != this.notePlaying) {
+			this.velocity = 127 - Math.round ((newNote / 127) * 96);
+			this.notePlaying = newNote;
+			chartMusic.noteOn (this.channelNo,0,this.programNo,this.notePlaying,this.velocity);
+		}
+
+	}
+}
+
+function bar (name,color,notches,notchHeight,notchWidth,channelNo,level,pan,programNo,velocity,note1,note2,note3,note4,note5) {
+	this.notes = new Array (note1,note2,note3,note4,note5);
+	this.channelNo = channelNo;
+	this.programNo = programNo;
+	this.level = level;
+	this.pan = pan;
+	this.velocity = velocity;
+	this.notePlaying = 0;
+	this.name = name;
+	this.color = color;
+	this.notches = notches;
+	this.notchHeight = notchHeight;
+	this.notchWidth = notchWidth;
+	this.value = Math.round (Math.random () * (this.notches - 1)) + 1;
+
+	if (isJavaScript1_1) {
+		this.blank = new Image (this.notchWidth,this.notchHeight);
+		this.blank.src = baseURL + "bar/blank.gif";
+		this.filled = new Image (this.notchWidth,this.notchHeight);
+		this.filled.src = baseURL + "bar/filled-" + this.color + ".gif";
+	}
+
+	this.currentNotch = 4;
+	this.newValue = bar_newValue;
+	this.soundInitialized = false;
+
+	document.writeln ('<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>');
+	for (var notchNo = this.notches; notchNo >= 1; notchNo--) {
+		document.writeln ('<IMG SRC="bar/' + ((notchNo > this.value) ? 'blank' : ('filled-' + this.color)) + '.gif" BORDER=0 HSPACE=16 VSPACE=0 WIDTH=' + this.notchWidth + ' HEIGHT=' + this.notchHeight + ' NAME="' + this.name + 'Notch-' + notchNo + '"><BR></A>');
+	}
+	document.writeln ('</TD></TD></TABLE>');
+}
+
+function barChart () {
+}
+
+function updateChart () {
+	for (barNo = 1; barNo <=5; barNo++) {
+		barChart [barNo].newValue ();
+	}
+	setTimeout ('updateChart ()', stocksCrash ? 10: 1600);
+}
+
+document.writeln (
+	'<CENTER>' +
+	'In this simulation, real-time data from the Internet is being sonified so that Beatnik plays a little symphony. The music is derived from the world\'s stock market values. Hint: try hitting the \'crash\' button to simulate a bad day on Wall St!<BR>' +
+	'<BR>' +
+	'<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 BGCOLOR=000000>' +
+	'<TR>' +
+	'<TD COLSPAN=2><A HREF="javascript://" ONCLICK="stocksCrash = !stocksCrash; return false"><IMG SRC="images/chart-top.gif" BORDER=0 HSPACE=0 VSPACE=0 WIDTH=545 HEIGHT=26></A></TD>' +
+	'</TR>' +
+	'<TR>' +
+	'<TD><IMG SRC="images/chart-left.gif" BORDER=0 HSPACE=0 VSPACE=0 WIDTH=50 HEIGHT=314></TD>' +
+	'<TD ALIGN=LEFT VALIGN=BOTTOM><TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0><TR>' +
+	'<TD ALIGN=CENTER>'
+);
+barChart [1] = new bar ('barChart [1]','red',18,15,56,1,105,0,48,88,46,51,53,55,58);
+document.writeln (
+	'</TD>' +
+	'<TD ALIGN=CENTER>'
+);
+barChart [2] = new bar ('barChart [2]','yellow',18,15,56,2,100,32,1,64,46,50,51,53,55);
+document.writeln (
+	'</TD>' +
+	'<TD ALIGN=CENTER>'
+);
+barChart [3] = new bar ('barChart [3]','orange',18,15,56,3,100,64,35,46,39,43,46,48,50);  // 35 = bass
+document.writeln (
+	'</TD>' +
+	'<TD ALIGN=CENTER>'
+);
+barChart [4] = new bar ('barChart [4]','blue',18,15,56,4,60,96,44,60,58,60,62,63,65);
+document.writeln (
+	'</TD>' +
+	'<TD ALIGN=CENTER>'
+);
+barChart [5] = new bar ('barChart [5]','cyan',18,15,56,5,127,127,100,65,75,77,79,82,84);
+document.writeln (
+	'</TD>' +
+	'</TR></TABLE>' +
+	'</TD>' +
+	'</TR>' +
+	'<TR>' +
+	'<TD COLSPAN=2 ALIGN=LEFT><IMG SRC="images/chart-bottom.gif" BORDER=0 HSPACE=0 VSPACE=0 WIDTH=495 HEIGHT=38></TD>' +
+	'</TR>' +
+	'</TABLE>' +
+	'<BR>'
+);
+
+chartMusic.stubEmbed ('../../music/stub.rmf');
+setTimeout ('updateChart ()',1000);
+
+// --></SCRIPT>
+
+</BODY>
+</HTML>

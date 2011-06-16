@@ -1,0 +1,249 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Language Modules</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Language Modules
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../javascript/music-object-c-compatibility.js"></SCRIPT>
+<SCRIPT SRC="../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#introduction">Introduction</A>
+			<LI><A HREF="#available-languages">What Language Modules are Available ?</A>
+			<LI><A HREF="#suite">Building a Language Module Into a Suite</A>
+			<LI><A HREF="#creating-your-own">Creating Your Own Language Modules</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="introduction"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Introduction
+</TD></TR></TABLE>
+<BR>
+
+<P>It is now possible to customize the prompts that pop up as a result of the user not having the Beatnik Player installed, so that they appear in a language appropriate to the Web content you are sonifying. This applies also to the prompts that appear when the sonified content requires a version of the Beatnik Player higher than the Player that is installed on the user's system, and also the prompt that appears for Netscape Navigator users who have Java disabled.</P>
+
+<DIV CLASS=subsection>What are Language Modules?</DIV>
+
+<P>By default, all Music Object compatibility prompts are displayed in US English. Language modules are optional JavaScript files that can override the default English language.</P>
+
+<DIV CLASS=subsection>How Does One Use a Language Module?</DIV>
+
+<P>Using a Music Object language module is easy. Language modules are simply JavaScript files, like the "music-object.js" file, that can be sourced into sonified pages as needed. A language module that is sourced in after the "music-object.js" file will slot into the Music Object API and alter the compatibility prompt boxes that appear so that they are in the language desired for the Web site.</P>
+
+<P>In the following example, the Portuguese language module is being used...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;TITLE&gt;Page Using the Portuguese Language Module&lt;/TITLE&gt;&lt;/HTML&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-l-portuguese.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+    // ***************************
+    // SOME SONIFICATION SCRIPTING
+    // ***************************
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- ****************** --&gt;
+&lt;!-- SOME SONIFIED HTML --&gt;
+&lt;!-- ****************** --&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P><IMG SRC="../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>It is only possible to use one language module in a Web page. If you source in multiple language modules, the last one to be sourced in will override all the previously sourced in language modules. You should use the language module appropriate to the language you are using on your Web pages. The language module you use should be sourced in after the "music-object.js" file, otherwise it will not work correctly.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="available-languages"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What Language Modules are Available ?
+</TD></TR></TABLE>
+<BR>
+
+<P>The following Music Object language modules are currently available, with more to follow...</P>
+
+<UL>
+	<LI><A NAME="available-languages/japanese-sjis"></A>Japanese Shift-JIS (<A HREF="../javascript/music-object-l-japanese-sjis.js" TARGET="_blank">music-object-l-japanese-sjis.js</A>)
+	<LI><A NAME="available-languages/portuguese"></A>Portuguese (<A HREF="../javascript/music-object-l-portuguese.js" TARGET="_blank">music-object-l-portuguese.js</A>)
+	<LI><A NAME="available-languages/spanish"></A>Spanish (<A HREF="../javascript/music-object-l-spanish.js" TARGET="_blank">music-object-l-spanish.js</A>)
+	<LI><A NAME="available-languages/english-us"></A>U.S. English, <B>provided as a template</B> (<A HREF="../javascript/music-object-l-english-us.js" TARGET="_blank">music-object-l-english-us.js</A>)
+</UL>
+
+<P>To get any of the above language modules' JavaScript file, simply right-click (click-and-hold for Mac users) on the language module link in the list above. Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the JavaScript file into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above links, the language module JavaScript files can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<BLOCKQUOTE>
+	<IMG SRC="../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;If you are fluent in the English language and are also fluent in another language for which there is currently no language module listed above, then you would be helping out the Beatnik cause tremendously if you could offer your translation services and provide us with a language module that can be made available in this documentation and shared with all other Beatnik developers. For more information, see the section <A HREF="#creating-your-own">Creating Your Own Language Modules</A>.
+</BLOCKQUOTE>
+
+<!--***********************************************************************-->
+
+<A NAME="suite"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR VALIGN=CENTER><TD CLASS=section>
+&nbsp;Building a Language Module Into a Suite
+</TD>
+<TD CLASS=section ALIGN=RIGHT><IMG SRC="../style/images/advanced.gif" WIDTH=136 HEIGHT=30 HSPACE=0 VSPACE=0 BORDER=0 ALT="ADVANCED"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>If you find yourself regularly using a particular language module in all your sonified Web pages, then you may wish to consider building a Music Object suite to simplify your authoring and to make your life a little easier. For more information, consult the section <A HREF="intro.html#suite">Making a Custom Music Object Suite</A></P>
+
+<!--***********************************************************************-->
+
+<A NAME="creating-your-own"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR VALIGN=CENTER><TD CLASS=section>
+&nbsp;Creating Your Own Language Modules
+</TD>
+<TD CLASS=section ALIGN=RIGHT><IMG SRC="../style/images/advanced.gif" WIDTH=136 HEIGHT=30 HSPACE=0 VSPACE=0 BORDER=0 ALT="ADVANCED"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>If you are working on a Web site that is in a language not supported by one of the <A HREF="#available-languages">currently available</A> Music Object language modules and you are fluent in both English and the language required for the site, then you can use the U.S. English language module below as a template to make a custom language module for your site. Of course, you would also be helping out many other Beatnik content developers if you shared the new language module with the Beatnik developer community.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+/****************************************
+Music Object Language Module - <SPAN CLASS=sample-code-highlighted>U.S. English</SPAN> - Version 1.0.0
+written by <SPAN CLASS=sample-code-highlighted>Chris van Rensburg</SPAN>
+
+   REQUIRES:
+   - music-object.js (3.2.0 or higher)
+
+© Copyright 1996-1999 Beatnik, Inc.
+All  Rights Reserved
+***************************************/
+
+function mo_upgradePrompt () {
+   mo_promptUser (
+      '<SPAN CLASS=sample-code-highlighted>Please Upgrade Beatnik</SPAN>',
+      '<SPAN CLASS=sample-code-highlighted>This page has been optimized for the features of version </SPAN>&lt;B&gt;' +
+      Music.requiredMinVersion + ' (<SPAN CLASS=sample-code-highlighted>or higher</SPAN>)&lt;/B&gt; <SPAN CLASS=sample-code-highlighted>of the Beatnik Player.</SPAN> ' +
+      '<SPAN CLASS=sample-code-highlighted>The currently installed version in your browser is</SPAN> ' + Music.playerVersion +
+      '.&lt;P&gt;<SPAN CLASS=sample-code-highlighted>If you choose to IGNORE this message, the page will continue</SPAN> ' +
+      '<SPAN CLASS=sample-code-highlighted>to load normally, but may not function properly as designed by the author.</SPAN>',
+      '<SPAN CLASS=sample-code-highlighted>UPGRADE BEATNIK</SPAN> &gt;&gt;&gt;','mo_installPlayer ()',
+      '<SPAN CLASS=sample-code-highlighted>IGNORE</SPAN>','mo_promptClose ()'
+   );
+}
+
+function mo_installPrompt () {
+   mo_promptUser (
+      '<SPAN CLASS=sample-code-highlighted>Beatnik Enhanced Content</SPAN> !!',
+      '<SPAN CLASS=sample-code-highlighted>This page has been optimized for the audio features of the</SPAN> ' +
+      '&lt;B&gt;<SPAN CLASS=sample-code-highlighted>Beatnik Player</SPAN>&lt;/B&gt;. <SPAN CLASS=sample-code-highlighted>It appears you do not have</SPAN> ' +
+      '<SPAN CLASS=sample-code-highlighted>the Beatnik Player installed.</SPAN>&lt;P&gt;<SPAN CLASS=sample-code-highlighted>If you choose to IGNORE this message,</SPAN> ' +
+      '<SPAN CLASS=sample-code-highlighted>the page will continue to load normally, except there will be no Beatnik audio.</SPAN>',
+      '<SPAN CLASS=sample-code-highlighted>INSTALL BEATNIK</SPAN> &gt;&gt;&gt;','mo_installPlayer ()',
+      '<SPAN CLASS=sample-code-highlighted>IGNORE</SPAN>','mo_promptClose ()'
+   );
+}
+
+function mo_enableJavaPrompt () {
+   mo_promptUser (
+      '<SPAN CLASS=sample-code-highlighted>Please Enable Java</SPAN>',
+      '<SPAN CLASS=sample-code-highlighted>This page makes use of the interactive audio features of the</SPAN> ' +
+      '<SPAN CLASS=sample-code-highlighted>Beatnik Player. Java is currently not enabled in your browser.</SPAN> ' +
+      '<SPAN CLASS=sample-code-highlighted>In order for the page to function correctly with Beatnik,</SPAN> ' +
+      '&lt;B&gt;<SPAN CLASS=sample-code-highlighted>you must have Java enabled</SPAN>&lt;/B&gt;.&lt;P&gt;<SPAN CLASS=sample-code-highlighted>This page will continue to load normally,</SPAN> ' +
+      '<SPAN CLASS=sample-code-highlighted>but some interactive audio functionality may be absent.</SPAN>',
+      '    <SPAN CLASS=sample-code-highlighted>OK</SPAN>    ','mo_promptClose ()'
+   );
+}
+
+Music.upgradePlayerText = '<SPAN CLASS=sample-code-highlighted>Upgrade Beatnik</SPAN>';
+Music.getPlayerText = '<SPAN CLASS=sample-code-highlighted>Get Beatnik</SPAN>';
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>To edit the template, you can either copy-and-paste the source code shown above, or you can obtain the "music-object-l-english-us.js" JavaScript file from the documentation's "javascript" folder.</P>
+
+<P>In the template source code listing above, the text that is highlighted represents the text you will need to replace to create your custom language module. This includes the text that needs to be translated into the desired language, as well as the language module name and author (in the comments section at the top of the module). In some languages the grammatical structure may be sufficiently different that lines may have to be pushed around in the course of doing the translation, but you should try to retain the original formatting (such as bolding and paragraph breaks) as much as possible.</P>
+
+<DIV CLASS=subsection>Testing Your Custom Language Module</DIV>
+
+<P>Once you have created your custom language module, you should save it into an appropriate folder of the local copy of your Web site, with a filename of the form "<B>music-object-l-<FONT COLOR=FF0000>mylanguage</FONT>.js</B>". An example would be "music-object-l-dutch.js" for a Dutch language module. Once you've saved your custom language module, you should create a test page as follows...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Custom Language Module Test Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object-l-mylanguage.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+
+&lt;A HREF="javascript://" ONCLICK="mo_upgradePrompt (); return false"&gt;
+   Show the Upgrade Prompt
+&lt;/A&gt;
+&lt;P&gt;
+
+&lt;A HREF="javascript://" ONCLICK="mo_installPrompt (); return false"&gt;
+   Show the Install Prompt
+&lt;/A&gt;
+&lt;P&gt;
+
+&lt;A HREF="javascript://" ONCLICK="mo_enableJavaPrompt (); return false"&gt;
+   Show the Enable Java Prompt
+&lt;/A&gt;
+&lt;P&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>To create your test page, follow these simple steps...</P>
+<OL>
+	<LI>Copy-and-paste the above template into a blank new text document.
+	<LI>Edit the statement that sourced in the language module (highlighted in the source code listing above) so that it reflects the filename you chose when you saved your language module.
+	<LI>Save the test page as "<B>language-module-test.html</B>" into the same directory in which you saved your custom language module.
+	<LI>Make sure that the "music-object.js" file is also in the folder with your custom language module, otherwise the language module will not work.
+	<LI>Load the test page into your browser.
+	<LI>Click on the links to display the different compatibility prompts.
+	<LI>If there are any JavaScript errors or problems with the layout or formatting of the prompts, refine your language module until the prompts display correctly.
+	<LI>Once your new language module is polished, please share it with the rest of us!
+</OL>
+
+</BODY></HTML>

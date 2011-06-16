@@ -1,0 +1,237 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Using Player Callbacks</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+PART B - step 1: Setting up the HTML
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music1 = new Music ();
+music2 = new Music ();
+
+// --></SCRIPT>
+
+<P>For our example, we will use the exact same layout as the <A HREF="../../putting-music-on-a-page/index.html?steps/tiny-little-strips.html" TARGET="_parent">Tiny Little Strips</A> example in the <B>Putting Music On a Page</B> tutorial. Take a look at the sample below and you will see how playing multiple songs at the same time could be a tad bothersome to an end-user.</P>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music1 = new Music ();
+music2 = new Music ();
+music3 = new Music ();
+music4 = new Music ();
+music5 = new Music ();
+
+// --></SCRIPT>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=6>
+	<TR BGCOLOR=EEEEEE>
+		<TD>
+			"<B>Ambient</B>" by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music1.magicEmbed (
+					'SRC="../../../music/ambient.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE '
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=DDDDDD>
+		<TD>
+			"<B>Classical</B>" arranged by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music2.magicEmbed (
+					'SRC="../../../music/classical.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE '
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=CCCCCC>
+		<TD>
+			"<B>Jungle</B>" by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music3.magicEmbed (
+					'SRC="../../../music/jungle.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=BBBBBB>
+		<TD>
+			"<B>Lounge</B>" by Brian Salter
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music4.magicEmbed (
+					'SRC="../../../music/lounge.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+	<TR BGCOLOR=AAAAAA>
+		<TD>
+			"<B>Modern Rock</B>" by Paul Sebastien
+		</TD>
+		<TD>
+			<SCRIPT LANGUAGE=JavaScript><!-- //
+				music5.magicEmbed (
+					'SRC="../../../music/modern-rock.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=15 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE'
+				);
+			// --></SCRIPT>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Looking at the source HTML for this step, you can see that this is no plain embedding of Beatnik players in a table. Although the layout used for this example is exactly the same as the <B>Tiny Little Strips</B> example, here we have used Music Object's magicEmbed method to embed the players instead of using the plain HTML technique. We have done this in preparation for the next step where we will need to use the Music Object callback methods to register callback handlers for each of the players. Towards the beginning of the source code you will notice that a Music Object instance has been created for each player instance.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music1 = new Music ();
+music2 = new Music ();
+music3 = new Music ();
+music4 = new Music ();
+music5 = new Music ();
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6&gt;
+   &lt;TR BGCOLOR=EEEEEE&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Ambient&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+<SPAN CLASS=sample-code-highlighted>         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music1.magicEmbed (
+               'SRC="ambient.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;</SPAN>
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=DDDDDD&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Classical&lt;/B&gt;" arranged by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+<SPAN CLASS=sample-code-highlighted>         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music2.magicEmbed (
+               'SRC="classical.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;</SPAN>
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=CCCCCC&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Jungle&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+<SPAN CLASS=sample-code-highlighted>         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music3.magicEmbed (
+               'SRC="jungle.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;</SPAN>
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=BBBBBB&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Lounge&lt;/B&gt;" by Brian Salter
+      &lt;/TD&gt;
+      &lt;TD&gt;
+<SPAN CLASS=sample-code-highlighted>         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music4.magicEmbed (
+               'SRC="lounge.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;</SPAN>
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR BGCOLOR=AAAAAA&gt;
+      &lt;TD&gt;
+         "&lt;B&gt;Modern Rock&lt;/B&gt;" by Paul Sebastien
+      &lt;/TD&gt;
+      &lt;TD&gt;
+<SPAN CLASS=sample-code-highlighted>         &lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+            music5.magicEmbed (
+               'SRC="modern-rock.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=15 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE'
+            );
+         // --&gt;&lt;/SCRIPT&gt;</SPAN>
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+&lt;P>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

@@ -1,0 +1,216 @@
+<HTML>
+<HEAD>
+	<TITLE>About Music Object Extensions</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+About Music Object Extensions
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#introduction">Introduction</A>
+			<LI><A HREF="#available-extensions">What Extensions are Available?</A>
+			<LI><A HREF="#suite">Building Extensions Into a Suite</A>
+			<LI><A HREF="#creating-your-own">Creating Your Own Extensions</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="introduction"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Introduction
+</TD></TR></TABLE>
+<BR>
+
+<P>Beatnik Inc. is excited to be able to expand the Music Object API further through the use of modular extensions that do not increase the code size of the core Music Object API (Beatnik Inc. has made a commitment to freeze the size of the core Music Object API's code). Our goal is to make your life as a developer of sonified content easier, and to help you to create awesome content enhanced by the power of Beatnik's interactive music and audio capabilities.</P>
+
+<DIV CLASS=subsection>What are Extensions?</DIV>
+
+<P>Music Object extensions are modular JavaScript files that are geared towards different types of sonification needs. For example, <A HREF="groups/index.html">Music Object Extension - Groups</A> is ideal for making remix interfaces easier to code. And <A HREF="dynamic/index.html">Music Object Extension - Dynamic</A> is ideal for making sonified Web pages remain fresh and entertaining, and to encourage repeat visits.</P>
+
+<DIV CLASS=subsection>What are the Benefits of Extensions?</DIV>
+<UL>
+	<LI>they extend the core Music Object API with higher level features useful for sonification 
+	<LI>they don't increase the size of the core Music Object API
+	<LI>they are modular and can be used in different combinations as needed
+	<LI>they add value to the Music Object sonification API
+	<LI>building extensions is open to third party developers
+</UL>
+
+<DIV CLASS=subsection>How Does One Use Extensions?</DIV>
+
+<P>Using the Music Object extensions is easy. Extensions are simply JavaScript files like the "music-object.js" file that can be sourced into sonified pages as needed. In the following example, <A HREF="groups/index.html">Music Object Extension - Groups</A> and <A HREF="dynamic/index.html">Music Object Extension - Dynamic</A> are being used...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;&lt;TITLE&gt;Page Using Music Object Extensions&lt;/TITLE&gt;&lt;/HTML&gt;
+&lt;BODY&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object-x-groups.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+    // ***************************
+    // SOME SONIFICATION SCRIPTING
+    // ***************************
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;!-- ****************** --&gt;
+&lt;!-- SOME SONIFIED HTML --&gt;
+&lt;!-- ****************** --&gt;
+
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>With the majority of extensions, it doesn't matter in which order you source in the extensions, as long as they are all sourced in following the "music-object.js" file, and <B>not before it</B>. If you source in an extension file before sourcing in "music-object.js", the extension simply will not work. This would be similar to trying to use a JavaScript function before you have defined it. In order to extend the Music Object, it first needs to be defined (which is done by sourcing it in).</P>
+
+<P>In most cases, extensions have been designed to be independent of other extensions. However, there may be some exceptions to this rule, as it is possible that an extension may require some of the features of another extension in order to function correctly. To be 100% certain of the order in which extensions should be sourced in, consult the documentation for individual extensions to find out what their dependencies are. As a simple rule, if an extension depends on another extension, then that required extension should be sourced in before the extension that depends on it.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="available-extensions"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What Extensions are Available?
+</TD></TR></TABLE>
+<BR>
+
+<P>The Music Object extensions listed below are released and fully documented. Other exciting extensions are currently under development. In the table, each extension name is linked to the full reference for the extension.</P>
+
+<A NAME="available-extensions/table"></A>
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Extension&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="auto-disengage/index.html">Auto&nbsp;Disengage</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides features to help alleviate the conflicts that may occur in some system configurations when the Beatnik Player and other audio players are being used together in the same Web site.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="callbacks/index.html">Callbacks</A></TD>
+	<TD CLASS=contents-table-item-desc>Offers methods that allow multiple callback handlers to be registered for each callback type, letting different code modules share a Music Object instance's callbacks without overriding each others registered callbacks. Also allows handlers to be assigned to specific meta events that occur within RMF (and MIDI) files.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="channels/index.html">Channels</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides methods for more conveniently querying and modifying properties of MIDI channels. Most of these properties can be set using the core Music Object setController method, so this extension is provided primarily to ease programming.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="chords/index.html">Chords</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds instance and static methods that make it easier to play musical chords using a chord syntax that is familiar to musicians.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="clip/index.html">Clip</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides a set of services for conveniently creating a music preview system on a Web page.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="debug/index.html">Debug</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds debugging capabilities that can help in locating errors in sonified content. These debugging features were built into the core Music Object API in versions before 3.2.x, but are now being made available as an optional extension.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="ducking/index.html">Ducking</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides methods for linking instances to one another and setting up automated ducking relationships - much like the ducking effect used so often in radio broadcasting.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="dynamic/index.html">Dynamic</A></TD>
+	<TD CLASS=contents-table-item-desc>Offers methods that help in creating sonified Web site content that remains fresh and can hold up to repeat visits.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="fades/index.html">Fades</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds features that are useful in the design of realtime music remixing applications, such as methods for fading MIDI continuous controller values and fading playback tempo, as well as a generic fade method and a Fade object that can be used to create custom fades for any controllable musical parameters.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="flash/index.html">Flash</A></TD>
+	<TD CLASS=contents-table-item-desc>Makes it easier to configure Web pages so that Flash movies can be sonified using the power of Beatnik's interactive music and audio capabilities.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="groups/index.html">Groups</A></TD>
+	<TD CLASS=contents-table-item-desc>Offers methods that make it easier to program Web-based "remix" interfaces, where musical compositions are "performed" as the user switches on and switches off different parts of the music - these parts often being made up of multiple MIDI channels or tracks.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="group-volume/index.html">Group&nbsp;Volume</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides methods for conveniently adjusting the overall volume of entire groups of Music Object instances, including a sonified page's overall volume.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="instruments/index.html">Instruments</A></TD>
+	<TD CLASS=contents-table-item-desc>Offers methods that allow Web-based music applications to offer meaningful instrument names, rather than just program numbers.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="note-effects/index.html">Note&nbsp;Effects</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides methods for easily creating outrageous sound effects using just musical notes.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="snapshots/index.html">Snapshots</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides methods for easily capturing and restoring mix snapshots for RMF and MIDI files that are playing.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="song-info/index.html">Song&nbsp;Info</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides additional features for displaying an RMF file's copyright information.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="tracing/index.html">Tracing</A></TD>
+	<TD CLASS=contents-table-item-desc>Provides an easy way to watch calls to methods of the Music Object API and is a very useful tool to have when debugging sonification code.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="wizards/index.html">Wizards</A></TD>
+	<TD CLASS=contents-table-item-desc>Adds methods that let you easily sonify all form elements and links on a page in a single step, without having to add JavaScript code to all the elements you wish to sonify.</TD>
+</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="suite"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR VALIGN=CENTER><TD CLASS=section>
+&nbsp;Building Extensions Into a Suite
+</TD>
+<TD CLASS=section ALIGN=RIGHT><IMG SRC="../../style/images/advanced.gif" WIDTH=136 HEIGHT=30 HSPACE=0 VSPACE=0 BORDER=0 ALT="ADVANCED"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>If you find yourself regularly using a particular extension (or group of extensions) in all your sonified Web pages, then you may wish to consider building a Music Object suite to simplify your authoring and to make your life a little easier. For more information, consult the section <A HREF="../intro.html#suite">Making a Custom Music Object Suite</A></P>
+
+<!--***********************************************************************-->
+
+<A NAME="creating-your-own"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR VALIGN=CENTER><TD CLASS=section>
+&nbsp;Creating Your Own Extensions
+</TD>
+<TD CLASS=section ALIGN=RIGHT><IMG SRC="../../style/images/advanced.gif" WIDTH=136 HEIGHT=30 HSPACE=0 VSPACE=0 BORDER=0 ALT="ADVANCED"></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>If you find yourself often adding on to the Music Object API by defining your own custom functions to take care of common sonification tasks, you may wish to consider building your own custom Music Object extension. By building an extension, you can more tightly integrate your higher level sonification functions into the Music Object API in the form of instance methods and static methods. And if your extension is judged to be well implemented and of demonstrable value to sonified content developers, there is even the possibility that it could be included as part of the official set of Music Object extensions.</P>
+
+<P>To develop your own extensions, you should consult the reference for the <A HREF="../extensibility-api.html">Music Object Extensibility API</A>.</P>
+
+</BODY></HTML>

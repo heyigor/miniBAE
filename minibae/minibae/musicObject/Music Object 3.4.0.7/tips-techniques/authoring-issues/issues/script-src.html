@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Issues: 'SCRIPT SRC=' and file server problems</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+'SCRIPT SRC=' and file server problems
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>HTML pages that inline JavaScript (.js) files using the SCRIPT tag's SRC attribute sometimes don't work correctly from the server and all you see is a mass of JavaScript code.</P>
+
+<DIV CLASS=subsection>Background</DIV>
+
+<P>The SCRIPT tag's SRC attribute is a useful way to inline JavaScript code into HTML documents. This is great for JavaScript code that is used frequently in many different HTML pages such as, for instance, JavaScript files containing commonly used methods. This not only reduces the size of all the HTML pages that reference such JavaScript files and would otherwise need to have the code copied-and-pasted into them, but, more importantly, it solves the version control issue. In other words, by inlining the JavaScript code using the SRC attribute, any changes that are made in the JavaScript source file will automatically be reflected in all HTML pages that reference that JavaScript file.</P>
+
+<P>The Music Object API makes use of this convenient SCRIPT SRC attribute that is supported in Netscape Navigator 3.0 and higher. In most cases this works without incident. However, with the combination of Navigator 3.01 (or higher) and certain HTTP servers, there is a known issue that involves caching of JavaScript (.js) files. Before using the SRC attribute to inline the Music Object API in all your HTML documents, you should first determine that your server will correctly deliver JavaScript files consistently. Simply testing your pages locally is not a good indication, as this specific issue never presents itself with JavaScript files that are inlined from the local hard drive. You <B>must</B> test your Web server's ability to deliver .js files.</P>
+
+<P>You should also be aware that this nasty little issue is not evident to people using Netscape Navigator 3.0, but only 3.01 or later. Therefore, if you are using Navigator 3.0, you may not even notice that you have a potential server problem that will be experienced by a multitude of visitors to your site that are using 3.01 or higher. In order to do this test, you must use Navigator 3.01.</P>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>An HTML document that inlines a JavaScript (.js) file using the SCRIPT tag's SRC attribute will work only for the first time and thereafter mysteriously redirect to the inlined JavaScript document and display it in the window or frame as though it were a text document, completely replacing the referencing HTML document and thus breaking one's authoring. You're left with a mass of JavaScript code where there should have been an HTML document.</P>
+
+<P>In cases where one is using a 'hidden' frame (ie. a frame with 0 size) to contain music intelligence for a Web site, and the music is not working at all, one should check to make sure that it is not as a result of this problem. This can be done easilly in Navigator by doing a 'View | Frame Source' on the hidden frame (make sure that the hidden frame is the active frame by clicking inside it). A problem like this can easily go unresolved if an HTML page in a 'hidden' frame is inlining a JavaScript document and the server is failing to deliver it correctly  - you won't easily notice when the HTML document is replaced by a mass of JavaScript code, as you would in a frame which is completely visible.</P>
+
+<DIV CLASS=subsection>Cause</DIV>
+
+<P>Navigator 3.01 tries to first see if JavaScript documents are current in the disk cache, whereas 3.0 always requests the entire document from the server each time. This would explain why this problem is not evident using 3.0. Navigator 3.01 sends a 'cache-style' HTTP request header to the server and the server responds with an HTTP response header informing Navigator that the client copy should be used and that the document MIME type is "text/plain". This causes Navigator 3.01 to redirect to the JavaScript document URL instead of 'inlining' the code into the referencing HTML document, thus breaking the authoring. It would seem to be a server incompatibility with Navigator 3.01 (or higher) when delivering .js files and only occurs after the .js file has been cached - pages experiencing this problem may work for the first time, or any time after Navigator's cache has been cleared.</P>
+
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>Unfortunately, if one is experiencing this exact problem, the only current solution is to copy-and-paste the JavaScript (.js) file directly into the HTML document. Using the SCRIPT SRC attribute to inline the JavaScript file is not going to work reliably if your server has this problem. There is currently no known fix for the server software and it is unclear which types of server software have this problem.</P>
+
+</BODY></HTML>

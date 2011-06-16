@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The fadeController Method</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+DEMO: The fadeController Method
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-debug.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-fades.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-note-slides.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-ducking.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+
+// --></SCRIPT>
+
+<P>
+<A HREF="javascript://" ONCLICK="music.duckVolume (); return false">duck volume</A><BR>
+</P>
+
+<P>
+<A HREF="javascript://" ONCLICK="music.fadeController (10,7,127,0,3000); music.fadeController (8,7,127,0,3000); music.fadeController (9,7,127,0,3000); return false">fade out the drums & lead</A><BR>
+<A HREF="javascript://" ONCLICK="music.fadeController (10,7,0,127,3000); music.fadeController (8,7,0,127,3000); music.fadeController (9,7,0,127,3000); return false">fade in the drums & lead</A><BR>
+</P>
+
+<P>
+<A HREF="javascript://" ONCLICK="music.fadeTempo (null,60,3000); return false">fade tempo down to 60 over 5 seconds</A><BR>
+<A HREF="javascript://" ONCLICK="music.fadeTempo (null,200,3000); return false">fade tempo up to 200 over 5 seconds</A><BR>
+</P>
+
+<P>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,42,90,75,80,2000,4000); return false">Formula 1 - Descending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,44,90,75,80,500,2000); return false">Trill Strings - Descending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,44,40,60,80,1500,2000); return false">Trill Strings - Ascending - Low</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,44,60,85,80,1000,2000); return false">Trill Strings - Ascending - High</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,54,40,60,80,1000,2000); return false">Cloudscapes - Ascending - Low</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,77,70,90,80,2000,2000); return false">Apparition - Ascending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,77,85,65,80,1500,2000); return false">Apparition - Descending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,82,80,100,80,1500,1000); return false">Moon Jelly - Ascending - High</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,91,90,70,80,1500,4000); return false">50's Sci-Fi - Descending - Slow</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,91,40,80,80,2000,5000)">50's Sci-Fi - Ascending - Slow</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,93,50,80,80,700,2000); return false">UFOs - Ascending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,94,40,60,80,700,2000); return false">Soprano - Ascending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,94,20,50,80,2000,1000); return false">Soprano - Ascending - Overlapped</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,94,10,30,80,2000,1000); return false">Soprano - Ascending - Low</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,95,20,50,127,4000,1000); return false">Refractions - Ascending - Low</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,95,50,90,80,2000,2000); return false">Refractions - Ascending - Mid</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,95,90,30,80,1300,2000); return false">Refractions - Descending - Mid</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,95,100,70,80,1000,1000); return false">Refractions - Descending - High</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,108,90,60,60,1000,2000); return false">Fairy Godmother - Descending - High</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,108,60,30,80,2000,5000); return false">Fairy Godmother - Descending - Low</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,108,30,50,127,2000,1000); return false">Fairy Godmother - Ascending - Low</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,108,50,80,80,1500,1000); return false">Fairy Godmother - Ascending - Mid</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,113,80,50,80,500,1000); return false">Teletype - Descending - Short</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,113,80,55,80,1500,3000); return false">Teletype - Descending - Long</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,125,40,10,127,300,1000); return false">Cosmic Ray - Descending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,125,40,70,70,300,1000); return false">Cosmic Ray - Ascending - High</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,126,20,65,80,2000,2000); return false">SampHold - Ascending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,127,20,65,80,2000,2000); return false">SampHold 2 - Ascending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,127,60,30,80,1000,1000); return false">SampHold 2 - Descending</A><BR>
+<A HREF="javascript://" ONCLICK="music.playNoteSlide (1,1,194,60,30,80,2000,3000); return false">Noise Echo - Descending</A><BR>
+</P>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music.stubEmbed ('../../music/hyperactive.rmf');
+//music.stubEmbed ('../../music/stub.rmf');
+
+// --></SCRIPT>
+
+</BODY></HTML>

@@ -1,0 +1,243 @@
+<HTML>
+<HEAD>
+	<TITLE>Migrating Content from Music Object 3.2.x to 3.3.x</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Migrating Content from Music Object 3.2.x to 3.3.x
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Some fairly minor, but nevertheless noteworthy changes have been made to the Music Object API between versions 3.2.x and 3.3.x. Some of these changes may require that your existing sonified code be modified in some small way. To help transition your code to use the 3.3.x (and later) versions of Music Object, this document provides guidelines for easily updating your code.</P>
+
+<TABLE ALIGN=CENTER WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=1 BGCOLOR=CCCCCC><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5 BGCOLOR=FFFFFF><TR><TD>
+<IMG SRC="../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+<DIV CLASS=note>
+If your content has been not been authored for a Music Object 3.2.x version, then you should first consult previous sections about migrating your content, starting from the Music Object version your content is currently using and working your way up to version 3.2.x. Once all your content has been migrated to version 3.2.x, then it will be safe to follow the guidelines in this document to upgrade further to version 3.3.x.
+</DIV>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="guidelines"></A>
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+1. Make Backups
+</TD></TR></TABLE>
+<BR>
+
+<P>Create a backup of the local versions of any Web sites you wish to update <B>BEFORE</B> you make any of the following changes. This is a wise safety measure.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+2. Download the Latest Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Download the new "music-object.js" file by <B>right-clicking</B> (click-and-hold for Mac users) on the link below and selecting the 'Save Link As...' or 'Save Target As...' option from the pop-up menu. Save the file to your local hard drive.</P>
+
+<P><A HREF="../../javascript/music-object.js" TARGET="_top">music-object.js</A></P>
+
+<P>If this does not work or you do not see a 'Save Link As...' or 'Save Target As...' option in the pop-up, you can also obtain the new "music-object.js" file if you <A HREF="../../index-body.html#download-it" TARGET="_parent">download</A> the latest version of the Beatnik Music Object Documentation. Once you have downloaded and de-archived the documentation, you can find the "music-object.js" file by following these steps...</P>
+
+<OL>
+	<LI>Open up the documentation's main folder.
+	<LI>Then, from inside the documentation's main folder, open up the folder called "web-authoring".
+	<LI>Inside this folder, you will see a folder called "javascript". This is where the "music-object.js" file is located.
+	<LI>Copy the file from this location.
+		<P><IMG SRC="../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=0 BORDER=0 ALIGN=LEFT>&nbsp;<B>IMPORTANT : </B>Be sure NOT to move the "music-object.js" file outside of the "javascript" folder, as this would cause the documentation to not function correctly.</P>
+</OL>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+3. Replace Your Existing Music Object
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that you have the latest "music-object.js" file, simply replace the existing "music-object.js" file you are using in any and all Web sites that you have authored with interactive Beatnik content.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+4. Modify Your Code
+</TD></TR></TABLE>
+<BR>
+
+<P>Although we've provided the backwards compatibility patch, <A HREF="#compatibility-patch">Music Object Patch - Pre 3.3.0</A>, we strongly advocate that you play it safe and just go through the process of updating your code as soon as you start using Music Object 3.3.x. The changes in the Music Object API may not even affect your code, depending on whether or not your code made reliance upon any of the features that have changed. Either way, the best course of action is to religiously follow the steps outlined below on each sonified Web page.</P>
+
+<OL>
+	<LI><B>Open the sonified page(s) in a good text editor</B><BR>
+		<P>If you have a text editor that can open multiple documents at the same time and perform a search-and-replace procedure through all the currently open documents, this would be ideal. You should open up all documents that have been sonified using the Music Object API into this text editor. If, on the other hand, your text editor cannot open multiple documents, then you will have to repeat this process for each sonified document by loading in the documents one at a time and performing the search-and-replace procedures listed below.</P>
+	<LI><B>Modify all uses of the "Music.platform" Static Property</B><BR>
+		<P>Because the <A HREF="../obsoleted-features.html#Music.platform" TARGET="_parent"><B>Music.platform</B></A> static property has been deprecated in Music Object 3.3.x (see the <A HREF="versions/version-3.3.0.html#api/api-changes/Music.platform">Music Object 3.3.0 version history entry</A>), it is necessary to modify all references to this property to use the new <A HREF="../static-properties.html#Music.clientPlatform" TARGET="_parent"><B>Music.clientPlatform</B></A> static property. In order to do this, you should perform a search procedure to find each instance of the text "platform". For each instance that you find, make sure that the statement is referencing the Music Object API's <B>Music.platform</B> static property and not a custom variable named "platform" or the <B>navigator.platform</B> property. Once you're certain that the <B>Music.platform</B> property is being used in the statement, replace the reference to this property with a reference to the new <B>Music.clientPlatform</B> property.</P>
+		<P>So, for example, the code...</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+if (Music.platform == 'WebTV') {
+   alert ('Some features of this content may not work on this platform');
+}
+</PRE>
+</TD></TR></TABLE>
+		<P>...would become...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+if (Music.<SPAN CLASS=sample-code-highlighted>client</SPAN>Platform == 'WebTV') {
+   alert ('Some features of this content may not work on this platform');
+}
+</PRE>
+</TD></TR></TABLE>
+		<P>Be careful when you search for uses of the <B>Music.platform</B> static property to not search specifically for the text "Music.platform", since some uses of this property may occur within "with" statements, such as the code...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+with (Music) {
+   showCompatibilityPrompt = false;
+   if (platform == 'WebTV') {
+      alert ('Some features of this content may not work on this platform');
+   }
+}
+</PRE>
+</TD></TR></TABLE>
+		<P>In such cases, you should not only change the reference to the deprecated <B>Music.platform</B> property to a reference to the new <B>Music.clientPlatform</B> property, but it is also advocated that you update such code to no longer use the "with" statement (see the point below <A HREF="#remove-with-statements">Remove "with" Statements</A>).</P>
+		<P>So, the code...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+with (Music) {
+   showCompatibilityPrompt = false;
+   if (platform == 'WebTV') {
+      alert ('Some features of this content may not work on this platform');
+   }
+}
+</PRE>
+</TD></TR></TABLE>
+		<P>...would then become...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+<SPAN CLASS=sample-code-highlighted>Music.</SPAN>showCompatibilityPrompt = false;
+if (<SPAN CLASS=sample-code-highlighted>Music.client</SPAN>platform == 'WebTV') {
+   alert ('Some features of this content may not work on this platform');
+}
+</PRE>
+</TD></TR></TABLE>
+		<P><IMG SRC="../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=5 BORDER=0 ALIGN=LEFT><B>IMPORTANT:</B> Because the <B>Music.platform</B> static property has only been deprecated and has not yet become unsupported, this is a non-critical change. However, it is highly recommended that you make this change now rather than later.</P>
+	<LI><B>Modify all assignments of the "Music.requiredMinVersion" Static Property</B><BR>
+		<P>Because the <A HREF="../static-properties.html#Music.requiredMinVersion" TARGET="_parent"><B>Music.requiredMinVersion</B></A> static property has become a read-only property in Music Object 3.3.x (see the <A HREF="versions/version-3.3.0.html#api/api-changes/Music.requiredMinVersion">Music Object 3.3.0 version history entry</A>), it is necessary to change all assignments of the <B>Music.requiredMinVersion</B> static property to become calls to the new <A HREF="../static-methods.html#Music.requireMinPlayerVersion" TARGET="_parent"><B>Music.requireMinPlayerVersion</B></A> static method. In order to do this, perform a search procedure to find each instance of the text "requiredMinVersion". For each instance that you find, check to see if the statement that this property is being used in is an assignment. If the statement is assigning a value to the <B>Music.requiredMinVersion</B> static property, then you must replace the assignment statement with a call to the <B>Music.requireMinPlayerVersion</B> static method.</P>
+		<P>For example, the statement...</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code><PRE>Music.requiredMinVersion = '2.0';</PRE></TD></TR></TABLE>
+		<P>...would become...</P>
+		<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code><PRE>Music.<SPAN CLASS=sample-code-highlighted>requireMinPlayerVersion (</SPAN>'2.0'<SPAN CLASS=sample-code-highlighted>)</SPAN>;</PRE></TD></TR></TABLE>
+		<P>Be careful when you search for uses of the <B>Music.requiredMinVersion</B> static property to not search specifically for the text "Music.requiredMinVersion", since some uses of this property may occur within "with" statements, such as the code...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+with (Music) {
+   showCompatibilityPrompt = false;
+   requiredMinVersion = '2.0'
+}
+</PRE>
+</TD></TR></TABLE>
+		<P>In such cases, you should not only change the assignment of the <B>Music.requiredMinVersion</B> static property to become a call to the <B>Music.requireMinPlayerVersion</B> static method, but it is also advocated that you update such code to no longer use the "with" statement (see the point below <A HREF="#remove-with-statements">Remove "with" Statements</A>).</P>
+		<P>So, the code...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+with (Music) {
+   showCompatibilityPrompt = false;
+   requiredMinVersion = '2.0';
+}
+</PRE>
+</TD></TR></TABLE>
+		<P>...would then become...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+<SPAN CLASS=sample-code-highlighted>Music.</SPAN>showCompatibilityPrompt = false;
+<SPAN CLASS=sample-code-highlighted>Music.requireMinPlayerVersion (</SPAN>'2.0'<SPAN CLASS=sample-code-highlighted>)</SPAN>;
+</PRE>
+</TD></TR></TABLE>
+		<P><IMG SRC="../../style/images/exclamation.gif" WIDTH=20 HEIGHT=17 VSPACE=0 HSPACE=5 BORDER=0 ALIGN=LEFT><B>IMPORTANT:</B> Because the <B>Music.requiredMinVersion</B> static property is still supported and because the Music Object API will continue to behave the same way for content that explicitly assigns a value to this property, this is a non-critical change. However, it is highly recommended that you make this change now rather than later. Code that is not updated to accommodate this API change may not work correctly later on when used with other code modules that specify their player version requirements in a cooperative manner using the new <B>Music.requireMinPlayerVersion</B> method.</P>
+	<LI><B>Update Hidden Embeds</B><BR>
+		<P>Music Object 3.3 offers the ability to create truly hidden Music Object instances that have no graphical control panel and do not occupy any layout space (see the <A HREF="versions/version-3.3.0.html#api/general-improvements/truly-hidden-instances">Music Object 3.3.0 version history entry</A>). In order to get the benefit of this new feature, however, you need to make sure that you specify the <A HREF="../../general-reference/embedding-properties.html#hidden" TARGET="_parent"><B>HIDDEN</B></A> embedding property and you also specify the value <SPAN CLASS=value>0</SPAN> for both the <A HREF="../../general-reference/embedding-properties.html#width" TARGET="_parent"><B>WIDTH</B></A> and <A HREF="../../general-reference/embedding-properties.html#height" TARGET="_parent"><B>HEIGHT</B></A> embedding properties for any Music Object instances that you want to be hidden and that you embed using the <A HREF="../instance-methods.html#magicEmbed" TARGET="_parent"><B>magicEmbed</B></A> instance method or the <A HREF="../static-methods.html#Music.magicEmbed" TARGET="_parent"><B>Music.magicEmbed</B></A> static method. Because of problems with some older browsers, earlier documentation has advocated that the value <SPAN CLASS=value>2</SPAN> always be specified for the <B>WIDTH</B> and <B>HEIGHT</B> embedding properties when embedding hidden instances. However, this is no longer so much of an issue and it is now quite safe to specify a width and height of 0 when embedding instances.</P>
+		<P>As an example, in order to embed an instance that is truly hidden and doesn't affect the layout flow of other elements on the page, the statement...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.magicEmbed (
+   'SRC="my-file.rmf" AUTOSTART=TRUE LOOP=FALSE WIDTH=2 HEIGHT=2 HIDDEN'
+);
+</PRE>
+</TD></TR></TABLE>
+		<P>...would have to be changed to...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.magicEmbed (
+   'SRC="my-file.rmf" AUTOSTART=TRUE LOOP=FALSE WIDTH=<SPAN CLASS=sample-code-highlighted>0</SPAN> HEIGHT=<SPAN CLASS=sample-code-highlighted>0</SPAN> HIDDEN'
+);
+</PRE>
+</TD></TR></TABLE>
+		<P><IMG SRC="../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"></P>
+		<UL>
+			<LI><P>Music Object instances that are embedded using the <A HREF="../instance-methods.html#stubEmbed" TARGET="_parent"><B>stubEmbed</B></A> and <A HREF="../instance-methods.html#preloadEmbed" TARGET="_parent"><B>preloadEmbed</B></A> instance methods automatically inherit this new feature, so no updating of your code that uses either of these methods may be required.</P>
+			<LI><P>With the new mechanism for embedding truly hidden player instances, a problem was found with embedding hidden instances in table cells, that would cause intermittent crashes in some 4.x versions of Netscape Navigator. Hidden instances should, therefore, not be embedded within table cells (or any other container elements, for that matter). Hidden instances should only be embedded as top level members of the BODY tag. For more information, consult the section <A HREF="../../tips-techniques/authoring-issues/index.html?issues/hidden-in-table-cells.html" TARGET="_parent">Authoring Issues: Embedding Hidden Instances in Table Cells</A>.</P>
+		</UL>
+	<LI><A NAME="remove-with-statements"></A><B>Remove "with" Statements</B><BR>
+		<P>According to the latest revision of the ECMA-262 standard (JavaScript, JScript, etc.), the "with" statement has been deprecated. While it may be supported for some browser versions in the future in order to maintain backwards compatibility with existing content, there is some question as to how consistent the implementation of the statement will be across all browsers that support ECMA-262, given that the statement will no longer be part of the official language specification. Because of this, it was decided to remove all "with" statements from all Music Object code modules (see the <A HREF="versions/version-3.3.0.html#api/general-improvements/no-with-statements">Music Object 3.3.0 version history entry</A>) as well as all sample code examples included as part of the documentation (see the <A HREF="versions/version-3.3.0.html#doc/general-improvements/no-with-statements">Music Object 3.3.0 version history entry</A>). We strongly advise that you do the same with all sonification code. In doing so, you will reduce the risk of your code breaking unexpectedly at some stage in the future.</P>
+		<P>In order to remove "with" statements, perform a search procedure to find each instance of the text "with". For each instance that you find, determine if this text is actually part of a JavaScript "with" statement and not just part of a string literal, comment, variable, function name, etc. For each legitimate "with" statement that you find, modify the code so that each property or method that is a member of the object specified in the "with" statement is prefixed explicitly with the object's name. Then, remove the "with" statement that encapsulates the code block.</P>
+		<P>As an example, the code...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+with (myMusicObject) {
+   Music.setReverbType (1);
+   setController (1,10,0);
+   playNote (1,0,15,63,127,1000);
+}
+</PRE>
+</TD></TR></TABLE>
+		<P>...would become...</P>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.setReverbType (1);
+<SPAN CLASS=sample-code-highlighted>myMusicObject.</SPAN>setController (1,10,0);
+<SPAN CLASS=sample-code-highlighted>myMusicObject.</SPAN>playNote (1,0,15,63,127,1000);
+</PRE>
+</TD></TR></TABLE>
+		<P></P>
+</OL>
+
+<P>After performing the above changes to your code, your content will then be Music Object 3.3.x compliant. <B>Under no circumstances</B> should you perform this procedure upon the "music-object.js" file itself - <B>ONLY</B> your sonified documents which source in the "music-object.js" file.</P>
+
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+5. Test Your Content
+</TD></TR></TABLE>
+<BR>
+
+<P>Check your Web site pages locally to ensure that all your content is still working. If possible, use several browser versions in your testing. Do not delete the backup(s) that you made in step 1 until you have uploaded the changes to the online version of your Web site and verified that all your content works online as well. There are some authoring issues that only impact content when it is being served from a Web server. Even if you have tested your content online and are confident everything is peachy, you may still wish to keep the backups hanging around for a week or so, just in case. Sometimes it is not possible to test all possibilities and you may receive reports from Web site visitors saying that things are suddenly amiss with your content. Always play it safe with your Web content.</P>
+
+<A NAME="compatibility-patch"></A>
+<!--***************************************-->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Music Object Patch - Pre 3.3.0
+</TD></TR></TABLE>
+<BR>
+
+<P>For your convenience, Beatnik Inc. is providing a temporary Music Object patch to ease the transition to the new 3.3.x (and higher) versions. All that is necessary is to source in the tiny additional JavaScript file immediately after sourcing in the "music-object.js" file, as follows...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-p-pre320.js"&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Using this JavaScript file will smooth over the API differences between versions 3.2.x and 3.3.x, and existing code should continue to work without further modification. You can find the "music-object-p-pre320.js" file inside the "javascript" folder of this documentation. If you absolutely need to upgrade to a 3.3.x (or later) version of Music Object because of some new features you need to use in your code, but you don't have the time to immediately make the changes outlined above, then this may be an acceptable temporary solution. However, it is still recommended that you follow the <A HREF="#guidelines">guidelines</A> above for updating your content as soon as possible.</P>
+
+<BLOCKQUOTE>
+<IMG SRC="../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;If you are unfamiliar with Music Object extensions, consult the section <A HREF="../../music-object-reference/extensions/intro.html">About Music Object Extensions</A>.
+<BLOCKQUOTE>
+
+</BODY></HTML>

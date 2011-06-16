@@ -1,0 +1,152 @@
+<HTML>
+<HEAD>
+	<TITLE>Netscape 6 and Automatic Sonification</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Netscape 6 and Automatic Sonification
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Synopsis</DIV>
+
+<P>Certain content sonified using the <A HREF="../../../music-object-reference/extensions/wizards/index.html" TARGET="_parent">Wizards extension</A> (or other automatic sonification techniques) could be crippled when browsed in Netscape 6.</P>
+
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>If you are using the Wizards extension for automatic sonification, then different symptoms could be seen, depending on which version of the extension is being used...</P>
+
+<UL>
+	<LI><B>Versions Before 1.2.0</B> (and also custom automatic sonification code)
+		<P>Certain content sonified using versions of the Wizards extension before 1.2.0 (or other custom automatic sonification code) could be crippled when browsed in Netscape 6, so that links or other HTML elements do not function correctly. Because of a bug in Netscape 6, event handlers for HTML elements could be overwritten during the automatic sonification process. For sonified elements, this could result in image rollovers not functioning correctly, status bar messages not displaying correctly, form field validation not functioning, window opening links not functioning, etc.</P>
+	<LI><B>Versions 1.2.0 and Higher</B>
+		<P>Content sonified using versions 1.2.0 and higher of the Wizards extension may not produce sound when browsed in Netscape 6, unless the content has been updated to set the <B>Music.noManualHandlers</B> static property to the value <SPAN CLASS=value>true</SPAN> (see the <A HREF="#solution">Solution</A> section of this document).</P>
+</UL>
+
+<DIV CLASS=subsection>Severity</DIV>
+
+<P>If you have sonified any content using versions of the Wizards extension earlier than 1.2.0 (or you are using other custom code for automatic sonification), and some of the HTML elements that are being automatically sonified are also performing other operations that are implemented in event handler HTML attributes for those elements, then these elements will not function as intended when the page is browsed in Netscape 6.</P>
+
+<P>For example, if you are automatically sonifying a form and there is an <B>ONSUBMIT</B> attribute, as part of the <B>FORM</B> tag, that specifies code that should be executed to perform field value validation, then this validation will not occur when the page is browsed in Netscape 6. This, of course, could be a serious problem and may significantly impair the functioning of your page.</P>
+
+<P>Similarly, links that are supposed to open content in new windows, and that are also being automatically sonified with click sounds, may fail to open the content they are supposed to when the page is browsed in Netscape 6. Once again, this would be a serious impairment to such a page.</P>
+
+<P>Because of this potential for serious problems, it is highly recommended that you read through the <A HREF="#solution">Solution</A> section of this document and update - as needed - any pages that are sonified using the Wizards extension or other custom automatic sonification code.</P>
+
+<DIV CLASS=subsection>Cause</DIV>
+
+<P>Netscape 6 has a somewhat insidious little bug that results in event handlers, that are declared in the HTML code, not being correctly reflected in the DOM (Document Object Model), so that these event handlers are not accessible by JavaScript. In fact, as it turns out, the bug is so strange that these event handlers only become reflected to JavaScript after the user interacts with the HTML elements to which they belong. So, as an example, if a link has an <B>ONMOUSEOVER</B> attribute, then the <B>onmouseover</B> property for the link only becomes set correctly after the user "mouses over" the link for the first time. Pretty bizarre!</P>
+
+<P>This is a problem for the Wizards extension (and automatic sonification in general) because, when event handlers for the HTML elements that are to be sonified are replaced with sonification handlers, it is not possible to store the previously registered event handlers so that these actions can be respectfully carried out as well as part of the sonification handlers. If the event handlers that are coded into the HTML are not reflected to JavaScript at the time that the automatic sonification is carried out, then it simply appears to the automatic sonification code that there aren't any previously existing handlers, and so nothing is stored. So, the content author's originally intended actions for these HTML elements effectively become "lost in space".</P>
+
+<A NAME="solution"></A>
+<DIV CLASS=subsection>Solution</DIV>
+
+<P>To prevent the Wizards extension from crippling sonified pages browsed in Netscape 6, a mechanism was put into place (starting from version 1.2.0) so that automatic sonification using this extension is disabled, by default, for Netscape 6. While the Wizards extension may not impair the proper functioning of all sonified pages in Netscape 6, Beatnik, Inc. felt it better to be safe than sorry. If you are still using a version of the Wizards extension earlier than 1.2.0, then you should absolutely upgrade to the latest version in order to protect your sonified content from this Netscape 6 issue.</P>
+
+<P>Because of the mechanism in versions 1.2.0 and higher, content sonified using these versions of the extension will no longer be sonified in Netscape 6, unless the content is specifically updated to use the new <A HREF="../../../music-object-reference/extensions/wizards/index.html#Music.noManualHandlers" TARGET="_parent"><B>Music.noManualHandlers</B></A> static property. This property lets you essentially declare to the Wizards extension that none of the HTML elements that will be sonified by it have event handlers in the HTML code, and that it is, therefore, safe to automatically sonify these elements - even when the page is being browsed in Netscape 6.</P>
+
+<P>Updating your code to use the <B>Music.noManualHandlers</B> property is easy, but you should be very careful to first make sure that it is safe. Check the HTML code that you wish to sonify and make absolutely certain that none of the HTML elements you will be sonifying using the extension have event handlers in the HTML code.</P>
+
+<P>The following simple example shows just how easy it is to add this property to your code  (the added code is highlighted)...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Automatic Sonification Example&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY ONLOAD="sonifyLinks ()"&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<SPAN CLASS=sample-code-highlighted>Music.noManualHandlers = true;</SPAN>
+
+function sonifyLinks () {
+   Music.sonifyLinksWithHandlers (
+      '',
+      'uiPlayer.playRandomNote (1,1,10,100,110,100,70,1000,1000,100,100,0,127);'
+   );
+}
+
+uiPlayer = new Music ();
+uiPlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;A HREF="some-page1.html"&gt;Some Link 1&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="some-page2.html"&gt;Some Link 2&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="some-page3.html"&gt;Some Link 3&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="some-page4.html"&gt;Some Link 4&lt;/A&gt;&lt;BR&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>If you are not using the Wizards extension but are, instead, using other automatic page sonification code that you have written yourself or have obtained elsewhere, then you should consider adding conditional logic to this code so that it is disabled for users browsing the content with Netscape 6. The conditional logic would simply check that the user's browser is not Netscape 6 before going ahead and performing the automatic sonification.</P>
+
+<P>The following simple example illustrates how easy it is to add such a condition to custom automatic sonification code (the added code is highlighted)...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Automatic Sonification Example&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY ONLOAD="sonifyLinks ()"&gt;
+
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="music-object-x-dynamic.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+function mouseOverSound () {
+   uiPlayer.playRandomNote (1,1,10,100,110,100,70,1000,1000,100,100,0,127);
+}
+
+function sonifyLinks () {
+   <SPAN CLASS=sample-code-highlighted>if (Music.clientName != 'Netscape' || !Music.meetsMinVersion (Music.clientVersion,'5')) {</SPAN>
+      for (var linkNo = 0; linkNo < document.links.length; linkNo++) {
+         if (typeof document.links [linkNo].onmouseover == 'undefined') {
+            document.links [linkNo].onmouseover = mouseOverSound;
+         }
+      }
+   <SPAN CLASS=sample-code-highlighted>}</SPAN>
+}
+
+uiPlayer = new Music ();
+uiPlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;A HREF="some-page1.html" ONMOUSEOVER="window.status = 'Some Link 1'; return true"&gt;
+   Some Link 1
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;A HREF="some-page2.html" ONMOUSEOVER="window.status = 'Some Link 2'; return true"&gt;
+   Some Link 2
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;A HREF="some-page3.html" ONMOUSEOVER="window.status = 'Some Link 3'; return true"&gt;
+   Some Link 3
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;A HREF="some-page4.html" ONMOUSEOVER="window.status = 'Some Link 4'; return true"&gt;
+   Some Link 4
+&lt;/A&gt;&lt;BR&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P></P>
+
+</BODY></HTML>

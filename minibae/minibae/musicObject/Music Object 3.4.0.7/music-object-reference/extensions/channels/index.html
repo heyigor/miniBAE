@@ -1,0 +1,2136 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Channels</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Channels
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Channels extension provides convenient access to all the channel properties that can be controlled through the Music Object API. Most of these properties can be accessed using the core Music Object API's <A HREF="../../instance-methods.html#setController"><B>setController</B></A> and <A HREF="../../instance-methods.html#getController"><B>getController</B></A> methods, so this extension is provided primarily to ease programming and to make sonification code more easily understood. As an example, using the Channels extension's <A HREF="#setChannelReverbLevel"><B>setChannelReverbLevel</B></A> method has the same effect as using the <B>setController</B> method and specifying the value 91 for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-channels.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-channels.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-channels.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-channels.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelBankNumber">getChannelBankNumber</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the bank number of the instrument that is selected for the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelChorusLevel">getChannelChorusLevel</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the amount of chorus effect that is set for the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelExpression">getChannelExpression</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the amount of expression that is applied to the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelInstrumentMode">getChannelInstrumentMode</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the current instrument mode for the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelModulation">getChannelModulation</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the amount of modulation that is applied to the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelNrpn">getChannelNrpn</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the last value that was set for the specified non-registered parameter number (NRPN) on the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelPan">getChannelPan</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the stereo positioning of the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelPitchBendRange">getChannelPitchBendRange</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the current pitch bend range set for the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelReverbLevel">getChannelReverbLevel</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the amount of reverb effect that is set for the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelRpn">getChannelRpn</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the last value that was set for the specified registered parameter number (RPN) on the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getChannelVolume">getChannelVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the volume level of the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#resetAllControllers">resetAllControllers</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you easily reset all the controller values for the specified MIDI channel back to their default settings.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelBankNumber">setChannelBankNumber</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you send a bank select message to the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelChorusLevel">setChannelChorusLevel</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you select the amount of chorus effect that is to be applied to the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelExpression">setChannelExpression</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you select the amount of expression that is to be applied to the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelInstrumentMode">setChannelInstrumentMode</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you select the instrument mode for the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelModulation">setChannelModulation</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you select the amount of modulation that is to be applied to the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelNrpn">setChannelNrpn</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set a value for the specified non-registered parameter number (NRPN) on the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelPan">setChannelPan</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the stereo positioning of the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelPitchBendRange">setChannelPitchBendRange</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the pitch bend range (measured in musical intervals) for the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelReverbLevel">setChannelReverbLevel</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you select the amount of reverb effect that is to be applied to the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelRpn">setChannelRpn</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set a value for the specified registered parameter number (RPN) on the specified MIDI channel.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setChannelVolume">setChannelVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the volume level of the specified MIDI channel.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getControllerName">Music.getControllerName</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns a string value, representing the name of the specified MIDI continuous controller number.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.midiMsbLsbToInt">Music.midiMsbLsbToInt</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you convert a MIDI MSB-LSB pair to an integer value.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="getChannelBankNumber"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelBankNumber</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelBankNumber</B> method returns an integer value, indicating the bank number of the instrument that is selected for the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelBankNumber (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>getChannelBankNumber</B> method has the same effect as using the <B>getController</B> method and specifying the value <SPAN CLASS=value>0</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var bankNames = new Array ('General MIDI Bank','Special Bank','User Bank');
+var channel3BankName = bankNames [myMusicObject.getChannelBankNumber (3)];
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var bankNames = new Array ('General MIDI Bank','Special Bank','User Bank');
+var channel3BankName = bankNames [myMusicObject.getController (3,0)];
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#getController"><B>getController</B></A> instance method.
+</UL>
+
+<A NAME="getChannelChorusLevel"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelChorusLevel</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelChorusLevel</B> method returns an integer value, indicating the amount of chorus effect that is set for the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelChorusLevel (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ChannelChorusLevel0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>getChannelChorusLevel</B> method has the same effect as using the <B>getController</B> method and specifying the value <SPAN CLASS=value>93</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3ChorusLevel = myMusicObject.getChannelChorusLevel (3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3ChorusLevel = myMusicObject.getController (3,93);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#getController"><B>getController</B></A> instance method.
+</UL>
+
+<A NAME="getChannelExpression"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelExpression</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelExpression</B> method returns an integer value, indicating the amount of expression that is applied to the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelExpression (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ChannelExpression0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>getChannelExpression</B> method has the same effect as using the <B>getController</B> method and specifying the value <SPAN CLASS=value>11</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Expression = myMusicObject.getChannelExpression (3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Expression = myMusicObject.getController (3,11);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#getController"><B>getController</B></A> instance method.
+</UL>
+
+<A NAME="getChannelInstrumentMode"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelInstrumentMode</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelInstrumentMode</B> method returns an integer value, indicating the current instrument mode for the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelInstrumentMode (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#ChannelInstrumentMode0to3">ChannelInstrumentMode0to3</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The instrument mode selected for a channel can also be obtained using the <A HREF="#getChannelNrpn"><B>getChannelNrpn</B></A> instance method and specifying the value <SPAN CLASS=value>640</SPAN> for the <B>Nrpn0to16383</B> parameter.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelInstrumentMode</B> method will only return the last instrument mode that was set using the <A HREF="#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A> or <A HREF="#setChannelNrpn"><B>setChannelNrpn</B></A> instance methods. Because it is possible for instrument mode to be set by MIDI events that occur within an RMF or MIDI file, or by using the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API, it is possible that the <B>getChannelInstrumentMode</B> method could return a value that does not reflect the true instrument mode selected for a channel.</P>
+
+<P>So, if you are going to use this method in an interactive audio application, you need to be sure that the RMF or MIDI content you are using does not contain MIDI events that will set instrument mode on channels where your scripting will also be modifying and querying the instrument mode (using the <B>setChannelInstrumentMode</B> and <B>getChannelInstrumentMode</B> methods), and that you also do not use the <B>setController</B> method for setting a channel's instrument mode.</P>
+
+<P>Take a look at the following example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** sets instrument mode 2 for channel 1, using the setChannelInstrumentMode method ***/
+myMusicObject.setChannelInstrumentMode (1,2);
+
+/*** sets instrument mode 3 for channel 1, using the setController method ***/
+myMusicObject.setController (1,99,5); // non-registered parameter MSB
+myMusicObject.setController (1,98,0); // non-registered parameter LSB
+myMusicObject.setController (1,6,3);  // non-registered parameter value
+
+/*** alerts the instrument mode for channel 1 ***/
+alert (myMusicObject.getChannelInstrumentMode (1));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>After the code in this example has been executed, channel 1 will be set to instrument mode 3. However, because the <B>getChannelInstrumentMode</B> method only returns the last instrument mode set by the <B>setChannelInstrumentMode</B> or <B>setChannelNrpn</B> methods, the value <SPAN CLASS=value>2</SPAN> will be displayed by the "alert" statement, and not the value <SPAN CLASS=value>3</SPAN> as one might expect. This is a limitation that you should be aware of.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>For more comprehensive information on the Beatnik Player's Channel Instrument Mode feature, consult the section <A HREF="../../concepts.html#channel-instrument-mode">Important Concepts: Channel Instrument Mode</A>.
+	<LI>See also the <A HREF="#getChannelNrpn"><B>getChannelNrpn</B></A> and <A HREF="#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A> instance methods.
+</UL>
+
+<A NAME="getChannelModulation"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelModulation</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelModulation</B> method returns an integer value, indicating the amount of modulation that is applied to the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelModulation (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ChannelModulation0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>getChannelModulation</B> method has the same effect as using the <B>getController</B> method and specifying the value <SPAN CLASS=value>1</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Modulation = myMusicObject.getChannelModulation (3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Modulation = myMusicObject.getController (3,1);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#getController"><B>getController</B></A> instance method.
+</UL>
+
+<A NAME="getChannelNrpn"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelNrpn</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelNrpn</B> method returns an integer value, indicating the last value that was set for the specified non-registered parameter number (NRPN) on the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelNrpn (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B> Nrpn0to16383 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>NrpnValue0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Values can be set for non-registered parameter numbers via scripting using the <A HREF="#setChannelNrpn"><B>setChannelNrpn</B></A> instance method.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelNrpn</B> method will only return the last value that was set for an NRPN using the <B>setChannelNrpn</B> instance method (or the <A HREF="#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A> instance method, in the case of NRPN 640). Because it is possible for NRPN's to be set by MIDI events that occur within an RMF or MIDI file, or by using the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API, it is possible that the <B>getChannelNrpn</B> method could return a value that does not reflect the true value of the specified NRPN for a channel.</P>
+
+<P>So, if you are going to use this method in an interactive audio application, you need to be sure that the RMF or MIDI content you are using does not contain MIDI events that will set the values of the NRPN's you will be using in your application, on channels where your scripting will also be modifying and querying these NRPN values (using the <B>setChannelNrpn</B> and <B>getChannelNrpn</B> methods), and that you also do not use the <B>setController</B> method for setting an NRPN's value.</P>
+
+<P>Take a look at the following example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** sets channel 1's instrument mode (NRPN 640) to 2, using the setChannelNrpn method ***/
+myMusicObject.setChannelNrpn (1,640,2);
+
+/*** sets channel 1's instrument mode (NRPN 640) to 3, using the setController method ***/
+myMusicObject.setController (1,99,5); // non-registered parameter MSB
+myMusicObject.setController (1,98,0); // non-registered parameter LSB
+myMusicObject.setController (1,6,3);  // non-registered parameter value
+
+/*** alerts channel 1's instrument mode (NRPN 640) setting ***/
+alert (myMusicObject.getChannelNrpn (1,640));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>After the code in this example has been executed, channel 1 will be set to instrument mode 3. However, because the <B>getChannelNrpn</B> method only returns the last NRPN value set by the <B>setChannelNrpn</B> method (or the <B>setChannelInstrumentMode</B> method, in the case of NRPN 640), the value <SPAN CLASS=value>2</SPAN> will be displayed by the "alert" statement, and not the value <SPAN CLASS=value>3</SPAN> as one might expect. This is a limitation that you should be aware of.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#setChannelNrpn"><B>setChannelNrpn</B></A>, <A HREF="#getChannelInstrumentMode"><B>getChannelInstrumentMode</B></A>, <A HREF="#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A>, and <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance methods.
+</UL>
+
+<A NAME="getChannelPan"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelPan</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelPan</B> method returns an integer value, indicating the stereo positioning of the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelPan (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ChannelPan0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>getChannelPan</B> method has the same effect as using the <B>getController</B> method and specifying the value <SPAN CLASS=value>10</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Pan = myMusicObject.getChannelPan (3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Pan = myMusicObject.getController (3,10);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#getController"><B>getController</B></A> instance method.
+</UL>
+
+<A NAME="getChannelPitchBendRange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelPitchBendRange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelPitchBendRange</B> method returns an integer value, indicating the current pitch bend range (measured in musical intervals) set for the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelPitchBendRange (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ChannelPitchBendRangeINT</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The pitch bend range selected for a channel can also be obtained using the <A HREF="#getChannelRpn"><B>getChannelRpn</B></A> instance method and specifying the value <SPAN CLASS=value>0</SPAN> for the <B>Rpn0to16383</B> parameter.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelPitchBendRange</B> method will only return the last pitch bend range that was set using the <A HREF="#setChannelPitchBendRange"><B>setChannelPitchBendRange</B></A> or <A HREF="#setChannelRpn"><B>setChannelRpn</B></A> instance methods. Because it is possible for pitch bend range to be set by MIDI events that occur within an RMF or MIDI file, or by using the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API, it is possible that the <B>getChannelPitchBendRange</B> method could return a value that does not reflect the true pitch bend range selected for a channel.</P>
+
+<P>So, if you are going to use this method in an interactive audio application, you need to be sure that the RMF or MIDI content you are using does not contain MIDI events that will set pitch bend range on channels where your scripting will also be modifying and querying the pitch bend range (using the <B>setChannelPitchBendRange</B> and <B>getChannelPitchBendRange</B> methods), and that you also do not use the <B>setController</B> method for setting a channel's pitch bend range.</P>
+
+<P>Take a look at the following example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** sets channel 1's pitch bend range (RPN 0) to 12, using the setChannelRpn method ***/
+myMusicObject.setChannelRpn (1,0,12);
+
+/*** sets channel 1's pitch bend range (RPN 0) to 7, using the setController method ***/
+myMusicObject.setController (1,101,0); // registered parameter MSB
+myMusicObject.setController (1,100,0); // registered parameter LSB
+myMusicObject.setController (1,6,7);   // registered parameter value
+
+/*** alerts channel 1's pitch bend range (RPN 0) setting ***/
+alert (myMusicObject.getChannelRpn (1,0));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>After the code in this example has been executed, the pitch bend range for channel 1 will be set to 7 musical intervals (a musical 5th). However, because the <B>getChannelRpn</B> method only returns the last RPN value set by the <B>setChannelPitchBendRange</B> or <B>setChannelRpn</B> methods, the value <SPAN CLASS=value>12</SPAN> (a full octave) will be displayed by the "alert" statement, and not the value <SPAN CLASS=value>7</SPAN> as one might expect. This is a limitation that you should be aware of.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#getChannelRpn"><B>getChannelRpn</B></A> and <A HREF="#setChannelPitchBendRange"><B>setChannelPitchBendRange</B></A> instance methods.
+</UL>
+
+<A NAME="getChannelReverbLevel"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelReverbLevel</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelReverbLevel</B> method returns an integer value, indicating the amount of reverb effect that is set for the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelReverbLevel (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ChannelReverbLevel0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>getChannelReverbLevel</B> method has the same effect as using the <B>getController</B> method and specifying the value <SPAN CLASS=value>91</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3ReverbLevel = myMusicObject.getChannelReverbLevel (3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3ReverbLevel = myMusicObject.getController (3,91);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#getController"><B>getController</B></A> instance method.
+</UL>
+
+<A NAME="getChannelRpn"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelRpn</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelRpn</B> method returns an integer value, indicating the last value that was set for the specified registered parameter number (RPN) on the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelRpn (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B> Rpn0to16383 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>RpnValue0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Values can be set for registered parameter numbers via scripting using the <A HREF="#setChannelRpn"><B>setChannelRpn</B></A> instance method.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelRpn</B> method will only return the last value that was set for an RPN using the <B>setChannelRpn</B> instance method (or the <A HREF="#setChannelPitchBendRange"><B>setChannelPitchBendRange</B></A> instance method, in the case of RPN 0). Because it is possible for RPN's to be set by MIDI events that occur within an RMF or MIDI file, or by using the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API, it is possible that the <B>getChannelRpn</B> method could return a value that does not reflect the true value of the specified RPN for a channel.</P>
+
+<P>So, if you are going to use this method in an interactive audio application, you need to be sure that the RMF or MIDI content you are using does not contain MIDI events that will set the values of the RPN's you will be using in your application, on channels where your scripting will also be modifying and querying these RPN values (using the <B>setChannelRpn</B> and <B>getChannelRpn</B> methods), and that you also do not use the <B>setController</B> method for setting an RPN's value.</P>
+
+<P>Take a look at the following example...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** sets channel 1's pitch bend range (RPN 0) to 12, using the setChannelRpn method ***/
+myMusicObject.setChannelRpn (1,0,12);
+
+/*** sets channel 1's pitch bend range (RPN 0) to 7, using the setController method ***/
+myMusicObject.setController (1,101,0); // registered parameter MSB
+myMusicObject.setController (1,100,0); // registered parameter LSB
+myMusicObject.setController (1,6,7);   // registered parameter value
+
+/*** alerts channel 1's pitch bend range (RPN 0) setting ***/
+alert (myMusicObject.getChannelRpn (1,0));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>After the code in this example has been executed, the pitch bend range for channel 1 will be set to 7 musical intervals (a musical 5th). However, because the <B>getChannelRpn</B> method only returns the last RPN value set by the <B>setChannelRpn</B> method (or the <B>setChannelPitchBendRange</B> method, in the case of RPN 0), the value <SPAN CLASS=value>12</SPAN> (a full octave) will be displayed by the "alert" statement, and not the value <SPAN CLASS=value>7</SPAN> as one might expect. This is a limitation that you should be aware of.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#setChannelRpn"><B>setChannelRpn</B></A>, <A HREF="#getChannelInstrumentMode"><B>getChannelInstrumentMode</B></A>, <A HREF="#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A>, and <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance methods.
+</UL>
+
+<A NAME="getChannelVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getChannelVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getChannelVolume</B> method returns an integer value, indicating the volume level of the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getChannelVolume (</B> <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ChannelVolume0to127</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>getChannelVolume</B> method has the same effect as using the <B>getController</B> method and specifying the value <SPAN CLASS=value>7</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Volume = myMusicObject.getChannelVolume (3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+var channel3Volume = myMusicObject.getController (3,7);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#getController"><B>getController</B></A> instance method.
+</UL>
+
+<A NAME="resetAllControllers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;resetAllControllers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>resetAllControllers</B> method lets you easily reset all the controller values for the specified MIDI channel back to their default settings.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>resetAllControllers (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>resetAllControllers</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>121</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter, and the value <SPAN CLASS=value>0</SPAN> for the <A HREF="../../parameters.html#ControllerValue0to127"><B>ControllerValue0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.resetAllControllers (3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,121,0);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Because the <B>resetAllControllers</B> method accepts a <B>MidiChannel0to16</B> parameter, where the value <SPAN CLASS=value>0</SPAN> represents all MIDI channels (see the section <A HREF="../../concepts.html#magical-0">Important Concepts: Magical MIDI Channel Number 0 and Track Number 0</A>), it is possible to reset all continuous controllers for all MIDI channels of a Music Object instance with a single statement of the form <NOBR><SPAN CLASS=sample-code>myMusicObject.resetAllControllers (0);</SPAN></NOBR>.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<A NAME="setChannelBankNumber"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelBankNumber</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelBankNumber</B> method lets you send a bank select message to the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelBankNumber (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>setChannelBankNumber</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>0</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function getBankNumber (bankName) {
+   var bankNames = {
+      'General MIDI Bank':0,
+      'Special Bank':1, 
+      'User Bank':2
+   }
+   return bankNames [bankName];
+}
+
+myMusicObject.setChannelBankNumber (3,getBankName ('Special Bank'));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function getBankNumber (bankName) {
+   var bankNames = {
+      'General MIDI Bank':0,
+      'Special Bank':1, 
+      'User Bank':2
+   }
+   return bankNames [bankName];
+}
+
+myMusicObject.setController (3,0,getBankName ('Special Bank'));
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<A NAME="setChannelChorusLevel"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelChorusLevel</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelChorusLevel</B> method lets you select the amount of chorus effect that is to be applied to the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelChorusLevel (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> ChannelChorusLevel0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>setChannelChorusLevel</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>93</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelChorusLevel (3,61);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,93,61);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<A NAME="setChannelExpression"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelExpression</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelExpression</B> method lets you select the amount of expression that is to be applied to the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelExpression (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> ChannelExpression0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>setChannelExpression</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>11</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelExpression (3,127);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,11,127);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<A NAME="setChannelInstrumentMode"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelInstrumentMode</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelInstrumentMode</B> instance method lets you select the instrument mode for the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelInstrumentMode (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> <A HREF="../../parameters.html#ChannelInstrumentMode0to3">ChannelInstrumentMode0to3</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>It is also possible to set instrument mode for a channel using the <A HREF="#setChannelNrpn"><B>setChannelNrpn</B></A> instance method, or the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API.</P>
+
+<P>The following sample code examples all have the effect of selecting instrument mode 2 for MIDI channel 3...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Using the setController Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,99,5); // non-registered parameter MSB
+myMusicObject.setController (3,98,0); // non-registered parameter LSB
+myMusicObject.setController (3,6,<SPAN CLASS=sample-code-highlighted>2</SPAN>);  // non-registered parameter value
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelNrpn Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelNrpn (3,640,<SPAN CLASS=sample-code-highlighted>2</SPAN>);
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelInstrumentMode Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelInstrumentMode (3,<SPAN CLASS=sample-code-highlighted>2</SPAN>);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>In each of the sample code listings above, the highlighted code indicates where the instrument mode value is specified.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelInstrumentMode</B> instance method will only return the last instrument mode that was set using the <B>setChannelInstrumentMode</B> or <B>setChannelNrpn</B> instance methods. So, if you wish to be able to query the instrument mode for a channel using the <B>getChannelInstrumentMode</B> method, you should use either the <B>setChannelInstrumentMode</B> or <B>setChannelNrpn</B> methods for setting instrument mode, and you should avoid using the <B>setController</B> method for this purpose.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#getChannelInstrumentMode"><B>getChannelInstrumentMode</B></A> and <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance methods.
+</UL>
+
+<A NAME="setChannelModulation"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelModulation</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelModulation</B> method lets you select the amount of modulation that is to be applied to the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelModulation (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> ChannelModulation0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>setChannelModulation</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>1</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelModulation (3,30);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,1,30);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<A NAME="setChannelNrpn"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelNrpn</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelNrpn</B> method lets you set a value for the specified non-registered parameter number (NRPN) on the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelNrpn (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> Nrpn0to16383 <B>,</B> NrpnValue0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Values for non-registered parameter numbers can be queried via scripting using the <A HREF="#getChannelNrpn"><B>getChannelNrpn</B></A> instance method. It is also possible to set values for NRPN's using the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API.</P>
+
+<P>The following sample code examples both have the effect of setting 2 for the instrument mode (NRPN 640) of MIDI channel 3...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Using the setController Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,99,5); // non-registered parameter MSB
+myMusicObject.setController (3,98,0); // non-registered parameter LSB
+myMusicObject.setController (3,6,<SPAN CLASS=sample-code-highlighted>2</SPAN>);  // non-registered parameter value
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelNrpn Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelNrpn (3,640,<SPAN CLASS=sample-code-highlighted>2</SPAN>);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>In each of the sample code listings above, the highlighted code indicates where the instrument mode value is specified.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelNrpn</B> instance method will only return the last value that was set for the specified NRPN using the <B>setChannelNrpn</B> instance method (or the <A HREF="#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A> instance method, in the case of NRPN 640). So, if you wish to be able to query the value of an NRPN for a channel using the <B>getChannelNrpn</B> method, you should use either the <B>setChannelNrpn</B> method (or the <B>setChannelInstrumentMode</B> method, in the case of NRPN 640) for setting the value of the NRPN, and you should avoid using the <B>setController</B> method for this purpose.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#getChannelNrpn"><B>getChannelNrpn</B></A>, <A HREF="#getChannelInstrumentMode"><B>getChannelInstrumentMode</B></A>, <A HREF="#setChannelInstrumentMode"><B>setChannelInstrumentMode</B></A>, and <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance methods.
+</UL>
+
+<A NAME="setChannelPan"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelPan</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelPan</B> method lets you set the stereo positioning of the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelPan (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> ChannelPan0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>setChannelPan</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>10</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelPan (3,0);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,10,0);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<A NAME="setChannelPitchBendRange"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelPitchBendRange</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelPitchBendRange</B> instance method lets you set the pitch bend range (measured in musical intervals) for the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelPitchBendRange (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> ChannelPitchBendRangeINT <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>It is also possible to set pitch bend range for a channel using the <A HREF="#setChannelRpn"><B>setChannelRpn</B></A> instance method, or the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API.</P>
+
+<P>The following sample code examples all have the effect of setting the pitch bend range to 12 (a full octave) for MIDI channel 3...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Using the setController Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,101,0); // registered parameter MSB
+myMusicObject.setController (3,100,0); // registered parameter LSB
+myMusicObject.setController (3,6,<SPAN CLASS=sample-code-highlighted>12</SPAN>);  // registered parameter value
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelRpn Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelRpn (3,0,<SPAN CLASS=sample-code-highlighted>12</SPAN>);
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelPitchBendRange Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelPitchBendRange (3,<SPAN CLASS=sample-code-highlighted>12</SPAN>);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>In each of the sample code listings above, the highlighted code indicates where the pitch bend range value is specified.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelPitchBendRange</B> instance method will only return the last pitch bend range that was set using the <B>setChannelPitchBendRange</B> or <B>setChannelRpn</B> instance methods. So, if you wish to be able to query the pitch bend range for a channel using the <B>getChannelPitchBendRange</B> method, you should use either the <B>setChannelPitchBendRange</B> or <B>setChannelRpn</B> methods for setting pitch bend range, and you should avoid using the <B>setController</B> method for this purpose.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#getChannelPitchBendRange"><B>getChannelPitchBendRange</B></A> and <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance methods.
+</UL>
+
+<A NAME="setChannelReverbLevel"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelReverbLevel</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelReverbLevel</B> method lets you select the amount of reverb effect that is to be applied to the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelReverbLevel (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> ChannelReverbLevel0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>setChannelReverbLevel</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>91</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelReverbLevel (3,15);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,91,15);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<A NAME="setChannelRpn"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelRpn</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelRpn</B> method lets you set a value for the specified registered parameter number (RPN) on the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelRpn (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> Rpn0to16383 <B>,</B> RpnValue0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Values for registered parameter numbers can be queried via scripting using the <A HREF="#getChannelRpn"><B>getChannelRpn</B></A> instance method. It is also possible to set values for RPN's using the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method of the core Music Object API.</P>
+
+<P>The following sample code examples both have the effect of setting 12 for the pitch bend range (RPN 0) of MIDI channel 3...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Using the setController Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,101,0); // registered parameter MSB
+myMusicObject.setController (3,100,0); // registered parameter LSB
+myMusicObject.setController (3,6,<SPAN CLASS=sample-code-highlighted>12</SPAN>);  // registered parameter value
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Using the setChannelRpn Method</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelRpn (3,0,<SPAN CLASS=sample-code-highlighted>12</SPAN>);
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>In each of the sample code listings above, the highlighted code indicates where the instrument mode value is specified.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>Due to a limitation in current versions of the Beatnik Player, the <B>getChannelRpn</B> instance method will only return the last value that was set for the specified RPN using the <B>setChannelRpn</B> instance method (or the <A HREF="#setChannelPitchBendRange"><B>setChannelPitchBendRange</B></A> instance method, in the case of RPN 0). So, if you wish to be able to query the value of an RPN for a channel using the <B>getChannelRpn</B> method, you should use either the <B>setChannelRpn</B> method (or the <B>setChannelPitchBendRange</B> method, in the case of RPN 0) for setting the value of the RPN, and you should avoid using the <B>setController</B> method for this purpose.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#getChannelRpn"><B>getChannelRpn</B></A>, <A HREF="#getChannelPitchBendRange"><B>getChannelPitchBendRange</B></A>, <A HREF="#setChannelPitchBendRange"><B>setChannelPitchBendRange</B></A>, and <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance methods.
+</UL>
+
+<A NAME="setChannelVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setChannelVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setChannelVolume</B> method lets you set the volume level of the specified MIDI channel.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setChannelVolume (</B> <A HREF="../../parameters.html#MidiChannel0to16">MidiChannel0to16</A> <B>,</B> ChannelVolume0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Using the <B>setChannelVolume</B> method has the same effect as using the <B>setController</B> method and specifying the value <SPAN CLASS=value>7</SPAN> for the <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> parameter.</P>
+
+<P>For example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelVolume (3,127);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setController (3,7,127);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="../../instance-methods.html#setController"><B>setController</B></A> instance method.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.getControllerName"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getControllerName</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getControllerName</B> static method returns a string value, representing the name of the specified MIDI continuous controller number.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getControllerName (</B> <A HREF="../../parameters.html#ControllerNumber0to127"><B>ControllerNumber0to127</B></A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>ControllerNameSTR</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The following table shows all the possible values that can be returned by this method...</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Method&nbsp;Call</TD>
+		<TD CLASS=data-table-column-header>Return&nbsp;Value</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>Music.getControllerName (0)</TD>
+		<TD CLASS=data-table-item>"<SPAN CLASS=value>Bank Number</SPAN>"</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>Music.getControllerName (1)</TD>
+		<TD CLASS=data-table-item>"<SPAN CLASS=value>Modulation</SPAN>"</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>Music.getControllerName (7)</TD>
+		<TD CLASS=data-table-item>"<SPAN CLASS=value>Volume</SPAN>"</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>Music.getControllerName (10)</TD>
+		<TD CLASS=data-table-item>"<SPAN CLASS=value>Pan</SPAN>"</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>Music.getControllerName (11)</TD>
+		<TD CLASS=data-table-item>"<SPAN CLASS=value>Expression</SPAN>"</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>Music.getControllerName (91)</TD>
+		<TD CLASS=data-table-item>"<SPAN CLASS=value>Reverb Level</SPAN>"</TD>
+	</TR>
+	<TR>
+		<TD CLASS=data-table-item>Music.getControllerName (93)</TD>
+		<TD CLASS=data-table-item>"<SPAN CLASS=value>Chorus Level</SPAN>"</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES">
+<P>As a rule, symbolic controller names are only returned for MIDI controller numbers for which the Channels extension provides get- and set- style methods (such as <A HREF="#getChannelExpression"><B>getChannelExpression</B></A> and <A HREF="#setChannelExpression"><B>setChannelExpression</B></A>).</P>
+
+<P>There may be other MIDI controllers that are supported by the player (see the appendix <A HREF="../../../appendixes/supported-midi-controllers.html">Supported MIDI Controllers</A>) for which the <B>Music.getControllerName</B> method will not return a dedicated symbolic name. One such example is MIDI controller number 98, which is the "Non-registered Parameter Number LSB" controller. There are also a good number of MIDI controllers that are not supported by the player. If, for whatever reason, the <B>Music.getControllerName</B> method does not know the symbolic name of the specified MIDI controller number, then the method will simply return the specified MIDI controller number as a string in the form "MIDI Controller [ControllerNumber0to127]". So, the statement <NOBR><SPAN CLASS=sample-code>Music.getControllerName (98);</SPAN></NOBR> would return the value <NOBR>"<SPAN CLASS=value>MIDI Controller 98</SPAN>"</NOBR>.</P>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.midiMsbLsbToInt"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.midiMsbLsbToInt</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Channels</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.midiMsbLsbToInt</B> static method lets you convert a MIDI MSB-LSB pair to an integer value.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.midiMsbLsbToInt (</B> Msb0to127 <B>,</B> Lsb0to127 <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>Integer0to16383</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>With the MIDI communication protocol, many values are constrained to a single 7-bit byte (where one bit is reserved as a flag). This means, of course, that these values are constrained to the range of 0 through 127. It is no coincidence that values for MIDI continuous controllers, such as channel volume, are constrained to this range. And it is no coincidence that note numbers for MIDI note events are constrained to this range. And it is also no coincidence that there are 128 MIDI continuous controllers in total.</P>
+
+<P>Now, in order to offer a large set of registered parameter numbers (RPN) and non-registered parameter numbers (NRPN), so that these parameters don't suffer the same ultimate scarcity as the rather limited set of 128 MIDI continuous controllers, it was decided to use two 7-bit bytes for specifying RPN's and NRPN's. These two bytes are combined together to form a 14-bit number. One byte, called the MSB (Most Significant Byte), is used to represent the upper 7 bits, while the other byte, called the LSB (Least Significant Byte), is used to represent the lower 7 bits.</P>
+
+<P>For example, an MSB-LSB pair where the MSB value is <SPAN CLASS=value>5</SPAN> and where the LSB value is <SPAN CLASS=value>0</SPAN> would represent the number 640. NRPN 640 is the NRPN that is used to set a channel's instrument mode (see the section <A HREF="../../concepts.html#channel-instrument-mode">Important Concepts: Channel Instrument Mode</A>). If you have used RPN's or NRPN's in music compositions, then you will most probably have had plenty of experience specifying these parameters by their MSB-LSB pair in your music sequencer's MIDI event view. Because all the methods in this extension that deal with registered and non-registered parameter numbers take a single integer value for specifying these parameters' numbers, the <B>Music.midiMsbLsbToInt</B> method is provided as a convenience in case you have become accustomed to thinking of RPN's and NRPN's in terms of their MSB-LSB pair.</P>
+
+<P>To illustrate our example for NRPN 640, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelNrpn (1,Music.midiMsbLsbToInt (5,0),2);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.setChannelNrpn (1,640,2);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>See also the <A HREF="#getChannelNrpn"><B>getChannelNrpn</B></A>, <A HREF="#getChannelRpn"><B>getChannelRpn</B></A>, <A HREF="#setChannelNrpn"><B>setChannelNrpn</B></A>, and <A HREF="#setChannelRpn"><B>setChannelRpn</B></A> instance methods.
+</UL>
+
+</BODY></HTML>

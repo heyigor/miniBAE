@@ -1,0 +1,2296 @@
+<HTML>
+<HEAD>
+	<TITLE>Obsoleted Features</TITLE>
+	<LINK REL="stylesheet" HREF="../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Obsoleted Features
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Many versions of the Music Object API have come and gone, and some significant changes in the API have occurred, leaving a good number of methods and properties either deprecated or completely unsupported. This section is provided to help developers in updating old sonification code to use the most current version of the Music Object API.</P>
+
+<P>This section lists all methods and properties that have become unsupported, with explanations on how those methods and properties behaved and how newer methods and properties of the Music Object API can be used to achieve similar results. Wherever possible, explanations on how to update code are provided.</P>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods"><B>Instance Methods</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#engageAudio">engageAudio</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to engage or disengage the audio device used by the player's underlying audio engine. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.engageAudio"><B>Music.engageAudio</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#fadeFromTo">fadeFromTo</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to fade the overall playback volume of a Music Object instance from a specified starting volume to a specified ending volume over a specified amount of time. Supplanted by the functionally equivalent <A HREF="instance-methods.html#fadeVolume"><B>fadeVolume</B></A> instance method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getNoteName">getNoteName</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to convert a MIDI note number to a corresponding musical note name. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteName"><B>Music.getNoteName</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getNoteNumber">getNoteNumber</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to convert a musical note name to a corresponding MIDI note number. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteNumber"><B>Music.getNoteNumber</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getPlatform">getPlatform</A></TD>
+	<TD CLASS=contents-table-item-desc>Returned a string value, representing the user agent name of the user's browser. Replaced by the <A HREF="static-properties.html#Music.clientPlatform"><B>Music.clientPlatform</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getReverbType">getReverbType</A></TD>
+	<TD CLASS=contents-table-item-desc>Returned an integer value, indicating the global reverb type that was set for the player's underlying audio engine. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.getReverbType"><B>Music.getReverbType</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#getVersion">getVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>Returned a string value, indicating the version number of the player installed in the user's browser. Replaced by the <A HREF="static-properties.html#Music.playerVersion"><B>Music.playerVersion</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#isReady">isReady</A></TD>
+	<TD CLASS=contents-table-item-desc>Returned a boolean value, indicating whether or not a Music Object instance's player was ready for scripted control. Replaced by the functionally equivalent <A HREF="instance-properties.html#ready"><B>ready</B></A> instance property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#playGroovoid">playGroovoid</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a convenient way to play Groovoids, simply by specifying the Groovoid name using a string parameter. This functionality was subsumed by the <A HREF="instance-methods.html#play"><B>play</B></A> instance method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setGlobalMute">setGlobalMute</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to mute or unmute the global audio output of the player's underlying audio engine. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.setGlobalMute"><B>Music.setGlobalMute</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#setReverbType">setReverbType</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to set the global reverb type for the player's underlying audio engine. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.setReverbType"><B>Music.setReverbType</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#stopAll">stopAll</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to stop playback for all player instances in a single operation. Replaced by the <A HREF="static-methods.html#Music.stopAll"><B>Music.stopAll</B></A> static method.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-properties"><B>Static Properties</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.ignoreNotReady">Music.ignoreNotReady</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean property that specified whether or not error messages were to be sent to the debug output if scripting was targeted to a player instance that was not yet ready.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.platform">Music.platform</A></TD>
+	<TD CLASS=contents-table-item-desc>A string property that represented the user's platform (operating system). Replaced by the functionally equivalent <A HREF="static-properties.html#Music.clientPlatform"><B>Music.clientPlatform</B></A> static property.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#global-functions"><B>Global Functions</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_getNoteName">mo_getNoteName</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to convert a MIDI note number to a corresponding musical note name. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteName"><B>Music.getNoteName</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_getNoteNumber">mo_getNoteNumber</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to convert a musical note name to a corresponding MIDI note number. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteNumber"><B>Music.getNoteNumber</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_hasMinVersion">mo_hasMinVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>Returned a boolean value, indicating whether or not the version of the player installed in the user's browser met the minimum version specified. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.hasMinVersion"><B>Music.hasMinVersion</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_installBeatnik">mo_installBeatnik</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to explicitly launch the player installation process. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.installPlayer"><B>Music.installPlayer</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_isPlayerCompatible">mo_isPlayerCompatible</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to force Music Object to perform the compatibility test, even before any attempts were made in the authoring to embed player instances into the page. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_magicEmbed">mo_magicEmbed</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to embed a non-scriptable player instance that was not associated to any Music Object instance. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_promptClose">mo_promptClose</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to close a prompt window that was opened by the mo_promptUser function. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.promptClose"><B>Music.promptClose</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_promptUser">mo_promptUser</A></TD>
+	<TD CLASS=contents-table-item-desc>Provided a way to open up a non-modal dialog window to prompt the user to make a decision. Replaced by the functionally equivalent <A HREF="static-methods.html#Music.promptUser"><B>Music.promptUser</B></A> static method.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#musicObject">musicObject</A></TD>
+	<TD CLASS=contents-table-item-desc>An object constructor that provided a way to create new Music Object instances. Replaced by the functionally equivalent <A HREF="intro.html#start"><B>Music</B></A> object constructor.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#global-variables"><B>Global Variables</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_BeatnikType">mo_BeatnikType</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable that indicated the type of browser component architecture used by the player. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.playerType"><B>Music.playerType</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_BeatnikVersion">mo_BeatnikVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable that indicated the version number of the player installed in the user's browser. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.playerVersion"><B>Music.playerVersion</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_browserSupported">mo_browserSupported</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that indicated whether or not the user's browser was supported by the player. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.clientSupported"><B>Music.clientSupported</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_debugToAlert">mo_debugToAlert</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that specified whether or not error messages were to be displayed in alert boxes. Replaced by the functionally equivalent <A HREF="extensions/debug/index.html#Music.debugToAlert"><B>Music.debugToAlert</B></A> static property of the <A HREF="extensions/debug/index.html">Debug extension</A>.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_debugToJavaConsole">mo_debugToJavaConsole</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that specified whether or not error messages were to be displayed in the Java console. Replaced by the functionally equivalent <A HREF="extensions/debug/index.html#Music.debugToJavaConsole"><B>Music.debugToJavaConsole</B></A> static property of the <A HREF="extensions/debug/index.html">Debug extension</A>.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_debugToStatus">mo_debugToStatus</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that specified whether or not error messages were to be displayed in the window's status bar. Replaced by the functionally equivalent <A HREF="extensions/debug/index.html#Music.debugToStatus"><B>Music.debugToStatus</B></A> static property of the <A HREF="extensions/debug/index.html">Debug extension</A>.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_enabled">mo_enabled</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that acted as a "master switch" to enable or disable sonification of a page. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.enabled"><B>Music.enabled</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_hasBeatnik">mo_hasBeatnik</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that indicated whether or not the player was installed in the user's browser. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.hasPlayer"><B>Music.hasPlayer</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_ignoreJavaDisabled">mo_ignoreJavaDisabled</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that specified whether or not a prompt should be displayed when Java was disabled in Netscape Navigator. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.ignoreJavaDisabled"><B>Music.ignoreJavaDisabled</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_ignoreNotReady">mo_ignoreNotReady</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that specified whether or not error messages were to be sent to the debug output if scripting was targeted to a player instance that was not yet ready.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_platform">mo_platform</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable that represented the user's platform (operating system). Replaced by the functionally equivalent <A HREF="static-properties.html#Music.clientPlatform"><B>Music.clientPlatform</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_requiredMinVersion">mo_requiredMinVersion</A></TD>
+	<TD CLASS=contents-table-item-desc>A string variable that specified the minimum player version required by a sonified page. Replaced by the <A HREF="static-methods.html#Music.requireMinPlayerVersion"><B>Music.requireMinPlayerVersion</B></A> static method and <A HREF="static-properties.html#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A> read-only static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_showCompatibilityPrompt">mo_showCompatibilityPrompt</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that specified whether or not a prompt should be displayed when the user's player configuration failed to meet a sonified page's compatibility requirements. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.showCompatibilityPrompt"><B>Music.showCompatibilityPrompt</B></A> static property.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#mo_silentIfInadequate">mo_silentIfInadequate</A></TD>
+	<TD CLASS=contents-table-item-desc>A boolean variable that specified whether or not sonification on a page should be completely disabled if the user's player configuration failed to meet the page's compatibility requirements. Replaced by the functionally equivalent <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A> static property.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#code-modules"><B>Code Modules</B></A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#patch/navigator-4.04-bug">Patch - Navigator 4.04 Bug</A></TD>
+	<TD CLASS=contents-table-item-desc>A patch that was used to work around a specific bug in Netscape Navigator 4.04.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="engageAudio"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;engageAudio</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.2.2.html">2.2.2</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.2.0.html">3.2.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.engageAudio">Music.engageAudio</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>engageAudio</B> instance method provided a way to engage or disengage the audio device used by the player's underlying audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>engageAudio (</B> AudioEngagedBOOL <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>engageAudio</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-2.2.2.html">Music Object 2.2.2</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.2.0.html">Music Object 3.2.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method affected the global audio engine and was not specific to any Music Object instance. Consequently, this instance method was replaced by the functionally equivalent <A HREF="static-methods.html#Music.engageAudio"><B>Music.engageAudio</B></A> static method.
+</UL>
+
+<A NAME="fadeFromTo"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;fadeFromTo</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.1.0.html">1.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="instance-methods.html#fadeVolume">fadeVolume</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>fadeFromTo</B> instance method provided a way to fade the overall playback volume of a Music Object instance from a specified starting volume to a specified ending volume over a specified amount of time.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music Object Versions 1.1.0 - 2.1.8</B>
+			<HR SIZE=1 NOSHADE>
+			<B>fadeFromTo (</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="parameters.html#Volume0to100">Volume0to100</A> 
+			<BR>
+			<B>)</B>
+			<P></P>
+			<B>Music Object Versions 2.2.2 - 3.1.0</B>
+			<HR SIZE=1 NOSHADE>
+			<B>fadeFromTo (</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="parameters.html#Volume0to100">Volume0to100</A> 
+			<BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="parameters.html#FadeBOOL">FadeBOOL</A><B>or</B><A HREF="parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="parameters.html#Function">Function</A><B>or</B><A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeStepCallback<A HREF="parameters.html#Function">Function</A><B>or</B><A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>fadeFromTo</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.1.0.html">Music Object 1.1.0</A>.
+		<P></P>
+	<LI>When the <B>fadeVolume</B> instance method was introduced in <A HREF="version-history/index.html?versions/version-2.2.2.html">Music Object 2.2.2</A>, it was designed in such way as to provide a superset of the parameters and capabilities of the <B>fadeFromTo</B> method. For many versions, the <B>fadeFromTo</B> method was still provided in order to maintain backwards compatibility, even though this method was merely calling through to the newer <B>fadeVolume</B> method.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that it was no longer necessary to provide the <B>fadeFromTo</B> method for backwards compatibility, since this method had been deprecated for many versions. Consequently, this instance method was removed in favor of the functionally equivalent <A HREF="instance-methods.html#fadeVolume"><B>fadeVolume</B></A> instance method.
+</UL>
+
+<A NAME="getNoteName"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getNoteName</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.1.0.html">1.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.getNoteName">Music.getNoteName</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getNoteName</B> instance method provided a way to convert a MIDI note number to a corresponding musical note name.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getNoteName (</B> <A HREF="parameters.html#NoteNumber0to127">NoteNumber0to127</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>getNoteName</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.1.0.html">Music Object 1.1.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method was not specific to any Music Object instance. Consequently, this instance method was replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteName"><B>Music.getNoteName</B></A> static method.
+</UL>
+
+<A NAME="getNoteNumber"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getNoteNumber</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.1.0.html">1.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.getNoteNumber">Music.getNoteNumber</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getNoteNumber</B> instance method provided a way to convert a musical note name to a corresponding MIDI note number.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getNoteNumber (</B> <A HREF="parameters.html#NoteNameSTR">NoteNameSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>getNoteNumber</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.1.0.html">Music Object 1.1.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method was not specific to any Music Object instance. Consequently, this instance method was replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteNumber"><B>Music.getNoteNumber</B></A> static method.
+</UL>
+
+<A NAME="getPlatform"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getPlatform</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.1.0.html">1.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.7.9.html">2.7.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.clientPlatform">Music.clientPlatform</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getPlatform</B> instance method returned a string value, representing the user agent name of the user's browser.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getPlatform ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>getPlatform</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.1.0.html">Music Object 1.1.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-2.7.9.html">Music Object 2.7.9</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method was not specific to any Music Object instance. Consequently, this instance method was supplanted by the <A HREF="#mo_platform"><B>mo_platform</B></A> global variable.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global properties previously available as global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_platform</B> global variable was replaced by the functionally equivalent <A HREF="#Music.platform"><B>Music.platform</B></A> static property.
+		<P></P>
+	<LI>Finally, with the release of <A HREF="version-history/index.html?versions/version-3.3.0.html">Music Object 3.3.0</A>, it was decided that all static properties that indicated information about the user's client application (or browser) should be grouped together by naming convention, by prefixing each of these properties with "client" (eg. <B>Music.clientName</B>, <B>Music.clientSupported</B>, <B>Music.clientVersion</B>). Consequently, the <B>Music.platform</B> static property was replaced by the functionally equivalent <A HREF="static-properties.html#Music.clientPlatform"><B>Music.clientPlatform</B></A> static property.
+</UL>
+
+<A NAME="getReverbType"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getReverbType</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.6.0.html">1.6.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.2.0.html">3.2.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.getReverbType">Music.getReverbType</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getReverbType</B> instance method returned an integer value, indicating the global reverb type that was set for the player's underlying audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getReverbType ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>getReverbType</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.6.0.html">Music Object 1.6.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.2.0.html">Music Object 3.2.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method applied to the global audio engine and was not specific to any Music Object instance. Consequently, this instance method was replaced by the functionally equivalent <A HREF="static-methods.html#Music.getReverbType"><B>Music.getReverbType</B></A> static method.
+</UL>
+
+<A NAME="getVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;getVersion</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.1.0.html">1.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.playerVersion">Music.playerVersion</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>getVersion</B> instance method returned a string value, indicating the version number of the player installed in the user's browser.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>getVersion ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>getVersion</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.1.0.html">Music Object 1.1.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method was not specific to any Music Object instance. It was also decided to take advantage of this opportunity to improve the API by choosing a clearer and more meaningful name for this feature. Consequently, this instance method was replaced by the functionally equivalent <A HREF="static-properties.html#Music.playerVersion"><B>Music.playerVersion</B></A> static property.
+</UL>
+
+<A NAME="isReady"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;isReady</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.1.0.html">1.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="instance-properties.html#ready">ready</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>isReady</B> instance method returned a boolean value, indicating whether or not a Music Object instance's player was ready for scripted control.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>isReady ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>isReady</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.1.0.html">Music Object 1.1.0</A>.
+		<P></P>
+	<LI>In order to further streamline the Music Object API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A> to eliminate the <B>isReady</B> instance method in favor of the functionally equivalent <A HREF="instance-properties.html#ready"><B>ready</B></A> instance property. This property was already being maintained for each Music Object instance, yet had previously not been part of the public API.
+</UL>
+
+<A NAME="playGroovoid"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;playGroovoid</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.6.0.html">1.6.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="instance-methods.html#play">play</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>playGroovoid</B> instance method provided a convenient way to play Groovoids, simply by specifying the Groovoid name using a string parameter.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music Object Versions 1.6.0 - 2.3.1</B>
+			<HR SIZE=1 NOSHADE>
+			<B>playGroovoid (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="parameters.html#LoopingBOOL">LoopingBOOL</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="parameters.html#GroovoidNameSTR">GroovoidNameSTR</A>
+			<BR>
+			<B>)</B>
+			<P></P>
+			<B>Music Object Versions 2.6.9 - 3.0.8</B>
+			<HR SIZE=1 NOSHADE>
+			<B>playGroovoid (</B> <A HREF="parameters.html#GroovoidNameSTR">GroovoidNameSTR</A> <B>)</B>
+			<P>...or...</P>
+			<B>playGroovoid (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="parameters.html#LoopingBOOL">LoopingBOOL</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="parameters.html#GroovoidNameSTR">GroovoidNameSTR</A>
+			<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>playGroovoid</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.6.0.html">Music Object 1.6.0</A>.
+		<P></P>
+	<LI>In order to help streamline the Music Object API, it was decided for the release of <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A> to combine the capabilities of the <B>playGroovoid</B> instance method into an enhanced <B>play</B> instance method. In order to maintain backwards compatibility with existing content, it was decided to still support the <B>playGroovoid</B> method for some versions into the future.
+		<P></P>
+	<LI>Finally, with the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that it was no longer necessary to provide the <B>playGroovoid</B> method for backwards compatibility, since this method had been deprecated for many versions. Consequently, this instance method was removed in favor of the functionally equivalent <A HREF="instance-methods.html#play"><B>play</B></A> instance method.</P>
+</UL>
+
+<A NAME="setGlobalMute"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setGlobalMute</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.6.0.html">1.6.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.2.0.html">3.2.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.setGlobalMute">Music.setGlobalMute</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setGlobalMute</B> instance method provided a way to mute or unmute the global audio output of the player's underlying audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setGlobalMute (</B> <A HREF="parameters.html#MuteStateBOOL">MuteStateBOOL</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>setGlobalMute</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.6.0.html">Music Object 1.6.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.2.0.html">Music Object 3.2.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method affected the global audio engine and was not specific to any Music Object instance. Consequently, this instance method was replaced by the functionally equivalent <A HREF="static-methods.html#Music.setGlobalMute"><B>Music.setGlobalMute</B></A> static method.
+</UL>
+
+<A NAME="setReverbType"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;setReverbType</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.6.0.html">1.6.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.2.0.html">3.2.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.setReverbType">Music.setReverbType</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>setReverbType</B> instance method provided a way to set the global reverb type for the player's underlying audio engine.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>setReverbType (</B> <A HREF="parameters.html#ReverbType1to11">ReverbType1to11</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>setReverbType</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-1.6.0.html">Music Object 1.6.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.2.0.html">Music Object 3.2.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method affected the global audio engine and was not specific to any Music Object instance. Consequently, this instance method was replaced by the functionally equivalent <A HREF="static-methods.html#Music.setReverbType"><B>Music.setReverbType</B></A> static method.
+</UL>
+
+<A NAME="stopAll"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;stopAll</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.2.2.html">2.2.2</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.stopAll">Music.stopAll</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>stopAll</B> instance method provided a way to stop playback for all player instances in a single operation.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>stopAll ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>stopAll</B> instance method was first introduced in <A HREF="version-history/index.html?versions/version-2.2.2.html">Music Object 2.2.2</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that it was no longer appropriate for this method to be an instance method, since the method could affect multiple Music Object instances - not just the instance that the method was called on. Consequently, this instance method was supplanted by the <A HREF="static-methods.html#Music.stopAll"><B>Music.stopAll</B></A> static method.
+</UL>
+
+<IMG SRC="../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+
+<P>The <B>Music.stopAll</B> static method is not functionally equivalent to the obsoleted <B>stopAll</B> instance method. It was decided that it was no longer desirable to provide a method that could have the effect of stopping playback of all player instances - including player instances that were not part of the document that originated the call to the method - since this could result in the sonification for one Web site interfering with the sonification of a different Web site that is contained inside a different window. So, the <B>Music.stopAll</B> static method was implemented so that it would only stop the playback for all the player instances contained inside the document that originated the call to the method.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="static-properties"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Properties
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.ignoreNotReady"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.ignoreNotReady</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-- none --&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.ignoreNotReady</B> static property was a boolean property that specified whether or not error messages were to be sent to the debug output if scripting was targeted to a player instance that was not yet ready.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>Music.ignoreNotReady</B> static property was first introduced in <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that this feature was not compelling enough and, in an effort to streamline the Music Object API, this static property was removed from the API.
+</UL>
+
+<A NAME="Music.platform"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.platform</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Property&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.3.0.html">3.3.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.clientPlatform">Music.clientPlatform</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.platform</B> static property was a string property that represented the user's platform (operating system).
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>Music.platform</B> static property was first introduced in <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.3.0.html">Music Object 3.3.0</A>, it was decided that all static properties that indicated information about the user's client application (or browser) should be grouped together by naming convention, by prefixing each of these properties with "client" (eg. <B>Music.clientName</B>, <B>Music.clientSupported</B>, <B>Music.clientVersion</B>). Consequently, the <B>Music.platform</B> static property was replaced by the functionally equivalent <A HREF="static-properties.html#Music.clientPlatform"><B>Music.clientPlatform</B></A> static property.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="global-functions"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Global Functions
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="mo_getNoteName"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_getNoteName</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.6.0.html">1.6.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.getNoteName">Music.getNoteName</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_getNoteName</B> global function provided a way to convert a MIDI note number to a corresponding musical note name.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>mo_getNoteName (</B> <A HREF="parameters.html#NoteNumber0to127">NoteNumber0to127</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_getNoteName</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-1.6.0.html">Music Object 1.6.0</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. Consequently, the <B>mo_getNoteName</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteName"><B>Music.getNoteName</B></A> static method.
+</UL>
+
+<A NAME="mo_getNoteNumber"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_getNoteNumber</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.6.0.html">1.6.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.getNoteNumber">Music.getNoteNumber</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_getNoteNumber</B> global function provided a way to convert a musical note name to a corresponding MIDI note number.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>mo_getNoteNumber (</B> <A HREF="parameters.html#NoteNameSTR">NoteNameSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_getNoteNumber</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-1.6.0.html">Music Object 1.6.0</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. Consequently, the <B>mo_getNoteNumber</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.getNoteNumber"><B>Music.getNoteNumber</B></A> static method.
+</UL>
+
+<A NAME="mo_hasMinVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_hasMinVersion</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.hasMinVersion">Music.hasMinVersion</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_hasMinVersion</B> global function returned a boolean value, indicating whether or not the version of the player installed in the user's browser met the minimum version specified.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>mo_hasMinVersion</B> ( MinimumVersionSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_hasMinVersion</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. Consequently, the <B>mo_hasMinVersion</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.hasMinVersion"><B>Music.hasMinVersion</B></A> static method.
+</UL>
+
+<A NAME="mo_installBeatnik"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_installBeatnik</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.installPlayer">Music.installPlayer</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_installBeatnik</B> global function provided a way to explicitly launch the player installation process.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>mo_installBeatnik ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_installBeatnik</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. It was also decided to take advantage of this opportunity to improve the API by choosing a new name for this method that was vendor-neutral and not specific to Beatnik's Player technology. Consequently, the <B>mo_installBeatnik</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.installPlayer"><B>Music.installPlayer</B></A> static method.
+</UL>
+
+<A NAME="mo_isPlayerCompatible"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_isPlayerCompatible</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.isPlayerCompatible">Music.isPlayerCompatible</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_isPlayerCompatible</B> global function provided a way to force Music Object to perform the compatibility test, even before any attempts were made in the authoring to embed player instances into the page.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>mo_isPlayerCompatible (</B><BR>
+			&nbsp;&nbsp;&nbsp; MinimumVersionSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; SilentIfInadequateBOOL <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ShowCompatibilityPromptBOOL<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_isPlayerCompatible</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. Consequently, the <B>mo_isPlayerCompatible</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.isPlayerCompatible"><B>Music.isPlayerCompatible</B></A> static method.
+</UL>
+
+<A NAME="mo_magicEmbed"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_magicEmbed</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.1.6.html">2.1.6</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.magicEmbed">Music.magicEmbed</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_magicEmbed</B> global function provided a way to embed a non-scriptable player instance that was not associated to any Music Object instance.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>mo_magicEmbed (</B> <A HREF="parameters.html#EmbedLineSTR">EmbedLineSTR</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_magicEmbed</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-2.1.6.html">Music Object 2.1.6</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. Consequently, the <B>mo_magicEmbed</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.magicEmbed"><B>Music.magicEmbed</B></A> static method.
+</UL>
+
+<A NAME="mo_promptClose"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_promptClose</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.promptClose">Music.promptClose</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_promptClose</B> global function provided a way to close a prompt window that was opened by the <A HREF="#mo_promptUser"><B>mo_promptUser</B></A> function.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>mo_promptClose ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_promptClose</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. Consequently, the <B>mo_promptClose</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.promptClose"><B>Music.promptClose</B></A> static method.
+</UL>
+
+<A NAME="mo_promptUser"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_promptUser</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;deprecated&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.promptUser">Music.promptUser</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_promptUser</B> global function provided a way to open up a non-modal dialog window to prompt the user to make a decision.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.promptUser (</B><BR>
+			&nbsp;&nbsp;&nbsp; HeadingSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; MessageSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; OkTextSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Ok<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; CancelTextSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Cancel<A HREF="parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ShowStatusBarBOOL<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_promptUser</B> global function was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global functions prefixed with "mo_" should be supplanted by similarly named static methods of the <B>Music</B> object. Consequently, the <B>mo_promptUser</B> global function was replaced by the functionally equivalent <A HREF="static-methods.html#Music.promptUser"><B>Music.promptUser</B></A> static method.
+</UL>
+
+<A NAME="musicObject"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;musicObject</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Function&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-1.1.0.html">1.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="intro.html#start">Music</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>musicObject</B> global function was an object constructor that provided a way to create new Music Object instances.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>musicObject (</B> ObjectNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>musicObject</B> global function (object constructor) was first introduced in <A HREF="version-history/index.html?versions/version-1.1.0.html">Music Object 1.1.0</A>.
+		<P></P>
+	<LI>For the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A>, it was decided to present a more elegant API to developers by rolling much of the functionality, that was previously available in the form of global functions and global variables, into a single object class. The object class name "Music" was chosen in order to bring the API in line with other objects that are built into the JavaScript language (such as the "Math", "Image", "Date" and other objects). Since the capitalization of the first letter now indicated that "Music" was an object constructor, it was considered redundant to append "Object" to its name. Consequently, the <B>musicObject</B> object constructor was replaced by the functionally equivalent <A HREF="intro.html#start"><B>Music</B></A> object constructor. It was decided to still support the <B>musicObject</B> constructor to maintain backwards compatibility, giving content developers time in which to transition to using the new <B>Music</B> constructor.		<P></P>
+	<LI>With the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided to no longer support the <B>musicObject</B> constructor. A backwards compatibility patch (<A HREF="patches/index.html?patches/pre-3.1.0.html">Music Object Patch - Pre 3.1.0</A>) was provided to allow content developers to use version 3.1.0 without having to update their code to accommodate this change in the API.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="global-variables"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Global Variables
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="mo_BeatnikType"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_BeatnikType</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.2.2.html">2.2.2</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.playerType">Music.playerType</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_BeatnikType</B> global variable was a string variable that indicated the type of browser component architecture used by the player.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_BeatnikType</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.2.2.html">Music Object 2.2.2</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. It was also decided to take advantage of this opportunity to improve the API by choosing a new name for this property that was vendor-neutral and not specific to Beatnik's Player technology. Consequently, the <B>mo_BeatnikType</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.playerType"><B>Music.playerType</B></A> static property.
+</UL>
+
+<A NAME="mo_BeatnikVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_BeatnikVersion</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.playerVersion">Music.playerVersion</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_BeatnikVersion</B> global variable was a string variable that indicated the version number of the player installed in the user's browser.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_BeatnikVersion</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. It was also decided to take advantage of this opportunity to improve the API by choosing a new name for this property that was vendor-neutral and not specific to Beatnik's Player technology. Consequently, the <B>mo_BeatnikVersion</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.playerVersion"><B>Music.playerVersion</B></A> static property.
+</UL>
+
+<A NAME="mo_browserSupported"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_browserSupported</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.clientSupported">Music.clientSupported</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_browserSupported</B> global variable was a boolean variable that indicated whether or not the user's browser was supported by the player.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_browserSupported</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. It was also decided to start grouping together static properties that indicated information about the user's client application (or browser), by prefixing each of these properties with "client". Consequently, the <B>mo_browserSupported</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.clientSupported"><B>Music.clientSupported</B></A> static property.
+</UL>
+
+<A NAME="mo_debugToAlert"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_debugToAlert</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.3.0.html">2.3.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="extensions/debug/index.html#Music.debugToAlert">Music.debugToAlert</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_debugToAlert</B> global variable was a boolean variable that specified whether or not error messages were to be displayed in alert boxes.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_debugToAlert</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.3.0.html">Music Object 2.3.0</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global properties previously available as global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_debugToAlert</B> global variable was replaced by the functionally equivalent <A HREF="extensions/debug/index.html#Music.debugToAlert"><B>Music.debugToAlert</B></A> static property.
+		<P></P>
+	<LI>With the release of <A HREF="version-history/index.html?versions/version-3.2.0.html">Music Object 3.2.0</A>, it was decided to no longer make the debugging capabilities part of the core Music Object API, but rather to make them available in the optional <A HREF="extensions/debug/index.html">Debug</A> Music Object extension. This was done in order to allow content developers to publish highly-optimized live content using the smallest possible "music-object.js" JavaScript file.
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>While the Debug extension is designed primarily to assist you in tracking down problems before content goes live, you can still opt to use the Debug extension in your live content if you feel this may help in providing technical support to users if further problems are found with your content after it has gone live.
+	<LI>If you like the idea of having the debugging capabilities wrapped together with the Music Object API in a single JavaScript file, you can still achieve this by making your own custom Music Object suite. For further information on how to do this, consult the section <A HREF="intro.html#suite">Making a Custom Music Object Suite</A>.
+</UL>
+
+<A NAME="mo_debugToJavaConsole"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_debugToJavaConsole</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.3.0.html">2.3.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="extensions/debug/index.html#Music.debugToJavaConsole">Music.debugToJavaConsole</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_debugToJavaConsole</B> global variable was a boolean variable that specified whether or not error messages were to be displayed in the Java console.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_debugToJavaConsole</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.3.0.html">Music Object 2.3.0</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global properties previously available as global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_debugToJavaConsole</B> global variable was replaced by the functionally equivalent <A HREF="extensions/debug/index.html#Music.debugToJavaConsole"><B>Music.debugToJavaConsole</B></A> static property.
+		<P></P>
+	<LI>With the release of <A HREF="version-history/index.html?versions/version-3.2.0.html">Music Object 3.2.0</A>, it was decided to no longer make the debugging capabilities part of the core Music Object API, but rather to make them available in the optional <A HREF="extensions/debug/index.html">Debug</A> Music Object extension. This was done in order to allow content developers to publish highly-optimized live content using the smallest possible "music-object.js" JavaScript file.
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>While the Debug extension is designed primarily to assist you in tracking down problems before content goes live, you can still opt to use the Debug extension in your live content if you feel this may help in providing technical support to users if further problems are found with your content after it has gone live.
+	<LI>If you like the idea of having the debugging capabilities wrapped together with the Music Object API in a single JavaScript file, you can still achieve this by making your own custom Music Object suite. For further information on how to do this, consult the section <A HREF="intro.html#suite">Making a Custom Music Object Suite</A>.
+</UL>
+
+<A NAME="mo_debugToStatus"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_debugToStatus</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.3.0.html">2.3.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="extensions/debug/index.html#Music.debugToStatus">Music.debugToStatus</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_debugToStatus</B> global variable was a boolean variable that specified whether or not error messages were to be displayed in the window's status bar.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_debugToStatus</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.3.0.html">Music Object 2.3.0</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global properties previously available as global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_debugToStatus</B> global variable was replaced by the functionally equivalent <A HREF="extensions/debug/index.html#Music.debugToStatus"><B>Music.debugToStatus</B></A> static property.
+		<P></P>
+	<LI>With the release of <A HREF="version-history/index.html?versions/version-3.2.0.html">Music Object 3.2.0</A>, it was decided to no longer make the debugging capabilities part of the core Music Object API, but rather to make them available in the optional <A HREF="extensions/debug/index.html">Debug</A> Music Object extension. This was done in order to allow content developers to publish highly-optimized live content using the smallest possible "music-object.js" JavaScript file.
+</UL>
+
+<IMG SRC="../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>While the Debug extension is designed primarily to assist you in tracking down problems before content goes live, you can still opt to use the Debug extension in your live content if you feel this may help in providing technical support to users if further problems are found with your content after it has gone live.
+	<LI>If you like the idea of having the debugging capabilities wrapped together with the Music Object API in a single JavaScript file, you can still achieve this by making your own custom Music Object suite. For further information on how to do this, consult the section <A HREF="intro.html#suite">Making a Custom Music Object Suite</A>.
+</UL>
+
+<A NAME="mo_enabled"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_enabled</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.enabled">Music.enabled</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_enabled</B> global variable was a boolean variable that acted as a "master switch" to enable or disable sonification of a page.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_enabled</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_enabled</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.enabled"><B>Music.enabled</B></A> static property.
+</UL>
+
+<A NAME="mo_hasBeatnik"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_hasBeatnik</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.2.2.html">2.2.2</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.hasPlayer">Music.hasPlayer</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_hasBeatnik</B> global variable was a boolean variable that indicated whether or not the player was installed in the user's browser.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_hasBeatnik</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.2.2.html">Music Object 2.2.2</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. It was also decided to take advantage of this opportunity to improve the API by choosing a new name for this property that was vendor-neutral and not specific to Beatnik's Player technology. Consequently, the <B>mo_hasBeatnik</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.hasPlayer"><B>Music.hasPlayer</B></A> static property.
+</UL>
+
+<A NAME="mo_ignoreJavaDisabled"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_ignoreJavaDisabled</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.ignoreJavaDisabled">Music.ignoreJavaDisabled</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_ignoreJavaDisabled</B> global variable was a boolean variable that specified whether or not a prompt should be displayed when Java was disabled in Netscape Navigator.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_ignoreJavaDisabled</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_ignoreJavaDisabled</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.ignoreJavaDisabled"><B>Music.ignoreJavaDisabled</B></A> static property.
+</UL>
+
+<A NAME="mo_ignoreNotReady"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_ignoreNotReady</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.3.1.html">2.3.1</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;-- none --&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_ignoreNotReady</B> global variable was a boolean variable that specified whether or not error messages were to be sent to the debug output if scripting was targeted to a player instance that was not yet ready.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_ignoreNotReady</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.3.1.html">Music Object 2.3.1</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global properties previously available as global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_ignoreNotReady</B> global variable was replaced by the functionally equivalent <A HREF="#Music.ignoreNotReady"><B>Music.ignoreNotReady</B></A> static property.
+		<P></P>
+	<LI>Finally, with the release of <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, it was decided that this feature was not compelling enough and, in an effort to streamline the Music Object API, the <B>Music.ignoreNotReady</B> static property was removed from the API.
+</UL>
+
+<A NAME="mo_platform"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_platform</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.clientPlatform">Music.clientPlatform</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_platform</B> global variable was a string variable that represented the user's platform (operating system).
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_platform</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global properties previously available as global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_platform</B> global variable was replaced by the functionally equivalent <A HREF="#Music.platform"><B>Music.platform</B></A> static property.
+		<P></P>
+	<LI>Finally, with the release of <A HREF="version-history/index.html?versions/version-3.3.0.html">Music Object 3.3.0</A>, it was decided that all static properties that indicated information about the user's client application (or browser) should be grouped together by naming convention, by prefixing each of these properties with "client" (eg. <B>Music.clientName</B>, <B>Music.clientSupported</B>, <B>Music.clientVersion</B>). Consequently, the <B>Music.platform</B> static property was replaced by the functionally equivalent <A HREF="static-properties.html#Music.clientPlatform"><B>Music.clientPlatform</B></A> static property.
+</UL>
+
+<A NAME="mo_requiredMinVersion"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_requiredMinVersion</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-methods.html#Music.requireMinPlayerVersion">Music.requireMinPlayerVersion</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_requiredMinVersion</B> global variable was a string variable that specified the minimum player version required by a sonified page.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_requiredMinVersion</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global properties previously available as global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_requiredMinVersion</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.requiredMinVersion"><B>Music.requiredMinVersion</B></A> static property.
+		<P></P>
+	<LI>Finally, with the release of <A HREF="version-history/index.html?versions/version-3.3.0.html">Music Object 3.3.0</A>, it was decided that the <B>Music.requiredMinVersion</B> static property should become a read-only property and that the newer <A HREF="static-methods.html#Music.requireMinPlayerVersion"><B>Music.requireMinPlayerVersion</B></A> static method should be used, instead, to request a minimum required version. This change was made to allow multiple separate code modules to independently request a minimum player version, such that the highest minimum player version that is requested by all code modules will be the version used to determine if the player installed on the user's system is adequate for the content as a whole. This approach allows separate code modules to co-exist and declare their player dependencies in a more cooperative manner. With this new approach, the read-only <B>Music.requiredMinVersion</B> static property serves the purpose of indicating the minimum required player version that results from all requests for a minimum version that go through the <B>Music.requireMinPlayerVersion</B> static method.
+</UL>
+
+<A NAME="mo_showCompatibilityPrompt"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_showCompatibilityPrompt</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.showCompatibilityPrompt">Music.showCompatibilityPrompt</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_showCompatibilityPrompt</B> global variable was a boolean variable that specified whether or not a prompt should be displayed when the user's player configuration failed to meet a sonified page's compatibility requirements.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_showCompatibilityPrompt</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_showCompatibilityPrompt</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.showCompatibilityPrompt"><B>Music.showCompatibilityPrompt</B></A> static property.
+</UL>
+
+<A NAME="mo_silentIfInadequate"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;mo_silentIfInadequate</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Global Variable&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-2.6.9.html">2.6.9</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.0.0.html">3.0.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Current&nbsp;Equivalent&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="static-properties.html#Music.silentIfInadequate">Music.silentIfInadequate</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>mo_silentIfInadequate</B> global variable was a boolean variable that specified whether or not sonification on a page should be completely disabled if the user's player configuration failed to meet the page's compatibility requirements.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>The <B>mo_silentIfInadequate</B> global variable was first introduced in <A HREF="version-history/index.html?versions/version-2.6.9.html">Music Object 2.6.9</A>.
+		<P></P>
+	<LI>In order to present a more elegant API, it was decided for the release of <A HREF="version-history/index.html?versions/version-3.0.0.html">Music Object 3.0.0</A> that all global variables prefixed with "mo_" should be supplanted by similarly named static properties of the <B>Music</B> object. Consequently, the <B>mo_silentIfInadequate</B> global variable was replaced by the functionally equivalent <A HREF="static-properties.html#Music.silentIfInadequate"><B>Music.silentIfInadequate</B></A> static property.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="code-modules"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Code Modules
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="patch/navigator-4.04-bug"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music Object Patch - Navigator 4.04 Bug</TD><TD CLASS=reference-header ALIGN=RIGHT><IMG SRC="../style/images/obsolete.gif" WIDTH=105 HEIGHT=13 HSPACE=3 VSPACE=0 BORDER=0 ALT="OBSOLETE"></TD></TR>
+	<TR><TD CLASS=reference-header-line COLSPAN=2><IMG SRC="../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Code Modules&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Status&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;no longer supported&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Introduced&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.1.0.html">3.1.0</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Obsoleted&nbsp;at&nbsp;Version...&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="version-history/index.html?versions/version-3.4.0.html">3.4.0</A>&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music Object Patch - Navigator 4.04 Bug</B> code module was used to work around a specific bug in Netscape Navigator 4.04.
+<BR CLEAR=RIGHT>
+</P>
+
+<DIV CLASS=subsection>History</DIV>
+
+<UL>
+	<LI>After the bug in Navigator 4.04 was discovered, a workaround was introduced and was built into <A HREF="version-history/index.html?versions/version-2.1.6.html">Music Object 2.1.6</A>.
+		<P></P>
+	<LI>The built-in workaround was subsequently dropped in Music Object 2.5.5, due to several releases of Navigator passing since Netscape fixed the bug and also due to the code size that the workaround added to the Music Object API.
+		<P></P>
+	<LI>In <A HREF="version-history/index.html?versions/version-3.1.0.html">Music Object 3.1.0</A>, due to concerns from Web content developers regarding compatibility of their sonified content with all versions of Navigator, this workaround was reinstated in the form of an optional code module "Music Object Patch - Navigator 4.04 Bug". This provided the best way at the time to offer content developers the option of supporting the old 4.04 version of Navigator, while at the same time not bloating the code size of the core Music Object API.
+		<P></P>
+	<LI>Finally, with the release of <A HREF="version-history/index.html?versions/version-3.4.0.html">Music Object 3.4.0</A>, Beatnik officially stopped supporting versions 4.0.x of the Netscape Navigator browser. As a result, the <B>Music Object Patch - Navigator 4.04 Bug</B> code module was obsoleted.
+		<P></P>
+</UL>
+
+</BODY></HTML>

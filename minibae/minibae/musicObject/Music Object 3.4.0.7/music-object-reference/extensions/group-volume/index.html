@@ -1,0 +1,997 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Group Volume</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Group Volume
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>The Group Volume extension provides methods for conveniently adjusting the overall volume of an entire group of Music Object instances. This, for example, makes it really easy for the overall group volume levels of all Music Object instances that are being used for one functional aspect of a page's sonification (such as user interface sound effects or background music) to be adjusted in one simple step, without interfering with the different instances' individual volume levels that are being used to balance the instances together in the group. In particular, this extension offers the <A HREF="#Music.setPageVolume"><B>Music.setPageVolume</B></A> and <A HREF="#Music.getPageVolume"><B>Music.getPageVolume</B></A> static methods that make it possible to modify the overall volume of a page's sonification in one operation.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-group-volume.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-group-volume.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-group-volume.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-group-volume.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.addVolumeGroupMembers">Music.addVolumeGroupMembers</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you add the specified Music Object instances as members to the specified volume group.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.destroyVolumeGroup">Music.destroyVolumeGroup</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you destroy the specified volume group, effectively removing all of its members.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.fadeGroupVolume">Music.fadeGroupVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you perform a volume fade on the specified volume group.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.fadePageVolume">Music.fadePageVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you perform a fade of the page's volume, effectively fading all Music Object instances in the page.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getGroupVolume">Music.getGroupVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the volume level for the specified volume group.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getPageVolume">Music.getPageVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an integer value, indicating the overall volume level for the page.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.removeVolumeGroupMembers">Music.removeVolumeGroupMembers</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you remove the specified Music Object instance(s) from the specified volume group.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.setGroupVolume">Music.setGroupVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the volume level for the specified volume group.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.setPageVolume">Music.setPageVolume</A></TD>
+	<TD CLASS=contents-table-item-desc>Lets you set the overall page volume, affecting all Music Object instances in the page.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<P></P>
+
+<A NAME="Music.addVolumeGroupMembers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.addVolumeGroupMembers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.addVolumeGroupMembers</B> static method lets you add the specified Music Object instances as members to the specified volume group
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.addVolumeGroupMembers (</B><BR>
+			&nbsp;&nbsp;&nbsp;GroupNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp;GroupMembersARRAYorOBJ<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Multiple Music Object instances can be added to a group - one at a time - by specifying the Music Object instance references in multiple calls to the <B>Music.addVolumeGroupMembers</B> method, as in the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject1);
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject2);
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject3);
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject4);
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject5);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Alternatively, by specifying an array for the <B>GroupMembersARRAYorOBJ</B> parameter, all the instances can be added in just one statement. A temporary array can be created inside the call to the <B>Music.addVolumeGroupMembers</B> method to contain all the Music Object instances, as in the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>When adding members to a volume group, it doesn't matter in what order the members are added, over how many separate statements the members are added, or whether the members are added using arrays or single object references.</P>
+
+<P>So, for example, the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject2);
+
+Music.addVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject5,
+      myMusicObject3,
+      myMusicObject4
+   )
+);
+
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject1);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...is equivalent to the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>It also does not matter how many times a specific Music Object instance is added to a volume group. Any Music Object instance can only be a member of a group once. So, the following code still results in only five members being added to the volume group "My Volume Group"...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject1);
+
+Music.addVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject3);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>GroupNameSTR</B> parameter, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>GroupMembersARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document will be added to the specified volume group.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.addVolumeGroupMembers (</B> GroupNameSTR <B>)</B>
+		<P>When no <B>GroupMembersARRAYorOBJ</B> parameter is specified, then all Music Object instances currently created in the document will be added to the specified volume group.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.addVolumeGroupMembers ( )</B>
+		<P>When there is also no <B>GroupNameSTR</B> parameter specified, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.destroyVolumeGroup"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.destroyVolumeGroup</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.destroyVolumeGroup</B> static method lets you destroy the specified volume group, effectively removing all of its members.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.destroyVolumeGroup (</B> GroupNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The volume setting for a volume group that is being destroyed will cease to have any effect on the Music Object instances that belonged to the group, so there may be a noticeable volume change for those instances at the time that a volume group is destroyed.</P>
+
+<P>Removing all of the members of a volume group has the same effect as destroying the volume group. For instance, a volume group that was set up with the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could be destroyed with the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.<SPAN CLASS=sample-code-highlighted>remove</SPAN>VolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...or the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.destroyVolumeGroup ('My Volume Group');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>GroupNameSTR</B> parameter, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.destroyVolumeGroup ( )</B>
+		<P>When no <B>GroupNameSTR</B> parameter is specified, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Individual members can be removed from a volume group using the <A HREF="#Music.removeVolumeGroupMembers"><B>Music.removeVolumeGroupMembers</B></A> static method.
+</UL>
+
+<A NAME="Music.fadeGroupVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.fadeGroupVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.fadeGroupVolume</B> static method lets you perform a volume fade on the specified volume group.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.fadeGroupVolume (</B><BR>
+			&nbsp;&nbsp;&nbsp; GroupNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../fades/index.html#Music.Fade">FadeOBJ</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>GroupNameSTR</B> parameter, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>StartVolumeLevel</B> parameter, then the current volume setting of the specified volume group will be used as the starting volume for the fade.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>EndVolumeLevel</B> parameter, then the fade will end at volume <SPAN CLASS=value>0</SPAN> (silence).
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>FadeTimeMsINT</B> parameter, then the fade will have a default duration of 1 second (1000ms), which is equivalent to specifying the value <SPAN CLASS=value>1000</SPAN> for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>FadeEndCallback</B> parameter, then no callback will be executed when the fade reaches its conclusion.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.fadeGroupVolume (</B> GroupNameSTR <B>,</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>)</B>
+		<P>When no <B>FadeEndCallback</B> parameter is specified, then no callback will be executed when the fade reaches its conclusion.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fadeGroupVolume (</B> GroupNameSTR <B>,</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B>
+		<P>When there is also no <B>FadeTimeMsINT</B> parameter specified, then the fade will have a default duration of 1 second (1000ms), which is equivalent to specifying the value <SPAN CLASS=value>1000</SPAN> for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fadeGroupVolume (</B> GroupNameSTR <B>,</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B>
+		<P>When there is also no <B>EndVolume0to100</B> parameter specified, then the fade will have a default end volume of <SPAN CLASS=value>0</SPAN> (silence).</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fadeGroupVolume (</B> GroupNameSTR <B>)</B>
+		<P>When there is also no <B>StartVolume0to100</B> parameter specified, then the fade will start at the current volume level of the specified volume group.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fadeGroupVolume ( )</B>
+		<P>When there is also no <B>GroupNameSTR</B> parameter specified, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<!--
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>
+</UL>
+-->
+
+<A NAME="Music.fadePageVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.fadePageVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.fadePageVolume</B> static method lets you perform a fade of the page's volume, effectively fading all Music Object instances in the page.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.fadePageVolume (</B><BR>
+			&nbsp;&nbsp;&nbsp; Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; FadeEndCallback<A HREF="../../parameters.html#Function">Function</A><B>or</B><A HREF="../../parameters.html#JavaScriptSTR">JavaScriptSTR</A> <B>,</B><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../fades/index.html#Music.Fade">FadeOBJ</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.fadePageVolume</B> method essentially performs a fade for the special volume group "Page Volume", which contains all Music Object instances in a page.</P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>StartVolumeLevel</B> parameter, then the current volume setting of the specified volume group will be used as the starting volume for the fade.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>EndVolumeLevel</B> parameter, then the fade will end at volume <SPAN CLASS=value>0</SPAN> (silence).
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>FadeTimeMsINT</B> parameter, then the fade will have a default duration of 1 second (1000ms), which is equivalent to specifying the value <SPAN CLASS=value>1000</SPAN> for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>FadeEndCallback</B> parameter, then no callback will be executed when the fade reaches its conclusion.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.fadePageVolume (</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> <A HREF="../../parameters.html#FadeTimeMsINT">FadeTimeMsINT</A> <B>)</B>
+		<P>When no <B>FadeEndCallback</B> parameter is specified, then no callback will be executed when the fade reaches its conclusion.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fadePageVolume (</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>,</B> End<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B>
+		<P>When there is also no <B>FadeTimeMsINT</B> parameter specified, then the fade will have a default duration of 1 second (1000ms), which is equivalent to specifying the value <SPAN CLASS=value>1000</SPAN> for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fadePageVolume (</B> Start<A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B>
+		<P>When there is also no <B>EndVolume0to100</B> parameter specified, then the fade will have a default end volume of <SPAN CLASS=value>0</SPAN> (silence).</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.fadePageVolume ( )</B>
+		<P>When there is also no <B>StartVolume0to100</B> parameter specified, then the fade will start at the current volume level of the specified volume group.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Fades for other volume groups can be performed using the <A HREF="#Music.fadeGroupVolume"><B>Music.fadeGroupVolume</B></A> static method.
+</UL>
+
+<A NAME="Music.getGroupVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getGroupVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getGroupVolume</B> static method returns an integer value, indicating the volume level for the specified volume group.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.getGroupVolume (</B> GroupNameSTR <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#Volume0to100">Volume0to100</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>GroupNameSTR</B> parameter, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter. This is, in effect, equivalent to using the <A HREF="#Music.getPageVolume"><B>Music.getPageVolume</B></A> method.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.getGroupVolume ( )</B>
+		<P>When no <B>GroupNameSTR</B> parameter is specified, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter. Using this variation is, in effect, equivalent to using the <A HREF="#Music.getPageVolume"><B>Music.getPageVolume</B></A> method.
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Volume level can be set for a volume group using the <A HREF="#Music.setGroupVolume"><B>Music.setGroupVolume</B></A> static method.
+</UL>
+
+<A NAME="Music.getPageVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getPageVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getPageVolume</B> static method returns an integer value, indicating the overall volume level for the page.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.getPageVolume ( )</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><A HREF="../../parameters.html#Volume0to100">Volume0to100</A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.getPageVolume</B> method essentially queries the volume level for the special volume group "Page Volume", which contains all Music Object instances in a page.</P>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Volume level can be set for a page using the <A HREF="#Music.setPageVolume"><B>Music.setPageVolume</B></A> static method.
+</UL>
+
+<A NAME="Music.removeVolumeGroupMembers"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.removeVolumeGroupMembers</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.removeVolumeGroupMembers</B> static method lets you remove the specified Music Object instance(s) from the specified volume group.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>Music.removeVolumeGroupMembers (</B><BR>
+			&nbsp;&nbsp;&nbsp;GroupNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp;GroupMembersARRAYorOBJ<BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Multiple Music Object instances can be removed from a group - one at a time - by specifying the Music Object instance references in multiple calls to the <B>Music.removeVolumeGroupMembers</B> method, as in the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.removeVolumeGroupMembers ('My Volume Group',myMusicObject1);
+Music.removeVolumeGroupMembers ('My Volume Group',myMusicObject2);
+Music.removeVolumeGroupMembers ('My Volume Group',myMusicObject3);
+Music.removeVolumeGroupMembers ('My Volume Group',myMusicObject4);
+Music.removeVolumeGroupMembers ('My Volume Group',myMusicObject5);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Alternatively, by specifying an array for the <B>GroupMembersARRAYorOBJ</B> parameter, all the instances can be removed in just one statement. A temporary array can be created inside the call to the <B>Music.removeVolumeGroupMembers</B> method to contain all the Music Object instances, as in the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.removeVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>When removing members from a volume group, it doesn't matter in what order the members were originally added, over how many separate statements the members were added, or whether the members were added using arrays or single object references.</P>
+
+<P>So, for example, the members added to the volume group "My Volume Group" using the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject2);
+
+Music.addVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject5,
+      myMusicObject3,
+      myMusicObject4
+   )
+);
+
+Music.addVolumeGroupMembers ('My Volume Group',myMusicObject1);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could all be removed from the volume group "My Volume Group" using the single statement...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.removeVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Removing all of the members of a volume group has the same effect as destroying the volume group. For instance, a volume group that was set up with the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.addVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could be destroyed with the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.removeVolumeGroupMembers (
+   'My Volume Group',
+   new Array (
+      myMusicObject1,
+      myMusicObject2,
+      myMusicObject3,
+      myMusicObject4,
+      myMusicObject5
+   )
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...or the code...</P>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+Music.<SPAN CLASS=sample-code-highlighted>destroyVolumeGroup</SPAN> ('My Volume Group');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>GroupNameSTR</B> parameter, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>GroupMembersARRAYorOBJ</B> parameter, then all Music Object instances currently created in the document will be removed from the specified volume group.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.removeVolumeGroupMembers (</B> GroupNameSTR <B>)</B>
+		<P>When no <B>GroupMembersARRAYorOBJ</B> parameter is specified, then all Music Object instances currently created in the document will be removed from the specified volume group.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.removeVolumeGroupMembers ( )</B>
+		<P>When there is also no <B>GroupNameSTR</B> parameter specified, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Music Object instances can be added as members of a volume group using the <A HREF="#Music.addVolumeGroupMembers"><B>Music.addVolumeGroupMembers</B></A> static method.
+</UL>
+
+<A NAME="Music.setGroupVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.setGroupVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.setGroupVolume</B> static method lets you set the volume level for the specified volume group.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.setGroupVolume (</B> GroupNameSTR <B>,</B> <A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> (or an empty string) is specified for the <B>GroupNameSTR</B> parameter, then the value "<SPAN CLASS=value>Page Volume</SPAN>" will be used as the default for this parameter. This is, in effect, equivalent to using the <A HREF="#Music.setPageVolume"><B>Music.setPageVolume</B></A> method.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.setGroupVolume (</B> GroupNameSTR <B>,</B> <SPAN CLASS=value>-1</SPAN> )</B>
+		<P>When the value <SPAN CLASS=value>-1</SPAN> is specified in place of the <B>Volume0to100</B> parameter, then the volume group specified by the <B>GroupNameSTR</B> parameter will effectively be removed. If there is no existing volume group matching the name specified by the <B>GroupNameSTR</B> parameter, then the <B>Music.getGroupVolume</B> method will have no effect.
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Volume level for a volume group can be queried using the <A HREF="#Music.getGroupVolume"><B>Music.getGroupVolume</B></A> static method.
+</UL>
+
+<A NAME="Music.setPageVolume"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.setPageVolume</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Group Volume</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.setPageVolume</B> static method lets you set the overall page volume, affecting all Music Object instances in the page.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.setPageVolume (</B> <A HREF="../../parameters.html#Volume0to100">Volume0to100</A> <B>)</B></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>Music.setPageVolume</B> method essentially sets the volume level for the special volume group "Page Volume", which contains all Music Object instances in a page.</P>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.setPageVolume (</B> <SPAN CLASS=value>-1</SPAN> <B>)</B>
+		<P>When the value <SPAN CLASS=value>-1</SPAN> is specified in place of the <B>Volume0to100</B> parameter, then the "Page Volume" volume group will effectively be removed. This would have a similar effect to using the statement <NOBR><SPAN CLASS=sample-code>Music.setPageVolume (100)</SPAN></NOBR>.
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI>Overal volume level for a page can be queried using the <A HREF="#Music.getPageVolume"><B>Music.getPageVolume</B></A> static method.
+</UL>
+
+</BODY></HTML>

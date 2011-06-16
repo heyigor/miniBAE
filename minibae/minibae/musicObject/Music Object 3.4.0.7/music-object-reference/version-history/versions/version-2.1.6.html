@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 2.1.6</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 2.1.6<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1998-02-12</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#this-version">What's New In This Version</A>
+			<LI><A HREF="#navigator-4.04-issue">Navigator 4.04 Issue</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<P>Music Object Version 2.1.6 offers a workaround for a serious Navigator 4.04 issue that has caused existing content to break.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="navigator-4.04-issue"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Navigator 4.04 Issue
+</TD></TR></TABLE>
+<BR>
+
+<P>If you have done or are planning to do any interactive sonification using Beatnik, you need to be aware of this issue. With the release of Netscape Navigator 4.04, it appears that a new bug / issue has been thrown at authors of Beatnik content. This means that some content you may have already authored is likely to not work in Navigator 4.04.</P>
+
+<P>Fortunately, there is a remedy for this problem which is fairly painless and doesn't require additional authoring. Read on.</P>
+
+<A NAME="navigator-4.04-issue/when-it-occurs"></A>
+<DIV CLASS=subsection>When It Occurs</DIV>
+
+<P>This bug manifests itself in Beatnik sonified Web pages that exist inside a frameset. Due to the nature of the bug, it does not cause problems for single HTML pages that are not in a frameset. A single page that currently works fine in Navigator 4.04 will stop working once it is thrown inside a frameset.</P>
+
+<A NAME="navigator-4.04-issue/symptoms"></A>
+<DIV CLASS=subsection>Symptoms</DIV>
+
+<P>Frameset pages authored for Beatnik, which otherwise work perfectly on earlier versions of Navigator, now produce JavaScript error messages to the tune of "myMusicObject is undefined" or "myMusicObject has no properties". After displaying these JavaScript error alerts, interactive content then does not work as designed. This is NOT a bug with the Beatnik Plug-in or the "music-object.js" file. It is a bug with Navigator 4.04.</P>
+
+<A NAME="navigator-4.04-issue/explanation"></A>
+<DIV CLASS=subsection>Explanation</DIV>
+
+<P>It appears that Navigator 4.04 is targeting all callbacks that originate from a plug-in - not to the frame in the frameset that contains the plug-in - but the top frameset document itself. This means that a callback is no longer executed in the appropriate context in which it was generated, leading in our case to error messages such as "myMusicObject is undefined" or "myMusicObject has no properties". This is a change in the behavior from all previous versions of Navigator.</P>
+
+<P>Because all plug-in callbacks are now targeted to the top frame in a frameset, this problem does not affect non-frameset Web pages, since the HTML page then is the top frame in the window.</P>
+
+<A NAME="navigator-4.04-issue/solution"></A>
+<DIV CLASS=subsection>The Solution</DIV>
+
+<P>Fortunately, at Beatnik Inc. we were able to find a workaround to make this issue invisible to authors. It has always been our goal to hide as much of the annoyance factor from Beatnik authors as possible. The workaround exists within the "music-object.js" JavaScript file. A process kicks into effect for Netscape Navigator browsers that determines the full frameset path from the top window to execute the callback function in the frame where the callback originated. So, even though the top frame is executing a function that would otherwise not be recognized in its context, it reaches back deep into the frameset hierarchy and executes the function in the appropriate context.</P>
+
+<A NAME="navigator-4.04-issue/updating-content"></A>
+<DIV CLASS=subsection>HOW TO UPDATE YOUR CONTENT</DIV>
+
+<P>Despite the previous technical explanations, updating your content to avoid this Navigator 4.04 bug is quite easy.</P>
+
+<OL>
+	<LI><B>Update</B>
+		<P>You will most likely be upgrading from Music Object version 1.x (if you are unsure which version you are currently using, consult <A HREF="../intro.html#which-version">Which Music Object Version Are You Using?</A>). You will need to make some minor changes in your content in order to benefit from the workaround in version 2.1.6. Follow the simple instructions in <A HREF="../from-1.x-to-2.x.html">Migrating Content From Music Object Version 1.x</A>, and then continue with the remaining steps below.</P>
+	<LI><B>Test</B>
+		<P>Now that you have updated your Web site(s) with the latest version of Music Object, check your Web site pages locally to see that you do not experience the bug described here. Be sure to use Netscape Navigator 4.04 since it is this browser that manifests the problem. <B>If you use a version other than 4.04, you may not be able to tell if the change has been effective</B>. Even if you didn't experience the bug before, do testing anyway to ensure that all your content still works with the new "music-object.js" file.</P>
+	<LI><B>Follow Up</B> 
+		<P>Once you have tested and are confident everything is peachy, make sure you have updated the online version of your Web site and watch closely for any e-mail reports from patrons to your Web site who may be browsing with different browser and OS configurations.</P>
+</OL>
+
+<A NAME="navigator-4.04-issue/recommendations"></A>
+<DIV CLASS=subsection>Recommendations</DIV>
+
+<P>All authors should switch to the new "music-object.js" file immediately - even if you are not using framesets on your Web site. You may forget about this issue and later choose to place some single pages into a frameset and not understand why they are not working in Navigator 4.04.</P>
+
+<BLOCKQUOTE>
+<IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;There may be other unrelated issues with Navigator 4.04 on the Mac or incompatibilities with early versions of the Beatnik Plug-in that may cause problems with Beatnik sonified content. If so, please bring these to our attention. This developer announcement addresses only this one very specific issue described above.
+</BLOCKQUOTE>
+
+<!--***********************************************************************-->
+
+</BODY></HTML>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Version 2.7.9</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Version 2.7.9<BR>
+<SPAN CLASS=title-annotation>RELEASE DATE: 1999-01-12</SPAN>
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="this-version"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New In This Version
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>NEW CLIENT SUPPORTED - WebTV Satellite Receiver</DIV>
+
+<BLOCKQUOTE>
+Version 2.7.9 now supports one of the new models of WebTV set-top boxes, known as the "WebTV Satellite Receiver". This is in addition to the "WebTV Plus Receiver", supported since version 2.7.4. Support for the new WebTV product has not added substantially to the size of the "music-object.js" file.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>ISSUE WORKAROUND - Unexplained Long Pause in Internet Explorer</DIV>
+
+<BLOCKQUOTE>
+<P>An issue was discovered with Microsoft Internet Explorer and the Beatnik ActiveX control. Occasionally, certain pages would pause for a very long time and not complete loading until something happened in the operating system to "tickle" the browser. The problem was traced to the OBJECT tag's HIDDEN parameter and how this was being used in the dummy instance that is necessary to obtain the version number of the installed player. How exactly this causes the problem is unknown.</P>
+
+<P>The solution, for now, requires that the 1 x 1 pixel dummy player instance not be hidden, resulting in a small "speck", usually towards the top left of any sonified document. This speck does not appear in Netscape Navigator because this browser provides a clear way to obtain version information of installed plug-ins without the need to create dummy instances.</P>
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>ISSUE WORKAROUND - Unreliable Triggering of the onReady Event</DIV>
+
+<BLOCKQUOTE>
+It was discovered that certain content behaved erratically and would sometimes work, and sometimes would not. Investigation revealed that event triggering from ActiveX controls is sometimes unreliable and there can be cases where the scripting layer is not successfully initialized and ready to receive events, when the control believes it is OK to trigger the events. The workaround that was put in place involves a kind of "handshake", where Music Object informs the control that it has received the onReady event. The control will continue periodically retriggering the event unless it receives this verification from Music Object.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>IMPROVEMENT - Full Meta Event Support in Internet Explorer</DIV>
+
+<BLOCKQUOTE>
+For a while, it has been unclear how to receive parameters passed by ActiveX controls firing events to the browser's scripting layer. So, while previous versions of Music Object where receiving meta events from the player, the all important meta event type and meta event value parameters were not being received. Version 2.7.9 now contains code to receive these parameters and pass them to the registered meta event handler.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>API CHANGE - getPlatform Method Replaced by mo_platform Attribute</DIV>
+
+<BLOCKQUOTE>
+For the longest time, the <A HREF="../../obsoleted-features.html#getPlatform" TARGET="_parent"><B>getPlatform</B></A> method has simply returned the userAgent property of the browser being used. Since this can easily be done using the "<B>navigator.userAgent</B>" property, it was decided to remove this method from the API. A more useful way to determine the class of browser being used is to use Music Object's <A HREF="../../obsoleted-features.html#mo_platform" TARGET="_parent"><B>mo_platform</B></A> global variable.
+</BLOCKQUOTE>
+
+<DIV CLASS=subsection>OPTIMIZATION - General Improvements</DIV>
+
+<BLOCKQUOTE>
+Some optimizations were made to the inner workings of Music Object to increase its efficiency. None of these code optimizations require any changes to authored content.
+</BLOCKQUOTE>
+
+</BODY></HTML>

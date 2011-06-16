@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+	<TITLE>EXAMPLE: A JavaScript Seashore (explanation)</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=2 CELLPADDING=4>
+	<TR>
+		<TD ALIGN=CENTER COLSPAN=2><HR NOSHADE SIZE=1><SPAN CLASS=sample-code-heading>A JavaScript Seashore (explanation)<HR NOSHADE SIZE=1></TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code-item-name>Description</TD>
+		<TD CLASS=sample-code-item-value>
+			This example demonstrates how one can generate music on the fly, simply using JavaScript and the Beatnik Player's LiveConnect methods. There are no RMF or MIDI files being played here - just some intelligent JavaScript. The result is a seashore soundtrack that is never repetitive, can go on for hours, and that doesn't require loading a large music file since the player is instantiated on the page using a stub file.
+
+			<P>There are 5 MIDI channels being used, each one playing the General MIDI wave sound (program 122), panned from left to right across the stereo field. At timed intervals, new random numbers are generated to update these waves. The pitch of the waves does not jump all over the place but follows a randomized rising and falling pattern. JavaScript is also used to slowly flip through the images, resulting in a "slideshow" style experience.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code-item-name>Methods&nbsp;Used</TD>
+		<TD CLASS=sample-code-item-value>noteOn, setController, setMonophonic, stubEmbed</TD>
+	</TR>
+	<TR>
+		<TD CLASS=sample-code-item-name>Skill&nbsp;Level</TD>
+		<TD CLASS=sample-code-item-value>Advanced</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=CENTER COLSPAN=2><HR NOSHADE SIZE=1></TD>
+	</TR>
+	<TR>
+		<TD></TD>
+		<TD ALIGN=RIGHT><A CLASS=sample-code-start HREF="example.html">Start...</A></TD>
+	</TR>
+</TABLE>
+
+</BODY>
+</HTML>

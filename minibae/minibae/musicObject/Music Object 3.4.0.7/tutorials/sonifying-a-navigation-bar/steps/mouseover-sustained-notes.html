@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Sonifying a Navigation Bar - Notes That Sustain Only During Mouseover</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+notePlayer = new Music ();
+notePlayer.setMonophonic (1,true);
+notePlayer.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 5: Notes That Sustain Only During Mouseover
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>We have seen how the <B>playNote</B> method can be used to trigger sounds when certain user interface events such as mouseovers and mouseclicks occur. When the <B>playNote</B> method is called, two events occur in the Beatnik player: the desired note is turned on, and then it is turned off again after the specified duration. Both of these events can also be triggered directly using the Music Object's <B>noteOn</B> and <B>noteOff</B> methods. This kind of control allows you to have a note that sustains indefinitely until a particular user interface event occurs. For instance, when the user mouses over a graphic, a note can be turned on. And then, when they mouse out of the graphic again, the note can be turned off. This is exactly the application for <B>noteOn</B> and <B>noteOff</B> that is used in this step of the tutorial.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD>
+			<A
+				HREF="buckingham1.html"
+				ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000); return false"
+				ONMOUSEOVER="notePlayer.noteOn (1,1,98,'C4',127)"
+				ONMOUSEOUT="notePlayer.noteOff (1,'C4')"
+			>
+			<IMG SRC="../../../images/example-nav-prev.gif" WIDTH=96 HEIGHT=36 ALT="PREV" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham-home.html"
+				ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000); return false"
+				ONMOUSEOVER="notePlayer.noteOn (1,1,98,'D4',127)"
+				ONMOUSEOUT="notePlayer.noteOff (1,'D4')"
+			>
+			<IMG SRC="../../../images/example-nav-home.gif" WIDTH=302 HEIGHT=36 ALT="HOME" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham3.html"
+				ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000); return false"
+				ONMOUSEOVER="notePlayer.noteOn (1,1,98,'E4',127)"
+				ONMOUSEOUT="notePlayer.noteOff (1,'E4')"
+			>
+			<IMG SRC="../../../images/example-nav-next.gif" WIDTH=96 HEIGHT=36 ALT="NEXT" BORDER=0 HSPACE=0></A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Interact with the sample for a while and get a feel for the different response. If necessary, go back to the previous step to compare behaviors. You will find that the new approach gives a more immediate sense of leaving each active area of the navigation bar. Also, because the note is being sustained indefinitely while you are over an active region, you are always aware that the region is clickable. Compare this behavior to the behavior of the previous step, where the note eventually fades out, even while you remain over a certain area.</P>
+
+<P>Now, let's look at the source...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+notePlayer.setMonophonic (1,true);
+notePlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham1.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="notePlayer.noteOn (1,1,98,'C4',127)"
+            ONMOUSEOUT="notePlayer.noteOff (1,'C4')"</SPAN>
+            ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000)"
+         &gt;
+         &lt;IMG
+            SRC="navbar-prev.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="PREV"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham-home.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="notePlayer.noteOn (1,1,98,'D4',127)"
+            ONMOUSEOUT="notePlayer.noteOff (1,'C4')"</SPAN>
+            ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000)"
+         &gt;
+         &lt;IMG
+            SRC="navbar-home.gif"
+            WIDTH=302
+            HEIGHT=36
+            ALT="HOME"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham3.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="notePlayer.noteOn (1,1,98,'E4',127)"
+            ONMOUSEOUT="notePlayer.noteOff (1,'C4')"</SPAN>
+            ONCLICK="notePlayer.playNote (1,0,213,'C4',127,1000)"
+         &gt;
+         &lt;IMG
+            SRC="navbar-next.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="NEXT"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>You will see from the source that the <B>playNote</B> method calls from the previous step have now been replaced with <B>noteOn</B> method calls for the ONMOUSEOVER events. And we have also now added <B>noteOff</B> method calls for the ONMOUSEOUT events, so that the notes do not sustain forever but get switched off when the user mouses out of each graphic. The parameters that the <B>noteOn</B> method takes are exactly the same as the parameters for the <B>playNote</B> method, with the notable absence of a NoteDurationMsINT parameter.</P>
+
+<P>By contrast, the <B>noteOff</B> method takes just two parameters: <B>MidiChannel1to16</B>, and <B>NoteNameSTR</B>. In order to successfully turn off a note that is turned on with an ONMOUSEOVER event, the <B>noteOff</B> method must match both the MIDI channel and note name values with the values that were sent in the <B>noteOn</B> method call. When you are fine-tuning a page's sonification and trying out different note values to find the right "sound" for your page, it is easy to make the mistake of changing just the note value in the ONMOUSEOVER event and omitting to change the value similarly in the ONMOUSEOUT event. When this happens, notes will not be switched off properly. So, each time you make such a change, you need to make the change in two places.</P>
+
+<P>With the ONCLICK event, we still have the <B>playNote</B> method call from the previous step. Only now, the effect of the <B>setMonophonic</B> statement at the head of the code is that much more noticable. The percussive sound that is triggered when the user clicks on one of the links is being played through the same channel as the mouseover sounds. Because the channel has been set to monophonic mode, as soon as the click sound is triggered, the mouseover sound is killed. This is appropriate because the user has been "hovering" over a potential link without committing to any action. The mouseover drone then acts as a "soundtrack" to their state of indecision. As soon as a decision is reached and the user clicks, the sound of the indecision is killed with a decisive click noise.</P>
+
+</BODY></HTML>

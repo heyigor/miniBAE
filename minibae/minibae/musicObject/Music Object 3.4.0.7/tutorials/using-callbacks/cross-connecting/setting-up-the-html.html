@@ -1,0 +1,147 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Using Player Callbacks</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+PART A - step 1: Setting up the HTML
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+
+// --></SCRIPT>
+
+<P>Since this is just a modest example we don't wish to be too graphic intensive quite yet, so we'll make use of a few bright (arguably blinding) table cell background colors. Form elements are a dime a dozen and they can even be coerced to change state with just a little bit of JavaScript finesse. Throw in a neat little table - complete with Beatnik Player - and you have the layout seen below...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=CENTER>
+		<TD BGCOLOR=000000 ALIGN=CENTER>
+			<SCRIPT LANGUAGE=JavaScript>
+				music.magicEmbed (
+					'SRC="../../../music/lounge.rmf" ' +
+					'WIDTH=144 ' +
+					'HEIGHT=60 ' +
+					'DISPLAY=SONG ' +
+					'AUTOSTART=FALSE ' +
+					'LOOP=FALSE ' +
+					'HSPACE=20'
+				);
+			</SCRIPT>
+		</TD>
+		<TD VALIGN=CENTER>
+			<TABLE HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=8>
+				<FORM NAME="callbackForm">
+				<TR>
+					<TD BGCOLOR=FF0000>
+						<INPUT TYPE=radio NAME=playState CHECKED>
+						<FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=FFFFFF><B>STOP</B></FONT>
+					</TD>
+				</TR>
+				<TR>
+					<TD BGCOLOR=00FF00>
+						<INPUT TYPE=radio NAME=playState>
+						<FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000><B>PLAY</B></FONT>
+					</TD>
+				</TR>
+				<TR>
+					<TD BGCOLOR=FFFF00>
+						<INPUT TYPE=radio NAME=playState>
+						<FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000><B>PAUSE</B></FONT>
+					</TD>
+				</TR>
+				</FORM>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>Interacting with the sample, you will notice how there is as yet no connection between the player and the HTML form elements. Take a look at the HTML source code listing for this step. It's not too complex and won't be that much more complex when the connections have been wired in the next step. The main goal is for you to be able to clearly see the mechanics of callbacks in action, in a form that is simple and not obscured by a necessarily more complicated real-life application.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+<SPAN CLASS=sample-code-highlighted>&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music = new Music ();
+
+// --&gt;&lt;/SCRIPT&gt;</SPAN>
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR VALIGN=CENTER&gt;
+      &lt;TD BGCOLOR=000000 ALIGN=CENTER&gt;
+<SPAN CLASS=sample-code-highlighted>         &lt;SCRIPT LANGUAGE=JavaScript&gt;
+            music.magicEmbed (
+               'SRC="lounge.rmf" ' +
+               'WIDTH=144 ' +
+               'HEIGHT=60 ' +
+               'DISPLAY=SONG ' +
+               'AUTOSTART=FALSE ' +
+               'LOOP=FALSE ' +
+               'HSPACE=20'
+            );
+         &lt;/SCRIPT&gt;</SPAN>
+      &lt;/TD&gt;
+      &lt;TD VALIGN=CENTER&gt;
+         &lt;TABLE HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=8&gt;
+            &lt;FORM NAME="callbackForm"&gt;
+            &lt;TR&gt;
+               &lt;TD BGCOLOR=FF0000&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=playState
+                     ONCLICK="music.stop ()"
+                     CHECKED
+                  &gt;
+                  &lt;FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=FFFFFF&gt;&lt;B&gt;STOP&lt;/B&gt;&lt;/FONT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR&gt;
+               &lt;TD BGCOLOR=00FF00&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=playState
+                     ONCLICK="music.play ()"
+                  &gt;
+                  &lt;FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000&gt;&lt;B&gt;PLAY&lt;/B&gt;&lt;/FONT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;TR&gt;
+               &lt;TD BGCOLOR=FFFF00&gt;
+                  &lt;INPUT
+                     TYPE=radio
+                     NAME=playState
+                     ONCLICK="music.pause ()"
+                  &gt;
+                  &lt;FONT FACE="ARIAL,HELVETICA,VERDANA" COLOR=000000&gt;&lt;B&gt;PAUSE&lt;/B&gt;&lt;/FONT&gt;
+               &lt;/TD&gt;
+            &lt;/TR&gt;
+            &lt;/FORM&gt;
+         &lt;/TABLE&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+&lt;P&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the above source code listing, the text that is highlighted represents the code necessary to embed a Beatnik Player using Music Object's <B>magicEmbed</B> method. Using Music Object is necessary since in the next step we will use Music Object methods to set up callbacks from the player in order to 'wire together' the player and the HTML form elements.</P>
+
+<P><IMG SRC="../../../style/images/subheading-note.gif" WIDTH=50 HEIGHT=12 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTE" ALIGN=BOTTOM>&nbsp;&nbsp;See how the <B>magicEmbed</B> method has been broken up into multiple lines, with each line concatenating a further piece of the EMBED string. This was only done to avoid the line from scrolling off way to the right in the source code listing, making the source code a little easier to read. It is not necessary to do this in one's real code - the EMBED string can be one solid and unbroken string.</P>
+
+</BODY></HTML>

@@ -1,0 +1,108 @@
+<HTML><HEAD><TITLE>EXAMPLE: Custom Control Panel (source)</TITLE></HEAD>
+<BODY BGCOLOR=FFFFFF TEXT=000000 LINK=000088 VLINK=880088>
+
+<PRE>
+&lt;!--SEARCH PARENT="../index.html"--&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+   &lt;TITLE&gt;EXAMPLE: Custom Control Panel (sample)&lt;/TITLE&gt;
+   &lt;LINK REL="stylesheet" HREF="../../style/style.css"&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;!--*********************************************************************--&gt;
+&lt;!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *--&gt;
+&lt;!--*                -- http://www.tomkidding.com --                    *--&gt;
+&lt;!--*                                                                   *--&gt;
+&lt;!--*                    ©1997-1999 Beatnik, Inc.                       *--&gt;
+&lt;!--*********************************************************************--&gt;
+
+&lt;SCRIPT SRC="../../javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="../../javascript/music-object-prefs.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="../../javascript/library-widgets.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+baseURL = window.location.href;
+baseURL = baseURL.substring (0,baseURL.lastIndexOf ('/') + 1);
+isJavaScript1_1 = typeof Image != 'undefined';
+
+function musicPlays () {
+   if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-up.gif';
+   lastState = 'play';
+   if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-down.gif';
+}
+
+function musicPauses () {
+   if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-up.gif';
+   lastState = 'pause';
+   if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-down.gif';
+}
+
+function musicStops () {
+   if (isJavaScript1_1) document ['img_' + lastState].src = baseURL + 'buttons/' + lastState + '-up.gif';
+   lastState = 'stop';
+}
+
+function changeFile () {
+   music.stop ();
+   music.setAutostart (true);
+   var
+      selectHandle = document.fileForm.fileList,
+      currentFile = selectHandle.options [selectHandle.selectedIndex].text
+   ;
+   music.play (true,'../../music/' + currentFile + '.rmf');
+}
+
+function volumeFromSlider () {music.setVolume (volumeSlider.value)}
+
+music = new Music ();
+music.onPlay (musicPlays);
+music.onStop (musicStops);
+music.onPause (musicPauses);
+
+lastState = 'stop';
+
+document.writeln (
+   '&lt;TABLE ALIGN=CENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="888888"&gt;&lt;TR&gt;&lt;TD&gt;' +
+   '&lt;TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 BGCOLOR="223344"&gt;' +
+   '&lt;TR&gt;' +
+   '&lt;TD BGCOLOR="223344" COLSPAN=3 ALIGN=CENTER&gt;' +
+   '&lt;FORM NAME="fileForm"&gt;' +
+   '&lt;SELECT NAME="fileList" ONCHANGE="changeFile ()" ONFOCUS="volumeSlider.blur ()"&gt;' +
+   '&lt;OPTION&gt;ambient' +
+   '&lt;OPTION&gt;classical' +
+   '&lt;OPTION&gt;house' +
+   '&lt;OPTION&gt;jungle' +
+   '&lt;OPTION&gt;lounge' +
+   '&lt;OPTION&gt;modern-rock' +
+   '&lt;OPTION&gt;sfx-medley' +
+   '&lt;OPTION&gt;techno' +
+   '&lt;OPTION&gt;trance' +
+   '&lt;/SELECT&gt;' +
+   '&lt;/FORM&gt;' +
+   '&lt;/TD&gt;' +
+   '&lt;TD ROWSPAN=3&gt;'
+);
+new Slider ('volumeSlider','volumeFromSlider ()',0,100,100,10,12,8,5,'../../images/slider/');
+document.writeln (
+   '&lt;/TD&gt;' +
+   '&lt;/TR&gt;' +
+   '&lt;TR&gt;' +
+   '&lt;TD ALIGN=CENTER&gt;&lt;A HREF="javascript://" ONCLICK="music.stop (); return false"&gt;&lt;IMG SRC="buttons/stop-up.gif" ALT="stop" WIDTH=35 HEIGHT=24 BORDER=0 NAME="img_stop"&gt;&lt;/A&gt;&lt;/TD&gt;' +
+   '&lt;TD ALIGN=CENTER&gt;&lt;A HREF="javascript://" ONCLICK="music.play (); return false"&gt;&lt;IMG SRC="buttons/play-up.gif" ALT="play" WIDTH=35 HEIGHT=24 BORDER=0 NAME="img_play"&gt;&lt;/A&gt;&lt;/TD&gt;' +
+   '&lt;TD ALIGN=CENTER&gt;&lt;A HREF="javascript://" ONCLICK="music.pause (); return false"&gt;&lt;IMG SRC="buttons/pause-up.gif" ALT="pause" WIDTH=35 HEIGHT=24 BORDER=0 NAME="img_pause"&gt;&lt;/A&gt;&lt;/TD&gt;' +
+   '&lt;/TR&gt;' +
+   '&lt;/TABLE&gt;' +
+   '&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;'
+);
+
+music.magicEmbed ('SRC="../../music/ambient.rmf" AUTOSTART=FALSE LOOP=TRUE VOLUME=100 HIDDEN WIDTH=0 HEIGHT=0');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;</PRE>
+
+</BODY>
+</HTML>

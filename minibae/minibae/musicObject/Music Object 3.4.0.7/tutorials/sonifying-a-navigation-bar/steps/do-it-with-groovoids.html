@@ -1,0 +1,135 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Sonifying a Navigation Bar - Do It With Groovoids</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+groovoidPlayer = new Music ();
+groovoidPlayer.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 6: Do It With Groovoids
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>You have seen how the <B>playNote</B>, <B>noteOn</B>, and <B>noteOff</B> methods can be used to sonify a navbar in various different ways. We will now go off on somewhat of a tangent and use Groovoids - in place of note playing - to sonify our navbar.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD>
+			<A
+				HREF="buckingham1.html"
+				ONCLICK="groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.play ('UI-SimpleClick1')"
+			>
+			<IMG SRC="../../../images/example-nav-prev.gif" WIDTH=96 HEIGHT=36 ALT="PREV" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham-home.html"
+				ONCLICK="groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.play ('UI-SimpleClick1')"
+			>
+			<IMG SRC="../../../images/example-nav-home.gif" WIDTH=302 HEIGHT=36 ALT="HOME" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham3.html"
+				ONCLICK="groovoidPlayer.play ('Hits-Magic'); return false"
+				ONMOUSEOVER="groovoidPlayer.play ('UI-SimpleClick1')"
+			>
+			<IMG SRC="../../../images/example-nav-next.gif" WIDTH=96 HEIGHT=36 ALT="NEXT" BORDER=0 HSPACE=0></A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>You can only play one file at a time through any given Music Object instance. This applies also to Groovoids since Groovoids are themselves just small musical files that are built directly into the Beatnik soundbank. If a Beatnik player is currently playing a file and you then instruct it to play a new file, the file that is currently playing will be cut short so that the new file can be played. You can see this behavior in action in the above navbar - just click on any link on the navbar and then immediately mouse over one of the other links.</P>
+
+<P>Notice how the Groovoid 'Hits-Magic' that started playing gets abruptly ended so that the Beatnik player can play the 'UI-SimpleClick1' Groovoid. This is not really a problem in this example since it is expected that, when this navigation bar is used in a real life HTML page, the links will actually go somewhere and the user will then have no further opportunity to interact with the navigation bar.</P>
+
+<P>Let's take a look at the source...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+groovoidPlayer = new Music ();
+groovoidPlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham1.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="groovoidPlayer.play ('UI-SimpleClick1')"
+            ONCLICK="groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-prev.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="PREV"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham-home.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="groovoidPlayer.play ('UI-SimpleClick1')"
+            ONCLICK="groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-home.gif"
+            WIDTH=302
+            HEIGHT=36
+            ALT="HOME"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham3.html"
+<SPAN CLASS=sample-code-highlighted>            ONMOUSEOVER="groovoidPlayer.play ('UI-SimpleClick1')"
+            ONCLICK="groovoidPlayer.play ('Hits-Magic')"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-next.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="NEXT"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>We have completely lost all <B>playNote</B>, <B>noteOn</B>, and <B>noteOff</B> methods and are now only using the <B>play</B> method for the sonification. We have also dropped the <B>setMonophonic</B> statement from the previous example, since this method only applies to note playing and is not relevant at all when it comes to playing Groovoids or music files. We achieve the same kind of "monophonic" behavior as was seen in the previous step of the tutorial, just by virtue of the fact that a player instance can only play one file or Groovoid at a time.</P>
+
+<P>Notice how the statements being executed for ONMOUSEOVER and ONCLICK events are exactly the same for each graphic. Each graphic is playing the same Groovoid when the user mouses over it. One thing that we no longer get, by using Groovoids, is the ability to easily play the mouseover sounds at different pitches.</P>
+
+<DIV CLASS=subsection>Useful Resources</DIV>
+<UL>
+	<LI>For a full list of all the available Groovoids, consult the appendix <A HREF="../../../appendixes/groovoids.html" TARGET="_parent">Beatnik Soundbank - Groovoids</A>.
+<!--	<LI>For a step-by-step guide on playing Groovoids, consult the tutorial <A HREF="../../playing-groovoids/index.html" TARGET="_parent">Playing Groovoids</A>.-->
+</UL>
+
+</BODY></HTML>

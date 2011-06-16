@@ -1,0 +1,604 @@
+<HTML>
+<HEAD>
+	<TITLE>DEMO: The playNoteSlide Method</TITLE>
+	<LINK REL="stylesheet" HREF="../../style/style.css">
+</HEAD>
+<BODY ONLOAD="initialize ()">
+
+<SCRIPT SRC="../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+DEMO: The playNoteSlide Method
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<SCRIPT SRC="../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../javascript/music-object-x-note-effects.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+music = new Music ();
+music.stubEmbed ('../../music/stub.rmf');
+
+noteSlideChannelNo = 1;
+noteSlideBankNo = 1;
+noteSlideProgramNo = 197;
+noteSlideStartNote = 20;
+noteSlideEndNote = 120;
+noteSlideStartVelocity = 127;
+noteSlideEndVelocity = 60;
+noteSlideStartNoteDuration = 1000;
+noteSlideEndNoteDuration = -1;
+noteSlideTime = 1000;
+noteSlideNoteInterval = 25;
+
+function updateNoteSlide (channelNo,bankNo,programNo,startNote,endNote,startVelocity,endVelocity,startNoteDuration,endNoteDuration,slideTime,noteInterval) {
+	noteSlideChannelNo = channelNo;
+	noteSlideBankNo = bankNo;
+	noteSlideProgramNo = programNo;
+	noteSlideStartNote = startNote;
+	noteSlideEndNote = endNote;
+	noteSlideStartVelocity = startVelocity;
+	noteSlideEndVelocity = endVelocity;
+	noteSlideStartNoteDuration = startNoteDuration;
+	noteSlideEndNoteDuration = endNoteDuration;
+	noteSlideTime = slideTime;
+	noteSlideNoteInterval = (typeof noteInterval == 'number') ? noteInterval : 100;
+}
+
+function playCurrentNoteSlide () {
+	music.setController (1,10,64);
+	music.setController (1,91,0);
+	music.playNoteSlide (
+		noteSlideChannelNo,
+		noteSlideBankNo,
+		noteSlideProgramNo,
+		noteSlideStartNote,
+		noteSlideEndNote,
+		noteSlideStartVelocity,
+		noteSlideEndVelocity,
+		noteSlideStartNoteDuration,
+		noteSlideEndNoteDuration,
+		noteSlideTime,
+		noteSlideNoteInterval
+	);
+}
+
+function updateMethodCallView () {
+	document.noteSlideForm.playNoteSlideMethodCall.value = 'myMusicObject.playNoteSlide (1,' + noteSlideBankNo + ',' + noteSlideProgramNo + ',' + noteSlideStartNote + ',' + noteSlideEndNote + ',' + noteSlideStartVelocity + ',' + noteSlideEndVelocity + ',' + noteSlideStartNoteDuration + ',' + noteSlideEndNoteDuration + ',' + noteSlideTime + ',' + noteSlideNoteInterval + ');';
+}
+
+function updateNoteSlideEditor () {
+	var formHandle = document.noteSlideForm;
+	formHandle.bankNo.value = noteSlideBankNo;
+	formHandle.programNo.value = noteSlideProgramNo;
+	formHandle.startNote.value = noteSlideStartNote;
+	formHandle.endNote.value = noteSlideEndNote;
+	formHandle.startVelocity.value = noteSlideStartVelocity;
+	formHandle.endVelocity.value = noteSlideEndVelocity;
+	formHandle.startNoteDuration.value = noteSlideStartNoteDuration;
+	formHandle.endNoteDuration.value = noteSlideEndNoteDuration;
+	formHandle.slideTime.value = noteSlideTime;
+	formHandle.noteInterval.value = noteSlideNoteInterval;
+	updateMethodCallView ();
+}
+
+function setNoteSlideAndPlay (channelNo,bankNo,programNo,startNote,endNote,startVelocity,endVelocity,startNoteDuration,EndNoteDuration,slideTime,noteInterval) {
+	updateNoteSlide (channelNo,bankNo,programNo,startNote,endNote,startVelocity,endVelocity,startNoteDuration,EndNoteDuration,slideTime,noteInterval);
+	updateNoteSlideEditor ();
+	playCurrentNoteSlide ();
+}
+
+function playNoteSlideFromEditor () {
+	var formHandle = document.noteSlideForm;
+	updateNoteSlide (
+		1,
+		formHandle.bankNo.value - 0,
+		formHandle.programNo.value - 0,
+		formHandle.startNote.value - 0,
+		formHandle.endNote.value - 0,
+		formHandle.startVelocity.value - 0,
+		formHandle.endVelocity.value - 0,
+		formHandle.startNoteDuration.value - 0,
+		formHandle.endNoteDuration.value - 0,
+		formHandle.slideTime.value - 0,
+		formHandle.noteInterval.value - 0
+	);
+	updateMethodCallView ();
+	playCurrentNoteSlide ();
+}
+
+function initialize () {
+	updateNoteSlide (1,1,197,20,120,127,60,1000,-1,1000,25);
+	updateNoteSlideEditor ();
+}
+
+// --></SCRIPT>
+
+<P>The <A HREF="../../music-object-reference/extensions/note-effects/index.html#playNoteSlide" TARGET="_parent"><B>playNoteSlide</B></A> method, offered as part of the <A HREF="../../music-object-reference/extensions/note-effects/index.html" TARGET="_parent">Note Effects extension</A>, provides a convenient way to generate musical note "slides", often referred to by musicians as glissandos. By customizing the rich set of parameters offered by this method, you can instantly and easily achieve a wide variety of complex sound textures and outrageous effects. Many of these effects will be ideal for the sonification of user interface elements, or even as sound effects for Web-based games implemented using DHTML or Flash (for more information on sonifying Flash movies using Beatnik, see the section <A HREF="../../tips-techniques/beatnik-and-flash.html" TARGET="_parent">Using Beatnik and Flash Together</A>).</P>
+
+<P>In this demo you will be able to preview some cool ready-made note slide examples, and then you can go on to tweak the parameters of the <B>playNoteSlide</B> method to achieve your own personalized note slide effects.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="tasty-note-slides"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Some Tasty Note Slides
+</TD></TR></TABLE>
+<BR>
+
+<P>In the table below, each row contains a unique note slide effect. For each note slide effect, there is a descriptive name, a speaker icon to trigger the note slide to play, and a source code listing for the <B>playNoteSlide</B> method call that produces the effect.</P>
+
+<P>Go ahead and take some note slides for a test drive. Be warned, though: you may want to step slowly through the note slides so you don't create too much of a note buildup and so that you can hear each individual note slide effect clearly, without too much of the tail of a previous note slide effect drowning things out.</P>
+
+<P>Let the sliding begin...</P>
+
+<CENTER>
+<FORM>
+	<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=0>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Formula 1, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,42,90,75,80,-1,2000,-1,4000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,42,90,75,80,-1,2000,-1,4000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Trill Strings, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,44,90,75,80,-1,500,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,44,90,75,80,-1,500,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Trill Strings, Ascending, Low</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,44,40,60,80,-1,1500,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,44,40,60,80,-1,1500,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Trill Strings, Ascending, High</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,44,60,85,80,-1,1000,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,44,60,85,80,-1,1000,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Cloudscapes, Ascending, Low</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,54,40,60,80,-1,1000,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,54,40,60,80,-1,1000,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Apparition, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,77,70,90,80,-1,2000,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,77,70,90,80,-1,2000,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Apparition, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,77,85,65,80,-1,1500,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,77,85,65,80,-1,1500,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Moon Jelly, Ascending, High</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,82,80,100,80,-1,1500,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,82,80,100,80,-1,1500,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>50's Sci-Fi, Descending, Slow</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,91,90,70,80,-1,1500,-1,4000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,91,90,70,80,-1,1500,-1,4000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>50's Sci-Fi, Ascending, Slow</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,91,40,80,80,-1,2000,-1,5000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,91,40,80,80,-1,2000,-1,5000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>UFOs, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,93,50,80,80,-1,700,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,93,50,80,80,-1,700,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Soprano, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,94,40,60,80,-1,700,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,94,40,60,80,-1,700,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Soprano, Ascending, Overlapped</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,94,20,50,80,-1,2000,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,94,20,50,80,-1,2000,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Soprano, Ascending, Low</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,94,10,30,80,-1,2000,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,94,10,30,80,-1,2000,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Refractions, Ascending, Low</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,95,20,50,127,-1,4000,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,95,20,50,127,-1,4000,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Refractions, Ascending, Mid</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,95,50,90,80,-1,2000,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,95,50,90,80,-1,2000,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Refractions, Descending, Mid</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,95,90,30,80,-1,1300,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,95,90,30,80,-1,1300,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Refractions, Descending, High</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,95,100,70,80,-1,1000,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,95,100,70,80,-1,1000,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Fairy Godmother, Descending, High</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,108,90,60,60,-1,1000,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,108,90,60,60,-1,1000,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Fairy Godmother, Descending, Low</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,108,60,30,80,-1,2000,-1,5000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,108,60,30,80,-1,2000,-1,5000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Fairy Godmother, Ascending, Low</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,108,30,50,127,-1,2000,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,108,30,50,127,-1,2000,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Fairy Godmother, Ascending, Mid</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,108,50,80,80,-1,1500,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,108,50,80,80,-1,1500,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Teletype, Descending, Short</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,113,80,50,80,-1,500,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,113,80,50,80,-1,500,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Teletype, Descending, Long</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,113,80,55,80,-1,1500,-1,3000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,113,80,55,80,-1,1500,-1,3000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Cosmic Ray, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,125,40,10,127,-1,300,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,125,40,10,127,-1,300,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Cosmic Ray, Ascending, High</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,125,40,70,70,-1,300,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,125,40,70,70,-1,300,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>SampHold, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,126,20,65,80,-1,2000,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,126,20,65,80,-1,2000,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>SampHold 2, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,127,20,65,80,-1,2000,-1,2000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,127,20,65,80,-1,2000,-1,2000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>SampHold 2, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,127,60,30,80,-1,1000,-1,1000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,127,60,30,80,-1,1000,-1,1000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Noise Echo, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,194,60,30,80,-1,2000,-1,3000); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,194,60,30,80,-1,2000,-1,3000)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>UFO-by, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,186,120,20,70,-1,1000,-1,1000,25); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,186,120,20,70,-1,1000,-1,1000,25)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>UFO-by, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,186,20,120,70,-1,1000,-1,1000,25); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,186,20,120,70,-1,1000,-1,1000,25)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>UFO-by, Ascending, Slow</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,186,50,85,60,-1,1000,-1,1500,100); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,186,50,85,60,-1,1000,-1,1500,100)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Hi Temple Gong, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,202,50,70,50,-1,1000,-1,500,25); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,202,50,70,50,-1,1000,-1,500,25)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>SloLaser, Descending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,185,85,50,80,-1,1000,-1,500,50); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,185,85,50,80,-1,1000,-1,500,50)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Rvs Cymb Pan Long, Ascending, Slow</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,180,1,40,65,-1,1500,-1,3000,25); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,180,1,40,65,-1,1500,-1,3000,25)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Bucket Hit, Ascending</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,197,20,120,127,60,1000,-1,1000,25); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,197,20,120,127,60,1000,-1,1000,25)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Growl Organ, Up & Down</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,1,18,40,80,60,110,3000,1000,1000,25); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,1,18,40,80,60,110,3000,1000,1000,25)&nbsp;</NOBR></TD>
+		</TR>
+		<TR>
+			<TD CLASS=data-table-item-name-small>Seashore, Rolling</TD>
+			<TD><A HREF="javascript://" ONCLICK="setNoteSlideAndPlay (1,0,122,100,20,40,127,5000,1000,2000,100); return false"><IMG SRC="../../images/preview-ready.gif" WIDTH=18 HEIGHT=13 BORDER=0></A></TD>
+			<TD CLASS=sample-code><NOBR>&nbsp;myMusicObject.playNoteSlide (1,0,122,100,20,40,127,5000,1000,2000)&nbsp;</NOBR></TD>
+		</TR>
+	</TABLE>
+</FORM>
+</CENTER>
+
+<!--***********************************************************************-->
+
+<A NAME="tweak-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Tweak It!
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that you have seen what a couple of note slide effects look like when expressed in the syntax required by the <B>playNoteSlide</B> method, why not experiment with some settings of your own.</P>
+
+<P>The interface below is designed to resemble a call to the <B>playNoteSlide</B> method and lets you edit all of the method's parameters. An entry box is provided for each of the method's parameters, with the exception of the <B>MidiChannel1to16</B> parameter which has a fixed value of <SPAN CLASS=value>1</SPAN> in this interface. To the left of each parameter entry box is the name of the parameter and, wherever reference information is available for a parameter, the parameter name is linked to the reference information.</P>
+
+<P>So, go ahead and tweak the parameters in the interface below. When you have a set of values that you like and you'd like to preview the note slide effect that would result from those settings, just hit the "Preview" button...</P>
+
+<FORM NAME="noteSlideForm">
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD BGCOLOR=224488>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=6>
+<TR><TD ALIGN=CENTER BGCOLOR=224488><FONT COLOR=FFFFFF SIZE=3><B>playNoteSlide Method Editor</B></FONT></TD></TR>
+<TR><TD BGCOLOR=FFFFFF ALIGN=RIGHT>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD ALIGN=RIGHT>myMusicObject.playNoteSlide&nbsp;(&nbsp;<A HREF="../../music-object-reference/parameters.html#MidiChannel1to16">MidiChannel1to16</A>&nbsp;</TD>
+		<TD><TABLE WIDTH=95 BORDER=1 CELLSPACING=0 CELLPADDING=1 ALIGN=LEFT BGCOLOR=DDDDDD><TR VALIGN=CENTER><TD>&nbsp;1</TD></TR></TABLE></FONT>&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT><A HREF="../../music-object-reference/parameters.html#BankNumber0to2">BankNumber0to2</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="bankNo" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT><A HREF="../../music-object-reference/parameters.html#ProgramNumber0to255">ProgramNumber0to255</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="programNo" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>Start<A HREF="../../music-object-reference/parameters.html#NoteNumber0to127">NoteNumber0to127</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="startNote" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>End<A HREF="../../music-object-reference/parameters.html#NoteNumber0to127">NoteNumber0to127</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="endNote" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>Start<A HREF="../../music-object-reference/parameters.html#Velocity0to127">Velocity0to127</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="startVelocity" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>End<A HREF="../../music-object-reference/parameters.html#Velocity0to127">Velocity0to127</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="endVelocity" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>Start<A HREF="../../music-object-reference/parameters.html#NoteDurationMsINT">NoteDurationMsINT</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="startNoteDuration" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>End<A HREF="../../music-object-reference/parameters.html#NoteDurationMsINT">NoteDurationMsINT</A>&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="endNoteDuration" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>SlideTimeMsINT&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="slideTime" VALUE="">&nbsp;,</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT>NoteIntervalMsINT&nbsp;</TD>
+		<TD><INPUT TYPE=text SIZE=11 NAME="noteInterval" VALUE="">&nbsp;)</TD>
+	</TR>
+	<TR>
+		<TD ALIGN=RIGHT></TD>
+		<TD><BR><INPUT TYPE=button VALUE="Preview" ONCLICK="playNoteSlideFromEditor ()"></TD>
+	</TR>
+</TABLE>
+</TD></TR>
+<TR><TD ALIGN=CENTER BGCOLOR=224488><INPUT TYPE=text NAME="playNoteSlideMethodCall" VALUE="" SIZE=45></TD></TR>
+</TABLE>
+</TD></TR></TABLE>
+<BR>
+</FORM>
+
+<P>You can also "seed" the interface with values by returning to the previous <A HREF="#tasty-note-slides">Some Tasty Note Slides</A> section and clicking on any of the buttons to play a note slide. When you scroll back down again to this section, then the parameters in the playNoteSlide Method Editor's interface will be seeded with the values needed to play the note slide you just played. You can then edit the parameters from there to derive new note slides from those listed in the previous section.</P>
+
+<P>Don't be thrown off by the fact that each parameter is on its own new line. This layout was chosen so that it wouldn't be necessary to scroll horizontally all the time to edit different parameters. It is also perfectly acceptable in the JavaScript language to break up a method or function call over several lines, provided that you don't end a line on an unterminated string literal (ie. start a string parameter with an opening quote but don't close the string on the same line). For example, the following method call is perfectly valid in JavaScript...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.playNoteSlide (
+   1,
+   1,
+   197,
+   20,
+   120,
+   127,
+   60,
+   1000,
+   -1,
+   1000,
+   25
+);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="stereo-slides"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Sliding in Stereo
+</TD></TR></TABLE>
+<BR>
+
+<P>Now, let's take a look at some more intricate techniques using the <B>playNoteSlide</B> method. In all of the examples below, there are two note slide effects being played: one that is panned full left and one that is panned full right. By playing two panned note slides in this way, one can achieve some pretty radical spatialized effects.</P>
+
+<P>In all of the source code listings for the examples, the calls to the <B>playNoteSlide</B> method have been highlighted. The other lines of code preceding the <B>playNoteSlide</B> method calls set up the MIDI channels 1 and 2 so that they are panned full left and full right, respectively, and so that there is no reverb send for the channels. Setting the reverb send level to 0 is important, since reverb would tend to "muddy" the effects and detract from the extreme stereo spatialization that is achieved by the effects.</P>
+
+<DIV CLASS=subsection>Fairy Godmothers, Crossing Paths</DIV>
+
+<P>In this example, the "Fairy Godmother" instrument (bank 1, program 108) is being used for both the left-panned note slide and the right-panned note slide. Both of the note slides play for the same duration, have the same starting and ending note velocities, and the same start and end note durations. In fact, the two note slides are identical but for one small detail: wherease the left-panned note slide starts from note pitch 50 and ascends to note pitch 80, the right-panned note slide starts from note pitch 80 and descends to note pitch 50. So, the note pitches for the two slides are going in the exact opposite directions, and crossing paths somewhere in the middle. This produces a pretty cool stereo pitch effect that resembles a Doppler effect.</P>
+
+<CENTER>
+<FORM>
+	<INPUT TYPE=button VALUE="PREVIEW" ONCLICK="music.setController (1,91,0); music.setController (2,91,0); music.setController (1,10,0); music.setController (2,10,127); music.playNoteSlide (1,1,108,50,80,80,-1,1500,-1,1000); music.playNoteSlide (2,1,108,80,50,80,-1,1500,-1,1000); return false">
+</FORM>
+</CENTER>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** set channels' reverb send level to 0 ***/
+myMusicObject.setController (1,91,0);
+myMusicObject.setController (2,91,0);
+
+/*** pan the channels full left and full right ***/
+myMusicObject.setController (1,10,0);
+myMusicObject.setController (2,10,127);
+
+/*** play the two note slides ***/
+<SPAN CLASS=sample-code-highlighted>myMusicObject.playNoteSlide (1,1,108,50,80,80,-1,1500,-1,1000);
+myMusicObject.playNoteSlide (2,1,108,80,50,80,-1,1500,-1,1000);</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>50's Sci-Fi, Converging</DIV>
+
+<P>In this example, the "50's Sci-Fi" instrument (bank 1, program 91) is being used for both the left-panned note slide and the right-panned note slide. Both of the note slides play for the same duration, have the same starting and ending note velocities, the same start and end note durations, and even the same ending note pitch. The only difference is that the two note slides start from different note pitches: wherease the left-panned note slide starts from note pitch 90 and descends to note pitch 70, the right-panned note slide starts from note pitch 50 and ascends to note pitch 70. So, the note pitches for the two slides move from opposite sides to end up in the middle, at note pitch 50. This produces a converging effect.</P>
+
+<CENTER>
+<FORM>
+	<INPUT TYPE=button VALUE="PREVIEW" ONCLICK="music.setController (1,91,0); music.setController (2,91,0); music.setController (1,10,0); music.setController (2,10,127); music.playNoteSlide (1,1,91,90,70,50,100,500,2000,4000); music.playNoteSlide (2,1,91,50,70,50,100,500,2000,4000); return false">
+</FORM>
+</CENTER>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** set channels' reverb send level to 0 ***/
+myMusicObject.setController (1,91,0);
+myMusicObject.setController (2,91,0);
+
+/*** pan the channels full left and full right ***/
+myMusicObject.setController (1,10,0);
+myMusicObject.setController (2,10,127);
+
+/*** play the two note slides ***/
+<SPAN CLASS=sample-code-highlighted>myMusicObject.playNoteSlide (1,1,91,90,70,50,100,500,2000,4000);
+myMusicObject.playNoteSlide (2,1,91,50,70,50,100,500,2000,4000);</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Soundtrack 2, Stereo Sweep of 5ths</DIV>
+
+<P>In this example, the "Soundtrack 2" instrument (bank 1, program 97) is being used for both the left-panned note slide and the right-panned note slide. Because the duration for each note slide is exactly the same and because no value is specified for the <B>NoteIntervalMsINT</B> parameter for each note slide (so the default value will be used), the notes for both note slides will be exactly synchronized to each other. And because the values for the <B>StartNoteNumber0to127</B> and <B>EndNoteNumber0to127</B> parameters for the right-panned note slide are exactly 7 greater than these parameters' values for the left-panned note slide, the two note slides will be perfectly harmonized by a musical 5th in the stereo field.</P>
+
+<P>Finally, to add a stereo panning effect, the right-panned slide starts with a note velocity of 110 and ends with a note velocity of 10, whereas the left-panned note slide starts with a velocity of 10 and ends with a note velocity of 110. To further emphasize this panning effect, the right-panned note slide starts with a note duration of 1000 and ends with a note duration of 500, whereas the left-panned note slide starts with a note duration of 500 and ends with a note duration of 1000. The result of this is that the notes with a higher velocity also have a longer duration, making them appear even stronger.</P>
+
+<CENTER>
+<FORM>
+	<INPUT TYPE=button VALUE="PREVIEW" ONCLICK="music.setController (1,91,0); music.setController (2,91,0); music.setController (1,10,0); music.setController (2,10,127); music.playNoteSlide (1,1,97,80,50,10,110,500,1000,3000); music.playNoteSlide (2,1,97,87,57,110,10,1000,500,3000); return false">
+</FORM>
+</CENTER>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** set channels' reverb send level to 0 ***/
+myMusicObject.setController (1,91,0);
+myMusicObject.setController (2,91,0);
+
+/*** pan the channels full left and full right ***/
+myMusicObject.setController (1,10,0);
+myMusicObject.setController (2,10,127);
+
+/*** play the two note slides ***/
+<SPAN CLASS=sample-code-highlighted>myMusicObject.playNoteSlide (1,1,97,80,50,10,110,500,1000,3000);
+myMusicObject.playNoteSlide (2,1,97,87,57,110,10,1000,500,3000);</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Bucket Hit and Thuddy Kick, Ascending in Parallel</DIV>
+
+<P>In this example, all aspects of the left-panned and right-panned note slides are exactly the same, except for the instruments used for each. While the left-panned note slide is playing the "Bucket Hit" percussion sound (bank 1, program 197), the right-panned note slide is playing the "Thuddy Kick" percussion sound (bank 1, program 203). So, while the timing, pitch, velocity, and duration of every note is exactly the same for both note slides, the use of different instruments for left and right still creates a unique stereo effect.</P>
+
+<CENTER>
+<FORM>
+	<INPUT TYPE=button VALUE="PREVIEW" ONCLICK="music.setController (1,91,0); music.setController (2,91,0); music.setController (1,10,0); music.setController (2,10,127); music.playNoteSlide (1,1,197,20,120,127,60,1000,-1,1000,25); music.playNoteSlide (2,1,203,20,120,127,60,1000,-1,1000,25); return false">
+</FORM>
+</CENTER>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** set channels' reverb send level to 0 ***/
+myMusicObject.setController (1,91,0);
+myMusicObject.setController (2,91,0);
+
+/*** pan the channels full left and full right ***/
+myMusicObject.setController (1,10,0);
+myMusicObject.setController (2,10,127);
+
+/*** play the two note slides ***/
+<SPAN CLASS=sample-code-highlighted>myMusicObject.playNoteSlide (1,1,197,20,120,127,60,1000,-1,1000,25);
+myMusicObject.playNoteSlide (2,1,203,20,120,127,60,1000,-1,1000,25);</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<DIV CLASS=subsection>Widening</DIV>
+
+<P>In this example, a unique stereo "widening" effect is achieved. As you will notice, the parameter values for the left-panned and right-panned note slides are almost identical. The only subtle difference is in the values set for the <B>SlideTimeMsINT</B> and <B>NoteIntervalMsINT</B> parameters. Even despite these differences, both note slides play exactly the same number of notes: 41. While the left-panned note slide has a time of 1200 milliseconds, the note interval of 30 milliseconds yields exactly 41 notes to be played (as calculated by the expression <B><NOBR>Math.floor (SlideTimeMsINT / NoteIntervalMsINT) + 1</NOBR></B>). And while the right-panned note slide has a time of 1000 milliseconds, its note interval of 25 milliseconds also yields exactly 41 notes to be played (as calculated by the expression <B><NOBR>Math.floor (SlideTimeMsINT / NoteIntervalMsINT) + 1</NOBR></B>).</P>
+
+<P>So, given that both note slides play exactly the same instrument and exactly the same number of exactly the same notes (same pitch, velocity, and duration), the only difference is in the timing. And because both note slides start out at the same time but have slightly different durations, the notes in each note slide will tend to drift further apart in timing towards the end of the note slides. This produces the stereo widening effect. What starts out sounding like a mono, center-panned note slide effect progressively spreads out to become much more stereo sounding.</P>
+
+<CENTER>
+<FORM>
+	<INPUT TYPE=button VALUE="PREVIEW" ONCLICK="music.setController (1,91,0); music.setController (2,91,0); music.setController (1,10,0); music.setController (2,10,127); music.playNoteSlide (1,0,193,80,40,60,127,1000,-1,1200,30); music.playNoteSlide (2,0,193,80,40,60,127,1000,-1,1000,25); return false">
+</FORM>
+</CENTER>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+/*** set channels' reverb send level to 0 ***/
+myMusicObject.setController (1,91,0);
+myMusicObject.setController (2,91,0);
+
+/*** pan the channels full left and full right ***/
+myMusicObject.setController (1,10,0);
+myMusicObject.setController (2,10,127);
+
+/*** play the two note slides ***/
+<SPAN CLASS=sample-code-highlighted>myMusicObject.playNoteSlide (1,0,193,80,40,60,127,1000,-1,1200,30);
+myMusicObject.playNoteSlide (2,0,193,80,40,60,127,1000,-1,1000,25);</SPAN>
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************
+
+<A NAME="random-note-slides"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=section>
+Sliding All Over the Place
+</TD></TR></TABLE>
+<BR>
+
+- random direction
+- randomly shifted up or down
+- randomly selected instruments
+- 
+-->
+
+</BODY>
+</HTML>

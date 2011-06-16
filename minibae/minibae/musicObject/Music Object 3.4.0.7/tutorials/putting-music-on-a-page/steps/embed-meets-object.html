@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Browser Compatibility: EMBED meets OBJECT)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 13: Browser Compatibility: EMBED meets OBJECT
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Up until now, this tutorial has dealt only with the embedding of a Beatnik Plug-in in an HTML page. Of course, the goal of any Web content developer is to open up their content to as wide an audience as possible. Well, the good news is that the Beatnik Player is available for both Netscape Navigator as well as Microsoft Internet Explorer.</P>
+
+<DIV CLASS=subsection>Microsoft Internet Explorer's OBJECT Tag</DIV>
+
+<P>Microsoft's technology for embedding rich media into HTML pages is called ActiveX. And Internet Explorer's equivalent of a Netscape plug-in is called an ActiveX control. While IE may do some tricky things when it encounters an EMBED tag, and it may even be possible to get IE to use the Beatnik ActiveX control in some cases when only an EMBED tag for an RMF file is specified, the only truly safe way to ensure that IE does the right thing is to use its preferred language - the OBJECT tag.</P>
+
+<DIV CLASS=subsection>Can EMBED and OBJECT co-exist ?</DIV>
+
+<P>So, if Internet Explorer wants to see an OBJECT tag and Navigator wants to see an EMBED tag, the first question that comes to mind is: "Can one put both tags on the page so that both browsers are happy?" Well, the answer is a resounding yes - provided that you place these tags in the HTML page in a specific way, as shown in our example below. For our example we have taken the same EMBED tag we used in the <A HREF="a-simple-embed.html">first step of this tutorial</A>. The example first shows just the EMBED tag, and then the magical EMBED / OBJECT combination that works in both browsers. The extra HTML code that has been added in the second stage is highlighted in red.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>Netscape Navigator ONLY</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="trance.rmf"
+   TYPE="audio/rmf"
+   WIDTH=144
+   HEIGHT=60
+   DISPLAY=SONG
+   AUTOSTART=FALSE
+   LOOP=FALSE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>Netscape Navigator AND Microsoft Internet Explorer</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+<SPAN CLASS=sample-code-highlighted>&lt;OBJECT
+   CLASSID="CLSID:B384F118-18EE-11D1-95C8-00A024330339"
+   CODEBASE="http://download.beatnik.com/beatnik-player/beatnik-player.cab"
+   WIDTH=144
+   HEIGHT=60
+&gt;
+   &lt;PARAM NAME="SRC" VALUE="trance.rmf"&gt;
+   &lt;PARAM NAME="WIDTH" VALUE="144"&gt;
+   &lt;PARAM NAME="HEIGHT" VALUE="60"&gt;
+   &lt;PARAM NAME="DISPLAY" VALUE="SONG"&gt;
+   &lt;PARAM NAME="AUTOSTART" VALUE="FALSE"&gt;
+   &lt;PARAM NAME="LOOP" VALUE="FALSE"&gt;</SPAN>
+   &lt;EMBED
+      SRC="trance.rmf"
+      TYPE="audio/rmf"
+      WIDTH=144
+      HEIGHT=60
+      DISPLAY=SONG
+      AUTOSTART=FALSE
+      LOOP=FALSE
+      PLUGINSPAGE="http://www.beatnik.com/to/?player"
+   &gt;
+<SPAN CLASS=sample-code-highlighted>&lt;\OBJECT&gt;</SPAN>
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<DIV CLASS=subsection>How Does it Work ?</DIV>
+
+<P>Now, how does this EMBED / OBJECT tag combination work in both browsers? Well, Netscape Navigator does not observe the OBJECT tag, but sees the EMBED tag buried between the opening and closing OBJECT tags and embeds a plug-in instance accordingly. Conversely, browsers that support the OBJECT tag - such as Internet Explorer - know to ignore any HTML tags between the opening and closing OBJECT tags, other than valid PARAM tags that are used to pass customizable values to the ActiveX control.</P>
+
+<P>So, when combining both the EMBED and OBJECT tags, it is imperative that the EMBED tag be wrapped between &lt;OBJECT&gt; and &lt;/OBJECT&gt;. Otherwise, you may in some cases end up with two of exactly the same music file playing on top of each other, but out of sync - not too much fun to listen to.</P>
+
+<DIV CLASS=subsection>The OBJECT Tag Explained</DIV>
+
+<P>There are some significant differences between the OBJECT tag and the EMBED tag. For one, the OBJECT tag is a container tag, unlike the EMBED tag which does not need a closing tag. Also, the OBJECT tag does not allow customizable ActiveX control properties to be specified using attributes like with the EMBED tag. Rather, an ActiveX control's customizable properties need to be specified between the opening and closing OBJECT tags, using the PARAM tag.</P>
+
+<P>The PARAM tag takes two attributes - NAME and VALUE. So, when you would just specify <B>LOOP=TRUE</B> inside the EMBED tag, with the OBJECT tag syntax you would have to specify <NOBR><B>&lt;PARAM NAME="LOOP" VALUE="TRUE"&gt;</B></NOBR> between the opening and closing OBJECT tags.</P>
+
+<P>There are also some special attributes that need to be placed inside the opening OBJECT tag in order to embed music in Internet Explorer using the Beatnik Player. These are...</P>
+
+<UL>
+	<LI><B>CLASSID</B><BR>
+		The CLASSID attribute specifies the exact class ID of the Beatnik Player ActiveX control as it is registered with the operating system. This attribute should always be present and needs to be set exactly as is shown in the example above. This attribute is similar, at least in effect, to the TYPE attribute used in the EMBED tag and allows you to force the Beatnik Player to handle a particular media file.
+		<P></P>
+	<LI><B>CODEBASE</B><BR>
+		The CODEBASE attribute specifies the Internet location of an automatic installer for the Beatnik Player for Internet Explorer. This attribute should always be present and needs to be set exactly as is shown in the example above.  This attribute is similar to the PLUGINSPAGE attribute used in the EMBED tag and lets you force an automatic install of the Beatnik Player for users who do not have it already installed.
+		<P>
+	<LI><B>WIDTH</B> and <B>HEIGHT</B><BR>
+		As an exception to the rule for the PARAM tag, these customizable properties need to be specified as attributes inside the opening OBJECT tag, as well as parameters between the opening and closing OBJECT tags. This is an idiosyncracry of the Beatnik Player for Internet Explorer and you should write your OBJECT tags in this way to be completely safe.
+		<P></P>
+</UL>
+
+<P>Now, while combining the EMBED and OBJECT tags achieves compatibility between Navigator and Internet Explorer, it does require a little extra effort and will add a tiny amount to the size of your Web pages. This is a small trade-off when compared to the benefit of reaching a wider audience with your Beatnik content.</P>
+
+<DIV CLASS=subsection>The EMBEDifier Saves the Day!</DIV>
+
+<P>To make your life as a Beatnik content developer a little easier, Beatnik Inc. has gone to the trouble of designing the free Beatnik EMBEDifier tool - a convenient way of creating your own custom EMBED / OBJECT code. Using the EMBEDifier is a breeze...</P>
+
+<P ALIGN=CENTER>
+<A HREF="../../../tools/embedifier/intro.html" TARGET="docBody"><FONT SIZE=4>Try the Beatnik EMBEDifier</FONT></A>
+</P>
+
+</BODY></HTML>

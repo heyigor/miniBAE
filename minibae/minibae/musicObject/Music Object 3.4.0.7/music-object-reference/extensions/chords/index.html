@@ -1,0 +1,711 @@
+<HTML>
+<HEAD>
+	<TITLE>Music Object Extension - Chords</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+<A NAME="top"></A>
+
+<TABLE CLASS=big-title-border BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH=100%><TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100%><TR><TD CLASS=big-title>
+Music Object Extension - Chords
+<HR>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=4 BORDER=0>
+<TR>
+	<TD CLASS=contents-frame ROWSPAN=2 ALIGN=LEFT WIDTH=5%>&nbsp;</TD>
+	<TD CLASS=contents-frame ALIGN=LEFT>Contents</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-list>
+		<UL>
+			<LI><A HREF="#about">About This Extension</A>
+			<LI><A HREF="#whats-new">What's New in the Latest Version</A>
+			<LI><A HREF="#getting-it">Getting This Extension</A>
+			<LI><A HREF="#dependencies">Dependencies</A>
+			<LI><A HREF="#reference">Reference</A>
+		</UL>
+	</TD>
+</TR>
+</TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="about"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+About This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>Integrating sonification of a Web page's user interface with background music can be a tricky thing. Especially challenging is the job of tying chromatic (pitched) user interface sounds to the specific key of background music. Well-chosen background music can create a strong soundtrack for a Web site that really enhances the user experience, and it would be a shame to spoil such a soundtrack with inappropriately chosen musical notes and chords.</P>
+
+<P>The methods provided in this extension make it easier to apply a musical knowledge of background music to the sonification of user interface elements. With methods such as <A HREF="#playChord">playChord</A>, one can easily play chords that blend in harmoniously with the background music, simply by specifying a chord name. The extension allows music-savvy Web developers to apply their knowledge of music in a manner that is familiar to them, proving invaluable as an aid in the development of Web-based music instruction applications and intelligent musical "jam along" applications.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="whats-new"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+What's New in the Latest Version
+</TD></TR></TABLE>
+<BR>
+
+<P>There is a dedicated <A HREF="version-history/index.html">version history</A> for this extension, where you will be able to find out about the new features and possible issues with the most recent version. The version history for this extension is independent of the version history for the core Music Object API.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="getting-it"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Getting This Extension
+</TD></TR></TABLE>
+<BR>
+
+<P>To get the "<B>music-object-x-chords.js</B>" JavaScript file that implements this extension, simply <A HREF="../../../javascript/music-object-x-chords.js" TARGET="_blank">right-click on this link</A> (click-and-hold for Mac users). Then, from the menu that pops up, select the 'Save Link As...' or 'Save Target As...' option and save the file as "music-object-x-chords.js" into an appropriate folder of the local copy of your Web site.</P>
+
+<P>In case you have problems saving the file using the above link, the "music-object-x-chords.js" file can also be found inside the documentation's "<B>javascript</B>" folder, along with the "music-object.js" file.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="dependencies"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Dependencies
+</TD></TR></TABLE>
+<BR>
+
+<P>In order to use this extension, the following JavaScript file(s) must first be sourced in...</P>
+<UL>
+	<LI><B>music-object.js</B> (version 3.3.0 or higher)
+</UL>
+
+<P>For more information on using extensions, consult the section <A HREF="../intro.html">About Music Object Extensions</A>.</P>
+
+<!--***********************************************************************-->
+
+<A NAME="reference"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Reference
+</TD></TR></TABLE>
+<BR>
+
+<TABLE ALIGN=CENTER WIDTH=100% CLASS=contents-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE WIDTH=100% CLASS=contents-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=2>
+<TR>
+	<TD CLASS=contents-table-column-header>&nbsp;Name&nbsp;</TD>
+	<TD CLASS=contents-table-column-header>&nbsp;Short&nbsp;Description&nbsp;</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#instance-methods">Instance Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#playChord">playChord</A></TD>
+	<TD CLASS=contents-table-item-desc>Plays a musical chord, as specified by a chord name parameter and other parameters.</TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#playNotes">playNotes</A></TD>
+	<TD CLASS=contents-table-item-desc>Plays a set of any number of musical notes, as specified by a notes array parameter.</TD>
+</TR>
+
+<TR>
+	<TD CLASS=contents-table-section COLSPAN=2><A HREF="#static-methods">Static Methods</A></TD>
+</TR>
+<TR>
+	<TD CLASS=contents-table-item-name><A HREF="#Music.getChordNotes">Music.getChordNotes</A></TD>
+	<TD CLASS=contents-table-item-desc>Returns an array, representing the musical notes that make up a specified chord.</TD>
+</TR>
+
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+
+<!--***********************************************************************-->
+
+<A NAME="instance-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Instance Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="playChord"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;playChord</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Chords</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>playChord</B> method plays a musical chord, as specified by a chord name parameter and other parameters.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>playChord (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#ProgramNumber0to255">ProgramNumber0to255</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ChordNameSTR <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; OctaveNumber0to12 <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; ChordRoot<A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>When using this method, as well as the <A HREF="#Music.getChordNotes"><B>Music.getChordNotes</B></A> static method, chord names must be expressed using different combinations of the elements listed below. The elements must appear in the chord name in the order in which they are listed and should not be separated by spaces, or the chord name may not be interpreted correctly. All the elements are optional, with the exception of the chord root which is required.</P>
+
+<P><B>Chord Name Elements</B> (listed in the order in which they should appear)</P>
+<OL>
+	<LI><B>A|B|C|D|E|F|G</B><BR>
+		one of the letters A, B, C, D, E, F, or G, indicating the root of the chord
+		<P></P>
+	<LI><B>[#|b]</B><BR>
+		an optional accidental (sharp or flat) following the chord root. The character "#" represents sharp (as in "A#" for A-sharp), and the lowercase letter "b" represents flat (as in "Cb" for C-flat).
+		<P></P>
+	<LI><B>[m|min|maj]</B><BR>
+		an optional "m" or "min" indicating that it is a minor chord, or "maj" indicating that it is a major chord
+		<P></P>
+	<LI><B>[dim]</B><BR>
+		an optional "dim", indicating that the chord is diminished. When a chord is diminished, the 5th note is diminished (lowered by a half step). No 7th note is added.
+		<P></P>
+	<LI><B>[[#|b]7]</B><BR>
+		an optional "7" prefixed with an optional accidental (sharp or flat), indicating that a 7th note is present in the chord, and whether the 7th note is sharp, flat, or natural.
+		<P></P>
+	<LI><B>[sus[2|4]]</B><BR>
+		an optional "sus" followed by a "2" or "4", indicating that the chord is suspended, and which note replaces the 3rd note, with "sus2" indicating that the 2nd note should replace the 3rd note, and "sus4" indicating that the 4th note should replace the 3rd note.
+		<P></P>
+	<LI><B>[[#|b]9]</B><BR>
+		an optional "9" prefixed with an optional accidental (sharp or flat), indicating that a 9th note is present in the chord, and whether the 9th note is sharp, flat, or natural. When "9" is present, it is implicit that the chord will contain a 7th note, and so a 7th note is added.
+		<P></P>
+	<LI><B>[[#|b][11|13]]</B><BR>
+		an optional "11" or "13" prefixed with an optional accidental (sharp or flat), indicating that either an 11th note or 13th note is present in the chord, and whether the note is sharp, flat, or natural. When either "11" or "13" is present, it is implicit that the chord will contain a 7th note, and so a 7th note is created if not already present. Also, the 9th note is set and the 5th and 8th notes are removed.
+		<P></P>
+	<LI><B>[[#|b]5]</B><BR>
+		an optional "5" prefixed with an optional accidental (sharp or flat), indicating that a 5th note is present in the chord, and whether the 5th note is sharp, flat, or natural.
+		<P></P>
+	<LI><B>[[#|b]6]</B><BR>
+		an optional "6" prefixed with an optional accidental (sharp or flat), indicating that a 6th note is present in the chord, and whether the 6th note is sharp, flat, or natural.
+		<P></P>
+	<LI><B>[+]</B><BR>
+		an optional "+" character, indicating that the chord should be augmented. If present, the chord's 5th note is augmented (raised by a half step).
+		<P></P>
+</OL>
+
+<P>To get a better understanding of how these elements can be combined in different ways to create different chords, <A HREF="../../../demos/index.html?demos/chords.html">see the demo</A> for the Chords extension.</P>
+
+<IMG SRC="../../../style/images/subheading-important.gif" WIDTH=123 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="IMPORTANT">
+
+<P>The <B>playChord</B> method has the following limitations...</P>
+<UL>
+	<LI><B>You can't express both 11th and 13th notes in a chord name.</B><BR>
+		Because of the way the <B>playChord</B> method interprets chord names, the "11" and "13" qualifiers are exclusive and it is not possible to specify a chord name such as "c13#11". In order to emulate a chord containing both an 11th note and a 13th note, one could specify a 6th note as a workaround, since a 6th note is just a 13th note one octave lower. An example would be the chord name "c9#116".
+		<P></P>
+	<LI><B>There is no qualifier for half diminished chords.</B><BR>
+		In musical notation, a half diminished chord will often be expressed using a qualifier character that looks much like an "o" with a line through it. The <B>playChord</B> method makes no provision for such a qualifier. When the optional "dim" qualifier is used, the resulting chord will be a diminished triad - neither a half diminished nor a fully diminished chord. To achieve a half diminished chord you should specify "min7b5" after the chord root, as in the chord name "Cmin7b5" which represents a C-minor chord that is half diminished.
+		<P></P>
+	<LI><B>There is no qualifier for fully diminished chords.</B><BR>
+		In musical notation, a fully diminished chord will often be expressed using a qualifier character that looks much like an "o". The <B>playChord</B> method makes no provision for such a qualifier. When the optional "dim" qualifier is used, the resulting chord will be a diminished triad - neither a half diminished nor a fully diminished chord. To achieve a fully diminished chord you should specify "dim7" after the chord root, as in the chord name "Cdim7" which represents a C-minor chord that is fully diminished. With a fully diminished chord, both the 5th and 7th notes are diminished (lowered by a half step).
+		<P></P>
+	<LI><B>An accidental following the chord root always acts on the chord root.</B><BR>
+		Specifying an accidental ("#" or "b") following the chord root always acts on the chord root and not the first note that is specified following the chord root. For example, the chord name "Cb5" indicates that the chord root is C-flat and not that the chord is a C chord containg a flat 5th note. This type of ambiguity is not much of an issue since it seldom comes up in practice, and there is usually another way to express the chord you are after to avoid the ambiguity. For example, when trying to represent a chord with a root of C and a flattened 9th note, one would usually not use "Cb9", but would instead use "C7b9" since a chord with a 9th note will usually implicitly also contain a 7th note. So, in this exaple the "7" qualifier separates the root "C" from the "b9" and avoids the ambiguity over which note the "b" accidental should be applied to.
+		<P></P>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for either of the <B>BankNumber0to2</B> or <B>ProgramNumber0to255</B> parameters, then the instrument setting of the MIDI channel specified by the <B>MidiChannel1to16</B> parameter will not be changed, so notes played by this method will be played using the instrument that is currently set for that channel.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>OctaveNumber0to12</B> parameter, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>ChordRootNoteNameSTR</B> parameter, then the chord root that is specified in the <B>ChordNameSTR</B> parameter will be used and will not be overridden.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>Velocity0to127</B> parameter, then the default value of <SPAN CLASS=value>127</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>NoteDurationMsINT</B> parameter, then the default value of <SPAN CLASS=value>1000</SPAN> (1 second) will be used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>playChord (</B> MidiChannel1to16 , BankNumber0to2 , ProgramNumber0to255 , ChordNameSTR , OctaveNumber0to12 , ChordRootNoteNameSTR , Velocity0to127 <B>)</B>
+		<P>
+		When no <B>NoteDurationMsINT</B> parameter is specified, then the default value of <SPAN CLASS=value>1000</SPAN> (1 second) will be used for this parameter.
+		<HR NOSHADE SIZE=1>
+	<LI><B>playChord (</B> MidiChannel1to16 , BankNumber0to2 , ProgramNumber0to255 , ChordNameSTR , OctaveNumber0to12 , ChordRootNoteNameSTR <B>)</B>
+		<P>
+		When there is also no <B>Velocity0to127</B> parameter specified, then the default value of <SPAN CLASS=value>127</SPAN> will be used for this parameter.
+		<HR NOSHADE SIZE=1>
+	<LI><B>playChord (</B> MidiChannel1to16 , BankNumber0to2 , ProgramNumber0to255 , ChordNameSTR , OctaveNumber0to12 <B>)</B>
+		<P>
+		When there is also no <B>ChordRootNoteNameSTR</B> parameter specified, then the chord root that is specified in the <B>ChordNameSTR</B> parameter will be used and will not be overridden.
+		<HR NOSHADE SIZE=1>
+	<LI><B>playChord (</B> MidiChannel1to16 , BankNumber0to2 , ProgramNumber0to255 , ChordNameSTR <B>)</B>
+		<P>
+		When there is also no <B>OctaveNumber0to12</B> parameter specified, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI><A HREF="../../../demos/index.html?demos/chords.html">See the demo</A> for the Chords extension.
+</UL>
+
+<A NAME="playNotes"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;playNotes</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Instance Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Chords</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;1.0.0&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;File Types Supported&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;RMF, MIDI&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>playNotes</B> method plays a set of any number of musical notes, as specified by a notes array parameter.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>
+			<B>playNotes (</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#MidiChannel1to16">MidiChannel1to16</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#BankNumber0to2">BankNumber0to2</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#ProgramNumber0to255">ProgramNumber0to255</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; NotesARRAY <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#Velocity0to127">Velocity0to127</A> <B>,</B><BR>
+			&nbsp;&nbsp;&nbsp; <A HREF="../../parameters.html#NoteDurationMsINT">NoteDurationMsINT</A><BR>
+			<B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The <B>playNotes</B> method will play all of the notes contained in the <B>NotesARRAY</B> parameter on the specified MIDI channel. All notes will be played using the same instrument, at the same velocity, and for the same duration, as specified by the <B>BankNumber0to2</B>, <B>ProgramNumber0to255</B>, <B>Velocity0to127</B>, and <B>NoteDurationMsINT</B> parameters.</P>
+
+<P>The elements of the notes array, specified by the <B>NotesARRAY</B> parameter, may be either note names or note numbers. All elements that are not of type "string" or "number" will be ignored. This includes elements that have a value of null, and also elements that are of type "boolean". The fact that null-value elements are ignored by this method is particularly important because the array that is returned by the <A HREF="#Music.getChordNotes"><B>Music.getChordNotes</B></A> static method will invariably contain some null-value elements.</P>
+
+<P>The <B>playNotes</B> method is useful as a way of playing an arbitrarily large number of notes simultaneously, since there is no restriction on the number of notes that can be specified by the <B>NotesARRAY</B> parameter. The method is also useful for playing notes that don't conform to any chord that could otherwise be played using the <A HREF="#playChord"><B>playChord</B></A> method, or interchangeably playing chord note arrays produced by the <A HREF="#Music.getChordNotes"><B>Music.getChordNotes</B></A> static method and note arrays that are generated using a custom function or constructed manually.</P>
+
+<P>The <B>playChord</B> and <B>Music.getChordNotes</B> methods take three parameters to fully qualify the notes that make up a chord: <B>ChordNameSTR</B>, <B>OctaveNumber0to12</B>, and <B>ChordRootNoteNameSTR</B>. Because of this, it isn't possible to call these methods with a single parameter that can represent an exact chord. So, if for example you wanted to design code that iterated in some pattern through an array of chords, then the <B>playNotes</B> method would come in very handy.</P>
+
+<P>In the following code example, the function <B>playNextChord</B> will step through the chords in the array named "chords". When it reaches the end of the "chords" array it will being again from the first element.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+chordNo = -1;
+
+function playNextChord () {
+   chordNo = (chordNo + 1) % chords.length;
+   myMusicObject.playNotes (1,1,11,chords [chordNo],127,2000);
+}
+
+chords = new Array (
+   Music.getChordNotes ('Eb7#9',3,'Eb'),
+   'C#3,C#4,E#4,Db5,C#5,Gb5',
+   Music.getChordNotes ('A7#11',3,'A'),
+   'C3,D#4,F4,G#4,Bb5',
+   Music.getChordNotes ('Emaj9',3,'E'),
+   new Array ('C#4','F#4','G#4','B4','D#5'),
+   new Array (49,63,65,68,72,75),
+   Music.getChordNotes ('Abmin11',3,'Ab'),
+);
+
+myMusicObject = new Music ();
+myMusicObject.stubEmbed ('stub.rmf');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>From the listing above, you will notice what may seem like quite a bit of "hanky-panky" going on with the creation of the "chords" array. Along with several elements that are being created using the <B>Music.getChordNotes</B> method, there are also some elements being declared as simple strings, as well as some other elements being created using the <B>new</B> operator. Because the <B>playNotes</B> method can take either a <B>NotesARRAY</B> parameter or a <B>NoteNamesSTR</B> parameter, it doesn't truly matter that all the elements of the "chords" array are not of the same type. When the <B>playNextChord</B> function selects element 0 of the "chords" array, it will be passing an array reference to the <B>playNotes</B> method. But, when the function selects element 1, it will pass the string value "<NOBR>C#3,C#4,E#4,Db5,C#5,Gb5</NOBR>" to the <B>playNotes</B> method.</P>
+
+<P>The <B>playNotes</B> method is, indeed, quite flexible. In the sample code listing below, all the calls to the playNotes method will play exactly the same chord...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+myMusicObject.playNotes (1,1,11,'C#3,D#4,F4,G#4,C5',127,2000);
+myMusicObject.playNotes (1,1,11,new Array (49,63,65,68,72),127,2000);
+myMusicObject.playNotes (1,1,11,new Array ('C#3','D#4','F4','G#4','C5'),127,2000);
+myMusicObject.playNotes (1,1,11,new Array (49,'D#4','F4',68,72),127,2000);
+
+myNotesArray = new Array (49,63,65,68,72);
+myMusicObject.playNotes (1,1,11,myNotesArray,127,2000);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now, let's take a look at the calls to the <B>playNotes</B> method above...</P>
+<OL>
+	<LI>In the first call to the <B>playNotes</B> method, the form of the method that takes a <B>NoteNamesSTR</B> parameter is being used in place of the form that takes a <B>NotesARRAY</B> parameter. This string parameter must always contain a comma-separated list of note names. Note numbers may not be used in the comma-separated list with this form of the method.
+		<P></P>
+	<LI>In the second call to the <B>playNotes</B> method, an array of note numbers is being created using the <B>new</B> operator at the time of the method call - and actually inside the parameter list of the method call. This is a perfectly valid syntax for the JavaScript language.
+		<P></P>
+	<LI>In the third call to the <B>playNotes</B> method, an array of note names is being created instead of an array of note numbers. Because the elements of the array referenced by the <B>NotesARRAY</B> parameter can be either note names or note numbers, an array containing only note names is just as valid as an array of only note numbers.
+		<P></P>
+	<LI>In the fourth call to the <B>playNotes</B> method, the array that is being created and passed as a parameter contains a blend of note names and note numbers. Because the elements of the array referenced by the <B>NotesARRAY</B> parameter can be either note names or note numbers, an array with a blend of names and numbers is also perfectly acceptable.
+		<P></P>
+	<LI>Finally, in the fifth call to the <B>playNotes</B> method, the variable <B>myNotesArray</B> is being passed for the <B>NotesARRAY</B> parameter. In this case, the array of notes has already been created beforehand and has been assigned to the variable <B>myNotesArray</B>.
+</OL>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for either of the <B>BankNumber0to2</B> or <B>ProgramNumber0to255</B> parameters, then the instrument setting of the MIDI channel specified by the <B>MidiChannel1to16</B> parameter will not be changed, so notes played by this method will be played using the instrument that is currently set for that channel.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>Velocity0to127</B> parameter, then the default value of <SPAN CLASS=value>127</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>NoteDurationMsINT</B> parameter, then the default value of <SPAN CLASS=value>1000</SPAN> (1 second) will be used for this parameter.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>playNotes (</B> MidiChannel1to16 , BankNumber0to2 , ProgramNumber0to255 , NoteNamesSTR, Velocity0to127 , NoteDurationMsINT <B>)</B>
+		<P>When a <B>NoteNamesSTR</B> parameter is used in place of a <B>NotesARRAY</B> parameter, then a string containing a comma-separated list of note names can be used to specify the notes that should be played.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>playNotes (</B> MidiChannel1to16 , BankNumber0to2 , ProgramNumber0to255 , NotesARRAY, Velocity0to127 <B>)</B>
+		<P>When no <B>NoteDurationMsINT</B> parameter is specified, then the default value of <SPAN CLASS=value>1000</SPAN> (1 second) will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>playNotes (</B> MidiChannel1to16 , BankNumber0to2 , ProgramNumber0to255 , NotesARRAY <B>)</B>
+		<P>When there is also no <B>Velocity0to127</B> parameter specified, then the default value of <SPAN CLASS=value>127</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI><A HREF="../../../demos/index.html?demos/chords.html">See the demo</A> for the Chords extension.
+</UL>
+
+<!--***********************************************************************-->
+
+<A NAME="static-methods"></A>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=100%><TR><TD CLASS=section>
+Static Methods
+</TD></TR></TABLE>
+<BR>
+
+<A NAME="Music.getChordNotes"></A>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+	<TR><TD CLASS=reference-header>&nbsp;Music.getChordNotes</TD></TR>
+	<TR><TD CLASS=reference-header-line><IMG SRC="../../../images/blank.gif" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD></TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 ALIGN=RIGHT><TR><TD>&nbsp;</TD><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=summary-table-border-color>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=0>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;CATEGORY&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;Static Method&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;MODULE&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;<A HREF="#top">Music Object Extension - Chords</A>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD CLASS=summary-table-item-name>&nbsp;Min. Player Version&nbsp;</TD>
+		<TD CLASS=summary-table-item-value>&nbsp;n/a&nbsp;</TD>
+	</TR>
+</TABLE>
+</TD></TR><TR><TD>&nbsp;</TD></TR></TABLE>
+</TD></TR></TABLE>
+
+<P>
+The <B>Music.getChordNotes</B> static method returns an array, representing the musical notes that make up a specified chord.
+<BR CLEAR=RIGHT>
+</P>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-syntax.gif" WIDTH=80 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SYNTAX">&nbsp;&nbsp;&nbsp;</TD>
+		<TD><B>Music.getChordNotes (</B> ChordNameSTR <B>,</B> OctaveNumber0to12 <B>,</B> ChordRoot<A HREF="../../parameters.html#NoteNameSTR">NoteNameSTR</A> <B>)</B>
+		</TD>
+	</TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR VALIGN=TOP>
+		<TD><IMG SRC="../../../style/images/subheading-return-value.gif" WIDTH=133 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="RETURN VALUE">&nbsp;&nbsp;&nbsp;</TD>
+		<TD>NoteNumbersARRAY</TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>The array that is returned by the <B>Music.getChordNotes</B> method will contain exactly 14 elements, with element 0 always containing a null value, and the elements 1 through 13 containing either note numbers or null values. Elements 1 through 13 represent the notes that make up a chord. For example, element 1 will represent the chord root note, element 2 will represent the chord's 2nd note, element 3 will represent the chord's 3rd note, and so on. If the chord does not contain a certain note, then the element corresponding to that chord note will be set to a null value. For instance, if a particular chord does not contain a 7th note, then element 7 will be set to null. On the other hand, if the chord does contain a 7th note, then element 7 will contain the MIDI note number of the chord's 7th note.</P>
+
+<P>The following table shows several example chords with a listing of the MIDI note numbers that make up the chords. In the first three columns are the chord name, octave, and root note that determine the notes of the chord, and in the remaining 13 columns are the values of elements 1 through 13 of the array that will be returned by the <B>Music.getChordNotes</B> method.</P>
+
+<TABLE ALIGN=CENTER CLASS=data-table-border-color BORDER=0 CELLSPACING=0 CELLPADDING=1><TR><TD>
+<TABLE CLASS=data-table-spacer-color BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4>
+	<TR>
+		<TD CLASS=data-table-column-header>Chord</TD>
+		<TD CLASS=data-table-column-header>Octave</TD>
+		<TD CLASS=data-table-column-header>Root</TD>
+		<TD CLASS=data-table-column-header>root</TD>
+		<TD CLASS=data-table-column-header>2nd</TD>
+		<TD CLASS=data-table-column-header>3rd</TD>
+		<TD CLASS=data-table-column-header>4th</TD>
+		<TD CLASS=data-table-column-header>5th</TD>
+		<TD CLASS=data-table-column-header>6th</TD>
+		<TD CLASS=data-table-column-header>7th</TD>
+		<TD CLASS=data-table-column-header>8th</TD>
+		<TD CLASS=data-table-column-header>9th</TD>
+		<TD CLASS=data-table-column-header>10th</TD>
+		<TD CLASS=data-table-column-header>11th</TD>
+		<TD CLASS=data-table-column-header>12th</TD>
+		<TD CLASS=data-table-column-header>13th</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-highlighted>Eb7#9</TD>
+		<TD CLASS=data-table-item-highlighted>3</TD>
+		<TD CLASS=data-table-item-highlighted>Eb</TD>
+		<TD CLASS=data-table-item><B>51</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>55</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>58</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>61</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>66</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-highlighted>A7#11</TD>
+		<TD CLASS=data-table-item-highlighted>3</TD>
+		<TD CLASS=data-table-item-highlighted>A</TD>
+		<TD CLASS=data-table-item><B>57</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>61</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>67</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>71</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>75</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-highlighted>Emaj9</TD>
+		<TD CLASS=data-table-item-highlighted>3</TD>
+		<TD CLASS=data-table-item-highlighted>E</TD>
+		<TD CLASS=data-table-item><B>52</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>56</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>59</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>63</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>66</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-highlighted>Dbsus9</TD>
+		<TD CLASS=data-table-item-highlighted>4</TD>
+		<TD CLASS=data-table-item-highlighted>Db</TD>
+		<TD CLASS=data-table-item><B>61</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>66</B></TD>
+		<TD CLASS=data-table-item><B>68</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>71</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>75</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-highlighted>Abmin11</TD>
+		<TD CLASS=data-table-item-highlighted>2</TD>
+		<TD CLASS=data-table-item-highlighted>Ab</TD>
+		<TD CLASS=data-table-item><B>56</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>59</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>70</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>73</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-highlighted>Emaj7#11</TD>
+		<TD CLASS=data-table-item-highlighted>4</TD>
+		<TD CLASS=data-table-item-highlighted>E</TD>
+		<TD CLASS=data-table-item><B>64</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>68</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>75</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>78</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>82</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+	</TR>
+	<TR ALIGN=CENTER>
+		<TD CLASS=data-table-item-highlighted>Bb7#5#9</TD>
+		<TD CLASS=data-table-item-highlighted>3</TD>
+		<TD CLASS=data-table-item-highlighted>Bb</TD>
+		<TD CLASS=data-table-item><B>58</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>62</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>66</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item><B>68</B></TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+		<TD CLASS=data-table-item>null</TD>
+	</TR>
+</TABLE>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<BR>
+</CENTER>
+
+<P>The <B>playChord</B> method takes three parameters to fully qualify the notes that make up a chord: <B>ChordNameSTR</B>, <B>OctaveNumber0to12</B>, and <B>ChordRootNoteNameSTR</B>. Because of this, it isn't possible to call this method with a single parameter that can represent an exact chord. So, if for example you wanted to design code to play a randomly selected chord from an array of chords, then you would be better off using the <B>Music.getChordNotes</B> method in conjunction with the <B>playNotes</B> method instead of the <B>playChord</B> method.</P>
+
+<P>In the following code example, the function <B>playRandomChord</B> will randomly select a chord from the array named "chords"...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function playRandomChord () {
+   var chordNo = Math.floor (Math.random () * chords.length);
+   myMusicObject.playNotes (1,1,11,chords [chordNo],127,2000);
+}
+
+chords = new Array (
+   Music.getChordNotes ('Eb7#9',3,'Eb'),
+   Music.getChordNotes ('A7#11',3,'A'),
+   Music.getChordNotes ('Emaj9',3,'E'),
+   Music.getChordNotes ('Dbsus9',4,'Db'),
+   Music.getChordNotes ('Abmin11',3,'Ab'),
+   Music.getChordNotes ('Emaj7#11',4,'E'),
+   Music.getChordNotes ('Bb7#5#9',3,'Bb'),
+   Music.getChordNotes ('Eb7#9',3,'Eb'),
+   Music.getChordNotes ('A7#11',3,'A')
+);
+
+myMusicObject = new Music ();
+myMusicObject.stubEmbed ('stub.rmf');
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In this example, the array of chords is created using the <B>new</B> constructor and is assigned to the variable "chords". Don't mind the fact that the statement is broken up across multiple lines - this is a perfectly acceptable thing to do in JavaScript, provided that you end each line on a logical token and you don't ever have any unterminated string literals. Each element of the array "chords" is, itself, an array containing the MIDI note numbers of the notes that make up a chord. The array for each element is created using a call to the <B>Music.getChordNotes</B> method. Now, when the <B>playRandomChord</B> function selects a chord, it will pass an element of the array "chords" by reference to the <B>playNotes</B> method, and the <B>playNotes</B> method will in turn play the notes of the chord.</P>
+
+<P>The array that is returned by the <B>Music.getChordNotes</B> method is likely to contain some null-value elements. If, for the purposes of your own code, you needed a compacted array of notes containing no null-value elements, then you could write a custom function as follows...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+function compactChord (chordName,chordOctave,chordRoot) {
+   var
+      chordNotes = Music.getChordNotes (chordName,chordOctave,chordRoot),
+      compactNotes = new Array ()
+   ;
+   for (var noteNo = 0; noteNo < chordNotes.length; noteNo++) {
+      if (chordNotes [noteNo] != null) {
+         compactNotes [compactNotes.length] = chordNotes [noteNo];
+      }
+   }
+   return compactNotes;
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>For detailed guidelines on the chord name syntax that should be used for this method, consult the reference for the <A HREF="#playChord"><B>playChord</B></A> method.</P>
+
+<IMG SRC="../../../style/images/subheading-special-values.gif" WIDTH=145 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="SPECIAL VALUES"><BR>
+<UL CLASS=reference-special-values>
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> is specified for the <B>OctaveNumber0to12</B> parameter, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.
+	<LI>When a value of <SPAN CLASS=value>null</SPAN> or an empty string is specified for the <B>ChordRootNoteNameSTR</B> parameter, then the chord root that is specified in the <B>ChordNameSTR</B> parameter will be used and will not be overridden.
+</UL>
+
+<IMG SRC="../../../style/images/subheading-variations.gif" WIDTH=108 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="VARIATIONS"><BR>
+<UL CLASS=reference-variations>
+	<LI><B>Music.getChordNotes (</B> ChordNameSTR , OctaveNumber0to12 <B>)</B>
+		<P>When no <B>ChordRootNoteNameSTR</B> parameter is specified, then the chord root that is specified in the <B>ChordNameSTR</B> parameter will be used and will not be overridden.</P>
+		<HR NOSHADE SIZE=1>
+	<LI><B>Music.getChordNotes (</B> ChordNameSTR <B>)</B>
+		<P>When there is also no <B>OctaveNumber0to12</B> parameter specified, then the default value of <SPAN CLASS=value>0</SPAN> will be used for this parameter.</P>
+		<HR NOSHADE SIZE=1>
+</UL>
+
+<IMG SRC="../../../style/images/subheading-notes.gif" WIDTH=72 HEIGHT=16 HSPACE=0 VSPACE=0 BORDER=0 ALT="NOTES"><BR>
+<UL CLASS=reference-notes>
+	<LI><A HREF="../../../demos/index.html?demos/chords.html">See the demo</A> for the Chords extension.
+</UL>
+
+</BODY></HTML>

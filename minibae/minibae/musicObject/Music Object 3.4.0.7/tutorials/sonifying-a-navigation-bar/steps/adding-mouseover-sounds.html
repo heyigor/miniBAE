@@ -1,0 +1,138 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Sonifying a Navigation Bar - Adding the Mouseover Sounds</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('../../../music/stub.rmf');
+
+// --></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 3: Adding the Mouseover Sounds
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Now that we have thoroughly prepared our page for sonification by adding all the necessary components, we can get down to the fun part of making Beatnik play sounds. We will start by adding mouseover sounds to give the user a sonic confirmation of their mouse actions. Users will be so thrilled by the notion of having sounds play when they interact with a Web page that you can expect them to gratuitously play with the page's UI for quite a while before even clicking on a link - simply marvelling at the fact that their actions play musical notes.</P>
+
+<P>For our example, we will use a sound from Beatnik's General MIDI bank called "Soundtrack", which is located at MIDI bank number 0 and MIDI program number 97. We will then use the <B>playNote</B> method of the Music Object instance called 'notePlayer' to play the notes C4, D4, and E4 when the user mouses over the 'PREV', 'HOME', and 'NEXT' links on the navbar, respectively.</P>
+
+<P>Now, the <B>playNote</B> method takes the following parameters in a comma-separated list inside parentheses...</P>
+<UL>
+	<LI>MIDI channel number (ranging from 1 to 16)
+	<LI>instrument bank number (0 = General MIDI, 1 = Special Bank, 2 = User Bank)
+	<LI>instrument program number (ranging from 0 to 127)
+	<LI>MIDI note number (or name)
+	<LI>note velocity (ranging from 0 to 127, where 0 is softest and 127 is loudest)
+	<LI>note duration (measured in milliseconds)
+</UL>
+
+<P>So, for example, the statement <B>notePlayer.playNote (1,0,97,'C4',127,1000)</B> will play a note on MIDI channel 1 (the first parameter in the list). The instrument that the note will play on will be from bank 0 and program number 97 (the next two parameters in the list), which corresponds to the General MIDI 'Soundtrack' instrument. The note that is played will be 'C4', which corresponds to C in the fourth octave (also referred to as middle C). The next parameter in the list is the velocity that the note is to be played at, in this case 127 which is maximum velocity. Then, the final parameter is how long to note should play for - it's duration. We have set this to 1000 milliseconds, which is equivalent to 1 second. After all, we don't want the note to play forever and cause a cacophony when other notes are triggered by the user.</P>
+
+<P>In order to trigger a note when the user mouses over the links on the navbar, we make use of the ONMOUSEOVER event which is supported for hypertext links (the &lt;A&gt; tag) in all major browsers. The ONMOUSEOVER event is an attribute of the &lt;A&gt; tag and takes a JavaScript statement or statements as its value. Because JavaScript code may very likely contain spaces, it is necessary to enclose the JavaScript for the ONMOUSEOVER attribute in quotes. These can be single or double quotes, and for convenience should typically be the opposite of any quotes you might use in the JavaScript statements themselves. For instance, the statement <B>notePlayer.playNote (1,0,97,'C4',127,1000)</B> contains single quotes and so it would not be possible to use single quotes to also enclose the full JavaScript statement as this would confuse the browser's HTML parser: how would it know which quote indicated the end of the JavaScript code that belonged to the ONMOUSEOVER attribute?</P>
+
+<P>Now, whatever JavaScript statement(s) are contained in the ONMOUSEOVER event handler will be executed when the user mouses over the link. In our example, the <B>playNote</B> method of 'notePlayer' will be called and will cause the Beatnik player to play a note.</P>
+
+<P>Why not try it for yourself! Below is a version of the navbar with sonified mouseovers...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 CELLSPACING=0 CELLPADDING=0>
+	<TR>
+		<TD>
+			<A
+				HREF="buckingham1.html"
+				ONCLICK="return false"
+				ONMOUSEOVER="notePlayer.playNote (1,0,97,'C4',127,1000)"
+			>
+			<IMG SRC="../../../images/example-nav-prev.gif" WIDTH=96 HEIGHT=36 ALT="PREV" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham-home.html"
+				ONCLICK="return false"
+				ONMOUSEOVER="notePlayer.playNote (1,0,97,'D4',127,1000)"
+			>
+			<IMG SRC="../../../images/example-nav-home.gif" WIDTH=302 HEIGHT=36 ALT="HOME" BORDER=0 HSPACE=0></A></TD>
+		<TD>
+			<A
+				HREF="buckingham3.html"
+				ONCLICK="return false"
+				ONMOUSEOVER="notePlayer.playNote (1,0,97,'E4',127,1000)"
+			>
+			<IMG SRC="../../../images/example-nav-next.gif" WIDTH=96 HEIGHT=36 ALT="NEXT" BORDER=0 HSPACE=0></A></TD>
+	</TR>
+</TABLE>
+<BR>
+
+<P>And now let's take a look at the HTML source code for this sonified navbar. All code that has been added since the last step is indicated in red.</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+notePlayer = new Music ();
+notePlayer.stubEmbed ('stub.rmf');
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+&lt;TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham1.html"
+            <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="notePlayer.playNote (1,0,97,'C4',127,1000)"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-prev.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="PREV"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham-home.html"
+            <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="notePlayer.playNote (1,0,97,'D4',127,1000)"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-home.gif"
+            WIDTH=302
+            HEIGHT=36
+            ALT="HOME"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;A
+            HREF="buckingham3.html"
+            <SPAN CLASS=sample-code-highlighted>ONMOUSEOVER="notePlayer.playNote (1,0,97,'E4',127,1000)"</SPAN>
+         &gt;
+         &lt;IMG
+            SRC="navbar-next.gif"
+            WIDTH=96
+            HEIGHT=36
+            ALT="NEXT"
+            BORDER=0
+            HSPACE=0&gt;&lt;/A&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

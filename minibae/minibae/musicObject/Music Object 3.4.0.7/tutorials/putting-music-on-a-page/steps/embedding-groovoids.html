@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Embedding Groovoids)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 10: Embedding Groovoids
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Groovoids are "pre-cooked" musical cues that come bundled with the player. Groovoids provide an easy way to sonify a Web page because they are built right into the player's soundbank and don't require any extra downloading for the person visiting your sonified Web page. For a more thorough explanation of Groovoids, consult the section <A HREF="../../../music-object-reference/concepts.html#groovoids" TARGET="_parent">Important Concepts: Groovoids</A>.</P>
+
+<P>Now, while some categories of Groovoids are only really appropriate for the more sophisticated sonification of user interface elements (buttons, links, form fields, etc.), the Groovoids from the Background, Fanfare, and Hits categories can be embedded very easily in a page, to play when the page loads in. This page, for example, has the Groovoid "Background-Smooth" playing as the soothing background music (see the player control panel below).</P>
+
+<CENTER>
+<EMBED
+	SRC="../../../music/stub.rmf"
+	GROOVOID="Background-Smooth"
+	TYPE="audio/rmf"
+	WIDTH=144
+	HEIGHT=60
+	DISPLAY=SONG
+	AUTOSTART=TRUE
+	LOOP=TRUE
+	PLUGINSPAGE="http://www.beatnik.com/to/?player"
+>
+</CENTER>
+
+<P>Groovoids can be easily embedded in a page by simply adding the <A HREF="../../../general-reference/embedding-properties.html#groovoid" TARGET="_parent"><B>GROOVOID</B></A> embedding property to the EMBED tag. The source code listing below shows the HTML code that was used to embed the Groovoid "Background-Smooth" in this page...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="stub.rmf"
+   <SPAN CLASS=sample-code-highlighted>GROOVOID="Background-Smooth"</SPAN>
+   TYPE="audio/rmf"
+   WIDTH=144
+   HEIGHT=60
+   DISPLAY=SONG
+   AUTOSTART=TRUE
+   LOOP=TRUE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>From the source code listing, you will notice that the additional <B>GROOVOID</B> property has been highlighted. You should also notice that the EMBED tag still contains a <A HREF="../../../general-reference/embedding-properties.html#src" TARGET="_parent"><B>SRC</B></A> property. While the <B>GROOVOID</B> property always overrides any file specified by the <B>SRC</B> property, it is still recommended to specify a valid file URL in the <B>SRC</B> property to maintain backward compatibility with some older browser versions that required a plug-in to be embedded with a valid file URL specified for the <B>SRC</B> property. In browsers that don't have this problem, the player simply ignores the <B>SRC</B> property when the <B>GROOVOID</B> property is present, so no extra downloading is required in the majority of cases.</P>
+
+<DIV CLASS=subsection>Hidden Groovoids</DIV>
+
+<P>In this example, we've chosen to display the control panel for the player. However, we could just as easily make the player instance be invisible so that all you had was the Groovoid playing as the background music for the page without there being any indication that a plug-in is being used in the page. You may remember seeing this approach in the earlier step of this tutorial, <A HREF="hidden.html">Music You Cannot See</A>.</P>
+
+<P>Now, if we wanted to play the same Groovoid "Background-Smooth" but make the player invisible on the page, then the code would look as follows...</P>
+
+<TABLE ALIGN=CENTER BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+&lt;EMBED
+   SRC="stub.rmf"
+   GROOVOID="Background-Smooth"</SPAN>
+   TYPE="audio/rmf"
+<SPAN CLASS=sample-code-highlighted>   WIDTH=0
+   HEIGHT=0
+   HIDDEN</SPAN>
+   AUTOSTART=TRUE
+   LOOP=TRUE
+   PLUGINSPAGE="http://www.beatnik.com/to/?player"
+&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>In the source code listing above, the highlighted text represents the code needed to make the player be invisible on the page. You will also notice that we have removed the <SPAN CLASS=sample-code>DISPLAY=SONG</SPAN> embedding property from the EMBED tag. When a player instance is hidden, it is not necessary to specify a value for the <A HREF="../../../general-reference/embedding-properties.html#display" TARGET="_parent"><B>DISPLAY</B></A> embedding property because there is nothing to display.</P>
+
+<!--
+<DIV CLASS=subsection>More Advanced Techniques Using Groovoids</DIV>
+
+<P>If this step of the tutorial has whet your appetite and you'd like to learn about some more sophisticated ways of using Groovoids in sonification, then you may like to check out the tutorial <A HREF="../../playing-groovoids/index.html" TARGET="_parent">Playing Groovoids</A>.</P>
+-->
+
+<DIV CLASS=subsection>What Groovoids Are Available?</DIV>
+
+<P>For a full list of all the available Groovoids, consult the appendix <A HREF="../../../appendixes/groovoids.html" TARGET="_parent">Beatnik Soundbank - Groovoids</A>. For a more in-depth discussion of how the Groovoids are divided up into different categories, consult the section <A HREF="../../../music-object-reference/concepts.html#groovoids" TARGET="_parent">Important Concepts: Groovoids</A>.</P>
+
+</BODY></HTML>

@@ -1,0 +1,6 @@
+VERS resource map
+
+DWRD	Major
+DWRD	Minor
+DWRD	Sub minor
+

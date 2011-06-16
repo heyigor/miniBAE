@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+	<TITLE>Tutorial: Putting Music On a Page (Creating Scriptable Instances)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 15: Creating Scriptable Instances
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>While we've shown in the previous step that using Music Object's <B>Music.magicEmbed</B> static method can produce cleaner cross-browser code than the combined <A HREF="embed-meets-object.html">EMBED-OBJECT tag approach</A>, we still don't get the benefits of scriptable interactivity provided by the Music Object API. In order to be able to control the Player instance after it has been created, we need to first create a Music Object instance and then use that instance's <B>magicEmbed</B> method instead of the <B>Music.magicEmbed</B> static method.</P>
+
+<P>Take a look at the before-and-after comparison below to see how we've taken the code from the previous step in this tutorial and translated it to use the <B>magicEmbed</B> instance method in place of the <B>Music.magicEmbed</B> static method...</P>
+
+<TABLE ALIGN=CENTER WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code-header>BEFORE (Using the Music.magicEmbed Static Method)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+Music.magicEmbed (
+   'SRC="trance.rmf" ' +
+   'WIDTH=144 ' +
+   'HEIGHT=60 ' +
+   'DISPLAY=SONG ' +
+   'AUTOSTART=FALSE ' +
+   'LOOP=FALSE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+<TR><TD CLASS=sample-code-header>AFTER (Using the magicEmbed Instance Method)</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+<SPAN CLASS=sample-code-highlighted>myMusicObject = new Music ();</SPAN>
+
+<SPAN CLASS=sample-code-highlighted>myMusicObject.</SPAN>magicEmbed (
+   'SRC="trance.rmf" ' +
+   'WIDTH=144 ' +
+   'HEIGHT=60 ' +
+   'DISPLAY=SONG ' +
+   'AUTOSTART=FALSE ' +
+   'LOOP=FALSE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>The text that is highlighted represents text that has been added or changed in order to use the instance method instead of the static method. You will notice how we've created a new Music Object instance in the statement <B><NOBR>myMusicObject = new Music ()</NOBR></B>. We then use that instance for the first time by calling its <B>magicEmbed</B> method to embed a scriptable Player instance.</P>
+
+<P>Of course, we still don't have any actual scripting for interactive control of the Player instance - we've just set up the foundation to allow the Player instance to be controlled through the Music Object instance "<B>myMusicObject</B>". In the following source code listing we've added some more HTML code to control the playback of the Player instance from HTML form buttons. This is quite an unimaginitive example of interactive music, but it does serve to illustrate the principle...</P>
+
+<TABLE ALIGN=CENTER WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="music-object.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;CENTER&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+myMusicObject = new Music ();
+
+myMusicObject.magicEmbed (
+   'SRC="trance.rmf" ' +
+   'WIDTH=144 ' +
+   'HEIGHT=60 ' +
+   'DISPLAY=SONG ' +
+   'AUTOSTART=FALSE ' +
+   'LOOP=FALSE'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+
+<SPAN CLASS=sample-code-highlighted>&lt;FORM&gt;
+&lt;INPUT TYPE=button VALUE="PLAY" ONCLICK="myMusicObject.play ()"&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;INPUT TYPE=button VALUE="PAUSE" ONCLICK="myMusicObject.pause ()"&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;INPUT TYPE=button VALUE="STOP" ONCLICK="myMusicObject.stop (2000)"&gt;
+&lt;/FORM&gt;
+</SPAN>
+
+&lt;/CENTER&gt;
+</PRE>
+</TD></TR>
+</TABLE>
+<BR>
+
+<P>The text that is highlighted indicates the text that has been added to achieve a very token level of musical interactivity. A simple form containing three buttons lets the user control the play, pause, and stop functions of the Player instance that is embedded right above the buttons. Of course, with a more ambitious and more imaginitive Web site sonification, it could be any events within a page that controls a Player instance. Notice how each <B>INPUT</B> tag has an <B>ONCLICK</B> event handler, each calling a different method of the Music Object instance "myMusicObject".</P>
+
+<P>Now, below you will see the results that this HTML code generates. Click the buttons and see how it works...</P>
+
+<CENTER>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+myMusicObject = new Music ();
+
+myMusicObject.magicEmbed (
+   'SRC="../../../music/trance.rmf" ' +
+   'WIDTH=144 ' +
+   'HEIGHT=60 ' +
+   'DISPLAY=SONG ' +
+   'AUTOSTART=FALSE ' +
+   'LOOP=FALSE'
+);
+
+// --></SCRIPT>
+
+<FORM>
+<INPUT TYPE=button VALUE="PLAY" ONCLICK="myMusicObject.play ()">
+&nbsp;&nbsp;&nbsp;
+<INPUT TYPE=button VALUE="PAUSE" ONCLICK="myMusicObject.pause ()">
+&nbsp;&nbsp;&nbsp;
+<INPUT TYPE=button VALUE="STOP" ONCLICK="myMusicObject.stop (2000)">
+</FORM>
+
+</CENTER>
+
+</BODY></HTML>

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+	<TITLE>Authoring Tips: JAVASCRIPT TIP: Shorthand Conditions</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+Shorthand Conditions
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P>Using the "?" operator, it is possible to significantly shorten the code necessary for certain types of conditional statements. For example, the following statements...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+if (calculationType == 'multiply') {
+	a = b * c - d;
+} else {
+	a = b / c - d;
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could be reduced to just...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+a = (calculationType == 'multiply') ? (b * c - d) : (b / c - d);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...and can be reduced even a little further to...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+a = ((calculationType == 'multiply') ? (b * c) : (b / c)) - d;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...since the subtraction of the variable "d" is common to both expressions. It is even possible to use the "?" operator in cases where the result of the two options for the "?" expression are not to be assigned to anything. For example, the statements...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+if (useGroovoid) {
+	Music.play ('UI-Click1');
+} else {
+	Music.playNote (1,1,175,77,127,1000);
+}
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>...could be reduced to...</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR><TD CLASS=sample-code>
+<PRE>
+useGroovoid ? music.play ('UI-Click1') : music.playNote (1,1,175,77,127,1000);
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+</BODY></HTML>

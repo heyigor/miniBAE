@@ -1,0 +1,117 @@
+//---------------------------------------------------------
+
+testInfo.txt
+
+	Chris Grigg
+	19 January 2000
+
+//---------------------------------------------------------
+
+
+There are 7 testNN.txt files in this directory for use
+with Mark Deggeler's TestSuite shell for Mini-BAE.  This
+document is an index to the tests in each one, and the
+media files that each one requires.
+
+
+//---------------------------------------------------------
+// test01.txt
+//---------------------------------------------------------
+// 1. Play MIDI File
+
+   requires testMidi1.mid
+            default patch file
+
+//---------------------------------------------------------
+// test02.txt
+//---------------------------------------------------------
+// 1. Play RMF Files:
+//      a. 22k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+//      b. 44k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+
+    requires mono8_22.rmf
+             mono16_22.rmf
+             stereo8_22.rmf
+             stereo16_22.rmf
+             mono8_44.rmf
+             mono16_44.rmf
+             stereo8_44.rmf
+             stereo16_44.rmf
+
+
+//---------------------------------------------------------
+// test03.txt
+//---------------------------------------------------------
+// 1. Play Files and Stop:
+//    a. MIDI file
+//    b. RMF file
+
+   requires testMidi1.mid
+            House.rmf
+            default patch file
+
+
+//---------------------------------------------------------
+// test04.txt
+//---------------------------------------------------------
+// 1. Play All Notes
+//
+// NOTE: Implemented with NoteOnWithLoad(), not NoteOn()
+//       Uses patch 1
+//       Uses velocity 100
+
+    requires default patch file
+
+
+//---------------------------------------------------------
+// test05.txt
+//---------------------------------------------------------
+// 1. Play Sound using built-in Custom Sample generator:
+//      a. 22k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+//      b. 44k
+//          i.    8-bit mono
+//          ii.  16-bit mono
+//          iii.  8-bit stereo
+//          iv.  16-bit stereo
+
+    (no media files required)
+
+
+//---------------------------------------------------------
+// test06.txt
+//---------------------------------------------------------
+// 1. Play Files, Fade, and Stop:
+//    a. MIDI file
+//    b. RMF file
+
+   requires testMidi1.mid
+            House.rmf
+            default patch file
+
+
+//---------------------------------------------------------
+// test07.txt
+//---------------------------------------------------------
+// 1. MIDI File:
+//    a. Start, Stop
+//    b. Start, Pause, Resume, SetVolume, Stop
+//    
+// 2. RMF File:
+//    a. Start, Stop
+//    b. Start, Pause, Resume, SetVolume, Stop
+
+   requires testMidi1.mid
+            House.rmf
+            default patch file

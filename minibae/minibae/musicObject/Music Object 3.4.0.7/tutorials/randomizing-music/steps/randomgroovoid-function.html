@@ -1,0 +1,163 @@
+<HTML>
+<HEAD>
+	<TITLE>Randomizing Music On a Web Page (Creating a randomGroovoid Function)</TITLE>
+	<LINK REL="stylesheet" HREF="../../../style/style.css">
+</HEAD>
+<BODY>
+
+<SCRIPT SRC="../../../javascript/object-listboxnav-page.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/shared-copy-paste-message.js"></SCRIPT>
+
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=4><TR><TD CLASS=title>
+STEP 5: Creating a randomGroovoid Function
+<HR>
+</TD></TR></TABLE>
+<BR>
+
+<P ALIGN=CENTER>
+
+<SCRIPT SRC="../../../javascript/music-object.js"></SCRIPT>
+<SCRIPT SRC="../../../javascript/music-object-prefs.js"></SCRIPT>
+
+<SCRIPT LANGUAGE=JavaScript><!-- //
+
+function randomGroovoid (groovoidPrefix) {
+	var groovoidNames = new Array (
+		'UI-BeepClick1','UI-Chimes','UI-Choice1','UI-Click1','UI-Click2',
+		'UI-Click3','UI-Click4','UI-Click5','UI-Click6','UI-Click7',
+		'UI-Click8','UI-Click9','UI-Click10','UI-Click11','UI-Click12',
+		'UI-Click13','UI-Click14','UI-Click15','UI-Click16','UI-Click17',
+		'UI-Click18','UI-CarriageReturn','UI-FunnyBeep','UI-Load1',
+		'UI-MouseOver1','UI-MouseOver2','UI-MouseOverDrone1',
+		'UI-Notification1','UI-Notification2','UI-Notification3',
+		'UI-OpenOrClose1','UI-OpenOrClose2','UI-OpenOrClose3',
+		'UI-Question','UI-SimpleClick1','UI-SimpleClick2','UI-SystemBeep',
+		'UI-TeletypeBurst2','UI-TypeOneKey','Hits-BlastOff','Hits-Kicker1',
+		'Hits-Kicker2','Hits-Kicker5','Hits-LudwigVan','Hits-Magic',
+		'Hits-MysteryChime','Hits-SportsOrganCharge','Hits-ZoomAndHit',
+		'Fanfare-Arrival','Fanfare-Cascade','Fanfare-CorpSting1',
+		'Fanfare-Finished','Fanfare-Horserace','Fanfare-Mars',
+		'Fanfare-Majesty','Fanfare-Presenting','Fanfare-Sports',
+		'Background-Beeps','Background-Clock','Background-Dubby',
+		'Background-Funky','Background-Groove2','Background-InfoPulse',
+		'Background-Latin','Background-News','Background-Piano',
+		'Background-SimpleTyping','Background-Smooth',
+		'Background-StillWaiting','Background-Teletype',
+		'Misc-CashRegister','Misc-ThruPhoneRing'
+	);
+	if (typeof groovoidPrefix == 'undefined' || groovoidPrefix == null || groovoidPrefix == '') {
+		return groovoidNames [Math.round (Math.random () * (groovoidNames.length - 1))];
+	} else {
+		var
+			matches = new Array (),
+			totalMatches = 0
+		;
+		for (var groovoidNo = 0; groovoidNo < groovoidNames.length; groovoidNo++) {
+			if (groovoidNames [groovoidNo].indexOf (groovoidPrefix) == 0) {
+				matches [totalMatches] = groovoidNo;
+				totalMatches++;
+			}
+		}
+		if (totalMatches == 0) {
+			return '';
+		} else if (totalMatches == 1) {
+			return groovoidNames [matches [0]];
+		} else {
+			return groovoidNames [matches [Math.round (Math.random () * (totalMatches - 1))]];
+		}
+	}
+}
+
+Music.magicEmbed (
+	'SRC="../../../music/stub.rmf" ' +
+	'GROOVOID="' + randomGroovoid ('Background-') + '" ' +
+	'AUTOSTART=TRUE ' +
+	'DISPLAY=SONG ' +
+	'MODE=INFO ' +
+	'LOOP=TRUE ' +
+	'VOLUME=100'
+);
+
+// --></SCRIPT>
+
+</P>
+
+<P>This example is similar to the previous example in that it uses JavaScript once again to randomly select one of the many Groovoids that are built into the Beatnik Player's soundbank. Each time you <A HREF="randomgroovoid-function.html">reload this page</A>, a new randomly selected Groovoid will play. Because the selection is truly random, you may sometimes get the same Groovoid selected twice in a row.</P>
+
+<P>If you look at the source code listing below, you will see that a function called <B>randomGroovoid</B> has been defined. This function is being called with the parameter "Background-" which instructs the function to randomly select a Groovoid that starts with "Background-" as a prefix. The Beatnik soundbank contains 13 such background-style Groovoids. They are designed to loop and are perfect as subtle grooves that play softly in the background.</P>
+
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0>
+<TR><TD>
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=6><TR><TD CLASS=copy-paste-callout><A HREF="javascript://" TARGET="_parent" ONCLICK="copyAndPasteMessage (); return false">Copy-and-Paste</A></TD></TR></TABLE>
+</TD></TR>
+<TR><TD CLASS=sample-code>
+<PRE>
+&lt;SCRIPT SRC="<SPAN CLASS=sample-code-highlighted>music-object.js</SPAN>"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+function randomGroovoid (groovoidPrefix) {
+   var groovoidNames = new Array (
+      'UI-BeepClick1','UI-Chimes','UI-Choice1','UI-Click1','UI-Click2',
+      'UI-Click3','UI-Click4','UI-Click5','UI-Click6','UI-Click7',
+      'UI-Click8','UI-Click9','UI-Click10','UI-Click11','UI-Click12',
+      'UI-Click13','UI-Click14','UI-Click15','UI-Click16','UI-Click17',
+      'UI-Click18','UI-CarriageReturn','UI-FunnyBeep','UI-Load1',
+      'UI-MouseOver1','UI-MouseOver2','UI-MouseOverDrone1',
+      'UI-Notification1','UI-Notification2','UI-Notification3',
+      'UI-OpenOrClose1','UI-OpenOrClose2','UI-OpenOrClose3',
+      'UI-Question','UI-SimpleClick1','UI-SimpleClick2','UI-SystemBeep',
+      'UI-TeletypeBurst2','UI-TypeOneKey','Hits-BlastOff','Hits-Kicker1',
+      'Hits-Kicker2','Hits-Kicker5','Hits-LudwigVan','Hits-Magic',
+      'Hits-MysteryChime','Hits-SportsOrganCharge','Hits-ZoomAndHit',
+      'Fanfare-Arrival','Fanfare-Cascade','Fanfare-CorpSting1',
+      'Fanfare-Finished','Fanfare-Horserace','Fanfare-Mars',
+      'Fanfare-Majesty','Fanfare-Presenting','Fanfare-Sports',
+      'Background-Beeps','Background-Clock','Background-Dubby',
+      'Background-Funky','Background-Groove2','Background-InfoPulse',
+      'Background-Latin','Background-News','Background-Piano',
+      'Background-SimpleTyping','Background-Smooth',
+      'Background-StillWaiting','Background-Teletype',
+      'Misc-CashRegister','Misc-ThruPhoneRing'
+   );
+   if (typeof groovoidPrefix == 'undefined' || groovoidPrefix == null || groovoidPrefix == '') {
+      return groovoidNames [Math.round (Math.random () * (groovoidNames.length - 1))];
+   } else {
+      var
+         matches = new Array (),
+         totalMatches = 0
+      ;
+      for (var groovoidNo = 0; groovoidNo < groovoidNames.length; groovoidNo++) {
+         if (groovoidNames [groovoidNo].indexOf (groovoidPrefix) == 0) {
+            matches [totalMatches] = groovoidNo;
+            totalMatches++;
+         }
+      }
+      if (totalMatches == 0) {
+         return '';
+      } else if (totalMatches == 1) {
+         return groovoidNames [matches [0]];
+      } else {
+         return groovoidNames [matches [Math.round (Math.random () * (totalMatches - 1))]];
+      }
+   }
+}
+
+Music.magicEmbed (
+   'SRC="<SPAN CLASS=sample-code-highlighted>stub.rmf</SPAN>" ' +
+   'GROOVOID="' + randomGroovoid ('Background-') + '" ' +
+   'AUTOSTART=TRUE ' +
+   'DISPLAY=SONG ' +
+   'MODE=INFO ' +
+   'LOOP=TRUE ' +
+   'VOLUME=100'
+);
+
+// --&gt;&lt;/SCRIPT&gt;
+</PRE>
+</TD></TR></TABLE>
+<BR>
+
+<P>The <B>randomGroovoid</B> function achieves its random selection by having knowledge of all the Groovoids that are available in the Beatnik soundbank. The full list of Groovoids is being stored in the <B>groovoidNames</B> array variable defined inside the function. The function is then being called as part of the <B>Music.magicEmbed</B> function call, and the randomly selected Groovoid which is returned by the <B>randomGroovoid</B> function goes into forming the EMBED tag that gets passed into the <B>Music.magicEmbed</B> function.</P>
+
+</BODY></HTML>

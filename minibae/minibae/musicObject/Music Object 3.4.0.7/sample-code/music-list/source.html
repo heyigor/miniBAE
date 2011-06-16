@@ -1,0 +1,65 @@
+<HTML><HEAD><TITLE>EXAMPLE: Music List (source)</TITLE></HEAD>
+<BODY BGCOLOR=FFFFFF TEXT=000000 LINK=000088 VLINK=880088>
+
+<PRE>
+&lt;!--SEARCH PARENT="../index.html"--&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+   &lt;TITLE&gt;EXAMPLE: Music List (sample)&lt;/TITLE&gt;
+   &lt;LINK REL="stylesheet" HREF="../../style/style.css"&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+
+&lt;!--*********************************************************************--&gt;
+&lt;!--* JavaScript programming by Chris van Rensburg (a.k.a. Tom Kidding) *--&gt;
+&lt;!--*                -- http://www.tomkidding.com --                    *--&gt;
+&lt;!--*                                                                   *--&gt;
+&lt;!--*                    ©1997-1999 Beatnik, Inc.                       *--&gt;
+&lt;!--*********************************************************************--&gt;
+
+&lt;SCRIPT SRC="../../javascript/music-object.js"&gt;&lt;/SCRIPT&gt;
+&lt;SCRIPT SRC="../../javascript/music-object-prefs.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE=JavaScript&gt;&lt;!-- //
+
+music = new Music ();
+
+// --&gt;&lt;/SCRIPT&gt;
+
+&lt;TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=5&gt;
+   &lt;TR VALIGN=TOP&gt;
+      &lt;TD ROWSPAN=2&gt;
+         This example demonstrates how you can instruct a Beatnik Player embedded in an HTML page to play music files from a list.
+         &lt;P&gt;A practical application of this technique would be a Web site that allows the user to preview music files before choosing one to download and use in their own Web page. It could also just be a convenient way for a multimedia musician to let visitors listen to showcase compositions - all on just one page. The advantage of instructing the Beatnik Player to play a new file is that the user does not need to leave the preview page, but can keep selecting new files from the list, or read further information on the page as they listen to a file they have chosen. The code is also much easier to author than for a technique that might make use of a frameset.&lt;/P&gt;
+         &lt;P&gt;Click on any one of the files in the list to the right. Clicking on one of these links will instruct the player embedded below the list to play the chosen file. Now, take a look at the source for this page and see how simple the code is.&lt;/P&gt;
+      &lt;/TD&gt;
+      &lt;TD ROWSPAN=2&gt;
+      &lt;/TD&gt;
+      &lt;TD&gt;
+         &lt;NOBR&gt;
+         &lt;UL&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/ambient.rmf'); return false"&gt;Ambient&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/classical.rmf'); return false"&gt;Classical&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/house.rmf'); return false"&gt;House&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/jungle.rmf'); return false"&gt;Jungle&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/lounge.rmf'); return false"&gt;Lounge&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/modern-rock.rmf'); return false"&gt;Modern Rock&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/sfx-medley.rmf'); return false"&gt;SFX Medley&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/techno.rmf'); return false"&gt;Techno&lt;/A&gt;
+            &lt;LI&gt;&lt;A HREF="javascript://" ONCLICK="music.play ('../../music/trance.rmf'); return false"&gt;Trance&lt;/A&gt;
+         &lt;/UL&gt;
+         &lt;/NOBR&gt;
+      &lt;/TD&gt;
+   &lt;/TR&gt;
+   &lt;TR&gt;
+      &lt;TD&gt;&lt;SCRIPT LANGUAGE=JavaScript&gt;music.magicEmbed ('SRC="../../music/stub.rmf" WIDTH=144 HEIGHT=60 DISPLAY=SONG AUTOSTART=TRUE VOLUME=100');&lt;/SCRIPT&gt;&lt;/TD&gt;
+   &lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;BR&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;</PRE>
+
+</BODY>
+</HTML>
