@@ -113,27 +113,27 @@ Mark Deggeller - Beatnik
 Doug Scott - Beatnik/Danger  
 Andrew Ezekiel Rostaing - Beatnik  
 Chris Grigg - Beatnik  
-Sean Echevarria - Beatnik
+Sean Echevarria - Beatnik  
 Kara Kytle - Sun Microsystems - Javasoft  
-Chris Rogers - Beatnik
+Chris Rogers - Beatnik  
 Jarrell Irvin - Danger  
-Ian MacDonald - Sapien Technologies
+Ian MacDonald - Sapien Technologies  
   
 #### Business Development  
-Don Millers - Beatnik
+Don Millers - Beatnik  
 Gavin Bourne - Beatnik  
 Thomas Dolby - Headspace/Beatnik  
 Mary Coller Albert - Headspace/Beatnik  
-John Eckstein - Beatnik
+John Eckstein - Beatnik  
 Dane Bigham - Presage Software  
 Steve Hales - Halestorm/Igor Labs/Beatnik/Danger  
-Jim Nitchals - Halestorm/Igor Labs/Beatnik
+Jim Nitchals - Halestorm/Igor Labs/Beatnik  
 Brian Hales - Halestorm  
 Brett Durrett - Halestorm  
 Joe Britt - WebTV/Danger  
 Andy Rubin - WebTV/Danger  
 David Rivas - Sun Microsystems - Javasoft  
-Bruce Leak - Apple/General Magic/WebTV
+Bruce Leak - Apple/General Magic/WebTV  
 Phil Goldman - Apple/WebTV  
 Kari Johnson - Beatnik  
 Matti Hamalainen - Nokia  
