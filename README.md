@@ -61,17 +61,6 @@
  no-brainer, requiring literally no additional sound artist work –
  simply re-use the files.
 
-
-### Acknowledgment:
-
- Everyone on this list made a contribution in some important way. Its
- amazing to me that two scruffy guys working in our house created
- something that went around the world and in lots of peoples pockets.
-
-Thank you all.  
-
-Steve Hales - steve@igorlabs.com  
-
 ### New BSD License
 
     Copyright (c) 2009 Beatnik, Inc All rights reserved.  
@@ -102,6 +91,16 @@ Steve Hales - steve@igorlabs.com
     LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING  
     NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS  
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+
+### Acknowledgment:
+
+ Everyone on this list made a contribution in some important way. Its
+ amazing to me that two scruffy guys working in our house created
+ something that went around the world and in lots of peoples pockets.
+
+Thank you all.  
+
+Steve Hales - steve@igorlabs.com  
 
 #### Software
   
