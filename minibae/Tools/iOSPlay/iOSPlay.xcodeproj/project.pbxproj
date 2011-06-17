@@ -731,7 +731,7 @@
 					"X_PLATFORM=X_IOS",
 				);
 				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iOSPlay-Info.plist";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = iOSPlay;
@@ -757,7 +757,7 @@
 					"X_PLATFORM=X_IOS",
 				);
 				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iOSPlay-Info.plist";
 				PRODUCT_NAME = iOSPlay;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
