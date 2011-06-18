@@ -8,28 +8,28 @@
 * Written by Mark Deggeller (mark@beatnik.com)
 *
 * Legal Notice:
-*	Beatnik products contain certain trade secrets and confidential and
-*	proprietary information of Beatnik.  Use, reproduction, disclosure
-*	and distribution by any means are prohibited, except pursuant to
-*	a written license from Beatnik. Use of copyright notice is
-*	precautionary and does not imply publication or disclosure.
+*   Beatnik products contain certain trade secrets and confidential and
+*   proprietary information of Beatnik.  Use, reproduction, disclosure
+*   and distribution by any means are prohibited, except pursuant to
+*   a written license from Beatnik. Use of copyright notice is
+*   precautionary and does not imply publication or disclosure.
 *
 * Restricted Rights Legend:
-*	Use, duplication, or disclosure by the Government is subject to
-*	restrictions as set forth in subparagraph (c)(1)(ii) of The
-*	Rights in Technical Data and Computer Software clause in DFARS
-*	252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
-*	Computer Software--Restricted Rights at 48 CFR 52.227-19, as
-*	applicable.
+*   Use, duplication, or disclosure by the Government is subject to
+*   restrictions as set forth in subparagraph (c)(1)(ii) of The
+*   Rights in Technical Data and Computer Software clause in DFARS
+*   252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
+*   Computer Software--Restricted Rights at 48 CFR 52.227-19, as
+*   applicable.
 *
 * Confidential - Internal use only
 *
 * History:
-*	7/30/99		Created
-*  8/11/99		Added PV_PrintRMFFields
-*  9/21/99		Added support for wav, au, aiff, mpeg files.
-*				Added BeatnikPlay(), PlaySound(), playbae()
-*	10/26/99	Added PlayMIDI()
+*   7/30/99     Created
+*  8/11/99      Added PV_PrintRMFFields
+*  9/21/99      Added support for wav, au, aiff, mpeg files.
+*               Added BeatnikPlay(), PlaySound(), playbae()
+*   10/26/99    Added PlayMIDI()
 *
 ****************************************************************************/
 
@@ -331,9 +331,9 @@ int main(int argc, char *argv[])
    theMixer = BAEMixer_New();
    if (theMixer)
    {
-	   pcm   = 1;
-	   rmf   = BAE_MAX_VOICES - pcm;
-	   level = rmf / 3;
+       pcm   = 1;
+       rmf   = BAE_MAX_VOICES - pcm;
+       level = rmf / 3;
       rate  = BAE_RATE_44K;
       if (PV_ParseCommands(argc, argv, "-mr", TRUE, parmFile))
       {
@@ -357,9 +357,9 @@ int main(int argc, char *argv[])
       {
          BAEMixer_SetAudioTask(theMixer, PV_Task, (void *)theMixer);
 
-		  // turn on nice verb
-		 BAEMixer_SetDefaultReverb(theMixer, BAE_REVERB_TYPE_8);
-		  		  
+          // turn on nice verb
+         BAEMixer_SetDefaultReverb(theMixer, BAE_REVERB_TYPE_8);
+                  
          printf("BAE memory used during idle prior to SetBankToFile: %ld\n\n", BAE_GetSizeOfMemoryUsed());
 
          if (PV_ParseCommands(argc, argv, "-p", TRUE, parmFile))

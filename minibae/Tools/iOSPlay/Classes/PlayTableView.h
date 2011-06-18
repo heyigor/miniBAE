@@ -11,7 +11,7 @@
 
 @interface PlayTableView : UITableViewController 
 {
-	NSMutableArray*	mFiles;
+    NSMutableArray* mFiles;
 }
 
 @end

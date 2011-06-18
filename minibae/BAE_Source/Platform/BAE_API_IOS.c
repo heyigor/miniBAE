@@ -30,81 +30,81 @@
 */
 /*****************************************************************************/
 /*
-**	BAE_API_IOS.c
+**  BAE_API_IOS.c
 **
-**	This provides platform specfic functions for the Macintosh OS. This interface
-**	for BAE is for the Sound Manager and sends buffer slices
-**	through the multimedia system.
+**  This provides platform specfic functions for the Macintosh OS. This interface
+**  for BAE is for the Sound Manager and sends buffer slices
+**  through the multimedia system.
 **
-**	© Copyright 1995-2000 Beatnik, Inc, All Rights Reserved.
-**	Written by Steve Hales
+**  © Copyright 1995-2000 Beatnik, Inc, All Rights Reserved.
+**  Written by Steve Hales
 **
-**	Beatnik products contain certain trade secrets and confidential and
-**	proprietary information of Beatnik.  Use, reproduction, disclosure
-**	and distribution by any means are prohibited, except pursuant to
-**	a written license from Beatnik. Use of copyright notice is
-**	precautionary and does not imply publication or disclosure.
+**  Beatnik products contain certain trade secrets and confidential and
+**  proprietary information of Beatnik.  Use, reproduction, disclosure
+**  and distribution by any means are prohibited, except pursuant to
+**  a written license from Beatnik. Use of copyright notice is
+**  precautionary and does not imply publication or disclosure.
 **
-**	Restricted Rights Legend:
-**	Use, duplication, or disclosure by the Government is subject to
-**	restrictions as set forth in subparagraph (c)(1)(ii) of The
-**	Rights in Technical Data and Computer Software clause in DFARS
-**	252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
-**	Computer Software--Restricted Rights at 48 CFR 52.227-19, as
-**	applicable.
+**  Restricted Rights Legend:
+**  Use, duplication, or disclosure by the Government is subject to
+**  restrictions as set forth in subparagraph (c)(1)(ii) of The
+**  Rights in Technical Data and Computer Software clause in DFARS
+**  252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
+**  Computer Software--Restricted Rights at 48 CFR 52.227-19, as
+**  applicable.
 **
-**	Confidential-- Internal use only
+**  Confidential-- Internal use only
 **
-**	History	-
-**	7/22/97		Created
-**	11/11/97	Added BAE_MaxDevices & BAE_SetDeviceID & BAE_GetDeviceID & BAE_GetDeviceName
-**	11/14/97	Removed multiple defined variable "mAudioFramesToGenerate"
-**	12/16/97	Modified BAE_GetDeviceID and BAE_SetDeviceID to pass a device parameter pointer
-**				that is specific for that device.
-**	1/9/98		Added BAE_FileDelete
-**	2/13/98		Modified BAE_AquireAudioCard to handle different sample rates
-**	3/17/98		Added BAE_Is8BitSupported
-**	3/23/98		Fixed a bug in BAE_GetDeviceName that wrote the name into space. Thanks DavidZ
+**  History -
+**  7/22/97     Created
+**  11/11/97    Added BAE_MaxDevices & BAE_SetDeviceID & BAE_GetDeviceID & BAE_GetDeviceName
+**  11/14/97    Removed multiple defined variable "mAudioFramesToGenerate"
+**  12/16/97    Modified BAE_GetDeviceID and BAE_SetDeviceID to pass a device parameter pointer
+**              that is specific for that device.
+**  1/9/98      Added BAE_FileDelete
+**  2/13/98     Modified BAE_AquireAudioCard to handle different sample rates
+**  3/17/98     Added BAE_Is8BitSupported
+**  3/23/98     Fixed a bug in BAE_GetDeviceName that wrote the name into space. Thanks DavidZ
 **
-**	6/5/98		Jim Nitchals RIP	1/15/62 - 6/5/98
-**				I'm going to miss your irreverent humor. Your coding style and desire
-**				to make things as fast as possible. Your collaboration behind this entire
-**				codebase. Your absolute belief in creating the best possible relationships
-**				from honesty and integrity. Your ability to enjoy conversation. Your business
-**				savvy in understanding the big picture. Your gentleness. Your willingness
-**				to understand someone else's way of thinking. Your debates on the latest
-**				political issues. Your generosity. Your great mimicking of cartoon voices.
-**				Your friendship. - Steve Hales
+**  6/5/98      Jim Nitchals RIP    1/15/62 - 6/5/98
+**              I'm going to miss your irreverent humor. Your coding style and desire
+**              to make things as fast as possible. Your collaboration behind this entire
+**              codebase. Your absolute belief in creating the best possible relationships
+**              from honesty and integrity. Your ability to enjoy conversation. Your business
+**              savvy in understanding the big picture. Your gentleness. Your willingness
+**              to understand someone else's way of thinking. Your debates on the latest
+**              political issues. Your generosity. Your great mimicking of cartoon voices.
+**              Your friendship. - Steve Hales
 **
-**	12/17/98	Added BAE_GetHardwareBalance & BAE_SetHardwareBalance
-**	3/5/99		Changed context to threadContext to reflect what is really is used
-**				in the system.
-**	3/31/99		Added constant for Netscape plugin memory.
-**	5/7/99		Added some post flight memory tests to keep us from the hairy
-**				edge of MacOS lala land.
-**  8/23/99		MSD:  fixed terminating zero bug in BAE_GetDeviceName()
-**	9/3/99		Changed the BAE_FRAMES_PER_BLOCK to 2, in case Apple changes to
-**				smaller buffers in the Sound Manager.
-**	2/1/2000	Added new MacOS X "approved" sound double buffering. Set
-**				USE_MAC_OS_X to TRUE to use the new callback method.
-**				Note: its slower.
-**	2/2/2000	Added a buffer clear function to eliminate a startup click. Changed
-**				name in BAE_GetDeviceName to support new method of playback.
-**	7/5/2000	Changed BAE_Allocate/BAE_Deallocate to use MacOS temporary
-**				memory. This has the effect of expanding the current application
-**				heap.
-**				Fixed a recursive bug in BAE_Allocate. oops.
-**	7/25/2000	Changed BAE_SizeOfPointer to use the new way to get size of temp
-**				handles.
-**				Placed a USE_TEMP_MEMORY flag to control if we use the temp memory
-**				API instead of allocating through our natural heap.
-**				Added PV_IsVirtualMemoryAvailable & PV_LockMemory & PV_UnlockMemory
-**	9/29/2000	Added condition compiler flags for support on MacOS X
-**	10/2/2000	Set default condition to not use SndDoubleBuffer. This allows us to
-**				to run under X without recompiling. We run in the "classic" mode.
-**	10/5/2000	Fixed a function name change in BAE_AquireAudioCard
-**	2/14/2001	sh	When compiled for Carbon (MacOS9/X) BAE_GetDeviceName now
-**					reports a better name that's not specific to OS9/X
+**  12/17/98    Added BAE_GetHardwareBalance & BAE_SetHardwareBalance
+**  3/5/99      Changed context to threadContext to reflect what is really is used
+**              in the system.
+**  3/31/99     Added constant for Netscape plugin memory.
+**  5/7/99      Added some post flight memory tests to keep us from the hairy
+**              edge of MacOS lala land.
+**  8/23/99     MSD:  fixed terminating zero bug in BAE_GetDeviceName()
+**  9/3/99      Changed the BAE_FRAMES_PER_BLOCK to 2, in case Apple changes to
+**              smaller buffers in the Sound Manager.
+**  2/1/2000    Added new MacOS X "approved" sound double buffering. Set
+**              USE_MAC_OS_X to TRUE to use the new callback method.
+**              Note: its slower.
+**  2/2/2000    Added a buffer clear function to eliminate a startup click. Changed
+**              name in BAE_GetDeviceName to support new method of playback.
+**  7/5/2000    Changed BAE_Allocate/BAE_Deallocate to use MacOS temporary
+**              memory. This has the effect of expanding the current application
+**              heap.
+**              Fixed a recursive bug in BAE_Allocate. oops.
+**  7/25/2000   Changed BAE_SizeOfPointer to use the new way to get size of temp
+**              handles.
+**              Placed a USE_TEMP_MEMORY flag to control if we use the temp memory
+**              API instead of allocating through our natural heap.
+**              Added PV_IsVirtualMemoryAvailable & PV_LockMemory & PV_UnlockMemory
+**  9/29/2000   Added condition compiler flags for support on MacOS X
+**  10/2/2000   Set default condition to not use SndDoubleBuffer. This allows us to
+**              to run under X without recompiling. We run in the "classic" mode.
+**  10/5/2000   Fixed a function name change in BAE_AquireAudioCard
+**  2/14/2001   sh  When compiled for Carbon (MacOS9/X) BAE_GetDeviceName now
+**                  reports a better name that's not specific to OS9/X
 */
 /*****************************************************************************/
 
@@ -134,27 +134,27 @@
 
 typedef struct
 {
-	// hardware volume in BAE scale
-	short int						mUnscaledVolume;
-	// balance scale -256 to 256 (left to right)
-	short int						mBalance;
-	
-	// size of audio buffers in bytes
-	long							mAudioByteBufferSize;
-	
-	char							mDataReady;
-	char							mDonePlaying;
-	char							mShutdownDoubleBuffer;
-	
-	// number of samples per audio frame to generate
-	long							mAudioFramesToGenerate;
-	
-	// How many audio frames to generate at one time
-	unsigned int					mSynthFramesPerBlock;
-	unsigned long					mSamplesPlayed;
+    // hardware volume in BAE scale
+    short int                       mUnscaledVolume;
+    // balance scale -256 to 256 (left to right)
+    short int                       mBalance;
+    
+    // size of audio buffers in bytes
+    long                            mAudioByteBufferSize;
+    
+    char                            mDataReady;
+    char                            mDonePlaying;
+    char                            mShutdownDoubleBuffer;
+    
+    // number of samples per audio frame to generate
+    long                            mAudioFramesToGenerate;
+    
+    // How many audio frames to generate at one time
+    unsigned int                    mSynthFramesPerBlock;
+    unsigned long                   mSamplesPlayed;
 
-	AudioUnit						mAudioUnit;
-	AudioStreamBasicDescription		mFormat;
+    AudioUnit                       mAudioUnit;
+    AudioStreamBasicDescription     mFormat;
 
 } AudioControlData;
 
@@ -184,28 +184,28 @@ int BAE_Cleanup(void)
 // allocate a block of locked, zeroed memory. Return a pointer
 void *BAE_Allocate(unsigned long size)
 {
-	assert(size > 0);
-	void* data = (void*)calloc(1, size);
-	return data;
+    assert(size > 0);
+    void* data = (void*)calloc(1, size);
+    return data;
 }
 
 // dispose of memory allocated with BAE_Allocate
 void BAE_Deallocate(void *memoryBlock)
 {
-	free(memoryBlock);
+    free(memoryBlock);
 }
 
 // return memory used
 unsigned long BAE_GetSizeOfMemoryUsed(void)
 {
-//	return g_memory_buoy;
+//  return g_memory_buoy;
    return(0);
 }
 
 // return max memory used
 unsigned long BAE_GetMaxSizeOfMemoryUsed(void)
 {
-//	return g_memory_buoy_max;
+//  return g_memory_buoy_max;
    return(0);
 }
 
@@ -227,45 +227,45 @@ int BAE_IsBadReadPointer(void *memoryBlock, unsigned long size)
 // 0 if you don't support this feature
 unsigned long BAE_SizeOfPointer(void *memoryBlock)
 {
-	return malloc_size(memoryBlock);
+    return malloc_size(memoryBlock);
 }
 
 // block move memory. This is basicly memmove, but its exposed to take advantage of
 // special block move speed ups, various hardware has available.
 void BAE_BlockMove(void *source, void *dest, unsigned long size)
 {
-	assert(dest != NULL && source != NULL);
-	memmove(dest, source, size);
+    assert(dest != NULL && source != NULL);
+    memmove(dest, source, size);
 }
 
 // **** Audio Card modifiers
 // Return 1 if stereo hardware is supported, otherwise 0.
 int BAE_IsStereoSupported(void)
 {
-	return 1;
+    return 1;
 }
 
 // Return 1, if sound hardware support 16 bit output, otherwise 0.
 int BAE_Is16BitSupported(void)
 {
-	return 1;
+    return 1;
 }
 
 // Return 1, if sound hardware support 8 bit output, otherwise 0.
 int BAE_Is8BitSupported(void)
 {
-	return 1;
+    return 1;
 }
 
 // returned balance is in the range of -256 to 256. Left to right. If you're hardware doesn't support this
 // range, just scale it.
 short int BAE_GetHardwareBalance(void)
 {
-	if (sHardwareChannel)
-	{
-		return sHardwareChannel->mBalance;
-	}
-	return 0;
+    if (sHardwareChannel)
+    {
+        return sHardwareChannel->mBalance;
+    }
+    return 0;
 }
 
 // 'balance' is in the range of -256 to 256. Left to right. If you're hardware doesn't support this
@@ -283,19 +283,19 @@ void BAE_SetHardwareBalance(short int balance)
    }
    if (sHardwareChannel)
    {
-	   sHardwareChannel->mBalance = balance;
-	   BAE_SetHardwareVolume(sHardwareChannel->mUnscaledVolume);
+       sHardwareChannel->mBalance = balance;
+       BAE_SetHardwareVolume(sHardwareChannel->mUnscaledVolume);
    }
 }
 
 // returned volume is in the range of 0 to 256
 short int BAE_GetHardwareVolume(void)
 {
-	if (sHardwareChannel)
-	{
-		return sHardwareChannel->mUnscaledVolume;
-	}
-	return 256;
+    if (sHardwareChannel)
+    {
+        return sHardwareChannel->mUnscaledVolume;
+    }
+    return 256;
 }
 
 // theVolume is in the range of 0 to 256
@@ -313,7 +313,7 @@ void BAE_SetHardwareVolume(short int newVolume)
    {
       newVolume = 0;
    }
-	sHardwareChannel->mUnscaledVolume = newVolume;
+    sHardwareChannel->mUnscaledVolume = newVolume;
 
    // calculate balance multipliers
    if (sHardwareChannel->mBalance > 0)
@@ -357,34 +357,34 @@ void BAE_WaitMicroseconds(unsigned long usec)
 
 int BAE_NewMutex(BAE_Mutex* lock, char *name, char *file, int lineno)
 {
-	pthread_mutex_t	*pMutex = (pthread_mutex_t *) BAE_Allocate(sizeof(pthread_mutex_t));
-	pthread_mutexattr_t attrib;
-	pthread_mutexattr_init(&attrib);
-	pthread_mutexattr_settype(&attrib, PTHREAD_MUTEX_RECURSIVE);
-	// Create reentrant (within same thread) mutex.
-	pthread_mutex_init(pMutex, &attrib);
-	pthread_mutexattr_destroy(&attrib);
-	*lock = (BAE_Mutex) pMutex;
-	return 1; // ok
+    pthread_mutex_t *pMutex = (pthread_mutex_t *) BAE_Allocate(sizeof(pthread_mutex_t));
+    pthread_mutexattr_t attrib;
+    pthread_mutexattr_init(&attrib);
+    pthread_mutexattr_settype(&attrib, PTHREAD_MUTEX_RECURSIVE);
+    // Create reentrant (within same thread) mutex.
+    pthread_mutex_init(pMutex, &attrib);
+    pthread_mutexattr_destroy(&attrib);
+    *lock = (BAE_Mutex) pMutex;
+    return 1; // ok
 }
 
 void BAE_AcquireMutex(BAE_Mutex lock)
 {
-	pthread_mutex_t	*pMutex = (pthread_mutex_t*) lock;
-	pthread_mutex_lock(pMutex);
+    pthread_mutex_t *pMutex = (pthread_mutex_t*) lock;
+    pthread_mutex_lock(pMutex);
 }
 
 void BAE_ReleaseMutex(BAE_Mutex lock)
 {
-	pthread_mutex_t	*pMutex = (pthread_mutex_t*) lock;
-	pthread_mutex_unlock(pMutex);
+    pthread_mutex_t *pMutex = (pthread_mutex_t*) lock;
+    pthread_mutex_unlock(pMutex);
 }
 
 void BAE_DestroyMutex(BAE_Mutex lock)
 {
-	pthread_mutex_t	*pMutex = (pthread_mutex_t*) lock;
-	pthread_mutex_destroy(pMutex);
-	BAE_Deallocate(pMutex);
+    pthread_mutex_t *pMutex = (pthread_mutex_t*) lock;
+    pthread_mutex_destroy(pMutex);
+    BAE_Deallocate(pMutex);
 }
 
 
@@ -392,7 +392,7 @@ void BAE_DestroyMutex(BAE_Mutex lock)
 // rendering without threads.
 void BAE_Idle(void *userContext)
 {
-//	userContext = userContext;
+//  userContext = userContext;
 }
 
 // **** File support
@@ -403,50 +403,50 @@ void BAE_Idle(void *userContext)
 // in the native format to the pointer passed fileNameDest.
 void BAE_CopyFileNameNative(void *fileNameSource, void *fileNameDest)
 {
-	char *dest;
-	char *src;
-	
-	if ((fileNameSource) && (fileNameDest))
-	{
-		dest = (char *)fileNameDest;
-		src  = (char *)fileNameSource;
-		if (src == NULL)
-		{
-			src = "";
-		}
-		if (dest)
-		{
-			while (*src)
-			{
-				*dest++ = *src++;
-			}
-			*dest = 0;
-		}
-	}
+    char *dest;
+    char *src;
+    
+    if ((fileNameSource) && (fileNameDest))
+    {
+        dest = (char *)fileNameDest;
+        src  = (char *)fileNameSource;
+        if (src == NULL)
+        {
+            src = "";
+        }
+        if (dest)
+        {
+            while (*src)
+            {
+                *dest++ = *src++;
+            }
+            *dest = 0;
+        }
+    }
 }
 
 long BAE_FileCreate(void *fileName)
 {
-	int file;
-	
-	file = open((char *)fileName, O_CREAT | O_TRUNC | O_RDWR);
-	if (file != -1)
-	{
-		close(file);
-	}
-	return((file != -1) ? 0 : -1);	
+    int file;
+    
+    file = open((char *)fileName, O_CREAT | O_TRUNC | O_RDWR);
+    if (file != -1)
+    {
+        close(file);
+    }
+    return((file != -1) ? 0 : -1);  
 }
 
 long BAE_FileDelete(void *fileName)
 {
-	if (fileName)
-	{
-		if (remove(fileName))
-		{
-			return(0);
-		}
-	}
-	return(-1);
+    if (fileName)
+    {
+        if (remove(fileName))
+        {
+            return(0);
+        }
+    }
+    return(-1);
 }
 
 
@@ -454,104 +454,104 @@ long BAE_FileDelete(void *fileName)
 // Return -1 if error, otherwise file handle
 long BAE_FileOpenForRead(void *fileName)
 {
-	CFURLRef dataURL;
-	CFStringRef cfResourceName;
-	char fullPath[PATH_MAX];
-	Boolean ok = FALSE;
+    CFURLRef dataURL;
+    CFStringRef cfResourceName;
+    char fullPath[PATH_MAX];
+    Boolean ok = FALSE;
 
-	if (fileName)
-	{
-		fullPath[0] = 0;
-		cfResourceName = CFStringCreateWithCString(NULL, fileName, kCFStringEncodingASCII);
-		dataURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), cfResourceName, NULL, NULL);
-		if (dataURL)
-		{
-			ok = CFURLGetFileSystemRepresentation(dataURL, TRUE, (UInt8*)fullPath, PATH_MAX);
-			CFRelease(dataURL); 
-		}
-		CFRelease(cfResourceName);
+    if (fileName)
+    {
+        fullPath[0] = 0;
+        cfResourceName = CFStringCreateWithCString(NULL, fileName, kCFStringEncodingASCII);
+        dataURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), cfResourceName, NULL, NULL);
+        if (dataURL)
+        {
+            ok = CFURLGetFileSystemRepresentation(dataURL, TRUE, (UInt8*)fullPath, PATH_MAX);
+            CFRelease(dataURL); 
+        }
+        CFRelease(cfResourceName);
 
-		if ((ok == TRUE) && (fullPath[0]))
-		{
-			return (long)open(fullPath, O_RDONLY);
-		}
-	}
-	return -1;
+        if ((ok == TRUE) && (fullPath[0]))
+        {
+            return (long)open(fullPath, O_RDONLY);
+        }
+    }
+    return -1;
 }
 
 long BAE_FileOpenForWrite(void *fileName)
 {
-	if (fileName)
-	{
-		return(open((char *)fileName, O_WRONLY | O_CREAT | O_TRUNC));
-	}
-	return(-1);
+    if (fileName)
+    {
+        return(open((char *)fileName, O_WRONLY | O_CREAT | O_TRUNC));
+    }
+    return(-1);
 }
 
 long BAE_FileOpenForReadWrite(void *fileName)
 {
-	if (fileName)
-	{
-		return(open((char *)fileName, O_RDWR));
-	}
-	return(-1);
+    if (fileName)
+    {
+        return(open((char *)fileName, O_RDWR));
+    }
+    return(-1);
 }
 
 // Close a file
 void BAE_FileClose(long fileReference)
 {
-	close(fileReference);
+    close(fileReference);
 }
 
 // Read a block of memory from a file.
 // Return -1 if error, otherwise length of data read.
 long BAE_ReadFile(long fileReference, void *pBuffer, long bufferLength)
 {
-	if ((pBuffer) && (bufferLength))
-	{
-		return(read(fileReference, (char *)pBuffer, bufferLength));
-	}
-	return(-1);
+    if ((pBuffer) && (bufferLength))
+    {
+        return(read(fileReference, (char *)pBuffer, bufferLength));
+    }
+    return(-1);
 }
 
 // Write a block of memory from a file
 // Return -1 if error, otherwise length of data written.
 long BAE_WriteFile(long fileReference, void *pBuffer, long bufferLength)
 {
-	if ((pBuffer) && (bufferLength))
-	{
-		return(write(fileReference, (char *)pBuffer, bufferLength));
-	}
-	return(-1);
+    if ((pBuffer) && (bufferLength))
+    {
+        return(write(fileReference, (char *)pBuffer, bufferLength));
+    }
+    return(-1);
 }
 
 // set file position in absolute file byte position
 // Return -1 if error, otherwise 0.
 long BAE_SetFilePosition(long fileReference, unsigned long filePosition)
 {
-	return((lseek(fileReference, filePosition, SEEK_SET) == -1) ? -1 : 0);
+    return((lseek(fileReference, filePosition, SEEK_SET) == -1) ? -1 : 0);
 }
 
 // get file position in absolute file bytes
 unsigned long BAE_GetFilePosition(long fileReference)
 {
-	return(lseek(fileReference, 0, SEEK_CUR));
+    return(lseek(fileReference, 0, SEEK_CUR));
 }
 
 // get length of file
 unsigned long BAE_GetFileLength(long fileReference)
 {
-	unsigned long pos;
+    unsigned long pos;
 
-	pos = lseek(fileReference, 0, SEEK_END);
-	lseek(fileReference, 0, SEEK_SET);
-	return(pos);
+    pos = lseek(fileReference, 0, SEEK_END);
+    lseek(fileReference, 0, SEEK_SET);
+    return(pos);
 }
 
 // set the length of a file. Return 0, if ok, or -1 for error
 int BAE_SetFileLength(long fileReference, unsigned long newSize)
 {
-	return -1;
+    return -1;
 }
 
 // This function is called at render time with w route bus flag. If there's
@@ -563,50 +563,50 @@ void BAE_ProcessRouteBus(int currentRoute, long *pChannels, int count)
 
 static void PV_ClearOutputBuffer(void *pBuffer, short int channels, short int bits, unsigned long frames)
 {
-	short int count;
-	char      *dest8;
-	short int *dest16;
-	
-	if (bits == 16)
-	{
-		// use 16 bit output
-		dest16 = (short int *)pBuffer;
-		for (count = 0; count < frames / 4; count++)
-		{
-			*dest16++ = 0;
-			*dest16++ = 0;
-			*dest16++ = 0;
-			*dest16++ = 0;
-			if (channels == 2)
-			{
-				// this is a slow way to do this!
-				*dest16++ = 0;
-				*dest16++ = 0;
-				*dest16++ = 0;
-				*dest16++ = 0;
-			}
-		}
-	}
-	else
-	{
-		// use 8 bit output
-		dest8 = (char *)pBuffer;
-		for (count = 0; count < frames / 4; count++)
-		{
-			*dest8++ = 0x80;
-			*dest8++ = 0x80;
-			*dest8++ = 0x80;
-			*dest8++ = 0x80;
-			if (channels == 2)
-			{
-				// this is a slow way to do this!
-				*dest8++ = 0x80;
-				*dest8++ = 0x80;
-				*dest8++ = 0x80;
-				*dest8++ = 0x80;
-			}
-		}
-	}
+    short int count;
+    char      *dest8;
+    short int *dest16;
+    
+    if (bits == 16)
+    {
+        // use 16 bit output
+        dest16 = (short int *)pBuffer;
+        for (count = 0; count < frames / 4; count++)
+        {
+            *dest16++ = 0;
+            *dest16++ = 0;
+            *dest16++ = 0;
+            *dest16++ = 0;
+            if (channels == 2)
+            {
+                // this is a slow way to do this!
+                *dest16++ = 0;
+                *dest16++ = 0;
+                *dest16++ = 0;
+                *dest16++ = 0;
+            }
+        }
+    }
+    else
+    {
+        // use 8 bit output
+        dest8 = (char *)pBuffer;
+        for (count = 0; count < frames / 4; count++)
+        {
+            *dest8++ = 0x80;
+            *dest8++ = 0x80;
+            *dest8++ = 0x80;
+            *dest8++ = 0x80;
+            if (channels == 2)
+            {
+                // this is a slow way to do this!
+                *dest8++ = 0x80;
+                *dest8++ = 0x80;
+                *dest8++ = 0x80;
+                *dest8++ = 0x80;
+            }
+        }
+    }
 }
 
 
@@ -635,45 +635,45 @@ int BAE_Unmute(void)
 }
 
 static OSStatus PV_AudioUnitOutputCallback(void *inUserData, 
-									   AudioUnitRenderActionFlags *ioActionFlags, 
-									   const AudioTimeStamp *inTimeStamp, 
-									   UInt32 inBusNumber, 
-									   UInt32 inNumberFrames, 
-									   AudioBufferList *ioData)
+                                       AudioUnitRenderActionFlags *ioActionFlags, 
+                                       const AudioTimeStamp *inTimeStamp, 
+                                       UInt32 inBusNumber, 
+                                       UInt32 inNumberFrames, 
+                                       AudioBufferList *ioData)
 {
-	AudioControlData *THIS = (AudioControlData*)inUserData;
+    AudioControlData *THIS = (AudioControlData*)inUserData;
 
-	THIS->mSamplesPlayed += sHardwareChannel->mAudioFramesToGenerate;
-	if (THIS->mShutdownDoubleBuffer == FALSE)
-	{
-		if (THIS->mDataReady)
-		{
-			THIS->mDonePlaying = FALSE;
-			int maxBuffers = inNumberFrames / THIS->mAudioFramesToGenerate;
-			if ((maxBuffers * THIS->mAudioFramesToGenerate) != inNumberFrames)
-			{
-				printf("Trying to generate %ld frames, but only can generate %ld\n", inNumberFrames,
-					   THIS->mAudioFramesToGenerate);
-				assert(TRUE);
-			}
+    THIS->mSamplesPlayed += sHardwareChannel->mAudioFramesToGenerate;
+    if (THIS->mShutdownDoubleBuffer == FALSE)
+    {
+        if (THIS->mDataReady)
+        {
+            THIS->mDonePlaying = FALSE;
+            int maxBuffers = inNumberFrames / THIS->mAudioFramesToGenerate;
+            if ((maxBuffers * THIS->mAudioFramesToGenerate) != inNumberFrames)
+            {
+                printf("Trying to generate %ld frames, but only can generate %ld\n", inNumberFrames,
+                       THIS->mAudioFramesToGenerate);
+                assert(TRUE);
+            }
 
-			for (int count = 0; count < maxBuffers; count++)
-			{
-				char* buffer = (char*)ioData->mBuffers[0].mData;
-				buffer += (count * THIS->mAudioByteBufferSize);
-				// Generate one frame audio
-				BAE_BuildMixerSlice(NULL, buffer, THIS->mAudioByteBufferSize, THIS->mAudioFramesToGenerate);
-			}
-			ioData->mBuffers[0].mDataByteSize = THIS->mAudioByteBufferSize * maxBuffers;
-		}
-		else
-		{
-			PV_ClearOutputBuffer(ioData->mBuffers[0].mData, THIS->mFormat.mChannelsPerFrame,
-								 THIS->mFormat.mBitsPerChannel, inNumberFrames);
-			ioData->mBuffers[0].mDataByteSize = inNumberFrames;
-		}
-	}
-	return 0;
+            for (int count = 0; count < maxBuffers; count++)
+            {
+                char* buffer = (char*)ioData->mBuffers[0].mData;
+                buffer += (count * THIS->mAudioByteBufferSize);
+                // Generate one frame audio
+                BAE_BuildMixerSlice(NULL, buffer, THIS->mAudioByteBufferSize, THIS->mAudioFramesToGenerate);
+            }
+            ioData->mBuffers[0].mDataByteSize = THIS->mAudioByteBufferSize * maxBuffers;
+        }
+        else
+        {
+            PV_ClearOutputBuffer(ioData->mBuffers[0].mData, THIS->mFormat.mChannelsPerFrame,
+                                 THIS->mFormat.mBitsPerChannel, inNumberFrames);
+            ioData->mBuffers[0].mDataByteSize = inNumberFrames;
+        }
+    }
+    return 0;
 }
 
 const int kOutputBus = 0;
@@ -685,155 +685,155 @@ const int kInputBus = 1;
 // return 0 if ok, -1 if failed
 int BAE_AquireAudioCard(void *threadContext, unsigned long sampleRate, unsigned long channels, unsigned long bits)
 {
-	int           flag;
-	long          bufferSize;
-	OSStatus      err = noErr;
+    int           flag;
+    long          bufferSize;
+    OSStatus      err = noErr;
 
-	sHardwareChannel = BAE_Allocate(sizeof(AudioControlData));
-	if (sHardwareChannel == NULL)
-	{
-		return -1;
-	}
+    sHardwareChannel = BAE_Allocate(sizeof(AudioControlData));
+    if (sHardwareChannel == NULL)
+    {
+        return -1;
+    }
 
-	flag = -1;                                   // failure
-	sHardwareChannel->mShutdownDoubleBuffer = FALSE;
-	sHardwareChannel->mBalance = 0;
-	sHardwareChannel->mUnscaledVolume = 256;
+    flag = -1;                                   // failure
+    sHardwareChannel->mShutdownDoubleBuffer = FALSE;
+    sHardwareChannel->mBalance = 0;
+    sHardwareChannel->mUnscaledVolume = 256;
 
-	sHardwareChannel->mAudioFramesToGenerate = BAE_GetMaxSamplePerSlice();        // get number of frames per sample rate slice
-	switch (sampleRate)
-	{
-		default:
-			assert(TRUE);
-			break;
-		case 48000:
-		case 44100:
-		case 24000:
-		case 22050:
-		case 11025:
-		case 16000:
-		case 8000:
-			break;
-	}
-	OSStatus status = 0;
-	if ((sHardwareChannel->mAudioFramesToGenerate) && ((err == noErr)))
-	{
-		bufferSize  = (bits == 8) ? sizeof(char) : sizeof(short int);
-		bufferSize *= channels;
+    sHardwareChannel->mAudioFramesToGenerate = BAE_GetMaxSamplePerSlice();        // get number of frames per sample rate slice
+    switch (sampleRate)
+    {
+        default:
+            assert(TRUE);
+            break;
+        case 48000:
+        case 44100:
+        case 24000:
+        case 22050:
+        case 11025:
+        case 16000:
+        case 8000:
+            break;
+    }
+    OSStatus status = 0;
+    if ((sHardwareChannel->mAudioFramesToGenerate) && ((err == noErr)))
+    {
+        bufferSize  = (bits == 8) ? sizeof(char) : sizeof(short int);
+        bufferSize *= channels;
 
-		// Describe audio component
-		AudioComponentDescription desc;
-		desc.componentType = kAudioUnitType_Output;
-		desc.componentSubType = kAudioUnitSubType_RemoteIO;
-		desc.componentFlags = 0;
-		desc.componentFlagsMask = 0;
-		desc.componentManufacturer = kAudioUnitManufacturer_Apple;
-		
-		AudioComponent comp = AudioComponentFindNext(NULL, &desc);
-		AudioComponentInstanceNew(comp, &sHardwareChannel->mAudioUnit);
+        // Describe audio component
+        AudioComponentDescription desc;
+        desc.componentType = kAudioUnitType_Output;
+        desc.componentSubType = kAudioUnitSubType_RemoteIO;
+        desc.componentFlags = 0;
+        desc.componentFlagsMask = 0;
+        desc.componentManufacturer = kAudioUnitManufacturer_Apple;
+        
+        AudioComponent comp = AudioComponentFindNext(NULL, &desc);
+        AudioComponentInstanceNew(comp, &sHardwareChannel->mAudioUnit);
 
-		// Enable IO for playback
-		status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
-									  kAudioOutputUnitProperty_EnableIO, 
-									  kAudioUnitScope_Output, 
-									  kOutputBus,
-									  &flag, 
-									  sizeof(flag));
+        // Enable IO for playback
+        status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
+                                      kAudioOutputUnitProperty_EnableIO, 
+                                      kAudioUnitScope_Output, 
+                                      kOutputBus,
+                                      &flag, 
+                                      sizeof(flag));
 
-		// Describe format
-		sHardwareChannel->mFormat.mSampleRate		= sampleRate;
-		sHardwareChannel->mFormat.mFormatID			= kAudioFormatLinearPCM;
-		sHardwareChannel->mFormat.mFormatFlags		= kAudioFormatFlagIsPacked;
-		if (bits != 8)
-		{
-			sHardwareChannel->mFormat.mFormatFlags	|= kAudioFormatFlagIsSignedInteger;
-		}
-		sHardwareChannel->mFormat.mFramesPerPacket	= 1;
-		sHardwareChannel->mFormat.mChannelsPerFrame	= channels;
-		sHardwareChannel->mFormat.mBitsPerChannel	= bits;
-		sHardwareChannel->mFormat.mBytesPerPacket	= channels * (bits / 8);
-		sHardwareChannel->mFormat.mBytesPerFrame	= channels * (bits / 8);
-		
-		// Apply format
-		status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
-									  kAudioUnitProperty_StreamFormat, 
-									  kAudioUnitScope_Output, 
-									  kInputBus, 
-									  &sHardwareChannel->mFormat, 
-									  sizeof(AudioStreamBasicDescription));
-		status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
-									  kAudioUnitProperty_StreamFormat, 
-									  kAudioUnitScope_Input, 
-									  kOutputBus, 
-									  &sHardwareChannel->mFormat, 
-									  sizeof(AudioStreamBasicDescription));
-		
-		// Set output callback
+        // Describe format
+        sHardwareChannel->mFormat.mSampleRate       = sampleRate;
+        sHardwareChannel->mFormat.mFormatID         = kAudioFormatLinearPCM;
+        sHardwareChannel->mFormat.mFormatFlags      = kAudioFormatFlagIsPacked;
+        if (bits != 8)
+        {
+            sHardwareChannel->mFormat.mFormatFlags  |= kAudioFormatFlagIsSignedInteger;
+        }
+        sHardwareChannel->mFormat.mFramesPerPacket  = 1;
+        sHardwareChannel->mFormat.mChannelsPerFrame = channels;
+        sHardwareChannel->mFormat.mBitsPerChannel   = bits;
+        sHardwareChannel->mFormat.mBytesPerPacket   = channels * (bits / 8);
+        sHardwareChannel->mFormat.mBytesPerFrame    = channels * (bits / 8);
+        
+        // Apply format
+        status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
+                                      kAudioUnitProperty_StreamFormat, 
+                                      kAudioUnitScope_Output, 
+                                      kInputBus, 
+                                      &sHardwareChannel->mFormat, 
+                                      sizeof(AudioStreamBasicDescription));
+        status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
+                                      kAudioUnitProperty_StreamFormat, 
+                                      kAudioUnitScope_Input, 
+                                      kOutputBus, 
+                                      &sHardwareChannel->mFormat, 
+                                      sizeof(AudioStreamBasicDescription));
+        
+        // Set output callback
         AURenderCallbackStruct proc;
-		proc.inputProc = PV_AudioUnitOutputCallback;
-		proc.inputProcRefCon = sHardwareChannel;
-		status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
-									  kAudioUnitProperty_SetRenderCallback, 
-									  kAudioUnitScope_Global, 
-									  kOutputBus,
-									  &proc, 
-									  sizeof(AURenderCallbackStruct));
+        proc.inputProc = PV_AudioUnitOutputCallback;
+        proc.inputProcRefCon = sHardwareChannel;
+        status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
+                                      kAudioUnitProperty_SetRenderCallback, 
+                                      kAudioUnitScope_Global, 
+                                      kOutputBus,
+                                      &proc, 
+                                      sizeof(AURenderCallbackStruct));
 
         
-		bufferSize *= sHardwareChannel->mAudioFramesToGenerate;
-		// store just the size of the audio buffer frame
-		sHardwareChannel->mAudioByteBufferSize = bufferSize;
+        bufferSize *= sHardwareChannel->mAudioFramesToGenerate;
+        // store just the size of the audio buffer frame
+        sHardwareChannel->mAudioByteBufferSize = bufferSize;
 
-		// set max buffer slice size
-		status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
-									  kAudioUnitProperty_MaximumFramesPerSlice, 
-									  kAudioUnitScope_Global, 0, 
-									  (UInt32*)&sHardwareChannel->mAudioFramesToGenerate, 
-									  sizeof(UInt32));
-		
-		// we're going to build many buffers at a time
-		sHardwareChannel->mSynthFramesPerBlock = BAE_FRAMES_PER_BLOCK;
-		sHardwareChannel->mSamplesPlayed = 0;
-		sHardwareChannel->mDataReady = FALSE;
-		sHardwareChannel->mDonePlaying = FALSE;
+        // set max buffer slice size
+        status = AudioUnitSetProperty(sHardwareChannel->mAudioUnit, 
+                                      kAudioUnitProperty_MaximumFramesPerSlice, 
+                                      kAudioUnitScope_Global, 0, 
+                                      (UInt32*)&sHardwareChannel->mAudioFramesToGenerate, 
+                                      sizeof(UInt32));
+        
+        // we're going to build many buffers at a time
+        sHardwareChannel->mSynthFramesPerBlock = BAE_FRAMES_PER_BLOCK;
+        sHardwareChannel->mSamplesPlayed = 0;
+        sHardwareChannel->mDataReady = FALSE;
+        sHardwareChannel->mDonePlaying = FALSE;
 
-		status = AudioUnitInitialize(sHardwareChannel->mAudioUnit);
-				
-		flag = 0;                      // ok
-		sHardwareChannel->mDataReady = TRUE;
-		status = AudioOutputUnitStart(sHardwareChannel->mAudioUnit);
-		if (status)
-		{
-			printf("not started\n");
-			flag = 1;
-		}
-	}
+        status = AudioUnitInitialize(sHardwareChannel->mAudioUnit);
+                
+        flag = 0;                      // ok
+        sHardwareChannel->mDataReady = TRUE;
+        status = AudioOutputUnitStart(sHardwareChannel->mAudioUnit);
+        if (status)
+        {
+            printf("not started\n");
+            flag = 1;
+        }
+    }
 
-	if (flag)
-	{
-		// something failed
-		BAE_ReleaseAudioCard(threadContext);
-	}
-	return(flag);
+    if (flag)
+    {
+        // something failed
+        BAE_ReleaseAudioCard(threadContext);
+    }
+    return(flag);
 }
 
 // Release and free audio card.
 // return 0 if ok, -1 if failed.
 int BAE_ReleaseAudioCard(void *threadContext)
 {
-	//  Kill sounds currently playing in this channel
-	if (sHardwareChannel)
-	{
-		sHardwareChannel->mShutdownDoubleBuffer = TRUE;
-		sHardwareChannel->mDataReady = FALSE;
+    //  Kill sounds currently playing in this channel
+    if (sHardwareChannel)
+    {
+        sHardwareChannel->mShutdownDoubleBuffer = TRUE;
+        sHardwareChannel->mDataReady = FALSE;
 
-		AudioOutputUnitStop(sHardwareChannel->mAudioUnit);
-		AudioUnitUninitialize(sHardwareChannel->mAudioUnit);
-		
-		BAE_Deallocate(sHardwareChannel);
-		sHardwareChannel = NULL;
-	}
-	return 0;
+        AudioOutputUnitStop(sHardwareChannel->mAudioUnit);
+        AudioUnitUninitialize(sHardwareChannel->mAudioUnit);
+        
+        BAE_Deallocate(sHardwareChannel);
+        sHardwareChannel = NULL;
+    }
+    return 0;
 }
 
 // return device position in samples
@@ -852,9 +852,9 @@ long BAE_MaxDevices(void)
 }
 
 // set the current device. device is from 0 to BAE_MaxDevices()
-// NOTE:	This function needs to function before any other calls may have happened.
-//			Also you will need to call BAE_ReleaseAudioCard then BAE_AquireAudioCard
-//			in order for the change to take place.
+// NOTE:    This function needs to function before any other calls may have happened.
+//          Also you will need to call BAE_ReleaseAudioCard then BAE_AquireAudioCard
+//          in order for the change to take place.
 void BAE_SetDeviceID(long deviceID, void *deviceParameter)
 {
    deviceID;
@@ -870,14 +870,14 @@ long BAE_GetDeviceID(void *deviceParameter)
 }
 
 // get deviceID name
-// NOTE:	This function needs to function before any other calls may have happened.
-//			Format of string is a zero terminated comma delinated C string.
-//			"platform,method,misc"
-//	example	"MacOS,Sound Manager 3.0,SndPlayDoubleBuffer"
-//			"WinOS,DirectSound,multi threaded"
-//			"WinOS,waveOut,multi threaded"
-//			"WinOS,VxD,low level hardware"
-//			"WinOS,plugin,Director"
+// NOTE:    This function needs to function before any other calls may have happened.
+//          Format of string is a zero terminated comma delinated C string.
+//          "platform,method,misc"
+//  example "MacOS,Sound Manager 3.0,SndPlayDoubleBuffer"
+//          "WinOS,DirectSound,multi threaded"
+//          "WinOS,waveOut,multi threaded"
+//          "WinOS,VxD,low level hardware"
+//          "WinOS,plugin,Director"
 void BAE_GetDeviceName(long deviceID, char *cName, unsigned long cNameLength)
 {
    static char id[] =

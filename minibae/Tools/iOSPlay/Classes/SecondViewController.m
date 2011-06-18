@@ -39,22 +39,22 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-	[super viewDidAppear:animated];
-	
-	UINavigationController* nav = [self navigationController];
-	[[[nav navigationBar] topItem] setTitle:@"Interactive"];
-	
-	CGRect bounds = [[UIScreen mainScreen] bounds];
+    [super viewDidAppear:animated];
+    
+    UINavigationController* nav = [self navigationController];
+    [[[nav navigationBar] topItem] setTitle:@"Interactive"];
+    
+    CGRect bounds = [[UIScreen mainScreen] bounds];
     self.interactiveView = [[InteractiveView alloc] initWithFrame:bounds];
     [self.view addSubview:interactiveView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[super viewDidDisappear:animated];
-	
-	[interactiveView removeFromSuperview];
-	self.interactiveView = nil;
+    [super viewDidDisappear:animated];
+    
+    [interactiveView removeFromSuperview];
+    self.interactiveView = nil;
 }
 
 /*

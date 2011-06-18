@@ -11,50 +11,50 @@
 
 @interface PlayFileDetail : UIViewController 
 {
-	UILabel*	detailText;
-	NSString*	fileName;
+    UILabel*    detailText;
+    NSString*   fileName;
 
-	UILabel*	cpuLoad;
+    UILabel*    cpuLoad;
 
-	UISegmentedControl* mChannelControl0;
-	UISegmentedControl* mChannelControl1;
-	UISegmentedControl* mChannelControl2;
-	UISegmentedControl* mChannelControl3;
-	UISegmentedControl* mChannelControl4;
-	UISegmentedControl* mChannelControl5;
-	UISegmentedControl* mChannelControl6;
-	UISegmentedControl* mChannelControl7;
-	UISegmentedControl* mChannelControl8;
-	UISegmentedControl* mChannelControl9;
-	UISegmentedControl* mChannelControl10;
-	UISegmentedControl* mChannelControl11;
-	UISegmentedControl* mChannelControl12;
-	UISegmentedControl* mChannelControl13;
-	UISegmentedControl* mChannelControl14;
-	UISegmentedControl* mChannelControl15;
-	UISegmentedControl*	mChannelControl[16];
-	
-	UISlider*			mSongPosition;
-	UISlider*			mMasterTempo;
-	UISlider*			mMasterVolume;
-	
-	UISlider*			mChannelVolume0;
-	UISlider*			mChannelVolume1;
-	UISlider*			mChannelVolume2;
-	UISlider*			mChannelVolume3;
-	UISlider*			mChannelVolume4;
-	UISlider*			mChannelVolume5;
-	UISlider*			mChannelVolume6;
-	UISlider*			mChannelVolume7;
-	UISlider*			mChannelVolume8;
-	UISlider*			mChannelVolume9;
-	UISlider*			mChannelVolume10;
-	UISlider*			mChannelVolume11;
-	UISlider*			mChannelVolume12;
-	UISlider*			mChannelVolume13;
-	UISlider*			mChannelVolume14;
-	UISlider*			mChannelVolume15;
-	UISlider*			mChannelVolume[16];
+    UISegmentedControl* mChannelControl0;
+    UISegmentedControl* mChannelControl1;
+    UISegmentedControl* mChannelControl2;
+    UISegmentedControl* mChannelControl3;
+    UISegmentedControl* mChannelControl4;
+    UISegmentedControl* mChannelControl5;
+    UISegmentedControl* mChannelControl6;
+    UISegmentedControl* mChannelControl7;
+    UISegmentedControl* mChannelControl8;
+    UISegmentedControl* mChannelControl9;
+    UISegmentedControl* mChannelControl10;
+    UISegmentedControl* mChannelControl11;
+    UISegmentedControl* mChannelControl12;
+    UISegmentedControl* mChannelControl13;
+    UISegmentedControl* mChannelControl14;
+    UISegmentedControl* mChannelControl15;
+    UISegmentedControl* mChannelControl[16];
+    
+    UISlider*           mSongPosition;
+    UISlider*           mMasterTempo;
+    UISlider*           mMasterVolume;
+    
+    UISlider*           mChannelVolume0;
+    UISlider*           mChannelVolume1;
+    UISlider*           mChannelVolume2;
+    UISlider*           mChannelVolume3;
+    UISlider*           mChannelVolume4;
+    UISlider*           mChannelVolume5;
+    UISlider*           mChannelVolume6;
+    UISlider*           mChannelVolume7;
+    UISlider*           mChannelVolume8;
+    UISlider*           mChannelVolume9;
+    UISlider*           mChannelVolume10;
+    UISlider*           mChannelVolume11;
+    UISlider*           mChannelVolume12;
+    UISlider*           mChannelVolume13;
+    UISlider*           mChannelVolume14;
+    UISlider*           mChannelVolume15;
+    UISlider*           mChannelVolume[16];
 }
 @property (nonatomic, retain) IBOutlet UILabel *detailText;
 @property (nonatomic, retain) IBOutlet UILabel *cpuLoad;

@@ -30,75 +30,75 @@
 */
 /*****************************************************************************/
 /*
-**	BAE_API.h
+**  BAE_API.h
 **
-**	This provides platform specfic functions for BAE
+**  This provides platform specfic functions for BAE
 **
-**	© Copyright 1995-2000 Beatnik, Inc, All Rights Reserved.
-**	Written by Steve Hales
+**  © Copyright 1995-2000 Beatnik, Inc, All Rights Reserved.
+**  Written by Steve Hales
 **
-**	Beatnik products contain certain trade secrets and confidential and
-**	proprietary information of Beatnik.  Use, reproduction, disclosure
-**	and distribution by any means are prohibited, except pursuant to
-**	a written license from Beatnik. Use of copyright notice is
-**	precautionary and does not imply publication or disclosure.
+**  Beatnik products contain certain trade secrets and confidential and
+**  proprietary information of Beatnik.  Use, reproduction, disclosure
+**  and distribution by any means are prohibited, except pursuant to
+**  a written license from Beatnik. Use of copyright notice is
+**  precautionary and does not imply publication or disclosure.
 **
-**	Restricted Rights Legend:
-**	Use, duplication, or disclosure by the Government is subject to
-**	restrictions as set forth in subparagraph (c)(1)(ii) of The
-**	Rights in Technical Data and Computer Software clause in DFARS
-**	252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
-**	Computer Software--Restricted Rights at 48 CFR 52.227-19, as
-**	applicable.
+**  Restricted Rights Legend:
+**  Use, duplication, or disclosure by the Government is subject to
+**  restrictions as set forth in subparagraph (c)(1)(ii) of The
+**  Rights in Technical Data and Computer Software clause in DFARS
+**  252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
+**  Computer Software--Restricted Rights at 48 CFR 52.227-19, as
+**  applicable.
 **
-**	Confidential-- Internal use only
+**  Confidential-- Internal use only
 **
-**	History	-
-**	7/14/97		Created
-**	7/22/97		Added BAE_GetAudioByteBufferSize
-**	11/11/97	Added BAE_MaxDevices & BAE_SetDeviceID & BAE_GetDeviceID & BAE_GetDeviceName
-**	12/16/97	Modified BAE_GetDeviceID and BAE_SetDeviceID to pass a device parameter pointer
-**				that is specific for that device.
-**	1/9/98		Added BAE_FileDelete
-**	2/13/98		Changed BAE_AquireAudioCard to use unsigned longs
-**	3/17/98		Added BAE_Is8BitSupported
+**  History -
+**  7/14/97     Created
+**  7/22/97     Added BAE_GetAudioByteBufferSize
+**  11/11/97    Added BAE_MaxDevices & BAE_SetDeviceID & BAE_GetDeviceID & BAE_GetDeviceName
+**  12/16/97    Modified BAE_GetDeviceID and BAE_SetDeviceID to pass a device parameter pointer
+**              that is specific for that device.
+**  1/9/98      Added BAE_FileDelete
+**  2/13/98     Changed BAE_AquireAudioCard to use unsigned longs
+**  3/17/98     Added BAE_Is8BitSupported
 **
-**	6/5/98		Jim Nitchals RIP	1/15/62 - 6/5/98
-**				I'm going to miss your irreverent humor. Your coding style and desire
-**				to make things as fast as possible. Your collaboration behind this entire
-**				codebase. Your absolute belief in creating the best possible relationships 
-**				from honesty and integrity. Your ability to enjoy conversation. Your business 
-**				savvy in understanding the big picture. Your gentleness. Your willingness 
-**				to understand someone else's way of thinking. Your debates on the latest 
-**				political issues. Your generosity. Your great mimicking of cartoon voices. 
-**				Your friendship. - Steve Hales
+**  6/5/98      Jim Nitchals RIP    1/15/62 - 6/5/98
+**              I'm going to miss your irreverent humor. Your coding style and desire
+**              to make things as fast as possible. Your collaboration behind this entire
+**              codebase. Your absolute belief in creating the best possible relationships 
+**              from honesty and integrity. Your ability to enjoy conversation. Your business 
+**              savvy in understanding the big picture. Your gentleness. Your willingness 
+**              to understand someone else's way of thinking. Your debates on the latest 
+**              political issues. Your generosity. Your great mimicking of cartoon voices. 
+**              Your friendship. - Steve Hales
 **
-**	6/28/98		Added Capture API
-**	7/23/98		Added a new parameter to BAE_AquireAudioCapture
-**				Added BAE_PauseAudioCapture & BAE_ResumeAudioCapture
-**	7/31/98		Added BAE_GetCaptureDeviceName
-**	8/13/98		Changed BAE_CaptureDone proc pointer to be void * parameters rather than
-**				the direct objects.
+**  6/28/98     Added Capture API
+**  7/23/98     Added a new parameter to BAE_AquireAudioCapture
+**              Added BAE_PauseAudioCapture & BAE_ResumeAudioCapture
+**  7/31/98     Added BAE_GetCaptureDeviceName
+**  8/13/98     Changed BAE_CaptureDone proc pointer to be void * parameters rather than
+**              the direct objects.
 **
 ** JAVASOFT
-** 10.09.98		Changed BAE_StartAudioCapture parameters
-** 10.13.98		added BAE_GetCaptureBufferSizeInFrames
-** 10.14.98		added BAE_GetDeviceSamplesCapturedPosition (need to implement!)
-** 10.15.98		added BAE_GetCaptureBufferCount
+** 10.09.98     Changed BAE_StartAudioCapture parameters
+** 10.13.98     added BAE_GetCaptureBufferSizeInFrames
+** 10.14.98     added BAE_GetDeviceSamplesCapturedPosition (need to implement!)
+** 10.15.98     added BAE_GetCaptureBufferCount
 ** 
-**	12/17/98	Added BAE_GetHardwareBalance & BAE_SetHardwareBalance
-**	3/5/99		Changed context to threadContext to reflect what is really is used
-**				in the system.
-**	5/28/99		Changed comment on BAE_BlockMove.
-**	7/12/99		Fixed spelling in BAE_WaitMicroseconds
-**	7/13/99		Renamed BAE to BAE
-**	7/14/99		Added backward compatibility macros to BAE_ API
-**	8/28/99		Added BAEWinOSParameters, and changed BAE_SetDeviceID & BAE_GetDeviceID
-**				to read from that structure for the Windows platform
-**	11/27/99	Added BAE_GetSizeOfMemoryUsed
-**	2/4/2000	Changed copyright. We're Y2K compliant!
-**	2/28/00		Added BAE_GetMaxSizeOfMemoryUsed
-**	10/17/2000	Added BAE_Idle
+**  12/17/98    Added BAE_GetHardwareBalance & BAE_SetHardwareBalance
+**  3/5/99      Changed context to threadContext to reflect what is really is used
+**              in the system.
+**  5/28/99     Changed comment on BAE_BlockMove.
+**  7/12/99     Fixed spelling in BAE_WaitMicroseconds
+**  7/13/99     Renamed BAE to BAE
+**  7/14/99     Added backward compatibility macros to BAE_ API
+**  8/28/99     Added BAEWinOSParameters, and changed BAE_SetDeviceID & BAE_GetDeviceID
+**              to read from that structure for the Windows platform
+**  11/27/99    Added BAE_GetSizeOfMemoryUsed
+**  2/4/2000    Changed copyright. We're Y2K compliant!
+**  2/28/00     Added BAE_GetMaxSizeOfMemoryUsed
+**  10/17/2000  Added BAE_Idle
 */
 /*****************************************************************************/
 
@@ -106,7 +106,7 @@
 #define BAE_API
 
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
 // This file contains API's that need to be defined in order to get BAE (IgorAudio)
@@ -159,8 +159,8 @@ unsigned long BAE_SizeOfPointer(void *memoryBlock);
 
 // block move memory. This is basicly memmove, but its exposed to take advantage of
 // special block move speed ups, various hardware has available.
-// NOTE:	Must use a function like memmove that insures a valid copy in the case
-//			of overlapping memory blocks.
+// NOTE:    Must use a function like memmove that insures a valid copy in the case
+//          of overlapping memory blocks.
 void BAE_BlockMove(void *source, void *dest, unsigned long size);
 
 // **** Audio Card modifiers
@@ -288,33 +288,33 @@ long BAE_MaxDevices(void);
 
 
 // NOTE:
-//		BAE_SetDeviceID & BAE_GetDeviceID take and accept a platform specific pointer for
-//		each device type. Currently there are 3 devices:
-//			0,	BAE_WAVEOUT							- uses the waveOut device
-//			1,	BAE_DIRECTSOUND_PRIMARY_BUFFER		- uses DirectSound with a primary buffer
-//			2,	BAE_DIRECTSOUND_SECONDARY_BUFFER	- uses DirectSound with a secondary buffer
+//      BAE_SetDeviceID & BAE_GetDeviceID take and accept a platform specific pointer for
+//      each device type. Currently there are 3 devices:
+//          0,  BAE_WAVEOUT                         - uses the waveOut device
+//          1,  BAE_DIRECTSOUND_PRIMARY_BUFFER      - uses DirectSound with a primary buffer
+//          2,  BAE_DIRECTSOUND_SECONDARY_BUFFER    - uses DirectSound with a secondary buffer
 
-//		For Windows 95/98/NT the deviceParameter is defined as
-//		WINDOWS
+//      For Windows 95/98/NT the deviceParameter is defined as
+//      WINDOWS
 struct BAEWinOSParameters
 {
-	// actaully a HWND. Only usefull for DirectSound devices
-	void			*windowHandle;
+    // actaully a HWND. Only usefull for DirectSound devices
+    void            *windowHandle;
 
-	// How many audio frames to generate at one time 
-	unsigned long	synthFramesPerBlock;	// NOTE: the waveOut device ignore this parameter
-	// How much time to sleep in milliseconds between buffer builds
-	unsigned long	audioPeriodSleepTime;
+    // How many audio frames to generate at one time 
+    unsigned long   synthFramesPerBlock;    // NOTE: the waveOut device ignore this parameter
+    // How much time to sleep in milliseconds between buffer builds
+    unsigned long   audioPeriodSleepTime;
 
-	unsigned long	undefined[32];			// used for future expansion
+    unsigned long   undefined[32];          // used for future expansion
 };
 typedef struct BAEWinOSParameters BAEWinOSParameters;
 
 // set the current device. device is from 0 to BAE_MaxDevices()
-// NOTE:	This function needs to function before any other calls may have happened.
-//			Also you will need to call BAE_ReleaseAudioCard then BAE_AquireAudioCard
-//			in order for the change to take place. deviceParameter is a device specific
-//			pointer. Pass NULL if you don't know what to use.
+// NOTE:    This function needs to function before any other calls may have happened.
+//          Also you will need to call BAE_ReleaseAudioCard then BAE_AquireAudioCard
+//          in order for the change to take place. deviceParameter is a device specific
+//          pointer. Pass NULL if you don't know what to use.
 void BAE_SetDeviceID(long deviceID, void *deviceParameter);
 
 // return current device ID, and fills in the deviceParameter with a device specific
@@ -323,14 +323,14 @@ void BAE_SetDeviceID(long deviceID, void *deviceParameter);
 long BAE_GetDeviceID(void *deviceParameter);
 
 // get deviceID name 
-// NOTE:	This function needs to function before any other calls may have happened.
-//			Format of string is a zero terminated comma delinated C string.
-//			"platform,method,misc"
-//	example	"MacOS,Sound Manager 3.0,SndPlayDoubleBuffer"
-//			"WinOS,DirectSound,multi threaded"
-//			"WinOS,waveOut,multi threaded"
-//			"WinOS,VxD,low level hardware"
-//			"WinOS,plugin,Director"
+// NOTE:    This function needs to function before any other calls may have happened.
+//          Format of string is a zero terminated comma delinated C string.
+//          "platform,method,misc"
+//  example "MacOS,Sound Manager 3.0,SndPlayDoubleBuffer"
+//          "WinOS,DirectSound,multi threaded"
+//          "WinOS,waveOut,multi threaded"
+//          "WinOS,VxD,low level hardware"
+//          "WinOS,plugin,Director"
 void BAE_GetDeviceName(long deviceID, char *cName, unsigned long cNameLength);
 
 // Return the number of microseconds of real time that will be generated when calling
@@ -346,10 +346,10 @@ int BAE_GetAudioBufferCount(void);
 long BAE_GetAudioByteBufferSize(void);
 
 // **** Audio Engine feedback functions. These functions are used to direct or get
-//		information about the engine.
+//      information about the engine.
 //
-// NOTE:	These are external functions that your audio card code calls to process 
-//			a mixer buffer. You call this, don't define it.
+// NOTE:    These are external functions that your audio card code calls to process 
+//          a mixer buffer. You call this, don't define it.
 
 // Based upon sample rate, channels, and bit size, build 11 milliseconds worth of mixer
 // output, and store it in pAudioBuffer.
@@ -357,8 +357,8 @@ long BAE_GetAudioByteBufferSize(void);
 // at the moment. sampleFrames is how many sample frames. These two values should match
 // ie. sampleFrames = bufferByteLength / channels / bitsize / 8
 extern void BAE_BuildMixerSlice(void *threadContext, void *pAudioBuffer, 
-					long bufferByteLength,
-					long sampleFrames);
+                    long bufferByteLength,
+                    long sampleFrames);
 
 // Return the maximumn number of samples for 11 milliseconds worth of 44 khz data.
 // Typically this is 512. Use this in your calculation of audio buffers
@@ -381,15 +381,15 @@ void BAE_DestroyMutex(BAE_Mutex mutex);
 typedef void (*BAE_FrameThreadProc)(void* threadContext);
 
 // Create and start the frame thread
-extern int	BAE_CreateFrameThread(void* threadContext, BAE_FrameThreadProc proc);
+extern int  BAE_CreateFrameThread(void* threadContext, BAE_FrameThreadProc proc);
 
 extern int BAE_SetFrameThreadPriority(void *threadContext, int priority);
 
 // Stop and destroy the frame thread
-extern int	BAE_DestroyFrameThread(void* threadContext);
+extern int  BAE_DestroyFrameThread(void* threadContext);
 
 // Make the frame thread sleep for the given number of milliseconds
-extern int	BAE_SleepFrameThread(void* threadContext, long msec);
+extern int  BAE_SleepFrameThread(void* threadContext, long msec);
 
 // CAPTURE API
 
@@ -399,7 +399,7 @@ extern int	BAE_SleepFrameThread(void* threadContext, long msec);
 // pCaptureHandle can be NULL.
 // return 0 if ok, -1 if failed
 int BAE_AquireAudioCapture(void *threadContext, unsigned long sampleRate, unsigned long channels, unsigned long bits,
-							unsigned long *pCaptureHandle);
+                            unsigned long *pCaptureHandle);
 
 // Release and free audio capture device
 // return 0 if ok, -1 if failed.
@@ -407,23 +407,23 @@ int BAE_ReleaseAudioCapture(void *threadContext);
 
 typedef enum
 {
-	OPEN_CAPTURE = 0,
-	CLOSE_CAPTURE,
-	DATA_READY_CAPTURE
+    OPEN_CAPTURE = 0,
+    CLOSE_CAPTURE,
+    DATA_READY_CAPTURE
 } BAECaptureMessage;
 
 // Called when BAE_StartAudioCapture is called. 
-// 	OPEN_CAPTURE
-//		parmeter1 and parmeter2 are NULL.
+//  OPEN_CAPTURE
+//      parmeter1 and parmeter2 are NULL.
 
 // Called when BAE_StopAudioCapture is called. 
-//	CLOSE_CAPTURE
-//		parmeter1 and parmeter2 are NULL.
+//  CLOSE_CAPTURE
+//      parmeter1 and parmeter2 are NULL.
 
 // Called when the audio buffer has been filled by the capture audio subsystem.
-//	DATA_READY_CAPTURE
-//		parmeter1 is a pointer to an char * which is the pointer to the audio block
-//		parmeter2 is a pointer to an unsigned long which is the length of buffer
+//  DATA_READY_CAPTURE
+//      parmeter1 is a pointer to an char * which is the pointer to the audio block
+//      parmeter2 is a pointer to an unsigned long which is the length of buffer
 
 typedef void (*BAE_CaptureDone)(void *callbackContext, BAECaptureMessage message, void *parmeter1, void *parameter2);
 
@@ -447,10 +447,10 @@ int BAE_ResumeAudioCapture(void);
 long BAE_MaxCaptureDevices(void);
 
 // set the current device. device is from 0 to BAE_MaxCaptureDevices()
-// NOTE:	This function needs to function before any other calls may have happened.
-//			Also you will need to call BAE_ReleaseAudioCapture then BAE_AquireAudioCapture
-//			in order for the change to take place. deviceParameter is a device specific
-//			pointer. Pass NULL if you don't know what to use.
+// NOTE:    This function needs to function before any other calls may have happened.
+//          Also you will need to call BAE_ReleaseAudioCapture then BAE_AquireAudioCapture
+//          in order for the change to take place. deviceParameter is a device specific
+//          pointer. Pass NULL if you don't know what to use.
 void BAE_SetCaptureDeviceID(long deviceID, void *deviceParameter);
 
 // return current device ID, and fills in the deviceParameter with a device specific
@@ -459,14 +459,14 @@ void BAE_SetCaptureDeviceID(long deviceID, void *deviceParameter);
 long BAE_GetCaptureDeviceID(void *deviceParameter);
 
 // get deviceID name 
-// NOTE:	This function needs to function before any other calls may have happened.
-//			Format of string is a zero terminated comma delinated C string.
-//			"platform,method,misc"
-//	example	"MacOS,Sound Manager 3.0,SndPlayDoubleBuffer"
-//			"WinOS,DirectSound,multi threaded"
-//			"WinOS,waveIn,multi threaded"
-//			"WinOS,VxD,low level hardware"
-//			"WinOS,plugin,Director"
+// NOTE:    This function needs to function before any other calls may have happened.
+//          Format of string is a zero terminated comma delinated C string.
+//          "platform,method,misc"
+//  example "MacOS,Sound Manager 3.0,SndPlayDoubleBuffer"
+//          "WinOS,DirectSound,multi threaded"
+//          "WinOS,waveIn,multi threaded"
+//          "WinOS,VxD,low level hardware"
+//          "WinOS,plugin,Director"
 void BAE_GetCaptureDeviceName(long deviceID, char *cName, unsigned long cNameLength);
 
 // return the number of frames in the capture buffer
@@ -483,58 +483,58 @@ int BAE_GetCaptureBufferCount();
 unsigned long BAE_GetDeviceSamplesCapturedPosition();
 
 // backward compatibility
-#define HAE_WaitMicroseocnds				BAE_WaitMicroseconds
-#define HAE_Setup							BAE_Setup
-#define HAE_Cleanup							BAE_Cleanup
-#define HAE_Allocate						BAE_Allocate
-#define HAE_Deallocate						BAE_Deallocate
-#define HAE_IsBadReadPointer				BAE_IsBadReadPointer
-#define HAE_SizeOfPointer					BAE_SizeOfPointer
-#define HAE_BlockMove						BAE_BlockMove
-#define HAE_IsStereoSupported				BAE_IsStereoSupported
-#define HAE_Is8BitSupported					BAE_Is8BitSupported
-#define HAE_Is16BitSupported				BAE_Is16BitSupported
-#define HAE_GetHardwareVolume				BAE_GetHardwareVolume
-#define HAE_SetHardwareVolume				BAE_SetHardwareVolume
-#define HAE_GetHardwareBalance				BAE_GetHardwareBalance
-#define HAE_SetHardwareBalance				BAE_SetHardwareBalance
-#define HAE_Microseconds					BAE_Microseconds
-#define HAE_WaitMicroseconds				BAE_WaitMicroseconds
-#define HAE_WaitMicroseocnds				BAE_WaitMicroseconds
-#define HAE_CopyFileNameNative				BAE_CopyFileNameNative
-#define HAE_FileCreate						BAE_FileCreate
-#define HAE_FileDelete						BAE_FileDelete
-#define HAE_FileOpenForRead					BAE_FileOpenForRead
-#define HAE_FileOpenForWrite				BAE_FileOpenForWrite
-#define HAE_FileOpenForReadWrite			BAE_FileOpenForReadWrite
-#define HAE_FileClose						BAE_FileClose
-#define HAE_ReadFile						BAE_ReadFile
-#define HAE_WriteFile						BAE_WriteFile
-#define HAE_SetFilePosition					BAE_SetFilePosition
-#define HAE_GetFilePosition					BAE_GetFilePosition
-#define HAE_GetFileLength					BAE_GetFileLength
-#define HAE_SetFileLength					BAE_SetFileLength
-#define HAE_AquireAudioCard					BAE_AquireAudioCard
-#define HAE_ReleaseAudioCard				BAE_ReleaseAudioCard
-#define HAE_Idle							BAE_Idle
-#define HAE_GetDeviceSamplesPlayedPosition	BAE_GetDeviceSamplesPlayedPosition
-#define HAE_MaxDevices						BAE_MaxDevices
-#define HAE_SetDeviceID						BAE_SetDeviceID
-#define HAE_GetDeviceID						BAE_GetDeviceID
-#define HAE_GetDeviceName					BAE_GetDeviceName
-#define HAE_GetSliceTimeInMicroseconds		BAE_GetSliceTimeInMicroseconds
-#define HAE_GetAudioBufferCount				BAE_GetAudioBufferCount
-#define HAE_GetAudioByteBufferSize			BAE_GetAudioByteBufferSize
-#define HAE_BuildMixerSlice					BAE_BuildMixerSlice
-#define HAE_GetMaxSamplePerSlice			BAE_GetMaxSamplePerSlice
-#define HAE_FrameThreadProc					BAE_FrameThreadProc
-#define HAE_CreateFrameThread				BAE_CreateFrameThread
-#define HAE_DestroyFrameThread				BAE_DestroyFrameThread
-#define HAE_SleepFrameThread				BAE_SleepFrameThread
+#define HAE_WaitMicroseocnds                BAE_WaitMicroseconds
+#define HAE_Setup                           BAE_Setup
+#define HAE_Cleanup                         BAE_Cleanup
+#define HAE_Allocate                        BAE_Allocate
+#define HAE_Deallocate                      BAE_Deallocate
+#define HAE_IsBadReadPointer                BAE_IsBadReadPointer
+#define HAE_SizeOfPointer                   BAE_SizeOfPointer
+#define HAE_BlockMove                       BAE_BlockMove
+#define HAE_IsStereoSupported               BAE_IsStereoSupported
+#define HAE_Is8BitSupported                 BAE_Is8BitSupported
+#define HAE_Is16BitSupported                BAE_Is16BitSupported
+#define HAE_GetHardwareVolume               BAE_GetHardwareVolume
+#define HAE_SetHardwareVolume               BAE_SetHardwareVolume
+#define HAE_GetHardwareBalance              BAE_GetHardwareBalance
+#define HAE_SetHardwareBalance              BAE_SetHardwareBalance
+#define HAE_Microseconds                    BAE_Microseconds
+#define HAE_WaitMicroseconds                BAE_WaitMicroseconds
+#define HAE_WaitMicroseocnds                BAE_WaitMicroseconds
+#define HAE_CopyFileNameNative              BAE_CopyFileNameNative
+#define HAE_FileCreate                      BAE_FileCreate
+#define HAE_FileDelete                      BAE_FileDelete
+#define HAE_FileOpenForRead                 BAE_FileOpenForRead
+#define HAE_FileOpenForWrite                BAE_FileOpenForWrite
+#define HAE_FileOpenForReadWrite            BAE_FileOpenForReadWrite
+#define HAE_FileClose                       BAE_FileClose
+#define HAE_ReadFile                        BAE_ReadFile
+#define HAE_WriteFile                       BAE_WriteFile
+#define HAE_SetFilePosition                 BAE_SetFilePosition
+#define HAE_GetFilePosition                 BAE_GetFilePosition
+#define HAE_GetFileLength                   BAE_GetFileLength
+#define HAE_SetFileLength                   BAE_SetFileLength
+#define HAE_AquireAudioCard                 BAE_AquireAudioCard
+#define HAE_ReleaseAudioCard                BAE_ReleaseAudioCard
+#define HAE_Idle                            BAE_Idle
+#define HAE_GetDeviceSamplesPlayedPosition  BAE_GetDeviceSamplesPlayedPosition
+#define HAE_MaxDevices                      BAE_MaxDevices
+#define HAE_SetDeviceID                     BAE_SetDeviceID
+#define HAE_GetDeviceID                     BAE_GetDeviceID
+#define HAE_GetDeviceName                   BAE_GetDeviceName
+#define HAE_GetSliceTimeInMicroseconds      BAE_GetSliceTimeInMicroseconds
+#define HAE_GetAudioBufferCount             BAE_GetAudioBufferCount
+#define HAE_GetAudioByteBufferSize          BAE_GetAudioByteBufferSize
+#define HAE_BuildMixerSlice                 BAE_BuildMixerSlice
+#define HAE_GetMaxSamplePerSlice            BAE_GetMaxSamplePerSlice
+#define HAE_FrameThreadProc                 BAE_FrameThreadProc
+#define HAE_CreateFrameThread               BAE_CreateFrameThread
+#define HAE_DestroyFrameThread              BAE_DestroyFrameThread
+#define HAE_SleepFrameThread                BAE_SleepFrameThread
 
 #ifdef __cplusplus
-	}
+    }
 #endif
 
-#endif	// BAE_API
+#endif  // BAE_API
 

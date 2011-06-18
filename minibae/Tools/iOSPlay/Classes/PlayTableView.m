@@ -21,7 +21,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-	mFiles = [[NSMutableArray alloc] init];
+    mFiles = [[NSMutableArray alloc] init];
 }
 
 /*
@@ -65,35 +65,35 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	NSError *err;
-	
-	// get path to resources
-	NSString* resources = [[ NSBundle mainBundle ] resourcePath];	
-	NSFileManager *filemgr = [NSFileManager defaultManager];
-	NSArray *filelist = [filemgr contentsOfDirectoryAtPath: resources error:&err];
-	
-	int count;
-	int xcount = 0;
-	
-	for (count = 0; count < [filelist count]; count++)
-	{
-		BOOL add = FALSE;
-		NSString* fileName = [filelist objectAtIndex: count];
-		if ([fileName hasSuffix:@".rmf"])
-		{
-			add = TRUE;
-		}
-		if ([fileName hasSuffix:@".mid"])
-		{
-			add = TRUE;
-		}
-		if (add)
-		{
-			xcount++;
-			[mFiles addObject:[fileName mutableCopy]];
-		}
-	}
-	
+    NSError *err;
+    
+    // get path to resources
+    NSString* resources = [[ NSBundle mainBundle ] resourcePath];   
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    NSArray *filelist = [filemgr contentsOfDirectoryAtPath: resources error:&err];
+    
+    int count;
+    int xcount = 0;
+    
+    for (count = 0; count < [filelist count]; count++)
+    {
+        BOOL add = FALSE;
+        NSString* fileName = [filelist objectAtIndex: count];
+        if ([fileName hasSuffix:@".rmf"])
+        {
+            add = TRUE;
+        }
+        if ([fileName hasSuffix:@".mid"])
+        {
+            add = TRUE;
+        }
+        if (add)
+        {
+            xcount++;
+            [mFiles addObject:[fileName mutableCopy]];
+        }
+    }
+    
     // Return the number of rows in the section.
     return xcount;
 }
@@ -102,15 +102,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {    
     static NSString *CellIdentifier = @"CellIdentifier";
-	
+    
     // Dequeue or create a cell of the appropriate type.
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) 
-	{
+    {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-	
+    
     // Configure the cell.
     cell.textLabel.text = [mFiles objectAtIndex: indexPath.row];
     return cell;
@@ -154,14 +154,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     // Navigation logic may go here. Create and push another view controller.
-	PlayFileDetail *detailViewController = [[PlayFileDetail alloc] initWithNibName:@"PlayFileDetail" bundle:nil];
-	detailViewController.fileName = [mFiles objectAtIndex: indexPath.row];
+    PlayFileDetail *detailViewController = [[PlayFileDetail alloc] initWithNibName:@"PlayFileDetail" bundle:nil];
+    detailViewController.fileName = [mFiles objectAtIndex: indexPath.row];
 
-	iOSPlayAppDelegate* app = (iOSPlayAppDelegate*)[[UIApplication sharedApplication] delegate];
+    iOSPlayAppDelegate* app = (iOSPlayAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-	// Pass the selected object to the new view controller.
-	[[app.tabBarController navigationController] pushViewController:detailViewController animated:YES];
-	[detailViewController release];
+    // Pass the selected object to the new view controller.
+    [[app.tabBarController navigationController] pushViewController:detailViewController animated:YES];
+    [detailViewController release];
 }
 
 
@@ -185,8 +185,8 @@
 
 - (void)dealloc 
 {
-	[mFiles removeAllObjects];
-	mFiles = nil;
+    [mFiles removeAllObjects];
+    mFiles = nil;
     [super dealloc];
 }
 

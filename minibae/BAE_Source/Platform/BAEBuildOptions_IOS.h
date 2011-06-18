@@ -30,30 +30,30 @@
 */
 /*****************************************************************************/
 /*
-**	BAEBuildOptions_IOSX.h
+**  BAEBuildOptions_IOSX.h
 **
-**	© Copyright 1999 Beatnik, Inc, All Rights Reserved.
+**  © Copyright 1999 Beatnik, Inc, All Rights Reserved.
 **
-**	Beatnik products contain certain trade secrets and confidential and
-**	proprietary information of Beatnik.  Use, reproduction, disclosure
-**	and distribution by any means are prohibited, except pursuant to
-**	a written license from Beatnik. Use of copyright notice is
-**	precautionary and does not imply publication or disclosure.
+**  Beatnik products contain certain trade secrets and confidential and
+**  proprietary information of Beatnik.  Use, reproduction, disclosure
+**  and distribution by any means are prohibited, except pursuant to
+**  a written license from Beatnik. Use of copyright notice is
+**  precautionary and does not imply publication or disclosure.
 **
-**	Restricted Rights Legend:
-**	Use, duplication, or disclosure by the Government is subject to
-**	restrictions as set forth in subparagraph (c)(1)(ii) of The
-**	Rights in Technical Data and Computer Software clause in DFARS
-**	252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
-**	Computer Software--Restricted Rights at 48 CFR 52.227-19, as
-**	applicable.
+**  Restricted Rights Legend:
+**  Use, duplication, or disclosure by the Government is subject to
+**  restrictions as set forth in subparagraph (c)(1)(ii) of The
+**  Rights in Technical Data and Computer Software clause in DFARS
+**  252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
+**  Computer Software--Restricted Rights at 48 CFR 52.227-19, as
+**  applicable.
 **
-**	Confidential-- Internal use only
+**  Confidential-- Internal use only
 **
-**	Modification History:
-**	10/19/99	MSD:	Created -- extracted from X_API.h
-**	2/17/2000	Changed settings for plugin to allow for streaming.
-**	10/1/2000	Placed define for USE_MAC_OS_X if building under Carbon or MacOS X.
+**  Modification History:
+**  10/19/99    MSD:    Created -- extracted from X_API.h
+**  2/17/2000   Changed settings for plugin to allow for streaming.
+**  10/1/2000   Placed define for USE_MAC_OS_X if building under Carbon or MacOS X.
 */
 /*****************************************************************************/
 
@@ -72,13 +72,13 @@
 #define COMPILER_TYPE                                           GCC_COMPILER
 
 #if TARGET_IPHONE_SIMULATOR
-	#define CPU_TYPE                               	 			k80X86
+    #define CPU_TYPE                                            k80X86
 #else
-	#if TARGET_OS_IPHONE
-		#define CPU_TYPE                               	 		kARM
-	#else
-		#define CPU_TYPE                               	 		k80X86
-	#endif
+    #if TARGET_OS_IPHONE
+        #define CPU_TYPE                                        kARM
+    #else
+        #define CPU_TYPE                                        k80X86
+    #endif
 #endif
 
 #define X_WORD_ORDER                                            TRUE
@@ -101,8 +101,8 @@
 // Overwritable Flags -- default values
 // ----------------------------------------------
 #ifndef REVERB_USED
-	//#define REVERB_USED       REVERB_DISABLED
-	#define REVERB_USED			VARIABLE_REVERB
+    //#define REVERB_USED       REVERB_DISABLED
+    #define REVERB_USED         VARIABLE_REVERB
 
 #endif
 #ifndef USE_FULL_RMF_SUPPORT

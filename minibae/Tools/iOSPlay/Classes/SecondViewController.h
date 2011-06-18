@@ -11,7 +11,7 @@
 
 @interface SecondViewController : UIViewController 
 {
-	InteractiveView*	interactiveView;
+    InteractiveView*    interactiveView;
 }
 @property (nonatomic, retain) IBOutlet InteractiveView* interactiveView;
 

@@ -13,19 +13,19 @@
 
 @interface iOSPlayAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, AVAudioSessionDelegate> 
 {
-    UIWindow*				window;
-    UITabBarController*		tabBarController;
-	UINavigationController*	navController;
+    UIWindow*               window;
+    UITabBarController*     tabBarController;
+    UINavigationController* navController;
 
-	AVAudioSession*			audioSession;
+    AVAudioSession*         audioSession;
 
-	BAEMixer				mMixer;
-	BAEBankToken			mBank;
-	
-	BAESong					mCurrentPlaying;
-	char					mCurrentSongFile[2048];
-	
-	PlayFileDetail*			currentFileDetail;
+    BAEMixer                mMixer;
+    BAEBankToken            mBank;
+    
+    BAESong                 mCurrentPlaying;
+    char                    mCurrentSongFile[2048];
+    
+    PlayFileDetail*         currentFileDetail;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow* window;

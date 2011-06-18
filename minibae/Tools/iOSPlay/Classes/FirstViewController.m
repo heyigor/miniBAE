@@ -17,8 +17,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) 
-	{
-        // Custom initialization		
+    {
+        // Custom initialization        
     }
     return self;
 }
@@ -26,7 +26,7 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView 
-{	
+{   
     [super loadView];
 
     printf("loadView %p\n", self);
@@ -37,17 +37,17 @@
 {
     [super viewDidLoad];
     printf("viewDidLoad PlayTableView %p\n", self);
-	
+    
     self.playTableView = [[PlayTableView alloc] initWithNibName:@"PlayTableView" bundle:nil];
     [self.view addSubview:playTableView.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-	UINavigationController* nav = [self navigationController];
-	[[[nav navigationBar] topItem] setTitle:@"Songs"];
+    UINavigationController* nav = [self navigationController];
+    [[[nav navigationBar] topItem] setTitle:@"Songs"];
 
-	[super viewDidAppear:animated];
+    [super viewDidAppear:animated];
 }
 
 /*
@@ -59,16 +59,16 @@
 */
 
 - (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
+    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+    
+    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload 
 {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
     self.playTableView = nil;
 }
 
