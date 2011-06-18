@@ -30,41 +30,41 @@
 */
 /*****************************************************************************/
 /*
-**	XMPEG_BAE_API.h
+**  XMPEG_BAE_API.h
 **
-**	Layer between BAE and MPEG decoder.
+**  Layer between BAE and MPEG decoder.
 **
-**	© Copyright 2000-2001 Beatnik, Inc, All Rights Reserved.
-**	Written by Steve Hales
+**  © Copyright 2000-2001 Beatnik, Inc, All Rights Reserved.
+**  Written by Steve Hales
 **
-**	Beatnik products contain certain trade secrets and confidential and
-**	proprietary information of Beatnik.  Use, reproduction, disclosure
-**	and distribution by any means are prohibited, except pursuant to
-**	a written license from Beatnik. Use of copyright notice is
-**	precautionary and does not imply publication or disclosure.
+**  Beatnik products contain certain trade secrets and confidential and
+**  proprietary information of Beatnik.  Use, reproduction, disclosure
+**  and distribution by any means are prohibited, except pursuant to
+**  a written license from Beatnik. Use of copyright notice is
+**  precautionary and does not imply publication or disclosure.
 **
-**	Restricted Rights Legend:
-**	Use, duplication, or disclosure by the Government is subject to
-**	restrictions as set forth in subparagraph (c)(1)(ii) of The
-**	Rights in Technical Data and Computer Software clause in DFARS
-**	252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
-**	Computer Software--Restricted Rights at 48 CFR 52.227-19, as
-**	applicable.
+**  Restricted Rights Legend:
+**  Use, duplication, or disclosure by the Government is subject to
+**  restrictions as set forth in subparagraph (c)(1)(ii) of The
+**  Rights in Technical Data and Computer Software clause in DFARS
+**  252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
+**  Computer Software--Restricted Rights at 48 CFR 52.227-19, as
+**  applicable.
 **
-**	Confidential-- Internal use only
+**  Confidential-- Internal use only
 **
-**	History	-
+**  History -
 **
-**	4/15/2000	Created
-**	5/7/2000	Start of a file encoder
-**	06.21.2000 msd	Added MPG_EncodeSetRefillCallback(), which enables
-**					The MPEG encoder to stream encoding rather than
-**					having all it's data ready at the start.
-**	7/25/2000	sh	Added a new parameter to XGetClosestMPEGSampleRate.
-**	8/30/2000	sh	Added XGetMPEGCompressionType.
-**	1/3/2001	sh	Added MPG_GetEncodedFrameBufferSizeInBytes.
-**	1/17/2001	sh	Renamed MPG_GetEncodedFrameBufferSizeInBytes to 
-**					MPG_GetFrameBufferSizeInBytes.
+**  4/15/2000   Created
+**  5/7/2000    Start of a file encoder
+**  06.21.2000 msd  Added MPG_EncodeSetRefillCallback(), which enables
+**                  The MPEG encoder to stream encoding rather than
+**                  having all it's data ready at the start.
+**  7/25/2000   sh  Added a new parameter to XGetClosestMPEGSampleRate.
+**  8/30/2000   sh  Added XGetMPEGCompressionType.
+**  1/3/2001    sh  Added MPG_GetEncodedFrameBufferSizeInBytes.
+**  1/17/2001   sh  Renamed MPG_GetEncodedFrameBufferSizeInBytes to 
+**                  MPG_GetFrameBufferSizeInBytes.
 */
 /*****************************************************************************/
 
@@ -77,7 +77,7 @@
 #include "X_Formats.h"
 
 #ifdef __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
 //#### decoder API
@@ -128,8 +128,8 @@ unsigned long MPG_GetSizeInBytes(void *reference);
 
 // create new mpeg stream to prepare for memory based encoding. Returns NULL if failed.
 void * MPG_EncodeNewStream(unsigned long encodeRate,
-							unsigned long sampleRate, unsigned long channels,
-							XPTR data, unsigned long dataLength);
+                            unsigned long sampleRate, unsigned long channels,
+                            XPTR data, unsigned long dataLength);
 
 // compress frame
 // returns number of samples processed
@@ -167,15 +167,15 @@ XFIXED XGetClosestMPEGSampleRate(XFIXED sourceRate, SndCompressionSubType subTyp
 // calulate a new sample rate, new encode rate and return them in
 // *outSampleRate & *outEncodeRate
 void XGetClosestMPEGSampleRateAndEncodeRate(XFIXED inSampleRate, 
-											XMPEGEncodeRate inEncodeRate,
-											XFIXED *outSampleRate,
-											XMPEGEncodeRate *outEncodeRate,
-											SndCompressionSubType subType);
+                                            XMPEGEncodeRate inEncodeRate,
+                                            XFIXED *outSampleRate,
+                                            XMPEGEncodeRate *outEncodeRate,
+                                            SndCompressionSubType subType);
 
 #ifdef __cplusplus
-	}
+    }
 #endif
 
 
-#endif	// HAE_MPEG
+#endif  // HAE_MPEG
 
