@@ -1,26 +1,26 @@
 # What is miniBAE?
 
- The platform-neutral
- Beatnik Audio Engine, Mini Edition (miniBAE) is an exceptionally
- mature, well-rounded, and reliable computer music and sound system
- specially customized for small-footprint and embedded applications.
+ The platform neutral
+ Beatnik Audio Engine, mini edition (miniBAE) is an exceptionally
+ mature, well rounded, and reliable computer music and sound system
+ specially customized for small footprint and embedded applications.
 
 ## miniBAE is...
 
 ### Flexible
 
- It can play several leading industry-standard music and audio file
+ It can play several leading industry standard music and audio file
  formats from disk or from memory.  
 
-### Interactivity-oriented
+### Interactivity oriented
 
  You can pause and resume any media playback at will, change pitch while
- a sound is playing, etc.The feature-rich miniBAE API is full of
+ a sound is playing, etc.The feature rich miniBAE API is full of
  opportunities for innovative integration of sound design into
- interactive virtual worlds– for example, miniBAE includes a MIDI
- synthesizer that your application – or user – can play in real-time.
+ interactive virtual worlds, for example, miniBAE includes a MIDI
+ synthesizer that your application, or user, can play in real-time.
   
-### Great-Sounding
+### Great Sounding
 
  The audio engine DSP quality is very good, comparable to high-end PC
  wavetable sound cards even though the processing is entirely
@@ -29,7 +29,7 @@
   
 ### Powerful and Extensible
 
- The miniBAE music synthesizer is a high-quality wavetable instrument
+ The miniBAE music synthesizer is a high quality wavetable instrument
  with LFOs, ADSRs, and filters. It can be delivered with a complete
  General MIDI patch bank, or for small footprints a ‘light’ General MIDI
  approximation can be used. Custom instrument banks can be built with
@@ -40,26 +40,26 @@
  Despite miniBAE’s power, the per-voice processor load is impressively
  low.
   
-### Hardware Independent – Sound Card-Agnostic
+### Hardware Independent – Sound Card Agnostic
   
  Some other sound systems require consumers to buy expensive (and
- quickly out- dated) hardware sound cards – but miniBAE avoids nearly
+ quickly out dated) hardware sound cards – but miniBAE avoids nearly
  all sound card support issues because it’s 100% software. miniBAE
  requires no particular sound hardware in the host system, only an audio
  output.
 
 ### Consistent Across Platforms
   
- Because it’s a software-only solution, consistently great-sounding
+ Because it’s a software only solution, consistently great sounding
  music is much easier to achieve with miniBAE than with many other
  computer music systems.  
 
-### An Inexpensive Cross-Platform Audio Solution
+### An Inexpensive Cross Platform Audio Solution
 
  miniBAE provides the same music and sound capabilities on every
- supported plat- form, so porting music and sound content is a
- no-brainer, requiring literally no additional sound artist work –
- simply re-use the files.
+ supported platform, so porting music and sound content is a
+ no brainer, requiring literally no additional sound artist work –
+ simply reuse the files.
 
 ### New BSD License
 
