@@ -3,7 +3,7 @@ package com.igorlabs.DroidPlay;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MyActivity extends Activity {
+public class Start extends Activity {
     /**
      * Called when the activity is first created.
      */
