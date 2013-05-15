@@ -22,18 +22,45 @@ typedef struct
 
 typedef struct
 {
+    unsigned char   mBank;
     unsigned char   mInstrument;
     unsigned char   mChannel;
 } KeySquareSetup;
 
+typedef struct
+{
+    unsigned long mTick;    // at record time
+    unsigned char mCommand;
+    unsigned char mData1;
+    unsigned char mData2;
+    unsigned char mData3;
+} RecordStep;
+
+enum 
+{
+    SEQ_STOPPED = 0,
+    SEQ_RECORDING,
+    SEQ_PLAYING
+};
 
 @interface InteractiveView : UIView 
 {
     CGRect          square;
     BAESong         mInteractiveSong;
+    BAEMixer        mMixer;
     KeySquare       mSquares[KEY_SQUARE_MAX];
     KeySquareSetup  mKeySetup[KEY_SQUARE_MAX];
+
+    int             mSeqState;
+    NSMutableData*  mRecording;
 }
+
+- (void)onRecord:(id)sender;
+- (void)onStop:(id)sender;
+- (void)onPlay:(id)sender;
+- (void)setRecordButton;
+- (void)setPlayButton;
+- (void)setStopButton;
 
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, 
                         CGColorRef  endColor);

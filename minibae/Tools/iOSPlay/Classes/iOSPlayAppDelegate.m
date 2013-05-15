@@ -158,6 +158,7 @@ static void PV_Task(void *reference)
 
 - (void)beginInterruption
 {
+    BAEMixer_DisengageAudio(mMixer);
     [audioSession setActive:NO error:nil];  
 }
 
@@ -165,11 +166,13 @@ static void PV_Task(void *reference)
 - (void)endInterruptionWithFlags:(NSUInteger)flags
 {
     [audioSession setActive:YES error:nil];
+    BAEMixer_ReengageAudio(mMixer);
 }
 
 - (void)endInterruption; /* endInterruptionWithFlags: will be called instead if implemented. */
 {
     [audioSession setActive:YES error:nil];
+    BAEMixer_ReengageAudio(mMixer);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application 
@@ -179,8 +182,8 @@ static void PV_Task(void *reference)
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
     
-    [audioSession setActive:YES error:nil];
     BAEMixer_DisengageAudio(mMixer);
+    [audioSession setActive:NO error:nil];
 }
 
 

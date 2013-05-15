@@ -105,26 +105,29 @@ static int sKeyUsed[KEY_SQUARE_MAX] =
     NOTE_E(6), NOTE_C(6), NOTE_G(4), NOTE_B(4), NOTE_F(4), NOTE_A(3),
 };
 
-#define KEY_LEFT_EDGE 20
-#define KEY_RIGHT_EDGE -20
-#define KEY_TOP_EDGE 20
-#define KEY_BOTTOM_EDGE -135
+#define KEY_LEFT_EDGE 10
+#define KEY_RIGHT_EDGE -10
+#define KEY_TOP_EDGE 10
+#define KEY_BOTTOM_EDGE -125
 
 // http://www.midi.org/techspecs/gm1sound.php
 
-#define PIANO       {0, 0}
-#define STRING1     {49, 1}
-#define STRING2     {51, 1}
-#define LEAD_SYNTH  {80, 2}
+#define PIANO           {1, 1, 0}
+#define STRING1         {1, 89, 1}
+#define STRING2         {0, 51, 2}
+#define LEAD_SYNTH      {0, 80, 3}
+#define BREATH_ECHOS    {1, 76, 4}
+#define SCFI            {1, 91, 5}
+#define SAMPLE_HOLD2    {1, 127, 6}
 static KeySquareSetup sDefaultKeySetup[KEY_SQUARE_MAX] =
 {
     PIANO, PIANO, PIANO, PIANO, PIANO, PIANO, 
     LEAD_SYNTH, LEAD_SYNTH, LEAD_SYNTH, LEAD_SYNTH, LEAD_SYNTH, LEAD_SYNTH, 
     STRING1, STRING1, STRING1, STRING1, STRING1, STRING1, 
-    STRING1, STRING1, STRING1, STRING1, STRING1, STRING1, 
+    BREATH_ECHOS, BREATH_ECHOS, BREATH_ECHOS, BREATH_ECHOS, BREATH_ECHOS, BREATH_ECHOS, 
     STRING2, STRING2, STRING2, STRING2, STRING2, STRING2, 
-    STRING2, STRING2, STRING2, STRING2, STRING2, STRING2, 
-    STRING2, STRING2, STRING2, STRING2, STRING2, STRING2, 
+    SCFI, SCFI, SCFI, SCFI, SCFI, SCFI, 
+    SAMPLE_HOLD2, SAMPLE_HOLD2, SAMPLE_HOLD2, SAMPLE_HOLD2, SAMPLE_HOLD2, SAMPLE_HOLD2, 
 };
 
 - (id)initWithFrame:(CGRect)frame 
@@ -161,25 +164,69 @@ static KeySquareSetup sDefaultKeySetup[KEY_SQUARE_MAX] =
 
         iOSPlayAppDelegate* app = (iOSPlayAppDelegate*)[[UIApplication sharedApplication] delegate];
 
+        mMixer = [app getMixer];
         // turn on nice verb
-        BAEMixer_SetDefaultReverb([app getMixer], BAE_REVERB_TYPE_8);
-        mInteractiveSong = BAESong_New([app getMixer]);
+//      BAEMixer_SetDefaultReverb(mMixer, BAE_REVERB_TYPE_8);
+        BAEMixer_SetDefaultReverb(mMixer, BAE_REVERB_TYPE_11);
+        mInteractiveSong = BAESong_New(mMixer);
         
         for (int count = 0; count < KEY_SQUARE_MAX; count++)
         {
             unsigned char instrument = mKeySetup[count].mInstrument;
             unsigned char channel = mKeySetup[count].mChannel;
-            printf("Load sq %d inst %d chan %d\n", count, instrument, channel);
-            BAEResult result = BAESong_LoadInstrument(mInteractiveSong, instrument);
+            unsigned char bank = mKeySetup[count].mBank;
+
+            BAE_INSTRUMENT patch = TranslateBankProgramToInstrument(bank, 
+                                                                 instrument, 
+                                                                 channel,
+                                                                 60);
+            
+            printf("Load sq %d = bank %d inst %d chan %d\n", count, bank, instrument, channel);
+            BAEResult result = BAESong_LoadInstrument(mInteractiveSong, patch);
             if (result)
             {
                 printf("Bad load %d\n", instrument);
             }
-            BAESong_ProgramChange(mInteractiveSong, channel, instrument, 0);
-            BAESong_ControlChange(mInteractiveSong, channel, REVERB_SEND, 100, 0);
+            BAESong_ProgramBankChange(mInteractiveSong, channel, instrument, bank, 0);
+            BAESong_ControlChange(mInteractiveSong, channel, REVERB_SEND, 50, 0);
         }
+        mSeqState = SEQ_STOPPED;
+        [self setRecordButton];
     }
     return self;
+}
+
+- (void)setStopButton
+{
+    iOSPlayAppDelegate* app = (iOSPlayAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    UINavigationController* nav = [app navController];
+    UINavigationBar* bar = [nav navigationBar];
+    UINavigationItem *top = bar.topItem;
+    top.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Stop" style:UIBarButtonItemStylePlain target:self action:@selector(onStop:)]; 
+    top.rightBarButtonItem.tag = 0;
+}
+
+- (void)setRecordButton
+{
+    iOSPlayAppDelegate* app = (iOSPlayAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    UINavigationController* nav = [app navController];
+    UINavigationBar* bar = [nav navigationBar];
+    UINavigationItem *top = bar.topItem;
+    top.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(onRecord:)]; 
+    top.rightBarButtonItem.tag = 1;
+}
+
+- (void)setPlayButton
+{
+    iOSPlayAppDelegate* app = (iOSPlayAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    UINavigationController* nav = [app navController];
+    UINavigationBar* bar = [nav navigationBar];
+    UINavigationItem *top = bar.topItem;
+    top.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Play" style:UIBarButtonItemStylePlain target:self action:@selector(onPlay:)];
+    top.rightBarButtonItem.tag = 2;
 }
 
 - (void)removeFromSuperview
@@ -215,6 +262,30 @@ void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor
     CGColorSpaceRelease(colorSpace);
 }
 
+- (void)onStop:(id)sender
+{
+    [self setRecordButton];
+    mSeqState = SEQ_STOPPED;
+}
+
+
+- (void)onPlay:(id)sender
+{
+    [self setStopButton];
+    mSeqState = SEQ_PLAYING;
+}
+
+- (void)onRecord:(id)sender
+{
+    if (mRecording)
+    {
+        [mRecording release];
+        mRecording = nil;
+    }
+    mRecording = [[NSMutableData alloc] init];
+    [self setPlayButton];
+    mSeqState = SEQ_RECORDING;
+}
 
 const float ROT_90 = (M_PI * 90.0 / 180.0);
 const float ROT_270 = (M_PI * 270.0 / 180.0);
@@ -287,7 +358,7 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
         }
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
-            CGContextShowTextAtPoint(context, p.x + (square.size.width * .8), p.y + 5, noteName, strlen(noteName));
+            CGContextShowTextAtPoint(context, p.x + (square.size.width * .3), p.y + 5, noteName, strlen(noteName));
         }
     }
     // draw outer border
@@ -299,6 +370,8 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
 - (void)dealloc 
 {
     [super dealloc];
+    [mRecording release];
+    mRecording = nil;
 }
 
 //
@@ -321,7 +394,12 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
                 if (CGRectContainsPoint(mSquares[count].mBound, point))
                 {
                     mSquares[count].mPressed++;
-                    BAESong_NoteOn(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, 0);
+                    
+                    // get current time
+                    unsigned long tick;
+                    BAEMixer_GetTick(mMixer, &tick);
+
+                    BAESong_NoteOn(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, tick);
                     [self setNeedsDisplayInRect:mSquares[count].mBound];
                     printf("note on %d %d\n", mSquares[count].mKey, mSquares[count].mPressed);
                 }
@@ -347,18 +425,22 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
                 BOOL newPress = CGRectContainsPoint(mSquares[count].mBound, point);
                 BOOL oldPress = CGRectContainsPoint(mSquares[count].mBound, prevPoint);
 
+                // get current time
+                unsigned long tick;
+                BAEMixer_GetTick(mMixer, &tick);
+
                 if (oldPress != newPress)
                 {
                     if (newPress)
                     {
                         mSquares[count].mPressed++;
-                        BAESong_NoteOn(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, 0);
+                        BAESong_NoteOn(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, tick);
                         printf("note on %d %d\n", mSquares[count].mKey, mSquares[count].mPressed);
                     }
                     if (oldPress)
                     {
                         mSquares[count].mPressed--;
-                        BAESong_NoteOff(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, 0);
+                        BAESong_NoteOff(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, tick);
                         printf("note off %d %d\n", mSquares[count].mKey, mSquares[count].mPressed);
                     }
                     [self setNeedsDisplayInRect:mSquares[count].mBound];
@@ -374,6 +456,10 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
     {
         BOOL allTouchesEnded = ([touches count] == [[event touchesForView:self] count]);
         
+        // get current time
+        unsigned long tick;
+        BAEMixer_GetTick(mMixer, &tick);
+
         int idx = 0;
         for (UITouch *touch in touches)
         {
@@ -381,6 +467,7 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
             CGPoint prevPoint = [touch previousLocationInView: [touch view]];
             
             idx++;
+
             //printf("touch end %f %f\n", point.x, point.y);
             for (int count = 0; count < KEY_SQUARE_MAX; count++)
             {
@@ -397,7 +484,7 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
                 if (off)
                 {
                     mSquares[count].mPressed--;
-                    BAESong_NoteOff(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, 0);
+                    BAESong_NoteOff(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, tick);
                     printf("note off %d %d\n", mSquares[count].mKey, mSquares[count].mPressed);
                     [self setNeedsDisplayInRect:mSquares[count].mBound];
                 }
@@ -411,7 +498,7 @@ const float ROT_270 = (M_PI * 270.0 / 180.0);
                 {
                     printf("note %d still on\n", mSquares[count].mKey);
                     mSquares[count].mPressed = 0;
-                    BAESong_NoteOff(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, 0);
+                    BAESong_NoteOff(mInteractiveSong, mKeySetup[count].mChannel, mSquares[count].mKey, 100, tick);
                     printf("note off %d %d\n", mSquares[count].mKey, mSquares[count].mPressed);
                     [self setNeedsDisplayInRect:mSquares[count].mBound];
                 }
