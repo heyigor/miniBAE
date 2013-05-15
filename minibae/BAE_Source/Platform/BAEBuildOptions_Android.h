@@ -1,0 +1,206 @@
+/*
+    Copyright (c) 2009 Beatnik, Inc All rights reserved.
+    
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are
+    met:
+    
+    Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    
+    Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+    
+    Neither the name of the Beatnik, Inc nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+    
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+    IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+    TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+    PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+    HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+    TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+/*****************************************************************************/
+/*
+**  BAEBuildOptions_Android.h
+**
+**  © Copyright 1999 Beatnik, Inc, All Rights Reserved.
+**
+**  Beatnik products contain certain trade secrets and confidential and
+**  proprietary information of Beatnik.  Use, reproduction, disclosure
+**  and distribution by any means are prohibited, except pursuant to
+**  a written license from Beatnik. Use of copyright notice is
+**  precautionary and does not imply publication or disclosure.
+**
+**  Restricted Rights Legend:
+**  Use, duplication, or disclosure by the Government is subject to
+**  restrictions as set forth in subparagraph (c)(1)(ii) of The
+**  Rights in Technical Data and Computer Software clause in DFARS
+**  252.227-7013 or subparagraphs (c)(1) and (2) of the Commercial
+**  Computer Software--Restricted Rights at 48 CFR 52.227-19, as
+**  applicable.
+**
+**  Confidential-- Internal use only
+**
+**  Modification History:
+**  10/19/99    MSD:    Created -- extracted from X_API.h
+**  2/17/2000   Changed settings for plugin to allow for streaming.
+**  10/1/2000   Placed define for USE_MAC_OS_X if building under Carbon or MacOS X.
+*/
+/*****************************************************************************/
+
+
+// #includes
+// ----------------------------------------------
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+// Non-overwritable Flags
+// ----------------------------------------------
+#define COMPILER_TYPE                                           GCC_COMPILER
+
+#define CPU_TYPE                                        kARM
+//#define CPU_TYPE                                            k80X86
+
+#define X_WORD_ORDER                                            TRUE
+#define USE_FLOAT                                               FALSE
+#define USE_8_BIT_OUTPUT                                        FALSE
+#define USE_16_BIT_OUTPUT                                       TRUE
+#define USE_MONO_OUTPUT                                         TRUE
+#define USE_STEREO_OUTPUT                                       TRUE
+#define LOOPS_USED                                              U3232_LOOPS
+#define USE_DROP_SAMPLE                                         FALSE
+#define USE_TERP1                                               FALSE
+#define USE_TERP2                                               TRUE
+#define USE_NEW_EFFECTS                                         TRUE
+#define FILE_NAME_LENGTH                                        1024
+#define USE_DEVICE_ENUM_SUPPORT                                 TRUE
+#define USE_CALLBACKS                                           TRUE
+#define USE_CREATION_API                                        TRUE
+#define BAE_COMPLETE                                            1
+#define USE_STREAM_API                                          TRUE
+// Overwritable Flags -- default values
+// ----------------------------------------------
+#ifndef REVERB_USED
+    //#define REVERB_USED       REVERB_DISABLED
+    #define REVERB_USED         VARIABLE_REVERB
+
+#endif
+#ifndef USE_FULL_RMF_SUPPORT
+        #define USE_FULL_RMF_SUPPORT            TRUE
+#endif
+
+#ifndef USE_CREATION_API
+        #define USE_CREATION_API                        TRUE
+#endif
+
+#ifndef USE_HIGHLEVEL_FILE_API
+        #define USE_HIGHLEVEL_FILE_API          TRUE
+#endif
+
+#ifndef USE_STREAM_API
+        #define USE_STREAM_API                          TRUE
+#endif
+
+#ifndef USE_CAPTURE_API
+        #define USE_CAPTURE_API                         FALSE
+#endif
+
+#ifndef USE_MOD_API
+        #define USE_MOD_API                                     FALSE
+#endif
+
+#ifndef USE_MPEG_ENCODER
+        #define USE_MPEG_ENCODER                        FALSE
+#endif
+
+#ifndef USE_MPEG_DECODER
+        #define USE_MPEG_DECODER                        FALSE
+#endif
+
+
+// INLINE
+// ------------------------
+#ifndef __MOTO__
+        #define INLINE                                          inline
+#else
+        #define INLINE
+#endif
+
+
+// DEBUG_STR
+// ------------------------
+#ifndef DEBUG_STR
+        #if USE_DEBUG == 0
+                #define DEBUG_STR(x)
+        #else
+                #include <stdio.h>
+        #endif
+                #if USE_DEBUG == 1
+                #define DEBUG_STR(x)    DebugStr((unsigned char *)(x))
+        #endif
+                #if USE_DEBUG == 2
+extern short int drawDebug;
+                #ifdef __cplusplus
+extern "C" {
+                #endif
+extern void DPrint(short int d, ...);
+
+                #ifdef __cplusplus
+}
+                #endif
+                #define DEBUG_STR(x)    DPrint(drawDebug, "%s\r", x)
+        #endif
+                #if USE_DEBUG == 3
+                #define DEBUG_STR(x)
+extern short int drawDebug;
+                #ifdef __cplusplus
+extern "C" {
+                #endif
+extern void DPrint(short int d, ...);
+
+                #ifdef __cplusplus
+}
+                #endif
+                #define DEBUG_STR2(x)    DPrint(drawDebug, "%s\r", x)
+        #else
+                #define DEBUG_STR2(x)
+        #endif
+#endif
+
+
+// MACROS
+// ----------------------------------------------
+#if 0           // this is for my testing. Please keep set to 0!!!
+        #undef  USE_DROP_SAMPLE
+        #define USE_DROP_SAMPLE                                 FALSE
+        #undef  USE_TERP1
+        #define USE_TERP1                                       FALSE
+        #undef  USE_8_BIT_OUTPUT
+        #define USE_8_BIT_OUTPUT                                FALSE
+        #undef  USE_MONO_OUTPUT
+        #define USE_MONO_OUTPUT                                 FALSE
+        #undef  USE_CREATION_API
+        #define USE_CREATION_API                                FALSE
+        #undef  USE_MOD_API
+        #define USE_MOD_API                                     FALSE
+        #undef  USE_HIGHLEVEL_FILE_API
+        #define USE_HIGHLEVEL_FILE_API                          FALSE
+        #undef  USE_STREAM_API
+        #define USE_STREAM_API                                  FALSE
+        #undef  USE_FULL_RMF_SUPPORT
+        #define USE_FULL_RMF_SUPPORT                            FALSE
+        #undef  USE_CAPTURE_API
+        #define USE_CAPTURE_API                                 FALSE
+#endif

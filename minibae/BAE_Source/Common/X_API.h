@@ -378,6 +378,8 @@
 
 #if X_PLATFORM == X_MACINTOSH_9
     #include "BAEBuildOptions_MacOS.h"
+#elif X_PLATFORM == X_ANDROID
+    #include "BAEBuildOptions_Android.h"
 #elif X_PLATFORM == X_IOS
     #include "BAEBuildOptions_IOS.h"
 #elif X_PLATFORM == X_MACINTOSH

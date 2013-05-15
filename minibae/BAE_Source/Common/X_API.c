@@ -1241,6 +1241,9 @@ XERR XGetTempXFILENAME(XFILENAME* xfilename)
 #if X_PLATFORM == X_IOS
     return -1;
 #endif
+#if X_PLATFORM == X_ANDROID
+	return -1;
+#endif
 #if X_PLATFORM == X_MACINTOSH
     char sfn[30] = "/tmp/bae_tmp.XXXXXX";
     char* result = NULL;
