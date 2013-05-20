@@ -1,10 +1,14 @@
 package org.minibae;
-import org.minibae.Sound;
-import org.minibae.Song;
+
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 
 public class Mixer
 {
-	static private int mReference;
+    private AssetManager mAssetManager;
+    private int mReference;
+
+    private static Mixer mMixer;
 
 	static
 	{
@@ -16,34 +20,38 @@ public class Mixer
 	private static native int _openMixer(int reference, int sampleRate, int terpMode, int maxSongVoices, int maxSoundVoices, int mixLevel);
 	
 	// keep static constructor private.
-	private Mixer()
+	private Mixer(AssetManager assetManager)
 	{
+        mAssetManager = assetManager;
+        mReference = _newMixer();
 	}
 	
-	public static int create(int sampleRate, int terpMode, int maxSongVoices, int maxSoundVoices, int mixLevel)
+	public static int create(AssetManager assetManager, int sampleRate, int terpMode, int maxSongVoices, int maxSoundVoices, int mixLevel)
 	{
-		int status = 0;
-		mReference = _newMixer();
-		if (mReference != 0)
+        int status = 0;
+
+        mMixer = new Mixer(assetManager);
+		if (mMixer.mReference != 0)
 		{
-			status = _openMixer(mReference, sampleRate, terpMode, maxSongVoices, maxSoundVoices, mixLevel);
+			status = _openMixer(mMixer.mReference, sampleRate, terpMode, maxSongVoices, maxSoundVoices, mixLevel);
 		}
 		return status;
     }
 
 	public static void delete()
 	{
-        if (mReference != 0)
+        if (mMixer.mReference != 0)
 		{
-			_deleteMixer(mReference);
-			mReference = 0;
+			_deleteMixer(mMixer.mReference);
+            mMixer.mReference = 0;
+            mMixer = null;
 		}
 	}
 
 	public static Sound create()
 	{
 		Sound snd = null;
-        if (mReference != 0)
+        if (mMixer.mReference != 0)
 		{
 			snd = new Sound();
 		}
