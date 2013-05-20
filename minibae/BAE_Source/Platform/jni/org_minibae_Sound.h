@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jint JNICALL Java_org_minibae_Sound__1newNativeSound
   (JNIEnv *, jobject);
 
+/*
+ * Class:     org_minibae_Sound
+ * Method:    _loadSound
+ * Signature: (Ljava/nio/ByteBuffer;)I
+ */
+JNIEXPORT jint JNICALL Java_org_minibae_Sound__1loadSound
+  (JNIEnv *, jobject, jobject);
+
 #ifdef __cplusplus
 }
 #endif
