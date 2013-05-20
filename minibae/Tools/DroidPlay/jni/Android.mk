@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+# build miniBAE
 LOCAL_PATH := $(call my-dir)/../../../BAE_Source
-
 include $(CLEAR_VARS)
-
 
 LOCAL_MODULE    := miniBAE
 LOCAL_SRC_FILES	:= \
@@ -50,7 +50,8 @@ LOCAL_SRC_FILES	:= \
 			Common/g721.c \
 			Common/g723_24.c \
 			Common/g723_40.c \
-			Common/g72x.c
+			Common/g72x.c \
+			Platform/jni/org_minibae_Mixer.c
 
 LOCAL_SRC_FILES += \
 			Platform/BAE_API_Android.c
@@ -60,7 +61,6 @@ LOCAL_C_INCLUDES	+= $(LOCAL_PATH)/Platform
 LOCAL_C_INCLUDES	+= $(LOCAL_PATH)/../BAE_MPEG_Source_II
 
 LOCAL_CFLAGS := -DX_PLATFORM=X_ANDROID
-
 LOCAL_ARM_MODE := arm
 
 # for native audio
@@ -69,7 +69,6 @@ LOCAL_LDLIBS    += -lOpenSLES
 LOCAL_LDLIBS    += -llog
 # for native asset manager
 LOCAL_LDLIBS    += -landroid
-
 
 include $(BUILD_SHARED_LIBRARY)
 
