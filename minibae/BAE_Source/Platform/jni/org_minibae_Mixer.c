@@ -1,7 +1,14 @@
 #include <dlfcn.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+
+// printf
 #include <android/log.h>
+
+// for native asset manager
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
 
 #include "org_minibae_Mixer.h"
 #include "MiniBAE.h"
@@ -20,7 +27,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 
     __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "JNI_OnLoad called");
 
-    if((*vm)->GetEnv(vm, (void**) &env, JNI_VERSION_1_6) != JNI_OK)
+    if((*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_6) != JNI_OK)
     {
         __android_log_print(ANDROID_LOG_ERROR, "miniBAE", "Failed to get the environment using GetEnv()");
         return -1;
@@ -43,7 +50,7 @@ JNIEXPORT jint JNICALL Java_org_minibae_Mixer__1newMixer
 	BAEMixer mixer = BAEMixer_New();
 	if (mixer)
 	{
-	    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "hello mixer");
+	    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "hello mixer %p", mixer);
 	}
 	return (jint)mixer;
 }
@@ -60,7 +67,7 @@ JNIEXPORT void JNICALL Java_org_minibae_Mixer__1deleteMixer
 	if (mixer)
 	{
 		BAEMixer_Delete(mixer);
-	    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "goodbye mixer");
+	    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "goodbye mixer %p", mixer);
 	}
 }
 
@@ -92,7 +99,7 @@ JNIEXPORT jint JNICALL Java_org_minibae_Mixer__1openMixer
 	    }
 	    else
 	    {
-	    	__android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "failed to open mixer");
+	    	__android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "failed to open mixer (%d)", err);
 	    }
 	}
 	return status;
