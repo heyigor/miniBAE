@@ -14,6 +14,8 @@
 #
 
 # build miniBAE
+NDK_TOOLCHAIN_VERSION=clang
+
 LOCAL_PATH := $(call my-dir)/../../../BAE_Source
 include $(CLEAR_VARS)
 
