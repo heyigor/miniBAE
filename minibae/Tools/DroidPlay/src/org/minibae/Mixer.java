@@ -13,20 +13,20 @@ public class Mixer
 
 	private static native int _newMixer();
 	private static native void _deleteMixer(int reference);
-	private static native int _openMixer(int sampleRate, int terpMode, int modifiers, int maxSongVoices, int maxSoundVoices, int mixLevel);
+	private static native int _openMixer(int reference, int sampleRate, int terpMode, int maxSongVoices, int maxSoundVoices, int mixLevel);
 	
 	// keep static constructor private.
 	private Mixer()
 	{
 	}
 	
-	public static int create(int sampleRate, int terpMode, int modifiers, int maxSongVoices, int maxSoundVoices, int mixLevel)
+	public static int create(int sampleRate, int terpMode, int maxSongVoices, int maxSoundVoices, int mixLevel)
 	{
 		int status = 0;
 		mReference = _newMixer();
 		if (mReference != 0)
 		{
-			status = _openMixer(sampleRate, terpMode, modifiers, maxSongVoices, maxSoundVoices, mixLevel);
+			status = _openMixer(mReference, sampleRate, terpMode, maxSongVoices, maxSoundVoices, mixLevel);
 		}
 		return status;
     }

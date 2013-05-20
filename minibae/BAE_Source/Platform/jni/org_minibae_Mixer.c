@@ -39,9 +39,13 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
  */
 JNIEXPORT jint JNICALL Java_org_minibae_Mixer__1newMixer
   (JNIEnv* env, jclass clazz)
-{
-    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "hello newMixer");
-	return 0;
+{    
+	BAEMixer mixer = BAEMixer_New();
+	if (mixer)
+	{
+	    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "hello mixer");
+	}
+	return (jint)mixer;
 }
 
 /*
@@ -52,6 +56,12 @@ JNIEXPORT jint JNICALL Java_org_minibae_Mixer__1newMixer
 JNIEXPORT void JNICALL Java_org_minibae_Mixer__1deleteMixer
   (JNIEnv* env, jclass clazz, jint reference)
 {
+	BAEMixer mixer = (BAEMixer)reference;
+	if (mixer)
+	{
+		BAEMixer_Delete(mixer);
+	    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "goodbye mixer");
+	}
 }
 
 /*
@@ -60,9 +70,31 @@ JNIEXPORT void JNICALL Java_org_minibae_Mixer__1deleteMixer
  * Signature: (IIIIII)I
  */
 JNIEXPORT jint JNICALL Java_org_minibae_Mixer__1openMixer
-  (JNIEnv* env, jclass clazz, jint sampleRate, jint terpMode, jint modifiers, jint maxSongVoices, jint maxSoundVoices, jint mixLevel)
+  (JNIEnv* env, jclass clazz, jint reference, jint sampleRate, jint terpMode, jint maxSongVoices, jint maxSoundVoices, jint mixLevel)
 {
-    __android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "hello openMixer");
-	return 0;
+	jint status = -1;
+    BAEResult    err;
+
+	BAEMixer mixer = (BAEMixer)reference;
+	if (mixer)
+	{
+        err = BAEMixer_Open(mixer,
+                            sampleRate,
+                            terpMode,
+                            BAE_USE_STEREO | BAE_USE_16,
+                            maxSongVoices,	// midi voices
+                            maxSoundVoices, // pcm voices
+                            mixLevel,
+                            FALSE);
+        if (err == BAE_NO_ERROR)
+        {
+	    	__android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "hello openMixer");
+	    }
+	    else
+	    {
+	    	__android_log_print(ANDROID_LOG_DEBUG, "miniBAE", "failed to open mixer");
+	    }
+	}
+	return status;
 }
 
