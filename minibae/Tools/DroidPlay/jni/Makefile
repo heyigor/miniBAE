@@ -3,7 +3,7 @@ all:
 	@echo "Targets"
 	@echo " build"
 	@echo " clean"
-	@echo " make_jni"
+	@echo " jni"
 
 build:
 	ndk-build
@@ -11,7 +11,8 @@ build:
 clean:
 	ndk-build clean
 
-make_jni:
+jni:
+	javac -d ../bin/classes ../src/org/minibae/*.java
 	javah -classpath ../bin/classes -jni org.minibae.Sound
 	javah -classpath ../bin/classes -jni org.minibae.Mixer
 	mv *.h ../../../BAE_Source/Platform/jni
