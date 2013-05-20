@@ -10,18 +10,26 @@ extern "C" {
 /*
  * Class:     org_minibae_Sound
  * Method:    _newNativeSound
- * Signature: ()I
+ * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_org_minibae_Sound__1newNativeSound
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     org_minibae_Sound
  * Method:    _loadSound
- * Signature: (Ljava/nio/ByteBuffer;)I
+ * Signature: (ILjava/nio/ByteBuffer;)I
  */
-JNIEXPORT jint JNICALL Java_org_minibae_Sound__1loadSound
-  (JNIEnv *, jobject, jobject);
+JNIEXPORT jint JNICALL Java_org_minibae_Sound__1loadSound__ILjava_nio_ByteBuffer_2
+  (JNIEnv *, jobject, jint, jobject);
+
+/*
+ * Class:     org_minibae_Sound
+ * Method:    _loadSound
+ * Signature: (ILandroid/content/res/AssetManager;Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_org_minibae_Sound__1loadSound__ILandroid_content_res_AssetManager_2Ljava_lang_String_2
+  (JNIEnv *, jobject, jint, jobject, jstring);
 
 #ifdef __cplusplus
 }

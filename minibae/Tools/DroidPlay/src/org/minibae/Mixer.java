@@ -5,8 +5,8 @@ import android.content.res.Resources;
 
 public class Mixer
 {
-    private AssetManager mAssetManager;
-    private int mReference;
+    AssetManager mAssetManager;
+    int mReference;
 
     private static Mixer mMixer;
 
@@ -53,7 +53,7 @@ public class Mixer
 		Sound snd = null;
         if (mMixer.mReference != 0)
 		{
-			snd = new Sound();
+			snd = new Sound(mMixer);
 		}
 		return snd;
 	}	

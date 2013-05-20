@@ -53,7 +53,9 @@ LOCAL_SRC_FILES	:= \
 			Common/g723_24.c \
 			Common/g723_40.c \
 			Common/g72x.c \
-			Platform/jni/org_minibae_Mixer.c
+			Platform/jni/org_minibae_Mixer.c \
+			Platform/jni/org_minibae_Sound.c \
+
 
 LOCAL_SRC_FILES += \
 			Platform/BAE_API_Android.c
