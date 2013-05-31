@@ -74,18 +74,19 @@ else
     endif
 endif
 
-all:
+all: update
+	@echo "\nBuilding debug apk..."
+	@ant debug
+
+update:
     ifdef TARGET
 		@echo "\nUpdating the project..."
-		@$(ANDROID_SDK)/tools/android update project --path ./ --target $(TARGET)
+		@$(ANDROID_SDK)/tools/android update project --path ./ --target $(TARGET) --subprojects
     else
         ifeq ($(wildcard build.xml),) 
 			$(error "\nERROR! Use make TARGET=N. For a complete list, type 'Makefile targets'.")
         endif
     endif
-
-	@echo "\nBuilding debug apk..."
-	@ant debug
 
 upload:
     ifeq ($(DEVICE) , ALL)
