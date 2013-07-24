@@ -7,6 +7,8 @@
 
 ## miniBAE is...
 
+![Alt text](docs/block.jpg)
+
 ### Flexible
 
  It can play several leading industry standard music and audio file
@@ -59,7 +61,30 @@
  miniBAE provides the same music and sound capabilities on every
  supported platform, so porting music and sound content is a
  no brainer, requiring literally no additional sound artist work –
- simply reuse the files.
+ simply reuse the files. Abstracted high performance audio mixing engine. Designed for very low latency. Very efficient.
+
+### Why do we care?
+Interactive audio is the core need for quality video games and sonified UIX.
+Audio is one of the senses, and any platform without good support suffers.
+
+### What can it be used for?
+Playing just about any kind of audio content. Either stored locally, via a network stream, or stored in an application.
+From the application there’s all kinds of ways to hook into the media as it plays.
+User feedback for visually impaired. Sonified UIX.
+Instantly create musical instruments out of any device or screen.
+
+### What’s is cost?
+ Free. BSD license.
+
+###What happen to Beatnik?
+ Beatnik ended business December 2009. Decided to release the miniBAE source as a BSD license rather than let it disappear.
+
+### What’s with all this Javascript code?
+ miniBAE’s first incarnation was a plugin for web browsers than included almost a feature for feature Javascript API to match the native API’s. That code is also in the release for potential reuse in Browsers or Frameworks that support Javascript.
+
+### What’s left to be done?
+ If the Javascript code is to be used, it will have to be modernized, and a layer between Javascript and the Native code will have to be written.
+ A Native Host will have to be written for each platform you want to support. The code release includes: Mac OSX, Windows, iOS.
 
 ### New BSD License
 
