@@ -5,3 +5,7 @@
 /minibae/Tools/DroidPlay/bin/
 /minibae/Tools/DroidPlay/gen/
 /minibae/Tools/DroidPlay/DroidPlay.iws
+minibae/Tools/playbae/playbae
+*.o
+minibae/Tools/iOSPlay/iOSPlay.xcodeproj/xcuserdata
+minibae/Tools/iOSPlay/iOSPlay.xcodeproj/project.xcworkspace/xcuserdata

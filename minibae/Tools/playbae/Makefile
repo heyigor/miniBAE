@@ -1,10 +1,12 @@
 TARGET = playbae
 
-vpath	%.c ../../BAE_Source/Common ../../BAE_Source/Platform ../../BAE_MPEG_Source_II
+VPATH = ../../BAE_Source/Common ../../BAE_Source/Platform ../../BAE_MPEG_Source_II
+VPATH += ../../BAE_MPEG_Source_II/mp3dec/src
 
 INC_PATH	:= -I../../BAE_Source/Common
 INC_PATH	+= -I../../BAE_Source/Platform
 INC_PATH	+= -I../../BAE_MPEG_Source_II
+INC_PATH	+= -I../../BAE_MPEG_Source_II/mp3dec/include -I../../BAE_MPEG_Source_II/mp3dec/src
 
 SRC		:=	BAE_API_MacOSX.c
 
@@ -42,44 +44,67 @@ SRC		+= \
 			g723_40.c \
 			g72x.c
 
-			
-#SRC		+= 	\
-#		XMPEGFilesSun.c \
-#		XMPEG_BAE_API.c \
-#		mpa_c_copybytes.c \
-#		mpa_conv.c \
-#		mpa_dec.c \
-#		mpa_dec_bits.c \
-#		mpa_dec_crc.c \
-#		mpa_dec_l1.c \
-#		mpa_dec_l12.c \
-#		mpa_dec_l2.c \
-#		mpa_dec_l3.c \
-#		mpa_dec_l3hf.c \
-#		mpa_dec_l3u.c \
-#		mpa_dec_poly.c \
-#		mpa_dec_tab.c \
-#		mpa_dec_vec.c \
-#		mpa_version.c
+SRC			+= \
+			pvmp3_normalize.cpp \
+		 	pvmp3_alias_reduction.cpp \
+		 	pvmp3_crc.cpp \
+		 	pvmp3_decode_header.cpp \
+		 	pvmp3_decode_huff_cw.cpp \
+		 	pvmp3_getbits.cpp \
+		 	pvmp3_dequantize_sample.cpp \
+		 	pvmp3_framedecoder.cpp \
+		 	pvmp3_get_main_data_size.cpp \
+		 	pvmp3_get_side_info.cpp \
+		 	pvmp3_get_scale_factors.cpp \
+		 	pvmp3_mpeg2_get_scale_data.cpp \
+		 	pvmp3_mpeg2_get_scale_factors.cpp \
+		 	pvmp3_mpeg2_stereo_proc.cpp \
+		 	pvmp3_huffman_decoding.cpp \
+		 	pvmp3_huffman_parsing.cpp \
+		 	pvmp3_tables.cpp \
+		 	pvmp3_imdct_synth.cpp \
+		 	pvmp3_mdct_6.cpp \
+		 	pvmp3_dct_6.cpp \
+		 	pvmp3_poly_phase_synthesis.cpp \
+		 	pvmp3_equalizer.cpp \
+		 	pvmp3_seek_synch.cpp \
+		 	pvmp3_stereo_proc.cpp \
+		 	pvmp3_reorder.cpp
+
+ifeq ($(TARGET_ARCH),arm)
+SRC += \
+	asm/pvmp3_polyphase_filter_window_gcc.s \
+ 	asm/pvmp3_mdct_18_gcc.s \
+ 	asm/pvmp3_dct_9_gcc.s \
+	asm/pvmp3_dct_16_gcc.s
+else
+SRC += \
+ 	pvmp3_polyphase_filter_window.cpp \
+ 	pvmp3_mdct_18.cpp \
+ 	pvmp3_dct_9.cpp \
+ 	pvmp3_dct_16.cpp
+endif
+
+SRC			+= \
+			XMPEGFiles.c \
+			XMPEG_PACKET_BAE_API.cpp
 			
 SRC		+=	playbae.c
 
 OBJ_DIR := obj/
 OBJ := $(addprefix $(OBJ_DIR),$(addsuffix .o,$(basename ${SRC})))
 
-#ARCH	:= -arch x86_64
-ARCH	:= -arch i386
-CC		:= gcc
-CXX		:= g++
-LD		:= g++
+CC     := clang
+CXX    := clang++
+LD     := clang++
 
 CFLAGS  	:= $(ARCH) -g -O3 $(INC_PATH) -D_THREAD_SAFE
 CFLAGS		+= -DX_PLATFORM=X_MACINTOSH
-#CFLAGS		+= -DUSE_MPEG_DECODER=1
+CFLAGS		+= -DUSE_MPEG_DECODER=1
 CFLAGS		+= -D_DEBUG=1
 #CFLAGS		+= -DREVERB_USED=REVERB_DISABLED
 CXXFLAGS 	:= $(CFLAGS)
-LDFLAGS		:= $(ARCH) -all_load -static-libgcc -prebind
+LDFLAGS		:= $(ARCH) -all_load -prebind
 
 
 LIBS	= 	-L/opt/local/lib \
@@ -95,7 +120,7 @@ $(TARGET): $(OBJ)
 		
 # Rules for compiling source files to object files
 $(OBJ_DIR)%.o : %.cpp
-	@echo @compile $<
+	@echo @compile++ $<
 	@mkdir -p $(OBJ_DIR)
 	@${CXX} -c ${CXXFLAGS} $< -o $@
 
