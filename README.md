@@ -76,7 +76,7 @@ Instantly create musical instruments out of any device or screen.
 ### What’s is cost?
  Free. BSD license.
 
-###What happen to Beatnik?
+### What happen to Beatnik?
  Beatnik ended business December 2009. Decided to release the miniBAE source as a BSD license rather than let it disappear.
 
 ### What’s with all this Javascript code?
