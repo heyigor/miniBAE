@@ -79,7 +79,7 @@ CFLAGS		+= -DX_PLATFORM=X_MACINTOSH
 CFLAGS		+= -D_DEBUG=1
 #CFLAGS		+= -DREVERB_USED=REVERB_DISABLED
 CXXFLAGS 	:= $(CFLAGS)
-LDFLAGS		:= $(ARCH) -all_load -static-libgcc -prebind
+LDFLAGS		:= $(ARCH) -all_load -prebind
 
 
 LIBS	= 	-L/opt/local/lib \
