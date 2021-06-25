@@ -200,5 +200,3 @@ Sal Orlando - Beatnik
 Peter Drescher - Halestorm  
 
 ---
-
-<img src="https://png.icons8.com/metro/1600/github.png" width="75"></img> <img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/License_icon-bsd.svg" width="75"></img>
