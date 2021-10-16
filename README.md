@@ -1,7 +1,6 @@
 # What is miniBAE?
 
- The platform neutral
- Beatnik Audio Engine, mini edition (miniBAE) is an exceptionally
+ The platform neutral Beatnik Audio Engine, mini edition (miniBAE) is an exceptionally
  mature, well rounded, and reliable computer music and sound system
  specially customized for small footprint and embedded applications.
 
@@ -159,13 +158,13 @@ Jarrell Irvin - Danger
 Ian MacDonald - Sapien Technologies  
   
 #### Business Development  
+Steve Hales - Halestorm/Igor Labs/Beatnik/Danger
 Don Millers - Beatnik  
 Gavin Bourne - Beatnik  
 Thomas Dolby - Headspace/Beatnik  
 Mary Coller Albert - Headspace/Beatnik  
 John Eckstein - Beatnik  
 Dane Bigham - Presage Software  
-Steve Hales - Halestorm/Igor Labs/Beatnik/Danger  
 Jim Nitchals - Halestorm/Igor Labs/Beatnik  
 Brian Hales - Halestorm  
 Brett Durrett - Halestorm  
