@@ -158,7 +158,7 @@ Jarrell Irvin - Danger
 Ian MacDonald - Sapien Technologies  
   
 #### Business Development  
-Steve Hales - Halestorm/Igor Labs/Beatnik/Danger
+Steve Hales - Halestorm/Igor Labs/Beatnik/Danger  
 Don Millers - Beatnik  
 Gavin Bourne - Beatnik  
 Thomas Dolby - Headspace/Beatnik  
