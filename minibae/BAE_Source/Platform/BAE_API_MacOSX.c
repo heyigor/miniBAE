@@ -459,11 +459,12 @@ long BAE_FileDelete(void *fileName)
 // Return -1 if error, otherwise file handle
 long BAE_FileOpenForRead(void *fileName)
 {
+    long file = -1;
     if (fileName)
     {
-        return(open((char *)fileName, O_RDONLY));
+        file = open((char *)fileName, O_RDONLY);
     }
-    return(-1);
+    return file;
 }
 
 long BAE_FileOpenForWrite(void *fileName)
