@@ -1017,7 +1017,7 @@ GM_Song * GM_LoadSong(struct GM_Mixer *pMixer,
                       XShortResourceID songID,
                       void *theExternalSong,
                       void *theExternalMidiData,
-                      long midiSize,
+                      XDWORD midiSize,
                       XShortResourceID *pInstrumentArray,
                       XBOOL loadInstruments,
                       XBOOL ignoreBadInstruments,
@@ -1702,14 +1702,14 @@ OPErr GM_SetSongMicrosecondPosition(GM_Song *pSong, UINT32 songMicrosecondPositi
 //  pInstrumentArray    array, if not NULL will be filled with the instruments that need to be loaded.
 //  pErr                pointer to an OPErr
 #if USE_CREATION_API == TRUE
-INT32 GM_GetUsedPatchlist(void *theExternalSong,
+XDWORD GM_GetUsedPatchlist(void *theExternalSong,
                           void *theExternalMidiData,
-                          long midiSize,
+                           XDWORD midiSize,
                           XShortResourceID *pInstrumentArray,
                           OPErr *pErr)
 {
     GM_Song             *theSong;
-    long                count;
+    XDWORD                count;
     XBankToken          bankToken;
 
     *pErr = NO_ERR;

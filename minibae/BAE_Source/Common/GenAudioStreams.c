@@ -300,9 +300,9 @@ struct GM_AudioStreamFileInfo
 {
     XFILENAME               playbackFile;
     XFILE                   fileOpenRef;
-    unsigned long           fileStartPosition;      // units are in bytes but as a complete decoded sample
-    unsigned long           filePlaybackPosition;   // for example: fileEndPosition for a MP3 file might be 40 MB.
-    unsigned long           fileEndPosition;        // these variables are used for positioning and control.
+    XDWORD           fileStartPosition;      // units are in bytes but as a complete decoded sample
+    XDWORD           filePlaybackPosition;   // for example: fileEndPosition for a MP3 file might be 40 MB.
+    XDWORD           fileEndPosition;        // these variables are used for positioning and control.
     XBOOL                   loopFile;
 
     GM_SoundDoneCallbackPtr doneCallback;
@@ -313,7 +313,7 @@ struct GM_AudioStreamFileInfo
     long                    formatType;             // typed file compression mode
 
     XPTR                    pBlockBuffer;           // used for decompression
-    unsigned long           blockSize;              // used for decompression
+    XDWORD           blockSize;              // used for decompression
 };
 typedef struct GM_AudioStreamFileInfo GM_AudioStreamFileInfo;
 
@@ -341,12 +341,12 @@ typedef enum
 struct GM_PlaybackEvent
 {
     GM_EventStatus status;
-    unsigned long framePosition;    
+    XDWORD framePosition;
 };
 typedef struct GM_PlaybackEvent GM_PlaybackEvent;
 // $$kk: 09.23.98: end changes <-
 
-#define STREAM_OFFSET_UNSET     (unsigned long)0xFFFFFFFFL
+#define STREAM_OFFSET_UNSET     (XDWORD)0xFFFFFFFFL
 
 // this structure, once allocated, becomes a STREAM_REFERENCE
 struct GM_AudioStream
@@ -357,37 +357,37 @@ struct GM_AudioStream
                                                 // will be DEAD_VOICE if not active
 
     OPErr                   startupStatus;      // error return before startup
-    short int               startupBufferFullCount;
+    XWORD                  startupBufferFullCount;
 
     GM_StreamObjectProc     streamCallback;
     GM_StreamData           streamData;
     void                    *pStreamBuffer;
-    unsigned long           streamBufferLength;
+    XDWORD           streamBufferLength;
 
-    unsigned long           streamPreRollBufferSize;    // size in frames of how many sample frames
+    XDWORD           streamPreRollBufferSize;    // size in frames of how many sample frames
                                                         // are prerolled prior to playback. This is
                                                         // set after stream is created. Its used as
                                                         // an offset to streamPlaybackPosition
-    unsigned long           streamOrgLength1;
-    unsigned long           streamOrgLength2;
+    XDWORD           streamOrgLength1;
+    XDWORD           streamOrgLength2;
 
     void                    *pStreamData1;
     void                    *pStreamData2;
-    unsigned long           streamLength1;
-    unsigned long           streamLength2;
+    XDWORD           streamLength1;
+    XDWORD           streamLength2;
     XBYTE                   streamMode;                 // Stream modes
     XBYTE                   lastStreamBufferPlayed;
 
-    unsigned long           streamPlaybackResetAtPosition;  //  in samples
-    unsigned long           streamPlaybackResetToThisPosition;  // in samples
+    XDWORD           streamPlaybackResetAtPosition;  //  in samples
+    XDWORD           streamPlaybackResetToThisPosition;  // in samples
 
-    unsigned long           streamPlaybackPosition;     // in samples; samples in this stream processed by engine
-    unsigned long           streamPlaybackOffset;       // in samples; total samples processed by engine when this stream starts
-    unsigned long           samplesWritten;             // update in GM_AudioStreamService. total number of samples
-    unsigned long           samplesPlayed;              // update in GM_AudioStreamUpdateSamplesPlayed. total number of samples played
+    XDWORD           streamPlaybackPosition;     // in samples; samples in this stream processed by engine
+    XDWORD           streamPlaybackOffset;       // in samples; total samples processed by engine when this stream starts
+    XDWORD           samplesWritten;             // update in GM_AudioStreamService. total number of samples
+    XDWORD           samplesPlayed;              // update in GM_AudioStreamUpdateSamplesPlayed. total number of samples played
 
 // $$kk: 08.12.98 merge: added this field   
-    unsigned long           residualSamples;            // if we're underflowing, then get more data and reset streamPlaybackOffset
+    XDWORD           residualSamples;            // if we're underflowing, then get more data and reset streamPlaybackOffset
                                                         // before playing all samples, need to record that we can still play these
                                                         // samples before reaching the new streamPlaybackOffset.
 
@@ -545,7 +545,7 @@ static STREAM_REFERENCE PV_GetEmptyAudioStream(void)
 }
 
 
-static unsigned long PV_GetSampleSizeInBytes(GM_StreamData * pAS)
+static XDWORD PV_GetSampleSizeInBytes(GM_StreamData * pAS)
 {
     return pAS->channelSize * (pAS->dataBitSize / 8);
 }
@@ -553,8 +553,8 @@ static unsigned long PV_GetSampleSizeInBytes(GM_StreamData * pAS)
 
 static void PV_FillBufferEndWithSilence(char *pDest, GM_StreamData * pAS)
 {
-    unsigned long   bufferSize, blockSize;
-    unsigned long   count;
+    XDWORD   bufferSize, blockSize;
+    XDWORD   count;
     short int       *pWData;
 
     if (pDest)
@@ -584,7 +584,7 @@ static void PV_FillBufferEndWithSilence(char *pDest, GM_StreamData * pAS)
 
 static void PV_CopyLastSamplesToFirst(char *pSource, char *pDest, GM_StreamData * pAS)
 {
-    unsigned long   bufferSize, blockSize;
+    XDWORD   bufferSize, blockSize;
 
     if (pAS->dataLength && pSource && pDest)
     {
@@ -1013,7 +1013,7 @@ OPErr GM_AudioStreamError(STREAM_REFERENCE reference)
 static OPErr PV_FileStreamCallback(void *context, GM_StreamMessage message, GM_StreamData *pAS)
 {
     OPErr                   error;
-    unsigned long           bufferSize, fileSize, outputBufferSize;
+    XDWORD           bufferSize, fileSize, outputBufferSize;
     GM_AudioStreamFileInfo  *pASInfo;
     GM_AudioStream          *pStream;
     short int               blockAlign;
@@ -1131,7 +1131,7 @@ static OPErr PV_FileStreamCallback(void *context, GM_StreamMessage message, GM_S
 
         case STREAM_SET_POSITION:
             {
-                unsigned long   samplePosition;
+                XDWORD   samplePosition;
 
                 pStream = (GM_AudioStream *)pAS->streamReference;
                 pASInfo = (GM_AudioStreamFileInfo *)pAS->userReference;
@@ -1222,7 +1222,7 @@ static OPErr PV_FileStreamCallback(void *context, GM_StreamMessage message, GM_S
                     error = NO_ERR;
                     if (pASInfo->loopFile)
                     {
-                        unsigned long   savePos;
+                        XDWORD   savePos;
 
                         pStream->streamPlaybackResetAtPosition = (pASInfo->filePlaybackPosition -
                                                                     pASInfo->fileStartPosition) / blockAlign;
@@ -1354,14 +1354,14 @@ XBOOL GM_AudioStreamGetLoop(STREAM_REFERENCE reference)
 // setup streaming a file and place it into pause mode. Don't start
 STREAM_REFERENCE GM_AudioStreamFileSetup(void *threadContext,
                                     XFILENAME *file, AudioFileType fileType,
-                                    unsigned long bufferSize, GM_Waveform *pFileInfo,
+                                         XDWORD bufferSize, GM_Waveform *pFileInfo,
                                     XBOOL loopFile)
 {
     STREAM_REFERENCE        reference;
     GM_Waveform             *pWaveform;
     GM_AudioStreamFileInfo  *pStream;
     long                    format;
-    unsigned long           blockSize;
+    XDWORD           blockSize;
     OPErr                   err;
     void                    *blockPtr;
 
@@ -1426,7 +1426,7 @@ STREAM_REFERENCE GM_AudioStreamFileSetup(void *threadContext,
 //  long            This is an audio reference number. Will be non-zero for valid stream
 
 STREAM_REFERENCE GM_AudioStreamSetup(void *threadContext, long userReference, GM_StreamObjectProc pProc,                        
-                            unsigned long bufferSize, 
+                                     XDWORD bufferSize,
                             XFIXED sampleRate,  // Fixed 16.16 sample rate
                             char dataBitSize,       // 8 or 16 bit data
                             char channelSize)       // 1 or 2 channels of date
@@ -1435,7 +1435,7 @@ STREAM_REFERENCE GM_AudioStreamSetup(void *threadContext, long userReference, GM
     GM_AudioStream      *pStream;
     GM_StreamData       ssData;
     OPErr               theErr;
-    unsigned long       byteLength;
+    XDWORD       byteLength;
 
     reference = DEAD_STREAM;
     theErr = NO_ERR;
@@ -1939,11 +1939,11 @@ OPErr GM_AudioStreamStop(void *threadContext, STREAM_REFERENCE reference)
 
 // get the position of samples played in a stream. This will be as close as
 // posible to realtime. Probably off by engine latency.
-unsigned long GM_AudioStreamGetPlaybackSamplePosition(STREAM_REFERENCE reference)
+XDWORD GM_AudioStreamGetPlaybackSamplePosition(STREAM_REFERENCE reference)
 {
 #if 0
     GM_AudioStream          *pStream;
-    unsigned long           samplePosition;
+    XDWORD           samplePosition;
 
     samplePosition = 0;
     pStream = PV_AudioStreamGetFromReference(reference);
@@ -1968,7 +1968,7 @@ unsigned long GM_AudioStreamGetPlaybackSamplePosition(STREAM_REFERENCE reference
     return samplePosition;
 #else
     GM_AudioStream          *pStream;
-    unsigned long           samplePosition;
+    XDWORD           samplePosition;
 
     samplePosition = 0;
     pStream = PV_AudioStreamGetFromReference(reference);
@@ -1990,11 +1990,11 @@ unsigned long GM_AudioStreamGetPlaybackSamplePosition(STREAM_REFERENCE reference
 // Get the file position of a audio stream, in samples. This
 // value is the current file track position. This does not equal what has
 // been played. Typically it will be ahead of real time.
-unsigned long GM_AudioStreamGetFileSamplePosition(STREAM_REFERENCE reference)
+XDWORD GM_AudioStreamGetFileSamplePosition(STREAM_REFERENCE reference)
 {
     GM_AudioStreamFileInfo  *pInfo;
     GM_AudioStream          *pStream;
-    unsigned long           samplePosition;
+    XDWORD           samplePosition;
     short int               blockAlign;
 
     samplePosition = 0;
@@ -2019,7 +2019,7 @@ unsigned long GM_AudioStreamGetFileSamplePosition(STREAM_REFERENCE reference)
 }
 
 // Set the file position of a audio stream, in samples
-OPErr GM_AudioStreamSetFileSamplePosition(STREAM_REFERENCE reference, unsigned long framePos)
+OPErr GM_AudioStreamSetFileSamplePosition(STREAM_REFERENCE reference, XDWORD framePos)
 {
     GM_AudioStream          *pStream;
     GM_AudioStreamFileInfo  *pFileInfo;
@@ -2051,8 +2051,8 @@ OPErr GM_AudioStreamSetFileSamplePosition(STREAM_REFERENCE reference, unsigned l
     return err;
 }
 
-OPErr GM_AudioStreamGetData(void *threadContext, STREAM_REFERENCE reference, unsigned long startFrame, unsigned long stopFrame,
-                                    XPTR pBuffer, unsigned long bufferLength)
+OPErr GM_AudioStreamGetData(void *threadContext, STREAM_REFERENCE reference, XDWORD startFrame, XDWORD stopFrame,
+                                    XPTR pBuffer, XDWORD bufferLength)
 {
     GM_AudioStream  *pStream;
     OPErr           theErr;
@@ -2109,10 +2109,10 @@ short int GM_AudioStreamGetStereoPosition(STREAM_REFERENCE reference)
 // Get the playback offset in samples for the stream.
 // This is the offset between the number of samples processed
 // by the mixer and the number of samples processed from this stream.
-unsigned long GM_AudioStreamGetSampleOffset(STREAM_REFERENCE reference)
+XDWORD GM_AudioStreamGetSampleOffset(STREAM_REFERENCE reference)
 {
     GM_AudioStream  *pStream;
-    unsigned long offset = 0;
+    XDWORD offset = 0;
 
 
     pStream = PV_AudioStreamGetFromReference(reference);
@@ -2125,10 +2125,10 @@ unsigned long GM_AudioStreamGetSampleOffset(STREAM_REFERENCE reference)
 
 // Get the engine's count of samples from this stream actually
 // played through the device.
-unsigned long GM_AudioStreamGetSamplesPlayed(STREAM_REFERENCE reference)
+XDWORD GM_AudioStreamGetSamplesPlayed(STREAM_REFERENCE reference)
 {
     GM_AudioStream  *pStream;
-    unsigned long samplesPlayed = 0;
+    XDWORD samplesPlayed = 0;
 
 
     pStream = PV_AudioStreamGetFromReference(reference);
@@ -2145,7 +2145,7 @@ unsigned long GM_AudioStreamGetSamplesPlayed(STREAM_REFERENCE reference)
 void GM_AudioStreamDrain(void *threadContext, STREAM_REFERENCE reference)
 {
     GM_AudioStream  *pStream;
-    unsigned long   samplesWritten;
+    XDWORD   samplesWritten;
 
     // get the samples written.
     // we have to drain until samples played reaches this value.
@@ -2948,17 +2948,17 @@ void GM_AudioStreamService(void *threadContext)
 // update number of samples played for each stream
 // delta is number of samples engine advanced, in its format
 // $$kk: 08.12.98 merge: changed this method to allow streams to exist in the engine until all samples played
-void GM_AudioStreamUpdateSamplesPlayed(unsigned long delta) 
+void GM_AudioStreamUpdateSamplesPlayed(XDWORD delta)
 {
     GM_AudioStream      *pStream, *pNext;
-    unsigned long       outputSampleRate;
+    XDWORD       outputSampleRate;
 
     //$$kk: 05.08.98: adding this variable and removing the next one
-    unsigned long       streamSampleRate;
+    XDWORD       streamSampleRate;
     //XFIXED                scaling;
 
-    unsigned long       streamDelta;    // delta in stream-format samples
-    unsigned long       samplesCommitted = 0;
+    XDWORD       streamDelta;    // delta in stream-format samples
+    XDWORD       samplesCommitted = 0;
 
     pStream = theStreams;
 
@@ -2993,7 +2993,7 @@ void GM_AudioStreamUpdateSamplesPlayed(unsigned long delta)
             (MusicGlobals->samplesPlayed > pStream->streamPlaybackOffset)) 
         {
             // we need to handle the case where the stream may just be starting up again
-            if ((unsigned long)(MusicGlobals->samplesPlayed -
+            if ((XDWORD)(MusicGlobals->samplesPlayed -
                                 pStream->streamPlaybackOffset) < streamDelta) 
             {
                 streamDelta = MusicGlobals->samplesPlayed - pStream->streamPlaybackOffset;

@@ -239,9 +239,9 @@ static XBOOL PV_ValidateRate(Rate theRate)
 
 
 // convert GenSynth Rate to actual sample rate used
-unsigned long GM_ConvertFromOutputRateToRate(Rate rate)
+XDWORD GM_ConvertFromOutputRateToRate(Rate rate)
 {
-    unsigned long sampleRate;
+    XDWORD sampleRate;
 
     sampleRate = 0;
     if (PV_ValidateRate(rate))
@@ -249,7 +249,7 @@ unsigned long GM_ConvertFromOutputRateToRate(Rate rate)
         switch (rate)
         {
             default:
-                sampleRate = (unsigned long)rate;
+                sampleRate = (XDWORD)rate;
                 break;
             case Q_RATE_22K_TERP_44K:
                 sampleRate = 44100;
@@ -460,8 +460,8 @@ unsigned long BAE_GetSliceTimeInMicroseconds(void)
 // This assumes that the pMixer and theRate are valid, no exceptions.
 static void PV_SetSampleSliceSize(GM_Mixer *pMixer, Rate theRate)
 {
-    unsigned long maxChunkSize;
-    unsigned long rate;
+    XDWORD maxChunkSize;
+    XDWORD rate;
 
     pMixer->maxChunkSize = MAX_CHUNK_SIZE;
     pMixer->One_Slice = MAX_CHUNK_SIZE;
@@ -1406,9 +1406,9 @@ UINT32 GM_GetDeviceTimeStamp(void)
 // given the sample frame size from the mixer variables
 // $$kk: 08.12.98 merge: changed this function
 // $$kk: no, we're getting the currentPos in SAMPLES, not bytes, from BAE_GetDeviceSamplesPlayedPosition().
-void GM_UpdateSamplesPlayed(unsigned long currentPos)
+void GM_UpdateSamplesPlayed(XDWORD currentPos)
 {
-    unsigned long delta;
+    XDWORD delta;
 
     if (currentPos >= MusicGlobals->lastSamplePosition)
     {
@@ -1432,7 +1432,7 @@ void GM_UpdateSamplesPlayed(unsigned long currentPos)
 // number of devices. ie different versions of the BAE connection. DirectSound and waveOut
 // return number of devices. ie 1 is one device, 2 is two devices.
 // NOTE: This function needs to function before any other calls may have happened.
-long GM_MaxDevices(void)
+XDWORD GM_MaxDevices(void)
 {
     return BAE_MaxDevices();
 }
@@ -1441,14 +1441,14 @@ long GM_MaxDevices(void)
 // NOTE:    This function needs to function before any other calls may have happened.
 //          Also you will need to call BAE_ReleaseAudioCard then BAE_AquireAudioCard
 //          in order for the change to take place.
-void GM_SetDeviceID(long deviceID, void *deviceParameter)
+void GM_SetDeviceID(XDWORD deviceID, void *deviceParameter)
 {
     BAE_SetDeviceID(deviceID, deviceParameter);
 }
 
 // return current device ID
 // NOTE: This function needs to function before any other calls may have happened.
-long GM_GetDeviceID(void *deviceParameter)
+XDWORD GM_GetDeviceID(void *deviceParameter)
 {
     return BAE_GetDeviceID(deviceParameter);
 }
@@ -1462,7 +1462,7 @@ long GM_GetDeviceID(void *deviceParameter)
 //          "WinOS,waveOut,multi threaded"
 //          "WinOS,VxD,low level hardware"
 //          "WinOS,plugin,Director"
-void GM_GetDeviceName(long deviceID, char *cName, unsigned long cNameLength)
+void GM_GetDeviceName(XDWORD deviceID, char *cName, XDWORD cNameLength)
 {
     BAE_GetDeviceName(deviceID, cName, cNameLength);
 }
@@ -1480,7 +1480,7 @@ UINT32 GM_GetSyncTimeStamp(void)
     return ticks;
 }
 
-long GM_GetAudioBufferOutputSize(void)
+XDWORD GM_GetAudioBufferOutputSize(void)
 {
     return BAE_GetAudioByteBufferSize();
 }

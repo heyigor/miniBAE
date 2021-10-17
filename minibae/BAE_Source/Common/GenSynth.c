@@ -475,9 +475,9 @@ static const XFIXED expDecayLookup[] =
 //   1 500 000 = 1.5 seconds
 //     150 000 = 15 microseconds
 // This is the amount of time to sustain to 96 dB or no volume.
-unsigned long GM_GetSustainDecayLevelInTime(long storedValue)
+XSDWORD GM_GetSustainDecayLevelInTime(XSDWORD storedValue)
 {
-    unsigned long time;
+    XSDWORD time;
 
     time = 0;
     if (storedValue < -50)
@@ -496,7 +496,7 @@ unsigned long GM_GetSustainDecayLevelInTime(long storedValue)
 // given a timeInMicroseconds range check between 50000 microseconds and 16 seconds, and return the storable
 // value for ADSRLevel.
 // This is the amount of time to sustain to 96 dB or no volume.
-long GM_SetSustainDecayLevelInTime(unsigned long timeInMicroseconds)
+XSDWORD GM_SetSustainDecayLevelInTime(XDWORD timeInMicroseconds)
 {
     timeInMicroseconds /= 8;
     if (timeInMicroseconds > ((sizeof(expDecayLookup) / sizeof(XFIXED)) * 50000L))
@@ -2269,9 +2269,9 @@ void BAE_BuildMixerSlice(void *threadContext, void *pAudioBuffer, long bufferByt
 
 #if BAE_COMPLETE
 // Get time in microseconds between calls to BAE_BuildMixerSlice
-unsigned long GM_GetMixerUsedTime(void)
+XDWORD GM_GetMixerUsedTime(void)
 {
-    unsigned long   time;
+    XDWORD   time;
 
     time = 0;
     if (MusicGlobals)
@@ -2284,9 +2284,9 @@ unsigned long GM_GetMixerUsedTime(void)
 
 #if BAE_COMPLETE
 // Get CPU load in percent. This function is realtime and assumes the mixer has been allocated
-unsigned long GM_GetMixerUsedTimeInPercent(void)
+XDWORD GM_GetMixerUsedTimeInPercent(void)
 {
-    unsigned long load;
+    XDWORD load;
 
     load = 0;
     if (MusicGlobals)

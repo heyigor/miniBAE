@@ -69,16 +69,18 @@
 #ifndef G_SEQ_TOOLS
 #define G_SEQ_TOOLS
 
+#include "X_API.h"
+
 #ifdef __cplusplus
     extern "C" {
 #endif
 
-XWORD       XGetShortWordAligned(XWORD *pData, long byteOffset);
-XDWORD      XGetLongWordAligned(XWORD *pData, long byteOffset);
-XWORD       XGetCharWordAligned(XWORD *pData, long byteOffset);
+XWORD XGetShortWordAligned(XWORD *pData, XSDWORD byteOffset);
+XDWORD XGetLongWordAligned(XWORD *pData, XSDWORD byteOffset);
+XWORD XGetCharWordAligned(XWORD *pData, XSDWORD byteOffset);
 
-short int   XLStrnCmpWordAligned(const char* s1, XWORD *s2, long byteOffset, long n);
-long        XStrnToLongWordAligned(XWORD* pData, long byteOffset, long length);
+XWORD XLStrnCmpWordAligned(const char* s1, XWORD *s2, XSDWORD byteOffset, XDWORD n);
+XDWORD XStrnToLongWordAligned(XWORD* pData, XSDWORD byteOffset, XDWORD length);
 
 #ifdef __cplusplus
     }

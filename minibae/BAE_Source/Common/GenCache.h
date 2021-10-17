@@ -68,10 +68,7 @@
 #ifndef G_CACHE
 #define G_CACHE
 
-#ifndef __X_API__
-    #include "X_API.h"
-#endif
-
+#include "X_API.h"
 #include "GenPriv.h"
 
 #ifdef __cplusplus

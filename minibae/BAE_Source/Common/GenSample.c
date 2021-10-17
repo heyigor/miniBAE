@@ -293,7 +293,7 @@ static void PV_ServeEffectsFades(void)
 static void PV_ServeEffectCallbacks(void *threadContext)
 {
     long                    count, minValue, maxValue;
-    unsigned long           offsetStart, offsetEnd;
+    XDWORD           offsetStart, offsetEnd;
     GM_Voice                *pVoice;
     GM_SampleCallbackEntry  *pCallbackEntry;
     GM_Mixer                *pMixer;
@@ -450,6 +450,7 @@ XBOOL GM_IsSoundReferenceValid(VOICE_REFERENCE reference)
     goodVoice = FALSE;
     if (MusicGlobals)
     {
+        //FIX: not 64 bit
         if ( ((long)reference >= 0) && ((long)reference < (MusicGlobals->MaxNotes+MusicGlobals->MaxEffects)) )
         {
             goodVoice = TRUE;
@@ -488,22 +489,22 @@ XBOOL GM_IsSoundDone(VOICE_REFERENCE reference)
 // scan through fast, and get the largest peak
 static void PV_CalculateLargestPeak(GM_Voice *pVoice)
 {
-    short           min = 0;
-    short           max = 0;
-    short           sample;
-    unsigned long   noiseMin, noiseMax;
-    char            *pStartB;
-    short           *pStartW;
-    char            *pEndB;
-    short           *pEndW;
+    XSWORD           min = 0;
+    XSWORD           max = 0;
+    XSWORD           sample;
+    XDWORD   noiseMin, noiseMax;
+    XBYTE            *pStartB;
+    XSWORD           *pStartW;
+    XBYTE           *pEndB;
+    XSWORD           *pEndW;
     int             step;
 
     if (pVoice)
     {
-        pStartW = (short *)pVoice->NotePtr;
-        pStartB = (char *)pVoice->NotePtr;
-        pEndW = (short *)pVoice->NotePtrEnd;
-        pEndB = (char *)pVoice->NotePtrEnd;
+        pStartW = (XSWORD *)pVoice->NotePtr;
+        pStartB = (XBYTE *)pVoice->NotePtr;
+        pEndW = (XSWORD *)pVoice->NotePtrEnd;
+        pEndB = (XBYTE *)pVoice->NotePtrEnd;
         pVoice->largestPeak = 0;
 
         if (pStartW < pEndW)
@@ -544,8 +545,8 @@ static void PV_CalculateLargestPeak(GM_Voice *pVoice)
                     pStartW += step;
                 }
             }
-            noiseMin = ((long)min + 32768L);
-            noiseMax = ((long)32768L - max);
+            noiseMin = ((XSDWORD)min + 32768L);
+            noiseMax = ((XSDWORD)32768L - max);
             if (noiseMin < noiseMax)
             {
                 pVoice->largestPeak = noiseMin;
@@ -913,10 +914,10 @@ void GM_EndAllSamples(void)
 
 #if X_PLATFORM != X_WEBTV
 
-unsigned long GM_GetSampleStartTimeStamp(VOICE_REFERENCE reference)
+XDWORD GM_GetSampleStartTimeStamp(VOICE_REFERENCE reference)
 {
     GM_Voice        *pVoice;
-    unsigned long   time;
+    XDWORD   time;
 
     time = 0;
     pVoice = PV_GetVoiceFromSoundReference(reference);
@@ -928,9 +929,9 @@ unsigned long GM_GetSampleStartTimeStamp(VOICE_REFERENCE reference)
 }
 
 // given a valid voice, return the current playback position
-unsigned long GM_GetSamplePlaybackPosition(VOICE_REFERENCE reference)
+XDWORD GM_GetSamplePlaybackPosition(VOICE_REFERENCE reference)
 {
-    unsigned long   position;
+    XDWORD   position;
     GM_Voice        *pVoice;
 
     position = 0L;
@@ -944,7 +945,7 @@ unsigned long GM_GetSamplePlaybackPosition(VOICE_REFERENCE reference)
 }
 
 // given a valid voice, set the position of the current playback
-OPErr GM_SetSamplePlaybackPosition(VOICE_REFERENCE reference, unsigned long framePos)
+OPErr GM_SetSamplePlaybackPosition(VOICE_REFERENCE reference, XDWORD framePos)
 {
     GM_Voice        *pVoice;
     OPErr           err;
@@ -963,7 +964,7 @@ OPErr GM_SetSamplePlaybackPosition(VOICE_REFERENCE reference, unsigned long fram
     return err;
 }
 
-void * GM_GetSamplePlaybackPointer(VOICE_REFERENCE reference, unsigned long *outFrameLength)
+void * GM_GetSamplePlaybackPointer(VOICE_REFERENCE reference, XDWORD *outFrameLength)
 {
     void            *pointer;
     GM_Voice        *pVoice;
@@ -1262,7 +1263,7 @@ void GM_ChangeSampleVolume(VOICE_REFERENCE reference, INT16 sampleVolume)
 }
 
 #if X_PLATFORM != X_WEBTV
-void GM_SetSampleLoopPoints(VOICE_REFERENCE reference, unsigned long start, unsigned long end)
+void GM_SetSampleLoopPoints(VOICE_REFERENCE reference, XDWORD start, XDWORD end)
 {
     register GM_Voice   *pVoice;
 
@@ -1284,7 +1285,7 @@ void GM_SetSampleLoopPoints(VOICE_REFERENCE reference, unsigned long start, unsi
 #endif
 
 
-OPErr GM_SetWaveformLoopPoints(GM_Waveform *pWave, unsigned long start, unsigned long end)
+OPErr GM_SetWaveformLoopPoints(GM_Waveform *pWave, XDWORD start, XDWORD end)
 {
     OPErr theErr;
 
@@ -1331,7 +1332,7 @@ OPErr GM_SetWaveformLoopPoints(GM_Waveform *pWave, unsigned long start, unsigned
 }
 
 
-OPErr GM_GetWaveformLoopPoints(GM_Waveform *pWave, unsigned long *outStart, unsigned long *outEnd)
+OPErr GM_GetWaveformLoopPoints(GM_Waveform *pWave, XDWORD *outStart, XDWORD *outEnd)
 {
     OPErr theErr;
 

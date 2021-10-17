@@ -6350,7 +6350,7 @@ BAEResult BAESong_LoadRmfFromFile(BAESong song, BAEPathName filePath, short int 
     GM_Song             *pSong;
     OPErr               theErr;
     XLongResourceID     theID;
-    long                size;
+    XDWORD                size;
 
     theErr = NO_ERR;
     if ( (song) && (song->mID == OBJECT_ID) )

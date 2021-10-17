@@ -118,7 +118,7 @@ static void PV_RunMonoFixedReverb(ReverbMode which)
     register INT32      *sourceLR, *sourceReverb;
     register INT32      *reverbBuf;
     register LOOPCOUNT  a;
-    register long       reverbPtr1, reverbPtr2, reverbPtr3, reverbPtr4;
+    register XDWORD       reverbPtr1, reverbPtr2, reverbPtr3, reverbPtr4;
 
     reverbBuf = &MusicGlobals->reverbBuffer[0];
     if (reverbBuf)

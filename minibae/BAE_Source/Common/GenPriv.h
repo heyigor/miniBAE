@@ -461,8 +461,8 @@ typedef struct U3232
 #endif
 #endif
 
-typedef unsigned char           OUTSAMPLE8;
-typedef short int               OUTSAMPLE16;        // 16 bit output sample
+typedef XBYTE                OUTSAMPLE8;
+typedef XSWORD               OUTSAMPLE16;        // 16 bit output sample
 
 enum
 {
@@ -615,14 +615,14 @@ struct GM_SampleCacheEntry
     XSampleID       theID;          // sample ID
     XBankToken      bankToken;      // The unique bank token to supplement theID
     XFIXED          rate;           // sample rate
-    unsigned long   waveSize;       // size in bytes
-    unsigned long   waveFrames;     // number of frames
-    unsigned long   loopStart;      // loop start frame
-    unsigned long   loopEnd;        // loop end frame
+    XDWORD          waveSize;       // size in bytes
+    XDWORD          waveFrames;     // number of frames
+    XDWORD          loopStart;      // loop start frame
+    XDWORD          loopEnd;        // loop end frame
     char            bitSize;        // sample bit size; 8 or 16
     char            channels;       // mono or stereo; 1 or 2
-    short int       baseKey;        // base sample key
-    long            referenceCount; // how many references to this sample block
+    XSWORD          baseKey;        // base sample key
+    XSDWORD         referenceCount; // how many references to this sample block
     void            *pSampleData;   // pointer to sample data. This may be an offset into the pMasterPtr
     void            *pMasterPtr;    // master pointer that contains the snd format information
 };
@@ -765,7 +765,7 @@ struct GM_Mixer
     XDWORD              reverbBufferSize;       // Set the size of memory allocated here.
                                                 // Make sure you set this because it is
                                                 // compared and tested against
-    XSDWORD             reverbPtr;              // delay line index into verb buffer
+    XDWORD                reverbPtr;              // delay line index into verb buffer
     XSDWORD             LPfilterL, LPfilterR;   // used for fixed verb
     XSDWORD             LPfilterLz, LPfilterRz;
 #endif
@@ -823,8 +823,8 @@ struct NewReverbParams
     int                 mReadIndex[kNumberOfCombFilters];
     int                 mWriteIndex[kNumberOfCombFilters];
     
-    long                mUnscaledDelayFrames[kNumberOfCombFilters];
-    long                mDelayFrames[kNumberOfCombFilters];
+    XSDWORD                mUnscaledDelayFrames[kNumberOfCombFilters];
+    XSDWORD                mDelayFrames[kNumberOfCombFilters];
     
     XSDWORD                 mFeedbackList[kNumberOfCombFilters];
     

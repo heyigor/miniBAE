@@ -182,7 +182,8 @@ XBOOL InitNewReverb()
     // in order to reduce our RAM footprint (especially for WebTV).  Therefore, we won't
     // actually allocate our own buffers for the 6 comb filters and the early reflections
     // buffer which happen to perfectly fit into the old buffer ;-)
-#if 0
+    //TODO: fix layed out shared verb memory
+#if 1
     long kMaxBytes = sizeof(INT32) * kCombBufferFrameSize;
     
     // allocate the comb filter delay line memory
@@ -203,7 +204,7 @@ XBOOL InitNewReverb()
         return FALSE;
     }
 #else   // share the old buffer
-
+    //TODO: doesn't work in 64 bit
     Assert_(REVERB_BUFFER_SIZE*2 == (kCombBufferFrameSize*kNumberOfCombFilters + kEarlyReflectionBufferFrameSize) );
     
     if(!MusicGlobals->reverbBuffer
@@ -217,10 +218,10 @@ XBOOL InitNewReverb()
 
     for(i = 0; i < kNumberOfCombFilters; i++)
     {
-        params->mReverbBuffer[i] = MusicGlobals->reverbBuffer + i*kCombBufferFrameSize;
+        params->mReverbBuffer[i] = MusicGlobals->reverbBuffer + (i*kCombBufferFrameSize);
     }
 
-    params->mEarlyReflectionBuffer = MusicGlobals->reverbBuffer + REVERB_BUFFER_SIZE*2 - kEarlyReflectionBufferFrameSize;
+    params->mEarlyReflectionBuffer = MusicGlobals->reverbBuffer + (REVERB_BUFFER_SIZE*2) - kEarlyReflectionBufferFrameSize;
 #endif
 
     // allocate the diffusion delay line memory
@@ -360,9 +361,10 @@ XBOOL CheckReverbType()
             }
             
             // clear out shared buffers, when switching reverb modes...
+            const INT32 kReverbBufferSize = kCombBufferFrameSize * sizeof(INT32);
             for(i = 0; i < kNumberOfCombFilters; i++)
             {
-                XSetMemory(params->mReverbBuffer[i], sizeof(INT32)*kCombBufferFrameSize, 0);
+                XSetMemory(params->mReverbBuffer[i], kReverbBufferSize, 0);
             }
             
             XSetMemory(params->mEarlyReflectionBuffer, sizeof(INT32)*kEarlyReflectionBufferFrameSize, 0);
@@ -463,7 +465,7 @@ void ScaleDelayTimes()
     log10maxG = regenList[ (params->mMaxRegen >> 3 ) & 0xf ];       
     desiredMinFrames = srate * ((log10maxG * T60) >> 7);    /*log10(maxG) * T60 / -3.0 */
     
-    // ok, at this point, desiredMinFrames if FIXED 16.16
+    // ok, at this point, desiredMinFrames is FIXED 16.16
     kMinDelayFrames = 485L * GetSR_44100Ratio();  /*485L << 16*/    /* 11ms */
     if(desiredMinFrames < kMinDelayFrames) desiredMinFrames = kMinDelayFrames;
     
@@ -611,7 +613,7 @@ void GenerateFeedbackValues()
 #endif
 }
 
-static long delay6tapList[6][6] =
+static XSDWORD delay6tapList[6][6] =
 {
     {
         1259,
@@ -670,7 +672,7 @@ static long delay6tapList[6][6] =
 void GenerateDelayTimes()
 {
     int i;
-    long    *delayFrameList;
+    XSDWORD    *delayFrameList;
     NewReverbParams* params = GetNewReverbParams();
     int index = params->mRoomChoice;
     
@@ -679,10 +681,10 @@ void GenerateDelayTimes()
     
     delayFrameList = delay6tapList[index];
 
-
+    UINT32 ratio = GetSR_44100Ratio();
     for(i = 0; i < kNumberOfCombFilters; i++)
     {       
-        params->mUnscaledDelayFrames[i] = (delayFrameList[i] * GetSR_44100Ratio() ) >> 16;
+        params->mUnscaledDelayFrames[i] = (delayFrameList[i] * ratio ) >> 16;
     }
     
     ScaleDelayTimes();

@@ -653,11 +653,7 @@ static GM_Instrument * PV_CreateInstrumentFromResource(GM_Instrument *theMaster,
     //  Next, increment refcount and grab it's pointer.
     if (GMCache_IsIDInCache(pMixer, theID, bankToken) != TRUE)
     {
-        sndInfo = GMCache_BuildSampleCacheEntry(pMixer,
-                                                theID,
-                                                bankToken,
-                                                NULL,
-                                                pErr);
+        sndInfo = GMCache_BuildSampleCacheEntry(pMixer, theID, bankToken, NULL, pErr);
     }
     else
     {

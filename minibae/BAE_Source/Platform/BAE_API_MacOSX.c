@@ -201,6 +201,7 @@ void BAE_Deallocate(void *memoryBlock)
 // return memory used
 unsigned long BAE_GetSizeOfMemoryUsed(void)
 {
+    printf("No memory buoy, can't determine memory size used\n");
 //  return g_memory_buoy;
    return(0);
 }
@@ -208,6 +209,7 @@ unsigned long BAE_GetSizeOfMemoryUsed(void)
 // return max memory used
 unsigned long BAE_GetMaxSizeOfMemoryUsed(void)
 {
+    printf("No memory buoy, can't determine memory size used\n");
 //  return g_memory_buoy_max;
    return(0);
 }
