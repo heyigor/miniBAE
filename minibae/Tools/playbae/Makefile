@@ -67,13 +67,11 @@ SRC		+=	playbae.c
 OBJ_DIR := obj/
 OBJ := $(addprefix $(OBJ_DIR),$(addsuffix .o,$(basename ${SRC})))
 
-#ARCH	:= -arch x86_64
-ARCH	:= -arch i386
 CC		:= gcc
 CXX		:= g++
 LD		:= g++
 
-CFLAGS  	:= $(ARCH) -g -O3 $(INC_PATH) -D_THREAD_SAFE
+CFLAGS  	:= -g -O3 $(INC_PATH) -D_THREAD_SAFE
 CFLAGS		+= -DX_PLATFORM=X_MACINTOSH
 #CFLAGS		+= -DUSE_MPEG_DECODER=1
 CFLAGS		+= -D_DEBUG=1
@@ -82,8 +80,9 @@ CXXFLAGS 	:= $(CFLAGS)
 LDFLAGS		:= $(ARCH) -all_load -prebind
 
 
-LIBS	= 	-L/opt/local/lib \
+LIBS	= 	-lc \
 			-lpthread \
+			-Wl,-framework,Foundation \
 			-Wl,-framework,CoreFoundation \
 			-Wl,-framework,CoreAudio \
 			-Wl,-framework,AudioToolbox
