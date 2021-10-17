@@ -3183,6 +3183,32 @@ BAEResult BAEMixer_ServiceAudioOutputToFile(BAEMixer theMixer)
 #endif
 }
 
+// Debug
+BAEResult BAEMixer_DisplayVoiceData(BAEMixer mixer)
+{
+    OPErr err;
+    
+    err = NO_ERR;
+    if (mixer)
+    {
+        if (mixer->pMixer)
+        {
+            GM_DisplayVoiceData(mixer->pMixer);
+        }
+        else
+        {
+            err = NOT_SETUP;
+        }
+    }
+    else
+    {
+        err = NULL_OBJECT;
+    }
+    return BAE_TranslateOPErr(err);
+}
+
+
+
 
 // ------------------------------------------------------------------
 // BAESound Functions
@@ -5677,13 +5703,13 @@ void BAESong_DisplayInfo(BAESong song)
                 printf("UNKNOWN\n");
             }
         }
-        printf("    sequenceDataSize %ld\n", pSong->sequenceDataSize);
+        printf("    sequenceDataSize %lu\n", (unsigned long)pSong->sequenceDataSize);
 
         printf("    songID %d\n", pSong->songID);
         printf("    maxSongVoices %d\n", pSong->maxSongVoices);
         printf("    mixLevel %d\n", pSong->mixLevel);
         printf("    maxEffectVoices %d\n", pSong->maxEffectVoices);
-        printf("    MasterTempo %ld\n", pSong->MasterTempo);
+        printf("    MasterTempo %g\n", XFIXED_TO_FLOAT(pSong->MasterTempo));
         printf("    songTempo %d\n", pSong->songTempo);
         printf("    songPitchShift %d\n", pSong->songPitchShift);
         printf("    songPaused %s\n", pSong->songPaused ? "TRUE" : "FALSE");

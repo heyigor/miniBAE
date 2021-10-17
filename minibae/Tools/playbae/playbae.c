@@ -76,11 +76,12 @@ static void PV_Idle(BAEMixer theMixer, unsigned long time)
    }
    else
    {
-      max = time / 12000;
-      for (count = 0; count < max; count++)
-      {
-         BAE_WaitMicroseconds(12000);
-      }
+       max = time / 12000;
+       for (count = 0; count < max; count++)
+       {
+           BAE_WaitMicroseconds(12000);
+//           BAEMixer_DisplayVoiceData(theMixer);
+       }
    }
 }
 

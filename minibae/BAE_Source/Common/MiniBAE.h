@@ -1103,7 +1103,8 @@ void                BAEMixer_StopOutputToFile(void);
 // once started saving to a file, call this to continue saving to file
 BAEResult           BAEMixer_ServiceAudioOutputToFile(BAEMixer mixer);
 
-
+// Debug
+BAEResult               BAEMixer_DisplayVoiceData(BAEMixer mixer);
 
 // -----------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------

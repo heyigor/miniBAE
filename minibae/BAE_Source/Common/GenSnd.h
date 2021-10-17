@@ -1991,6 +1991,8 @@ void GM_SetControllerCallback(GM_Song *theSong, void * reference, GM_ControlerCa
 // Display
 XSWORD GM_GetAudioSampleFrame(XSWORD *pLeft, XSWORD *pRight);
 
+void GM_DisplayVoiceData(struct GM_Mixer *pMixer);
+
 // This will check active voices and look at a sub sample of the audio output to
 // determine if there's any audio still playing
 XBOOL GM_IsAudioActive(void);
