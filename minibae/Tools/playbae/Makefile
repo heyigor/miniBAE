@@ -111,6 +111,8 @@ lib_install:
 CONTENT := ../../Content
 BANKS := ../../banks
 
+TEST_BANK := $(BANKS)/patches/patches.hsb
+
 # requires mp3 codec
 #TEST_RMF    := LT_RMF_MPEG.rmf
 #TEST_RMF	:= little_boss.rmf
@@ -126,19 +128,19 @@ BANKS := ../../banks
 TEST_RMF	:= chop-squad-full.rmf
 
 test1: $(TARGET)
-	./$(TARGET) -p $(BANKS)/patches/patches.hsb -m $(CONTENT)/rmf/kartv.mid -mr 44100
+	./$(TARGET) -p $(TEST_BANK) -m $(CONTENT)/rmf/kartv.mid -mr 44100
 
 test2: $(TARGET)
-	./$(TARGET) -p $(BANKS)/patches/patches.hsb -m $(CONTENT)/midi/synco.mid -mr 44100
+	./$(TARGET) -p $(TEST_BANK) -m $(CONTENT)/midi/synco.mid -mr 44100
 
 test3: $(TARGET)
-	./$(TARGET) -p $(BANKS)/patches/patches.hsb -r $(CONTENT)/rmf/$(TEST_RMF) -mr 44100
+	./$(TARGET) -p $(TEST_BANK) -r $(CONTENT)/rmf/$(TEST_RMF) -mr 44100
 
 test4: $(TARGET)
-	./$(TARGET) -p $(BANKS)/patches/patches.hsb -w $(CONTENT)/wav/sexy_coffee_pot.wav -mr 44100
+	./$(TARGET) -p $(TEST_BANK) -w $(CONTENT)/wav/sexy_coffee_pot.wav -mr 44100
 
 test5: $(TARGET)
-	./$(TARGET) -p $(BANKS)/patches/patches.hsb -sw $(CONTENT)/wav/sexy_coffee_pot.wav -mr 44100
+	./$(TARGET) -p $(TEST_BANK) -sw $(CONTENT)/wav/sexy_coffee_pot.wav -mr 44100
 
 clean:
 	@rm -f $(TARGET)
