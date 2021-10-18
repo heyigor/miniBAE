@@ -182,7 +182,7 @@
 
 
 // NOTE: This samples parameter is not guarenteed to be word aligned.
-void XSwapShorts(short* shortArray, long count)
+void XSwapShorts(XSWORD* shortArray, XDWORD count)
 {
 UBYTE*          byteArray;
 UBYTE           data;
@@ -204,7 +204,7 @@ UBYTE           data;
 #endif
 
 // This is used on 8 bit samples that are sign encoded. We want 0 to 255 not -128 to 127
-void XPhase8BitWaveform(unsigned char * pByte, long size)
+void XPhase8BitWaveform(XBYTE * pByte, XDWORD size)
 {
     while (size--)
     {
@@ -213,12 +213,12 @@ void XPhase8BitWaveform(unsigned char * pByte, long size)
 }
 
 // Given a Mac snd pointer, this will return the encoding type, and a pointer to a SoundHeader structure
-static void * PV_GetSoundHeaderPtr(XPTR pRes, short int *pEncode)
+static void * PV_GetSoundHeaderPtr(XPTR pRes, XSWORD *pEncode)
 {
     XSoundHeader    *pSndBuffer;
-    short int       soundFormat;
-    short int       numSynths, numCmds;
-    long            offset;
+    XWORD       soundFormat;
+    XWORD       numSynths, numCmds;
+    XDWORD            offset;
     char            *pSndFormat;
 
     numSynths = 0;
@@ -268,13 +268,14 @@ static void * PV_GetSoundHeaderPtr(XPTR pRes, short int *pEncode)
 
 // Given a Mac sample, and loop points, this will change the data associated with it
 #if USE_CREATION_API == TRUE
-void XSetSoundLoopPoints(XPTR pRes, long loopStart, long loopEnd)
+void XSetSoundLoopPoints(XPTR pRes, XDWORD loopStart, XDWORD loopEnd)
 {
     register XSoundHeader       *pSndBuffer;
     register XCmpSoundHeader    *pCmpBuffer;
     register XExtSoundHeader    *pExtBuffer;
     register XSoundHeader3      *pType3Buffer;
-    short int                   encode, count;
+    XSWORD                      encode;
+    int                         count;
 
     pSndBuffer = (XSoundHeader *)PV_GetSoundHeaderPtr(pRes, &encode);
     if (pSndBuffer) /* did we get the right format? */
@@ -714,7 +715,7 @@ XERR XGetSampleInfoFromSnd(XPTR pResource, SampleDataInfo *pOutInfo)
                 case XCompressedHeader: // compressed header
                 {
                 XCmpSoundHeader*    headerCmp;
-                short               compressionID;
+                    XSWORD               compressionID;
 
                     headerCmp = (XCmpSoundHeader*)header;
                     pOutInfo->channels = (short)XGetLong(&headerCmp->numChannels);
@@ -813,7 +814,7 @@ XERR XGetSampleInfoFromSnd(XPTR pResource, SampleDataInfo *pOutInfo)
                         break;
             #endif
                     default:
-                        BAE_PRINTF("Unsupported codec %ld\n", pOutInfo->compressionType);
+                        BAE_PRINTF("Unsupported codec %lu\n", (unsigned long)pOutInfo->compressionType);
                         BAE_ASSERT(FALSE);
                         err = -3;
                         break;
@@ -862,6 +863,7 @@ XPTR                encodedData;
 UINT32              startFrame;
 XBYTE*              inIntelOrder;
 XPTR                sampleData;
+XDWORD              samplePtrOffset;
 XBYTE               order = X_WORD_ORDER;
 
     inIntelOrder = &order;
@@ -919,13 +921,19 @@ XBYTE               order = X_WORD_ORDER;
     case XCompressedHeader: // compressed header
     {
     XCmpSoundHeader*    headerCmp;
-    short               compressionID;
+        XSWORD               compressionID;
 
         headerCmp = (XCmpSoundHeader*)header;
-        encodedData = (XPTR)XGetLong(&headerCmp->samplePtr);
-        if (!encodedData)   /* get ptr to sample data */
+        samplePtrOffset = XGetLong(&headerCmp->samplePtrOffset);
+        if (samplePtrOffset == 0L)
         {
+            /* get ptr to sample data */
             encodedData = headerCmp->sampleArea;
+        }
+        else
+        {
+            BAE_ASSERT(FALSE);
+            return NULL;
         }
         info->channels = (short)XGetLong(&headerCmp->numChannels);
         info->bitSize = XGetShort(&headerCmp->sampleSize);
@@ -1029,7 +1037,7 @@ XBYTE               order = X_WORD_ORDER;
             break;
 #endif
         default:
-            BAE_PRINTF("Unsupported codec %ld\n", info->compressionType);
+            BAE_PRINTF("Unsupported codec %lu\n", (unsigned long)info->compressionType);
             BAE_ASSERT(FALSE);
             return NULL;
         }
@@ -1113,9 +1121,10 @@ register XSoundHeader       *pSndBuffer;
 register XCmpSoundHeader    *pCmpBuffer;
 register XExtSoundHeader    *pExtBuffer;
 register XSoundHeader3      *pType3Buffer;
-long                        offset;
+XDWORD                        offset;
 char                        *sampleData;
-short int                   encode;
+XDWORD              samplePtrOffset;
+XWORD                   encode;
 #if X_PLATFORM == X_MACINTOSH
 XPTR                        rightData;
 long                        count;
@@ -1298,10 +1307,16 @@ char                        *pLeft, *pRight;
 
     case XCompressedHeader: // compressed header
         pCmpBuffer = (XCmpSoundHeader *)pSndBuffer;
-        sampleData = (char *)XGetLong(&pCmpBuffer->samplePtr);
-        if (sampleData == NULL) /* get ptr to sample data */
+        samplePtrOffset = XGetLong(&pCmpBuffer->samplePtrOffset);
+        if (samplePtrOffset == 0L)
         {
+            /* get ptr to sample data */
             sampleData = (char *) pCmpBuffer->sampleArea;
+        }
+        else
+        {
+            BAE_ASSERT(FALSE);
+            return NULL;
         }
         info->channels = (short)XGetLong(&pCmpBuffer->numChannels);
         info->bitSize = XGetShort(&pCmpBuffer->sampleSize);
@@ -1476,7 +1491,7 @@ char                        *pLeft, *pRight;
 #if USE_CREATION_API == TRUE
 // Given a sample ID, this will search through sample types and return a 'C' string
 // of the resource name of the currently open resource files
-XBOOL XGetSampleNameFromID(XLongResourceID sampleSoundID, char cName[256])
+XBOOL XGetSampleNameFromID(XLongResourceID sampleSoundID, char *cName)
 {
     static XResourceType    sampleType[] = {ID_CSND, ID_ESND, ID_SND};
     short int               count;
@@ -1506,7 +1521,7 @@ XBOOL XGetSampleNameFromID(XLongResourceID sampleSoundID, char cName[256])
 
 #if USE_CREATION_API == TRUE
 // given 8 bit data, convert this to 16 bit data
-XWORD * XConvert8BitTo16Bit(XBYTE * p8BitPCMData, unsigned long frames, unsigned long channels)
+XWORD * XConvert8BitTo16Bit(XBYTE * p8BitPCMData, XDWORD frames, XDWORD channels)
 {
     XWORD           *newData;
     unsigned long   count, ccount;
@@ -1531,7 +1546,7 @@ XWORD * XConvert8BitTo16Bit(XBYTE * p8BitPCMData, unsigned long frames, unsigned
 #endif
 
 // given 16 bit data, convert this to 8 bit data
-XBYTE * XConvert16BitTo8Bit(XWORD * p16BitPCMData, unsigned long frames, unsigned long channels)
+XBYTE * XConvert16BitTo8Bit(XWORD * p16BitPCMData, XDWORD frames, XDWORD channels)
 {
     XBYTE           *newData = NULL;
     unsigned long   count, ccount;
@@ -1634,7 +1649,7 @@ XSoundFormat1*      header;
 
         snd = (XExtSndHeader1*)*dst;
 
-        XPutLong(&snd->sndBuffer.samplePtr, 0L);
+        XPutLong(&snd->sndBuffer.samplePtrOffset, 0L);
         XPutLong(&snd->sndBuffer.numChannels, src.channels);
         XPutShort(&snd->sndBuffer.sampleSize, src.bitSize);
         XPutLong(&snd->sndBuffer.sampleRate, src.sampledRate);
@@ -1673,7 +1688,7 @@ XSoundFormat1*      header;
 
         snd = (XCmpSndHeader1*)*dst;
 
-        XPutLong(&snd->sndBuffer.samplePtr, 0L);
+        XPutLong(&snd->sndBuffer.samplePtrOffset, 0L);
         XPutLong(&snd->sndBuffer.numChannels, src.channels);
         XPutShort(&snd->sndBuffer.sampleSize, 2);
         if (src.bitSize == 8)
@@ -1747,7 +1762,7 @@ XSoundFormat1*      header;
 
         snd = (XCmpSndHeader1*)*dst;
 
-        XPutLong(&snd->sndBuffer.samplePtr, 0L);
+        XPutLong(&snd->sndBuffer.samplePtrOffset, 0L);
         XPutLong(&snd->sndBuffer.numChannels, src.channels);
         XPutShort(&snd->sndBuffer.sampleSize, 2);
 

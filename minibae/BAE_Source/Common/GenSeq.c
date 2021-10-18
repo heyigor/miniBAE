@@ -879,7 +879,7 @@ void GM_SetSongCallback(GM_Song *theSong, GM_SongCallbackProcPtr theCallback, vo
     }
 }
 
-void GM_SetSongTimeCallback(GM_Song *theSong, GM_SongTimeCallbackProcPtr theCallback, long reference)
+void GM_SetSongTimeCallback(GM_Song *theSong, GM_SongTimeCallbackProcPtr theCallback, XPTR reference)
 {
     if (theSong)
     {
@@ -904,7 +904,7 @@ static void PV_CallSongMetaEventCallback(void *threadContext, GM_Song *pSong, ch
     }
 }
 
-void GM_SetSongMetaEventCallback(GM_Song *theSong, GM_SongMetaCallbackProcPtr theCallback, long reference)
+void GM_SetSongMetaEventCallback(GM_Song *theSong, GM_SongMetaCallbackProcPtr theCallback, XPTR reference)
 {
     if (theSong)
     {
@@ -3084,7 +3084,7 @@ static void PV_ProcessIgorMeta(GM_Song *pSong, unsigned char *pMidiStream)
                                         //  but we only can overide instruments not in use, so
                                         //  we must use the current bank as our token.
                                         //  files, assign it as such...
-                                //      bankToken = CreateBankTokenFromInputs((XTOKEN) pSong->midiData, (XTOKEN) 0);
+                                //      bankToken = CreateBankTokenFromInputs((XTOKEN) pSong->midiData, (XDWORD) 0);
                                         bankToken = CreateBankToken();
 
                                         pMidiStream += 4;
@@ -4199,7 +4199,7 @@ void GM_GetTrackSoloStatus(GM_Song *pSong, char *pStatus)
 
 // If allowPitch is FALSE, then "GM_SetSongPitchOffset" will have no effect on passed 
 // channel (0 to 15)
-void GM_AllowChannelPitchOffset(GM_Song *pSong, unsigned short int channel, XBOOL allowPitch)
+void GM_AllowChannelPitchOffset(GM_Song *pSong, XWORD channel, XBOOL allowPitch)
 {
     if (pSong)
     {
@@ -4215,7 +4215,7 @@ void GM_AllowChannelPitchOffset(GM_Song *pSong, unsigned short int channel, XBOO
 }
 
 // Return if the passed channel will allow pitch offset
-XBOOL GM_DoesChannelAllowPitchOffset(GM_Song *pSong, unsigned short int channel)
+XBOOL GM_DoesChannelAllowPitchOffset(GM_Song *pSong, XWORD channel)
 {
     XBOOL   flag;
 
@@ -4228,7 +4228,7 @@ XBOOL GM_DoesChannelAllowPitchOffset(GM_Song *pSong, unsigned short int channel)
 }
 
 // set note offset in semi tones    (12 is down an octave, -12 is up an octave)
-void GM_SetSongPitchOffset(GM_Song *pSong, long offset)
+void GM_SetSongPitchOffset(GM_Song *pSong, XSWORD offset)
 {
     if (pSong)
     {
@@ -4237,9 +4237,9 @@ void GM_SetSongPitchOffset(GM_Song *pSong, long offset)
 }
 
 // return note offset in semi tones (12 is down an octave, -12 is up an octave)
-long GM_GetSongPitchOffset(GM_Song *pSong)
+XSWORD GM_GetSongPitchOffset(GM_Song *pSong)
 {
-    long    offset;
+    XSDWORD    offset;
 
     offset = 0;
     if (pSong)

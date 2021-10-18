@@ -203,8 +203,8 @@
 */
 typedef struct 
 {
-    short int       instrumentNumber;
-    short int       ResourceINSTID;
+    XSWORD       instrumentNumber;
+    XSWORD       ResourceINSTID;
 } X_PACKBY1 Remap;
     
 enum
@@ -273,25 +273,25 @@ typedef enum
 typedef struct
 {
     XShortResourceID    midiResourceID;
-    char                reserved_0;
-    char                reverbType;
-    unsigned short      songTempo;
-    char                songType;                       //  0 - SMS, 1 - RMF, 2 - MOD
+    XBYTE                reserved_0;
+    XBYTE                reverbType;
+    XWORD      songTempo;
+    XBYTE                songType;                       //  0 - SMS, 1 - RMF, 2 - MOD
 
-    char                songPitchShift;
-    char                maxEffects;
-    char                maxNotes;
-    short int           mixLevel;
-    unsigned char       flags1;                         // see XBF for flags1
-    char                noteDecay;
-    char                defaultPercusionProgram;        // yes, I wanted signed!
-    unsigned char       flags2;                         // see XBF for flags2
-    short int           remapCount;
-    char                remaps;                         // Remap variable
-//  unsigned char       copyright;                      // variable pascal string
-    unsigned char       author;                         // variable pascal string
-    unsigned char       title;                          // variable pascal string
-    unsigned char       licensor_contact;
+    XBYTE                songPitchShift;
+    XBYTE                maxEffects;
+    XBYTE                maxNotes;
+    XSWORD           mixLevel;
+    XBYTE       flags1;                         // see XBF for flags1
+    XBYTE                noteDecay;
+    XBYTE                defaultPercusionProgram;        // yes, I wanted signed!
+    XBYTE       flags2;                         // see XBF for flags2
+    XSWORD           remapCount;
+    XBYTE                remaps;                         // Remap variable
+//  XBYTE       copyright;                      // variable pascal string
+    XBYTE       author;                         // variable pascal string
+    XBYTE       title;                          // variable pascal string
+    XBYTE       licensor_contact;
 } X_PACKBY1 SongResource_SMS;
 
 
@@ -335,38 +335,38 @@ typedef enum
 typedef struct
 {
     XShortResourceID    rmfResourceID;
-    char                reserved_0;
-    char                reverbType;
-    unsigned short      songTempo;
-    char                songType;                       //  0 - SMS, 1 - RMF, 2 - MOD
+    XBYTE                reserved_0;
+    XBYTE                reverbType;
+    XWORD      songTempo;
+    XBYTE                songType;                       //  0 - SMS, 1 - RMF, 2 - MOD
 
-    char                locked;                         // are resource encrypted
-    short int           songPitchShift;
-    short int           maxEffects;
-    short int           maxNotes;
-    short int           mixLevel;
-    short int           songVolume;                     // 127 is 100%, 256 is 200% etc.
-    char                embeddedSong;                   // TRUE if embedded in a bank
-    char                reserved_1;
-    long                unused[7];
+    XBYTE                locked;                         // are resource encrypted
+    XSWORD           songPitchShift;
+    XSWORD           maxEffects;
+    XSWORD           maxNotes;
+    XSWORD           mixLevel;
+    XSWORD           songVolume;                     // 127 is 100%, 256 is 200% etc.
+    XBYTE                embeddedSong;                   // TRUE if embedded in a bank
+    XBYTE                reserved_1;
+    XDWORD                unused[7];
     
-    short int           resourceCount;
-    short int           resourceData;                   // subtract this when calculating empty structure
+    XSWORD           resourceCount;
+    XSWORD           resourceData;                   // subtract this when calculating empty structure
     //
     // from this point on, the data is based upon types and data blocks
-//  char                title[1];                       // variable C string
-//  char                composer[1];                    // variable C string
-//  char                copyright_date[1];              // variable C string
-//  char                copyright_line[1];              // variable C string
-//  char                contact_info[1];                // variable C string
-//  char                use_license[1];                 // variable C string
-//  char                license_term[1];                // variable C string
-//  char                territory[1];                   // variable C string
-//  char                expire_date[1];                 // variable C string
-//  char                foreign_rights[1];              // variable C string
-//  char                compser_notes[1];               // variable C string
-//  char                index_number[1];                // variable C string
-//  short int           velocityCurve[128];
+//  XBYTE                title[1];                       // variable C string
+//  XBYTE                composer[1];                    // variable C string
+//  XBYTE                copyright_date[1];              // variable C string
+//  XBYTE                copyright_line[1];              // variable C string
+//  XBYTE                contact_info[1];                // variable C string
+//  XBYTE                use_license[1];                 // variable C string
+//  XBYTE                license_term[1];                // variable C string
+//  XBYTE                territory[1];                   // variable C string
+//  XBYTE                expire_date[1];                 // variable C string
+//  XBYTE                foreign_rights[1];              // variable C string
+//  XBYTE                compser_notes[1];               // variable C string
+//  XBYTE                index_number[1];                // variable C string
+//  XSWORD           velocityCurve[128];
 } X_PACKBY1 SongResource_RMF;
 
 // bits for SongResource_RMF_Linear flags
@@ -383,52 +383,52 @@ typedef struct
 typedef struct
 {
     XShortResourceID    audioResourceID;
-    char                reserved_0;
-    char                reverbType;
-    unsigned short      songTempo;
-    char                songType;                       //  0 - SMS, 1 - RMF, 2 - RMF LINEAR
+    XBYTE                reserved_0;
+    XBYTE                reverbType;
+    XWORD      songTempo;
+    XBYTE                songType;                       //  0 - SMS, 1 - RMF, 2 - RMF LINEAR
 
-    char                locked;                         // are resource encrypted
-    short int           maxEffects;
-    short int           maxNotes;
-    short int           mixLevel;
-    short int           songVolume;                     // 100 is 100%, 200 is 200% etc.
+    XBYTE                locked;                         // are resource encrypted
+    XSWORD           maxEffects;
+    XSWORD           maxNotes;
+    XSWORD           mixLevel;
+    XSWORD           songVolume;                     // 100 is 100%, 200 is 200% etc.
     XResourceType       audioFormatType;
     XFIXED              sampleRate;
-    unsigned long       lengthInBytes;                  // length in bytes uncompressed
-    unsigned long       lengthInFrames;                 // length in frames uncompressed
-    char                channels;
-    char                bitSize;
-    char                flags;                          // see SongResource_RMF_Linear flags
+    XDWORD       lengthInBytes;                  // length in bytes uncompressed
+    XDWORD       lengthInFrames;                 // length in frames uncompressed
+    XBYTE                channels;
+    XBYTE                bitSize;
+    XBYTE                flags;                          // see SongResource_RMF_Linear flags
     
-    char                unused1;
-    long                unused2[3];
+    XBYTE                unused1;
+    XDWORD                unused2[3];
     
-    short int           resourceCount;
-    short int           resourceData;                   // subtract this when calculating empty structure
+    XSWORD           resourceCount;
+    XSWORD           resourceData;                   // subtract this when calculating empty structure
     //
     // from this point on, the data is based upon types and data blocks
-//  char                title[1];                       // variable C string
-//  char                composer[1];                    // variable C string
-//  char                copyright_date[1];              // variable C string
-//  char                copyright_line[1];              // variable C string
-//  char                contact_info[1];                // variable C string
-//  char                use_license[1];                 // variable C string
-//  char                license_term[1];                // variable C string
-//  char                territory[1];                   // variable C string
-//  char                expire_date[1];                 // variable C string
-//  char                foreign_rights[1];              // variable C string
-//  char                compser_notes[1];               // variable C string
-//  char                index_number[1];                // variable C string
+//  XBYTE                title[1];                       // variable C string
+//  XBYTE                composer[1];                    // variable C string
+//  XBYTE                copyright_date[1];              // variable C string
+//  XBYTE                copyright_line[1];              // variable C string
+//  XBYTE                contact_info[1];                // variable C string
+//  XBYTE                use_license[1];                 // variable C string
+//  XBYTE                license_term[1];                // variable C string
+//  XBYTE                territory[1];                   // variable C string
+//  XBYTE                expire_date[1];                 // variable C string
+//  XBYTE                foreign_rights[1];              // variable C string
+//  XBYTE                compser_notes[1];               // variable C string
+//  XBYTE                index_number[1];                // variable C string
 } X_PACKBY1 SongResource_RMF_Linear;
 
 #define DEFAULT_RESOURCE_VERS_ID    0       // ID used inside of RMF file, or a bank
 // version structure
 typedef struct
 {
-    short int   versionMajor;
-    short int   versionMinor;
-    short int   versionSubMinor;
+    XSWORD   versionMajor;
+    XSWORD   versionMinor;
+    XSWORD   versionSubMinor;
 } X_PACKBY1 XVersion;
 
 typedef void SongResource;
@@ -437,60 +437,60 @@ typedef void SongResource;
 // Use XGetSongResourceInfo, and XNewSongResourceInfo/XDisposeSongResourceInfo
 typedef struct
 {
-    short int           maxMidiNotes;
-    short int           maxEffects;
-    short int           mixLevel;
-    short int           reverbType;
+    XSWORD           maxMidiNotes;
+    XSWORD           maxEffects;
+    XSWORD           mixLevel;
+    XSWORD           reverbType;
     XShortResourceID    objectResourceID;
-    short int           songVolume;
+    XSWORD           songVolume;
     SongType            songType;
-    long                songTempo;
-    short int           songPitchShift;
+    XDWORD                songTempo;
+    XSWORD           songPitchShift;
     XBOOL               songLocked;
     XBOOL               songEmbedded;
 
-    char                *title;                         // 0
-    char                *performed;                     // 1
-    char                *composer;                      // 2
-    char                *copyright;                     // 3
-    char                *publisher_contact_info;        // 4
-    char                *use_license;                   // 5
-    char                *licensed_to_URL;               // 6
-    char                *license_term;                  // 7
-    char                *expire_date;                   // 8
-    char                *compser_notes;                 // 9
-    char                *index_number;                  // 10
-    char                *genre;                         // 11
-    char                *sub_genre;                     // 12
-    char                *tempo_description;             // 13
-    char                *original_source;               // 14
+    XBYTE                *title;                         // 0
+    XBYTE                *performed;                     // 1
+    XBYTE                *composer;                      // 2
+    XBYTE                *copyright;                     // 3
+    XBYTE                *publisher_contact_info;        // 4
+    XBYTE                *use_license;                   // 5
+    XBYTE                *licensed_to_URL;               // 6
+    XBYTE                *license_term;                  // 7
+    XBYTE                *expire_date;                   // 8
+    XBYTE                *compser_notes;                 // 9
+    XBYTE                *index_number;                  // 10
+    XBYTE                *genre;                         // 11
+    XBYTE                *sub_genre;                     // 12
+    XBYTE                *tempo_description;             // 13
+    XBYTE                *original_source;               // 14
 
-    char                *manufacturer;                  // 15
-    char                *misc1;                         // 16
-    char                *misc2;                         // 17
-    char                *misc3;                         // 18
-    char                *misc4;                         // 19
-    char                *misc5;                         // 20
-    char                *misc6;                         // 21
-    char                *misc7;                         // 22
-    char                *misc8;
+    XBYTE                *manufacturer;                  // 15
+    XBYTE                *misc1;                         // 16
+    XBYTE                *misc2;                         // 17
+    XBYTE                *misc3;                         // 18
+    XBYTE                *misc4;                         // 19
+    XBYTE                *misc5;                         // 20
+    XBYTE                *misc6;                         // 21
+    XBYTE                *misc7;                         // 22
+    XBYTE                *misc8;
 
-    short int           remapCount;
-    short int           *remaps;
+    XSWORD           remapCount;
+    XSWORD           *remaps;
 
-    short int           *velocityCurve;
+    XSWORD           *velocityCurve;
 } X_PACKBY1 SongResource_Info;
 
 
 typedef struct
 {
-    char                lowMidi;
-    char                highMidi;
+    XBYTE                lowMidi;
+    XBYTE                highMidi;
     XShortResourceID    sndResourceID;
-    short int           miscParameter1;     // can be smodParmeter1 if ZBF_enableSoundModifier
+    XSWORD           miscParameter1;     // can be smodParmeter1 if ZBF_enableSoundModifier
                                             // enabled, otherwise its a replacement
                                             // rootKey for sample
-    short int           miscParameter2;     // if ZBF_enableSoundModifier is enabled then its
+    XSWORD           miscParameter2;     // if ZBF_enableSoundModifier is enabled then its
                                             // used as smodParmeter2, otherwise its a volume level
 } X_PACKBY1 KeySplit;
 
@@ -517,23 +517,23 @@ typedef struct
 typedef struct
 {
     XShortResourceID    sndResourceID;
-    short int           midiRootKey;
-    char                panPlacement;
-    unsigned char       flags1;             // see ZBF bits for values
-    unsigned char       flags2;             // see ZBF bits for values
-    char                smodResourceID;     // Really a smaller version of XShortResourceID
-    short int           miscParameter1;     // can be smodParmeter1 if ZBF_enableSoundModifier
+    XSWORD           midiRootKey;
+    XBYTE                panPlacement;
+    XBYTE       flags1;             // see ZBF bits for values
+    XBYTE       flags2;             // see ZBF bits for values
+    XBYTE                smodResourceID;     // Really a smaller version of XShortResourceID
+    XSWORD           miscParameter1;     // can be smodParmeter1 if ZBF_enableSoundModifier
                                             // enabled, otherwise its a replacement
                                             // rootKey for sample
-    short int           miscParameter2;     // if ZBF_enableSoundModifier is enabled then its
+    XSWORD           miscParameter2;     // if ZBF_enableSoundModifier is enabled then its
                                             // used as smodParmeter2, otherwise its a volume level
-    short int           keySplitCount;      // if this is non-zero, then KeySplit structure is inserted
+    XSWORD           keySplitCount;      // if this is non-zero, then KeySplit structure is inserted
     // to go beyond this point, if keySplitCount is non-zero, you must use function calls.
-    short int           tremoloCount;       // if this is non-zero, then a Word is inserted.
-    short int           tremoloEnd;         // Always 0x8000
-    short int           reserved_3;
-    short int           descriptorName;     // Always 0
-    short int           descriptorFlags;    // Always 0
+    XSWORD           tremoloCount;       // if this is non-zero, then a Word is inserted.
+    XSWORD           tremoloEnd;         // Always 0x8000
+    XSWORD           reserved_3;
+    XSWORD           descriptorName;     // Always 0
+    XSWORD           descriptorFlags;    // Always 0
 } X_PACKBY1 InstrumentResource;
 
 #define DEFAULT_RESOURCE_BANK_ID    0       // ID used inside of RMF file
@@ -541,17 +541,17 @@ typedef struct
 // This is a ID_BANK resource
 typedef struct
 {
-    unsigned long   version;
-    char            bankURL[BANK_NAME_MAX_SIZE];
-    char            bankName[BANK_NAME_MAX_SIZE];
+    XDWORD   version;
+    XBYTE            bankURL[BANK_NAME_MAX_SIZE];
+    XBYTE            bankName[BANK_NAME_MAX_SIZE];
 } X_PACKBY1 BankStatus;
 
 #define DEFAULT_RESOURCE_PASSWORD_ID 0      // ID used inside of RMF file
 // This is a ID_PASSWORD resource
 typedef struct
 {
-    unsigned long   version;
-//  char            eacs[];     // variable length password accessed with XDecryptAndDuplicateStr
+    XDWORD   version;
+//  XBYTE            eacs[];     // variable length password accessed with XDecryptAndDuplicateStr
 } X_PACKBY1 PasswordAccess;
 
 #define DEFAULT_RESOURCE_ALIAS_ID   0       // ID used inside of a patch file
@@ -566,8 +566,8 @@ typedef struct
 // This is a ID_ALIAS resource
 typedef struct
 {
-    unsigned long   version;
-    unsigned long   numberOfAliases;
+    XDWORD   version;
+    XDWORD   numberOfAliases;
     XAliasLink      list[1];    // dynamic list
 } X_PACKBY1 XAliasLinkResource;
 
@@ -589,27 +589,27 @@ enum
 #define AUDIO_OBJECT_VERSION            0x0001
 typedef struct
 {
-    unsigned long   version;            // structure version 1
-    unsigned long   dataLength;         // length of sample data in bytes
-    unsigned long   dataOffset;         // offset from begining of structure to data
-    unsigned long   audioType;          // audio type of audioType
-    unsigned long   usageType;
-    unsigned long   sampleRate;         // sample rate in 16.16 fixed point
-    unsigned long   sampleFrames;       // number of sample frames
-    unsigned long   loopStart;          // first loop start
-    unsigned long   loopEnd;            // first loop end
-    short int       baseMidiKey;        // base root midi key
-    short int       bitSize;            // 8 or 16 bits per sample
-    short int       channels;           // 1 or 2 channels
+    XDWORD   version;            // structure version 1
+    XDWORD   dataLength;         // length of sample data in bytes
+    XDWORD   dataOffset;         // offset from begining of structure to data
+    XDWORD   audioType;          // audio type of audioType
+    XDWORD   usageType;
+    XDWORD   sampleRate;         // sample rate in 16.16 fixed point
+    XDWORD   sampleFrames;       // number of sample frames
+    XDWORD   loopStart;          // first loop start
+    XDWORD   loopEnd;            // first loop end
+    XSWORD       baseMidiKey;        // base root midi key
+    XSWORD       bitSize;            // 8 or 16 bits per sample
+    XSWORD       channels;           // 1 or 2 channels
     XResourceType   nameResourceType;   // Resource name type. ie (AUDIO_NAME_TYPE)
                                         // if ID_NULL, then no name
     XLongResourceID nameResourceID;     // Resource name id. ie AUDIO_NAME_TYPE ID 2000
-    char            usedInBank;         // if true, then sample is embedded in a bank
-    char            unusedFlag2;
-    char            unusedFlag3;
-    char            unusedFlag4;
-    unsigned long   filler[16];
-    unsigned long   firstSampleFiller;
+    XBYTE            usedInBank;         // if true, then sample is embedded in a bank
+    XBYTE            unusedFlag2;
+    XBYTE            unusedFlag3;
+    XBYTE            unusedFlag4;
+    XDWORD   filler[16];
+    XDWORD   firstSampleFiller;
 //  data
 } X_PACKBY1 AudioResource;
 
@@ -692,81 +692,82 @@ typedef struct
 
 typedef struct
 {
-    char                    *samplePtr;     /*if NIL then samples are in sampleArea*/
-    unsigned long           length;         /*length of sound in bytes*/
-    unsigned long           sampleRate;     /*sample rate for this sound*/
-    unsigned long           loopStart;      /*start of looping portion*/
-    unsigned long           loopEnd;        /*end of looping portion*/
-    unsigned char           encode;         /*header encoding*/
-    unsigned char           baseFrequency;  /*baseFrequency value*/
-    unsigned char           sampleArea[1];  /*space for when samples follow directly*/
+    XDWORD      samplePtrOffset;    /*if NIL then samples are in sampleArea*/
+    XDWORD           length;         /*length of sound in bytes*/
+    XDWORD           sampleRate;     /*sample rate for this sound*/
+    XDWORD           loopStart;      /*start of looping portion*/
+    XDWORD           loopEnd;        /*end of looping portion*/
+    XBYTE           encode;         /*header encoding*/
+    XBYTE           baseFrequency;  /*baseFrequency value*/
+    XBYTE           sampleArea[1];  /*space for when samples follow directly*/
 } X_PACKBY1 XSoundHeader;
 typedef XSoundHeader *XSoundHeaderPtr;
 
 typedef struct
 {
-    char                    *samplePtr;         /*if nil then samples are in sample area*/
-    unsigned long           numChannels;        /*number of channels i.e. mono = 1*/
-    unsigned long           sampleRate;         /*sample rate in Apples Fixed point representation*/
-    unsigned long           loopStart;          /*loopStart of sound before compression*/
-    unsigned long           loopEnd;            /*loopEnd of sound before compression*/
-    unsigned char           encode;             /*data structure used , stdSH, extSH, or cmpSH*/
-    unsigned char           baseFrequency;      /*same meaning as regular SoundHeader*/
-    unsigned long           numFrames;          /*length in frames ( packetFrames or sampleFrames )*/
-    char                    AIFFSampleRate[10]; /*IEEE sample rate*/
-    char                    *markerChunk;       /*sync track*/
-    long                    format;             /*data format type, was futureUse1*/
-    char                    forceSample8bit;    /*reserved by Apple, Igor will use as IMA encoder to 8 or 16 bit output. Set to 0x80 */
+    XDWORD      samplePtrOffset;    /*if NIL then samples are in sampleArea*/
+    XDWORD           numChannels;        /*number of channels i.e. mono = 1*/
+    XDWORD           sampleRate;         /*sample rate in Apples Fixed point representation*/
+    XDWORD           loopStart;          /*loopStart of sound before compression*/
+    XDWORD           loopEnd;            /*loopEnd of sound before compression*/
+    XBYTE           encode;             /*data structure used , stdSH, extSH, or cmpSH*/
+    XBYTE           baseFrequency;      /*same meaning as regular SoundHeader*/
+    XDWORD           numFrames;          /*length in frames ( packetFrames or sampleFrames )*/
+    XBYTE                    AIFFSampleRate[10]; /*IEEE sample rate*/
+    XBYTE                    markerChunk[4];       /*sync track*/
+    XDWORD                    format;             /*data format type, was futureUse1*/
+    XBYTE                    forceSample8bit;    /*reserved by Apple, Igor will use as IMA encoder to 8 or 16 bit output. Set to 0x80 */
                                                 // to encode as 8 bit output
-    char                    soundIsEmbedded;    /*reserved by Apple. Igor uses it as a flag */
-    char                    futureUse2_2;       /*reserved by Apple*/
-    char                    futureUse2_3;       /*reserved by Apple*/
-    void                    *stateVars;         /*pointer to State Block*/
-    void                    *leftOverSamples;   /*used to save truncated samples between compression calls*/
-    short                   compressionID;      /*0 means no compression, non zero means compressionID*/
-    unsigned short          packetSize;         /*number of bits in compressed sample packet*/
-    unsigned short          snthID;             /*resource ID of Sound Manager snth that contains NRT C/E*/
-    unsigned short          sampleSize;         /*number of bits in non-compressed sample*/
+    XBYTE                    soundIsEmbedded;    /*reserved by Apple. Igor uses it as a flag */
+    XBYTE                    futureUse2_2;       /*reserved by Apple*/
+    XBYTE                    futureUse2_3;       /*reserved by Apple*/
+    XBYTE                    stateVars[4];         /*pointer to State Block*/
+    XBYTE                    leftOverSamples[4];   /*used to save truncated samples between compression calls*/
+    XSWORD                   compressionID;      /*0 means no compression, non zero means compressionID*/
+    XWORD          packetSize;         /*number of bits in compressed sample packet*/
+    XWORD          snthID;             /*resource ID of Sound Manager snth that contains NRT C/E*/
+    XWORD          sampleSize;         /*number of bits in non-compressed sample*/
                                                 //MOE: For ALAW, ULAW, and IMA, the number of bytes is stored!
-    unsigned char           sampleArea[1];      /*space for when samples follow directly*/
+    XBYTE           sampleArea[1];      /*space for when samples follow directly*/
 } X_PACKBY1 XCmpSoundHeader;
 typedef XCmpSoundHeader * XCmpSoundHeaderPtr;
 
 typedef struct
 {
-    char                    *samplePtr;         /*if nil then samples are in sample area*/
-    unsigned long           numChannels;        /*number of channels,  ie mono = 1*/
-    unsigned long           sampleRate;         /*sample rate in Apples Fixed point representation*/
-    unsigned long           loopStart;          /*same meaning as regular SoundHeader*/
-    unsigned long           loopEnd;            /*same meaning as regular SoundHeader*/
-    unsigned char           encode;             /*data structure used , stdSH, extSH, or cmpSH*/
-    unsigned char           baseFrequency;      /*same meaning as regular SoundHeader*/
-    unsigned long           numFrames;          /*length in total number of frames*/
-    char                    AIFFSampleRate[10]; /*IEEE sample rate*/
-    char                    *markerChunk;       /*sync track*/
-    char                    *instrumentChunks;  /*AIFF instrument chunks*/
-    char                    *AESRecording;
-    unsigned short          sampleSize;         /*number of bits in sample*/
-    char                    soundIsEmbedded;    // reserved by Apple. Igor uses it as a flag
-    char                    sampleIsIntelOrder; // reserved by Apple. Igor uses it to determine if samples are Intel ordered
-    unsigned long           futureUse2;         /*reserved by Apple*/
-    unsigned long           futureUse3;         /*reserved by Apple*/
-    unsigned long           futureUse4;         /*reserved by Apple*/
-    unsigned char           sampleArea[1];      /*space for when samples follow directly*/
+    XDWORD      samplePtrOffset;    /*if NIL then samples are in sampleArea*/
+    XDWORD           numChannels;        /*number of channels,  ie mono = 1*/
+    XDWORD           sampleRate;         /*sample rate in Apples Fixed point representation*/
+    XDWORD           loopStart;          /*same meaning as regular SoundHeader*/
+    XDWORD           loopEnd;            /*same meaning as regular SoundHeader*/
+    XBYTE           encode;             /*data structure used , stdSH, extSH, or cmpSH*/
+    XBYTE           baseFrequency;      /*same meaning as regular SoundHeader*/
+    XDWORD           numFrames;          /*length in total number of frames*/
+    XBYTE                    AIFFSampleRate[10]; /*IEEE sample rate*/
+    //TODO: pointer issues, structure is incorrect for 64 bit
+    XBYTE                    *markerChunk;       /*sync track*/
+    XBYTE                    *instrumentChunks;  /*AIFF instrument chunks*/
+    XBYTE                    *AESRecording;
+    XWORD          sampleSize;         /*number of bits in sample*/
+    XBYTE                    soundIsEmbedded;    // reserved by Apple. Igor uses it as a flag
+    XBYTE                    sampleIsIntelOrder; // reserved by Apple. Igor uses it to determine if samples are Intel ordered
+    XDWORD           futureUse2;         /*reserved by Apple*/
+    XDWORD           futureUse3;         /*reserved by Apple*/
+    XDWORD           futureUse4;         /*reserved by Apple*/
+    XBYTE           sampleArea[1];      /*space for when samples follow directly*/
 } X_PACKBY1 XExtSoundHeader;
 typedef XExtSoundHeader *XExtSoundHeaderPtr;
 
 typedef struct
 {
-    short int       type;
-    short int       numModifiers;
-    unsigned short  modNumber;
-    long            modInit;
-    short int       numCommands;
+    XSWORD       type;
+    XSWORD       numModifiers;
+    XWORD  modNumber;
+    XDWORD            modInit;
+    XSWORD       numCommands;
 // first command
-    unsigned short  cmd;
-    short int       param1;
-    long            param2;
+    XWORD  cmd;
+    XSWORD       param1;
+    XDWORD            param2;
 } X_PACKBY1 XSoundFormat1;
 
 typedef struct
@@ -789,13 +790,13 @@ typedef struct
 
 typedef struct
 {
-    short int       type;
-    short int       refCount;
-    short int       numCmds;
+    XSWORD       type;
+    XSWORD       refCount;
+    XSWORD       numCmds;
 // first command
-    unsigned short  cmd;
-    short int       param1;
-    long            param2;
+    XWORD  cmd;
+    XSWORD       param1;
+    XDWORD            param2;
 } X_PACKBY1 XSoundFormat2;
 
 typedef struct
@@ -812,7 +813,7 @@ typedef struct
 
 typedef struct
 {
-    short int       type;
+    XSWORD       type;
     XSoundHeader3   sndBuffer;
 } X_PACKBY1 XSndHeader3;
 
@@ -890,13 +891,13 @@ enum
 typedef struct
 {
     XFIXED              rate;               // sample rate
-    unsigned long       frames;             // number of audio frames
-    unsigned long       size;               // size in bytes, compressed size if compressed
-    unsigned long       loopStart;          // loop start frame
-    unsigned long       loopEnd;            // loop end frame
-    short int           bitSize;            // sample bit size; 8 or 16
-    short int           channels;           // mono or stereo; 1 or 2
-    short int           baseKey;            // base sample key
+    XDWORD       frames;             // number of audio frames
+    XDWORD       size;               // size in bytes, compressed size if compressed
+    XDWORD       loopStart;          // loop start frame
+    XDWORD       loopEnd;            // loop end frame
+    XSWORD           bitSize;            // sample bit size; 8 or 16
+    XSWORD           channels;           // mono or stereo; 1 or 2
+    XSWORD           baseKey;            // base sample key
     XShortResourceID    theID;              // sample ID if required
     XResourceType       compressionType;    // compression type
     void                *pMasterPtr;        // master pointer if required
@@ -933,30 +934,30 @@ typedef enum
     I_MISC8
 } SongInfo;
 
-void XGetSongInformation(SongResource *theSong, long songSize, SongInfo type,
-                            char* targetBuffer, unsigned long bufferBytes);
+void XGetSongInformation(SongResource *theSong, XDWORD songSize, SongInfo type,
+                         XBYTE* targetBuffer, XDWORD bufferBytes);
 
-unsigned long XGetSongInformationSize(SongResource *theSong, long songSize, SongInfo type);
+XDWORD XGetSongInformationSize(SongResource *theSong, XDWORD songSize, SongInfo type);
 
 
 // Create a new song resource.
 SongResource * XNewSongPtr( SongType songType, 
                             XShortResourceID midiID,
-                            short int maxSongVoices, 
-                            short int mixLevel, 
-                            short int maxEffectVoices,
+                           XSWORD maxSongVoices,
+                           XSWORD mixLevel,
+                           XSWORD maxEffectVoices,
                             ReverbMode reverbType);
 
 void XDisposeSongPtr(SongResource *theSong);
 
-void XGetKeySplitFromPtr(InstrumentResource *theX, short int entry, KeySplit *keysplit);
+void XGetKeySplitFromPtr(InstrumentResource *theX, XSWORD entry, KeySplit *keysplit);
 
-XPTR XGetSoundResourceByID(XLongResourceID theID, long *pReturnedSize);
-XPTR XGetSoundResourceByName(void *cName, long *pReturnedSize);
+XPTR XGetSoundResourceByID(XLongResourceID theID, XDWORD *pReturnedSize);
+XPTR XGetSoundResourceByName(void *cName, XDWORD *pReturnedSize);
 // Get sound resource and detach from resource manager but don't decompress.
-XPTR XGetRawSoundResourceByID(XLongResourceID theID, XResourceType *pReturnedType, long *pReturnedSize);
+XPTR XGetRawSoundResourceByID(XLongResourceID theID, XResourceType *pReturnedType, XDWORD *pReturnedSize);
 
-XPTR XGetMidiData(XLongResourceID theID, long *pReturnedSize, XResourceType *pType);
+XPTR XGetMidiData(XLongResourceID theID, XDWORD *pReturnedSize, XResourceType *pType);
 
 // Given a ID_SND resource, parse through and return in *pInfo the information
 // about the sample resource. The pMasterPtr will be set to the resource passed in (pRes).
@@ -976,10 +977,10 @@ XPTR XGetSamplePtrFromSnd(XPTR pRes, SampleDataInfo *pInfo);
 //          -3  not supported format type
 XERR XGetSampleInfoFromSnd(XPTR pResource, SampleDataInfo *pOutInfo);
 
-void XSetSoundLoopPoints(XPTR pRes, long loopStart, long loopEnd);
+void XSetSoundLoopPoints(XPTR pRes, XDWORD loopStart, XDWORD loopEnd);
 void XSetSoundSampleRate(XPTR pRes, XFIXED sampleRate);
-void XSetSoundBaseKey(XPTR pRes, short int baseKey);
-short int XGetSoundBaseKey(XPTR pRes);
+void XSetSoundBaseKey(XPTR pRes, XSWORD baseKey);
+XSWORD XGetSoundBaseKey(XPTR pRes);
 
 XBOOL XGetSoundEmbeddedStatus(XPTR pRes);
 void XSetSoundEmbeddedStatus(XPTR pRes, XBOOL soundEmbedded);
@@ -1002,7 +1003,7 @@ OPErr XCreateSoundObjectFromData(XPTR* dst,
 
 XBOOL XGetSampleNameFromID(XLongResourceID sampleSoundID, char *cName);
 
-SongResource_Info * XGetSongResourceInfo(SongResource *pSong, long songSize);
+SongResource_Info * XGetSongResourceInfo(SongResource *pSong, XDWORD songSize);
 
 // return a new blank SongResource_Info structure
 SongResource_Info * XNewSongResourceInfo(void);
@@ -1023,22 +1024,22 @@ void XSetSongLocked(SongResource *pSong, XBOOL locked);
 // will determine if song is using compression. Requires active resource file
 XBOOL XIsSongCompressed(SongResource *pSong);
 
-void XGetSongPerformanceSettings(SongResource * theSong, short int *maxMidiVoices, 
-                                    short int *maxEffectsVoices, short int *mixLevel);
-void XSetSongPerformanceSettings(SongResource *pSong, short int maxMidiVoices, short int maxEffectsVoices,
-                                        short int mixLevel);
+void XGetSongPerformanceSettings(SongResource * theSong, XSWORD *maxMidiVoices,
+                                 XSWORD *maxEffectsVoices, XSWORD *mixLevel);
+void XSetSongPerformanceSettings(SongResource *pSong, XSWORD maxMidiVoices, XSWORD maxEffectsVoices,
+                                 XSWORD mixLevel);
 
-short int XGetSongReverbType(SongResource *pSong);
-void XSetSongReverbType(SongResource *pSong, short int reverbType);
+XSWORD XGetSongReverbType(SongResource *pSong);
+void XSetSongReverbType(SongResource *pSong, XSWORD reverbType);
 
-short int XGetSongVolume(SongResource *pSong);
-void XSetSongVolume(SongResource *pSong, short int volume);
+XSWORD XGetSongVolume(SongResource *pSong);
+void XSetSongVolume(SongResource *pSong, XSWORD volume);
 
 
 SongType XGetSongResourceObjectType(SongResource *pSong);
 
-SongResource * XChangeSongResource(SongResource *theSong, long songSize, 
-                    SongResourceType resourceType, void *pResource, long resourceLength);
+SongResource * XChangeSongResource(SongResource *theSong, XDWORD songSize,
+                    SongResourceType resourceType, void *pResource, XDWORD resourceLength);
 
 XBOOL XGetSongEmbeddedStatus(SongResource *pSong);
 void XSetSongEmbeddedStatus(SongResource *pSong, XBOOL embedded);
@@ -1062,22 +1063,22 @@ XPTR XCreateBankStatus(BankStatus *pStatus);
 // Get bank resource from currently open resource file
 void XGetBankStatus(BankStatus *pStatus);
 // Create version resource that is ready to be stored
-XPTR XCreateVersion(short int major, short int minor, short int subMinor);
+XPTR XCreateVersion(XSWORD major, XSWORD minor, XSWORD subMinor);
 // Will return a XVersion number in platform order from the currently open resource file
 void XGetVersionNumber(XVersion *pVersionNumber);
 
 // convert to and from ieee to XFIXED. Used for AIF files, and SND resources
-XFIXED XConvertFromIeeeExtended(unsigned char *bytes);
-void XConvertToIeeeExtended(XFIXED ieeeFixedRate, unsigned char *bytes);
+XFIXED XConvertFromIeeeExtended(XBYTE *bytes);
+void XConvertToIeeeExtended(XFIXED ieeeFixedRate, XBYTE *bytes);
 
 // a law / u law compression
-void XCompressLaw(SndCompressionType compressionType, short int *pSource, char *pDest, 
-                        unsigned long frames, unsigned long channels);
+void XCompressLaw(SndCompressionType compressionType, XSWORD *pSource, XBYTE *pDest,
+                  XDWORD frames, XDWORD channels);
 
 // Simple utility to convert promote 8-bit samples to 16 bit
-XWORD * XConvert8BitTo16Bit(XBYTE * p8BitPCMData, unsigned long frames, unsigned long channels);
+XWORD * XConvert8BitTo16Bit(XBYTE * p8BitPCMData, XDWORD frames, XDWORD channels);
 // given 16 bit data, convert this to 8 bit data
-XBYTE * XConvert16BitTo8Bit(XWORD * p16BitPCMData, unsigned long frames, unsigned long channels);
+XBYTE * XConvert16BitTo8Bit(XWORD * p16BitPCMData, XDWORD frames, XDWORD channels);
 
 
 // MPEG decoder
@@ -1088,20 +1089,20 @@ struct XMPEGDecodedData
     XFIXED          sampleRate;
     XBYTE           bitSize;
     XBYTE           channels;
-    unsigned long   bitrate;
-    unsigned long   lengthInBytes;      // right now, it's simply frameBufferSize*maxFrameBuffers
+    XDWORD   bitrate;
+    XDWORD   lengthInBytes;      // right now, it's simply frameBufferSize*maxFrameBuffers
                                         // with new MPEG code, it should be the minimum decoded size
-    unsigned long   lengthInSamples;
-    unsigned long   frameBufferSize;
-    unsigned long   maxFrameBuffers;
+    XDWORD   lengthInSamples;
+    XDWORD   frameBufferSize;
+    XDWORD   maxFrameBuffers;
 };
 typedef struct XMPEGDecodedData XMPEGDecodedData;
 
 XMPEGDecodedData * XOpenMPEGStreamFromXFILE(XFILE file, OPErr *pErr);
-XMPEGDecodedData * XOpenMPEGStreamFromMemory(XPTR pBlock, unsigned long blockSize, OPErr *pErr);
+XMPEGDecodedData * XOpenMPEGStreamFromMemory(XPTR pBlock, XDWORD blockSize, OPErr *pErr);
 OPErr XCloseMPEGStream(XMPEGDecodedData *stream);
 OPErr XFillMPEGStreamBuffer(XMPEGDecodedData *stream, void *pcmAudioBuffer, XBOOL *pDone);
-SndCompressionType XGetMPEGBitrateType(unsigned long bitrate);
+SndCompressionType XGetMPEGBitrateType(XDWORD bitrate);
 
 #endif  // USE_MPEG_DECODER
 
@@ -1132,11 +1133,11 @@ typedef enum
 
 struct XMPEGEncodeData
 {
-    unsigned long       currentFrameBuffer;     // OUT  current frame buffer processing
-    unsigned long       maxFrameBuffers;        // OUT  max number of MPEG frames
-    unsigned long       frameBufferSizeInBytes; // OUT  byte size of each frame buffer
-    char                *pFrameBuffer;          // OUT  bytes of completed buffer
-    unsigned long       frameBufferSize;        // OUT  size in bytes of completed MPEG buffer
+    XDWORD       currentFrameBuffer;     // OUT  current frame buffer processing
+    XDWORD       maxFrameBuffers;        // OUT  max number of MPEG frames
+    XDWORD       frameBufferSizeInBytes; // OUT  byte size of each frame buffer
+    XBYTE                *pFrameBuffer;          // OUT  bytes of completed buffer
+    XDWORD       frameBufferSize;        // OUT  size in bytes of completed MPEG buffer
 
 //private:
     void                *pPrivateData;
@@ -1154,11 +1155,11 @@ typedef struct XMPEGEncodeData XMPEGEncodeData;
 // When done, then call XCloseMPEGEncodeStream to cleanup and free memory.
 XMPEGEncodeData *XOpenMPEGEncodeStreamFromMemory(GM_Waveform *pAudio, XMPEGEncodeRate encodeRate, OPErr *pErr);
 OPErr   XProcessMPEGEncoder(XMPEGEncodeData *stream);   // call this XMPEGEncodeData->maxFrameBuffers times
-OPErr   XCloseMPEGEncodeStream(XMPEGEncodeData *stream, XPTR *pReturnedBuffer, unsigned long *pReturnedSize);
+OPErr   XCloseMPEGEncodeStream(XMPEGEncodeData *stream, XPTR *pReturnedBuffer, XDWORD *pReturnedSize);
 
 // Given an mpeg bit encode rate, and a sample rate, this will return TRUE if
 // this encoder can encode, or FALSE if it will not work.
-XBOOL XIsValidMPEGSampleRateAndEncodeRate(XMPEGEncodeRate encodeRate, XFIXED sampleRate, SndCompressionSubType subType, short int numChannel);
+XBOOL XIsValidMPEGSampleRateAndEncodeRate(XMPEGEncodeRate encodeRate, XFIXED sampleRate, SndCompressionSubType subType, XSWORD numChannel);
 
 // This will encode an MPEG stream from a formatted GM_Waveform
 OPErr XCompressMPEG(GM_Waveform const* pWave,

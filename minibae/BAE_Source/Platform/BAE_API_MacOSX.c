@@ -201,6 +201,7 @@ void BAE_Deallocate(void *memoryBlock)
 // return memory used
 unsigned long BAE_GetSizeOfMemoryUsed(void)
 {
+    printf("No memory buoy, can't determine memory size used\n");
 //  return g_memory_buoy;
    return(0);
 }
@@ -208,6 +209,7 @@ unsigned long BAE_GetSizeOfMemoryUsed(void)
 // return max memory used
 unsigned long BAE_GetMaxSizeOfMemoryUsed(void)
 {
+    printf("No memory buoy, can't determine memory size used\n");
 //  return g_memory_buoy_max;
    return(0);
 }
@@ -459,11 +461,12 @@ long BAE_FileDelete(void *fileName)
 // Return -1 if error, otherwise file handle
 long BAE_FileOpenForRead(void *fileName)
 {
+    long file = -1;
     if (fileName)
     {
-        return(open((char *)fileName, O_RDONLY));
+        file = open((char *)fileName, O_RDONLY);
     }
-    return(-1);
+    return file;
 }
 
 long BAE_FileOpenForWrite(void *fileName)

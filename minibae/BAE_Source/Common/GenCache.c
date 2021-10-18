@@ -693,3 +693,43 @@ UINT32 PV_GetCacheIndexFromCachePtr(GM_Mixer * pMixer,
     *pErr = PARAM_ERR;
     return 0;
 }
+
+/******************************************************************************
+*******************************************************************************
+*******************************************************************************
+**
+**  Functions to manage bank tokens
+**
+*******************************************************************************
+*******************************************************************************
+******************************************************************************/
+
+
+XBOOL AreBankTokensIdentical(XBankToken tok1, XBankToken tok2)
+{
+    if (tok1.fileLen == tok2.fileLen && tok1.xFile == tok2.xFile)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+XBankToken CreateBankToken(void)
+{
+    XBankToken          retVal;
+
+    retVal.xFile = (XTOKEN) XFileGetCurrentResourceFile();
+    retVal.fileLen = XFileGetLength(retVal.xFile);
+
+    return retVal;
+}
+
+XBankToken CreateBankTokenFromInputs(XTOKEN tok, XDWORD len)
+{
+    XBankToken          retVal;
+
+    retVal.xFile = tok;
+    retVal.fileLen = len;
+
+    return retVal;
+}

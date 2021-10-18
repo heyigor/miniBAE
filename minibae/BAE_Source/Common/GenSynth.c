@@ -475,9 +475,9 @@ static const XFIXED expDecayLookup[] =
 //   1 500 000 = 1.5 seconds
 //     150 000 = 15 microseconds
 // This is the amount of time to sustain to 96 dB or no volume.
-unsigned long GM_GetSustainDecayLevelInTime(long storedValue)
+XSDWORD GM_GetSustainDecayLevelInTime(XSDWORD storedValue)
 {
-    unsigned long time;
+    XSDWORD time;
 
     time = 0;
     if (storedValue < -50)
@@ -496,7 +496,7 @@ unsigned long GM_GetSustainDecayLevelInTime(long storedValue)
 // given a timeInMicroseconds range check between 50000 microseconds and 16 seconds, and return the storable
 // value for ADSRLevel.
 // This is the amount of time to sustain to 96 dB or no volume.
-long GM_SetSustainDecayLevelInTime(unsigned long timeInMicroseconds)
+XSDWORD GM_SetSustainDecayLevelInTime(XDWORD timeInMicroseconds)
 {
     timeInMicroseconds /= 8;
     if (timeInMicroseconds > ((sizeof(expDecayLookup) / sizeof(XFIXED)) * 50000L))
@@ -2269,9 +2269,9 @@ void BAE_BuildMixerSlice(void *threadContext, void *pAudioBuffer, long bufferByt
 
 #if BAE_COMPLETE
 // Get time in microseconds between calls to BAE_BuildMixerSlice
-unsigned long GM_GetMixerUsedTime(void)
+XDWORD GM_GetMixerUsedTime(void)
 {
-    unsigned long   time;
+    XDWORD   time;
 
     time = 0;
     if (MusicGlobals)
@@ -2284,9 +2284,9 @@ unsigned long GM_GetMixerUsedTime(void)
 
 #if BAE_COMPLETE
 // Get CPU load in percent. This function is realtime and assumes the mixer has been allocated
-unsigned long GM_GetMixerUsedTimeInPercent(void)
+XDWORD GM_GetMixerUsedTimeInPercent(void)
 {
-    unsigned long load;
+    XDWORD load;
 
     load = 0;
     if (MusicGlobals)
@@ -3782,12 +3782,14 @@ INT16 GM_GetAudioSampleFrame(INT16 *pLeft, INT16 *pRight)
 #endif
 }
 
-#if 01
-void GM_DisplayVoiceData(void)
+void GM_DisplayVoiceData(GM_Mixer *pMixer)
 {
-    GM_Mixer    *pMixer = GM_GetCurrentMixer();
     LOOPCOUNT   count;
     GM_Voice    *pVoice;
+
+    if (pMixer == NULL) {
+        pMixer = GM_GetCurrentMixer();
+    }
     
     for (count = 0; count < (pMixer->MaxNotes+pMixer->MaxEffects); count++)
     {
@@ -3796,22 +3798,21 @@ void GM_DisplayVoiceData(void)
         {
             BAE_PRINTF("### Voice %ld\n", count);
             BAE_PRINTF("    voiceMode %d\n", pVoice->voiceMode);
-            BAE_PRINTF("    voiceStartTimeStamp %ld\n", pVoice->voiceStartTimeStamp);
+            BAE_PRINTF("    voiceStartTimeStamp %lu\n", (unsigned long)pVoice->voiceStartTimeStamp);
             BAE_PRINTF("    pSong %lx\n", (long)pVoice->pSong);
             BAE_PRINTF("    pInstrument %lx\n", (long)pVoice->pInstrument);
             BAE_PRINTF("    NoteChannel %d\n", pVoice->NoteChannel);
             BAE_PRINTF("    NoteMIDIPitch %d\n", pVoice->NoteMIDIPitch);
             BAE_PRINTF("    sustainMode %d\n", pVoice->sustainMode);
             BAE_PRINTF("    NoteVolumeEnvelope %d\n", pVoice->NoteVolumeEnvelope);
-            BAE_PRINTF("    NoteVolume %ld\n", pVoice->NoteVolume);
+            BAE_PRINTF("    NoteVolume %ld\n", (long)pVoice->NoteVolume);
             BAE_PRINTF("    NoteMIDIVolume %d\n", pVoice->NoteMIDIVolume);
-            BAE_PRINTF("    NoteProgram %ld\n", pVoice->NoteProgram);
-            BAE_PRINTF("    volumeADSRRecord.sustainingDecayLevel %ld\n", pVoice->volumeADSRRecord.sustainingDecayLevel);
+            BAE_PRINTF("    NoteProgram %ld\n", (unsigned long)pVoice->NoteProgram);
+            BAE_PRINTF("    volumeADSRRecord.sustainingDecayLevel %g\n", XFIXED_TO_FLOAT(pVoice->volumeADSRRecord.sustainingDecayLevel));
             BAE_PRINTF("###\n");
         }
     }
 }
-#endif
 
 // This will check active voices and look at a sub sample of the audio output to
 // determine if there's any audio still playing

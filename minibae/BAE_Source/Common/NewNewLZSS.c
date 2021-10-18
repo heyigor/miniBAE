@@ -137,56 +137,56 @@
 #define LOOKBACK    (1L << OFFSETBITS)              /* size of lookback buffer              */
 
 // forwards
-static void         doLZSSDecode(unsigned char* srcBuffer, unsigned long srcBytes, unsigned char* dstBuffer, long dstSize);
+static void         doLZSSDecode(unsigned char* srcBuffer, XDWORD srcBytes, unsigned char* dstBuffer, long dstSize);
 #if USE_CREATION_API == TRUE
-static void         DeltaMono8(unsigned char* pData, unsigned long frameCount);
-static void         DeltaStereo8(unsigned char* pData, unsigned long frameCount);
-static void         DeltaMono16(short* pData, unsigned long frameCount);
-static void         DeltaStereo16(short* pData, unsigned long frameCount);
+static void         DeltaMono8(unsigned char* pData, XDWORD frameCount);
+static void         DeltaStereo8(unsigned char* pData, XDWORD frameCount);
+static void         DeltaMono16(short* pData, XDWORD frameCount);
+static void         DeltaStereo16(short* pData, XDWORD frameCount);
 #endif
-static void         UnDeltaMono8(unsigned char* pData, unsigned long frameCount);
-static void         UnDeltaStereo8(unsigned char* pData, unsigned long frameCount);
-static void         UnDeltaMono16(short* pData, unsigned long frameCount);
-static void         UnDeltaStereo16(short* pData, unsigned long frameCount);
+static void         UnDeltaMono8(unsigned char* pData, XDWORD frameCount);
+static void         UnDeltaStereo8(unsigned char* pData, XDWORD frameCount);
+static void         UnDeltaMono16(short* pData, XDWORD frameCount);
+static void         UnDeltaStereo16(short* pData, XDWORD frameCount);
 
 #if USE_CREATION_API == TRUE
-long LZSSCompressDeltaMono8(XBYTE* src, unsigned long srcBytes, XBYTE* dst,
+XDWORD LZSSCompressDeltaMono8(XBYTE* src, XDWORD srcBytes, XBYTE* dst,
                             XCompressStatusProc proc, void* procData)
 {
-long            dstBytes;
+    XDWORD            dstBytes;
 
     DeltaMono8(src, srcBytes);
     dstBytes = LZSSCompress(src, srcBytes, dst, proc, procData);
     UnDeltaMono8(src, srcBytes);
     return dstBytes;
 }
-long LZSSCompressDeltaStereo8(XBYTE* src, unsigned long srcBytes, XBYTE* dst,
+XDWORD LZSSCompressDeltaStereo8(XBYTE* src, XDWORD srcBytes, XBYTE* dst,
                                 XCompressStatusProc proc, void* procData)
 {
-unsigned long   const frameCount = srcBytes / 2;
-long            dstBytes;
+    XDWORD   const frameCount = srcBytes / 2;
+    XDWORD            dstBytes;
 
     DeltaStereo8(src, frameCount);
     dstBytes = LZSSCompress(src, srcBytes, dst, proc, procData);
     UnDeltaStereo8(src, frameCount);
     return dstBytes;
 }
-long LZSSCompressDeltaMono16(short* src, unsigned long srcBytes, XBYTE* dst,
+XDWORD LZSSCompressDeltaMono16(XSWORD* src, XDWORD srcBytes, XBYTE* dst,
                                 XCompressStatusProc proc, void* procData)
 {
-unsigned long   const frameCount = srcBytes / 2;
-long            dstBytes;
+    XDWORD   const frameCount = srcBytes / 2;
+    XDWORD            dstBytes;
 
     DeltaMono16(src, frameCount);
     dstBytes = LZSSCompress((XBYTE*)src, srcBytes, dst, proc, procData);
     UnDeltaMono16(src, frameCount);
     return dstBytes;
 }
-long LZSSCompressDeltaStereo16(short* src, unsigned long srcBytes, XBYTE* dst,
+XDWORD LZSSCompressDeltaStereo16(XSWORD* src, XDWORD srcBytes, XBYTE* dst,
                                 XCompressStatusProc proc, void* procData)
 {
-unsigned long   const frameCount = srcBytes / 4;
-long            dstBytes;
+    XDWORD   const frameCount = srcBytes / 4;
+    XDWORD            dstBytes;
 
     DeltaStereo16(src, frameCount);
     dstBytes = LZSSCompress((XBYTE*)src, srcBytes, dst, proc, procData);
@@ -195,31 +195,31 @@ long            dstBytes;
 }
 #endif
 
-void LZSSUncompress(unsigned char* src, unsigned long srcBytes,
-                    unsigned char* dst, unsigned long dstBytes)
+void LZSSUncompress(XBYTE* src, XDWORD srcBytes,
+                    XBYTE* dst, XDWORD dstBytes)
 {
     doLZSSDecode(src, srcBytes, dst, dstBytes);
 }
-void LZSSUncompressDeltaMono8(unsigned char* src, unsigned long srcBytes,
-                                unsigned char* dst, unsigned long dstBytes)
+void LZSSUncompressDeltaMono8(XBYTE* src, XDWORD srcBytes,
+                                XBYTE* dst, XDWORD dstBytes)
 {
     doLZSSDecode(src, srcBytes, dst, dstBytes);
     UnDeltaMono8(dst, dstBytes);
 }
-void LZSSUncompressDeltaStereo8(unsigned char* src, unsigned long srcBytes,
-                                unsigned char* dst, unsigned long dstBytes)
+void LZSSUncompressDeltaStereo8(XBYTE* src, XDWORD srcBytes,
+                                XBYTE* dst, XDWORD dstBytes)
 {
     doLZSSDecode(src, srcBytes, dst, dstBytes);
     UnDeltaStereo8(dst, dstBytes / 2);
 }
-void LZSSUncompressDeltaMono16(unsigned char* src, unsigned long srcBytes,
-                                short* dst, unsigned long dstBytes)
+void LZSSUncompressDeltaMono16(XBYTE* src, XDWORD srcBytes,
+                                XSWORD* dst, XDWORD dstBytes)
 {
     doLZSSDecode(src, srcBytes, (unsigned char*)dst, dstBytes);
     UnDeltaMono16(dst, dstBytes / 2);
 }
-void LZSSUncompressDeltaStereo16(unsigned char* src, unsigned long srcBytes,
-                                    short* dst, unsigned long dstBytes)
+void LZSSUncompressDeltaStereo16(XBYTE* src, XDWORD srcBytes,
+                                    XSWORD* dst, XDWORD dstBytes)
 {
     doLZSSDecode(src, srcBytes, (unsigned char*)dst, dstBytes);
     UnDeltaStereo16(dst, dstBytes / 4);
@@ -256,7 +256,7 @@ void LZSSUncompressDeltaStereo16(unsigned char* src, unsigned long srcBytes,
  *
  * -------------------------------------------------------------------------------- */
 
-static asm short int findLongestMatch(unsigned char * theData, unsigned long dataLen, unsigned long patternStart, unsigned short* codeWord)
+static asm short int findLongestMatch(XBYTE * theData, XDWORD dataLen, XDWORD patternStart, XWORD* codeWord)
 {
         fralloc +
         MOVEM.L     D2-D6/A2-A3,-(SP)       // Save all registers
@@ -359,19 +359,19 @@ static asm short int findLongestMatch(unsigned char * theData, unsigned long dat
 
 #else
 
-static short int findLongestMatch(unsigned char * theData, unsigned long dataLen, 
-                                    unsigned long patternStart, unsigned short* codeWord)
+static short int findLongestMatch(XBYTE * theData, XDWORD dataLen,
+                                  XDWORD patternStart, XWORD* codeWord)
 {
-unsigned char           *pointer;               // scanning source pointer
-register unsigned char *lookback;               // scanning compare pointer
-register unsigned char *tPointer;               // scanning source pointer
-register unsigned char *tLookback;              // scanning compare pointer
-register long           counter;                // number of bytes to scan
-register unsigned long  maxLen;                 // maximum match length
-register unsigned long  bestLen;                // best match length
-register unsigned long  bestOff;                // best match offset
-register unsigned long  length;                 // scanning length
-unsigned long           forward;                // bytes to scan ahead
+    XBYTE *pointer;               // scanning source pointer
+    register XBYTE *lookback;               // scanning compare pointer
+    register XBYTE *tPointer;               // scanning source pointer
+    register XBYTE *tLookback;              // scanning compare pointer
+    register long   counter;                // number of bytes to scan
+    register XDWORD  maxLen;                 // maximum match length
+    register XDWORD  bestLen;                // best match length
+    register XDWORD  bestOff;                // best match offset
+    register XDWORD  length;                 // scanning length
+    XDWORD           forward;                // bytes to scan ahead
 
     pointer = theData + patternStart;
     
@@ -385,7 +385,7 @@ unsigned long           forward;                // bytes to scan ahead
 // find maximum match length    
     maxLen = MAXMATCH;
     forward = dataLen - patternStart;
-    if (forward < (unsigned long)counter)
+    if (forward < (XDWORD)counter)
     {
         if (forward < maxLen)
         {
@@ -394,7 +394,7 @@ unsigned long           forward;                // bytes to scan ahead
     }
     else
     {
-        if ((unsigned long)counter < maxLen)
+        if ((XDWORD)counter < maxLen)
         {
             maxLen = counter;
         }
@@ -451,7 +451,7 @@ unsigned long           forward;                // bytes to scan ahead
 /* -------------------------------------------------------------------------------- *
  * Compress srcBuffer using LZSS technique.
  * -------------------------------------------------------------------------------- */
-long LZSSCompress(XBYTE* srcBuffer, unsigned long srcBytes, XBYTE* dstBuffer,
+XDWORD LZSSCompress(XBYTE* srcBuffer, XDWORD srcBytes, XBYTE* dstBuffer,
                     XCompressStatusProc proc, void* procData)
 //  srcBuffer;                  /* pointer to uncompressed data */
 //  srcBytes;                   /* size of uncompressed data */
@@ -540,10 +540,10 @@ XBYTE*          callProcPtr;            /* src position at which to call proc */
 #else
 
 register XBYTE *dataPtr;                    /* pointer to uncompressed data */
-register unsigned long  dataPos;                    /* buffer position for uncompressed data */
+register XDWORD  dataPos;                    /* buffer position for uncompressed data */
 register XBYTE *cdataPtr;                   /* pointer to compressed data */
-register unsigned long  cdataPos;                   /* buffer position for compressed data */
-unsigned long           callProcPos;                /* src position at which to call proc */
+register XDWORD  cdataPos;                   /* buffer position for compressed data */
+XDWORD           callProcPos;                /* src position at which to call proc */
 
 register unsigned int   codeCount;                  /* index for the code group */
 register unsigned int   codeNumber;                 /* the number 0-7 of the code element */
@@ -639,7 +639,7 @@ XBYTE           codeBuf[16];                /* buffer for the code group */
 //  dstSize;                    /* size of uncompressed data */
 /* -------------------------------------------------------------------------------- */
 #if (X_PLATFORM == X_MACINTOSH) && (CPU_TYPE == k68000) && (ASM_doLZSSDecode)
-static asm void doLZSSDecode(unsigned char * srcBuffer, unsigned long srcBytes,
+static asm void doLZSSDecode(unsigned char * srcBuffer, XDWORD srcBytes,
                                 unsigned char * dstBuffer, long dstSize)
 {
             fralloc +
@@ -719,7 +719,7 @@ Chris3
 */
 
 
-static void doLZSSDecode(unsigned char* srcBuffer, unsigned long srcBytes,
+static void doLZSSDecode(unsigned char* srcBuffer, XDWORD srcBytes,
                             unsigned char* dstBuffer, long dstSize)
 {
 #if 1   //Moe's version
@@ -884,7 +884,7 @@ long            dstCountdown;
 
 /* convert buffer by byte differences */
 #if USE_CREATION_API == TRUE
-static void DeltaMono8(unsigned char * pData, unsigned long frameCount)
+static void DeltaMono8(unsigned char * pData, XDWORD frameCount)
 {
 #if 0
     asm 68000
@@ -913,7 +913,7 @@ unsigned char   prev;
     }
 #endif
 }
-static void DeltaStereo8(unsigned char* pData, unsigned long frameCount)
+static void DeltaStereo8(unsigned char* pData, XDWORD frameCount)
 {
 unsigned char   prevL;
 unsigned char   prevR;
@@ -934,7 +934,7 @@ unsigned char   prevR;
         prevR = nextR;
     }
 }
-static void DeltaMono16(short* pData, unsigned long frameCount)
+static void DeltaMono16(short* pData, XDWORD frameCount)
 {
 short           prev;
     
@@ -948,7 +948,7 @@ short           prev;
         prev = next;
     }
 }
-static void DeltaStereo16(short* pData, unsigned long frameCount)
+static void DeltaStereo16(short* pData, XDWORD frameCount)
 {
 short           prevL;
 short           prevR;
@@ -972,7 +972,7 @@ short           prevR;
 #endif
 
 /* unconvert byte difference buffer */
-static void UnDeltaMono8(unsigned char * pData, unsigned long frameCount)
+static void UnDeltaMono8(unsigned char * pData, XDWORD frameCount)
 {
 #if 0
     asm 68000
@@ -997,7 +997,7 @@ unsigned char   sample;
     }
 #endif
 }
-static void UnDeltaStereo8(unsigned char* pData, unsigned long frameCount)
+static void UnDeltaStereo8(unsigned char* pData, XDWORD frameCount)
 {
 unsigned char   left;
 unsigned char   right;
@@ -1012,7 +1012,7 @@ unsigned char   right;
         *pData++ = right;
     }
 }
-static void UnDeltaMono16(short* pData, unsigned long frameCount)
+static void UnDeltaMono16(short* pData, XDWORD frameCount)
 {
 short       sample;
     
@@ -1023,7 +1023,7 @@ short       sample;
         *pData++ = sample;
     }
 }
-static void UnDeltaStereo16(short* pData, unsigned long frameCount)
+static void UnDeltaStereo16(short* pData, XDWORD frameCount)
 {
 short       left;
 short       right;

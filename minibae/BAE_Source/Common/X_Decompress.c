@@ -107,7 +107,7 @@
 #endif
 
 #if USE_CREATION_API == TRUE
-void XGetShortCompressionName(long compressionType, void *cName)
+void XGetShortCompressionName(SndCompressionType compressionType, void *cName)
 {
     switch (compressionType)
     {
@@ -180,7 +180,7 @@ void XGetShortCompressionName(long compressionType, void *cName)
     }
 }
 
-void XGetCompressionName(long compressionType, void *cName)
+void XGetCompressionName(SndCompressionType compressionType, void *cName)
 {
     switch (compressionType)
     {
@@ -262,17 +262,17 @@ void XGetCompressionName(long compressionType, void *cName)
 
 #if X_PLATFORM == X_MACINTOSH_9
 // expand data 1 to 3 use MacOS MACE compression
-void XExpandMace1to3(void *inBuffer, void *outBuffer, unsigned long length, 
+void XExpandMace1to3(void *inBuffer, void *outBuffer, XDWORD length,
                     void * inState, void * outState, 
-                    unsigned long numChannels, unsigned long whichChannel)
+                     XDWORD numChannels, XDWORD whichChannel)
 {
     Exp1to3(inBuffer, outBuffer, length, (StateBlockPtr)inState, (StateBlockPtr)outState, numChannels, whichChannel);
 }
 
 // expand data 1 to 6 use MacOS MACE compression
-void XExpandMace1to6(void *inBuffer, void *outBuffer, unsigned long length, 
+void XExpandMace1to6(void *inBuffer, void *outBuffer, XDWORD length,
                     void * inState, void * outState, 
-                    unsigned long numChannels, unsigned long whichChannel)
+                     XDWORD numChannels, XDWORD whichChannel)
 {
     Exp1to6(inBuffer, outBuffer, length, (StateBlockPtr)inState, (StateBlockPtr)outState, numChannels, whichChannel);
 }
@@ -385,7 +385,7 @@ static short int st_ulaw_to_linear(unsigned char ulawbyte)
 
 #endif
 
-void XExpandULawto16BitLinear(unsigned char *pSource, short int *pDest, long frames, long channels)
+void XExpandULawto16BitLinear(XBYTE *pSource, XSWORD *pDest, XDWORD frames, XDWORD channels)
 {
     long    count;
 
@@ -399,7 +399,7 @@ void XExpandULawto16BitLinear(unsigned char *pSource, short int *pDest, long fra
 }
 
 
-void XExpandALawto16BitLinear(unsigned char *pSource, short int *pDest, long frames, long channels)
+void XExpandALawto16BitLinear(XBYTE *pSource, XSWORD *pDest, XDWORD frames, XDWORD channels)
 {
     long    count;
 
@@ -414,10 +414,10 @@ void XExpandALawto16BitLinear(unsigned char *pSource, short int *pDest, long fra
 
 #if USE_CREATION_API == TRUE
 // compress ALaw or ULaw
-void XCompressLaw(SndCompressionType compressionType, short int *pSource, char *pDest, 
-                        unsigned long frames, unsigned long channels)
+void XCompressLaw(SndCompressionType compressionType, XSWORD *pSource, XBYTE *pDest,
+                        XDWORD frames, XDWORD channels)
 {
-    unsigned long   count;
+    XDWORD   count;
 
     if (pSource && pDest && frames)
     {
@@ -440,11 +440,11 @@ void XCompressLaw(SndCompressionType compressionType, short int *pSource, char *
 }
 #endif
 
-#define INIT_R      (unsigned long)56549
-#define C1          (unsigned long)52845
-#define C2          (unsigned long)22719
+#define INIT_R      (XDWORD)56549
+#define C1          (XDWORD)52845
+#define C2          (XDWORD)22719
 
-static INLINE unsigned char PV_Decrypt(unsigned long *pR, unsigned char cipher)
+static INLINE unsigned char PV_Decrypt(XDWORD *pR, unsigned char cipher)
 {
     unsigned char plain;
 
@@ -454,7 +454,7 @@ static INLINE unsigned char PV_Decrypt(unsigned long *pR, unsigned char cipher)
 }
 
 #if USE_CREATION_API == TRUE
-static INLINE unsigned char PV_Encrypt(unsigned long *pR, unsigned char plain)
+static INLINE unsigned char PV_Encrypt(XDWORD *pR, unsigned char plain)
 {
     unsigned char cipher;
 
@@ -464,9 +464,9 @@ static INLINE unsigned char PV_Encrypt(unsigned long *pR, unsigned char plain)
 }
 #endif
 
-long XEncryptedStrLen(char const* src)
+XDWORD XEncryptedStrLen(char const* src)
 {
-    unsigned long R;
+    XDWORD R;
 #if 1
     short int len;
 
@@ -483,7 +483,7 @@ long XEncryptedStrLen(char const* src)
         len++;
     } while  (PV_Decrypt(&R, *src++));
 
-    return len;
+    return (XDWORD)len;
 #else
 char const*     s;
 
@@ -504,11 +504,11 @@ char const*     s;
 
 // standard strcpy, but with crypto controls
 // Copies 'C' string s2 into s1
-char * XEncryptedStrCpy(char *dest, char const* src, short int copy)
+char * XEncryptedStrCpy(char *dest, char const* src, XEncryptType copy)
 {
     char *sav;
     char data;
-    unsigned long R;
+    XDWORD R;
 
     if (src == NULL)
     {
@@ -566,10 +566,10 @@ char * XDecryptAndDuplicateStr(char const* src)
 
 #if USE_CREATION_API == TRUE
 // Encrypt a block of data. This should be U.S. munitions safe. ie below 40 bit
-void XEncryptData(void *pData, unsigned long size)
+void XEncryptData(void *pData, XDWORD size)
 {
     unsigned char *pByte, *pEnd;
-    unsigned long R;
+    XDWORD R;
 
     if (pData && size)
     {
@@ -587,11 +587,11 @@ void XEncryptData(void *pData, unsigned long size)
 #endif  // USE_CREATION_API == TRUE
 
 // Decrypt a block of data. This should be U.S. munitions safe. ie below 40 bit
-void XDecryptData(void *pData, unsigned long size)
+void XDecryptData(void *pData, XDWORD size)
 {
     unsigned char *pByte, *pEnd;
-    unsigned long R;
-    unsigned long   crc1, crc2;
+    XDWORD R;
+    XDWORD   crc1, crc2;
 
     crc1 = 0;
     crc2 = 0;
